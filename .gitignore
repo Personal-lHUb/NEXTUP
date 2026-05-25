@@ -34,6 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+# generated source archives
+nextup-source.zip
+
 # editor
 .vscode/
 .idea/
