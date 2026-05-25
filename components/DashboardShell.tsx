@@ -1,24 +1,30 @@
 import Link from "next/link";
+import { LogoutButton } from "./LogoutButton";
 
 type RoleKey = "client" | "maker" | "designer";
 
-const NAV: { key: RoleKey; href: "/client" | "/maker" | "/designer"; label: string }[] = [
-  { key: "client", href: "/client", label: "Cliente" },
-  { key: "maker", href: "/maker", label: "Maker" },
-  { key: "designer", href: "/designer", label: "Progettista" },
+const NAV: { key: RoleKey; href: "/client" | "/maker" | "/designer"; label: string; role: string }[] = [
+  { key: "client", href: "/client", label: "Cliente", role: "CLIENT" },
+  { key: "maker", href: "/maker", label: "Maker", role: "MAKER" },
+  { key: "designer", href: "/designer", label: "Progettista", role: "DESIGNER" },
 ];
 
 export function DashboardShell({
   active,
   title,
   subtitle,
+  user,
   children,
 }: {
   active: RoleKey;
   title: string;
   subtitle?: string;
+  user?: { name: string; roles: string[] };
   children: React.ReactNode;
 }) {
+  const roles = user?.roles ?? [];
+  const nav = user ? NAV.filter((item) => roles.includes(item.role)) : NAV;
+
   return (
     <div className="min-h-screen">
       <header className="border-b" style={{ borderColor: "var(--border)" }}>
@@ -32,22 +38,33 @@ export function DashboardShell({
             </span>
             <span className="text-lg font-semibold">NextUp</span>
           </Link>
-          <nav className="flex items-center gap-1 rounded-lg p-1" style={{ background: "var(--surface)" }}>
-            {NAV.map((item) => (
-              <Link
-                key={item.key}
-                href={item.href}
-                className="rounded-md px-3 py-1.5 text-sm font-medium transition-colors"
-                style={
-                  item.key === active
-                    ? { background: "var(--accent)", color: "white" }
-                    : { color: "var(--muted)" }
-                }
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+
+          <div className="flex items-center gap-3">
+            <nav className="flex items-center gap-1 rounded-lg p-1" style={{ background: "var(--surface)" }}>
+              {nav.map((item) => (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  className="rounded-md px-3 py-1.5 text-sm font-medium transition-colors"
+                  style={
+                    item.key === active
+                      ? { background: "var(--accent)", color: "white" }
+                      : { color: "var(--muted)" }
+                  }
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            {user && (
+              <div className="flex items-center gap-3">
+                <span className="hidden text-sm sm:inline" style={{ color: "var(--muted)" }}>
+                  {user.name}
+                </span>
+                <LogoutButton />
+              </div>
+            )}
+          </div>
         </div>
       </header>
 

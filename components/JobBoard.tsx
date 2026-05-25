@@ -80,14 +80,27 @@ export function JobBoard({ printers, jobs }: { printers: PrinterVM[]; jobs: JobV
 
 function JobRow({ job }: { job: JobVM }) {
   const [started, setStarted] = useState(false);
+  const [info, setInfo] = useState<string | null>(null);
 
   async function startPrint() {
     setStarted(true);
-    await fetch("/api/printers", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ action: "start-print", projectId: job.id }),
-    }).catch(() => {});
+    try {
+      const res = await fetch("/api/print/start", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ projectId: job.id, material: job.material }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setInfo(`G-code pronto (${(data.bytes / 1024).toFixed(1)} KB) — streaming monouso alla stampante.`);
+      } else {
+        setInfo(typeof data.error === "string" ? data.error : "Avvio non riuscito");
+        setStarted(false);
+      }
+    } catch {
+      setInfo("Errore di rete");
+      setStarted(false);
+    }
   }
 
   return (
@@ -134,6 +147,11 @@ function JobRow({ job }: { job: JobVM }) {
       >
         {started ? "Stampa avviata (streaming G-code)" : "Avvia stampa protetta"}
       </button>
+      {info && (
+        <p className="mt-2 text-[11px]" style={{ color: "var(--accent-2)" }}>
+          {info}
+        </p>
+      )}
     </div>
   );
 }

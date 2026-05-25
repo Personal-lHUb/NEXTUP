@@ -5,8 +5,10 @@ import { ModelViewer } from "@/components/ModelViewer";
 import { QCApproval } from "@/components/QCApproval";
 import { getProjectById } from "@/lib/repositories/projects";
 import { computeOrderBreakdown, formatEUR } from "@/lib/money";
+import { requireRole } from "@/lib/auth/guards";
 
 export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
+  const user = await requireRole("CLIENT");
   const { id } = await params;
   const project = await getProjectById(id);
   if (!project) notFound();
@@ -24,7 +26,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
   const showQC = project.status === "QC_PENDING";
 
   return (
-    <DashboardShell active="client" title={project.title} subtitle={`Categoria: ${project.category}`}>
+    <DashboardShell active="client" title={project.title} subtitle={`Categoria: ${project.category}`} user={user}>
       <div className="mb-4">
         <StatusBadge status={project.status} />
       </div>

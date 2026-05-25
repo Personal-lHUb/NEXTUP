@@ -3,8 +3,10 @@ import { PrinterCard } from "@/components/PrinterCard";
 import { JobBoard } from "@/components/JobBoard";
 import { getMakerPrinters } from "@/lib/repositories/printers";
 import { getOpenJobs } from "@/lib/repositories/projects";
+import { requireRole } from "@/lib/auth/guards";
 
 export default async function MakerDashboard() {
+  const user = await requireRole("MAKER");
   const [printers, jobs] = await Promise.all([getMakerPrinters(), getOpenJobs()]);
 
   return (
@@ -12,6 +14,7 @@ export default async function MakerDashboard() {
       active="maker"
       title="Dashboard Maker"
       subtitle="Gestisci le tue stampanti e trova lavori compatibili col tuo hardware."
+      user={user}
     >
       <section className="mb-10">
         <div className="mb-4 flex items-center justify-between">

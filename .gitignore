@@ -28,6 +28,9 @@ yarn-error.log*
 # prisma
 /prisma/*.db
 
+# local object storage (dev)
+/.storage/
+
 # typescript
 *.tsbuildinfo
 
