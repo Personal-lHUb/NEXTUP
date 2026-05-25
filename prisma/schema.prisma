@@ -1,0 +1,372 @@
+// NextUp — P2P 3D-printing marketplace data model.
+// Three-sided: CLIENT (hobbyist) ↔ DESIGNER (3D modeler) ↔ MAKER (printer owner).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────── Enums ───────────────────────────
+
+enum Role {
+  CLIENT
+  DESIGNER
+  MAKER
+  ADMIN
+}
+
+enum PrinterTechnology {
+  FDM // Fused Deposition Modeling (filament)
+  SLA // Stereolithography (resin)
+  DLP // Digital Light Processing (resin)
+  SLS // Selective Laser Sintering (powder)
+  MJF // Multi Jet Fusion
+}
+
+enum MaterialType {
+  PLA
+  ABS
+  PETG
+  TPU
+  NYLON
+  RESIN_STANDARD
+  RESIN_TOUGH
+  RESIN_FLEXIBLE
+}
+
+enum FileFormat {
+  STL
+  OBJ
+  THREE_MF // 3MF
+  STEP
+}
+
+enum PrinterStatus {
+  ACTIVE
+  INACTIVE
+  BUSY
+}
+
+// Macro-phases shown on the client Kanban / used to scope chat threads.
+enum ProjectPhase {
+  MODELING // dialogue with the Designer
+  PRINTING // dialogue with the Maker
+}
+
+enum ProjectStatus {
+  DRAFT // client is still defining the brief
+  MODELING // assigned to a designer, modeling in progress
+  MODEL_REVIEW // render submitted, awaiting client approval (watermarked viewer)
+  MODEL_APPROVED // design locked, ready to find a maker
+  MATCHING // searching / awaiting a compatible maker
+  PRINTING // maker is producing the object
+  QC_PENDING // maker uploaded photos / awaiting client approval
+  QC_APPROVED // photos approved (manually or by silent consent)
+  SHIPPING // label generated, in transit
+  DELIVERED // received by client
+  COMPLETED // funds released, closed
+  CANCELLED
+  DISPUTED
+}
+
+enum PaymentStatus {
+  PENDING // payment intent created, not captured
+  HELD // captured & held in escrow
+  PARTIALLY_RELEASED // one party paid out
+  RELEASED // fully paid out
+  REFUNDED
+  FAILED
+}
+
+enum PayoutStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+enum QCStatus {
+  AWAITING_PHOTOS
+  AWAITING_APPROVAL
+  APPROVED // client approved manually
+  AUTO_APPROVED // silent consent after the 48h window
+  REJECTED
+}
+
+enum PrintJobStatus {
+  QUEUED
+  STREAMING // temporary G-code being streamed to the printer
+  PRINTING
+  COMPLETED
+  FAILED
+}
+
+// ─────────────────────────── Models ──────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  roles        Role[]   @default([CLIENT])
+  avatarUrl    String?
+  bio          String?
+  country      String? // ISO-3166 alpha-2, used for shipping (not for matching)
+  ratingAvg    Float    @default(0)
+  ratingCount  Int      @default(0)
+
+  // Stripe Connect account id (designers & makers receive payouts).
+  stripeAccountId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  printers         Printer[]
+  designs          DesignFile[]
+  clientProjects   Project[]    @relation("ClientProjects")
+  designerProjects Project[]    @relation("DesignerProjects")
+  makerProjects    Project[]    @relation("MakerProjects")
+  qcPhotos         QCPhoto[]
+  payouts          Payout[]
+  messages         Message[]
+  reviewsAuthored  Review[]     @relation("ReviewAuthor")
+  reviewsReceived  Review[]     @relation("ReviewTarget")
+
+  @@index([email])
+}
+
+model Printer {
+  id           String            @id @default(cuid())
+  makerId      String
+  maker        User              @relation(fields: [makerId], references: [id], onDelete: Cascade)
+  name         String
+  technology   PrinterTechnology
+  // Build volume in millimetres — the basis for job-compatibility matching.
+  buildX       Int
+  buildY       Int
+  buildZ       Int
+  materials    MaterialType[]
+  nozzleMm     Float?
+  status       PrinterStatus     @default(ACTIVE)
+
+  // Optional remote-control integration (OctoPrint / Klipper Moonraker).
+  octoprintUrl    String?
+  octoprintApiKey String? // store encrypted at rest in production
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  printJobs PrintJob[]
+
+  @@index([makerId])
+  @@index([technology])
+}
+
+// Source files uploaded by designers. Blinded: never downloadable by makers.
+// Makers only ever see the derived technical metadata (bounding box, volume).
+model DesignFile {
+  id         String     @id @default(cuid())
+  designerId String
+  designer   User       @relation(fields: [designerId], references: [id], onDelete: Cascade)
+  projectId  String?
+  project    Project?   @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  filename   String
+  format     FileFormat
+  storageKey String // key in the protected object store
+  fileHash   String // sha-256 of the source bytes
+  sizeBytes  Int
+
+  // Technical metadata exposed to makers (mm / cm³).
+  boundingBoxX Float
+  boundingBoxY Float
+  boundingBoxZ Float
+  volumeCm3    Float?
+
+  isProtected Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@index([designerId])
+  @@index([projectId])
+}
+
+// Watermarked render preview the client approves in the protected 3D viewer.
+model RenderPreview {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url         String
+  watermarked Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@index([projectId])
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  category    String // e.g. "cosplay", "boardgames", "scale-models", "spare-parts"
+  status      ProjectStatus @default(DRAFT)
+
+  clientId   String
+  client     User    @relation("ClientProjects", fields: [clientId], references: [id])
+  designerId String?
+  designer   User?   @relation("DesignerProjects", fields: [designerId], references: [id])
+  makerId    String?
+  maker      User?   @relation("MakerProjects", fields: [makerId], references: [id])
+
+  // Quotes (EUR). The client pays designPrice + printPrice + shipping.
+  designPrice Decimal?      @db.Decimal(10, 2)
+  printPrice  Decimal?      @db.Decimal(10, 2)
+  material    MaterialType?
+
+  // Required build volume (mm), derived from the design bounding box.
+  // Drives the maker "Find Jobs" compatibility filter.
+  requiredX Float?
+  requiredY Float?
+  requiredZ Float?
+
+  qcStatus QCStatus  @default(AWAITING_PHOTOS)
+  qcDueAt  DateTime? // silent-consent deadline once photos are submitted
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  designFiles DesignFile[]
+  renders     RenderPreview[]
+  order       Order?
+  qcPhotos    QCPhoto[]
+  printJob    PrintJob?
+  messages    Message[]
+  reviews     Review[]
+
+  @@index([clientId])
+  @@index([designerId])
+  @@index([makerId])
+  @@index([status])
+}
+
+model Order {
+  id        String  @id @default(cuid())
+  projectId String  @unique
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  currency String @default("EUR")
+
+  // Monetary breakdown (EUR).
+  itemsTotal     Decimal @db.Decimal(10, 2) // designPrice + printPrice
+  shippingCost   Decimal @db.Decimal(10, 2) // carrier cost + micro-margin
+  platformFee    Decimal @db.Decimal(10, 2) // take rate on itemsTotal
+  designerPayout Decimal @db.Decimal(10, 2)
+  makerPayout    Decimal @db.Decimal(10, 2)
+  takeRateBps    Int // basis points captured for this order (e.g. 1300)
+
+  paymentStatus         PaymentStatus @default(PENDING)
+  stripePaymentIntentId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  payouts       Payout[]
+  shippingLabel ShippingLabel?
+
+  @@index([paymentStatus])
+}
+
+model Payout {
+  id      String @id @default(cuid())
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  payeeId String
+  payee   User   @relation(fields: [payeeId], references: [id])
+
+  role             Role // DESIGNER or MAKER
+  amount           Decimal      @db.Decimal(10, 2)
+  status           PayoutStatus @default(PENDING)
+  stripeTransferId String?
+  releasedAt       DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([payeeId])
+}
+
+model QCPhoto {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  makerId   String
+  maker     User     @relation(fields: [makerId], references: [id])
+  url       String
+  createdAt DateTime @default(now())
+
+  @@index([projectId])
+}
+
+model ShippingLabel {
+  id             String   @id @default(cuid())
+  orderId        String   @unique
+  order          Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  carrier        String
+  service        String
+  trackingNumber String?
+  labelPdfUrl    String?
+  cost           Decimal  @db.Decimal(10, 2)
+  fromAddress    Json?
+  toAddress      Json?
+  createdAt      DateTime @default(now())
+}
+
+model PrintJob {
+  id        String         @id @default(cuid())
+  projectId String         @unique
+  project   Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  printerId String
+  printer   Printer        @relation(fields: [printerId], references: [id])
+  status    PrintJobStatus @default(QUEUED)
+
+  // Temporary, single-use G-code key. Issued just-in-time, expires after the
+  // stream so the maker never holds a reusable copy of the source geometry.
+  gcodeStorageKey String?
+  gcodeExpiresAt  DateTime?
+
+  progress       Int       @default(0) // 0–100
+  streamStartedAt DateTime?
+  completedAt    DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([printerId])
+}
+
+model Message {
+  id        String       @id @default(cuid())
+  projectId String
+  project   Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  senderId  String
+  sender    User         @relation(fields: [senderId], references: [id])
+  phase     ProjectPhase // MODELING (client↔designer) or PRINTING (client↔maker)
+  body      String
+  createdAt DateTime     @default(now())
+
+  @@index([projectId])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User     @relation("ReviewAuthor", fields: [authorId], references: [id])
+  targetId  String
+  target    User     @relation("ReviewTarget", fields: [targetId], references: [id])
+  rating    Int // 1–5
+  comment   String?
+  createdAt DateTime @default(now())
+
+  @@index([targetId])
+  @@index([projectId])
+}
