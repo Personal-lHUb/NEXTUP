@@ -32,8 +32,8 @@ DEFAULT_BACKUP_DIR = Path(
 )
 
 #: che cosa entra nello snapshot, in ordine di importanza
-INCLUDED_FILES = ("book.json", "outline.json", "state.json")
-INCLUDED_DIRS = ("manuscript", "build")
+INCLUDED_FILES = ("book.json", "brief.md", "outline.json", "state.json")
+INCLUDED_DIRS = ("assets", "manuscript", "build")
 
 MANIFEST_NAME = "manifest.json"
 STAMP_FORMAT = "%Y%m%d-%H%M%S"

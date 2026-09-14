@@ -55,6 +55,30 @@ pari, capitoli in apertura di pagina dispari.
 
 ---
 
+## Che cosa serve da te
+
+Due file, dentro la cartella del libro, creati da `init`:
+
+```
+books/<slug>/
+├── brief.md              ← gli argomenti da affrontare (si scrive a mano)
+└── assets/
+    └── copertina.jpg     ← l'immagine di copertina da migliorare (facoltativa)
+```
+
+`brief.md` entra nella scheda del libro e vincola scaletta e capitoli: gli
+argomenti che scrivi lì vanno coperti tutti. L'immagine viene raddrizzata,
+ritagliata sulle proporzioni della copertina, portata a 300 DPI, ripulita e
+velata quanto basta perché il titolo resti leggibile; senza immagine la
+copertina esce tipografica. Istruzioni per esteso e requisiti di risoluzione in
+[`docs/materiali.md`](docs/materiali.md).
+
+```bash
+python3 -m kdpfactory plan <slug>   # dice se i due materiali ci sono e sono a posto
+```
+
+---
+
 ## Installazione
 
 ```bash
@@ -231,10 +255,11 @@ kdp-book-factory/
 │   ├── epub.py         EPUB 3
 │   ├── agents/         collegio editoriale: ruoli, revisione, impaginazione
 │   ├── backup.py       snapshot, ripristino, pulizia
+│   ├── coverimage.py   preparazione dell'immagine di copertina (300 DPI, velatura)
 │   ├── qa.py           controlli di qualità e conformità
 │   ├── metadata.py     scheda prodotto, prezzi, royalty
 │   └── pipeline.py     orchestrazione e convergenza sulle pagine
-├── books/<slug>/       book.json, outline.json, manuscript/, build/
+├── books/<slug>/       book.json, brief.md, assets/, manuscript/, build/
 ├── config/             costi di stampa per il calcolo delle royalty
 ├── docs/               checklist di pubblicazione, workflow, personalizzazione
 └── tests/              26 test, nessuna chiamata API
@@ -263,7 +288,8 @@ Tre cose che il codice non può fare al posto tuo:
    finanziari presentati come consulenza professionale.
 
 La checklist completa è in [`docs/checklist-kdp.md`](docs/checklist-kdp.md); il
-collegio editoriale in [`docs/agenti.md`](docs/agenti.md); il
+collegio editoriale in [`docs/agenti.md`](docs/agenti.md); i materiali da
+fornire in [`docs/materiali.md`](docs/materiali.md); il
 metodo di lavoro per produrre più titoli in [`docs/workflow.md`](docs/workflow.md);
 formati, font e temi di copertina in
 [`docs/personalizzazione.md`](docs/personalizzazione.md).

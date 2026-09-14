@@ -7,6 +7,15 @@ venv/
 # Copie di sicurezza: restano sul disco, non in git (contengono PDF)
 backup/
 
+# Immagini caricate dall'autore: restano sul disco (pesano e spesso sono su
+# licenza). Toglile da qui se vuoi versionarle.
+books/*/assets/*.jpg
+books/*/assets/*.jpeg
+books/*/assets/*.png
+books/*/assets/*.webp
+books/*/assets/*.tif
+books/*/assets/*.tiff
+
 # Output di lavorazione: si rigenerano dalla pipeline
 books/*/build/
 books/*/manuscript/

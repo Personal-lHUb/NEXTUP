@@ -16,7 +16,7 @@ from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfgen import canvas as pdfcanvas
 
-from . import kdpspecs
+from . import coverimage, kdpspecs
 from .models import BookSpec
 from .typography import register_family, set_default_canvas_font
 
@@ -87,6 +87,8 @@ def build_cover(
     bullets: list[str] | None = None,
     author_line: str = "",
     guides: bool = False,
+    image_path: Path | None = None,
+    enhance_image: bool = True,
 ) -> dict:
     """Genera il PDF di copertina. Restituisce le misure usate."""
     theme = pick_theme(spec)
@@ -115,8 +117,25 @@ def build_cover(
     c.rect(0, 0, width, height, stroke=0, fill=1)
 
     # --- prima di copertina ------------------------------------------------
-    c.setFillColor(colors.HexColor(theme.panel))
-    c.rect(front_x0, 0, trim_w_pt + bleed * INCH, height, stroke=0, fill=1)
+    front_width = trim_w_pt + bleed * INCH
+    image_report = None
+    if image_path is not None:
+        prepared = output.parent / f"{spec.slug}-copertina-immagine.jpg"
+        image_report = coverimage.prepare(
+            image_path, prepared, spec.trim, enhance=enhance_image
+        )
+        c.drawImage(
+            str(prepared), front_x0, 0, width=front_width, height=height,
+            preserveAspectRatio=False, anchor="c", mask=None,
+        )
+        # La velatura per la leggibilità è già dentro il JPEG preparato.
+    else:
+        c.setFillColor(colors.HexColor(theme.panel))
+        c.rect(front_x0, 0, front_width, height, stroke=0, fill=1)
+
+    # Sopra una foto velata il testo va sempre chiaro, anche con un tema chiaro.
+    front_title = colors.HexColor("#FFFFFF" if image_report else theme.title)
+    front_body = colors.HexColor("#E8E8E8" if image_report else theme.body)
 
     # Cornice sottile all'interno dell'area di sicurezza
     c.setStrokeColor(colors.HexColor(theme.accent))
@@ -135,7 +154,7 @@ def build_cover(
                                 inner_w, 46, 18)
     title_lines = _wrap_lines(spec.title.upper(), display, title_size, inner_w)
     y = height - (bleed + 1.15) * INCH
-    c.setFillColor(colors.HexColor(theme.title))
+    c.setFillColor(front_title)
     for line in title_lines:
         c.setFont(display, title_size)
         c.drawCentredString(front_x0 + trim_w_pt / 2, y, line)
@@ -150,7 +169,7 @@ def build_cover(
 
     if spec.subtitle:
         sub_size = _fit_font_size(spec.subtitle, serif, inner_w, 17, 10)
-        c.setFillColor(colors.HexColor(theme.body))
+        c.setFillColor(front_body)
         for line in _wrap_lines(spec.subtitle, serif, sub_size, inner_w):
             c.setFont(serif, sub_size)
             c.drawCentredString(front_x0 + trim_w_pt / 2, y, line)
@@ -166,7 +185,9 @@ def build_cover(
         front_x0 + trim_w_pt / 2 + 0.45 * INCH,
         author_y + author_size * 1.5,
     )
-    c.setFillColor(colors.HexColor(theme.accent))
+    # Sopra una foto il nome dell'autore va in bianco: l'accento del tema
+    # può sparire contro un fondo colorato.
+    c.setFillColor(front_title if image_report else colors.HexColor(theme.accent))
     c.setFont(display, author_size)
     c.drawCentredString(front_x0 + trim_w_pt / 2, author_y, spec.author.upper())
 
@@ -251,6 +272,7 @@ def build_cover(
 
     return {
         "cover_pdf": str(output),
+        "immagine": image_report.to_dict() if image_report else None,
         "pages": pages,
         "spine_in": round(spine_in, 4),
         "cover_width_in": round(cover_w_in, 4),

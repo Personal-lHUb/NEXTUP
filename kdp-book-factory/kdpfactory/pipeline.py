@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
-from . import agents, backup, kdpspecs, planner, qa, typeset, writer
+from . import agents, backup, coverimage, kdpspecs, planner, qa, typeset, writer
 from . import cover as cover_module
 from . import epub as epub_module
 from . import metadata as metadata_module
@@ -155,6 +155,14 @@ def build_package(
     chapters = writer.load_chapters(project, outline)
 
     cover_path = project.build_dir / f"{spec.slug}-copertina.pdf"
+    image_path = None
+    if spec.cover_style != "tipografica":
+        image_path = project.cover_image_path(spec)
+        if image_path is None and spec.cover_style == "immagine":
+            raise RuntimeError(
+                f"`cover_style` è 'immagine' ma non ho trovato nessun file in "
+                f"{project.assets_dir}: carica `copertina.jpg` (o .png)."
+            )
     cover_info = cover_module.build_cover(
         spec,
         result.pages,
@@ -163,7 +171,11 @@ def build_package(
         bullets=meta.get("back_cover_bullets") or [],
         author_line=meta.get("author_bio", ""),
         guides=guides,
+        image_path=image_path,
     )
+    if cover_info.get("immagine"):
+        print("  copertina con immagine dell'autore:")
+        print(coverimage.ImageReport(**cover_info["immagine"]).describe())
     result.cover_pdf = cover_path
 
     epub_path = project.build_dir / f"{spec.slug}.epub"
@@ -239,6 +251,8 @@ def run_qa(
     state = project.load_state()
     if state.get("metadata"):
         qa.check_metadata(state["metadata"], spec, report)
+    if state.get("cover"):
+        qa.check_cover(state["cover"], report)
 
     # Le segnalazioni del collegio confluiscono nel controllo finale: un
     # bloccante del fact-checker o della conformità vale come errore.

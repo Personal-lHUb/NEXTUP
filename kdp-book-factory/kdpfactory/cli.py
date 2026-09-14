@@ -52,6 +52,83 @@ def save_backup(project: BookProject, args, reason: str, *, force: bool = False)
     return backup.snapshot(project, reason, force=force)
 
 
+BRIEF_TEMPLATE = """# Argomenti da affrontare — {title}
+
+<!-- Scrivi qui, in italiano e senza formalità: questo file viene letto dagli
+     agenti che progettano la scaletta e scrivono i capitoli. Le righe che
+     cominciano con <!-- non vengono lette. Cancella pure quello che non serve. -->
+
+## Di che cosa parla il libro
+(due o tre frasi: il problema concreto del lettore e la soluzione che proponi)
+
+## A chi si rivolge
+(chi è, che cosa ha già provato, che cosa lo blocca)
+
+## Che cosa deve saper fare il lettore alla fine
+-
+-
+
+## Argomenti da coprire, in ordine libero
+-
+-
+-
+
+## Che cosa NON deve esserci
+(temi da evitare, luoghi comuni del settore, tesi con cui non sei d'accordo)
+
+## Materiale tuo da usare
+(esperienze, casi, numeri, metodi che hai già: è ciò che rende il libro diverso
+dagli altri sullo stesso tema)
+
+## Tono
+(come vuoi suonare: diretto, tecnico, informale, severo…)
+"""
+
+ASSETS_README = """# Materiali dell'autore
+
+## Immagine di copertina
+
+Metti qui il file e chiamalo `copertina` (l'estensione può essere .jpg, .jpeg,
+.png, .webp, .tif):
+
+    assets/copertina.jpg
+
+Viene raddrizzata, ritagliata sulle proporzioni esatte della prima di copertina
+(abbondanza inclusa), portata a 300 DPI e ripulita (contrasto, colore, nitidezza
+leggeri). Il risultato finisce in `build/<slug>-copertina-immagine.jpg` e la
+copertina lo usa come sfondo, con una velatura scura in alto e in basso perché
+titolo e nome dell'autore restino leggibili.
+
+**Risoluzione minima**: per un 6x9 pollici servono circa {px} pixel.
+Sotto i 200 DPI reali il controllo qualità blocca il libro: in stampa si vede.
+
+Per scegliere invece una copertina solo tipografica, senza immagine, imposta
+`"cover_style": "tipografica"` in `book.json`.
+
+## Altri file
+
+Qualsiasi altra cosa metti qui (foto dell'autore, appunti, scansioni) viene
+conservata e inclusa nelle copie di backup, ma non entra automaticamente nel
+libro.
+"""
+
+
+def create_author_inputs(project: BookProject, spec: BookSpec) -> None:
+    """Crea i due punti di ingresso dell'autore: brief e materiali."""
+    from . import coverimage
+
+    project.assets_dir.mkdir(parents=True, exist_ok=True)
+    if not project.brief_path.exists():
+        project.brief_path.write_text(
+            BRIEF_TEMPLATE.format(title=spec.title), encoding="utf-8"
+        )
+    readme = project.assets_dir / "LEGGIMI.md"
+    if not readme.exists():
+        width_in, height_in = coverimage.front_panel_size_in(spec.trim)
+        pixels = f"{round(width_in * coverimage.PRINT_DPI)}x{round(height_in * coverimage.PRINT_DPI)}"
+        readme.write_text(ASSETS_README.format(px=pixels), encoding="utf-8")
+
+
 def make_client(args) -> LLMClient:
     if not args.dry_run and not api_key_present():
         raise SystemExit(
@@ -100,7 +177,10 @@ def cmd_init(args) -> int:
     project = BookProject(root)
     project.ensure_dirs()
     spec.save(project.spec_path)
+    create_author_inputs(project, spec)
     print(f"Creato {project.spec_path}")
+    print(f"Argomenti da affrontare  → {project.brief_path}")
+    print(f"Immagine di copertina    → {project.assets_dir}/copertina.jpg (o .png)")
     print("Apri il file e completa `topic`, `audience`, `promise` e `notes`: più sono")
     print("precisi, più il libro sarà specifico e meno generico.\n")
     save_backup(project, args, "progetto creato")
@@ -113,6 +193,20 @@ def cmd_plan(args) -> int:
     project, spec = open_project(args)
     budget = budget_for(project, spec)
     print(planner.describe(budget, spec))
+    print("\nMateriali dell'autore")
+    brief = project.read_brief()
+    if project.brief_is_filled():
+        print(f"  Argomenti (brief.md) : compilato, {len(brief.split())} parole")
+    elif brief:
+        print(f"  Argomenti (brief.md) : modulo ancora da compilare → {project.brief_path}")
+    else:
+        print(f"  Argomenti (brief.md) : MANCANTE → scrivilo in {project.brief_path}")
+    image = project.cover_image_path(spec)
+    if image:
+        print(f"  Immagine di copertina: {image.name} ({image.stat().st_size // 1024} KB)")
+    else:
+        print(f"  Immagine di copertina: nessuna → {project.assets_dir}/copertina.jpg")
+        print("                         (senza immagine si usa la copertina tipografica)")
     if project.outline_path.exists():
         outline = project.load_outline()
         print("\nCapitoli in scaletta:")

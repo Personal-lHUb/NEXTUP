@@ -80,6 +80,13 @@ def book_bible(spec: BookSpec, outline: Outline | None = None) -> str:
     if spec.notes:
         lines.append(f"Istruzioni aggiuntive dell'editore: {spec.notes}")
 
+    if spec.brief:
+        # Gli argomenti scritti a mano dall'autore valgono più di qualsiasi
+        # inferenza: vanno coperti tutti.
+        lines.append("")
+        lines.append("ARGOMENTI RICHIESTI DALL'AUTORE (da coprire tutti, senza aggiungerne di estranei)")
+        lines.append(spec.brief.strip())
+
     if outline and outline.chapters:
         lines.append("")
         lines.append("STRUTTURA COMPLETA DEL LIBRO")

@@ -279,6 +279,36 @@ def _inspect_pdf(spec: BookSpec, pdf_path: Path, report: Report) -> None:
         report.add("info", "FONT", "Tutti i font risultano incorporati nel PDF.")
 
 
+def check_cover(cover_info: dict, report: Report | None = None) -> Report:
+    """Controlli sulla copertina, in particolare sull'immagine dell'autore."""
+    report = report or Report()
+    image = (cover_info or {}).get("immagine")
+    if not image:
+        return report
+    dpi = int(image.get("effective_dpi", 0))
+    if dpi < 200:
+        report.add(
+            "errore",
+            "IMMAGINE",
+            f"Immagine di copertina a {dpi} DPI reali: sotto i 200 KDP la stampa esce "
+            f"sgranata. Serve un originale di almeno "
+            f"{image['prepared_px'][0]}x{image['prepared_px'][1]} px.",
+        )
+    elif dpi < 300:
+        report.add(
+            "avviso",
+            "IMMAGINE",
+            f"Immagine di copertina a {dpi} DPI reali invece di 300: stampabile, ma i "
+            "dettagli fini si ammorbidiscono.",
+        )
+    else:
+        report.add("info", "IMMAGINE", f"Immagine di copertina a {dpi} DPI: adatta alla stampa.")
+    for warning in image.get("warnings", []):
+        if "Risoluzione insufficiente" not in warning and "sotto i" not in warning:
+            report.add("avviso", "IMMAGINE", warning)
+    return report
+
+
 def check_metadata(metadata: dict, spec: BookSpec, report: Report | None = None) -> Report:
     report = report or Report()
     title = metadata.get("title", spec.title)

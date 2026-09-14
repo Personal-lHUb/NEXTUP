@@ -11,6 +11,9 @@ from typing import Any
 
 from . import kdpspecs
 
+#: formati immagine accettati per la copertina
+IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff"}
+
 
 def slugify(text: str) -> str:
     normalized = unicodedata.normalize("NFKD", text)
@@ -37,6 +40,8 @@ class BookSpec:
     trim: str = "6x9"
     paper: str = "cream"                 # white | cream | color-standard | color-premium
     cover_theme: str = "auto"            # auto | notte | bosco | terracotta | indaco | carta | grafite
+    cover_image: str = ""                # immagine di copertina; vuoto = cerca in assets/copertina.*
+    cover_style: str = "auto"            # auto | immagine | tipografica
     body_font: str = "serif"             # serif | sans
     body_font_size: float = 11.0
     leading: float = 15.5                # interlinea in punti
@@ -53,6 +58,8 @@ class BookSpec:
     year: int = 0
     price_eur: float = 0.0
     notes: str = ""                      # istruzioni libere per il modello
+    #: contenuto di `brief.md`: non si salva in book.json, si legge dal file
+    brief: str = field(default="", repr=False)
 
     # --- validazione -----------------------------------------------------
     def validate(self) -> list[str]:
@@ -72,6 +79,8 @@ class BookSpec:
                 f"`target_pages` ({self.target_pages}) fuori dall'intervallo di progetto "
                 f"{kdpspecs.PROJECT_MIN_PAGES}-{kdpspecs.PROJECT_MAX_PAGES}."
             )
+        if self.cover_style not in {"auto", "immagine", "tipografica"}:
+            problems.append("`cover_style` supportati: 'auto', 'immagine', 'tipografica'.")
         if self.language not in {"it", "en"}:
             problems.append("`language` supportate: 'it', 'en'.")
         if self.genre not in {"non-fiction", "fiction"}:
@@ -86,7 +95,9 @@ class BookSpec:
 
     # --- serializzazione -------------------------------------------------
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        # `brief` vive in brief.md: duplicarlo in book.json vorrebbe dire
+        # tenerne due copie che prima o poi divergono.
+        return {k: v for k, v in asdict(self).items() if k != "brief"}
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> BookSpec:
@@ -201,6 +212,16 @@ class BookProject:
     def state_path(self) -> Path:
         return self.root / "state.json"
 
+    @property
+    def assets_dir(self) -> Path:
+        """Materiali forniti dall'autore: immagine di copertina, foto, note."""
+        return self.root / "assets"
+
+    @property
+    def brief_path(self) -> Path:
+        """Argomenti da affrontare, scritti a mano dall'autore."""
+        return self.root / "brief.md"
+
     def chapter_path(self, number: int) -> Path:
         return self.manuscript_dir / f"{number:02d}.md"
 
@@ -210,7 +231,9 @@ class BookProject:
             raise FileNotFoundError(
                 f"Manca {self.spec_path}. Crea il libro con: kdpfactory init <titolo>"
             )
-        return BookSpec.load(self.spec_path)
+        spec = BookSpec.load(self.spec_path)
+        spec.brief = self.read_brief()  # gli argomenti scritti a mano dall'autore
+        return spec
 
     def load_outline(self) -> Outline:
         if not self.outline_path.exists():
@@ -218,6 +241,56 @@ class BookProject:
                 f"Manca {self.outline_path}. Genera la scaletta con: kdpfactory outline {self.root.name}"
             )
         return Outline.load(self.outline_path)
+
+    def read_brief(self) -> str:
+        """Testo di `brief.md`, senza le istruzioni e i segnaposto del modello.
+
+        Le righe fra `<!--` e `-->`, quelle fra parentesi (i suggerimenti del
+        modulo) e i trattini rimasti vuoti non vengono lette: altrimenti il
+        modulo non compilato finirebbe nel prompt come se fosse contenuto.
+        """
+        if not self.brief_path.exists():
+            return ""
+        kept: list[str] = []
+        in_comment = False
+        for raw in self.brief_path.read_text(encoding="utf-8").splitlines():
+            line = raw.rstrip()
+            stripped = line.strip()
+            if in_comment:
+                in_comment = "-->" not in stripped
+                continue
+            if stripped.startswith("<!--"):
+                in_comment = "-->" not in stripped
+                continue
+            if stripped.startswith("(") and stripped.endswith(")"):
+                continue  # suggerimento del modulo, non contenuto
+            if stripped in {"-", "*", ""} and (not kept or not kept[-1].strip()):
+                continue
+            kept.append(line)
+        return "\n".join(kept).strip()
+
+    def brief_is_filled(self) -> bool:
+        """Vero se il brief contiene testo dell'autore, non solo i titoli del modulo."""
+        content = [
+            line
+            for line in self.read_brief().splitlines()
+            if line.strip() and not line.strip().startswith("#")
+        ]
+        return len(" ".join(content).split()) >= 25
+
+    def cover_image_path(self, spec: BookSpec | None = None) -> Path | None:
+        """Immagine di copertina indicata nella scheda o trovata in `assets/`."""
+        if spec is not None and spec.cover_image:
+            candidate = Path(spec.cover_image)
+            if not candidate.is_absolute():
+                candidate = self.root / candidate
+            return candidate if candidate.is_file() else None
+        if not self.assets_dir.is_dir():
+            return None
+        for path in sorted(self.assets_dir.iterdir()):
+            if path.stem.lower() in {"copertina", "cover"} and path.suffix.lower() in IMAGE_SUFFIXES:
+                return path
+        return None
 
     def load_state(self) -> dict[str, Any]:
         if self.state_path.exists():
@@ -238,6 +311,7 @@ class BookProject:
     def ensure_dirs(self) -> None:
         self.manuscript_dir.mkdir(parents=True, exist_ok=True)
         self.build_dir.mkdir(parents=True, exist_ok=True)
+        self.assets_dir.mkdir(parents=True, exist_ok=True)
 
     def chapter_files(self) -> list[Path]:
         if not self.manuscript_dir.exists():
