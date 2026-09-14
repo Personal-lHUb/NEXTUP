@@ -4,17 +4,27 @@ Pipeline per produrre **libri full content** pronti da caricare su Amazon KDP:
 dal solo argomento fino al PDF dell'interno, alla copertina full-wrap, all'EPUB
 e alla scheda prodotto.
 
+Il libro non esce da una passata sola: lo lavora un **collegio editoriale** di
+agenti — architetto, ghostwriter, revisore di stile, editor — e lo controllano
+un **lettore cieco** (legge senza sapere nulla del progetto), un fact-checker,
+un revisore di conformità e un controllo di impaginazione che misura il PDF
+riga per riga. È la catena di una redazione, non un unico prompt lungo.
+
 Il vincolo di progetto è il numero di pagine: **ogni libro esce fra 60 e 240
 pagine**, con un obiettivo scelto da te e centrato entro il ±5%. Non è una stima
 sulla fiducia: la pipeline impagina davvero, conta le pagine del PDF, ricalcola
 il budget di parole e fa riscrivere i capitoli finché il libro non rientra.
 
 ```
-argomento → scaletta → capitoli → impaginazione → misura pagine
-                           ↑                            │
-                           └──── riscrittura mirata ◄────┘
-                                                        │
-                              copertina + EPUB + scheda KDP + controlli
+argomento → scaletta → capitoli → [stile] → impaginazione → misura pagine
+                          ↑                                       │
+                          └────────── riscrittura mirata ◄─────────┘
+                                                                  │
+    lettore cieco · fact-checker · conformità · impaginazione ─────┤
+    correttore · editor di sviluppo                               │
+                          └─── segnalazioni → editor → rimpagina ──┘
+                                                                  │
+                               copertina + EPUB + scheda KDP + controlli
 ```
 
 ---
@@ -31,6 +41,7 @@ Per ogni libro, dentro `books/<slug>/build/`:
 | `<slug>-manoscritto.md` | manoscritto unico, per rileggere o passare a un editor umano |
 | `kdp-listing.md` | titolo, descrizione HTML, 7 keyword, categorie, prezzi e royalty stimate |
 | `metadata.json` | gli stessi dati in formato macchina |
+| `revisioni.md` | segnalazioni del collegio, per capitolo, dalla più grave |
 | `qa-report.json` | esito dei controlli di qualità e conformità |
 
 L'interno rispetta le regole KDP che fanno scartare un file in fase di
@@ -98,6 +109,9 @@ esempi usare, quale taglio dare).
 | `write <slug>` | scrive i capitoli mancanti (`--only 3,4`, `--overwrite`) |
 | `build <slug>` | impagina, converge sulle pagine, genera copertina ed EPUB |
 | `metadata <slug>` | scheda prodotto, keyword, categorie, prezzi |
+| `agents` | elenco del collegio (`--install` li installa in Claude Code) |
+| `review <slug>` | fa leggere il libro agli agenti di controllo |
+| `revise <slug>` | l'editor applica le segnalazioni raccolte |
 | `qa <slug>` | controlli di qualità e conformità |
 | `all <slug>` | tutto in sequenza |
 | `list` | elenco dei libri e stato di avanzamento |
@@ -105,6 +119,11 @@ esempi usare, quale taglio dare).
 
 Opzioni globali: `--dry-run`, `--model` (default `claude-opus-5`), `--effort`
 (`low`…`max`), `--max-tokens`, `--books-dir`.
+
+Il livello di lavorazione decide quanti agenti entrano in gioco:
+`--qualita bozza` (solo stesura), `standard` (default: stesura + collegio +
+editor), `alta` (in più stile e correttore di bozze). Dettagli in
+[`docs/agenti.md`](docs/agenti.md).
 
 Ogni comando è ripetibile: `write` salta i capitoli già scritti, `build` si può
 rilanciare quante volte serve. Il lavoro si interrompe e si riprende senza
@@ -177,6 +196,7 @@ kdp-book-factory/
 │   ├── typeset.py      impaginazione PDF dell'interno
 │   ├── cover.py        copertina full-wrap
 │   ├── epub.py         EPUB 3
+│   ├── agents/         collegio editoriale: ruoli, revisione, impaginazione
 │   ├── qa.py           controlli di qualità e conformità
 │   ├── metadata.py     scheda prodotto, prezzi, royalty
 │   └── pipeline.py     orchestrazione e convergenza sulle pagine
@@ -209,6 +229,7 @@ Tre cose che il codice non può fare al posto tuo:
    finanziari presentati come consulenza professionale.
 
 La checklist completa è in [`docs/checklist-kdp.md`](docs/checklist-kdp.md); il
+collegio editoriale in [`docs/agenti.md`](docs/agenti.md); il
 metodo di lavoro per produrre più titoli in [`docs/workflow.md`](docs/workflow.md);
 formati, font e temi di copertina in
 [`docs/personalizzazione.md`](docs/personalizzazione.md).

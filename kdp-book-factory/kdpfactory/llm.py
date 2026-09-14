@@ -109,7 +109,7 @@ class LLMClient:
         messi in cache (prefisso stabile riusato fra un capitolo e l'altro).
         """
         if self.config.dry_run:
-            return dry_run_text(user, label=label)
+            return dry_run_text(user, label=label, system=system)
 
         blocks = [system] if isinstance(system, str) else list(system)
         system_blocks = []
@@ -190,8 +190,20 @@ _STUB_SENTENCES = [
 ]
 
 
-def dry_run_text(user_prompt: str, label: str = "") -> str:
+def dry_run_text(user_prompt: str, label: str = "", system: str | list[str] | None = None) -> str:
     """Genera contenuto finto ma strutturalmente valido, rispettando il budget."""
+    system_text = system if isinstance(system, str) else "\n".join(system or [])
+
+    # Agenti di controllo: restituiscono segnalazioni, non testo.
+    if '"findings"' in system_text:
+        return json.dumps(_dry_run_findings(), ensure_ascii=False)
+
+    # Revisore di stile ed editor ricevono un testo e lo restituiscono: in
+    # dry-run lo ripassano invariato, così la lunghezza del libro non cambia.
+    echoed = _echo_chapter(user_prompt)
+    if echoed is not None:
+        return echoed
+
     if "JSON" in user_prompt or "json" in label:
         return _dry_run_json(user_prompt)
 
@@ -224,6 +236,27 @@ def dry_run_text(user_prompt: str, label: str = "") -> str:
         words += 12
         section += 1
     return "\n".join(parts)
+
+
+def _echo_chapter(user_prompt: str) -> str | None:
+    """Estrae il capitolo racchiuso fra `---` dopo `TESTO DEL CAPITOLO:`."""
+    match = re.search(r"TESTO DEL CAPITOLO:\s*\n---\n(.*?)\n---\s*$", user_prompt, flags=re.S)
+    return match.group(1).strip() if match else None
+
+
+def _dry_run_findings() -> dict:
+    return {
+        "notes": "Lettura segnaposto in modalità dry-run: nessun giudizio reale.",
+        "findings": [
+            {
+                "severity": "minore",
+                "category": "verifica dry-run",
+                "issue": "Segnalazione di prova prodotta senza chiamare il modello.",
+                "quote": "",
+                "suggestion": "Esegui la revisione senza --dry-run per avere segnalazioni vere.",
+            }
+        ],
+    }
 
 
 def _dry_run_json(user_prompt: str) -> str:

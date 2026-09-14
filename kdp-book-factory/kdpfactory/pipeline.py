@@ -12,9 +12,9 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
+from . import agents, kdpspecs, planner, qa, typeset, writer
 from . import cover as cover_module
 from . import epub as epub_module
-from . import kdpspecs, planner, qa, typeset, writer
 from . import metadata as metadata_module
 from .llm import LLMClient
 from .mdlite import count_words
@@ -31,6 +31,7 @@ class BuildResult:
     cover_pdf: Path | None = None
     epub_path: Path | None = None
     history: list[dict] = field(default_factory=list)
+    chapter_pages: dict[str, int] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -41,6 +42,7 @@ class BuildResult:
             "interno_pdf": str(self.interior_pdf) if self.interior_pdf else None,
             "copertina_pdf": str(self.cover_pdf) if self.cover_pdf else None,
             "epub": str(self.epub_path) if self.epub_path else None,
+            "chapter_pages": self.chapter_pages,
             "storico": self.history,
         }
 
@@ -87,6 +89,7 @@ def build_until_in_range(
         result.pages = typeset_result.pages
         result.words = typeset_result.words
         result.interior_pdf = typeset_result.pdf_path
+        result.chapter_pages = typeset_result.chapter_pages
         result.in_range = low <= typeset_result.pages <= high
         result.history.append(
             {
@@ -132,6 +135,9 @@ def build_until_in_range(
             break
         print(f"    capitoli riscritti: {', '.join(str(n) for n in revised)}")
 
+    # Lo stato va salvato qui e non solo in `build_package`: gli agenti di
+    # controllo hanno bisogno del PDF appena impaginato.
+    project.update_state(build=result.to_dict())
     return result
 
 
@@ -170,6 +176,56 @@ def build_package(
     return result
 
 
+def _finding_message(finding: agents.AgentFinding) -> str:
+    where = f"Capitolo {finding.chapter}: " if finding.chapter else ""
+    suffix = f" → {finding.suggestion}" if finding.suggestion else ""
+    return f"{where}{finding.category} — {finding.issue}{suffix}"
+
+
+def editorial_pass(
+    project: BookProject,
+    spec: BookSpec,
+    outline: Outline,
+    client: LLMClient,
+    result: BuildResult,
+    *,
+    quality: str = agents.DEFAULT_QUALITY,
+    tolerance: float = 0.05,
+    max_iterations: int = 3,
+) -> tuple[BuildResult, agents.ReviewReport | None]:
+    """Fa leggere il libro al collegio, applica le segnalazioni, rimpagina.
+
+    Si rimpagina perché l'editing cambia il numero di parole, e il numero di
+    parole decide il numero di pagine.
+    """
+    level = agents.QUALITY_LEVELS.get(quality, agents.QUALITY_LEVELS[agents.DEFAULT_QUALITY])
+    if not level["reviewers"]:
+        return result, None
+
+    report = agents.run_review(
+        project, spec, outline, client, agent_names=level["reviewers"]
+    )
+    print(report.render())
+
+    if level["apply"]:
+        revised = agents.apply_revisions(
+            project, spec, outline, client, report, min_severity=level["apply"]
+        )
+        if revised:
+            print(f"  editor: capitoli rivisti → {', '.join(str(n) for n in revised)}")
+            result = build_until_in_range(
+                project,
+                spec,
+                outline,
+                client,
+                max_iterations=max_iterations,
+                tolerance=tolerance,
+            )
+        else:
+            print("  editor: nessun intervento necessario")
+    return result, report
+
+
 def run_qa(
     project: BookProject, spec: BookSpec, outline: Outline, result: BuildResult
 ) -> qa.Report:
@@ -180,6 +236,15 @@ def run_qa(
     state = project.load_state()
     if state.get("metadata"):
         qa.check_metadata(state["metadata"], spec, report)
+
+    # Le segnalazioni del collegio confluiscono nel controllo finale: un
+    # bloccante del fact-checker o della conformità vale come errore.
+    review = agents.ReviewReport.load(project)
+    for finding in review.findings:
+        if finding.severity == "bloccante":
+            report.add("errore", finding.agent.upper(), _finding_message(finding))
+        elif finding.severity == "importante":
+            report.add("avviso", finding.agent.upper(), _finding_message(finding))
 
     low, high = acceptance_window(spec)
     if not (low <= result.pages <= high) and result.pages:

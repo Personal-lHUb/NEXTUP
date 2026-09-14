@@ -13,7 +13,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from . import kdpspecs, pipeline, planner, writer
+from . import agents, kdpspecs, pipeline, planner, writer
 from .llm import DEFAULT_MODEL, LLMClient, LLMConfig, api_key_present
 from .models import BookProject, BookSpec, slugify
 
@@ -239,15 +239,35 @@ def cmd_all(args) -> int:
         outline = project.load_outline()
         print("1/5 · scaletta già presente")
 
-    print("2/5 · scrittura capitoli")
+    level = agents.QUALITY_LEVELS[args.qualita]
+
+    print("2/6 · scrittura capitoli (ghostwriter)")
     writer.write_chapters(project, spec, outline, client, overwrite=args.force)
 
-    print("3/5 · impaginazione e convergenza sulle pagine")
+    if level["voce"]:
+        print("3/6 · revisione di stile (voce)")
+        agents.voice_pass(project, spec, outline, client)
+    else:
+        print("3/6 · revisione di stile saltata (livello di lavorazione)")
+
+    print("4/6 · impaginazione e convergenza sulle pagine")
     result = pipeline.build_until_in_range(
         project, spec, outline, client, max_iterations=args.iterations, tolerance=args.tolerance
     )
 
-    print("4/5 · scheda prodotto")
+    print(f"5/6 · collegio di revisione (livello «{args.qualita}»)")
+    result, _ = pipeline.editorial_pass(
+        project,
+        spec,
+        outline,
+        client,
+        result,
+        quality=args.qualita,
+        tolerance=args.tolerance,
+        max_iterations=args.iterations,
+    )
+
+    print("6/6 · scheda prodotto e controlli")
     from . import metadata as metadata_module
 
     chapters = writer.load_chapters(project, outline)
@@ -258,7 +278,6 @@ def cmd_all(args) -> int:
     pipeline.build_package(project, spec, outline, result, guides=args.guides)
     pipeline.export_manuscript_markdown(project, spec, outline)
 
-    print("5/5 · controlli")
     report = pipeline.run_qa(project, spec, outline, result)
     project.update_state(usage=client.usage_report())
     print(report.render())
@@ -267,6 +286,69 @@ def cmd_all(args) -> int:
     for path in sorted(project.build_dir.iterdir()):
         print(f"  {path}")
     return 0 if report.ok and result.in_range else 1
+
+
+def cmd_agents(args) -> int:
+    if args.install:
+        from .agents.install import install_claude_code_agents
+
+        target = Path(args.install)
+        written = install_claude_code_agents(target)
+        print(f"Installati {len(written)} agenti come subagent di Claude Code in {target}:")
+        for path in written:
+            print(f"  {path}")
+        print("\nDa Claude Code puoi ora invocarli per nome, per esempio:")
+        print('  "usa lettore-cieco su books/<slug>/manuscript/03.md"')
+        return 0
+    print(agents.describe_panel())
+    return 0
+
+
+def cmd_review(args) -> int:
+    project, spec = open_project(args)
+    outline = project.load_outline()
+    client = make_client(args)
+    only = [int(n) for n in args.only.split(",")] if args.only else None
+    names = (
+        [n.strip() for n in args.agents.split(",")]
+        if args.agents
+        else list(agents.QUALITY_LEVELS[args.qualita]["reviewers"])
+    )
+    if not names:
+        print(f"Il livello «{args.qualita}» non prevede revisione.")
+        return 0
+    print(f"Revisione di «{spec.title}» — agenti: {', '.join(names)}")
+    report = agents.run_review(project, spec, outline, client, agent_names=names, only=only)
+    project.update_state(usage=client.usage_report())
+    print(report.render())
+    print(f"\nRapporto salvato in {project.build_dir / 'revisioni.md'}")
+    if report.blocking:
+        print("Ci sono segnalazioni bloccanti: risolvile prima di pubblicare.")
+    print(f"\nPer applicarle: python -m kdpfactory revise {spec.slug}")
+    return 0
+
+
+def cmd_revise(args) -> int:
+    project, spec = open_project(args)
+    outline = project.load_outline()
+    report = agents.ReviewReport.load(project)
+    if not report.findings:
+        raise SystemExit(
+            f"Nessuna revisione da applicare. Esegui prima: python -m kdpfactory review {spec.slug}"
+        )
+    client = make_client(args)
+    only = [int(n) for n in args.only.split(",")] if args.only else None
+    print(f"L'editor applica le segnalazioni (da «{args.severita}» in su)…")
+    revised = agents.apply_revisions(
+        project, spec, outline, client, report, min_severity=args.severita, only=only
+    )
+    project.update_state(usage=client.usage_report())
+    if not revised:
+        print("Nessun capitolo da modificare.")
+        return 0
+    print(f"Capitoli rivisti: {', '.join(str(n) for n in revised)}")
+    print(f"\nRimpagina per ricontrollare le pagine: python -m kdpfactory build {spec.slug}")
+    return 0
 
 
 def cmd_list(args) -> int:
@@ -368,6 +450,41 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--overwrite", action="store_true")
     p.set_defaults(func=cmd_write)
 
+    p = sub.add_parser("agents", help="elenco del collegio editoriale")
+    p.add_argument(
+        "--install",
+        nargs="?",
+        const=".claude/agents",
+        default=None,
+        metavar="CARTELLA",
+        help="installa gli agenti come subagent di Claude Code (default .claude/agents)",
+    )
+    p.set_defaults(func=cmd_agents)
+
+    p = sub.add_parser("review", help="fa leggere il libro al collegio di revisione")
+    p.add_argument("slug")
+    p.add_argument(
+        "--agents",
+        default=None,
+        help="agenti da usare, separati da virgola (default: quelli del livello scelto)",
+    )
+    p.add_argument(
+        "--qualita", default=agents.DEFAULT_QUALITY, choices=sorted(agents.QUALITY_LEVELS)
+    )
+    p.add_argument("--only", default=None, help="numeri di capitolo separati da virgola")
+    p.set_defaults(func=cmd_review)
+
+    p = sub.add_parser("revise", help="l'editor applica le segnalazioni raccolte")
+    p.add_argument("slug")
+    p.add_argument(
+        "--severita",
+        default="importante",
+        choices=["bloccante", "importante", "minore"],
+        help="applica le segnalazioni da questa gravità in su (default: importante)",
+    )
+    p.add_argument("--only", default=None, help="numeri di capitolo separati da virgola")
+    p.set_defaults(func=cmd_revise)
+
     p = sub.add_parser("build", help="impagina, genera copertina ed EPUB")
     p.add_argument("slug")
     p.add_argument("--iterations", type=int, default=4)
@@ -386,6 +503,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     p = sub.add_parser("all", help="pipeline completa")
     p.add_argument("slug")
+    p.add_argument(
+        "--qualita",
+        default=agents.DEFAULT_QUALITY,
+        choices=sorted(agents.QUALITY_LEVELS),
+        help="livello di lavorazione: quali agenti entrano in gioco (vedi `agents`)",
+    )
     p.add_argument("--iterations", type=int, default=4)
     p.add_argument("--tolerance", type=float, default=0.05)
     p.add_argument("--guides", action="store_true")

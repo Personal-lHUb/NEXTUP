@@ -51,9 +51,15 @@ python3 -m kdpfactory outline <slug>
 $EDITOR books/<slug>/outline.json       # correggi i titoli deboli PRIMA di scrivere
 python3 -m kdpfactory write <slug>
 python3 -m kdpfactory build <slug>
+python3 -m kdpfactory review <slug>      # il collegio legge e segnala
+python3 -m kdpfactory revise <slug>      # l'editor applica
+python3 -m kdpfactory build <slug>       # si rimpagina: l'editing cambia le pagine
 python3 -m kdpfactory metadata <slug>
 python3 -m kdpfactory qa <slug>
 ```
+
+`kdpfactory all <slug>` esegue questa sequenza da sola, al livello di
+lavorazione scelto con `--qualita` (vedi [`agenti.md`](agenti.md)).
 
 Due punti in cui intervenire a mano rende molto:
 
@@ -69,6 +75,11 @@ Per rigenerare un singolo capitolo: `write <slug> --only 5 --overwrite`.
 Per rimettere in riga solo le pagine: `build <slug>`.
 
 ## 4. Revisione umana (non saltabile)
+
+Il collegio di agenti toglie di mezzo il lavoro meccanico — dati non
+verificabili, ripetizioni, capitoli che non mantengono la promessa, difetti di
+impaginazione — ma non sostituisce la lettura. Parti da `build/revisioni.md`:
+dice già dove guardare.
 
 - Leggi il manoscritto unico (`build/<slug>-manoscritto.md`), non i file sparsi.
 - Segna ogni affermazione che non sapresti difendere davanti a un lettore

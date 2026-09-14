@@ -162,11 +162,16 @@ class InteriorDoc(BaseDocTemplate):
         self.chapter_pages: dict[str, int] = {}
         self._reset_state()
 
+        # Padding a zero: i margini sono già quelli calcolati da `kdpspecs`, e i
+        # 6 punti di default di ReportLab li renderebbero diversi dal dichiarato.
+        padding = dict(leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)
         frame_recto = Frame(
-            geo.inner_margin, geo.bottom_margin, geo.text_width, geo.text_height, id="recto"
+            geo.inner_margin, geo.bottom_margin, geo.text_width, geo.text_height,
+            id="recto", **padding,
         )
         frame_verso = Frame(
-            geo.outer_margin, geo.bottom_margin, geo.text_width, geo.text_height, id="verso"
+            geo.outer_margin, geo.bottom_margin, geo.text_width, geo.text_height,
+            id="verso", **padding,
         )
         self.addPageTemplates(
             [
