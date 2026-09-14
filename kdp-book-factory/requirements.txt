@@ -1,0 +1,7 @@
+# Dipendenze della pipeline
+anthropic>=0.70          # generazione dei contenuti (Claude)
+reportlab>=4.0           # impaginazione PDF di interno e copertina
+
+# Consigliate (facoltative)
+pymupdf>=1.24            # controlli di preflight: font incorporati, formato pagina
+pyphen>=0.14             # sillabazione: testo giustificato più uniforme

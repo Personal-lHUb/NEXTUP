@@ -1,0 +1,10 @@
+line-length = 110
+
+[lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+
+[lint.per-file-ignores]
+# Prompt e testi fissi: righe lunghe volute, si leggono meglio intere.
+"kdpfactory/prompts.py" = ["E501"]
+"kdpfactory/i18n.py" = ["E501"]
+"kdpfactory/typography.py" = ["E501"]

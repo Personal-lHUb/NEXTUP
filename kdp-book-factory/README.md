@@ -1,0 +1,218 @@
+# kdp-book-factory
+
+Pipeline per produrre **libri full content** pronti da caricare su Amazon KDP:
+dal solo argomento fino al PDF dell'interno, alla copertina full-wrap, all'EPUB
+e alla scheda prodotto.
+
+Il vincolo di progetto è il numero di pagine: **ogni libro esce fra 60 e 240
+pagine**, con un obiettivo scelto da te e centrato entro il ±5%. Non è una stima
+sulla fiducia: la pipeline impagina davvero, conta le pagine del PDF, ricalcola
+il budget di parole e fa riscrivere i capitoli finché il libro non rientra.
+
+```
+argomento → scaletta → capitoli → impaginazione → misura pagine
+                           ↑                            │
+                           └──── riscrittura mirata ◄────┘
+                                                        │
+                              copertina + EPUB + scheda KDP + controlli
+```
+
+---
+
+## Cosa produce
+
+Per ogni libro, dentro `books/<slug>/build/`:
+
+| File | A cosa serve |
+|---|---|
+| `<slug>-interno.pdf` | interno per la stampa: formato esatto, margini speculari, font incorporati |
+| `<slug>-copertina.pdf` | copertina full-wrap (quarta + dorso + prima) con dorso calcolato sulle pagine reali |
+| `<slug>.epub` | edizione Kindle, generata dallo stesso testo |
+| `<slug>-manoscritto.md` | manoscritto unico, per rileggere o passare a un editor umano |
+| `kdp-listing.md` | titolo, descrizione HTML, 7 keyword, categorie, prezzi e royalty stimate |
+| `metadata.json` | gli stessi dati in formato macchina |
+| `qa-report.json` | esito dei controlli di qualità e conformità |
+
+L'interno rispetta le regole KDP che fanno scartare un file in fase di
+caricamento: formato pagina uniforme, margine interno crescente col numero di
+pagine, margini esterni ≥ 0,25", **tutti i font incorporati**, numero di pagine
+pari, capitoli in apertura di pagina dispari.
+
+---
+
+## Installazione
+
+```bash
+cd kdp-book-factory
+python3 -m pip install -r requirements.txt      # oppure: make install
+export ANTHROPIC_API_KEY=sk-ant-...             # oppure: ant auth login
+```
+
+Serve Python 3.11+. I font: la pipeline cerca font TrueType di sistema
+(Liberation, DejaVu, EB Garamond…). Per usarne uno tuo, copia i quattro file
+(regular, bold, italic, bold-italic) nella cartella `fonts/`.
+
+### Prova senza spendere token
+
+```bash
+python3 -m kdpfactory --dry-run all esempio-metodo-tre-ore
+```
+
+Genera un libro completo con testo segnaposto: serve a collaudare impaginazione,
+conteggio pagine, copertina ed EPUB senza una sola chiamata API. Il controllo
+qualità blocca volutamente quel testo (`SEGNAPOSTO`): un libro in dry-run non va
+mai caricato.
+
+---
+
+## Uso
+
+```bash
+# 1. crea il progetto
+python3 -m kdpfactory init "Il Metodo delle Tre Ore" \
+    --subtitle "Come chiudere il lavoro che conta prima delle 15" \
+    --author "Nome Cognome" \
+    --pages 140 --trim 6x9 \
+    --topic "organizzare la giornata attorno a tre blocchi di lavoro profondo" \
+    --audience "freelance che lavorano a interruzione continua" \
+    --promise "liberare il pomeriggio senza allungare la giornata"
+
+# 2. completa books/<slug>/book.json (topic, audience, promise, notes)
+
+# 3. pipeline completa
+python3 -m kdpfactory all il-metodo-delle-tre-ore
+```
+
+**Il passaggio 2 è quello che decide la qualità del libro.** Con un `topic`
+generico esce un libro generico. I campi che contano di più sono `topic`,
+`audience`, `promise` e `notes` (istruzioni libere: cosa evitare, che tipo di
+esempi usare, quale taglio dare).
+
+### Comandi
+
+| Comando | Cosa fa |
+|---|---|
+| `init "Titolo"` | crea `books/<slug>/book.json` |
+| `plan <slug>` | budget di pagine e parole, misure di stampa, stato dei capitoli |
+| `outline <slug>` | genera la scaletta (`outline.json`) |
+| `write <slug>` | scrive i capitoli mancanti (`--only 3,4`, `--overwrite`) |
+| `build <slug>` | impagina, converge sulle pagine, genera copertina ed EPUB |
+| `metadata <slug>` | scheda prodotto, keyword, categorie, prezzi |
+| `qa <slug>` | controlli di qualità e conformità |
+| `all <slug>` | tutto in sequenza |
+| `list` | elenco dei libri e stato di avanzamento |
+| `specs --pages 160 --trim 6x9` | misure KDP per una combinazione formato/pagine |
+
+Opzioni globali: `--dry-run`, `--model` (default `claude-opus-5`), `--effort`
+(`low`…`max`), `--max-tokens`, `--books-dir`.
+
+Ogni comando è ripetibile: `write` salta i capitoli già scritti, `build` si può
+rilanciare quante volte serve. Il lavoro si interrompe e si riprende senza
+perdere nulla (`state.json`).
+
+---
+
+## Come viene controllato il numero di pagine
+
+1. **Stima a priori.** Dalla geometria della pagina (formato, margini, corpo,
+   interlinea) e dalle metriche reali del font si calcola quante parole entrano
+   in una pagina. Da lì: parole totali, numero di capitoli, parole per capitolo.
+2. **Misura.** Il PDF viene impaginato per davvero e le pagine si contano.
+3. **Ricalibrazione.** Dal rapporto reale parole/pagina si ricalcola il budget e
+   si assegna a ogni capitolo un nuovo obiettivo (correzione limitata a ±45% per
+   evitare oscillazioni).
+4. **Riscrittura mirata.** Solo i capitoli fuori tolleranza vengono riscritti,
+   con l'istruzione di *aggiungere sostanza* o *tagliare ripetizioni*, non di
+   allungare o accorciare le frasi.
+5. Si ripete (default: 4 tentativi) finché il PDF non rientra nella finestra.
+
+La misura parole/pagina viene salvata: dalla seconda esecuzione in poi la prima
+stima parte già calibrata sul tuo formato. Se non vuoi spendere token in
+riscritture: `build --no-rewrite`, oppure allarga la tolleranza
+(`--tolerance 0.1`).
+
+Esempio reale (in dry-run, obiettivo 80 pagine):
+
+```
+→ impaginazione 1: 98 pagine   parole/pagina 258.5   correzione -23.2%
+→ impaginazione 2: 72 pagine   parole/pagina 308.5   correzione +15.5%
+→ impaginazione 3: 84 pagine   ✓ dentro 76-84
+```
+
+---
+
+## Quanto costa un libro
+
+Con `claude-opus-5` ed effort `high`, un libro da 140 pagine (~35.000 parole)
+richiede una ventina di chiamate: scaletta, un capitolo per volta, i riassunti
+di continuità, la scheda prodotto, più le eventuali riscritture. Il prompt di
+sistema (regole d'autore + scheda del libro + scaletta) è identico per tutti i
+capitoli ed è messo in **cache**: si paga per intero una volta sola.
+
+Il consumo effettivo viene stampato a fine esecuzione e salvato in `state.json`:
+
+```json
+{"calls": 21, "input_tokens": 18432, "output_tokens": 61240,
+ "cache_read_tokens": 214880, "estimated_cost_usd": 1.83}
+```
+
+Per abbassare il costo: `--effort medium` per i libri più semplici,
+`--model claude-sonnet-5` per le bozze, `build --no-rewrite` quando le pagine
+sono già vicine all'obiettivo.
+
+---
+
+## Struttura del progetto
+
+```
+kdp-book-factory/
+├── kdpfactory/
+│   ├── cli.py          comandi
+│   ├── models.py       BookSpec, Outline, struttura su disco
+│   ├── kdpspecs.py     formati, margini, dorso, limiti KDP
+│   ├── planner.py      pagine → parole, ricalibrazione
+│   ├── prompts.py      prompt d'autore, scaletta, revisione, metadati
+│   ├── llm.py          client Claude: streaming, cache, costi, dry-run
+│   ├── writer.py       scaletta, capitoli, continuità, revisioni
+│   ├── typeset.py      impaginazione PDF dell'interno
+│   ├── cover.py        copertina full-wrap
+│   ├── epub.py         EPUB 3
+│   ├── qa.py           controlli di qualità e conformità
+│   ├── metadata.py     scheda prodotto, prezzi, royalty
+│   └── pipeline.py     orchestrazione e convergenza sulle pagine
+├── books/<slug>/       book.json, outline.json, manuscript/, build/
+├── config/             costi di stampa per il calcolo delle royalty
+├── docs/               checklist di pubblicazione, workflow, personalizzazione
+└── tests/              26 test, nessuna chiamata API
+```
+
+```bash
+make test     # python3 -m unittest discover -s tests
+```
+
+---
+
+## Prima di pubblicare
+
+Tre cose che il codice non può fare al posto tuo:
+
+1. **Leggere il libro.** La pipeline produce un manoscritto coerente e della
+   lunghezza giusta; non garantisce che ogni affermazione sia vera. I prompt
+   vietano statistiche e citazioni non verificabili proprio perché su carta un
+   errore resta. Rileggi, correggi, taglia.
+2. **Dichiarare l'uso dell'IA.** KDP chiede se il contenuto è generato con
+   intelligenza artificiale: va dichiarato (testo e, se generata, copertina). È
+   una dichiarazione interna, non appare sulla scheda e non blocca la
+   pubblicazione.
+3. **Rispettare le regole di contenuto.** Niente materiale altrui, niente libri
+   che si spacciano per opere di altri autori, niente consigli medici, legali o
+   finanziari presentati come consulenza professionale.
+
+La checklist completa è in [`docs/checklist-kdp.md`](docs/checklist-kdp.md); il
+metodo di lavoro per produrre più titoli in [`docs/workflow.md`](docs/workflow.md);
+formati, font e temi di copertina in
+[`docs/personalizzazione.md`](docs/personalizzazione.md).
+
+> I costi di stampa in `config/printing_costs.json` e le specifiche KDP
+> codificate in `kdpspecs.py` sono quelli pubblicati da Amazon al momento della
+> scrittura. Amazon li aggiorna: verificali prima di fissare un prezzo.

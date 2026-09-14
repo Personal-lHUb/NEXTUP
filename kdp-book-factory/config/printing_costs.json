@@ -1,0 +1,40 @@
+{
+  "_nota": "Costi di stampa KDP usati per stimare la royalty. Amazon li aggiorna periodicamente: prima di fissare il prezzo verifica su https://kdp.amazon.com/help/topic/G201834340 e aggiorna questo file. Il campo `verificato_il` serve a ricordarti quando l'hai fatto.",
+  "verificato_il": "DA VERIFICARE",
+  "royalty_rate": 0.6,
+  "marketplaces": [
+    {
+      "codice": "amazon.it",
+      "valuta": "EUR",
+      "simbolo": "€",
+      "bianco_e_nero": {
+        "fino_a_108_pagine": 2.05,
+        "oltre_108_costo_fisso": 0.6,
+        "oltre_108_costo_per_pagina": 0.012
+      },
+      "prezzo_minimo_consigliato": 6.99
+    },
+    {
+      "codice": "amazon.com",
+      "valuta": "USD",
+      "simbolo": "$",
+      "bianco_e_nero": {
+        "fino_a_108_pagine": 2.3,
+        "oltre_108_costo_fisso": 0.85,
+        "oltre_108_costo_per_pagina": 0.012
+      },
+      "prezzo_minimo_consigliato": 7.99
+    },
+    {
+      "codice": "amazon.co.uk",
+      "valuta": "GBP",
+      "simbolo": "£",
+      "bianco_e_nero": {
+        "fino_a_108_pagine": 1.93,
+        "oltre_108_costo_fisso": 0.7,
+        "oltre_108_costo_per_pagina": 0.01
+      },
+      "prezzo_minimo_consigliato": 6.99
+    }
+  ]
+}

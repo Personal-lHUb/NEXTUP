@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Output di lavorazione: si rigenerano dalla pipeline
+books/*/build/
+books/*/manuscript/
+books/*/state.json
+
+# Font con licenza propria
+fonts/*.ttf
+fonts/*.otf
