@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
-from . import agents, kdpspecs, planner, qa, typeset, writer
+from . import agents, backup, kdpspecs, planner, qa, typeset, writer
 from . import cover as cover_module
 from . import epub as epub_module
 from . import metadata as metadata_module
@@ -208,6 +208,9 @@ def editorial_pass(
     print(report.render())
 
     if level["apply"]:
+        # L'editor riscrive i capitoli sul posto: prima si mette al sicuro la
+        # stesura attuale, che potrebbe piacere più di quella rivista.
+        backup.snapshot(project, "prima delle modifiche dell'editor", force=True)
         revised = agents.apply_revisions(
             project, spec, outline, client, report, min_severity=level["apply"]
         )

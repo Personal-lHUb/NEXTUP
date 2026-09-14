@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from kdpfactory import agents, planner, writer
+from kdpfactory import agents, backup, planner, writer
 from kdpfactory.agents.base import AgentContext, AgentFinding
 from kdpfactory.agents.install import install_claude_code_agents
 from kdpfactory.agents.layout import (
@@ -211,6 +211,8 @@ class TestCicloDiRevisione(unittest.TestCase):
             slug="libro", title="Libro di Prova", topic="collaudo", target_pages=60, chapters=3
         )
         cls.spec.save(cls.project.spec_path)
+        # I test non devono scrivere nella cartella di backup del progetto.
+        backup.configure(enabled=False)
         cls.client = LLMClient(LLMConfig(dry_run=True, verbose=False))
         budget = planner.build_budget(cls.spec)
         cls.outline = writer.generate_outline(cls.spec, cls.client, budget)
@@ -219,6 +221,7 @@ class TestCicloDiRevisione(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        backup.configure(enabled=True, directory=None)
         cls.tmp.cleanup()
 
     def test_revisione_produce_segnalazioni_e_rapporto(self):

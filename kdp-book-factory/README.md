@@ -42,6 +42,10 @@ Per ogni libro, dentro `books/<slug>/build/`:
 | `kdp-listing.md` | titolo, descrizione HTML, 7 keyword, categorie, prezzi e royalty stimate |
 | `metadata.json` | gli stessi dati in formato macchina |
 | `revisioni.md` | segnalazioni del collegio, per capitolo, dalla più grave |
+
+Tutto questo, insieme a `book.json`, alla scaletta e al manoscritto, viene anche
+copiato in `backup/<slug>/<data-ora>/` a ogni passaggio: vedi
+[Copie di sicurezza](#copie-di-sicurezza).
 | `qa-report.json` | esito dei controlli di qualità e conformità |
 
 L'interno rispetta le regole KDP che fanno scartare un file in fase di
@@ -110,6 +114,7 @@ esempi usare, quale taglio dare).
 | `build <slug>` | impagina, converge sulle pagine, genera copertina ed EPUB |
 | `metadata <slug>` | scheda prodotto, keyword, categorie, prezzi |
 | `agents` | elenco del collegio (`--install` li installa in Claude Code) |
+| `backup <slug>` | elenco delle copie, `--now`, `--restore <id>`, `--prune N` |
 | `review <slug>` | fa leggere il libro agli agenti di controllo |
 | `revise <slug>` | l'editor applica le segnalazioni raccolte |
 | `qa <slug>` | controlli di qualità e conformità |
@@ -128,6 +133,34 @@ editor), `alta` (in più stile e correttore di bozze). Dettagli in
 Ogni comando è ripetibile: `write` salta i capitoli già scritti, `build` si può
 rilanciare quante volte serve. Il lavoro si interrompe e si riprende senza
 perdere nulla (`state.json`).
+
+---
+
+## Copie di sicurezza
+
+Ogni comando che scrive file lascia uno **snapshot datato** in
+`backup/<slug>/<AAAAMMGG-hhmmss>/`: scheda del libro, scaletta, manoscritto e
+tutto il contenuto di `build/`. Serve soprattutto contro sé stessi: l'editor, la
+passata di stile e `write --overwrite` riscrivono i capitoli sul posto, e una
+stesura che piaceva si perde in un istante. Prima di ogni riscrittura la copia
+viene forzata, anche se l'ultima è di un minuto prima.
+
+```bash
+python3 -m kdpfactory backup <slug>                  # elenco delle copie
+python3 -m kdpfactory backup <slug> --now            # copia subito
+python3 -m kdpfactory backup <slug> --restore latest # torna all'ultima
+python3 -m kdpfactory backup <slug> --prune 10       # tieni solo le ultime 10
+```
+
+- Due copie identiche non vengono duplicate: se nulla è cambiato, lo snapshot
+  viene saltato.
+- Il ripristino **sovrascrive ma non cancella**, e prima di procedere mette al
+  sicuro lo stato attuale: un ripristino sbagliato non è definitivo.
+- Ogni snapshot ha un `manifest.json` con dimensioni e hash SHA-256 di ogni file.
+- Cartella diversa: `--backup-dir /percorso` oppure `KDPFACTORY_BACKUP_DIR`.
+  Per disattivarle in una singola esecuzione: `--no-backup`.
+- `backup/` è fuori da git: sta sul disco, dove puoi sincronizzarla come
+  preferisci.
 
 ---
 
@@ -197,6 +230,7 @@ kdp-book-factory/
 │   ├── cover.py        copertina full-wrap
 │   ├── epub.py         EPUB 3
 │   ├── agents/         collegio editoriale: ruoli, revisione, impaginazione
+│   ├── backup.py       snapshot, ripristino, pulizia
 │   ├── qa.py           controlli di qualità e conformità
 │   ├── metadata.py     scheda prodotto, prezzi, royalty
 │   └── pipeline.py     orchestrazione e convergenza sulle pagine

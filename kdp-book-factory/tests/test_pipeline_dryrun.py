@@ -5,7 +5,7 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from kdpfactory import kdpspecs, pipeline, planner, qa, writer
+from kdpfactory import backup, kdpspecs, pipeline, planner, qa, writer
 from kdpfactory.llm import LLMClient, LLMConfig
 from kdpfactory.models import BookProject, BookSpec
 
@@ -28,6 +28,8 @@ class TestPipelineDryRun(unittest.TestCase):
             chapters=6,
         )
         cls.spec.save(cls.project.spec_path)
+        # I test non devono scrivere nella cartella di backup del progetto.
+        backup.configure(enabled=False)
         cls.client = LLMClient(LLMConfig(dry_run=True, verbose=False))
         budget = planner.build_budget(cls.spec)
         cls.outline = writer.generate_outline(cls.spec, cls.client, budget)
@@ -40,6 +42,7 @@ class TestPipelineDryRun(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        backup.configure(enabled=True, directory=None)
         cls.tmp.cleanup()
 
     def test_scaletta_contiene_intro_e_conclusione(self):

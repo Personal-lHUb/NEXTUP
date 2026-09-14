@@ -15,6 +15,7 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from .. import backup
 from ..llm import LLMClient
 from ..mdlite import count_words, strip_title
 from ..models import BookProject, BookSpec, Outline
@@ -307,6 +308,8 @@ def voice_pass(
     only: list[int] | None = None,
 ) -> list[int]:
     """Passata di stile su ogni capitolo (livello `alta`)."""
+    # Anche questa riscrive i capitoli sul posto: copia di sicurezza prima.
+    backup.snapshot(project, "prima della passata di stile", force=True)
     voce = get_agent("voce")
     touched: list[int] = []
     for number, title, text in load_chapters(project, outline):

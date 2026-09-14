@@ -4,6 +4,9 @@ __pycache__/
 venv/
 .env
 
+# Copie di sicurezza: restano sul disco, non in git (contengono PDF)
+backup/
+
 # Output di lavorazione: si rigenerano dalla pipeline
 books/*/build/
 books/*/manuscript/

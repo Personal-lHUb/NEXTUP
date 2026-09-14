@@ -13,7 +13,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from . import agents, kdpspecs, pipeline, planner, writer
+from . import agents, backup, kdpspecs, pipeline, planner, writer
 from .llm import DEFAULT_MODEL, LLMClient, LLMConfig, api_key_present
 from .models import BookProject, BookSpec, slugify
 
@@ -45,6 +45,11 @@ def budget_for(project: BookProject, spec: BookSpec) -> planner.PageBudget:
     """Budget del libro, usando la calibrazione misurata se già disponibile."""
     measured = project.load_state().get("words_per_page_measured")
     return planner.build_budget(spec, measured)
+
+
+def save_backup(project: BookProject, args, reason: str, *, force: bool = False):
+    """Copia di sicurezza di tutto il progetto, salvo `--no-backup`."""
+    return backup.snapshot(project, reason, force=force)
 
 
 def make_client(args) -> LLMClient:
@@ -98,6 +103,7 @@ def cmd_init(args) -> int:
     print(f"Creato {project.spec_path}")
     print("Apri il file e completa `topic`, `audience`, `promise` e `notes`: più sono")
     print("precisi, più il libro sarà specifico e meno generico.\n")
+    save_backup(project, args, "progetto creato")
     print(planner.describe(planner.build_budget(spec), spec))
     print(f"\nProssimo passo: python -m kdpfactory outline {slug}")
     return 0
@@ -131,6 +137,7 @@ def cmd_outline(args) -> int:
     project.ensure_dirs()
     outline.save(project.outline_path)
     project.update_state(budget=budget.to_dict(), usage=client.usage_report())
+    save_backup(project, args, "scaletta")
     print(f"\nScaletta salvata in {project.outline_path}")
     for chapter in outline.chapters:
         print(f"  {chapter.number:2d}. {chapter.title}  ({chapter.target_words} parole)")
@@ -143,9 +150,14 @@ def cmd_write(args) -> int:
     outline = project.load_outline()
     client = make_client(args)
     only = [int(n) for n in args.only.split(",")] if args.only else None
+    if args.overwrite:
+        # I capitoli vengono riscritti sul posto: prima si mette al sicuro
+        # quello che c'è, anche se l'ultimo backup è recente.
+        save_backup(project, args, "prima della riscrittura", force=True)
     print(f"Scrittura capitoli{' ' + args.only if only else ''}…")
     writer.write_chapters(project, spec, outline, client, only=only, overwrite=args.overwrite)
     project.update_state(usage=client.usage_report())
+    save_backup(project, args, "capitoli scritti")
     stats = pipeline.manuscript_stats(project, outline)
     print(json.dumps(stats, ensure_ascii=False, indent=2))
     print(f"\nProssimo passo: python -m kdpfactory build {spec.slug}")
@@ -170,6 +182,7 @@ def cmd_build(args) -> int:
     pipeline.export_manuscript_markdown(project, spec, outline)
     if client:
         project.update_state(usage=client.usage_report())
+    save_backup(project, args, f"impaginazione ({result.pages} pagine)")
 
     print("\nFile generati:")
     for path in sorted(project.build_dir.iterdir()):
@@ -199,6 +212,7 @@ def cmd_metadata(args) -> int:
     pages = state.get("build", {}).get("pagine") or spec.target_pages
     info = pipeline.write_metadata_files(project, spec, outline, meta, pages)
     project.update_state(usage=client.usage_report())
+    save_backup(project, args, "scheda prodotto")
     print(f"Scheda salvata in {info['listing']}")
     for row in info["prezzi"]:
         print(
@@ -227,6 +241,8 @@ def cmd_qa(args) -> int:
 def cmd_all(args) -> int:
     project, spec = open_project(args)
     client = make_client(args)
+    if args.force:
+        save_backup(project, args, "prima della rigenerazione completa", force=True)
 
     if not project.outline_path.exists() or args.force:
         budget = budget_for(project, spec)
@@ -255,6 +271,8 @@ def cmd_all(args) -> int:
         project, spec, outline, client, max_iterations=args.iterations, tolerance=args.tolerance
     )
 
+    save_backup(project, args, f"impaginazione ({result.pages} pagine)")
+
     print(f"5/6 · collegio di revisione (livello «{args.qualita}»)")
     result, _ = pipeline.editorial_pass(
         project,
@@ -281,6 +299,7 @@ def cmd_all(args) -> int:
     report = pipeline.run_qa(project, spec, outline, result)
     project.update_state(usage=client.usage_report())
     print(report.render())
+    save_backup(project, args, "pipeline completa")
     print("\nConsumo API:", json.dumps(client.usage_report(), ensure_ascii=False))
     print("\nFile generati:")
     for path in sorted(project.build_dir.iterdir()):
@@ -320,6 +339,7 @@ def cmd_review(args) -> int:
     print(f"Revisione di «{spec.title}» — agenti: {', '.join(names)}")
     report = agents.run_review(project, spec, outline, client, agent_names=names, only=only)
     project.update_state(usage=client.usage_report())
+    save_backup(project, args, "revisione del collegio")
     print(report.render())
     print(f"\nRapporto salvato in {project.build_dir / 'revisioni.md'}")
     if report.blocking:
@@ -338,16 +358,56 @@ def cmd_revise(args) -> int:
         )
     client = make_client(args)
     only = [int(n) for n in args.only.split(",")] if args.only else None
+    save_backup(project, args, "prima delle modifiche dell'editor", force=True)
     print(f"L'editor applica le segnalazioni (da «{args.severita}» in su)…")
     revised = agents.apply_revisions(
         project, spec, outline, client, report, min_severity=args.severita, only=only
     )
     project.update_state(usage=client.usage_report())
+    save_backup(project, args, "modifiche dell'editor")
     if not revised:
         print("Nessun capitolo da modificare.")
         return 0
     print(f"Capitoli rivisti: {', '.join(str(n) for n in revised)}")
     print(f"\nRimpagina per ricontrollare le pagine: python -m kdpfactory build {spec.slug}")
+    return 0
+
+
+def cmd_backup(args) -> int:
+    project, spec = open_project(args)
+    backup_dir = Path(args.backup_dir) if args.backup_dir else None
+
+    if args.restore:
+        result = backup.restore(project, args.restore, backup_dir=backup_dir)
+        print(
+            f"Ripristinato lo snapshot {result.snapshot.stamp} "
+            f"({len(result.restored)} file) di «{spec.title}»."
+        )
+        if result.safety:
+            print(f"Lo stato precedente è al sicuro in {result.safety.path}")
+        return 0
+
+    if args.prune:
+        removed = backup.prune(project, args.prune, backup_dir=backup_dir)
+        print(f"Eliminati {len(removed)} snapshot, tenuti gli ultimi {args.prune}.")
+        return 0
+
+    if args.now:
+        result = save_backup(project, args, args.reason or "copia manuale", force=True)
+        if result is None:
+            print("Niente da copiare.")
+        return 0
+
+    snapshots = backup.list_snapshots(project, backup_dir)
+    if not snapshots:
+        print(f"Nessun backup per «{spec.title}» in {backup.backup_root(project, backup_dir)}")
+        return 0
+    count, total = backup.usage(project, backup_dir)
+    print(f"Backup di «{spec.title}» in {backup.backup_root(project, backup_dir)}")
+    for item in snapshots:
+        print(f"  {item.describe()}")
+    print(f"  ── {count} snapshot, {total / 1_048_576:.1f} MB")
+    print(f"\nPer tornare indietro: python -m kdpfactory backup {spec.slug} --restore <id>")
     return 0
 
 
@@ -415,6 +475,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--dry-run",
         action="store_true",
         help="nessuna chiamata API: genera testo segnaposto per collaudare la pipeline",
+    )
+    parser.add_argument(
+        "--backup-dir",
+        default=None,
+        help=f"cartella delle copie di sicurezza (default {backup.DEFAULT_BACKUP_DIR})",
+    )
+    parser.add_argument(
+        "--no-backup",
+        action="store_true",
+        help="non copiare i file generati nella cartella di backup",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -515,6 +585,21 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--force", action="store_true", help="rigenera scaletta e capitoli")
     p.set_defaults(func=cmd_all)
 
+    p = sub.add_parser("backup", help="copie di sicurezza: elenco, copia, ripristino")
+    p.add_argument("slug")
+    p.add_argument("--now", action="store_true", help="fai subito una copia")
+    p.add_argument("--reason", default="", help="etichetta della copia manuale")
+    p.add_argument(
+        "--restore",
+        default=None,
+        metavar="ID",
+        help="ripristina lo snapshot indicato (`latest` per l'ultimo)",
+    )
+    p.add_argument(
+        "--prune", type=int, default=None, metavar="N", help="tieni solo gli ultimi N snapshot"
+    )
+    p.set_defaults(func=cmd_backup)
+
     p = sub.add_parser("list", help="elenco dei libri e stato")
     p.set_defaults(func=cmd_list)
 
@@ -530,6 +615,9 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    # La preferenza vale per tutta l'esecuzione: anche la pipeline e gli agenti
+    # mettono al sicuro i file prima di sovrascriverli.
+    backup.configure(enabled=not args.no_backup, directory=args.backup_dir)
     try:
         return args.func(args)
     except KeyboardInterrupt:
