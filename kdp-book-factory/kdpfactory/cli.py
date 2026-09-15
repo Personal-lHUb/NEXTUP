@@ -467,6 +467,51 @@ def cmd_revise(args) -> int:
     return 0
 
 
+def cmd_puzzle(args) -> int:
+    from .puzzle import book as puzzle_book
+
+    root = books_dir(args) / args.slug
+    if args.action == "new":
+        if root.exists() and not args.force:
+            raise SystemExit(f"Esiste già {root}. Usa --force per sovrascrivere.")
+        project = BookProject(root)
+        project.ensure_dirs()
+        spec = puzzle_book.default_book_spec(args.slug, args.author)
+        spec.save(project.spec_path)
+        puzzle_spec = puzzle_book.PuzzleSpec(seed=args.seed)
+        puzzle_spec.save(puzzle_book.puzzle_spec_path(project))
+        save_backup(project, args, "libro di enigmi creato")
+        print(f"Creato {project.spec_path} e {puzzle_book.puzzle_spec_path(project)}")
+        print(f"Titolo: {spec.title}\nSeme: {puzzle_spec.seed}")
+        print(f"\nProssimo passo: python -m kdpfactory puzzle build {args.slug}")
+        return 0
+
+    project, spec = open_project(args)
+    puzzle_spec = puzzle_book.PuzzleSpec.load(puzzle_book.puzzle_spec_path(project))
+    if args.seed:
+        puzzle_spec.seed = args.seed
+        puzzle_spec.save(puzzle_book.puzzle_spec_path(project))
+
+    print(f"Generazione di «{spec.title}» (seme {puzzle_spec.seed})…")
+    result = puzzle_book.build(project, spec, puzzle_spec, guides=args.guides)
+    generated = result["book"]
+    print(
+        f"  {len(generated.cases)} casi + finale · {generated.suspects_total} sospetti · "
+        f"{generated.clues_total} indizi · {result['pages']} pagine"
+    )
+    report = puzzle_book.check(project, spec, result["pages"], result["interior"])
+    print(report.render())
+    for row in result["prices"]:
+        print(
+            f"  {row.marketplace:<14} stampa {row.symbol}{row.printing_cost:.2f} · "
+            f"prezzo {row.symbol}{row.suggested_price:.2f} · royalty {row.symbol}{row.royalty:.2f}"
+        )
+    print("\nFile generati:")
+    for path in sorted(project.build_dir.iterdir()):
+        print(f"  {path}")
+    return 0 if report.ok else 1
+
+
 def cmd_backup(args) -> int:
     project, spec = open_project(args)
     backup_dir = Path(args.backup_dir) if args.backup_dir else None
@@ -678,6 +723,15 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--guides", action="store_true")
     p.add_argument("--force", action="store_true", help="rigenera scaletta e capitoli")
     p.set_defaults(func=cmd_all)
+
+    p = sub.add_parser("puzzle", help="libri di enigmi di deduzione (senza chiamate API)")
+    p.add_argument("action", choices=["new", "build"])
+    p.add_argument("slug")
+    p.add_argument("--seed", type=int, default=0, help="seme: stesso seme, stesso libro")
+    p.add_argument("--author", default="Iris Vane")
+    p.add_argument("--guides", action="store_true", help="copertina con linee guida")
+    p.add_argument("--force", action="store_true")
+    p.set_defaults(func=cmd_puzzle)
 
     p = sub.add_parser("backup", help="copie di sicurezza: elenco, copia, ripristino")
     p.add_argument("slug")

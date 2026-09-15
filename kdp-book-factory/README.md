@@ -10,6 +10,11 @@ un **lettore cieco** (legge senza sapere nulla del progetto), un fact-checker,
 un revisore di conformità e un controllo di impaginazione che misura il PDF
 riga per riga. È la catena di una redazione, non un unico prompt lungo.
 
+Due linee di produzione: **libri in prosa**, scritti dal collegio di agenti, e
+**libri di enigmi di deduzione** ([`docs/enigmistica.md`](docs/enigmistica.md)),
+che si generano da un seme e si *dimostrano* corretti senza chiamare nessun
+modello — soluzione unica, nessun indizio superfluo, stesso seme stesso libro.
+
 Il vincolo di progetto è il numero di pagine: **ogni libro esce fra 60 e 240
 pagine**, con un obiettivo scelto da te e centrato entro il ±5%. Non è una stima
 sulla fiducia: la pipeline impagina davvero, conta le pagine del PDF, ricalcola
@@ -139,6 +144,7 @@ esempi usare, quale taglio dare).
 | `metadata <slug>` | scheda prodotto, keyword, categorie, prezzi |
 | `agents` | elenco del collegio (`--install` li installa in Claude Code) |
 | `backup <slug>` | elenco delle copie, `--now`, `--restore <id>`, `--prune N` |
+| `puzzle new/build <slug>` | libri di enigmi di deduzione, senza chiamate API |
 | `review <slug>` | fa leggere il libro agli agenti di controllo |
 | `revise <slug>` | l'editor applica le segnalazioni raccolte |
 | `qa <slug>` | controlli di qualità e conformità |
@@ -255,6 +261,7 @@ kdp-book-factory/
 │   ├── epub.py         EPUB 3
 │   ├── agents/         collegio editoriale: ruoli, revisione, impaginazione
 │   ├── backup.py       snapshot, ripristino, pulizia
+│   ├── puzzle/         enigmi di deduzione: modello, solver, generatore, impaginazione
 │   ├── coverimage.py   preparazione dell'immagine di copertina (300 DPI, velatura)
 │   ├── qa.py           controlli di qualità e conformità
 │   ├── metadata.py     scheda prodotto, prezzi, royalty
@@ -262,7 +269,7 @@ kdp-book-factory/
 ├── books/<slug>/       book.json, brief.md, assets/, manuscript/, build/
 ├── config/             costi di stampa per il calcolo delle royalty
 ├── docs/               checklist di pubblicazione, workflow, personalizzazione
-└── tests/              26 test, nessuna chiamata API
+└── tests/              112 test, nessuna chiamata API
 ```
 
 ```bash
@@ -288,7 +295,8 @@ Tre cose che il codice non può fare al posto tuo:
    finanziari presentati come consulenza professionale.
 
 La checklist completa è in [`docs/checklist-kdp.md`](docs/checklist-kdp.md); il
-collegio editoriale in [`docs/agenti.md`](docs/agenti.md); i materiali da
+collegio editoriale in [`docs/agenti.md`](docs/agenti.md); la linea enigmistica
+in [`docs/enigmistica.md`](docs/enigmistica.md); i materiali da
 fornire in [`docs/materiali.md`](docs/materiali.md); il
 metodo di lavoro per produrre più titoli in [`docs/workflow.md`](docs/workflow.md);
 formati, font e temi di copertina in

@@ -146,7 +146,7 @@ class TestImpaginazione(unittest.TestCase):
         page = full_page(11)
         page[-1] = line(11, LEFT + INDENT, MEASURE - INDENT, y0=page[-1].y0)  # capoverso nuovo
         page[4] = line(11, LEFT + INDENT, MEASURE - INDENT, y0=page[4].y0)    # capoverso certo
-        findings = _check_widows_orphans({11: page}, 11, MEASURE, BODY, {1: LEFT}, INDENT, 1)
+        findings = _check_widows_orphans({11: page}, 11, MEASURE, BODY, "F", {1: LEFT}, INDENT, 1)
         self.assertIn("riga orfana", {f.category for f in findings})
 
     def test_riconosce_riga_vedova(self):
@@ -154,19 +154,20 @@ class TestImpaginazione(unittest.TestCase):
         page[0] = line(12, LEFT, MEASURE * 0.3, y0=page[0].y0)                 # coda di capoverso
         page[1] = line(12, LEFT + INDENT, MEASURE - INDENT, y0=page[1].y0)     # capoverso nuovo
         page[5] = line(12, LEFT + INDENT, MEASURE - INDENT, y0=page[5].y0)
-        findings = _check_widows_orphans({12: page}, 12, MEASURE, BODY, {0: LEFT}, INDENT, 1)
+        findings = _check_widows_orphans({12: page}, 12, MEASURE, BODY, "F", {0: LEFT}, INDENT, 1)
         self.assertIn("riga vedova", {f.category for f in findings})
 
     def test_riconosce_titolo_a_piede_di_pagina(self):
         page = full_page(13)
         page[-1] = line(13, LEFT, 200, size=BODY + 2, text="Una sezione", y0=page[-1].y0)
-        findings = _check_widows_orphans({13: page}, 13, MEASURE, BODY, {1: LEFT}, INDENT, 1)
+        page[-1].font = "Display"
+        findings = _check_widows_orphans({13: page}, 13, MEASURE, BODY, "F", {1: LEFT}, INDENT, 1)
         self.assertIn("titolo a piede di pagina", {f.category for f in findings})
 
     def test_pagina_pulita_non_produce_segnalazioni(self):
         page = full_page(14)
         page[3] = line(14, LEFT + INDENT, MEASURE - INDENT, y0=page[3].y0)
-        findings = _check_widows_orphans({14: page}, 14, MEASURE, BODY, {0: LEFT}, INDENT, 1)
+        findings = _check_widows_orphans({14: page}, 14, MEASURE, BODY, "F", {0: LEFT}, INDENT, 1)
         self.assertEqual(findings, [])
 
     def test_elenco_puntato_non_e_una_riga_orfana(self):
@@ -176,7 +177,7 @@ class TestImpaginazione(unittest.TestCase):
         page[-2] = line(15, bullet_x, 200, y0=page[-2].y0)
         page[-1] = line(15, bullet_x, 200, y0=page[-1].y0)
         page[4] = line(15, LEFT + INDENT, MEASURE - INDENT, y0=page[4].y0)
-        findings = _check_widows_orphans({15: page}, 15, MEASURE, BODY, {1: LEFT}, INDENT, 1)
+        findings = _check_widows_orphans({15: page}, 15, MEASURE, BODY, "F", {1: LEFT}, INDENT, 1)
         self.assertEqual(findings, [])
 
     def test_testo_fuori_gabbia(self):

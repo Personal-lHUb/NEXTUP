@@ -19,6 +19,7 @@ from .. import kdpspecs
 from .base import Agent, AgentContext, AgentFinding, AgentResult, register
 
 INDENT_TOLERANCE = 4.0     # punti: sotto questa soglia una riga è allineata al margine
+MAX_INDENT = 40.0          # oltre non è un rientro di capoverso: è una colonna di tabella
 SHORT_LINE_RATIO = 0.55    # riga "corta": meno del 55% della giustezza
 TINY_LINE_RATIO = 0.12     # riga finale di paragrafo molto corta
 FRAME_TOLERANCE = 2.0      # punti di tolleranza sul bordo della gabbia
@@ -148,8 +149,8 @@ def inspect_layout(ctx: AgentContext) -> list[AgentFinding]:
             )
         ]
 
-    body_size = Counter(line.size for line in lines).most_common(1)[0][0]
     measure = geo.text_width
+    body_size, body_font = _body_face(lines, measure)
     by_page: dict[int, list[Line]] = {}
     for line in lines:
         by_page.setdefault(line.page, []).append(line)
@@ -166,14 +167,42 @@ def inspect_layout(ctx: AgentContext) -> list[AgentFinding]:
     findings: list[AgentFinding] = []
     indent = _measure_first_line_indent(by_page, flush_left, body_size)
     findings += _check_widows_orphans(
-        by_page, page_count, measure, body_size, flush_left, indent, body_start
+        by_page, page_count, measure, body_size, body_font, flush_left, indent, body_start
     )
     findings += _check_frame_overflow(lines, geo)
     findings += _check_hyphen_ladders(by_page)
-    findings += _check_short_last_lines(lines, measure, body_size)
+    findings += _check_short_last_lines(lines, measure, body_size, flush_left, indent)
     findings += _check_chapter_tails(by_page, ctx, geo)
     findings += chapter_title_pages
     return findings
+
+
+def _standalone(page_lines: list[Line]) -> list[Line]:
+    """Righe che stanno da sole alla loro altezza.
+
+    Una riga di tabella ha accanto le altre celle, un elenco ha il numero o il
+    pallino alla stessa altezza del testo: in entrambi i casi la riga non è
+    testo corrente e le regole su vedove e orfane non la riguardano.
+    """
+    by_row: dict[int, int] = {}
+    for line in page_lines:
+        key = round(line.y0)
+        by_row[key] = by_row.get(key, 0) + 1
+    return [line for line in page_lines if by_row[round(line.y0)] == 1]
+
+
+def _body_face(lines: list[Line], measure: float) -> tuple[float, str]:
+    """Corpo e font del testo corrente, misurati sulle righe che riempiono la
+    giustezza.
+
+    Contare tutte le righe darebbe il corpo delle celle: in un libro di enigmi
+    le tabelle hanno più righe del testo, e il testo verrebbe scambiato per una
+    serie di titoli.
+    """
+    full = [line for line in lines if line.width > measure * 0.6] or lines
+    size = Counter(line.size for line in full).most_common(1)[0][0]
+    font = Counter(line.font for line in full if line.size == size).most_common(1)[0][0]
+    return size, font
 
 
 def _flush_left_by_parity(lines: list[Line]) -> dict[int, float]:
@@ -198,15 +227,35 @@ def _measure_first_line_indent(
     """
     indents: list[float] = []
     for page_lines in by_page.values():
-        for line, following in zip(page_lines, page_lines[1:], strict=False):
+        alone = _standalone(page_lines)
+        for line, following in zip(alone, alone[1:], strict=False):
             left = flush_left.get(line.page % 2)
             if left is None or round(line.size, 1) != body_size:
                 continue
-            if line.x0 > left + INDENT_TOLERANCE and abs(following.x0 - left) < INDENT_TOLERANCE:
-                indents.append(round(line.x0 - left, 1))
+            offset = line.x0 - left
+            if (
+                INDENT_TOLERANCE < offset <= MAX_INDENT
+                and abs(following.x0 - left) < INDENT_TOLERANCE
+            ):
+                indents.append(round(offset, 1))
     if not indents:
         return None
     return Counter(indents).most_common(1)[0][0]
+
+
+def _is_prose(line: Line, flush_left: dict[int, float], indent: float | None) -> bool:
+    """Righe di testo corrente: a filo di margine o rientrate di un capoverso.
+
+    Tutto il resto — celle di tabella, elenchi, citazioni — ha margini propri e
+    non va giudicato con le regole di vedove e orfane.
+    """
+    left = flush_left.get(line.page % 2)
+    if left is None:
+        return False
+    offset = line.x0 - left
+    if abs(offset) < INDENT_TOLERANCE:
+        return True
+    return indent is not None and abs(offset - indent) < 1.5
 
 
 def _is_paragraph_opening(
@@ -224,6 +273,7 @@ def _check_widows_orphans(
     page_count: int,
     measure: float,
     body_size: float,
+    body_font: str,
     flush_left: dict[int, float],
     indent: float | None,
     body_start: int = 1,
@@ -237,7 +287,15 @@ def _check_widows_orphans(
         if len(page_lines) < 3:
             continue  # apertura di capitolo o pagina di coda: non fanno testo
 
-        first, second = page_lines[0], page_lines[1]
+        prose = [
+            line
+            for line in _standalone(page_lines)
+            if _is_prose(line, flush_left, indent)
+        ]
+        if len(prose) < 3:
+            continue  # pagina di tabelle o di elenchi: altre regole, altro mestiere
+
+        first, second = prose[0], prose[1]
         # Vedova: la prima riga della pagina chiude il capoverso rimasto di là
         # (non è rientrata, ed è corta o seguita da un nuovo capoverso).
         if (
@@ -249,9 +307,12 @@ def _check_widows_orphans(
             widows.append(page)
 
         last = page_lines[-1]
-        if last.size > body_size + 0.6:
+        # Un titolo si riconosce da due cose insieme: corpo più grande *e* font
+        # diverso da quello del testo. Solo la dimensione non basta — in un libro
+        # pieno di tabelle il corpo più frequente è quello delle celle.
+        if last.size >= body_size + 1.5 and last.font != body_font:
             headings.append(page)      # titolo di sezione rimasto in fondo
-        elif _is_paragraph_opening(last, flush_left, indent):
+        elif last is prose[-1] and _is_paragraph_opening(last, flush_left, indent):
             orphans.append(page)       # prima riga di un capoverso in fondo alla pagina
 
     findings: list[AgentFinding] = []
@@ -341,12 +402,22 @@ def _check_hyphen_ladders(by_page: dict[int, list[Line]]) -> list[AgentFinding]:
 
 
 def _check_short_last_lines(
-    lines: list[Line], measure: float, body_size: float
+    lines: list[Line],
+    measure: float,
+    body_size: float,
+    flush_left: dict[int, float],
+    indent: float | None,
 ) -> list[AgentFinding]:
+    by_page: dict[int, list[Line]] = {}
+    for line in lines:
+        by_page.setdefault(line.page, []).append(line)
     tiny = [
         line
-        for line in lines
-        if round(line.size, 1) == body_size and line.width < measure * TINY_LINE_RATIO
+        for page_lines in by_page.values()
+        for line in _standalone(page_lines)
+        if round(line.size, 1) == body_size
+        and line.width < measure * TINY_LINE_RATIO
+        and _is_prose(line, flush_left, indent)
     ]
     if len(tiny) < 5:
         return []
