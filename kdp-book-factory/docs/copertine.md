@@ -18,7 +18,7 @@ misura il PDF finito.
 | 2 | **Titolo leggibile in miniatura** | altezza delle maiuscole ≥ 6% dell'altezza (8,5% per un titolo davvero dominante), su massimo 3 righe |
 | 3 | **Contrasto reale** | rapporto di contrasto titolo/fondo ≥ 7:1 (soglia AAA delle linee guida di accessibilità) |
 | 4 | **Stacco dalla pagina** | il fondo deve avere ≥ 3:1 contro il bianco, o la copertina perde il bordo e sparisce fra le altre |
-| 5 | **Codice di genere in mezzo secondo** | un segno grafico che dice *che libro è* prima che il titolo venga letto |
+| 5 | **Un'immagine che dice di che libro si tratta** | un'illustrazione riconoscibile in mezzo secondo, con **un solo punto in accento** |
 | 6 | **Un ciclo aperto** | una domanda o una promessa incompleta: è l'effetto Zeigarnik, l'incompiuto resta in testa |
 | 7 | **Numeri in cifre** | «13 CASES · 908 SUSPECTS» si legge in un colpo d'occhio, «tredici casi» va letto |
 
@@ -70,25 +70,68 @@ Per scriverli a mano basta metterli in `metadata.json`:
 La linea enigmistica li costruisce da sé, dai numeri veri del libro
 (`cover_copy()` in `kdpfactory/puzzle/book.py`).
 
+## L'illustrazione
+
+L'immagine di copertina è **disegnata dalla pipeline**, non cercata. Sta in
+`kdpfactory/coverart.py` e ha quattro vantaggi che una fotografia non ha:
+
+- non costa niente, non serve una chiave API né una banca di immagini;
+- è vettoriale, quindi nitida a qualunque risoluzione: KDP non la contesta mai
+  per i DPI, cosa che invece succede regolarmente con le foto;
+- nasce nei colori della palette del libro: l'immagine non litiga mai col titolo;
+- non ha un autore da pagare né problemi di diritti — che per una copertina
+  venduta su Amazon non è un dettaglio.
+
+A 160 pixel una fotografia ricca di dettagli diventa una macchia; una
+**silhouette con un solo punto luminoso** si riconosce ancora. Per questo tutte
+le illustrazioni seguono la stessa regola: un solo elemento in accento, ed è
+quello che racconta la storia.
+
+| illustrazione | che cos'è | il punto in accento |
+|---|---|---|
+| `treno` | un espresso notturno visto di fianco | la finestra accesa: la carrozza dov'è successo |
+| `lente` | una lente sopra una griglia di indizi | l'unico indizio che conta |
+| `elenco` | un elenco di sospetti barrati | l'unico nome rimasto in piedi |
+| `orologio` | un quadrante con uno spicchio pieno | le ore che il libro restituisce |
+| `scala` | gradini che salgono | l'ultimo gradino, il punto d'arrivo |
+| `porta` | una porta socchiusa | la luce che ne esce |
+
+### Come viene scelta
+
+1. `cover_art` in `book.json`, se l'autore l'ha indicata (`treno`, `lente`,
+   `elenco`, `orologio`, `scala`, `porta`, oppure `nessuna` per una copertina di
+   solo testo);
+2. altrimenti dalle **parole chiave** di quello che il libro dice di essere:
+   titolo, sottotitolo, argomento, promessa. A parità di parole trovate vince la
+   scena più concreta — un treno si ricorda, un segno astratto no;
+3. se non emerge niente, quella prevista per il genere: `enigmi` → `elenco`,
+   `non-fiction` → `scala`, `fiction` → `porta`.
+
+Quando la copertina ha già una fotografia dell'autore (`assets/copertina.jpg`),
+l'illustrazione **non** viene disegnata: la foto è già l'elemento dominante, e
+sovrapporle un secondo segno rompe la regola 1.
+
+### Aggiungerne una
+
+Una funzione `def nome(canvas, area, palette)` che disegna dentro `area`
+(un `Area`, con `fit(proporzione, anchor=...)` per ricavare il rettangolo con le
+proporzioni giuste), più una voce in `ARTS` con le parole chiave, le proporzioni
+e quanto è concreta. Due regole: **un solo accento**, e tutto dentro `area` —
+`coverart.draw` isola lo stato grafico, ma non ritaglia niente.
+
 ## L'adattamento per tipo di libro
 
-Il sistema è lo stesso per tutti i libri; cambia il **codice di genere**, perché
-chi cerca enigmi e chi cerca un metodo cercano due segnali diversi. Ci si
-differenzia dentro il codice del genere, non fuori: una copertina di enigmi che
-sembra un romanzo non viene cliccata da nessuno dei due pubblici.
+Il sistema è lo stesso per tutti i libri; cambia l'occhiello e cambia
+l'illustrazione, perché chi cerca enigmi e chi cerca un metodo cercano due
+segnali diversi. Ci si differenzia dentro il codice del genere, non fuori: una
+copertina di enigmi che sembra un romanzo non viene cliccata da nessuno dei due
+pubblici.
 
-| genere | occhiello | motivo grafico | che cosa dice |
-|---|---|---|---|
-| `enigmi` | `DEDUCTION PUZZLES` | elenco di sospetti barrati, uno cerchiato in accento | «qui si ragiona» — ed è anche il ciclo aperto: chi è quello cerchiato? |
-| `non-fiction` | nessuno | tre barre che crescono verso il basso, l'ultima in accento | «c'è un metodo, e porta da qualche parte» |
-| `fiction` | nessuno | nessuno: aria attorno al titolo | «è un romanzo»: l'atmosfera la fa la palette |
-
-La tabella è `GENRE_DEFAULTS`; un motivo nuovo è una funzione
-`motif_<nome>(canvas, box, palette, top, height)` aggiunta a `MOTIFS`.
-
-Quando la copertina ha un'immagine dell'autore (`assets/copertina.jpg`), il
-motivo grafico non viene disegnato: l'immagine **è** già l'elemento dominante, e
-sovrapporle un secondo segno rompe la regola 1.
+| genere | occhiello | illustrazione di riserva |
+|---|---|---|
+| `enigmi` | `DEDUCTION PUZZLES` | `elenco` |
+| `non-fiction` | nessuno | `scala` |
+| `fiction` | nessuno | `porta` |
 
 ## Le palette
 
@@ -136,6 +179,8 @@ Gli stessi controlli passano dall'agente, con la gravità e il rimedio:
 ```bash
 python3 -m kdpfactory review <slug> --agents copertina
 ```
+
+`state.json` → `cover.illustrazione` dice quale illustrazione è stata scelta.
 
 Un titolo illeggibile in miniatura, un contrasto sotto 7:1, un testo fuori
 dall'area di sicurezza o una rivendicazione vietata sono **bloccanti**: la

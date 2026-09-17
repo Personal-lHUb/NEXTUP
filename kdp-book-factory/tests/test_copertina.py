@@ -9,7 +9,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from kdpfactory import backup, cover, coverdesign, kdpspecs
+from kdpfactory import backup, cover, coverart, coverdesign, kdpspecs
 from kdpfactory.agents import AgentContext, get_agent
 from kdpfactory.coverdesign import (
     CoverCopy,
@@ -231,6 +231,137 @@ class TestCopertinaGenerata(unittest.TestCase):
         # un pixel di arrotondamento: la larghezza in punti non è intera
         self.assertAlmostEqual(pixmap.width, coverdesign.THUMBNAIL_WIDTH_PX, delta=1)
         self.assertAlmostEqual(pixmap.height / pixmap.width, trim_h / trim_w, places=2)
+
+
+class TestIllustrazioni(unittest.TestCase):
+    """Le illustrazioni sono vettoriali e deterministiche: si possono provare tutte."""
+
+    def area(self) -> coverart.Area:
+        return coverart.Area(x=100.0, y=50.0, width=390.0, height=240.0)
+
+    def test_fit_rispetta_le_proporzioni_e_sta_dentro(self):
+        area = self.area()
+        for ratio in (0.72, 1.0, 2.35, 3.0):
+            with self.subTest(ratio=ratio):
+                scene = area.fit(ratio)
+                self.assertAlmostEqual(scene.width / scene.height, ratio, places=6)
+                self.assertGreaterEqual(scene.x, area.x - 1e-9)
+                self.assertLessEqual(scene.right, area.right + 1e-9)
+                self.assertGreaterEqual(scene.y, area.y - 1e-9)
+                self.assertLessEqual(scene.top, area.top + 1e-9)
+
+    def test_fit_ancorato_in_basso_poggia_sul_bordo(self):
+        area = self.area()
+        self.assertAlmostEqual(area.fit(2.35, anchor="bottom").y, area.y)
+
+    def test_ogni_illustrazione_si_disegna_in_ogni_palette(self):
+        from reportlab.pdfgen import canvas as pdfcanvas
+
+        for art in coverart.ARTS:
+            for palette in coverdesign.PALETTES:
+                with self.subTest(art=art.name, palette=palette.name):
+                    with tempfile.TemporaryDirectory() as tmp:
+                        c = pdfcanvas.Canvas(str(Path(tmp) / "a.pdf"), pagesize=(600, 400))
+                        coverart.draw(c, art, self.area(), palette)
+                        c.showPage()
+                        c.save()
+
+    def test_lo_stato_grafico_torna_come_prima(self):
+        """La trasparenza resta nello stato della pagina: se un'illustrazione se
+        la porta dietro, tutto quello disegnato dopo esce slavato.
+
+        Si verifica sul risultato, non sugli attributi: dopo l'illustrazione si
+        stampa un rosso pieno e si legge il pixel."""
+        import pymupdf
+        from reportlab.lib import colors
+        from reportlab.pdfgen import canvas as pdfcanvas
+
+        for art in coverart.ARTS:
+            with self.subTest(art=art.name), tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / "a.pdf"
+                c = pdfcanvas.Canvas(str(path), pagesize=(600, 400))
+                c.setFillColor(colors.white)
+                c.rect(0, 0, 600, 400, stroke=0, fill=1)
+                c.setLineWidth(1)
+                coverart.draw(c, art, coverart.Area(20, 120, 320, 260), coverdesign.PALETTES[0])
+                self.assertEqual(c._lineWidth, 1)
+                c.setFillColor(colors.HexColor("#FF0000"))
+                c.rect(420, 40, 120, 60, stroke=0, fill=1)
+                c.showPage()
+                c.save()
+
+                document = pymupdf.open(path)
+                pixmap = document[0].get_pixmap()
+                self.assertEqual(pixmap.pixel(480, 400 - 70), (255, 0, 0))
+                document.close()
+
+    def test_scelta_dal_contenuto(self):
+        self.assertEqual(
+            coverart.pick("Twelve Carriages: a night express, one sleeper car", "enigmi").name,
+            "treno",
+        )
+        self.assertEqual(
+            coverart.pick("Il metodo delle tre ore: recuperare una mattina", "non-fiction").name,
+            "orologio",
+        )
+        self.assertEqual(
+            coverart.pick("La casa sul confine: un segreto dietro la porta", "fiction").name,
+            "porta",
+        )
+
+    def test_a_parita_di_parole_vince_la_scena_piu_concreta(self):
+        """Una parola a testa: «puzzle» pesca l'elenco astratto, «door» la
+        porta. A parità vince la scena, che in miniatura si ricorda."""
+        self.assertEqual(coverart.pick("a puzzle behind a door", "enigmi").name, "porta")
+
+    def test_senza_parole_riconoscibili_decide_il_genere(self):
+        for genre, expected in coverart.GENRE_ART.items():
+            with self.subTest(genre=genre):
+                self.assertEqual(coverart.pick("zzz qqq", genre).name, expected)
+
+    def test_scelta_dellautore_ha_la_precedenza(self):
+        self.assertEqual(
+            coverart.pick("Twelve Carriages, One Killer", "enigmi", wanted="orologio").name,
+            "orologio",
+        )
+
+    def test_nessuna_illustrazione_su_richiesta(self):
+        with self.assertRaises(KeyError):
+            coverart.pick("Twelve Carriages", "enigmi", wanted="nessuna")
+
+    def test_la_scelta_del_libro_arriva_fino_al_pdf(self):
+        backup.configure(enabled=False)
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                info = cover.build_cover(
+                    demo_spec(cover_art="treno"), 120, Path(tmp) / "c.pdf", genre="enigmi",
+                    copy=CoverCopy(title="Twelve Carriages, One Killer", author="Iris Vane"),
+                )
+                self.assertEqual(info["illustrazione"], "treno")
+                self.assertEqual(info["verifica"]["problemi"], [])
+        finally:
+            backup.configure(enabled=True)
+
+    def test_con_foto_dellautore_non_si_disegna_nulla(self):
+        """Regola 1: un solo elemento dominante. Se c'è già una fotografia,
+        l'illustrazione non ci va sopra."""
+        box = demo_box()
+        from reportlab.pdfgen import canvas as pdfcanvas
+
+        with tempfile.TemporaryDirectory() as tmp:
+            c = pdfcanvas.Canvas(str(Path(tmp) / "a.pdf"), pagesize=(box.width, box.height))
+            result = coverdesign.draw_front(
+                c, box, CoverCopy(title="Twelve Carriages", subject="night express train",
+                                  author="Iris Vane"),
+                coverdesign.PALETTES[0],
+                display=register_family("sans"), text_font=register_family("serif"),
+                genre="enigmi", over_image=True,
+            )
+        self.assertEqual(result.art, "")
+
+    def test_cover_art_sconosciuta_non_passa_la_validazione(self):
+        problems = demo_spec(cover_art="astronave").validate()
+        self.assertTrue(any("cover_art" in problem for problem in problems))
 
 
 class TestAgenteCopertina(unittest.TestCase):

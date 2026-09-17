@@ -259,7 +259,8 @@ kdp-book-factory/
 │   ├── writer.py       scaletta, capitoli, continuità, revisioni
 │   ├── typeset.py      impaginazione PDF dell'interno
 │   ├── cover.py        copertina full-wrap
-│   ├── coverdesign.py  sistema di copertina: regole, palette, motivi, verifica
+│   ├── coverdesign.py  sistema di copertina: regole, palette, testi, verifica
+│   ├── coverart.py     illustrazioni vettoriali della prima, scelte dal contenuto
 │   ├── epub.py         EPUB 3
 │   ├── agents/         collegio editoriale: ruoli, revisione, impaginazione
 │   ├── backup.py       snapshot, ripristino, pulizia
@@ -271,7 +272,7 @@ kdp-book-factory/
 ├── books/<slug>/       book.json, brief.md, assets/, manuscript/, build/
 ├── config/             costi di stampa per il calcolo delle royalty
 ├── docs/               checklist di pubblicazione, workflow, personalizzazione
-└── tests/              137 test, nessuna chiamata API
+└── tests/              149 test, nessuna chiamata API
 ```
 
 ```bash

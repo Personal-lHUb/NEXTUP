@@ -9,7 +9,7 @@ from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 from typing import Any
 
-from . import kdpspecs
+from . import coverart, kdpspecs
 
 #: formati immagine accettati per la copertina
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff"}
@@ -39,9 +39,12 @@ class BookSpec:
     target_pages: int = 140
     trim: str = "6x9"
     paper: str = "cream"                 # white | cream | color-standard | color-premium
-    cover_theme: str = "auto"            # auto | notte | bosco | terracotta | indaco | carta | grafite
+    #: palette: auto | notturno | allarme | inchiostro | bosco | terracotta | indaco
+    cover_theme: str = "auto"
     cover_image: str = ""                # immagine di copertina; vuoto = cerca in assets/copertina.*
     cover_style: str = "auto"            # auto | immagine | tipografica
+    #: illustrazione della prima: auto = scelta dal contenuto, nessuna = solo testo
+    cover_art: str = "auto"              # auto | nessuna | treno | lente | elenco | orologio | scala | porta
     body_font: str = "serif"             # serif | sans
     body_font_size: float = 11.0
     leading: float = 15.5                # interlinea in punti
@@ -81,6 +84,11 @@ class BookSpec:
             )
         if self.cover_style not in {"auto", "immagine", "tipografica"}:
             problems.append("`cover_style` supportati: 'auto', 'immagine', 'tipografica'.")
+        if self.cover_art not in {"auto", "nessuna", *coverart.BY_NAME}:
+            problems.append(
+                "`cover_art` supportati: 'auto', 'nessuna', "
+                f"{', '.join(repr(name) for name in coverart.BY_NAME)}."
+            )
         if self.language not in {"it", "en"}:
             problems.append("`language` supportate: 'it', 'en'.")
         if self.genre not in {"non-fiction", "fiction"}:

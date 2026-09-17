@@ -137,6 +137,7 @@ def build_cover(
         text_font=serif,
         genre=genre,
         over_image=image_report is not None,
+        art_name=getattr(spec, "cover_art", "auto"),
     )
 
     # --- dorso -------------------------------------------------------------
@@ -243,6 +244,7 @@ def build_cover(
         "theme": theme.name,
         "spine_text": kdpspecs.spine_text_allowed(pages),
         "titolo_corpo": draw_result.title_size,
+        "illustrazione": draw_result.art,
         "testi": asdict(cover_copy),
         "verifica": verdict.to_dict(),
     }

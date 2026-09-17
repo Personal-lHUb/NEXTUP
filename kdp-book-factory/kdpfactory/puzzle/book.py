@@ -62,8 +62,11 @@ def default_book_spec(slug: str, author: str) -> BookSpec:
         target_pages=100,
         trim="6x9",
         paper="white",
-        cover_theme="notte",
+        cover_theme="notturno",
         cover_style="tipografica",
+        # il libro è ambientato su un treno: l'illustrazione non si lascia
+        # decidere alle parole chiave quando la scena è nota
+        cover_art="treno",
         body_font="serif",
         body_font_size=11.0,
         leading=15.0,
@@ -147,6 +150,7 @@ def cover_copy(book: PuzzleBook, spec: BookSpec) -> CoverCopy:
         stats=f"{len(book.cases) + 1} CASES · {book.suspects_total:,} SUSPECTS · 1 MASTERMIND",
         badge="Every case has exactly one solution",
         author=spec.author,
+        subject=spec.title + " " + spec.topic,
     )
 
 

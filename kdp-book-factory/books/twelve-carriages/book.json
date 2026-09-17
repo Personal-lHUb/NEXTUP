@@ -12,7 +12,7 @@
   "target_pages": 100,
   "trim": "6x9",
   "paper": "white",
-  "cover_theme": "notte",
+  "cover_theme": "notturno",
   "cover_image": "",
   "cover_style": "tipografica",
   "body_font": "serif",
@@ -30,5 +30,6 @@
   "publisher": "",
   "year": 2026,
   "price_eur": 0.0,
-  "notes": ""
+  "notes": "",
+  "cover_art": "treno"
 }

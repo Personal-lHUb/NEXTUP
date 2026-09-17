@@ -15,7 +15,8 @@ Tutto quello che si cambia senza toccare la logica della pipeline.
 | `leading` | interlinea in punti: 1,35-1,45 volte il corpo |
 | `toc_depth` | `1` = solo capitoli nell'indice, `2` = anche le sezioni |
 | `include_exercises` | aggiunge a ogni capitolo la sezione `## In pratica` |
-| `cover_theme` | `auto`, `notturno`, `allarme`, `inchiostro`, `bosco`, `terracotta`, `indaco` (vedi `docs/copertine.md`) |
+| `cover_theme` | palette: `auto`, `notturno`, `allarme`, `inchiostro`, `bosco`, `terracotta`, `indaco` |
+| `cover_art` | illustrazione della prima: `auto` (scelta dal contenuto), `nessuna`, `treno`, `lente`, `elenco`, `orologio`, `scala`, `porta` |
 
 Corpo e interlinea **cambiano il numero di pagine**: portare il corpo da 11 a 12
 punti allunga il libro di circa il 15%. È la leva più rapida quando mancano poche
@@ -47,14 +48,15 @@ Baskerville, Crimson Pro, Source Serif (tutti SIL OFL) vanno bene.
 
 `kdpfactory/cover.py` genera la copertina full-wrap; la prima segue il sistema
 di `kdpfactory/coverdesign.py`, pensato per farsi vedere in miniatura fra venti
-altre copertine. Le regole, i testi, i motivi di genere e la verifica sono
+altre copertine. Le regole, i testi, le illustrazioni e la verifica sono
 documentati in **[`docs/copertine.md`](copertine.md)**.
 
 - Nuova palette: aggiungi una `Palette` a `PALETTES` (fondo, fondo profondo,
   titolo, accento, testo secondario, generi). Il sistema pretende ≥ 7:1 di
   contrasto sul titolo e uno stacco reale dal bianco: i test lo verificano.
-- Nuovo motivo di genere: una funzione `motif_<nome>` aggiunta a `MOTIFS`, e il
-  genere che la usa in `GENRE_DEFAULTS`.
+- Nuova illustrazione: una funzione `def nome(canvas, area, palette)` in
+  `kdpfactory/coverart.py` più una voce in `ARTS` con le parole chiave che la
+  richiamano. Regola: un solo elemento in accento.
 - Testi della prima: `cover_kicker`, `cover_hook`, `cover_stats`, `cover_badge`
   in `metadata.json` hanno la precedenza su quelli ricavati dal sottotitolo.
 - Controllo: `python3 -m kdpfactory review <slug> --agents copertina`, e la

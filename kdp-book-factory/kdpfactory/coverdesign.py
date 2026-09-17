@@ -38,7 +38,7 @@ from pathlib import Path
 from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 
-from . import kdpspecs
+from . import coverart, kdpspecs
 
 INCH = kdpspecs.INCH
 
@@ -144,15 +144,18 @@ class CoverCopy:
     stats: str = ""         # numeri in cifre, separati da ·
     badge: str = ""         # una garanzia vera, breve
     author: str = ""
+    #: di che cosa parla il libro, per scegliere l'illustrazione
+    subject: str = ""
 
     def elements(self) -> int:
         return sum(1 for value in (self.kicker, self.title, self.hook, self.stats) if value)
 
 
+#: l'occhiello per genere; l'illustrazione la sceglie `coverart`
 GENRE_DEFAULTS = {
-    "enigmi": {"kicker": "DEDUCTION PUZZLES", "motif": "grid"},
-    "non-fiction": {"kicker": "", "motif": "rules"},
-    "fiction": {"kicker": "", "motif": "none"},
+    "enigmi": {"kicker": "DEDUCTION PUZZLES"},
+    "non-fiction": {"kicker": ""},
+    "fiction": {"kicker": ""},
 }
 
 
@@ -171,6 +174,15 @@ def derive_copy(spec, metadata: dict | None = None, genre: str = "non-fiction") 
         stats=metadata.get("cover_stats", ""),
         badge=metadata.get("cover_badge", ""),
         author=spec.author,
+        subject=subject_of(spec),
+    )
+
+
+def subject_of(spec) -> str:
+    """Quello che il libro dice di essere: serve a scegliere l'illustrazione."""
+    return " ".join(
+        str(getattr(spec, field, "") or "")
+        for field in ("title", "subtitle", "topic", "promise", "audience")
     )
 
 
@@ -220,6 +232,7 @@ class DrawResult:
     title_lines: list[str] = field(default_factory=list)
     cap_ratio: float = 0.0
     contrast: float = 0.0
+    art: str = ""           # l'illustrazione effettivamente disegnata
 
 
 def tracked_width(text: str, font: str, size: float, tracking: float = 0.0) -> float:
@@ -302,72 +315,6 @@ def title_block_size(copy: CoverCopy, display: str, box: FrontBox) -> tuple[floa
     return size, lines
 
 
-# -- motivi di genere -------------------------------------------------------
-def motif_grid(canvas, box: FrontBox, palette: Palette, top: float, height: float) -> None:
-    """Righe barrate e una cerchiata: dice «enigma di deduzione» prima del titolo.
-
-    L'elemento diverso in mezzo a elementi uguali è quello che l'occhio trova
-    per primo — ed è anche il ciclo aperto: chi è quello cerchiato?
-    """
-    rows = 7
-    row_height = height / rows
-    left = box.center - box.measure * 0.34
-    right = box.center + box.measure * 0.34
-    box_side = row_height * 0.34
-    marked = 4
-
-    for index in range(rows):
-        y = top - index * row_height - row_height * 0.5
-        eliminated = index != marked
-        ink = palette.muted if eliminated else palette.accent
-        canvas.setStrokeColor(colors.HexColor(ink))
-        canvas.setFillColor(colors.HexColor(ink))
-        canvas.setLineWidth(1.0)
-        canvas.setDash(1, 0)
-        # la "riga" di un elenco di sospetti: la casella è piena se il nome è
-        # già stato escluso, vuota per l'unico che resta in piedi
-        canvas.rect(left, y - box_side * 0.5, box_side, box_side,
-                    stroke=1, fill=1 if eliminated else 0)
-        bar_x = left + row_height * 0.62
-        bar_width = (right - bar_x) * (0.62 + 0.3 * ((index * 7) % 5) / 5)
-        canvas.setFillAlpha(0.42 if eliminated else 1)
-        canvas.rect(bar_x, y - row_height * 0.11, bar_width, row_height * 0.22,
-                    stroke=0, fill=1)
-        canvas.setFillAlpha(1)
-        if eliminated:
-            # la barratura deve pesare più della barra che cancella, o in
-            # miniatura le due si confondono in una riga sola
-            canvas.setLineWidth(max(row_height * 0.1, 1.4))
-            canvas.line(bar_x - row_height * 0.14, y,
-                        bar_x + bar_width + row_height * 0.14, y)
-
-    # la riga superstite, cerchiata: è lei che apre il ciclo
-    y = top - marked * row_height - row_height * 0.5
-    canvas.setStrokeColor(colors.HexColor(palette.accent))
-    canvas.setLineWidth(2.2)
-    canvas.rect(left - row_height * 0.3, y - row_height * 0.42,
-                (right - left) + row_height * 0.6, row_height * 0.9, stroke=1, fill=0)
-
-
-def motif_rules(canvas, box: FrontBox, palette: Palette, top: float, height: float) -> None:
-    """Tre barre che crescono: promessa di metodo, non di racconto.
-
-    Crescono verso il basso, nel verso in cui si legge una copertina: l'ultima,
-    la più lunga, è in accento — è il punto d'arrivo, non un residuo.
-    """
-    bars = 3
-    gap = height / (bars * 2)
-    for index in range(bars):
-        y = top - (index + 1) * gap * 2
-        width = box.measure * (0.32 + 0.24 * index)
-        color = palette.accent if index == bars - 1 else palette.muted
-        canvas.setFillColor(colors.HexColor(color))
-        canvas.setFillAlpha(1 if index == bars - 1 else 0.5)
-        canvas.rect(box.center - width / 2, y, width, gap * 0.55, stroke=0, fill=1)
-        canvas.setFillAlpha(1)
-
-
-MOTIFS = {"grid": motif_grid, "rules": motif_rules, "none": None}
 
 
 # -- prima di copertina -----------------------------------------------------
@@ -381,6 +328,7 @@ def draw_front(
     text_font: str,
     genre: str = "non-fiction",
     over_image: bool = False,
+    art_name: str = "auto",
 ) -> DrawResult:
     """Disegna la prima di copertina secondo il sistema.
 
@@ -462,11 +410,26 @@ def draw_front(
         band_bottom = foot_top + stats_size * 0.85
         foot_top = band_bottom + band_height
 
-    # 6. motivo di genere, nello spazio che resta fra gancio e piede
-    motif = MOTIFS.get(GENRE_DEFAULTS.get(genre, {}).get("motif", "none"))
+    # 6. illustrazione, nello spazio che resta fra gancio e piede. Quando la
+    #    copertina ha già una fotografia dell'autore non si disegna niente:
+    #    l'immagine *è* l'elemento dominante, e sovrapporne un secondo
+    #    romperebbe la prima regola del sistema.
+    drawn_art = ""
     available = y - (foot_top + box.safe * 0.6)
-    if motif and available > box.trim_height * 0.14 and not over_image:
-        motif(canvas, box, palette, y - box.trim_height * 0.03, available * 0.74)
+    if not over_image and available > box.trim_height * 0.12:
+        try:
+            art = coverart.pick(copy.subject, genre, wanted=art_name)
+        except KeyError:
+            art = None
+        if art is not None:
+            area = coverart.Area(
+                x=box.center - box.measure / 2,
+                y=foot_top + box.safe * 0.6,
+                width=box.measure,
+                height=available,
+            ).inset(0.03)
+            coverart.draw(canvas, art, area, palette)
+            drawn_art = art.name
 
     # 7. numeri in cifre, appoggiati a una banda che arriva fino al taglio:
     #    è il piede che tiene insieme la copertina anche in miniatura
@@ -498,6 +461,7 @@ def draw_front(
         title_lines=lines,
         cap_ratio=cap_ratio,
         contrast=contrast_ratio(title_color, palette.background),
+        art=drawn_art,
     )
 
 
