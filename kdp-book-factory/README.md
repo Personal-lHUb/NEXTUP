@@ -42,6 +42,7 @@ Per ogni libro, dentro `books/<slug>/build/`:
 |---|---|
 | `<slug>-interno.pdf` | interno per la stampa: formato esatto, margini speculari, font incorporati |
 | `<slug>-copertina.pdf` | copertina full-wrap (quarta + dorso + prima) con dorso calcolato sulle pagine reali |
+| `<slug>-copertina-miniatura.png` | la prima larga 160 px, com'è vista nei risultati di ricerca: è lì che si giudica |
 | `<slug>.epub` | edizione Kindle, generata dallo stesso testo |
 | `<slug>-manoscritto.md` | manoscritto unico, per rileggere o passare a un editor umano |
 | `kdp-listing.md` | titolo, descrizione HTML, 7 keyword, categorie, prezzi e royalty stimate |
@@ -258,6 +259,7 @@ kdp-book-factory/
 │   ├── writer.py       scaletta, capitoli, continuità, revisioni
 │   ├── typeset.py      impaginazione PDF dell'interno
 │   ├── cover.py        copertina full-wrap
+│   ├── coverdesign.py  sistema di copertina: regole, palette, motivi, verifica
 │   ├── epub.py         EPUB 3
 │   ├── agents/         collegio editoriale: ruoli, revisione, impaginazione
 │   ├── backup.py       snapshot, ripristino, pulizia
@@ -269,7 +271,7 @@ kdp-book-factory/
 ├── books/<slug>/       book.json, brief.md, assets/, manuscript/, build/
 ├── config/             costi di stampa per il calcolo delle royalty
 ├── docs/               checklist di pubblicazione, workflow, personalizzazione
-└── tests/              112 test, nessuna chiamata API
+└── tests/              137 test, nessuna chiamata API
 ```
 
 ```bash
@@ -299,7 +301,8 @@ collegio editoriale in [`docs/agenti.md`](docs/agenti.md); la linea enigmistica
 in [`docs/enigmistica.md`](docs/enigmistica.md); i materiali da
 fornire in [`docs/materiali.md`](docs/materiali.md); il
 metodo di lavoro per produrre più titoli in [`docs/workflow.md`](docs/workflow.md);
-formati, font e temi di copertina in
+il sistema di copertina in [`docs/copertine.md`](docs/copertine.md);
+formati, font e palette in
 [`docs/personalizzazione.md`](docs/personalizzazione.md).
 
 > I costi di stampa in `config/printing_costs.json` e le specifiche KDP

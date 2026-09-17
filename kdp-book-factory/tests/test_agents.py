@@ -48,6 +48,7 @@ class TestRegistro(unittest.TestCase):
             "correttore",
             "editor-sviluppo",
             "impaginazione",
+            "copertina",
         }
         self.assertTrue(attesi.issubset(set(agents.REGISTRY)))
 

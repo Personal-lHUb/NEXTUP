@@ -89,6 +89,8 @@ class AgentContext:
     pages: int = 0
     chapter_pages: dict[str, int] = field(default_factory=dict)
     metadata: dict = field(default_factory=dict)
+    cover_pdf: Path | None = None
+    cover_copy: dict = field(default_factory=dict)
 
 
 @dataclass

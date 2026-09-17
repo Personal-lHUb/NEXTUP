@@ -43,7 +43,10 @@ INCH = kdpspecs.INCH
 def draw_tracked_string(canvas, x, y, text, font, size, tracking, align="left") -> None:
     """Disegna testo con spaziatura fra i caratteri (tracking).
 
-    Il canvas non espone `setCharSpace`: si passa da un text object.
+    Il canvas non espone `setCharSpace`: si passa da un text object. La
+    spaziatura fa parte dello stato grafico della pagina, non del blocco di
+    testo: va riazzerata alla fine, o allarga tutto quello che viene disegnato
+    dopo sulla stessa pagina.
     """
     from reportlab.pdfbase import pdfmetrics
 
@@ -56,6 +59,7 @@ def draw_tracked_string(canvas, x, y, text, font, size, tracking, align="left") 
     text_object.setFont(font, size)
     text_object.setCharSpace(tracking)
     text_object.textOut(text)
+    text_object.setCharSpace(0)
     canvas.drawText(text_object)
 
 

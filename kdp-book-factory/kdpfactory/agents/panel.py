@@ -31,7 +31,9 @@ from .base import (
 # Agenti che leggono un capitolo per volta.
 CHAPTER_REVIEWERS = ("lettore-cieco", "fact-checker", "conformita", "correttore")
 # Agenti che guardano il libro intero o il PDF.
-BOOK_REVIEWERS = ("editor-sviluppo", "impaginazione")
+BOOK_REVIEWERS = ("editor-sviluppo", "impaginazione", "copertina")
+# Agenti che misurano invece di leggere: non ricevono il modello.
+MEASURING_REVIEWERS = ("impaginazione", "copertina")
 
 #: Livelli di lavorazione: quali agenti entrano in gioco e con quale severità
 #: l'editor interviene.
@@ -50,6 +52,7 @@ QUALITY_LEVELS: dict[str, dict] = {
             "conformita",
             "editor-sviluppo",
             "impaginazione",
+            "copertina",
         ),
         "apply": "importante",
         "descrizione": "stesura + collegio di revisione; l'editor applica bloccanti e importanti",
@@ -210,7 +213,10 @@ def run_review(
 
     state = project.load_state()
     build = state.get("build", {})
+    cover = state.get("cover", {})
     pdf_path = Path(build["interno_pdf"]) if build.get("interno_pdf") else None
+    cover_file = cover.get("cover_pdf") or build.get("copertina_pdf")
+    cover_pdf = Path(cover_file) if cover_file else None
 
     chapter_agents = [get_agent(n) for n in names if n in CHAPTER_REVIEWERS]
     book_agents = [get_agent(n) for n in names if n in BOOK_REVIEWERS]
@@ -233,13 +239,17 @@ def run_review(
             report.add(agent.name, result.findings, result.notes)
 
     for agent in book_agents:
-        if agent.name == "impaginazione":
+        if agent.name in MEASURING_REVIEWERS:
+            # Questi due non leggono: misurano il PDF. Niente modello, niente
+            # testo del libro — solo le coordinate di quello che è stampato.
             ctx = AgentContext(
                 spec=spec,
                 outline=outline,
                 pdf_path=pdf_path,
                 pages=build.get("pagine", 0),
                 chapter_pages=build.get("chapter_pages", {}),
+                cover_pdf=cover_pdf,
+                cover_copy=cover.get("testi", {}),
             )
             result = agent.run(ctx, None)
         else:

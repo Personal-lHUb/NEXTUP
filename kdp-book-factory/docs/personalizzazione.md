@@ -15,7 +15,7 @@ Tutto quello che si cambia senza toccare la logica della pipeline.
 | `leading` | interlinea in punti: 1,35-1,45 volte il corpo |
 | `toc_depth` | `1` = solo capitoli nell'indice, `2` = anche le sezioni |
 | `include_exercises` | aggiunge a ogni capitolo la sezione `## In pratica` |
-| `cover_theme` | `auto`, `notte`, `bosco`, `terracotta`, `indaco`, `carta`, `grafite` |
+| `cover_theme` | `auto`, `notturno`, `allarme`, `inchiostro`, `bosco`, `terracotta`, `indaco` (vedi `docs/copertine.md`) |
 
 Corpo e interlinea **cambiano il numero di pagine**: portare il corpo da 11 a 12
 punti allunga il libro di circa il 15%. È la leva più rapida quando mancano poche
@@ -45,12 +45,20 @@ Baskerville, Crimson Pro, Source Serif (tutti SIL OFL) vanno bene.
 
 ## Copertina
 
-`kdpfactory/cover.py` genera una copertina tipografica: fondo, cornice, titolo,
-filetto, sottotitolo, autore, dorso, quarta con testo e punti elenco, area del
-codice a barre lasciata libera.
+`kdpfactory/cover.py` genera la copertina full-wrap; la prima segue il sistema
+di `kdpfactory/coverdesign.py`, pensato per farsi vedere in miniatura fra venti
+altre copertine. Le regole, i testi, i motivi di genere e la verifica sono
+documentati in **[`docs/copertine.md`](copertine.md)**.
 
-- Nuovo tema: aggiungi una `Theme` a `THEMES` (sei colori: fondo, pannello,
-  titolo, accento, testo).
+- Nuova palette: aggiungi una `Palette` a `PALETTES` (fondo, fondo profondo,
+  titolo, accento, testo secondario, generi). Il sistema pretende ≥ 7:1 di
+  contrasto sul titolo e uno stacco reale dal bianco: i test lo verificano.
+- Nuovo motivo di genere: una funzione `motif_<nome>` aggiunta a `MOTIFS`, e il
+  genere che la usa in `GENRE_DEFAULTS`.
+- Testi della prima: `cover_kicker`, `cover_hook`, `cover_stats`, `cover_badge`
+  in `metadata.json` hanno la precedenza su quelli ricavati dal sottotitolo.
+- Controllo: `python3 -m kdpfactory review <slug> --agents copertina`, e la
+  miniatura a 160 px in `build/<slug>-copertina-miniatura.png`.
 - Controllo delle misure: `build --guides` disegna rifilo, dorso e area del
   codice a barre. **Il file con le guide non va caricato su KDP.**
 - Copertina disegnata altrove: genera comunque quella automatica per leggere le

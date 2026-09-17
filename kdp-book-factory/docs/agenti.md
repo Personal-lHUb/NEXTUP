@@ -8,7 +8,7 @@ mette le mani nel testo dopo la stesura è l'editor, e lo fa applicando le
 segnalazioni degli altri.
 
 ```
-architetto → ghostwriter → [voce] → impaginazione
+architetto → ghostwriter → [voce] → impaginazione + copertina
                                          │
         lettore cieco ┐                  │
         fact-checker  ├─ segnalazioni ───┤
@@ -40,6 +40,7 @@ architetto → ghostwriter → [voce] → impaginazione
 | `correttore` | Bozze, parola per parola: refusi, accenti e apostrofi (perché, qual è, po'), accordi, punteggiatura, maiuscole incoerenti, ripetizioni ravvicinate, frasi rimaste a metà. |
 | `editor-sviluppo` | Il libro come oggetto unico: progressione, capitoli che si sovrappongono, contraddizioni fra capitoli, promesse dell'introduzione mai mantenute, aperture tutte uguali. |
 | `impaginazione` | Il PDF impaginato, non il manoscritto: righe vedove e orfane, titoli rimasti in fondo alla pagina, code di capitolo, testo fuori gabbia, scalette di sillabazione, capitoli che si aprono sulla pagina sbagliata. **Non usa il modello**: misura le coordinate del testo, quindi non costa nulla e non sbaglia per opinione. |
+| `copertina` | La prima di copertina vista come la vede il cliente: larga 160 pixel, su fondo bianco. Corpo del titolo, contrasto, stacco dalla pagina dei risultati, affollamento, testo dentro l'area di sicurezza; più i testi, che devono contenere un ciclo aperto e nessuna rivendicazione vietata da KDP. **Non usa il modello**: misura il PDF. Il sistema è documentato in [`copertine.md`](copertine.md). |
 
 ---
 
@@ -55,7 +56,7 @@ python3 -m kdpfactory all <slug> --qualita standard
 | Livello | Che cosa succede |
 |---|---|
 | `bozza` | Solo stesura. Serve a valutare un'idea o una scaletta, non a pubblicare. |
-| `standard` *(default)* | Stesura, poi lettore cieco, fact-checker, conformità, editor di sviluppo e impaginazione. L'editor applica bloccanti e importanti, poi si rimpagina. |
+| `standard` *(default)* | Stesura, poi lettore cieco, fact-checker, conformità, editor di sviluppo, impaginazione e copertina. L'editor applica bloccanti e importanti, poi si rimpagina. |
 | `alta` | Come standard, più la passata di stile su ogni capitolo e il correttore di bozze. L'editor applica anche le segnalazioni minori. |
 
 Dopo l'intervento dell'editor il libro viene **rimpaginato**: l'editing cambia

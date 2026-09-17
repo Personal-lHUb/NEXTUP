@@ -13,10 +13,11 @@ Controllo
     correttore      bozze: refusi, accenti, punteggiatura, accordi
     editor-sviluppo struttura del libro nel suo insieme
     impaginazione   difetti tipografici misurati sul PDF (senza modello)
+    copertina       leggibilità in miniatura e conformità della prima (senza modello)
 """
 
 # Gli import registrano gli agenti nel registro.
-from . import layout, review, writing  # noqa: F401,E402
+from . import copertina, layout, review, writing  # noqa: F401,E402
 from .base import (  # noqa: F401
     REGISTRY,
     Agent,

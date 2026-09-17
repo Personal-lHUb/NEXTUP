@@ -16,6 +16,7 @@ from .. import backup, kdpspecs, qa
 from .. import cover as cover_module
 from .. import metadata as metadata_module
 from ..agents import AgentContext, get_agent
+from ..coverdesign import CoverCopy
 from ..models import BookProject, BookSpec
 from .generator import PuzzleBook, generate_book
 from .layout import typeset_puzzle_book
@@ -132,6 +133,23 @@ def listing_metadata(book: PuzzleBook, spec: BookSpec, pages: int) -> dict:
     }
 
 
+def cover_copy(book: PuzzleBook, spec: BookSpec) -> CoverCopy:
+    """I testi della prima di copertina per un libro di enigmi.
+
+    Il gancio è una domanda (il ciclo resta aperto), i numeri sono in cifre e
+    la garanzia è vera e verificabile — è l'unica cosa che questo libro può
+    promettere e che gli altri non promettono.
+    """
+    return CoverCopy(
+        title=spec.title,
+        kicker="DEDUCTION PUZZLES",
+        hook="Can you name the killer in every carriage?",
+        stats=f"{len(book.cases) + 1} CASES · {book.suspects_total:,} SUSPECTS · 1 MASTERMIND",
+        badge="Every case has exactly one solution",
+        author=spec.author,
+    )
+
+
 # --------------------------------------------------------------------------
 # Produzione
 # --------------------------------------------------------------------------
@@ -158,6 +176,8 @@ def build(
         back_cover_text=meta["back_cover"],
         bullets=meta["back_cover_bullets"],
         guides=guides,
+        genre="enigmi",
+        copy=cover_copy(book, spec),
     )
 
     (project.build_dir / "answers.json").write_text(
@@ -211,7 +231,7 @@ def build(
 
 
 def check(project: BookProject, spec: BookSpec, pages: int, interior: Path) -> qa.Report:
-    """Controlli di stampa più l'agente di impaginazione sul PDF reale."""
+    """Controlli di stampa più gli agenti che misurano interno e copertina."""
     report = qa.Report()
     qa.check_print_pdf(spec, interior, pages, report)
 
@@ -219,20 +239,23 @@ def check(project: BookProject, spec: BookSpec, pages: int, interior: Path) -> q
     if state.get("metadata"):
         qa.check_metadata(state["metadata"], spec, report)
 
-    layout_agent = get_agent("impaginazione")
-    result = layout_agent.run(
-        AgentContext(
-            spec=spec,
-            pdf_path=interior,
-            pages=pages,
-            chapter_pages=state.get("build", {}).get("chapter_pages", {}),
-        )
+    cover_state = state.get("cover", {})
+    cover_file = cover_state.get("cover_pdf")
+    ctx = AgentContext(
+        spec=spec,
+        pdf_path=interior,
+        pages=pages,
+        chapter_pages=state.get("build", {}).get("chapter_pages", {}),
+        cover_pdf=Path(cover_file) if cover_file else None,
+        cover_copy=cover_state.get("testi", {}),
     )
-    for finding in result.findings:
-        level = {"bloccante": "errore", "importante": "avviso"}.get(finding.severity, "info")
-        report.add(level, "IMPAGINAZIONE", f"{finding.category} — {finding.issue}")
-    if not result.findings:
-        report.add("info", "IMPAGINAZIONE", "Nessun difetto tipografico rilevato.")
+    for agent_name, label in (("impaginazione", "IMPAGINAZIONE"), ("copertina", "COPERTINA")):
+        result = get_agent(agent_name).run(ctx)
+        for finding in result.findings:
+            level = {"bloccante": "errore", "importante": "avviso"}.get(finding.severity, "info")
+            report.add(level, label, f"{finding.category} — {finding.issue}")
+        if not result.findings:
+            report.add("info", label, result.notes)
 
     for problem in kdpspecs.validate_page_count(pages, spec.paper):
         report.add("errore", "PAGINE", problem)

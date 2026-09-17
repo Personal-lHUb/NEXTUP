@@ -172,6 +172,10 @@ def build_package(
         author_line=meta.get("author_bio", ""),
         guides=guides,
         image_path=image_path,
+        # I testi della prima si ricavano dalla scheda prodotto: `cover_hook`,
+        # `cover_stats` e `cover_badge` in `metadata.json` hanno la precedenza.
+        metadata=meta,
+        genre=spec.genre,
     )
     if cover_info.get("immagine"):
         print("  copertina con immagine dell'autore:")

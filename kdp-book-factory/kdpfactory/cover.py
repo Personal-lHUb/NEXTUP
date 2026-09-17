@@ -7,52 +7,28 @@ dorso, quindi la copertina va rigenerata **dopo** l'impaginazione definitiva.
 
 from __future__ import annotations
 
-import hashlib
 import textwrap
-from dataclasses import dataclass
+from dataclasses import asdict
 from pathlib import Path
 
 from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfgen import canvas as pdfcanvas
 
-from . import coverimage, kdpspecs
+from . import coverdesign, coverimage, kdpspecs
+from .coverdesign import CoverCopy, FrontBox, Palette
 from .models import BookSpec
 from .typography import register_family, set_default_canvas_font
 
 INCH = kdpspecs.INCH
-SAFE_MARGIN_IN = 0.25
+#: unico riferimento per il margine di sicurezza: disegno e verifica devono
+#: usare lo stesso numero, altrimenti il controllo non controlla niente.
+SAFE_MARGIN_IN = coverdesign.SAFE_MARGIN_IN
 
 
-@dataclass(frozen=True)
-class Theme:
-    name: str
-    background: str
-    panel: str
-    title: str
-    accent: str
-    body: str
-
-
-THEMES: tuple[Theme, ...] = (
-    Theme("notte", "#131A2B", "#1C2740", "#FFFFFF", "#E8B23A", "#C8D2E4"),
-    Theme("bosco", "#14271F", "#1B3429", "#F4F1E8", "#8FBF6F", "#CBD8CB"),
-    Theme("terracotta", "#2A1512", "#3A1F19", "#FBF3EA", "#D4703A", "#E3CDBE"),
-    Theme("indaco", "#1B1636", "#262046", "#FFFFFF", "#7B6CF6", "#CFC9EC"),
-    Theme("carta", "#EFE7D8", "#E4D9C4", "#1E1B16", "#9A5B2E", "#4A4338"),
-    Theme("grafite", "#1A1A1A", "#262626", "#FFFFFF", "#D93A3A", "#CFCFCF"),
-)
-
-
-def pick_theme(spec: BookSpec) -> Theme:
-    """Tema scelto dall'utente o derivato in modo stabile dal titolo."""
-    wanted = getattr(spec, "cover_theme", "auto")
-    if wanted and wanted != "auto":
-        for theme in THEMES:
-            if theme.name == wanted:
-                return theme
-    digest = hashlib.sha256(spec.title.encode("utf-8")).digest()
-    return THEMES[digest[0] % len(THEMES)]
+def pick_theme(spec: BookSpec, genre: str = "non-fiction") -> Palette:
+    """Palette della copertina: scelta dall'autore o la migliore per il genere."""
+    return coverdesign.pick_palette(spec, genre)
 
 
 def _fit_font_size(text: str, font: str, max_width: float, start: float, minimum: float) -> float:
@@ -89,9 +65,18 @@ def build_cover(
     guides: bool = False,
     image_path: Path | None = None,
     enhance_image: bool = True,
+    copy: CoverCopy | None = None,
+    genre: str = "",
+    metadata: dict | None = None,
 ) -> dict:
-    """Genera il PDF di copertina. Restituisce le misure usate."""
-    theme = pick_theme(spec)
+    """Genera il PDF di copertina e ne verifica la resa in miniatura.
+
+    La prima di copertina segue il sistema di `coverdesign`: un solo elemento
+    dominante, titolo leggibile a 160 px, contrasto misurato, codice di genere.
+    """
+    genre = genre or ("enigmi" if getattr(spec, "genre", "") == "puzzle" else spec.genre)
+    theme = pick_theme(spec, genre)
+    cover_copy = copy or coverdesign.derive_copy(spec, metadata, genre)
     display = register_family("sans")
     serif = register_family("serif")
     set_default_canvas_font(serif)
@@ -130,66 +115,29 @@ def build_cover(
         )
         # La velatura per la leggibilità è già dentro il JPEG preparato.
     else:
-        c.setFillColor(colors.HexColor(theme.panel))
+        c.setFillColor(colors.HexColor(theme.deep))
         c.rect(front_x0, 0, front_width, height, stroke=0, fill=1)
 
-    # Sopra una foto velata il testo va sempre chiaro, anche con un tema chiaro.
-    front_title = colors.HexColor("#FFFFFF" if image_report else theme.title)
-    front_body = colors.HexColor("#E8E8E8" if image_report else theme.body)
-
-    # Cornice sottile all'interno dell'area di sicurezza
-    c.setStrokeColor(colors.HexColor(theme.accent))
-    c.setLineWidth(0.8)
-    c.rect(
-        front_x0 + safe * 1.3,
-        (bleed + SAFE_MARGIN_IN * 1.3) * INCH,
-        trim_w_pt - 2.6 * safe,
-        trim_h_pt - 2.6 * safe,
-        stroke=1,
-        fill=0,
+    front_box = FrontBox(
+        x0=front_x0,
+        y0=0.0,
+        width=front_width,
+        height=height,
+        trim_width=trim_w_pt,
+        trim_height=trim_h_pt,
+        bleed=bleed * INCH,
+        safe=safe,
     )
-
-    inner_w = trim_w_pt - 3.4 * safe
-    title_size = _fit_font_size(max(spec.title.split(), key=len, default="A"), display,
-                                inner_w, 46, 18)
-    title_lines = _wrap_lines(spec.title.upper(), display, title_size, inner_w)
-    y = height - (bleed + 1.15) * INCH
-    c.setFillColor(front_title)
-    for line in title_lines:
-        c.setFont(display, title_size)
-        c.drawCentredString(front_x0 + trim_w_pt / 2, y, line)
-        y -= title_size * 1.12
-
-    # Filetto decorativo
-    y -= 0.22 * INCH
-    c.setStrokeColor(colors.HexColor(theme.accent))
-    c.setLineWidth(2)
-    c.line(front_x0 + trim_w_pt / 2 - 0.6 * INCH, y, front_x0 + trim_w_pt / 2 + 0.6 * INCH, y)
-    y -= 0.42 * INCH
-
-    if spec.subtitle:
-        sub_size = _fit_font_size(spec.subtitle, serif, inner_w, 17, 10)
-        c.setFillColor(front_body)
-        for line in _wrap_lines(spec.subtitle, serif, sub_size, inner_w):
-            c.setFont(serif, sub_size)
-            c.drawCentredString(front_x0 + trim_w_pt / 2, y, line)
-            y -= sub_size * 1.35
-
-    author_size = _fit_font_size(spec.author.upper(), display, inner_w, 16, 9)
-    author_y = (bleed + 0.95) * INCH
-    c.setStrokeColor(colors.HexColor(theme.accent))
-    c.setLineWidth(0.8)
-    c.line(
-        front_x0 + trim_w_pt / 2 - 0.45 * INCH,
-        author_y + author_size * 1.5,
-        front_x0 + trim_w_pt / 2 + 0.45 * INCH,
-        author_y + author_size * 1.5,
+    draw_result = coverdesign.draw_front(
+        c,
+        front_box,
+        cover_copy,
+        theme,
+        display=display,
+        text_font=serif,
+        genre=genre,
+        over_image=image_report is not None,
     )
-    # Sopra una foto il nome dell'autore va in bianco: l'accento del tema
-    # può sparire contro un fondo colorato.
-    c.setFillColor(front_title if image_report else colors.HexColor(theme.accent))
-    c.setFont(display, author_size)
-    c.drawCentredString(front_x0 + trim_w_pt / 2, author_y, spec.author.upper())
 
     # --- dorso -------------------------------------------------------------
     spine_pt = spine_in * INCH
@@ -229,7 +177,7 @@ def build_cover(
             y -= head_size * 1.25
         y -= 0.18 * INCH
 
-        c.setFillColor(colors.HexColor(theme.body))
+        c.setFillColor(colors.HexColor(theme.muted))
         body_size = 10.5
         for paragraph in [p for p in rest.split("\n\n") if p.strip()]:
             for line in _wrap_lines(paragraph.strip(), serif, body_size, text_w):
@@ -243,7 +191,7 @@ def build_cover(
         # stamperebbero un rettangolo vuoto.
         c.setFillColor(colors.HexColor(theme.accent))
         c.rect(text_x, y + 2.5, 4.5, 4.5, stroke=0, fill=1)
-        c.setFillColor(colors.HexColor(theme.body))
+        c.setFillColor(colors.HexColor(theme.muted))
         for line in _wrap_lines(bullet, serif, 10.5, text_w - 0.22 * INCH):
             c.setFont(serif, 10.5)
             c.drawString(text_x + 0.22 * INCH, y, line)
@@ -251,7 +199,7 @@ def build_cover(
         y -= 10.5 * 0.4
 
     if author_line:
-        c.setFillColor(colors.HexColor(theme.body))
+        c.setFillColor(colors.HexColor(theme.muted))
         for line in _wrap_lines(author_line, serif, 9.5, text_w):
             c.setFont(serif, 9.5)
             c.drawString(text_x, y, line)
@@ -270,8 +218,23 @@ def build_cover(
     c.showPage()
     c.save()
 
+    # La copertina si giudica come la vede il cliente: in miniatura.
+    verdict = coverdesign.audit(
+        output, trim=spec.trim, pages=pages, paper=spec.paper,
+        palette=theme, title=spec.title,
+    )
+    thumbnail = None
+    try:
+        thumbnail = coverdesign.render_thumbnail(
+            output, output.parent / f"{spec.slug}-copertina-miniatura.png",
+            trim=spec.trim, pages=pages, paper=spec.paper,
+        )
+    except ImportError:  # pragma: no cover - senza PyMuPDF si salta l'anteprima
+        pass
+
     return {
         "cover_pdf": str(output),
+        "miniatura": str(thumbnail) if thumbnail else None,
         "immagine": image_report.to_dict() if image_report else None,
         "pages": pages,
         "spine_in": round(spine_in, 4),
@@ -279,6 +242,9 @@ def build_cover(
         "cover_height_in": round(cover_h_in, 4),
         "theme": theme.name,
         "spine_text": kdpspecs.spine_text_allowed(pages),
+        "titolo_corpo": draw_result.title_size,
+        "testi": asdict(cover_copy),
+        "verifica": verdict.to_dict(),
     }
 
 

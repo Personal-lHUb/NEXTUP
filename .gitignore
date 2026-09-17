@@ -1,0 +1,9 @@
+# Copie di sicurezza dei file generati: restano sul disco, non in git.
+# Contengono PDF e crescono in fretta (vedi CLAUDE.md).
+backup/
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
