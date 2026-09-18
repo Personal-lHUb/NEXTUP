@@ -1,0 +1,128 @@
+# Da un ASIN a un libro
+
+Un reparto di quattro agenti che sta **prima** del collegio editoriale. Riceve
+la scheda Amazon di un libro che vende già e consegna `book.json` e `brief.md`:
+da lì in poi lavora la pipeline di sempre, che non sa e non deve sapere da dove
+è arrivata la scheda.
+
+```
+scheda Amazon incollata
+        │
+        ▼
+scheda-concorrente ──► analista-recensioni ──► posizionamento ──► originalita
+   (dati)                 (il buco)              (il libro)        (il freno)
+        │                                                              │
+        └──────────────────────► book.json + brief.md ◄────────────────┘
+                                          │
+                                          ▼
+                              architetto → indice → ghostwriter → …
+```
+
+## Il principio, prima di tutto il resto
+
+**L'ASIN entra come segnale di mercato, non come testo sorgente.** Il reparto
+legge quello che è pubblico sulla pagina — prezzo, categorie, classifica,
+descrizione, recensioni — e non legge il libro. Il risultato è un libro
+indipendente sullo stesso argomento, non una rielaborazione di quello di
+partenza: nessuno possiede un argomento, e quella è ricerca di mercato che fa
+qualunque editore.
+
+Due presidi lo rendono vero nel codice, non solo nelle intenzioni:
+
+1. **L'agente `originalita`** verifica il piano *prima* che qualcuno scriva.
+   Una segnalazione `bloccante` impedisce la scrittura di `book.json`: il
+   comando esce con un errore e non produce niente.
+2. **Il `brief.md` non contiene il libro di partenza.** Il titolo del
+   concorrente compare solo dentro un commento `<!-- -->`, e `read_brief()`
+   toglie i commenti prima che il testo arrivi a qualunque agente. Chi scrive il
+   libro non sa che esiste un libro di partenza. C'è un test che lo verifica.
+
+## Perché le recensioni sono il pezzo che vale di più
+
+Chi scrive una recensione a due o tre stelle ha **pagato** il libro, l'ha letto,
+e sta scrivendo alla lettera quale libro avrebbe voluto trovare. È l'unico dato
+di mercato gratuito e onesto disponibile senza strumenti a pagamento.
+
+Le cinque stelle servono a un'altra cosa: dicono perché quel libro viene
+comprato, cioè che cosa il libro nuovo deve **mantenere**. Entrare in una
+nicchia ripudiandone le premesse significa uscirne.
+
+Per questo il modulo da riempire chiede per prima cosa le recensioni, e chiede
+di aprirle tutte: con meno di cinque in mano l'analista abbassa da sé la
+confidenza invece di costruirci sopra un posizionamento.
+
+## Come si usa
+
+Amazon non è raggiungibile dall'ambiente di lavoro (il proxy di rete risponde
+`403` alla connessione), quindi la pagina si incolla a mano.
+
+```bash
+cd kdp-book-factory
+
+# 1. crea il modulo da riempire
+python3 -m kdpfactory concorrente new <slug> --asin B0ABCD1234
+```
+
+Apri `books/<slug>/concorrente/pagina.md` e incolla la scheda Amazon così com'è
+— menu, banner e suggerimenti vengono scartati da soli. Conta che ci siano, in
+ordine di importanza: le recensioni (tutte, non solo le prime), la descrizione
+completa, il riquadro «Dettagli prodotto», la riga della classifica con tutte le
+categorie, il prezzo con la valuta.
+
+```bash
+# 2. il reparto al lavoro
+python3 -m kdpfactory concorrente build <slug> --asin B0ABCD1234 --author "Nome Autore"
+
+# prima a vuoto, se vuoi vedere il giro senza spendere token:
+python3 -m kdpfactory --dry-run concorrente build <slug>
+```
+
+Il comando stampa il libro di partenza, le lacune trovate con le citazioni che
+le reggono, il libro proposto e l'esito del controllo di originalità; poi scrive
+`book.json`, `brief.md` e `concorrente/acquisizione.json` con tutta l'analisi.
+
+**Rileggi la scheda e il brief prima di andare avanti.** Il posizionamento è la
+decisione più costosa da sbagliare: correggerla adesso costa un file, dopo costa
+un manoscritto.
+
+```bash
+# 3. da qui è la pipeline di sempre
+python3 -m kdpfactory all <slug>
+```
+
+Il comando esce con codice 1 se l'originalità ha lasciato segnalazioni, anche
+non bloccanti: serve a non far proseguire uno script senza che qualcuno le abbia
+lette.
+
+## I quattro agenti
+
+| agente | che cosa fa | dove sbaglia se sbaglia |
+|---|---|---|
+| `scheda-concorrente` | dal testo incollato ai campi strutturati: prezzo, pagine, categorie con la classifica, descrizione, recensioni | inventare un numero che nella pagina non c'era. Ha l'ordine esplicito di lasciare vuoto e segnalarlo in `problemi` |
+| `analista-recensioni` | il buco di mercato: che cosa i lettori paganti dicono di non aver trovato, chi è il lettore vero, che cosa non va toccato | scambiare una lamentela sulla copia fisica («pagine staccate») per un difetto del contenuto. Le scarta e lo dichiara |
+| `posizionamento` | la scheda del libro nuovo: promessa, lettore, titolo, pagine, prezzo, sette parole chiave, tre categorie, i temi del brief | partire dalla lacuna più interessante invece che dalla più ricorrente |
+| `originalita` | verifica che il piano sia un libro indipendente prima che venga scritto | confondere «stesso argomento» con «stesso libro». Nessuno possiede un argomento: il problema è la forma, la sequenza e le parole |
+
+Ogni lacuna dichiarata deve portare **almeno una citazione** presa alla lettera
+dalle recensioni. Senza citazione è un'impressione, e non vale.
+
+## Che cosa blocca `originalita`
+
+| gravità | caso |
+|---|---|
+| `bloccante` | il titolo o il sottotitolo contengono il titolo del libro di partenza o il nome del suo autore |
+| `bloccante` | il libro di partenza è nominato in scheda, parole chiave o copertina — sono marchi di terzi e KDP li rifiuta |
+| `importante` | i temi proposti ricalcano l'indice dell'altro libro nello stesso ordine |
+| `importante` | la lacuna dichiarata non compare fra quelle trovate nelle recensioni: il posizionamento è un'opinione travestita da dato |
+| vario | formulazioni caratteristiche riprese, promesse non mantenibili, rivendicazioni vietate |
+
+## Limiti dichiarati
+
+- **Il reparto non vede Amazon.** Lavora su quello che incolli: se la pagina è
+  parziale, l'analisi è parziale, e `problemi` dice che cosa mancava.
+- **Non ha dati storici**: niente andamento del prezzo, niente stagionalità,
+  niente volumi di ricerca. Per quelli servirebbe un'API a pagamento (Keepa,
+  Rainforest) e la rete aperta.
+- **Le recensioni sono un campione autoselezionato**: scrive chi è entusiasta e
+  chi è arrabbiato, non chi è indifferente. Dicono che cosa manca, non quanto
+  grande sia il mercato di chi lo vuole.

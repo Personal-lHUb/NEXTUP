@@ -512,6 +512,46 @@ def cmd_puzzle(args) -> int:
     return 0 if report.ok else 1
 
 
+def cmd_concorrente(args) -> int:
+    from . import concorrente as acquisizione
+
+    root = books_dir(args) / args.slug
+    project = BookProject(root)
+
+    if args.action == "new":
+        if acquisizione.pagina_path(project).exists() and not args.force:
+            raise SystemExit(
+                f"Esiste già {acquisizione.pagina_path(project)}. "
+                "Usa --force per ricominciare da un modulo vuoto."
+            )
+        percorso = acquisizione.prepara(project, args.asin)
+        print(f"Creato {percorso}")
+        print("\nIncolla lì dentro la pagina Amazon del libro, recensioni comprese.")
+        print("Le recensioni da 2 e 3 stelle sono la parte che vale di più: sono i")
+        print("clienti che hanno pagato e dicono quale libro avrebbero voluto.")
+        print(f"\nPoi: python -m kdpfactory concorrente build {args.slug}")
+        return 0
+
+    if project.spec_path.exists() and not args.force:
+        raise SystemExit(
+            f"Esiste già {project.spec_path}.\n"
+            "Usa --force per riscrivere la scheda del libro dal piano di acquisizione."
+        )
+
+    client = make_client(args)
+    risultato = acquisizione.analizza(project, client, asin=args.asin)
+    print(acquisizione.render(risultato))
+
+    spec = acquisizione.scrivi(project, risultato, args.author)
+    project.add_usage(client.usage_report())
+    save_backup(project, args, f"acquisizione da ASIN {args.asin or '(non indicato)'}")
+
+    print(f"\nScritti {project.spec_path} e {project.brief_path}")
+    print(f"Dettaglio dell'analisi: {acquisizione.acquisizione_path(project)}")
+    print(f"\nRileggi la scheda e il brief, poi: python -m kdpfactory all {spec.slug}")
+    return 1 if risultato.segnalazioni else 0
+
+
 def cmd_backup(args) -> int:
     project, spec = open_project(args)
     backup_dir = Path(args.backup_dir) if args.backup_dir else None
@@ -753,6 +793,17 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--guides", action="store_true", help="copertina con linee guida")
     p.add_argument("--force", action="store_true")
     p.set_defaults(func=cmd_puzzle)
+
+    p = sub.add_parser(
+        "concorrente",
+        help="da una scheda Amazon incollata alla scheda di un libro nuovo che la batte",
+    )
+    p.add_argument("action", choices=["new", "build"])
+    p.add_argument("slug")
+    p.add_argument("--asin", default="", help="ASIN del libro di riferimento")
+    p.add_argument("--author", default="Autore Anonimo", help="autore del libro nuovo")
+    p.add_argument("--force", action="store_true")
+    p.set_defaults(func=cmd_concorrente)
 
     p = sub.add_parser("backup", help="copie di sicurezza: elenco, copia, ripristino")
     p.add_argument("slug")

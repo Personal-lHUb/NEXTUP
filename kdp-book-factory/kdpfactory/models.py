@@ -316,6 +316,26 @@ class BookProject:
         self.save_state(state)
         return state
 
+    def add_usage(self, usage: dict[str, Any]) -> dict[str, Any]:
+        """Somma il consumo di questo comando a quello già registrato.
+
+        Un libro si lavora anche a passi separati, e ogni comando è un processo a
+        sé che conosce solo i propri token: sostituire invece di sommare fa
+        leggere come costo del libro quello dell'ultimo comando eseguito.
+        """
+        state = self.load_state()
+        totale = dict(state.get("usage") or {})
+        for chiave, valore in (usage or {}).items():
+            if isinstance(valore, bool) or not isinstance(valore, (int, float)):
+                totale[chiave] = valore
+            else:
+                totale[chiave] = totale.get(chiave, 0) + valore
+        if "estimated_cost_usd" in totale:
+            totale["estimated_cost_usd"] = round(float(totale["estimated_cost_usd"]), 4)
+        state["usage"] = totale
+        self.save_state(state)
+        return state
+
     def ensure_dirs(self) -> None:
         self.manuscript_dir.mkdir(parents=True, exist_ok=True)
         self.build_dir.mkdir(parents=True, exist_ok=True)

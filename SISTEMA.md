@@ -45,7 +45,7 @@ NEXTUP/
 ├── CLAUDE.md                    regola dei backup + orientamento (governa le sessioni future)
 ├── SISTEMA.md                   questo file
 ├── .claude/
-│   ├── agents/                  17 subagent: 12 del collegio editoriale + 5 del team di miglioramento
+│   ├── agents/                  21 subagent: 16 del collegio (4 di acquisizione) + 5 del team
 │   └── commands/migliora.md     comando /migliora
 ├── backup/                      copie di sicurezza (fuori da git)
 └── kdp-book-factory/
@@ -53,19 +53,20 @@ NEXTUP/
     ├── books/<slug>/            book.json, brief.md, assets/, manuscript/, build/, state.json
     ├── config/printing_costs.json
     ├── docs/                    documentazione (vedi sotto)
-    ├── tests/                   177 test, nessuna chiamata di rete
+    ├── tests/                   188 test, nessuna chiamata di rete
     └── fonts/                   font TrueType propri (facoltativo)
 ```
 
 **Documentazione già scritta** (leggerla invece di ricostruire il ragionamento):
 `docs/agenti.md`, `docs/checklist-kdp.md`, `docs/copertine.md`,
-`docs/enigmistica.md`, `docs/materiali.md`, `docs/personalizzazione.md`,
+`docs/acquisizione.md`, `docs/enigmistica.md`, `docs/materiali.md`,
+`docs/personalizzazione.md`,
 `docs/team-miglioramento.md`, `docs/workflow.md`, più `README.md`.
 
 **Comandi:**
 ```bash
 cd kdp-book-factory
-python3 -m unittest discover -s tests     # 177 test, nessuna rete
+python3 -m unittest discover -s tests     # 188 test, nessuna rete
 ruff check kdpfactory tests
 python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 ```
@@ -92,7 +93,8 @@ python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 | `qa.py` | controlli di qualità e conformità |
 | `diagnostica.py` | **misure su tutti i libri**: i fatti per il team di miglioramento |
 | `backup.py` | snapshot datati, ripristino, pulizia |
-| `agents/` | collegio editoriale dentro la pipeline |
+| `agents/` | collegio editoriale dentro la pipeline, reparto di acquisizione compreso |
+| `concorrente.py` | **da un ASIN a un libro**: scheda Amazon incollata → `book.json` + `brief.md` |
 | `puzzle/` | seconda linea: enigmi di deduzione, senza chiamate API |
 | `pipeline.py` | orchestrazione e convergenza sulle pagine |
 | `typography.py`, `i18n.py`, `mdlite.py` | font, etichette it/en, parser Markdown ridotto |
@@ -376,10 +378,10 @@ solo via ricerca web. Non promettere dati di vendita che non si possono prendere
 | `twelve-carriages` | completo: 82 pagine, interno + copertina + scheda + risposte. `0 errori, 0 avvisi — PRONTO PER IL CARICAMENTO` |
 | `esempio-metodo-tre-ore` | solo `book.json`, serve da esempio e per il dry-run |
 
-**Test: 177**, nessuna chiamata di rete.
-`test_agents.py` 29 · `test_backup.py` 16 · `test_copertina.py` 37 ·
-`test_diagnostica.py` 21 · `test_materiali.py` 17 · `test_pipeline_dryrun.py` 11 ·
-`test_puzzle.py` 29 · `test_specs_and_planner.py` 17
+**Test: 188**, nessuna chiamata di rete.
+`test_agents.py` 29 · `test_backup.py` 16 · `test_concorrente.py` 11 ·
+`test_copertina.py` 37 · `test_diagnostica.py` 21 · `test_materiali.py` 17 ·
+`test_pipeline_dryrun.py` 11 · `test_puzzle.py` 29 · `test_specs_and_planner.py` 17
 
 **Rilievi aperti**, dalla prima diagnostica — nessuno è stato ancora affrontato:
 

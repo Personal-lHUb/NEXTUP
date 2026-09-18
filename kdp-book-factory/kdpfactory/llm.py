@@ -262,6 +262,14 @@ def _dry_run_findings() -> dict:
 def _dry_run_json(user_prompt: str) -> str:
     if "scheda prodotto" in user_prompt:
         return json.dumps(_dry_run_metadata(), ensure_ascii=False)
+    # Reparto di acquisizione: il giro da ASIN a scheda si deve poter provare
+    # a costo zero come tutto il resto.
+    if "Ecco la scheda del concorrente" in user_prompt:
+        return json.dumps(_dry_run_concorrente(), ensure_ascii=False)
+    if "Ricava le lacune del libro" in user_prompt:
+        return json.dumps(_dry_run_lacune(), ensure_ascii=False)
+    if "Decidi il libro nuovo" in user_prompt:
+        return json.dumps(_dry_run_posizionamento(), ensure_ascii=False)
 
     match = re.search(r"(\d{1,3})\s*capitoli", user_prompt)
     chapters = int(match.group(1)) if match else 10
@@ -282,6 +290,78 @@ def _dry_run_json(user_prompt: str) -> str:
         ],
     }
     return json.dumps(data, ensure_ascii=False)
+
+
+def _dry_run_concorrente() -> dict:
+    return {
+        "asin": "B0SEGNAPOSTO",
+        "titolo": "Libro segnaposto del concorrente",
+        "sottotitolo": "Sottotitolo segnaposto",
+        "autore": "Autore Segnaposto",
+        "editore": "Editore segnaposto",
+        "lingua": "it",
+        "prezzo": 14.99,
+        "valuta": "EUR",
+        "pagine": 210,
+        "formato": "15,2 x 1,5 x 22,9 cm",
+        "pubblicato_il": "2024-01-01",
+        "voto_medio": 4.1,
+        "numero_recensioni": 128,
+        "rango_generale": 12345,
+        "categorie": [{"nome": "Categoria segnaposto", "rango": 42}],
+        "descrizione": ["Paragrafo segnaposto della descrizione del concorrente."],
+        "recensioni": [
+            {"stelle": 3, "titolo": "Segnaposto", "testo": "Recensione segnaposto: manca la pratica."},
+            {"stelle": 5, "titolo": "Segnaposto", "testo": "Recensione segnaposto: molto chiaro."},
+        ],
+        "problemi": ["dati segnaposto: nessuna pagina è stata letta davvero"],
+    }
+
+
+def _dry_run_lacune() -> dict:
+    return {
+        "lettore_reale": "Lettore segnaposto",
+        "confidenza": "bassa",
+        "perche_questa_confidenza": "dati segnaposto in modalità dry-run",
+        "lacune": [
+            {
+                "tema": "Lacuna segnaposto",
+                "ricorrenze": 3,
+                "che_cosa_manca": "Descrizione segnaposto di quello che manca.",
+                "citazioni": ["Recensione segnaposto: manca la pratica."],
+                "vale_un_libro": True,
+            }
+        ],
+        "da_non_toccare": [
+            {"punto": "Punto di forza segnaposto", "citazioni": ["Recensione segnaposto: molto chiaro."]}
+        ],
+        "prezzo": "",
+        "scartate": [],
+    }
+
+
+def _dry_run_posizionamento() -> dict:
+    return {
+        "titolo": "Titolo segnaposto del libro nuovo",
+        "sottotitolo": "Sottotitolo segnaposto",
+        "lingua": "it",
+        "argomento": "Argomento segnaposto generato in modalità dry-run.",
+        "lettore": "Lettore segnaposto",
+        "promessa": "Promessa segnaposto.",
+        "tono": "chiaro, diretto, professionale, con esempi concreti",
+        "genere": "non-fiction",
+        "pagine_obiettivo": 140,
+        "prezzo": 12.99,
+        "valuta": "EUR",
+        "perche_questo_prezzo": "Motivazione segnaposto.",
+        "parole_chiave": [f"parola chiave segnaposto {i}" for i in range(1, 8)],
+        "categorie": [f"Categoria segnaposto {i}" for i in range(1, 4)],
+        "la_lacuna_che_copre": "Lacuna segnaposto",
+        "che_cosa_tiene": ["Punto di forza segnaposto"],
+        "che_cosa_non_fa": ["Argomento segnaposto escluso"],
+        "argomenti": [f"Tema segnaposto {i}" for i in range(1, 11)],
+        "rischi": ["Rischio segnaposto"],
+    }
 
 
 def _dry_run_metadata() -> dict:

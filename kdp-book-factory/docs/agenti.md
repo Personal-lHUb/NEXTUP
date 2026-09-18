@@ -22,6 +22,19 @@ architetto → indice → ghostwriter → [voce] → impaginazione + copertina
 
 ## Chi fa cosa
 
+### Acquisizione
+
+Solo per i libri che nascono da un ASIN. Stanno **prima** del collegio e
+consegnano `book.json` + `brief.md`. Documentati per esteso in
+[`acquisizione.md`](acquisizione.md).
+
+| Agente | Mestiere |
+|---|---|
+| `scheda-concorrente` | Legge una scheda Amazon copiata e incollata e ne ricava i dati strutturati. Quello che nella pagina non c'è resta vuoto: non stima e non deduce. |
+| `analista-recensioni` | Ricava il buco di mercato dalle recensioni: chi ha pagato il libro scrive alla lettera quale libro avrebbe voluto. Ogni lacuna deve portare una citazione. |
+| `posizionamento` | Decide che libro scrivere per coprire quel buco: promessa, lettore, titolo, pagine, prezzo, parole chiave, temi del brief. |
+| `originalita` | Verifica che il piano sia un libro indipendente **prima** che venga scritto. Un bloccante impedisce la scrittura della scheda. |
+
 ### Produzione
 
 | Agente | Mestiere |

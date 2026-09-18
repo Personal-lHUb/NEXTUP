@@ -1,5 +1,11 @@
 """Collegio editoriale: gli agenti che scrivono il libro e quelli che lo controllano.
 
+Acquisizione (prima del collegio, solo per i libri che nascono da un ASIN)
+    scheda-concorrente   legge una scheda Amazon incollata e la struttura
+    analista-recensioni  ricava il buco di mercato da chi il libro l'ha pagato
+    posizionamento       decide che libro scrivere per coprirlo
+    originalita          verifica che sia un libro indipendente, non una copia
+
 Produzione
     architetto      progetta la struttura
     indice          i titoli definitivi dei capitoli e il loro ordine
@@ -19,7 +25,7 @@ Controllo
 """
 
 # Gli import registrano gli agenti nel registro.
-from . import copertina, layout, review, writing  # noqa: F401,E402
+from . import acquisizione, copertina, layout, review, writing  # noqa: F401,E402
 from .base import (  # noqa: F401
     REGISTRY,
     Agent,

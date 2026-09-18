@@ -10,6 +10,7 @@ select = ["E", "F", "W", "I", "UP", "B"]
 "kdpfactory/typography.py" = ["E501"]
 "kdpfactory/agents/review.py" = ["E501"]
 "kdpfactory/agents/writing.py" = ["E501"]
+"kdpfactory/agents/acquisizione.py" = ["E501"]
 "kdpfactory/agents/install.py" = ["E501"]
 # Testi del libro: le frasi lunghe si leggono meglio intere
 "kdpfactory/puzzle/theme.py" = ["E501"]
