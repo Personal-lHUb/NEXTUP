@@ -151,6 +151,7 @@ esempi usare, quale taglio dare).
 | `qa <slug>` | controlli di qualità e conformità |
 | `all <slug>` | tutto in sequenza |
 | `list` | elenco dei libri e stato di avanzamento |
+| `diagnostica` | misura tutti i libri e il sistema: costi, resa, sprechi della scheda, difetti ricorrenti (nessuna chiamata API) |
 | `specs --pages 160 --trim 6x9` | misure KDP per una combinazione formato/pagine |
 
 Opzioni globali: `--dry-run`, `--model` (default `claude-opus-5`), `--effort`
@@ -267,12 +268,13 @@ kdp-book-factory/
 │   ├── puzzle/         enigmi di deduzione: modello, solver, generatore, impaginazione
 │   ├── coverimage.py   preparazione dell'immagine di copertina (300 DPI, velatura)
 │   ├── qa.py           controlli di qualità e conformità
+│   ├── diagnostica.py  misure su tutti i libri: costi, resa, sprechi della scheda
 │   ├── metadata.py     scheda prodotto, prezzi, royalty
 │   └── pipeline.py     orchestrazione e convergenza sulle pagine
 ├── books/<slug>/       book.json, brief.md, assets/, manuscript/, build/
 ├── config/             costi di stampa per il calcolo delle royalty
 ├── docs/               checklist di pubblicazione, workflow, personalizzazione
-└── tests/              149 test, nessuna chiamata API
+└── tests/              170 test, nessuna chiamata API
 ```
 
 ```bash
@@ -303,6 +305,7 @@ in [`docs/enigmistica.md`](docs/enigmistica.md); i materiali da
 fornire in [`docs/materiali.md`](docs/materiali.md); il
 metodo di lavoro per produrre più titoli in [`docs/workflow.md`](docs/workflow.md);
 il sistema di copertina in [`docs/copertine.md`](docs/copertine.md);
+il team che migliora il sistema in [`docs/team-miglioramento.md`](docs/team-miglioramento.md);
 formati, font e palette in
 [`docs/personalizzazione.md`](docs/personalizzazione.md).
 

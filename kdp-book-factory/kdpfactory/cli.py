@@ -13,7 +13,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from . import agents, backup, kdpspecs, pipeline, planner, writer
+from . import agents, backup, diagnostica, kdpspecs, pipeline, planner, writer
 from .llm import DEFAULT_MODEL, LLMClient, LLMConfig, api_key_present
 from .models import BookProject, BookSpec, slugify
 
@@ -577,6 +577,27 @@ def cmd_list(args) -> int:
     return 0
 
 
+def cmd_diagnostica(args) -> int:
+    """I fatti su cui lavora il team di miglioramento. Nessuna chiamata API."""
+    root = books_dir(args)
+    if not root.exists():
+        print(f"Nessun libro in {root}")
+        return 0
+    project_root = Path(__file__).resolve().parent.parent
+    system = diagnostica.analyse(root, project_root)
+
+    output = Path(args.output) if args.output else project_root / "diagnostica.json"
+    output.write_text(
+        json.dumps(system.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    if args.json:
+        print(json.dumps(system.to_dict(), ensure_ascii=False, indent=2))
+    else:
+        print(diagnostica.render(system))
+        print(f"Rapporto completo: {output}")
+    return 0
+
+
 def cmd_specs(args) -> int:
     """Mostra le specifiche KDP per una combinazione formato/pagine."""
     pages = args.pages
@@ -750,6 +771,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     p = sub.add_parser("list", help="elenco dei libri e stato")
     p.set_defaults(func=cmd_list)
+
+    p = sub.add_parser(
+        "diagnostica",
+        help="misura tutti i libri e il sistema: i fatti per il team di miglioramento",
+    )
+    p.add_argument("--json", action="store_true", help="stampa il rapporto completo in JSON")
+    p.add_argument("--output", help="dove salvare il rapporto (default: diagnostica.json)")
+    p.set_defaults(func=cmd_diagnostica)
 
     p = sub.add_parser("specs", help="specifiche KDP per formato e pagine")
     p.add_argument("--pages", type=int, default=140)

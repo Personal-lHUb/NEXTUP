@@ -24,3 +24,6 @@ books/*/state.json
 # Font con licenza propria
 fonts/*.ttf
 fonts/*.otf
+
+# Rapporto della diagnostica: si rigenera con `python3 -m kdpfactory diagnostica`
+diagnostica.json
