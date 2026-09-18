@@ -2,12 +2,14 @@
 
 Produzione
     architetto      progetta la struttura
+    indice          i titoli definitivi dei capitoli e il loro ordine
     ghostwriter     scrive i capitoli
     voce            revisione di stile (ritmo, varietà, tic da testo generato)
     editor          applica le segnalazioni del collegio
 
 Controllo
-    lettore-cieco   legge senza sapere nulla del progetto: dove ci si perde
+    lettore-cieco   legge senza sapere nulla del progetto: dove ci si perde sul
+                    capitolo, e sul libro intero se l'indice viene mantenuto
     fact-checker    affermazioni, numeri e citazioni non verificabili
     conformita      regole di contenuto KDP e rischi legali
     correttore      bozze: refusi, accenti, punteggiatura, accordi

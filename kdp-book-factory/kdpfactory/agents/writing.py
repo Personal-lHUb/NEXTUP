@@ -31,6 +31,65 @@ class Architetto(JsonAgent):
         return prompts.outline_prompt(ctx.spec, chapters, words)
 
 
+INDEX_RULES = """Sei l'agente che produce l'indice di un libro: l'elenco dei capitoli nell'ordine in cui si leggono, con il titolo esatto che comparirà nel sommario.
+
+L'indice non è una formalità tipografica. È la prima pagina che un cliente apre nell'anteprima «Guarda dentro» su Amazon, ed è spesso l'ultima cosa che guarda prima di decidere se comprare. Un indice fatto bene si legge in venti secondi e fa capire che cosa si impara. Un indice fatto male sembra l'elenco degli appunti di qualcun altro.
+
+Che cosa rende buono un titolo di capitolo
+1. DICE CHE COSA SI OTTIENE, non di che cosa si parla. «Dire di no senza perdere il cliente», non «La gestione delle richieste».
+2. STA IN UNA RIGA. Oltre le otto o nove parole va a capo nel sommario e si legge peggio.
+3. NON SI CONFONDE con gli altri. Se due titoli si somigliano, il lettore non capisce perché sono due capitoli separati.
+4. È CONCRETO. Cose che si vedono, non nomi astratti in -zione e -ità.
+5. STA IN PIEDI DA SOLO. Chi sfoglia il libro salta direttamente a un capitolo: il titolo deve reggere anche fuori dall'indice.
+
+La sequenza
+L'ordine dei capitoli è un argomento, non un elenco. Ogni capitolo deve rendere possibile il successivo. Se due capitoli si possono scambiare senza che cambi niente, o sono lo stesso capitolo o l'ordine è sbagliato: dillo in `notes`.
+
+Che cosa NON fai
+- Non scrivi il libro e non cambi il contenuto dei capitoli: lavori sui titoli e sull'ordine.
+- Non aggiungi e non togli capitoli: il numero lo decide il budget di pagine, e cambiarlo manderebbe il libro fuori dalle pagine obiettivo.
+- Niente numero dentro il titolo («Capitolo 3: …»): lo aggiunge l'impaginazione.
+- Niente sottotitoli, due punti o trattini che raddoppiano il titolo: una riga, una promessa."""
+
+
+@register
+class Indice(JsonAgent):
+    name = "indice"
+    title = "Indice dei capitoli"
+    description = (
+        "Produce l'indice del libro: il titolo definitivo di ogni capitolo e l'ordine in "
+        "cui si leggono. È la pagina che un cliente guarda nell'anteprima prima di comprare."
+    )
+    max_tokens = 8000
+
+    def system(self, ctx: AgentContext) -> list[str]:
+        return [INDEX_RULES]
+
+    def user(self, ctx: AgentContext) -> str:
+        chapters = ctx.outline.chapters if ctx.outline else []
+        righe = "\n".join(
+            f"{c.number}. [{c.role}] {c.title} — {c.summary}" for c in chapters
+        )
+        return f"""Ecco la scaletta di «{ctx.spec.title}», libro in {ctx.spec.language} per {ctx.spec.audience or 'un lettore generico'}.
+Promessa del libro: {ctx.spec.promise or '(non dichiarata)'}
+
+Capitoli in bozza, con la sintesi di ciascuno:
+{righe}
+
+Riscrivi i titoli perché funzionino da indice, mantenendo esattamente {len(chapters)} voci
+nello stesso ordine e con gli stessi numeri. Le voci con ruolo `intro` e `conclusion` sono
+introduzione e conclusione: lasciale al loro posto e dai anche a loro un titolo che dica
+qualcosa, se quello attuale è generico.
+
+Rispondi ESCLUSIVAMENTE con un oggetto JSON valido, senza testo prima o dopo:
+{{
+  "chapters": [
+    {{"number": 1, "title": "il titolo definitivo", "promise": "che cosa si porta a casa il lettore, una riga"}}
+  ],
+  "notes": "una frase sull'indice nel suo insieme; qui segnali anche i capitoli che si sovrappongono o un ordine che non regge"
+}}"""
+
+
 @register
 class Ghostwriter(WriterAgent):
     name = "ghostwriter"

@@ -46,6 +46,26 @@ BACK_MATTER_PAGES = 4
 # Pagine perse per ogni apertura di capitolo (titolo in alto + eventuale bianca).
 CHAPTER_OPENING_COST = 1.4
 
+# Lunghezza di un capitolo: è il metro con cui si generano i libri. Sotto le
+# 1.500 parole il capitolo non ripaga la sua apertura, che costa 1,4 pagine;
+# sopra le 2.000 il lettore non lo chiude in una seduta e lo lascia a metà.
+MIN_WORDS_PER_CHAPTER = 1500
+MAX_WORDS_PER_CHAPTER = 2000
+TARGET_WORDS_PER_CHAPTER = 1750
+
+# Introduzione e conclusione prendono una quota ridotta rispetto a un capitolo
+# pieno: entrano nel conto perché è su di loro che si ripartiscono le parole.
+INTRO_WEIGHT = 0.6
+CONCLUSION_WEIGHT = 0.5
+
+# Estremi del numero di capitoli: sono i due soli motivi per cui l'intervallo
+# di parole può non essere rispettato. Il tetto serve ai libri lunghi e fitti
+# (240 pagine di testo denso non stanno in 30 capitoli senza sforare le 2.000
+# parole); il pavimento ai libri corti e radi, dove cinque capitoli sarebbero
+# troppi e ne uscirebbero da meno di 1.500.
+MIN_CHAPTERS = 4
+MAX_CHAPTERS = 40
+
 
 @dataclass
 class PageBudget:
@@ -77,43 +97,81 @@ def words_per_page(spec: BookSpec, pages_hint: int | None = None) -> float:
     return chars_per_page / metrics.avg_chars_per_word
 
 
+def section_weights(spec: BookSpec, chapters: int) -> float:
+    """Peso complessivo delle sezioni fra cui si dividono le parole."""
+    total = float(chapters)
+    if spec.include_intro:
+        total += INTRO_WEIGHT
+    if spec.include_conclusion:
+        total += CONCLUSION_WEIGHT
+    return max(total, 1.0)
+
+
+def words_in_chapter(spec: BookSpec, total_words: int, chapters: int) -> float:
+    """Parole che toccano davvero a un capitolo pieno, dato il numero di capitoli."""
+    return total_words / section_weights(spec, chapters)
+
+
 def suggest_chapter_count(spec: BookSpec, total_words: int) -> int:
-    """Numero di capitoli sensato per la lunghezza richiesta."""
+    """Quanti capitoli servono per tenerli tutti nell'intervallo di progetto.
+
+    È il numero di capitoli ad adattarsi alla lunghezza voluta, non il
+    contrario: la lunghezza del capitolo è il metro, e non si sfora.
+    """
     if spec.chapters:
+        # Scelta esplicita dell'autore: vince sull'intervallo. `describe` avvisa
+        # quando il capitolo che ne esce sta fuori.
         return max(1, spec.chapters)
-    # Capitoli tra 1.800 e 3.200 parole: lunghezza che regge bene sia in
-    # cartaceo sia in ebook senza diventare dispersiva.
-    target_len = 2500 if spec.genre == "non-fiction" else 3000
-    count = round(total_words / target_len)
-    return max(5, min(24, count))
+    count = max(MIN_CHAPTERS, min(MAX_CHAPTERS, round(total_words / TARGET_WORDS_PER_CHAPTER)))
+    # L'arrotondamento può cadere fuori intervallo: si aggiusta di un capitolo
+    # alla volta, sul peso e non sul conteggio, perché introduzione e
+    # conclusione prendono una quota ridotta (vedi `distribute_words`).
+    while count < MAX_CHAPTERS and words_in_chapter(spec, total_words, count) > MAX_WORDS_PER_CHAPTER:
+        count += 1
+    while count > MIN_CHAPTERS and words_in_chapter(spec, total_words, count) < MIN_WORDS_PER_CHAPTER:
+        count -= 1
+    return count
+
+
+def _budget_for(spec: BookSpec, wpp: float, chapters: int) -> tuple[float, int, float]:
+    """Pagine di testo, parole totali e parole per capitolo, dato il numero di capitoli."""
+    overhead = FRONT_MATTER_PAGES + BACK_MATTER_PAGES + CHAPTER_OPENING_COST * max(chapters, 1)
+    body_pages = max(1.0, spec.target_pages - overhead)
+    total_words = int(body_pages * wpp)
+    return body_pages, total_words, words_in_chapter(spec, total_words, chapters)
 
 
 def build_budget(spec: BookSpec, words_per_page_override: float | None = None) -> PageBudget:
     """Calcola il budget di parole per raggiungere `spec.target_pages`."""
     wpp = words_per_page_override or words_per_page(spec)
-    chapters_guess = spec.chapters or 0
-    # Prima passata per stimare il numero di capitoli, poi affinamento.
-    for _ in range(3):
-        overhead = FRONT_MATTER_PAGES + BACK_MATTER_PAGES + CHAPTER_OPENING_COST * max(
-            chapters_guess, 1
+    if spec.chapters:
+        chapters_guess = max(1, spec.chapters)
+    else:
+        # Si prova ogni numero di capitoli ammesso invece di affinare a tentativi:
+        # il conto non converge da solo, perché ogni capitolo in più costa 1,4
+        # pagine di apertura e quindi cambia le parole da ripartire. Su libri
+        # corti l'affinamento oscillava e chiudeva fuori intervallo.
+        candidates = list(range(MIN_CHAPTERS, MAX_CHAPTERS + 1))
+        in_range = [
+            c
+            for c in candidates
+            if MIN_WORDS_PER_CHAPTER <= _budget_for(spec, wpp, c)[2] <= MAX_WORDS_PER_CHAPTER
+        ]
+        chapters_guess = min(
+            in_range or candidates,
+            key=lambda c: abs(_budget_for(spec, wpp, c)[2] - TARGET_WORDS_PER_CHAPTER),
         )
-        body_pages = max(1.0, spec.target_pages - overhead)
-        total_words = int(body_pages * wpp)
-        new_chapters = suggest_chapter_count(spec, total_words)
-        if new_chapters == chapters_guess:
-            break
-        chapters_guess = new_chapters
 
-    overhead = FRONT_MATTER_PAGES + BACK_MATTER_PAGES + CHAPTER_OPENING_COST * chapters_guess
-    body_pages = max(1.0, spec.target_pages - overhead)
-    total_words = int(body_pages * wpp)
+    body_pages, total_words, _ = _budget_for(spec, wpp, chapters_guess)
     return PageBudget(
         target_pages=spec.target_pages,
         words_per_page=round(wpp, 1),
         body_pages=round(body_pages, 1),
         total_words=total_words,
         chapters=chapters_guess,
-        words_per_chapter=int(total_words / max(chapters_guess, 1)),
+        # Le parole di un capitolo pieno, non la media fra tutte le sezioni:
+        # introduzione e conclusione ne prendono meno e falserebbero il numero.
+        words_per_chapter=int(words_in_chapter(spec, total_words, chapters_guess)),
     )
 
 
@@ -124,10 +182,10 @@ def distribute_words(budget: PageBudget, spec: BookSpec) -> list[int]:
     """
     weights: list[float] = []
     if spec.include_intro:
-        weights.append(0.6)
+        weights.append(INTRO_WEIGHT)
     weights.extend([1.0] * budget.chapters)
     if spec.include_conclusion:
-        weights.append(0.5)
+        weights.append(CONCLUSION_WEIGHT)
     total_weight = sum(weights)
     return [int(budget.total_words * w / total_weight) for w in weights]
 
@@ -215,7 +273,13 @@ def describe(budget: PageBudget, spec: BookSpec) -> str:
         f"Pagine obiettivo    : {budget.target_pages} (intervallo di progetto {limits})",
         f"Parole per pagina   : ~{budget.words_per_page}",
         f"Parole totali       : ~{budget.total_words:,}".replace(",", "."),
-        f"Capitoli            : {budget.chapters} (~{budget.words_per_chapter} parole ciascuno)",
+        f"Capitoli            : {budget.chapters} (~{budget.words_per_chapter} parole ciascuno, "
+        f"intervallo {MIN_WORDS_PER_CHAPTER}-{MAX_WORDS_PER_CHAPTER})"
+        + (
+            ""
+            if MIN_WORDS_PER_CHAPTER <= budget.words_per_chapter <= MAX_WORDS_PER_CHAPTER
+            else "  ← fuori intervallo: è il numero di capitoli scelto a mano in `chapters`"
+        ),
         f"Dorso               : {spine:.3f} in (testo sul dorso: "
         f"{'sì' if kdpspecs.spine_text_allowed(spec.target_pages) else 'no, servono 79+ pagine'})",
         f"Copertina           : {cover_w:.3f}x{cover_h:.3f} in (abbondanza inclusa)",

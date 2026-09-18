@@ -68,6 +68,38 @@ class TestPlanner(unittest.TestCase):
         self.assertLess(words[0], words[1])   # l'introduzione è più corta
         self.assertLess(words[-1], words[1])  # la conclusione pure
 
+    def test_i_capitoli_stanno_fra_1500_e_2000_parole(self):
+        """Il metro con cui si generano i libri: un capitolo non sfora, mai.
+
+        Si prova tutto lo spazio dei formati — pagine di progetto per densità
+        di pagina plausibili — perché è il numero di capitoli a doversi
+        adattare, e gli unici due modi di sbagliare sono i suoi estremi.
+        """
+        fuori = []
+        for wpp in (220, 250, 267.6, 300.9, 325.2, 360, 385.3, 420):
+            for pagine in (60, 80, 100, 140, 180, 200, 240):
+                for extra in (False, True):
+                    spec = self.spec(
+                        target_pages=pagine, include_intro=extra, include_conclusion=extra
+                    )
+                    budget = planner.build_budget(spec, words_per_page_override=wpp)
+                    parti = planner.distribute_words(budget, spec)
+                    capitoli = parti[1:-1] if extra else parti
+                    for parole in capitoli:
+                        if not (
+                            planner.MIN_WORDS_PER_CHAPTER
+                            <= parole
+                            <= planner.MAX_WORDS_PER_CHAPTER
+                        ):
+                            fuori.append((wpp, pagine, extra, budget.chapters, parole))
+                            break
+        self.assertEqual(fuori, [], f"capitoli fuori dall'intervallo: {fuori}")
+
+    def test_il_numero_di_capitoli_scelto_a_mano_vince(self):
+        """L'autore che fissa `chapters` decide lui: l'intervallo non lo scavalca."""
+        budget = planner.build_budget(self.spec(target_pages=140, chapters=7))
+        self.assertEqual(budget.chapters, 7)
+
     def test_ricalibrazione_riduce_se_troppe_pagine(self):
         spec = self.spec(target_pages=120)
         chapters = [ChapterPlan(number=i, title=f"C{i}", target_words=2000) for i in range(1, 11)]

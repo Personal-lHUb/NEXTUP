@@ -8,13 +8,14 @@ mette le mani nel testo dopo la stesura è l'editor, e lo fa applicando le
 segnalazioni degli altri.
 
 ```
-architetto → ghostwriter → [voce] → impaginazione + copertina
-                                         │
-        lettore cieco ┐                  │
-        fact-checker  ├─ segnalazioni ───┤
-        conformità    │                  │
-        correttore    │                  ▼
-        editor di sviluppo          →  editor  →  nuova impaginazione
+architetto → indice → ghostwriter → [voce] → impaginazione + copertina
+                                                    │
+        lettore cieco (capitolo) ┐                  │
+        fact-checker             ├─ segnalazioni ───┤
+        conformità               │                  │
+        correttore               │                  │
+        lettore cieco (libro)    │                  ▼
+        editor di sviluppo       →             editor  →  nuova impaginazione
 ```
 
 ---
@@ -26,6 +27,7 @@ architetto → ghostwriter → [voce] → impaginazione + copertina
 | Agente | Mestiere |
 |---|---|
 | `architetto` | Progetta la struttura: tesi portante, sequenza dei capitoli, promessa di ciascuno, testo di quarta. Non scrive il libro. |
+| `indice` | Produce l'indice: il titolo definitivo di ogni capitolo e l'ordine in cui si leggono. L'architetto dà ai capitoli titoli che li **descrivono**; questo li riscrive perché li **vendano**, perché l'indice è la pagina che il cliente apre nell'anteprima «Guarda dentro» prima di decidere. Non aggiunge né toglie capitoli: il numero lo decide il budget di pagine. |
 | `ghostwriter` | Scrive un capitolo per volta, con la scaletta, la voce del libro e il budget di parole. Riceve l'elenco di ciò che è già stato detto, per non ripetersi. |
 | `voce` | Revisione di stile: ritmo delle frasi, varietà dei capoversi, tic da testo prodotto in serie, lessico concreto. Non aggiunge né toglie contenuti, e mantiene la lunghezza entro il 5%. |
 | `editor` | Applica le segnalazioni del collegio, capitolo per capitolo, senza toccare ciò che nessuno ha segnalato e rispettando il budget di parole. |
@@ -34,7 +36,7 @@ architetto → ghostwriter → [voce] → impaginazione + copertina
 
 | Agente | Che cosa cerca |
 |---|---|
-| `lettore-cieco` | Legge **senza scaletta, senza scheda del libro, senza sapere che cosa il capitolo dovrebbe dimostrare**: solo le pagine, come chi ha comprato il libro. Riferisce dove ha perso il filo, dove ha saltato righe, quale promessa non è stata mantenuta, che cosa avrebbe chiesto all'autore. |
+| `lettore-cieco` | Legge **senza scaletta, senza scheda del libro, senza sapere che cosa il capitolo dovrebbe dimostrare**: solo le pagine, come chi ha comprato il libro. Lavora a due livelli. **Sul capitolo**: dove ha perso il filo, dove ha saltato righe, quale promessa non è stata mantenuta, che cosa avrebbe chiesto all'autore. **Sul libro intero**: riceve l'indice — l'unica cosa che ha visto prima di pagare — e verifica che ogni capitolo consegni quello che il suo titolo annuncia e che il contesto non cambi per strada: il destinatario che si sposta, i termini che cambiano nome, una definizione contraddetta più avanti, un «lo vedremo poi» che non arriva mai. Continua a non ricevere la scaletta, nemmeno qui. |
 | `fact-checker` | Affermazioni presentate come fatti e non verificabili: percentuali, "gli studi dimostrano", citazioni, nomi di istituti, cifre precise, generalizzazioni assolute. Le citazioni inventate sono sempre bloccanti: su carta non si correggono più. |
 | `conformita` | Regole di contenuto KDP e rischi legali: materiale di terzi, marchi e persone reali, consulenza medica/legale/fiscale formulata come prescrizione, promesse di risultato, coerenza fra il capitolo e la promessa del libro. |
 | `correttore` | Bozze, parola per parola: refusi, accenti e apostrofi (perché, qual è, po'), accordi, punteggiatura, maiuscole incoerenti, ripetizioni ravvicinate, frasi rimaste a metà. |

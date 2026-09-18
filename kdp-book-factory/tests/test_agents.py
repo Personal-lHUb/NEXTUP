@@ -292,3 +292,87 @@ class TestInstallazioneSubagent(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class _ClienteFinto:
+    """Client minimo: restituisce la risposta preparata e registra le chiamate."""
+
+    def __init__(self, risposta: dict):
+        self.risposta = risposta
+        self.chiamate = 0
+
+    def complete_json(self, **kwargs) -> dict:
+        self.chiamate += 1
+        return self.risposta
+
+
+class TestAgenteIndice(unittest.TestCase):
+    """L'indice è la pagina che il cliente guarda prima di comprare."""
+
+    def outline(self) -> Outline:
+        return Outline(
+            title="Titolo",
+            chapters=[
+                ChapterPlan(number=1, title="Introduzione", role="intro"),
+                ChapterPlan(number=2, title="La gestione delle richieste"),
+                ChapterPlan(number=3, title="L'ottimizzazione del processo"),
+            ],
+        )
+
+    def test_e_registrato_fra_gli_agenti_di_produzione(self):
+        agente = agents.get_agent("indice")
+        self.assertEqual(agente.stage, "produzione")
+
+    def test_applica_i_titoli_alla_scaletta(self):
+        outline = self.outline()
+        client = _ClienteFinto(
+            {
+                "chapters": [
+                    {"number": 1, "title": "Perché tre ore bastano"},
+                    {"number": 2, "title": "Dire di no senza perdere il cliente"},
+                    {"number": 3, "title": "Chiudere la giornata alle 15"},
+                ],
+                "notes": "ordine solido",
+            }
+        )
+        note = writer.apply_index(BookSpec(slug="t", title="Titolo"), outline, client)
+        self.assertEqual(client.chiamate, 1)
+        self.assertEqual(
+            [c.title for c in outline.chapters],
+            [
+                "Perché tre ore bastano",
+                "Dire di no senza perdere il cliente",
+                "Chiudere la giornata alle 15",
+            ],
+        )
+        self.assertEqual(note, "ordine solido")
+
+    def test_un_indice_parziale_non_viene_applicato(self):
+        """Metà titoli nuovi e metà vecchi sarebbe peggio di nessun titolo nuovo."""
+        outline = self.outline()
+        prima = [c.title for c in outline.chapters]
+        client = _ClienteFinto({"chapters": [{"number": 2, "title": "Solo questo"}]})
+        writer.apply_index(BookSpec(slug="t", title="Titolo"), outline, client)
+        self.assertEqual([c.title for c in outline.chapters], prima)
+
+
+class TestLettoreCiecoSulLibro(unittest.TestCase):
+    """Sul libro intero il lettore cieco riceve l'indice, non la scaletta."""
+
+    def test_sul_capitolo_non_riceve_nessun_indice(self):
+        agente = agents.get_agent("lettore-cieco")
+        ctx = AgentContext(spec=BookSpec(slug="t", title="T"), text="Un capitolo.")
+        self.assertNotIn("indice", agente.user(ctx).lower())
+
+    def test_sul_libro_riceve_l_indice_e_cambia_regole(self):
+        agente = agents.get_agent("lettore-cieco")
+        ctx_capitolo = AgentContext(spec=BookSpec(slug="t", title="T"), text="Un capitolo.")
+        ctx_libro = AgentContext(
+            spec=BookSpec(slug="t", title="T"),
+            text="Il libro.",
+            metadata={"indice": "1. Primo capitolo\n2. Secondo capitolo"},
+        )
+        self.assertIn("1. Primo capitolo", agente.user(ctx_libro))
+        self.assertNotEqual(agente.system(ctx_capitolo), agente.system(ctx_libro))
+        # Senza il contratto JSON la pipeline non saprebbe leggere la risposta.
+        self.assertIn('"findings"', agente.system(ctx_libro)[0])

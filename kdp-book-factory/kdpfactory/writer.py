@@ -55,7 +55,39 @@ def generate_outline(spec: BookSpec, client: LLMClient, budget: planner.PageBudg
     planner.apply_budget_to_outline(sequence, planner.distribute_words(budget, spec))
     if not outline.title:
         outline.title = spec.title
+    apply_index(spec, outline, client)
     return outline
+
+
+def apply_index(spec: BookSpec, outline: Outline, client: LLMClient) -> str:
+    """Fa produrre l'indice dall'agente omonimo e ne applica i titoli alla scaletta.
+
+    L'indice è la pagina che il cliente guarda nell'anteprima prima di comprare:
+    i titoli che escono dalla scaletta descrivono il contenuto, questi devono
+    vendere il capitolo. Restituisce le note dell'agente sull'indice.
+    """
+    # Import locale: il collegio importa a sua volta questo modulo.
+    from .agents import AgentContext, get_agent
+
+    result = get_agent("indice").run(AgentContext(spec=spec, outline=outline), client)
+    voci = result.data.get("chapters") or []
+    # Si applica solo un indice completo: una risposta parziale lascerebbe
+    # metà libro coi titoli vecchi e metà coi nuovi, che è peggio di nessuno.
+    if len(voci) != len(outline.chapters):
+        return str(result.data.get("notes", ""))
+
+    titoli = {}
+    for voce in voci:
+        if not isinstance(voce, dict):
+            continue
+        try:
+            titoli[int(voce.get("number"))] = str(voce.get("title", "")).strip()
+        except (TypeError, ValueError):
+            continue
+    for chapter in outline.chapters:
+        if titoli.get(chapter.number):
+            chapter.title = titoli[chapter.number]
+    return str(result.data.get("notes", ""))
 
 
 def _covered_topics(summaries: dict[int, str], up_to: int) -> list[str]:

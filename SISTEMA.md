@@ -18,7 +18,13 @@ pubblicare un libro difettoso.
 Vincolo di progetto: **ogni libro esce fra 60 e 240 pagine**, con un obiettivo
 scelto dall'autore e centrato entro il ±5%. Non è una stima: la pipeline impagina
 davvero, conta le pagine del PDF, ricalcola il budget di parole e fa riscrivere i
-capitoli finché il libro non rientra.
+capitoli finché il libro non rientra. *(La linea enigmistica non ha questo ciclo:
+vedi §8.)*
+
+Secondo vincolo, sulla forma: **ogni capitolo sta fra 1.500 e 2.000 parole**. È il
+metro con cui si generano i libri, e a doversi adattare è il numero di capitoli,
+non la lunghezza del capitolo. Introduzione e conclusione fanno eccezione per
+scelta: pesano meno di un capitolo pieno.
 
 ### Regole permanenti (valgono in ogni sessione)
 
@@ -39,7 +45,7 @@ NEXTUP/
 ├── CLAUDE.md                    regola dei backup + orientamento (governa le sessioni future)
 ├── SISTEMA.md                   questo file
 ├── .claude/
-│   ├── agents/                  15 subagent: 10 del collegio editoriale + 5 del team di miglioramento
+│   ├── agents/                  17 subagent: 12 del collegio editoriale + 5 del team di miglioramento
 │   └── commands/migliora.md     comando /migliora
 ├── backup/                      copie di sicurezza (fuori da git)
 └── kdp-book-factory/
@@ -47,7 +53,7 @@ NEXTUP/
     ├── books/<slug>/            book.json, brief.md, assets/, manuscript/, build/, state.json
     ├── config/printing_costs.json
     ├── docs/                    documentazione (vedi sotto)
-    ├── tests/                   170 test, nessuna chiamata di rete
+    ├── tests/                   177 test, nessuna chiamata di rete
     └── fonts/                   font TrueType propri (facoltativo)
 ```
 
@@ -59,7 +65,7 @@ NEXTUP/
 **Comandi:**
 ```bash
 cd kdp-book-factory
-python3 -m unittest discover -s tests     # 170 test, nessuna rete
+python3 -m unittest discover -s tests     # 177 test, nessuna rete
 ruff check kdpfactory tests
 python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 ```
@@ -72,7 +78,7 @@ python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 |---|---|
 | `kdpspecs.py` | specifiche KDP: formati, margini, dorso, limiti. `PROJECT_MIN_PAGES=60`, `PROJECT_MAX_PAGES=240` |
 | `models.py` | `BookSpec`, `ChapterPlan`, `Outline`, `BookProject`, `state.json` |
-| `planner.py` | pagine → parole, da metriche reali del font; ricalibrazione a posteriori |
+| `planner.py` | pagine → parole, da metriche reali del font; capitoli fra 1.500 e 2.000 parole; ricalibrazione a posteriori |
 | `prompts.py` | tutto il testo mandato al modello: `AUTHOR_RULES`, `BANNED_OPENERS`, `book_bible()` |
 | `llm.py` | client Claude: streaming, cache del prefisso, conteggio token e costi, dry-run |
 | `writer.py` | scaletta, capitoli, continuità, revisioni di lunghezza |
@@ -119,24 +125,26 @@ In `kdpspecs.py`, verificati contro il modulo di caricamento reale:
 Un libro passa da una redazione, non da un prompt lungo.
 
 ```
-architetto → ghostwriter → [voce] → impaginazione + copertina
-                                       │
-      lettore cieco ┐                  │
-      fact-checker  ├─ segnalazioni ───┤
-      conformità    │                  │
-      correttore    │                  ▼
-      editor di sviluppo          →  editor  →  nuova impaginazione
+architetto → indice → ghostwriter → [voce] → impaginazione + copertina
+                                                 │
+      lettore cieco (capitolo) ┐                 │
+      fact-checker             ├─ segnalazioni ──┤
+      conformità               │                 │
+      correttore               │                 │
+      lettore cieco (libro)    │                 ▼
+      editor di sviluppo       →            editor  →  nuova impaginazione
 ```
 
-**11 agenti registrati** in `kdpfactory/agents/` (`REGISTRY`):
+**12 agenti registrati** in `kdpfactory/agents/` (`REGISTRY`):
 
 | agente | ruolo | note |
 |---|---|---|
 | `architetto` | produzione | progetta la scaletta |
+| `indice` | produzione | i titoli definitivi dei capitoli: la pagina dell'anteprima |
 | `ghostwriter` | produzione | scrive i capitoli |
 | `voce` | produzione | line editing: ritmo, tic da testo generato |
 | `editor` | produzione | **l'unico che tocca il testo** |
-| `lettore-cieco` | controllo | `blind=True`: non riceve né scaletta né scheda del libro |
+| `lettore-cieco` | controllo | `blind=True`: non riceve né scaletta né scheda del libro. Sul capitolo dice dove ci si perde; sul libro intero riceve **l'indice** e verifica che sia mantenuto |
 | `fact-checker` | controllo | affermazioni non verificabili |
 | `conformita` | controllo | regole di contenuto KDP e rischi legali |
 | `correttore` | controllo | bozze |
@@ -368,10 +376,10 @@ solo via ricerca web. Non promettere dati di vendita che non si possono prendere
 | `twelve-carriages` | completo: 82 pagine, interno + copertina + scheda + risposte. `0 errori, 0 avvisi — PRONTO PER IL CARICAMENTO` |
 | `esempio-metodo-tre-ore` | solo `book.json`, serve da esempio e per il dry-run |
 
-**Test: 170**, nessuna chiamata di rete.
-`test_agents.py` 24 · `test_backup.py` 16 · `test_copertina.py` 37 ·
+**Test: 177**, nessuna chiamata di rete.
+`test_agents.py` 29 · `test_backup.py` 16 · `test_copertina.py` 37 ·
 `test_diagnostica.py` 21 · `test_materiali.py` 17 · `test_pipeline_dryrun.py` 11 ·
-`test_puzzle.py` 29 · `test_specs_and_planner.py` 15
+`test_puzzle.py` 29 · `test_specs_and_planner.py` 17
 
 **Rilievi aperti**, dalla prima diagnostica — nessuno è stato ancora affrontato:
 

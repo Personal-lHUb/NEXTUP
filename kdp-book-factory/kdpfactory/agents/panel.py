@@ -30,8 +30,10 @@ from .base import (
 
 # Agenti che leggono un capitolo per volta.
 CHAPTER_REVIEWERS = ("lettore-cieco", "fact-checker", "conformita", "correttore")
-# Agenti che guardano il libro intero o il PDF.
-BOOK_REVIEWERS = ("editor-sviluppo", "impaginazione", "copertina")
+# Agenti che guardano il libro intero o il PDF. Il lettore cieco compare anche
+# qui: sul capitolo dice dove ci si perde, sul libro verifica che ogni capitolo
+# mantenga quello che l'indice prometteva.
+BOOK_REVIEWERS = ("lettore-cieco", "editor-sviluppo", "impaginazione", "copertina")
 # Agenti che misurano invece di leggere: non ricevono il modello.
 MEASURING_REVIEWERS = ("impaginazione", "copertina")
 
@@ -177,8 +179,14 @@ class ReviewReport:
         return report
 
 
-def _book_digest(project: BookProject, outline: Outline, excerpt_words: int = 120) -> str:
-    """Sintesi del libro per l'editor di sviluppo: apertura e chiusura di ogni capitolo."""
+def _book_digest(
+    project: BookProject, outline: Outline, excerpt_words: int = 120, *, blind: bool = False
+) -> str:
+    """Sintesi del libro: apertura e chiusura di ogni capitolo.
+
+    Con `blind` la sintesi di lavorazione resta fuori: è materiale d'autore, e
+    un lettore non ce l'ha.
+    """
     state = project.load_state()
     summaries = {int(k): v for k, v in state.get("summaries", {}).items()}
     parts: list[str] = []
@@ -186,13 +194,16 @@ def _book_digest(project: BookProject, outline: Outline, excerpt_words: int = 12
         words = text.split()
         opening = " ".join(words[:excerpt_words])
         closing = " ".join(words[-excerpt_words:])
-        parts.append(
-            f"### Capitolo {number}: {title} ({len(words)} parole)\n"
-            f"Sintesi: {summaries.get(number, '(non disponibile)')}\n"
-            f"Apertura: «{opening}…»\n"
-            f"Chiusura: «…{closing}»"
-        )
+        riga = f"### Capitolo {number}: {title} ({len(words)} parole)\n"
+        if not blind:
+            riga += f"Sintesi: {summaries.get(number, '(non disponibile)')}\n"
+        parts.append(riga + f"Apertura: «{opening}…»\nChiusura: «…{closing}»")
     return "\n\n".join(parts)
+
+
+def _indice(outline: Outline) -> str:
+    """L'indice come lo vede chi apre l'anteprima: solo numero e titolo."""
+    return "\n".join(f"{c.number}. {c.title}" for c in outline.chapters)
 
 
 def run_review(
@@ -205,7 +216,9 @@ def run_review(
     only: list[int] | None = None,
 ) -> ReviewReport:
     """Fa leggere il libro al collegio e raccoglie le segnalazioni."""
-    names = list(agent_names) or list(QUALITY_LEVELS[DEFAULT_QUALITY]["reviewers"])
+    # Il lettore cieco sta in tutte e due le liste: senza deduplicare leggerebbe
+    # ogni capitolo due volte al livello «alta», che le somma.
+    names = list(dict.fromkeys(agent_names or QUALITY_LEVELS[DEFAULT_QUALITY]["reviewers"]))
     report = ReviewReport()
     chapters = load_chapters(project, outline)
     if not chapters:
@@ -252,6 +265,22 @@ def run_review(
                 cover_copy=cover.get("testi", {}),
             )
             result = agent.run(ctx, None)
+        elif agent.blind:
+            if only:
+                # Revisione ristretta a certi capitoli: leggere il libro intero
+                # è fuori da quello che è stato chiesto, e costa una chiamata su
+                # tutto il testo.
+                continue
+            # Riceve l'indice — quello che ha visto in anteprima prima di
+            # comprare — e il libro, ma non la scaletta: quella gli direbbe che
+            # cosa avrebbe dovuto capire.
+            ctx = AgentContext(
+                spec=spec,
+                outline=None,
+                text=_book_digest(project, outline, blind=True),
+                metadata={"indice": _indice(outline)},
+            )
+            result = agent.run(ctx, client)
         else:
             ctx = AgentContext(spec=spec, outline=outline, text=_book_digest(project, outline))
             result = agent.run(ctx, client)

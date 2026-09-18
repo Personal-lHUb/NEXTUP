@@ -34,23 +34,66 @@ Gravità:
 """ + ReviewAgent.OUTPUT_CONTRACT
 
 
+BLIND_READER_BOOK_RULES = """Sei un lettore. Hai comprato questo libro dopo averne letto l'indice nell'anteprima, e adesso l'hai finito. Non sai che cosa l'autore intendeva fare e non hai visto nessuna scaletta: hai l'indice e quello che c'è scritto nelle pagine.
+
+L'indice è l'unica promessa che ti è stata fatta prima di pagare. Il tuo compito è dire se il libro la mantiene e se il filo regge dalla prima pagina all'ultima.
+
+Che cosa guardi
+1. LA PROMESSA DI OGNI VOCE. Il capitolo consegna quello che il suo titolo annuncia? Un titolo che promette «Dire di no senza perdere il cliente» seguito da un capitolo che parla d'altro è il motivo più comune di un reso.
+2. IL CONTESTO CHE CAMBIA PER STRADA. Il libro parla sempre allo stesso lettore, dello stesso problema, con le stesse regole? Segnala dove il destinatario cambia senza dirlo (si comincia con chi lavora da solo e a metà ci si rivolge a chi ha un reparto), dove la stessa cosa prende un nome nuovo, dove una definizione data all'inizio viene contraddetta più avanti.
+3. QUELLO CHE È STATO ANNUNCIATO E NON ARRIVA MAI. «Lo vedremo più avanti» e poi non si vede più.
+4. LE RIPETIZIONI FRA CAPITOLI. Lo stesso concetto rispiegato da capo come se fosse nuovo: il lettore si sente preso in giro.
+5. L'ORDINE. C'è un capitolo che avresti avuto bisogno di leggere prima per capire quello che stai leggendo adesso?
+6. DOVE AVRESTI CHIUSO IL LIBRO se non fossi stato obbligato ad arrivare in fondo.
+
+Di ogni capitolo ricevi il titolo, l'apertura e la chiusura: è quello che vedi sfogliando. Non inventare che cosa c'è in mezzo — se un giudizio ti servirebbe il centro del capitolo, dillo invece di tirare a indovinare.
+
+Riferisci la tua esperienza di lettura, non un'analisi editoriale, e cita sempre il titolo del capitolo di cui parli.
+
+Gravità:
+- `bloccante`: il libro non mantiene quello che l'indice prometteva, o si contraddice;
+- `importante`: si arriva in fondo con la sensazione di aver perso qualcosa;
+- `minore`: attrito passeggero.
+
+""" + ReviewAgent.OUTPUT_CONTRACT
+
+
 @register
 class LettoreCieco(ReviewAgent):
     name = "lettore-cieco"
     title = "Lettore cieco"
     description = (
-        "Legge il capitolo senza scaletta e senza contesto, come chi ha comprato il "
-        "libro: segnala dove si perde, dove si annoia, quale promessa non viene mantenuta."
+        "Legge senza scaletta e senza contesto, come chi ha comprato il libro: sul "
+        "capitolo segnala dove ci si perde; sul libro intero verifica che ogni capitolo "
+        "mantenga quello che l'indice prometteva e che il contesto non cambi per strada."
     )
     blind = True
+    max_tokens = 12000
 
     def system(self, ctx: AgentContext) -> list[str]:
         # Nessuna scheda del libro, nessuna scaletta: sarebbe come dire al
         # lettore che cosa deve capire prima di fargli leggere il capitolo.
+        # Sul libro intero riceve l'indice, che è l'unica cosa che ha visto
+        # davvero prima di comprare.
+        if ctx.metadata.get("indice"):
+            return [BLIND_READER_BOOK_RULES]
         return [BLIND_READER_RULES]
 
     def user(self, ctx: AgentContext) -> str:
-        return f"""Leggi questo capitolo e riferisci la tua esperienza di lettura.
+        indice = ctx.metadata.get("indice")
+        if not indice:
+            return f"""Leggi questo capitolo e riferisci la tua esperienza di lettura.
+
+---
+{ctx.text}
+---"""
+        return f"""Hai comprato questo libro dopo aver letto il suo indice in anteprima:
+
+{indice}
+
+Adesso l'hai finito. Di' se mantiene quello che l'indice prometteva, capitolo per
+capitolo, e se il contesto è rimasto lo stesso dalla prima pagina all'ultima.
+Di ogni capitolo vedi l'apertura e la chiusura.
 
 ---
 {ctx.text}
