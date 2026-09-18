@@ -53,7 +53,7 @@ NEXTUP/
     ├── books/<slug>/            book.json, brief.md, assets/, manuscript/, build/, state.json
     ├── config/printing_costs.json
     ├── docs/                    documentazione (vedi sotto)
-    ├── tests/                   188 test, nessuna chiamata di rete
+    ├── tests/                   193 test, nessuna chiamata di rete
     └── fonts/                   font TrueType propri (facoltativo)
 ```
 
@@ -66,7 +66,7 @@ NEXTUP/
 **Comandi:**
 ```bash
 cd kdp-book-factory
-python3 -m unittest discover -s tests     # 188 test, nessuna rete
+python3 -m unittest discover -s tests     # 193 test, nessuna rete
 ruff check kdpfactory tests
 python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 ```
@@ -80,7 +80,7 @@ python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 | `kdpspecs.py` | specifiche KDP: formati, margini, dorso, limiti. `PROJECT_MIN_PAGES=60`, `PROJECT_MAX_PAGES=240` |
 | `models.py` | `BookSpec`, `ChapterPlan`, `Outline`, `BookProject`, `state.json` |
 | `planner.py` | pagine → parole, da metriche reali del font; capitoli fra 1.500 e 2.000 parole; ricalibrazione a posteriori |
-| `prompts.py` | tutto il testo mandato al modello: `AUTHOR_RULES`, `BANNED_OPENERS`, `book_bible()` |
+| `prompts.py` | tutto il testo mandato al modello: `AUTHOR_RULES`, `BANNED_OPENERS`, `book_bible()`; il contesto per capitolo tenuto a budget (`focus_covered`) |
 | `llm.py` | client Claude: streaming, cache del prefisso, conteggio token e costi, dry-run |
 | `writer.py` | scaletta, capitoli, continuità, revisioni di lunghezza |
 | `typeset.py` | interno PDF (ReportLab Platypus) |
@@ -169,7 +169,16 @@ parole decidono le pagine.
 
 **Convergenza sulle pagine**: stima da geometria e metriche del font → impaginato
 vero → parole/pagina misurate → nuovo budget (limitato a ±45%) → riscritture
-mirate → ripete.
+mirate → ripete. **Oggi non converge**: vedi §8.
+
+**Contesto di chi scrive**: il blocco stabile (regole d'autore + scheda del libro
+con la struttura completa) va in cache; il messaggio del capitolo no, e si
+ricompra ogni volta. L'elenco di quello che è già stato detto è perciò tenuto a
+budget (`prompts.COVERED_BUDGET_WORDS`, 350 parole, minimo tre capitoli): si
+tengono i riassunti recenti, che sono quelli da cui ci si ripete, e i più
+lontani restano nella struttura completa, che è già nel blocco in cache. Su un
+libro corto non cambia niente; da 18 capitoli in su **il contesto per capitolo
+smette di crescere**.
 
 ### 5.2 Linea enigmistica (`kdpfactory/puzzle/`)
 
@@ -378,8 +387,8 @@ solo via ricerca web. Non promettere dati di vendita che non si possono prendere
 | `twelve-carriages` | completo: 82 pagine, interno + copertina + scheda + risposte. `0 errori, 0 avvisi — PRONTO PER IL CARICAMENTO` |
 | `esempio-metodo-tre-ore` | solo `book.json`, serve da esempio e per il dry-run |
 
-**Test: 188**, nessuna chiamata di rete.
-`test_agents.py` 29 · `test_backup.py` 16 · `test_concorrente.py` 11 ·
+**Test: 193**, nessuna chiamata di rete.
+`test_agents.py` 34 · `test_backup.py` 16 · `test_concorrente.py` 11 ·
 `test_copertina.py` 37 · `test_diagnostica.py` 21 · `test_materiali.py` 17 ·
 `test_pipeline_dryrun.py` 11 · `test_puzzle.py` 29 · `test_specs_and_planner.py` 17
 

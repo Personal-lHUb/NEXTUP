@@ -119,6 +119,43 @@ rilancia `--install`, non si modificano i file esportati.
 
 ---
 
+## Il contesto che riceve chi scrive
+
+Il ghostwriter riceve due cose, e la differenza fra le due decide sia il costo
+sia la qualità.
+
+**Il blocco stabile** — regole d'autore e scheda del libro, con la struttura
+completa: tutti i capitoli, titolo e sintesi. È identico a ogni chiamata, quindi
+finisce in cache e dalla seconda in poi si paga un decimo.
+
+**Il messaggio del capitolo** — numero, titolo, punti da coprire, lunghezza, il
+riassunto del capitolo precedente e l'elenco di quello che è già stato detto.
+Questo **non** va in cache: si ricompra intero ogni volta.
+
+Quell'elenco cresceva di un riassunto a ogni capitolo. Su un libro da 240 pagine
+— che con capitoli da 1.500-2.000 parole sono una trentina — l'ultimo capitolo
+ne riceveva trentuno: **1.900 token** di roba scritta da altri capitoli, con
+dentro, in fondo, l'unica istruzione che conta davvero.
+
+Ora il blocco è tenuto a un budget (`COVERED_BUDGET_WORDS` in `prompts.py`,
+350 parole, minimo tre capitoli): si tengono i riassunti **recenti**, che sono
+quelli da cui ci si ripete davvero, e i più lontani restano dove erano già —
+nella struttura completa del libro, che è nel blocco stabile e quindi gratis
+dalla seconda chiamata in poi. Il prompt lo dice esplicitamente, così chi scrive
+sa che quei capitoli esistono e non li deve ripetere.
+
+| libro | capitoli | «già trattato» all'ultimo capitolo | su tutto il libro |
+|---|---|---|---|
+| 60 pagine | 6 | 306 → 306 token (invariato) | invariato |
+| 140 pagine | 18 | 1.040 → 551 token | −24% |
+| 240 pagine | 32 | 1.897 → **551** token | −51% |
+
+Il punto non è il risparmio, che vale pochi centesimi a libro: è che da lì in
+poi **il contesto smette di crescere**. Un libro corto non viene toccato, e un
+libro lungo riceve per ogni capitolo la stessa quantità di contesto recente.
+
+---
+
 ## Costi
 
 Ogni agente di controllo è una chiamata per capitolo: su un libro da 15 capitoli,

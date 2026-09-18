@@ -148,6 +148,39 @@ Rispondi con questo JSON:
 # --------------------------------------------------------------------------
 # Capitoli
 # --------------------------------------------------------------------------
+#: Il blocco «già trattato» viaggia nel messaggio dell'utente, cioè fuori dalla
+#: cache, e cresce di un riassunto a ogni capitolo: su un libro da 32 capitoli
+#: l'ultimo ne riceve trentuno. Il costo è di pochi centesimi, ma l'istruzione
+#: che conta — scrivi QUESTO capitolo, questi punti, questa lunghezza — finisce
+#: sepolta in fondo. Si tengono i riassunti recenti, che sono quelli da cui ci si
+#: ripete davvero; il piano completo del libro sta già nella scheda, che è un
+#: blocco stabile e quindi in cache.
+COVERED_BUDGET_WORDS = 350
+COVERED_MIN_CHAPTERS = 3
+
+
+def focus_covered(
+    covered: list[str],
+    budget_words: int = COVERED_BUDGET_WORDS,
+    minimo: int = COVERED_MIN_CHAPTERS,
+) -> tuple[list[str], int]:
+    """I riassunti più recenti che stanno nel budget, e quanti ne restano fuori.
+
+    Il minimo vince sul budget: anche con riassunti lunghi, gli ultimi capitoli
+    arrivano sempre, perché è dal capitolo appena scritto che ci si ripete.
+    """
+    tenuti: list[str] = []
+    parole = 0
+    for voce in reversed(covered or []):
+        lunghezza = len(voce.split())
+        if len(tenuti) >= minimo and parole + lunghezza > budget_words:
+            break
+        tenuti.append(voce)
+        parole += lunghezza
+    tenuti.reverse()
+    return tenuti, len(covered or []) - len(tenuti)
+
+
 def chapter_prompt(
     spec: BookSpec,
     chapter: ChapterPlan,
@@ -170,8 +203,15 @@ def chapter_prompt(
     }
     covered_text = ""
     if covered:
-        covered_text = "\n".join(f"- {item}" for item in covered)
-        covered_text = f"\nGIÀ TRATTATO NEI CAPITOLI PRECEDENTI (non ripeterlo):\n{covered_text}\n"
+        recenti, omessi = focus_covered(covered)
+        elenco = "\n".join(f"- {item}" for item in recenti)
+        coda = (
+            f"\nI {omessi} capitoli ancora precedenti stanno nella struttura completa del "
+            "libro, nella scheda qui sopra: non ripetere nemmeno quelli.\n"
+            if omessi
+            else ""
+        )
+        covered_text = f"\nGIÀ TRATTATO NEI CAPITOLI PRECEDENTI (non ripeterlo):\n{elenco}\n{coda}"
 
     beats = "\n".join(f"- {b}" for b in chapter.beats) or "- (struttura libera, coerente con la sintesi)"
 

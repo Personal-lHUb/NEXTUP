@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from kdpfactory import agents, backup, planner, writer
+from kdpfactory import agents, backup, planner, prompts, writer
 from kdpfactory.agents.base import AgentContext, AgentFinding
 from kdpfactory.agents.install import install_claude_code_agents
 from kdpfactory.agents.layout import (
@@ -376,3 +376,59 @@ class TestLettoreCiecoSulLibro(unittest.TestCase):
         self.assertNotEqual(agente.system(ctx_capitolo), agente.system(ctx_libro))
         # Senza il contratto JSON la pipeline non saprebbe leggere la risposta.
         self.assertIn('"findings"', agente.system(ctx_libro)[0])
+
+
+class TestContestoFocalizzato(unittest.TestCase):
+    """Il blocco «già trattato» non deve crescere con la lunghezza del libro.
+
+    Viaggia nel messaggio dell'utente, quindi fuori dalla cache, e soprattutto
+    spinge in fondo l'istruzione che conta: scrivi QUESTO capitolo, questi
+    punti, questa lunghezza.
+    """
+
+    def riassunto(self, n: int) -> str:
+        return f"Riassunto del capitolo {n}: " + "parola " * 55
+
+    def test_un_libro_corto_non_viene_toccato(self):
+        covered = [self.riassunto(i) for i in range(1, 4)]
+        tenuti, omessi = prompts.focus_covered(covered)
+        self.assertEqual(tenuti, covered)
+        self.assertEqual(omessi, 0)
+
+    def test_si_tengono_i_piu_recenti(self):
+        covered = [self.riassunto(i) for i in range(1, 21)]
+        tenuti, omessi = prompts.focus_covered(covered)
+        self.assertGreater(omessi, 0)
+        self.assertEqual(tenuti[-1], covered[-1])          # l'ultimo scritto c'è sempre
+        self.assertNotIn(covered[0], tenuti)               # il primo no
+        self.assertLessEqual(sum(len(t.split()) for t in tenuti), prompts.COVERED_BUDGET_WORDS)
+
+    def test_il_minimo_vince_sul_budget(self):
+        """Con riassunti lunghissimi arrivano comunque gli ultimi capitoli."""
+        covered = ["parola " * 5000 for _ in range(10)]
+        tenuti, _ = prompts.focus_covered(covered)
+        self.assertEqual(len(tenuti), prompts.COVERED_MIN_CHAPTERS)
+        self.assertEqual(tenuti[-1], covered[-1])
+
+    def test_il_prompt_dice_dove_sono_finiti_gli_altri(self):
+        spec = BookSpec(slug="t", title="T")
+        chapter = ChapterPlan(number=20, title="Capitolo", summary="s", target_words=1700)
+        testo = prompts.chapter_prompt(
+            spec, chapter, covered=[self.riassunto(i) for i in range(1, 20)]
+        )
+        self.assertIn("GIÀ TRATTATO", testo)
+        self.assertIn("struttura completa del libro", testo)
+        self.assertIn("non ripetere nemmeno quelli", testo)
+
+    def test_il_contesto_smette_di_crescere(self):
+        """Il capitolo 30 non riceve più contesto del capitolo 12."""
+        spec = BookSpec(slug="t", title="T")
+        chapter = ChapterPlan(number=99, title="Capitolo", summary="s", target_words=1700)
+        dodici = prompts.chapter_prompt(
+            spec, chapter, covered=[self.riassunto(i) for i in range(1, 12)]
+        )
+        trenta = prompts.chapter_prompt(
+            spec, chapter, covered=[self.riassunto(i) for i in range(1, 30)]
+        )
+        # la coda che nomina gli omessi cresce di poche decine di caratteri
+        self.assertLess(len(trenta) - len(dodici), 120)
