@@ -59,6 +59,9 @@ def default_book_spec(slug: str, author: str) -> BookSpec:
         audience="puzzle solvers who want reasoning rather than word search",
         promise="thirteen cases that can be solved with a pencil and no guesswork",
         genre="non-fiction",
+        # ogni caso porta impostazione, tabella del cast, indizi, pagina di
+        # appunti e soluzione: le pagine sono diverse fra loro per costruzione
+        content_type="medium",
         target_pages=100,
         trim="6x9",
         paper="white",

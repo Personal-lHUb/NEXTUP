@@ -26,12 +26,28 @@ def books_dir(args) -> Path:
     return Path(args.books_dir) if args.books_dir else DEFAULT_BOOKS_DIR
 
 
-def open_project(args) -> tuple[BookProject, BookSpec]:
+def open_project(args, *, riscrive: bool = False) -> tuple[BookProject, BookSpec]:
     root = books_dir(args) / args.slug
     if not root.exists():
         raise SystemExit(
             f"Libro '{args.slug}' non trovato in {books_dir(args)}.\n"
             f"Crealo con: python -m kdpfactory init \"Titolo\""
+        )
+    # Un libro con `puzzle.json` appartiene alla linea enigmistica: i comandi
+    # della prosa che lo riscrivono lo rifarebbero da capo — capitoli segnaposto
+    # al posto dei casi, stato sovrascritto — e il libro buono tornerebbe solo
+    # dal backup. La guardia vale solo per chi scrive: `qa`, `review` e `plan`
+    # leggono, e su un libro di enigmi devono poter girare (è l'agente di
+    # impaginazione che ne misura la varietà delle pagine).
+    # Niente scappatoia con `--force`: su `all` significa già «rigenera scaletta
+    # e capitoli», ed è il flag che si aggiunge quando il primo tentativo viene
+    # rifiutato. Chi vuole davvero convertire il libro alla prosa toglie il file.
+    if riscrive and (root / "puzzle.json").exists():
+        raise SystemExit(
+            f"«{args.slug}» è un libro della linea enigmistica: c'è {root / 'puzzle.json'}.\n"
+            "Questo comando appartiene alla linea prosa e riscriverebbe il libro da capo.\n"
+            f"Usa:  python -m kdpfactory puzzle build {args.slug}\n"
+            "Se il libro deve davvero passare alla prosa, togli prima puzzle.json."
         )
     project = BookProject(root)
     spec = project.load_spec()
@@ -164,6 +180,7 @@ def cmd_init(args) -> int:
         audience=args.audience,
         promise=args.promise,
         genre=args.genre,
+        content_type=args.content_type,
         target_pages=args.pages,
         trim=args.trim,
         paper=args.paper,
@@ -217,7 +234,7 @@ def cmd_plan(args) -> int:
 
 
 def cmd_outline(args) -> int:
-    project, spec = open_project(args)
+    project, spec = open_project(args, riscrive=True)
     if project.outline_path.exists() and not args.force:
         raise SystemExit(
             f"{project.outline_path} esiste già. Usa --force per rigenerarla "
@@ -230,7 +247,8 @@ def cmd_outline(args) -> int:
     outline = writer.generate_outline(spec, client, budget)
     project.ensure_dirs()
     outline.save(project.outline_path)
-    project.update_state(budget=budget.to_dict(), usage=client.usage_report())
+    project.update_state(budget=budget.to_dict())
+    project.add_usage(client.usage_report())
     save_backup(project, args, "scaletta")
     print(f"\nScaletta salvata in {project.outline_path}")
     for chapter in outline.chapters:
@@ -240,7 +258,7 @@ def cmd_outline(args) -> int:
 
 
 def cmd_write(args) -> int:
-    project, spec = open_project(args)
+    project, spec = open_project(args, riscrive=True)
     outline = project.load_outline()
     client = make_client(args)
     only = [int(n) for n in args.only.split(",")] if args.only else None
@@ -250,7 +268,7 @@ def cmd_write(args) -> int:
         save_backup(project, args, "prima della riscrittura", force=True)
     print(f"Scrittura capitoli{' ' + args.only if only else ''}…")
     writer.write_chapters(project, spec, outline, client, only=only, overwrite=args.overwrite)
-    project.update_state(usage=client.usage_report())
+    project.add_usage(client.usage_report())
     save_backup(project, args, "capitoli scritti")
     stats = pipeline.manuscript_stats(project, outline)
     print(json.dumps(stats, ensure_ascii=False, indent=2))
@@ -259,7 +277,7 @@ def cmd_write(args) -> int:
 
 
 def cmd_build(args) -> int:
-    project, spec = open_project(args)
+    project, spec = open_project(args, riscrive=True)
     outline = project.load_outline()
     client = None if args.no_rewrite else make_client(args)
     print(f"Impaginazione di «{spec.title}»…")
@@ -275,7 +293,7 @@ def cmd_build(args) -> int:
     pipeline.build_package(project, spec, outline, result, guides=args.guides)
     pipeline.export_manuscript_markdown(project, spec, outline)
     if client:
-        project.update_state(usage=client.usage_report())
+        project.add_usage(client.usage_report())
     save_backup(project, args, f"impaginazione ({result.pages} pagine)")
 
     print("\nFile generati:")
@@ -291,7 +309,7 @@ def cmd_build(args) -> int:
 
 
 def cmd_metadata(args) -> int:
-    project, spec = open_project(args)
+    project, spec = open_project(args, riscrive=True)
     outline = project.load_outline()
     client = make_client(args)
     chapters = writer.load_chapters(project, outline)
@@ -305,7 +323,7 @@ def cmd_metadata(args) -> int:
     state = project.load_state()
     pages = state.get("build", {}).get("pagine") or spec.target_pages
     info = pipeline.write_metadata_files(project, spec, outline, meta, pages)
-    project.update_state(usage=client.usage_report())
+    project.add_usage(client.usage_report())
     save_backup(project, args, "scheda prodotto")
     print(f"Scheda salvata in {info['listing']}")
     for row in info["prezzi"]:
@@ -333,7 +351,7 @@ def cmd_qa(args) -> int:
 
 
 def cmd_all(args) -> int:
-    project, spec = open_project(args)
+    project, spec = open_project(args, riscrive=True)
     client = make_client(args)
     if args.force:
         save_backup(project, args, "prima della rigenerazione completa", force=True)
@@ -341,13 +359,13 @@ def cmd_all(args) -> int:
     if not project.outline_path.exists() or args.force:
         budget = budget_for(project, spec)
         print(planner.describe(budget, spec), "\n")
-        print("1/5 · scaletta")
+        print("1/6 · scaletta")
         outline = writer.generate_outline(spec, client, budget)
         project.ensure_dirs()
         outline.save(project.outline_path)
     else:
         outline = project.load_outline()
-        print("1/5 · scaletta già presente")
+        print("1/6 · scaletta già presente")
 
     level = agents.QUALITY_LEVELS[args.qualita]
 
@@ -367,7 +385,21 @@ def cmd_all(args) -> int:
 
     save_backup(project, args, f"impaginazione ({result.pages} pagine)")
 
-    print(f"5/6 · collegio di revisione (livello «{args.qualita}»)")
+    print("5/6 · scheda prodotto e copertina")
+    from . import metadata as metadata_module
+
+    chapters = writer.load_chapters(project, outline)
+    sample = "\n\n".join(text for _, _, text in chapters[:2])
+    meta = metadata_module.generate_metadata(spec, outline, sample, client)
+    pipeline.write_metadata_files(project, spec, outline, meta, result.pages)
+    # La copertina si costruisce prima del collegio: l'agente `copertina` non
+    # legge, misura il PDF. Senza PDF non vede il testo fuori dall'area di
+    # sicurezza — che è un bloccante da tipografia — e in cambio segnala una
+    # copertina mancante su un libro che ce l'ha.
+    pipeline.build_package(project, spec, outline, result, guides=args.guides)
+
+    print(f"6/6 · collegio di revisione e controlli (livello «{args.qualita}»)")
+    pagine_prima = result.pages
     result, _ = pipeline.editorial_pass(
         project,
         spec,
@@ -378,20 +410,17 @@ def cmd_all(args) -> int:
         tolerance=args.tolerance,
         max_iterations=args.iterations,
     )
+    if result.pages != pagine_prima:
+        # L'editor ha cambiato la lunghezza: dorso, prezzi e pagine della scheda
+        # si calcolano sulle pagine e vanno rifatti sul numero definitivo,
+        # altrimenti la copertina non combacia più con l'interno.
+        pipeline.write_metadata_files(project, spec, outline, meta, result.pages)
+        pipeline.build_package(project, spec, outline, result, guides=args.guides)
 
-    print("6/6 · scheda prodotto e controlli")
-    from . import metadata as metadata_module
-
-    chapters = writer.load_chapters(project, outline)
-    sample = "\n\n".join(text for _, _, text in chapters[:2])
-    meta = metadata_module.generate_metadata(spec, outline, sample, client)
-    pipeline.write_metadata_files(project, spec, outline, meta, result.pages)
-
-    pipeline.build_package(project, spec, outline, result, guides=args.guides)
     pipeline.export_manuscript_markdown(project, spec, outline)
 
     report = pipeline.run_qa(project, spec, outline, result)
-    project.update_state(usage=client.usage_report())
+    project.add_usage(client.usage_report())
     print(report.render())
     save_backup(project, args, "pipeline completa")
     print("\nConsumo API:", json.dumps(client.usage_report(), ensure_ascii=False))
@@ -432,7 +461,7 @@ def cmd_review(args) -> int:
         return 0
     print(f"Revisione di «{spec.title}» — agenti: {', '.join(names)}")
     report = agents.run_review(project, spec, outline, client, agent_names=names, only=only)
-    project.update_state(usage=client.usage_report())
+    project.add_usage(client.usage_report())
     save_backup(project, args, "revisione del collegio")
     print(report.render())
     print(f"\nRapporto salvato in {project.build_dir / 'revisioni.md'}")
@@ -443,7 +472,7 @@ def cmd_review(args) -> int:
 
 
 def cmd_revise(args) -> int:
-    project, spec = open_project(args)
+    project, spec = open_project(args, riscrive=True)
     outline = project.load_outline()
     report = agents.ReviewReport.load(project)
     if not report.findings:
@@ -457,7 +486,7 @@ def cmd_revise(args) -> int:
     revised = agents.apply_revisions(
         project, spec, outline, client, report, min_severity=args.severita, only=only
     )
-    project.update_state(usage=client.usage_report())
+    project.add_usage(client.usage_report())
     save_backup(project, args, "modifiche dell'editor")
     if not revised:
         print("Nessun capitolo da modificare.")
@@ -698,6 +727,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--audience", default="lettori generalisti")
     p.add_argument("--promise", default="")
     p.add_argument("--genre", default="non-fiction", choices=["non-fiction", "fiction"])
+    p.add_argument(
+        "--content-type",
+        dest="content_type",
+        default="full",
+        choices=["full", "medium"],
+        help="full: opera a testo pieno · medium: libro interattivo, ogni pagina diversa",
+    )
     p.add_argument("--pages", type=int, default=140, help="pagine obiettivo (60-240)")
     p.add_argument("--trim", default="6x9", choices=sorted(kdpspecs.TRIM_SIZES))
     p.add_argument("--paper", default="cream", choices=sorted(kdpspecs.PAPER_SPINE_FACTOR))

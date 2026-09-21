@@ -81,6 +81,10 @@ Il comando stampa il libro di partenza, le lacune trovate con le citazioni che
 le reggono, il libro proposto e l'esito del controllo di originalità; poi scrive
 `book.json`, `brief.md` e `concorrente/acquisizione.json` con tutta l'analisi.
 
+La categoria la sceglie l'agente guardando le recensioni: «mancano gli
+esercizi» e «troppo teorico» spingono verso il medium-content, «poco
+approfondito» e «volevo capire il perché» verso il full-content.
+
 **Rileggi la scheda e il brief prima di andare avanti.** Il posizionamento è la
 decisione più costosa da sbagliare: correggerla adesso costa un file, dopo costa
 un manoscritto.
@@ -100,7 +104,7 @@ lette.
 |---|---|---|
 | `scheda-concorrente` | dal testo incollato ai campi strutturati: prezzo, pagine, categorie con la classifica, descrizione, recensioni | inventare un numero che nella pagina non c'era. Ha l'ordine esplicito di lasciare vuoto e segnalarlo in `problemi` |
 | `analista-recensioni` | il buco di mercato: che cosa i lettori paganti dicono di non aver trovato, chi è il lettore vero, che cosa non va toccato | scambiare una lamentela sulla copia fisica («pagine staccate») per un difetto del contenuto. Le scarta e lo dichiara |
-| `posizionamento` | la scheda del libro nuovo: promessa, lettore, titolo, pagine, prezzo, sette parole chiave, tre categorie, i temi del brief | partire dalla lacuna più interessante invece che dalla più ricorrente |
+| `posizionamento` | la scheda del libro nuovo: **categoria di prodotto** (full o medium), promessa, lettore, titolo, pagine, prezzo, sette parole chiave, tre categorie, i temi del brief | partire dalla lacuna più interessante invece che dalla più ricorrente |
 | `originalita` | verifica che il piano sia un libro indipendente prima che venga scritto | confondere «stesso argomento» con «stesso libro». Nessuno possiede un argomento: il problema è la forma, la sequenza e le parole |
 
 Ogni lacuna dichiarata deve portare **almeno una citazione** presa alla lettera

@@ -350,6 +350,8 @@ def _dry_run_posizionamento() -> dict:
         "promessa": "Promessa segnaposto.",
         "tono": "chiaro, diretto, professionale, con esempi concreti",
         "genere": "non-fiction",
+        "categoria": "full",
+        "perche_questa_categoria": "Motivazione segnaposto.",
         "pagine_obiettivo": 140,
         "prezzo": 12.99,
         "valuta": "EUR",

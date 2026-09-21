@@ -432,3 +432,56 @@ class TestContestoFocalizzato(unittest.TestCase):
         )
         # la coda che nomina gli omessi cresce di poche decine di caratteri
         self.assertLess(len(trenta) - len(dodici), 120)
+
+
+class TestVarietaDellePagine(unittest.TestCase):
+    """Il confine fra medium-content e low-content, misurato sulla pagina.
+
+    Il banco di prova è quello scritto in CLAUDE.md: se due pagine si possono
+    scambiare senza che cambi niente, il libro è un quaderno.
+    """
+
+    def contesto(self, content_type: str) -> AgentContext:
+        return AgentContext(
+            spec=BookSpec(slug="t", title="T", content_type=content_type),
+            chapter_pages={"1": 1},
+        )
+
+    def pagina_uguale(self, numero: int) -> list:
+        return [line(numero, 36.0, 300.0, text="riga di testo corrente uguale a tutte")
+                for _ in range(20)]
+
+    def pagina_varia(self, numero: int) -> list:
+        """Pagine con numero di righe, corpi e bordi diversi fra loro."""
+        righe = []
+        for i in range(3 + numero % 9):
+            righe.append(
+                line(numero, 36.0 + (i * numero % 4) * 18, 120.0 + numero,
+                     size=9.0 + (numero % 3), text="x" * (10 + numero * 3 + i))
+            )
+        return righe
+
+    def _misura(self, pagine: dict, content_type: str = "medium"):
+        from kdpfactory.agents.layout import _check_page_variety
+
+        return _check_page_variety(pagine, self.contesto(content_type), body_start=1)
+
+    def test_pagine_tutte_uguali_sono_low_content(self):
+        pagine = {n: self.pagina_uguale(n) for n in range(1, 31)}
+        findings = self._misura(pagine)
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0].category, "varietà delle pagine")
+        self.assertIn("100%", findings[0].issue)
+
+    def test_pagine_diverse_non_segnalano_niente(self):
+        pagine = {n: self.pagina_varia(n) for n in range(1, 31)}
+        self.assertEqual(self._misura(pagine), [])
+
+    def test_su_un_full_content_la_misura_non_si_applica(self):
+        """Un saggio ha pagine di testo tutte uguali per costruzione."""
+        pagine = {n: self.pagina_uguale(n) for n in range(1, 31)}
+        self.assertEqual(self._misura(pagine, content_type="full"), [])
+
+    def test_troppe_poche_pagine_non_dicono_niente(self):
+        pagine = {n: self.pagina_uguale(n) for n in range(1, 6)}
+        self.assertEqual(self._misura(pagine), [])

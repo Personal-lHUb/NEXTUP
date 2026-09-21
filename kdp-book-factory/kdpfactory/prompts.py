@@ -72,7 +72,7 @@ def book_bible(spec: BookSpec, outline: Outline | None = None) -> str:
         f"Tono e voce: {spec.tone}",
         f"Formato di stampa: {spec.trim} pollici, circa {spec.target_pages} pagine",
     ]
-    if spec.include_exercises:
+    if spec.wants_exercises:
         lines.append(
             "Ogni capitolo si chiude con una sezione `## In pratica` contenente 3-5 azioni "
             "concrete, formulate come istruzioni eseguibili (non consigli generici)."

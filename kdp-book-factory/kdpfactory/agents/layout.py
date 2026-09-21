@@ -173,8 +173,67 @@ def inspect_layout(ctx: AgentContext) -> list[AgentFinding]:
     findings += _check_hyphen_ladders(by_page)
     findings += _check_short_last_lines(lines, measure, body_size, flush_left, indent)
     findings += _check_chapter_tails(by_page, ctx, geo)
+    findings += _check_page_variety(by_page, ctx, body_start)
     findings += chapter_title_pages
     return findings
+
+
+#: Oltre questa quota di pagine strutturalmente identiche il libro non è più un
+#: medium-content: è un blocco di pagine uguali, cioè low-content.
+MAX_IDENTICAL_PAGES_RATIO = 0.5
+#: Sotto questo numero di pagine di testo la misura non dice niente.
+MIN_PAGES_FOR_VARIETY = 12
+
+
+def _page_signature(page_lines: list[Line]) -> tuple:
+    """Impronta strutturale di una pagina: com'è fatta, non che cosa dice.
+
+    Due pagine con la stessa impronta si possono scambiare senza che il lettore
+    se ne accorga — è il banco di prova del confine col low-content.
+    """
+    righe = len(page_lines)
+    corpi = tuple(sorted({round(line.size * 2) / 2 for line in page_lines}))
+    # I bordi sinistri distinguono una griglia o una tabella dal testo corrente:
+    # arrotondati a 6 punti per non contare gli scarti di misura.
+    bordi = len({round(line.x0 / 6) for line in page_lines})
+    caratteri = sum(len(line.text) for line in page_lines)
+    return (righe // 3, corpi, bordi, caratteri // 200)
+
+
+def _check_page_variety(
+    by_page: dict[int, list[Line]], ctx: AgentContext, body_start: int
+) -> list[AgentFinding]:
+    """Solo per i medium-content: ogni pagina deve avere qualcosa di suo."""
+    if not ctx.spec.is_medium_content:
+        return []
+    pagine = {n: righe for n, righe in by_page.items() if n >= body_start and righe}
+    if len(pagine) < MIN_PAGES_FOR_VARIETY:
+        return []
+
+    conteggio: dict[tuple, list[int]] = {}
+    for numero, righe in pagine.items():
+        conteggio.setdefault(_page_signature(righe), []).append(numero)
+    impronta, uguali = max(conteggio.items(), key=lambda voce: len(voce[1]))
+    quota = len(uguali) / len(pagine)
+    if quota <= MAX_IDENTICAL_PAGES_RATIO:
+        return []
+    return [
+        AgentFinding(
+            agent=Impaginazione.name,
+            severity="importante",
+            category="varietà delle pagine",
+            issue=(
+                f"{len(uguali)} pagine su {len(pagine)} ({quota:.0%}) hanno la stessa "
+                f"struttura: {_pages_label(sorted(uguali))}. Un medium-content vive del "
+                "fatto che ogni pagina offre qualcosa di diverso; a questa quota è un "
+                "blocco di pagine uguali, cioè low-content."
+            ),
+            suggestion=(
+                "Alternare i tipi di pagina — esercizio guidato, scheda pratica, domanda "
+                "di riflessione, griglia operativa — invece di ripetere lo stesso modulo."
+            ),
+        )
+    ]
 
 
 def _standalone(page_lines: list[Line]) -> list[Line]:

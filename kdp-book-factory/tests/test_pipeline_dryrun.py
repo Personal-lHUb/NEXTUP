@@ -118,3 +118,70 @@ class TestPipelineDryRun(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestCicloDiImpaginazione(unittest.TestCase):
+    """Il ciclo che converge sulle pagine, con l'impaginazione simulata.
+
+    Ogni capitolo si apre su pagina dispari e occupa quindi un numero pari di
+    pagine; la correzione scala tutti i capitoli insieme e li fa scavallare
+    insieme, così il totale salta di due pagine per capitolo. Su un libro con
+    molti capitoli il salto diventa più largo della finestra di accettazione e
+    l'obiettivo ci finisce dentro: continuare a riscrivere ricompra il libro
+    senza avvicinarlo.
+    """
+
+    def esegui(self, pagine: list[int], target_pages: int, capitoli: int = 8):
+        """Fa girare `build_until_in_range` su un'impaginazione scriptata."""
+        from unittest import mock
+
+        from kdpfactory.models import ChapterPlan, Outline
+        from kdpfactory.typeset import TypesetResult
+
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        backup.configure(enabled=False)
+        self.addCleanup(backup.configure, enabled=True, directory=None)
+        project = BookProject(Path(tmp.name) / "libro")
+        project.ensure_dirs()
+        spec = BookSpec(slug="libro", title="Libro", topic="t", target_pages=target_pages)
+        chapters = [
+            ChapterPlan(number=i, title=f"C{i}", summary="s", target_words=1700)
+            for i in range(1, capitoli + 1)
+        ]
+        outline = Outline(title="Libro", chapters=chapters)
+        outline.save(project.outline_path)
+
+        sequenza = iter(pagine)
+        def finto_typeset(*_args, **_kwargs):
+            n = next(sequenza)
+            return TypesetResult(
+                pdf_path=project.build_dir / "x.pdf", pages=n, words=n * 250,
+                words_by_chapter={c.number: 1700 for c in chapters},
+            )
+
+        client = LLMClient(LLMConfig(dry_run=True, verbose=False))
+        with mock.patch.object(pipeline, "typeset_only", finto_typeset), \
+             mock.patch.object(pipeline.writer, "revise_length", lambda *a, **k: [1]):
+            return pipeline.build_until_in_range(
+                project, spec, outline, client, max_iterations=4, tolerance=0.05
+            )
+
+    def test_si_ferma_quando_il_salto_supera_la_finestra(self):
+        """240 pagine, 32 capitoli: 288 → 220 salta 68 pagine su una finestra di 12."""
+        result = self.esegui([288, 220, 288, 220], target_pages=240, capitoli=32)
+        self.assertEqual(result.iterations, 2)
+        self.assertEqual(result.pages, 220)       # il migliore dei due, non l'ultimo
+        self.assertFalse(result.in_range)
+
+    def test_un_libro_che_converge_non_viene_toccato(self):
+        """Salti piccoli: il ciclo lavora come prima e rientra."""
+        result = self.esegui([86, 84], target_pages=80, capitoli=8)
+        self.assertEqual(result.iterations, 2)
+        self.assertEqual(result.pages, 84)
+        self.assertTrue(result.in_range)
+
+    def test_il_terzo_giro_si_fa_se_il_salto_resta_stretto(self):
+        """Tre impaginazioni sono legittime finché il libro si muove piano."""
+        result = self.esegui([100, 96, 92, 81], target_pages=80, capitoli=8)
+        self.assertGreaterEqual(result.iterations, 3)

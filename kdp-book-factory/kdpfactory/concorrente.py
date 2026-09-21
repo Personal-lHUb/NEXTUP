@@ -202,6 +202,7 @@ def spec_dal_piano(slug: str, piano: dict, autore: str) -> BookSpec:
         promise=str(piano.get("promessa") or "").strip(),
         tone=str(piano.get("tono") or BookSpec.tone).strip(),
         genre="fiction" if str(piano.get("genere")) == "fiction" else "non-fiction",
+        content_type="medium" if str(piano.get("categoria")) == "medium" else "full",
         target_pages=_pagine_valide(piano.get("pagine_obiettivo")),
         keywords=[str(k).strip() for k in (piano.get("parole_chiave") or []) if str(k).strip()],
         categories=[str(c).strip() for c in (piano.get("categorie") or []) if str(c).strip()],
@@ -319,9 +320,10 @@ def render(risultato: Acquisizione) -> str:
     righe.append(f"  «{piano.get('titolo', '')}»")
     if piano.get("sottotitolo"):
         righe.append(f"  {piano['sottotitolo']}")
+    categoria = "medium-content" if piano.get("categoria") == "medium" else "full-content"
     righe += [
-        f"  {piano.get('pagine_obiettivo', '?')} pagine · {piano.get('prezzo', '?')} "
-        f"{piano.get('valuta', '')} · {piano.get('lingua', '')}",
+        f"  {categoria} · {piano.get('pagine_obiettivo', '?')} pagine · "
+        f"{piano.get('prezzo', '?')} {piano.get('valuta', '')} · {piano.get('lingua', '')}",
         f"  copre: {piano.get('la_lacuna_che_copre', '')}",
     ]
     for voce in piano.get("che_cosa_non_fa") or []:

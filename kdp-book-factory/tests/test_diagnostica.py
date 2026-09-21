@@ -65,9 +65,41 @@ class TestScheda(unittest.TestCase):
 
     def test_titolo_troncato_nei_risultati(self):
         lungo = "Un titolo deliberatamente lunghissimo che nei risultati di ricerca non ci sta"
-        report = self.scheda({"title": lungo})
+        report = self.scheda({}, demo_spec(title=lungo, subtitle=""))
         self.assertGreater(len(lungo), diagnostica.TITLE_TRUNCATION_CHARS)
-        self.assertTrue(any("troncato" in f.fatto for f in report.rilievi))
+        self.assertTrue(any("tronca" in f.fatto for f in report.rilievi))
+
+    def test_il_taglio_si_misura_su_titolo_piu_sottotitolo(self):
+        """È la stringa intera che Amazon tronca, non il solo titolo.
+
+        Un titolo da 30 caratteri passa; con un sottotitolo da 40 la stringa
+        che compare nei risultati ne fa 72, e la promessa sparisce dopo i
+        puntini.
+        """
+        spec = demo_spec(title="T" * 30, subtitle="S" * 40)
+        report = self.scheda({}, spec)
+        self.assertEqual(report.scheda["titolo_caratteri"], 30)
+        self.assertEqual(report.scheda["titolo_piu_sottotitolo"], 72)
+        self.assertTrue(any("tronca" in f.fatto for f in report.rilievi))
+
+    def test_book_json_batte_il_segnaposto_della_lavorazione(self):
+        """`build/metadata.json` è una proposta del modello; in dry-run è finto.
+
+        Se vince lui, la diagnostica misura il segnaposto e dichiara conforme
+        un titolo che non lo è.
+        """
+        spec = demo_spec(title="T" * 30, subtitle="S" * 40)
+        report = self.scheda(
+            {"title": "Titolo segnaposto", "subtitle": "Sottotitolo segnaposto"}, spec
+        )
+        self.assertEqual(report.scheda["titolo_caratteri"], 30)
+        self.assertEqual(report.scheda["titolo_piu_sottotitolo"], 72)
+
+    def test_la_scheda_prodotta_vale_dove_book_json_tace(self):
+        """Parole chiave e categorie di un libro mai compilato a mano."""
+        report = self.scheda({"keywords": ["logic puzzles for adults"], "categories": ["A"]})
+        self.assertEqual(report.scheda["parole_chiave_usate"], 1)
+        self.assertEqual(report.scheda["categorie_usate"], 1)
 
     def test_i_primi_caratteri_della_descrizione_sono_estratti(self):
         testo = "A" * 400
@@ -78,8 +110,6 @@ class TestScheda(unittest.TestCase):
 
     def test_scheda_completa_non_produce_rilievi_sulla_scheda(self):
         report = self.scheda({
-            "title": "Tre Ore",
-            "subtitle": "Il metodo",
             "keywords": [
                 "svegliarsi presto senza sveglia", "lavoro profondo concentrazione",
                 "gestione del tempo per liberi professionisti", "routine mattutina efficace",
@@ -88,7 +118,7 @@ class TestScheda(unittest.TestCase):
             ],
             "categories": ["A", "B", "C"],
             "description_paragraphs": ["x" * 2000],
-        })
+        }, demo_spec(title="Tre Ore", subtitle="Il metodo"))
         self.assertEqual([f.fatto for f in report.rilievi if f.area == "scheda"], [])
 
 

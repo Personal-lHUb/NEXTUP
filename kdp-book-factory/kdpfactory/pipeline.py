@@ -82,6 +82,7 @@ def build_until_in_range(
     """Impagina e, se serve, fa riscrivere i capitoli fino a rientrare."""
     low, high = acceptance_window(spec, tolerance)
     result = BuildResult()
+    pagine_precedenti: int | None = None
 
     for iteration in range(1, max_iterations + 1):
         typeset_result = typeset_only(project, spec, outline)
@@ -109,6 +110,26 @@ def build_until_in_range(
         if result.in_range or not allow_rewrite or client is None or iteration == max_iterations:
             break
 
+        # Di quanto si è mosso il libro con l'ultima correzione. Ogni capitolo si
+        # apre su pagina dispari, quindi occupa sempre un numero pari di pagine;
+        # la correzione scala tutti i capitoli dello stesso fattore e li fa
+        # scavallare insieme, così il totale salta di due pagine per capitolo.
+        # Quando il salto misurato è più largo della finestra di accettazione,
+        # l'obiettivo sta *dentro* il salto e non è raggiungibile per questa
+        # strada: un altro giro ricompra l'intero libro e non avvicina niente.
+        # Ci si ferma qui, sul risultato migliore già ottenuto, invece che dopo
+        # un'altra riscrittura che riporterebbe al punto di partenza.
+        if pagine_precedenti is not None:
+            salto = abs(typeset_result.pages - pagine_precedenti)
+            if salto > high - low:
+                print(
+                    f"    il libro si muove a salti di {salto} pagine, più larghi della "
+                    f"finestra [{low}-{high}]: l'obiettivo non è raggiungibile "
+                    "riscrivendo, mi fermo."
+                )
+                break
+        pagine_precedenti = typeset_result.pages
+
         calibration = planner.recalibrate(
             measured_pages=typeset_result.pages,
             measured_words=typeset_result.words,
@@ -120,8 +141,10 @@ def build_until_in_range(
             f"    parole/pagina misurate: {calibration.measured_words_per_page} · "
             f"correzione del budget {calibration.scale - 1:+.1%}"
         )
-        # La misura viene conservata: le esecuzioni successive di questo libro
-        # (e il `plan` di libri con lo stesso formato) partono già calibrate.
+        # La misura resta nello stato di questo libro: sono le sue esecuzioni
+        # successive a partire calibrate. Non la vede nessun altro progetto —
+        # un archivio per formato/corpo/interlinea/lingua non esiste, e ogni
+        # libro nuovo ricomincia la taratura da capo.
         project.update_state(words_per_page_measured=calibration.measured_words_per_page)
         if abs(calibration.scale - 1) < 0.01:
             print("    scostamento minimo: nessuna riscrittura necessaria.")

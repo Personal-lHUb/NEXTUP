@@ -16,6 +16,13 @@ from . import kdpspecs, mdlite
 from .models import BookSpec, Outline
 from .prompts import BANNED_OPENERS
 
+#: Righe fatte per essere riempite a mano: file di trattini bassi o di puntini
+#: di guida. Sono il segno di un medium-content, e su un full-content — il cui
+#: valore «risiede interamente nella sostanza del testo» — non ci devono stare.
+#: I trattini restano fuori di proposito: `---` in Markdown è una linea
+#: orizzontale legittima, non uno spazio da compilare.
+FILL_LINE = re.compile(r"^[ \t_]{12,}$|^[ \t.·]{12,}$", flags=re.M)
+
 PLACEHOLDER_PATTERNS = [
     r"\bsegnaposto\b",
     r"\blorem ipsum\b",
@@ -140,12 +147,22 @@ def check_manuscript(
                 f"Capitolo {number}: nessuna sezione `##` in {words} parole, lettura pesante.",
             )
 
-        if spec.include_exercises and plan and plan.role == "chapter":
+        if spec.wants_exercises and plan and plan.role == "chapter":
             if not re.search(r"^##\s+In pratica", markdown, flags=re.M | re.I):
                 report.add(
                     "avviso",
                     "ESERCIZI",
                     f"Capitolo {number}: manca la sezione finale `## In pratica`.",
+                )
+
+        if not spec.is_medium_content:
+            righe_da_riempire = FILL_LINE.findall(markdown)
+            if righe_da_riempire:
+                report.add(
+                    "avviso",
+                    "CATEGORIA",
+                    f"Capitolo {number}: {len(righe_da_riempire)} righe da riempire a mano "
+                    "in un libro full-content, dove il valore sta tutto nel testo.",
                 )
 
         for opener in BANNED_OPENERS:

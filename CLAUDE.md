@@ -41,10 +41,22 @@ approfondita. Il valore risiede interamente nella sostanza del testo originale,
 nell'articolazione logica dei capitoli e nella densità concettuale: **nessuna
 pagina da compilare, nessuno schema interattivo vuoto**.
 
-Nel sistema di oggi la linea prosa (`outline` → `write` → `build`, cioè `all`)
-produce full-content; la linea enigmistica (`puzzle`) è un medium-content
-specifico. Un motore medium-content generale non esiste ancora, e `book.json`
-non dichiara a quale delle due categorie appartenga il libro.
+La categoria si dichiara in `book.json` con `content_type` (`full` o `medium`),
+si sceglie alla creazione con `init --content-type`, e il sistema la fa
+rispettare:
+
+- gli esercizi a fine capitolo seguono la categoria (`include_exercises: null`
+  lascia decidere a lei; un valore esplicito dell'autore vince);
+- su un **full-content** il controllo qualità segnala le righe da riempire a
+  mano, che contraddicono la definizione;
+- su un **medium-content** l'agente di impaginazione misura quante pagine
+  hanno la stessa struttura: oltre la metà, il libro è scivolato nel
+  low-content e lo dice.
+
+La linea prosa (`outline` → `write` → `build`, cioè `all`) produce
+full-content; la linea enigmistica (`puzzle`) è un medium-content **specifico**
+— dodici casi di deduzione — e non un motore della categoria: un medium-content
+di altro tipo va ancora progettato.
 
 ## Il progetto
 

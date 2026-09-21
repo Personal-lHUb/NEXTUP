@@ -139,7 +139,7 @@ esempi usare, quale taglio dare).
 
 | Comando | Cosa fa |
 |---|---|
-| `init "Titolo"` | crea `books/<slug>/book.json` |
+| `init "Titolo"` | crea `books/<slug>/book.json` (`--content-type full\|medium`) |
 | `plan <slug>` | budget di pagine e parole, misure di stampa, stato dei capitoli |
 | `outline <slug>` | genera la scaletta (`outline.json`) |
 | `write <slug>` | scrive i capitoli mancanti (`--only 3,4`, `--overwrite`) |

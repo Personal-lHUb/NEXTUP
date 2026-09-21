@@ -78,6 +78,7 @@ class BookReport:
     titolo: str = ""
     lingua: str = ""
     genere: str = ""
+    categoria: str = ""      # full | medium, vedi CLAUDE.md
     pagine: int = 0
     economia: dict = field(default_factory=dict)
     produzione: dict = field(default_factory=dict)
@@ -218,10 +219,17 @@ def _qualita(project: BookProject, state: dict, report: BookReport) -> None:
 def _scheda(state: dict, spec: BookSpec, report: BookReport) -> None:
     """La scheda prodotto contro i limiti veri del modulo KDP."""
     meta = state.get("metadata") or {}
-    title = meta.get("title") or spec.title
-    subtitle = meta.get("subtitle") or spec.subtitle
-    keywords = list(meta.get("keywords") or spec.keywords or [])
-    categories = list(meta.get("categories") or spec.categories or [])
+    # `book.json` viene prima: quello che sta in `build/metadata.json` è una
+    # proposta del modello, e dopo una lavorazione a secco è un segnaposto. Se
+    # vince lui, la diagnostica misura il segnaposto e dichiara conforme un
+    # titolo che non lo è. Dove `book.json` tace — parole chiave e categorie di
+    # un libro mai lavorato — resta valida la scheda prodotta.
+    title = spec.title or meta.get("title") or ""
+    subtitle = spec.subtitle or meta.get("subtitle") or ""
+    keywords = list(spec.keywords or meta.get("keywords") or [])
+    categories = list(spec.categories or meta.get("categories") or [])
+    #: è questa la stringa che Amazon tronca nei risultati, non il solo titolo
+    titolo_esteso = f"{title}: {subtitle}" if subtitle else title
     paragraphs = meta.get("description_paragraphs") or []
     description = "\n\n".join(paragraphs)
 
@@ -238,7 +246,7 @@ def _scheda(state: dict, spec: BookSpec, report: BookReport) -> None:
 
     report.scheda = {
         "titolo_caratteri": len(title),
-        "titolo_piu_sottotitolo": len(f"{title}: {subtitle}") if subtitle else len(title),
+        "titolo_piu_sottotitolo": len(titolo_esteso),
         "parole_chiave_usate": len(keywords),
         "parole_chiave_slot": KEYWORD_SLOTS,
         "caratteri_medi_per_slot": round(
@@ -286,11 +294,13 @@ def _scheda(state: dict, spec: BookSpec, report: BookReport) -> None:
             f"{len(categories)} categorie su {CATEGORY_SLOTS}: ogni categoria è una "
             "classifica in cui si può entrare.",
         ))
-    if len(title) > TITLE_TRUNCATION_CHARS:
+    if len(titolo_esteso) > TITLE_TRUNCATION_CHARS:
         report.rilievi.append(Finding(
             "scheda", "medio",
-            f"Titolo di {len(title)} caratteri: oltre i {TITLE_TRUNCATION_CHARS} "
-            "viene troncato nei risultati di ricerca.",
+            f"Titolo + sottotitolo di {len(titolo_esteso)} caratteri: oltre i "
+            f"{TITLE_TRUNCATION_CHARS} Amazon tronca nei risultati di ricerca, e quello "
+            "che si taglia è sempre la seconda metà, cioè la promessa.",
+            "Portare nei primi caratteri la frase che il lettore cerca davvero.",
         ))
     if description and len(description) < DESCRIPTION_MAX_CHARS * 0.4:
         report.rilievi.append(Finding(
@@ -323,7 +333,7 @@ def analyse_book(project: BookProject, spec: BookSpec) -> BookReport:
     pages = (state.get("build") or {}).get("pagine", 0)
     report = BookReport(
         slug=spec.slug, titolo=spec.title, lingua=spec.language,
-        genere=spec.genre, pagine=pages,
+        genere=spec.genre, categoria=spec.content_type, pagine=pages,
     )
     _economia(spec, state, pages, report)
     _produzione(state, spec, report)
@@ -468,7 +478,8 @@ def render(system: SystemReport) -> str:
     lines.append("")
 
     for book in system.libri:
-        lines += [f"{book.slug.upper()} — {book.titolo}", "-" * 42]
+        etichetta = "medium-content" if book.categoria == "medium" else "full-content"
+        lines += [f"{book.slug.upper()} — {book.titolo}  [{etichetta}]", "-" * 42]
         eco = book.economia
         lines.append(
             f"  {book.pagine} pagine · stampa {eco.get('costo_stampa')} · "

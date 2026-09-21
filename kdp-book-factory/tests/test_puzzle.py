@@ -242,3 +242,84 @@ class TestProduzione(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestConfineFraLeDueLinee(unittest.TestCase):
+    """Un libro di enigmi non deve finire nella pipeline della prosa.
+
+    È già successo: `--dry-run all twelve-carriages` ha prodotto cento pagine di
+    capitoli segnaposto sopra un libro di enigmi verificato, senza un avviso.
+    Su una lavorazione vera sarebbe un libro intero comprato in token sulla
+    linea sbagliata, più lo stato del libro buono da recuperare dal backup.
+    """
+
+    def setUp(self):
+        from kdpfactory import cli
+
+        self.cli = cli
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.books = Path(self.tmp.name)
+        backup.configure(enabled=False)
+        self.addCleanup(backup.configure, enabled=True, directory=None)
+        self.cli.main([
+            "--no-backup", "--books-dir", str(self.books),
+            "puzzle", "new", "enigmi-di-prova", "--seed", "7",
+        ])
+
+    def test_i_comandi_della_prosa_lo_rifiutano(self):
+        with self.assertRaises(SystemExit) as caso:
+            self.cli.main([
+                "--dry-run", "--no-backup", "--books-dir", str(self.books),
+                "all", "enigmi-di-prova",
+            ])
+        messaggio = str(caso.exception)
+        self.assertIn("linea enigmistica", messaggio)
+        self.assertIn("puzzle build", messaggio)
+        # e soprattutto: non ha toccato niente
+        self.assertFalse((self.books / "enigmi-di-prova" / "outline.json").exists())
+
+    def test_force_non_e_una_scappatoia(self):
+        """`--force` su `all` significa «rigenera»: non deve valere come consenso."""
+        with self.assertRaises(SystemExit):
+            self.cli.main([
+                "--dry-run", "--no-backup", "--books-dir", str(self.books),
+                "all", "enigmi-di-prova", "--force",
+            ])
+        self.assertFalse((self.books / "enigmi-di-prova" / "outline.json").exists())
+
+    def test_la_linea_enigmistica_passa(self):
+        self.cli.main([
+            "--no-backup", "--books-dir", str(self.books),
+            "puzzle", "build", "enigmi-di-prova", "--seed", "7",
+        ])
+        self.assertTrue(
+            (self.books / "enigmi-di-prova" / "build" / "answers.json").exists()
+        )
+
+
+class TestConsumoApiSommato(unittest.TestCase):
+    """Il costo del libro, non quello dell'ultimo comando eseguito."""
+
+    def test_add_usage_somma_invece_di_sostituire(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        project = BookProject(Path(tmp.name) / "libro")
+        project.ensure_dirs()
+        project.add_usage({"calls": 2, "input_tokens": 1000, "estimated_cost_usd": 0.02})
+        project.add_usage({"calls": 1, "input_tokens": 300, "estimated_cost_usd": 0.01})
+        usage = project.load_state()["usage"]
+        self.assertEqual(usage["calls"], 3)
+        self.assertEqual(usage["input_tokens"], 1300)
+        self.assertAlmostEqual(usage["estimated_cost_usd"], 0.03)
+
+    def test_i_campi_non_numerici_non_si_sommano(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        project = BookProject(Path(tmp.name) / "libro")
+        project.ensure_dirs()
+        project.add_usage({"model": "claude-opus-5", "calls": 1})
+        project.add_usage({"model": "claude-opus-5", "calls": 1})
+        usage = project.load_state()["usage"]
+        self.assertEqual(usage["model"], "claude-opus-5")
+        self.assertEqual(usage["calls"], 2)

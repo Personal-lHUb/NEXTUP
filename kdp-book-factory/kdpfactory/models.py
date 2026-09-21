@@ -36,6 +36,12 @@ class BookSpec:
     promise: str = ""                    # trasformazione promessa al lettore
     tone: str = "chiaro, diretto, professionale, con esempi concreti"
     genre: str = "non-fiction"           # non-fiction | fiction
+    #: Categoria di prodotto, definita in CLAUDE.md. `full` = opera a testo
+    #: pieno, il valore sta nella sostanza del testo: niente pagine da
+    #: compilare. `medium` = libro interattivo cartaceo in cui ogni pagina ha
+    #: contenuti, layout o stimoli differenti — e che non deve scivolare nel
+    #: low-content, cioè in pagine tutte uguali.
+    content_type: str = "full"           # full | medium
     target_pages: int = 140
     trim: str = "6x9"
     paper: str = "cream"                 # white | cream | color-standard | color-premium
@@ -50,7 +56,8 @@ class BookSpec:
     leading: float = 15.5                # interlinea in punti
     chapters: int = 0                    # 0 = calcolato dal planner
     toc_depth: int = 2                   # 1 = solo capitoli nell'indice, 2 = anche le sezioni
-    include_exercises: bool = True       # esercizi/checklist a fine capitolo
+    #: esercizi/checklist a fine capitolo; `None` = lo decide la categoria
+    include_exercises: bool | None = None
     include_intro: bool = True
     include_conclusion: bool = True
     dedication: str = ""
@@ -63,6 +70,21 @@ class BookSpec:
     notes: str = ""                      # istruzioni libere per il modello
     #: contenuto di `brief.md`: non si salva in book.json, si legge dal file
     brief: str = field(default="", repr=False)
+
+    @property
+    def wants_exercises(self) -> bool:
+        """Se l'autore non si pronuncia su `include_exercises`, decide la categoria.
+
+        Un medium-content vive di esercizi e schede; un full-content vive del
+        testo, e gli esercizi sono un di più che l'autore deve chiedere.
+        """
+        if self.include_exercises is not None:
+            return bool(self.include_exercises)
+        return self.content_type == "medium"
+
+    @property
+    def is_medium_content(self) -> bool:
+        return self.content_type == "medium"
 
     # --- validazione -----------------------------------------------------
     def validate(self) -> list[str]:
@@ -93,6 +115,11 @@ class BookSpec:
             problems.append("`language` supportate: 'it', 'en'.")
         if self.genre not in {"non-fiction", "fiction"}:
             problems.append("`genre` supportati: 'non-fiction', 'fiction'.")
+        if self.content_type not in {"full", "medium"}:
+            problems.append(
+                "`content_type` supportati: 'full' (opera a testo pieno) e "
+                "'medium' (libro interattivo, ogni pagina diversa)."
+            )
         if self.body_font_size < 9 or self.body_font_size > 14:
             problems.append("`body_font_size` consigliato tra 9 e 14 punti.")
         if self.leading < self.body_font_size * 1.15:

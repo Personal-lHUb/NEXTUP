@@ -39,10 +39,19 @@ La definizione completa, con i confini, sta in `CLAUDE.md`.
 | confine da non passare | **non low-content**: niente blocchi di pagine vuote o righe ripetitive. Se due pagine si scambiano senza che cambi niente, è un quaderno | **niente pagine da compilare**, nessuno schema interattivo vuoto |
 | nel sistema di oggi | solo la linea `puzzle`, che è un medium-content **specifico** (enigmi di deduzione) | la linea prosa: `all` / `outline` → `write` → `build` |
 
-**Quello che manca**: `book.json` non dichiara la categoria, quindi nessun
-controllo la fa rispettare — né il confine con il low-content sul medium, né il
-divieto di pagine da compilare sul full. E non esiste un motore medium-content
-generale: la linea enigmistica è un prodotto, non una categoria.
+La categoria sta in `book.json` come `content_type` (`full` | `medium`), si
+sceglie con `init --content-type`, e i due confini sono controllati:
+
+| confine | dove | come |
+|---|---|---|
+| un full-content non ha pagine da compilare | `qa.py` | conta le righe fatte di trattini bassi o puntini di guida nel manoscritto |
+| un medium-content non scivola nel low-content | `agents/layout.py` | firma strutturale di ogni pagina del PDF: se più della metà delle pagine ha la stessa struttura, lo segnala |
+
+Misurato su `twelve-carriages`: 75 pagine di testo, **35 strutture diverse**, la
+più ripetuta copre il 16% (sono le dodici pagine di appunti, una per caso).
+
+**Quello che manca ancora**: un motore medium-content generale. La linea
+enigmistica è un prodotto specifico, non una categoria.
 
 ### Regole permanenti (valgono in ogni sessione)
 
@@ -71,7 +80,7 @@ NEXTUP/
     ├── books/<slug>/            book.json, brief.md, assets/, manuscript/, build/, state.json
     ├── config/printing_costs.json
     ├── docs/                    documentazione (vedi sotto)
-    ├── tests/                   193 test, nessuna chiamata di rete
+    ├── tests/                   216 test, nessuna chiamata di rete
     └── fonts/                   font TrueType propri (facoltativo)
 ```
 
@@ -84,7 +93,7 @@ NEXTUP/
 **Comandi:**
 ```bash
 cd kdp-book-factory
-python3 -m unittest discover -s tests     # 193 test, nessuna rete
+python3 -m unittest discover -s tests     # 216 test, nessuna rete
 ruff check kdpfactory tests
 python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 ```
@@ -405,10 +414,7 @@ solo via ricerca web. Non promettere dati di vendita che non si possono prendere
 | `twelve-carriages` | completo: 82 pagine, interno + copertina + scheda + risposte. `0 errori, 0 avvisi — PRONTO PER IL CARICAMENTO` |
 | `esempio-metodo-tre-ore` | solo `book.json`, serve da esempio e per il dry-run |
 
-**Test: 193**, nessuna chiamata di rete.
-`test_agents.py` 34 · `test_backup.py` 16 · `test_concorrente.py` 11 ·
-`test_copertina.py` 37 · `test_diagnostica.py` 21 · `test_materiali.py` 17 ·
-`test_pipeline_dryrun.py` 11 · `test_puzzle.py` 29 · `test_specs_and_planner.py` 17
+**Test: 216**, nessuna chiamata di rete.
 
 **Rilievi aperti**, dalla prima diagnostica — nessuno è stato ancora affrontato:
 

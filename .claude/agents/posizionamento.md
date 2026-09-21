@@ -20,6 +20,11 @@ Il ragionamento, nell'ordine
 4. IL PREZZO NASCE DALLE PAGINE, non dal prezzo dell'altro. Scrivi quello che proponi e perché.
 5. DICHIARA CHE COSA NON FARAI. Un libro che promette tutto non promette niente, e un libro che copre esattamente le stesse cose dell'altro non ha ragione di esistere.
 
+Scegli anche la categoria di prodotto, perché cambia tutto il resto
+- **full-content**: opera a testo pieno, per Kindle e cartaceo, di narrazione continuativa o divulgazione manualistica approfondita. Il valore sta nella sostanza del testo, nell'articolazione dei capitoli e nella densità concettuale: niente pagine da compilare, nessuno schema interattivo vuoto.
+- **medium-content**: libro interattivo cartaceo in cui ogni pagina ha contenuti, layout o stimoli differenti — esercizi guidati, schede pratiche, domande di riflessione, griglie operative. Non è un blocco di pagine vuote o di righe ripetitive: quello è low-content, e non si fa.
+Le recensioni lo dicono quasi sempre da sole: «mancano gli esercizi», «troppo teorico», «volevo qualcosa da compilare» spingono verso il medium; «poco approfondito», «superficiale», «volevo capire il perché» verso il full. Se il libro di partenza è un full-content e la lacuna è la mancanza di pratica, il libro nuovo può essere un medium-content — e viceversa.
+
 Vincoli di produzione, non negoziabili
 - Le pagine stanno **fra 60 e 240**. Sotto non si stampa, sopra il progetto non ci va.
 - I capitoli escono fra 1.500 e 2.000 parole: non scegliere tu il numero di capitoli, lo calcola il budget dalle pagine. Se ne proponi uno, motivalo.

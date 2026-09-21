@@ -9,6 +9,7 @@
   "promise": "thirteen cases that can be solved with a pencil and no guesswork",
   "tone": "chiaro, diretto, professionale, con esempi concreti",
   "genre": "non-fiction",
+  "content_type": "medium",
   "target_pages": 100,
   "trim": "6x9",
   "paper": "white",

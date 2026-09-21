@@ -155,5 +155,66 @@ class TestMarkdown(unittest.TestCase):
         self.assertEqual(body, "corpo del testo")
 
 
+class TestCategorieDiProdotto(unittest.TestCase):
+    """Medium-content e full-content: le definizioni di CLAUDE.md, rese eseguibili."""
+
+    def spec(self, **kwargs) -> BookSpec:
+        base = dict(slug="t", title="Titolo", topic="argomento")
+        base.update(kwargs)
+        return BookSpec(**base)
+
+    def test_full_content_e_il_valore_predefinito(self):
+        self.assertEqual(self.spec().content_type, "full")
+        self.assertFalse(self.spec().is_medium_content)
+
+    def test_una_categoria_inventata_non_passa_la_validazione(self):
+        problemi = self.spec(content_type="low").validate()
+        self.assertTrue(any("content_type" in p for p in problemi))
+
+    def test_gli_esercizi_seguono_la_categoria(self):
+        """Un medium-content vive di esercizi; un full-content vive del testo."""
+        self.assertTrue(self.spec(content_type="medium").wants_exercises)
+        self.assertFalse(self.spec(content_type="full").wants_exercises)
+
+    def test_la_scelta_esplicita_dell_autore_vince(self):
+        self.assertTrue(self.spec(content_type="full", include_exercises=True).wants_exercises)
+        self.assertFalse(self.spec(content_type="medium", include_exercises=False).wants_exercises)
+
+    def test_la_linea_enigmistica_e_medium_content(self):
+        from kdpfactory.puzzle.book import default_book_spec
+
+        spec = default_book_spec("x", "Autore")
+        self.assertEqual(spec.content_type, "medium")
+        self.assertEqual(spec.validate(), [])
+
+
+class TestConfineDelFullContent(unittest.TestCase):
+    """Su un full-content non ci devono essere pagine da compilare."""
+
+    def controlla(self, markdown: str, content_type: str):
+        from kdpfactory import qa
+        from kdpfactory.models import ChapterPlan, Outline
+
+        spec = BookSpec(slug="t", title="T", topic="a", content_type=content_type)
+        capitolo = ChapterPlan(number=1, title="Capitolo", summary="s", target_words=1700)
+        outline = Outline(title="T", chapters=[capitolo])
+        report = qa.check_manuscript(spec, outline, [(1, "Capitolo", markdown)])
+        return [f for f in report.findings if f.code == "CATEGORIA"]
+
+    def test_righe_da_riempire_segnalate_su_un_full_content(self):
+        testo = "# Capitolo\n\nUn paragrafo.\n\n" + "_" * 40 + "\n\n" + "_" * 40 + "\n"
+        rilievi = self.controlla(testo, "full")
+        self.assertEqual(len(rilievi), 1)
+        self.assertIn("2 righe da riempire", rilievi[0].message)
+
+    def test_su_un_medium_content_sono_il_prodotto(self):
+        testo = "# Capitolo\n\nUn paragrafo.\n\n" + "_" * 40 + "\n"
+        self.assertEqual(self.controlla(testo, "medium"), [])
+
+    def test_una_linea_orizzontale_markdown_non_e_uno_spazio_da_compilare(self):
+        testo = "# Capitolo\n\nUn paragrafo.\n\n---\n\nAltro paragrafo.\n"
+        self.assertEqual(self.controlla(testo, "full"), [])
+
+
 if __name__ == "__main__":
     unittest.main()
