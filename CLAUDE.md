@@ -18,6 +18,34 @@ la pipeline e per qualsiasi file generato a mano in una sessione.
 - `backup/` non entra in git (contiene PDF e cresce in fretta): resta sul disco.
   Per liberare spazio: `python3 -m kdpfactory backup <slug> --prune 10`.
 
+## Le due categorie di prodotto
+
+Ogni libro di questo progetto è **medium-content** oppure **full-content**. La
+categoria si decide prima della scaletta e vincola tutto quello che viene dopo:
+impaginazione, scheda prodotto, categorie KDP, prezzo.
+
+**Medium-content** — un libro interattivo cartaceo in cui **ogni pagina presenta
+contenuti, layout o stimoli differenti**: esercizi guidati, schede pratiche,
+domande di riflessione, griglie operative. Si riconosce dai due confini che non
+deve superare:
+
+- **non è low-content.** Un blocco di pagine vuote o di righe ripetitive non è
+  un medium-content, è un quaderno. Il banco di prova: se due pagine qualsiasi
+  si possono scambiare senza che cambi niente, il libro è dalla parte sbagliata.
+- **non è full-content.** Non è un saggio di testo continuo con qualche
+  esercizio in coda al capitolo.
+
+**Full-content** — un'opera editoriale a **testo pieno**, destinata a eBook
+Kindle e cartaceo, di narrazione continuativa o divulgazione manualistica
+approfondita. Il valore risiede interamente nella sostanza del testo originale,
+nell'articolazione logica dei capitoli e nella densità concettuale: **nessuna
+pagina da compilare, nessuno schema interattivo vuoto**.
+
+Nel sistema di oggi la linea prosa (`outline` → `write` → `build`, cioè `all`)
+produce full-content; la linea enigmistica (`puzzle`) è un medium-content
+specifico. Un motore medium-content generale non esiste ancora, e `book.json`
+non dichiara a quale delle due categorie appartenga il libro.
+
 ## Il progetto
 
 `kdp-book-factory/` è una pipeline che produce libri completi (60-240 pagine)

@@ -26,6 +26,24 @@ metro con cui si generano i libri, e a doversi adattare è il numero di capitoli
 non la lunghezza del capitolo. Introduzione e conclusione fanno eccezione per
 scelta: pesano meno di un capitolo pieno.
 
+### Le due categorie di prodotto
+
+Ogni libro è **medium-content** oppure **full-content**. La categoria si decide
+prima della scaletta e vincola impaginazione, scheda, categorie KDP e prezzo.
+La definizione completa, con i confini, sta in `CLAUDE.md`.
+
+| | medium-content | full-content |
+|---|---|---|
+| che cos'è | libro interattivo cartaceo: ogni pagina ha contenuti, layout o stimoli **differenti** — esercizi guidati, schede pratiche, domande di riflessione, griglie operative | opera a **testo pieno** per Kindle e cartaceo: narrazione continuativa o divulgazione manualistica approfondita |
+| dove sta il valore | nella progettazione della pagina e nella varietà degli stimoli | nella sostanza del testo originale, nell'articolazione dei capitoli, nella densità concettuale |
+| confine da non passare | **non low-content**: niente blocchi di pagine vuote o righe ripetitive. Se due pagine si scambiano senza che cambi niente, è un quaderno | **niente pagine da compilare**, nessuno schema interattivo vuoto |
+| nel sistema di oggi | solo la linea `puzzle`, che è un medium-content **specifico** (enigmi di deduzione) | la linea prosa: `all` / `outline` → `write` → `build` |
+
+**Quello che manca**: `book.json` non dichiara la categoria, quindi nessun
+controllo la fa rispettare — né il confine con il low-content sul medium, né il
+divieto di pagine da compilare sul full. E non esiste un motore medium-content
+generale: la linea enigmistica è un prodotto, non una categoria.
+
 ### Regole permanenti (valgono in ogni sessione)
 
 | regola | dettaglio |
