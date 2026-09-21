@@ -35,17 +35,23 @@ from .model import (
     SameAs,
     Suspect,
 )
-from .theme import ATTRIBUTES, CASES, HONORIFICS, SURNAMES, CaseTheme
+from .theme import Ambientazione, CaseTheme
 
 MAX_CLUES = 16
+#: indizi minimi del finale. Come la copertura, si adatta: la griglia del
+#: finale ha una riga per caso, e cinque indizi non possono restringere tre
+#: righe — sarebbe un requisito irraggiungibile, non un finale più difficile.
 MIN_FINALE_CLUES = 5
-#: quanti dei dodici casi devono essere citati per nome nel finale. Non si
-#: pretende dodici su dodici: con la soluzione unica e nessun indizio superfluo,
-#: pretendere anche la copertura totale renderebbe il finale quasi impossibile
-#: da generare. Non è una rinuncia: per applicare un confronto il lettore deve
-#: conoscere gli attributi di *tutte* le righe della griglia, quindi tutte e
-#: dodici le risposte servono comunque.
+#: quanti casi devono essere citati per nome nel finale. Non si pretende la
+#: copertura totale: con la soluzione unica e nessun indizio superfluo,
+#: pretendere anche quella renderebbe il finale quasi impossibile da generare.
+#: Non è una rinuncia: per applicare un confronto il lettore deve conoscere gli
+#: attributi di *tutte* le righe della griglia, quindi tutte le risposte
+#: servono comunque. Su un libro con pochi casi la soglia si abbassa da sé,
+#: altrimenti sarebbe una richiesta impossibile.
 MIN_FINALE_COVERAGE = 8
+#: sotto questa quota di casi citati il finale non è più un finale
+MIN_FINALE_COVERAGE_RATIO = 2 / 3
 
 
 #: frazione di sospetti che un buon indizio dovrebbe eliminare: puntare al
@@ -83,12 +89,14 @@ class GenerationError(RuntimeError):
 # --------------------------------------------------------------------------
 # Cast
 # --------------------------------------------------------------------------
-def build_cast(theme: CaseTheme, rng: Random) -> tuple[dict[str, Attribute], list[Suspect]]:
+def build_cast(
+    theme: CaseTheme, rng: Random, ambientazione: Ambientazione
+) -> tuple[dict[str, Attribute], list[Suspect]]:
     """Il cast è il prodotto cartesiano degli attributi: nessun buco, nessun doppione."""
     attributes: dict[str, Attribute] = {}
     value_lists: list[tuple[str, ...]] = []
     for key, count in theme.plan:
-        base = ATTRIBUTES[key]
+        base = ambientazione.attributi[key]
         values = tuple(rng.sample(base.values, count))
         attributes[key] = Attribute(
             key=base.key,
@@ -104,15 +112,16 @@ def build_cast(theme: CaseTheme, rng: Random) -> tuple[dict[str, Attribute], lis
 
     keys = [key for key, _ in theme.plan]
     combinations = list(itertools.product(*value_lists))
-    if len(combinations) > len(SURNAMES):
+    if len(combinations) > len(ambientazione.cognomi):
         raise GenerationError(
-            f"Caso {theme.number}: servono {len(combinations)} cognomi, ne ho {len(SURNAMES)}."
+            f"Caso {theme.number}: servono {len(combinations)} cognomi, "
+            f"ne ho {len(ambientazione.cognomi)}."
         )
 
-    surnames = rng.sample(SURNAMES, len(combinations))
+    surnames = rng.sample(ambientazione.cognomi, len(combinations))
     suspects = [
         Suspect(
-            name=f"{rng.choice(HONORIFICS)} {surname}",
+            name=f"{rng.choice(ambientazione.appellativi)} {surname}",
             attrs=tuple(zip(keys, combination, strict=True)),
         )
         for surname, combination in zip(surnames, combinations, strict=True)
@@ -243,11 +252,13 @@ def select_clues(
     return chosen
 
 
-def generate_case(theme: CaseTheme, rng: Random, attempts: int = 60) -> Case:
+def generate_case(
+    theme: CaseTheme, rng: Random, ambientazione: Ambientazione, attempts: int = 60
+) -> Case:
     last_error = "nessun tentativo"
     for _ in range(attempts):
         try:
-            attributes, cast = build_cast(theme, rng)
+            attributes, cast = build_cast(theme, rng, ambientazione)
             culprit = rng.choice(cast)
             pool = candidate_clues(culprit, cast, attributes, theme.kinds, rng)
             clues = solver.minimize(cast, select_clues(cast, pool, rng))
@@ -308,34 +319,40 @@ def _finale_appeal(clue, used: set[tuple[int, str]]) -> float:
 
 
 def _finale_requirements(attempt: int, attempts: int, cases: int) -> tuple[int, int]:
-    """Requisiti estetici del finale, via via più indulgenti."""
+    """Requisiti estetici del finale, via via più indulgenti.
+
+    Le soglie si adattano al numero di casi: una richiesta fissa, tarata su un
+    libro da dodici, su un libro da tre sarebbe irraggiungibile.
+    """
+    quota = max(2, min(MIN_FINALE_COVERAGE, math.ceil(cases * MIN_FINALE_COVERAGE_RATIO)))
+    indizi = min(MIN_FINALE_CLUES, max(2, cases - 1))
     if attempt < attempts // 3:
-        return cases, MIN_FINALE_CLUES                  # cita tutti i casi
+        return cases, indizi                # cita tutti i casi
     if attempt < 2 * attempts // 3:
-        return MIN_FINALE_COVERAGE, MIN_FINALE_CLUES    # ne cita almeno otto
-    return 4, 3                                         # purché sia un enigma
+        return quota, indizi                # ne cita la maggior parte
+    return min(4, cases), min(3, indizi)    # purché sia un enigma
 
 
-def shared_attributes(cases: list[Case]) -> tuple[str, ...]:
+def shared_attributes(cases: list[Case], ambientazione: Ambientazione) -> tuple[str, ...]:
     """Attributi presenti in tutti i casi: solo su quelli si possono confrontare
     colpevoli di vetture diverse."""
     common = set(cases[0].attributes)
     for case in cases[1:]:
         common &= set(case.attributes)
-    order = list(ATTRIBUTES)
+    order = list(ambientazione.attributi)
     return tuple(sorted(common, key=order.index))
 
 
-def generate_finale(cases: list[Case], rng: Random, attempts: int = 900) -> Finale:
-    """Il finale si gioca sui dodici colpevoli: senza le dodici risposte non parte."""
-    from .theme import FINALE_SETTING, FINALE_TITLE
-
-    finale_attrs = shared_attributes(cases)
+def generate_finale(
+    cases: list[Case], rng: Random, ambientazione: Ambientazione, attempts: int = 900
+) -> Finale:
+    """Il finale si gioca su tutti i colpevoli: senza tutte le risposte non parte."""
+    finale_attrs = shared_attributes(cases, ambientazione)
     if len(finale_attrs) < 2:
         raise GenerationError(
             "I casi non condividono abbastanza attributi per costruire il finale."
         )
-    attributes = {key: ATTRIBUTES[key] for key in finale_attrs}
+    attributes = {key: ambientazione.attributi[key] for key in finale_attrs}
     suspects = [
         Suspect(
             name=case.culprit.name,
@@ -418,7 +435,9 @@ def generate_finale(cases: list[Case], rng: Random, attempts: int = 900) -> Fina
             attempt_index, attempts, len(total_cases)
         )
         if len(covered) < required_cases:
-            last_error = f"il finale cita solo {len(covered)} casi su {len(total_cases)}"
+            last_error = (
+                f"il finale cita {len(covered)} casi, ne servivano {required_cases}"
+            )
             continue
         if len(chosen) < required_clues:
             last_error = f"solo {len(chosen)} indizi: finale troppo facile"
@@ -426,8 +445,8 @@ def generate_finale(cases: list[Case], rng: Random, attempts: int = 900) -> Fina
 
         rng.shuffle(chosen)
         return Finale(
-            title=FINALE_TITLE,
-            setting=FINALE_SETTING,
+            title=ambientazione.finale_titolo,
+            setting=ambientazione.finale_testo,
             attributes=attributes,
             suspects=suspects,
             clues=chosen,
@@ -446,6 +465,8 @@ class PuzzleBook:
     cases: list[Case] = field(default_factory=list)
     finale: Finale | None = None
     example: Case | None = None      # il caso svolto nelle prime pagine
+    #: le istruzioni stampate in apertura: vengono dall'ambientazione del libro
+    come_si_gioca: str = ""
 
     @property
     def suspects_total(self) -> int:
@@ -469,11 +490,20 @@ class PuzzleBook:
         }
 
 
-def generate_book(seed: int, themes: tuple[CaseTheme, ...] = CASES) -> PuzzleBook:
-    from .theme import EXAMPLE
-
+def generate_book(seed: int, ambientazione: Ambientazione) -> PuzzleBook:
+    """Stesso seme e stessa ambientazione, stesso libro: la generazione è pura."""
     rng = Random(seed)
-    example = generate_case(EXAMPLE, rng)
-    cases = [generate_case(theme, rng) for theme in themes]
-    finale = generate_finale(cases, rng)
-    return PuzzleBook(seed=seed, cases=cases, finale=finale, example=example)
+    example = (
+        generate_case(ambientazione.esempio, rng, ambientazione)
+        if ambientazione.esempio
+        else None
+    )
+    cases = [generate_case(tema, rng, ambientazione) for tema in ambientazione.casi]
+    finale = generate_finale(cases, rng, ambientazione)
+    return PuzzleBook(
+        seed=seed,
+        cases=cases,
+        finale=finale,
+        example=example,
+        come_si_gioca=ambientazione.come_si_gioca,
+    )

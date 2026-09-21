@@ -45,8 +45,8 @@ inventarli. Puoi dire «questo slot è vuoto» perché lo vedi; non puoi dire
 ## Che cosa consegni
 
 Per ogni rilievo: **il testo sostitutivo già scritto**, non il consiglio di
-riscriverlo. «Accorcia il titolo» è inutile; «Twelve Carriages, One Killer»
-invece di un titolo di 74 caratteri è lavoro fatto.
+riscriverlo. «Accorcia il titolo» è inutile; un titolo nuovo da 28 caratteri,
+scritto per intero al posto di uno da 74, è lavoro fatto.
 
 ```
 ### <slug> — <che cosa si perde, in una riga>

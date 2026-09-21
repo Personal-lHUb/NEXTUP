@@ -47,11 +47,14 @@ sceglie con `init --content-type`, e i due confini sono controllati:
 | un full-content non ha pagine da compilare | `qa.py` | conta le righe fatte di trattini bassi o puntini di guida nel manoscritto |
 | un medium-content non scivola nel low-content | `agents/layout.py` | firma strutturale di ogni pagina del PDF: se più della metà delle pagine ha la stessa struttura, lo segnala |
 
-Misurato su `twelve-carriages`: 75 pagine di testo, **35 strutture diverse**, la
-più ripetuta copre il 16% (sono le dodici pagine di appunti, una per caso).
+Misurato su un libro di enigmi da dodici casi: 75 pagine di testo, **35
+strutture diverse**, la più ripetuta copre il 16% (sono le pagine di appunti,
+una per caso).
 
-**Quello che manca ancora**: un motore medium-content generale. La linea
-enigmistica è un prodotto specifico, non una categoria.
+La linea enigmistica è ora il **motore** della categoria, non un prodotto:
+l'ambientazione — dove si svolge, chi ci abita, i testi dei casi, l'esempio, il
+finale, la scheda — è un dato del libro (`books/<slug>/ambientazione.json`), non
+codice. Il sistema non contiene nessun libro.
 
 ### Regole permanenti (valgono in ogni sessione)
 
@@ -60,7 +63,7 @@ enigmistica è un prodotto specifico, non una categoria.
 | **Branch** | sviluppare, committare e spingere **solo** su `claude/dreamy-archimedes-hf8w45`. Mai un altro branch senza permesso esplicito. |
 | **Nessuna PR** | non aprire pull request se non richiesta esplicitamente. |
 | **Backup** | ogni file generato deve avere una copia di sicurezza. La pipeline lo fa da sé (`kdpfactory/backup.py`); i file generati a mano vanno copiati in `backup/manuale/<AAAAMMGG-hhmmss>/` mantenendo i percorsi relativi. `backup/` non entra in git. Regola scritta in `CLAUDE.md`. |
-| **Lingua** | codice, commenti, documentazione, messaggi e nomi in **italiano**. Il testo dei libri può essere in qualunque lingua (`twelve-carriages` è in inglese). |
+| **Lingua** | codice, commenti, documentazione, messaggi e nomi in **italiano**. Il testo dei libri può essere in qualunque lingua. |
 | **Attribuzione** | i commit finiscono con `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` e `Claude-Session: <url>`. Mai identificativi di modello dentro codice, commenti o altri artefatti del repo. |
 
 ---
@@ -228,9 +231,15 @@ nessun modello**. Stesso seme, stesso libro.
 **Meccanica**: 12 casi indipendenti + un **13° finale** che si può risolvere solo
 avendo in mano tutte e dodici le risposte.
 
-**Libro prodotto**: `books/twelve-carriages/` — *Twelve Carriages, One Killer*,
-inglese, seme `20260915`, 12 casi + finale, **908 sospetti**, 88 indizi,
-**82 pagine**, 6x9 bianco. Stampa $2.30, prezzo $8.99, royalty $3.09 a copia.
+**L'ambientazione è un dato, non codice.** `theme.py` contiene il motore — la
+forma di un caso, i livelli di difficoltà, la forma di un attributo — e carica
+il resto da `books/<slug>/ambientazione.json`: titolo, luogo, attributi dei
+sospetti, cognomi, i testi dei casi, l'esempio svolto, il finale, la scheda
+prodotto e i testi di copertina. `puzzle new` lascia il file da compilare, come
+`init` lascia `brief.md`.
+
+Requisiti del finale e copertura dei casi **scalano col libro**: erano tarati su
+dodici casi e su un libro più corto erano irraggiungibili.
 
 ### 5.3 Sistema di copertina
 
@@ -288,9 +297,8 @@ dominante e un secondo segno romperebbe la regola 1.
 `build/<slug>-copertina-miniatura.png` a 160 px — **è lì che si giudica una
 copertina, non nel PDF a schermo intero**.
 
-Copertina attuale di `twelve-carriages`: palette `notturno`, illustrazione
-`treno`, titolo al 7.0% dell'altezza, contrasto 18.5:1, dentro l'area di
-sicurezza, nessun problema.
+Le misure di copertina si leggono in `state.json` → `cover.verifica` dopo ogni
+`build`, e la miniatura a 160 px sta in `build/<slug>-copertina-miniatura.png`.
 
 ### 5.4 Team di miglioramento
 
@@ -411,24 +419,28 @@ solo via ricerca web. Non promettere dati di vendita che non si possono prendere
 
 | slug | stato |
 |---|---|
-| `twelve-carriages` | completo: 82 pagine, interno + copertina + scheda + risposte. `0 errori, 0 avvisi — PRONTO PER IL CARICAMENTO` |
-| `esempio-metodo-tre-ore` | solo `book.json`, serve da esempio e per il dry-run |
+| `collaudo` | **non è un libro**: è il bersaglio delle prove a secco e della diagnostica. Dichiaratamente vuoto di contenuto, così non c'è mai niente da ripulire |
+
+Il sistema non contiene nessun libro pubblicabile: è una fabbrica. Un libro si
+crea con `init`, con `concorrente new` (da un'analisi di mercato) o con
+`puzzle new`.
 
 **Test: 216**, nessuna chiamata di rete.
 
-**Rilievi aperti**, dalla prima diagnostica — nessuno è stato ancora affrontato:
+**Rilievi aperti** sul sistema (non su un libro: non ce ne sono):
 
-- ▲ `twelve-carriages`: **2 parole chiave sprecate** — «deduction game gift» e
-  «puzzle gift for dad» ripetono parole già nel titolo
-- • descrizione a **767 caratteri su 4000**: lo spazio di vendita più grande della
-  scheda, usato al 19%
-- • **18% di scarto** sulle pagine (82 contro un obiettivo di 100)
-- **5 moduli mai nominati nei test**: `agents/panel.py`, `agents/writing.py`,
-  `diagnostica.py`, `i18n.py`, **`typeset.py`** — quest'ultimo è quello che
-  produce i difetti di gravità 1, quindi è il più serio
-- rapporto test/codice **0.14** (1261 righe di test su 9154 di codice)
-- copertina: titolo al 7.0% dell'altezza — sopra la soglia minima del 6%, sotto
-  l'8,5% che rende un titolo davvero dominante. È «CARRIAGES,» che lo limita
+- **3 moduli mai nominati nei test**: `agents/panel.py`, `agents/writing.py`,
+  `i18n.py`. `panel.py` è il più serio: `apply_revisions` riscrive i capitoli
+  sul posto e l'unica difesa contro un capitolo mutilato è una soglia non
+  coperta da test
+- il **ciclo di impaginazione non converge** quando i capitoli sono molti: ora
+  si ferma da sé invece di insistere, ma la causa — tutti i capitoli scalati
+  dello stesso fattore, che scavallano insieme — resta
+- i **fattori di riempimento** di `planner.py` restano intoccati: le misure
+  disponibili oscillano del 12% sullo stesso libro e vengono da testo
+  segnaposto. Servirebbe un libro scritto davvero
+- i **costi di stampa** in `config/printing_costs.json` sono dichiarati
+  `DA VERIFICARE`: ogni royalty del sistema poggia su quel file
 
 **Il passo successivo naturale** è `/migliora`, che prende in mano esattamente
 questi rilievi. È un comando autosufficiente: legge `diagnostica.json` e il repo,

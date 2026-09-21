@@ -18,8 +18,10 @@ python3 -m kdpfactory puzzle build mio-libro
 
 ## Che cosa produce
 
-Un libro di tredici casi. I primi dodici sono indipendenti e si risolvono in
-qualsiasi ordine; il tredicesimo si apre solo con le dodici risposte in mano.
+Un libro di N casi indipendenti più un finale. I casi si risolvono in qualsiasi
+ordine; il finale si apre solo con tutte le risposte in mano. Quanti siano, e di
+che cosa parlino, lo decide l'**ambientazione** del libro — un file di dati, non
+il codice: vedi «Personalizzazione».
 
 Ogni caso ha:
 
@@ -97,22 +99,35 @@ correttezza: soluzione unica e nessun indizio superfluo, in tutti i casi.
 
 ---
 
-## Personalizzazione
+## L'ambientazione: dove sta il libro
 
-Tutto il testo e la forma stanno in `kdpfactory/puzzle/theme.py`:
+Il codice contiene il **motore**; il libro sta in un file di dati,
+`books/<slug>/ambientazione.json`, che `puzzle new` lascia da compilare e che
+spiega ogni campo al suo interno.
 
-- `ATTRIBUTES` — le caratteristiche dei passeggeri e come si dicono in inglese
-  (`template`, `negative_template`, singolare/plurale, articolo `a`/`an`);
-- `SURNAMES`, `HONORIFICS` — i nomi. Dentro un caso i cognomi sono unici, così
-  gli indizi possono citarli senza ambiguità;
-- `CASES` — dodici voci: vettura, titolo, testo di scena, attributi in gioco con
-  quante varianti ciascuno (il prodotto è la dimensione del cast) e tipi di
-  indizio ammessi;
-- `HOW_TO_PLAY`, `FINALE_SETTING` — i testi fissi.
+| campo | che cos'è |
+|---|---|
+| `titolo`, `sottotitolo`, `luogo` | come si chiama il libro e dove si svolge |
+| `attributi` | le caratteristiche dei sospetti e come si dicono (`template`, `negative_template`, singolare/plurale, articolo `a`/`an`) |
+| `attributi_comuni` | quelli presenti in ogni caso: **è su questi che si gioca il finale** |
+| `cognomi`, `appellativi` | i nomi. Dentro un caso i cognomi sono unici, così gli indizi possono citarli senza ambiguità |
+| `casi` | una voce per caso: luogo, titolo, testo di scena, `piano` (quanti valori per attributo — il prodotto è la dimensione del cast) e `difficolta` (`facile`, `medio`, `difficile`) |
+| `esempio` | il caso svolto in apertura, piccolo, che spiega il metodo |
+| `finale` | titolo e testo dell'ultimo caso |
+| `come_si_gioca` | le istruzioni stampate in apertura |
+| `scheda`, `copertina` | i testi di vendita. `{casi}`, `{sospetti}` e `{indizi}` vengono sostituiti con i numeri veri del libro generato |
 
-Per un libro diverso — un albergo, una nave, un collegio — si riscrive questo
-file e si lascia intatto tutto il resto. Per un libro in italiano si traducono
-i template: il motore non sa niente della lingua.
+Nel codice restano soltanto le regole del gioco: la forma di un caso, i tre
+livelli di difficoltà e i tipi di indizio che ciascuno ammette.
+
+Per un libro diverso — un albergo, una nave, un collegio — si scrive
+un'ambientazione nuova e non si tocca una riga di codice. Per un libro in
+italiano si traducono i `template`: il motore non sa niente della lingua.
+
+**Il numero di casi lo decidi tu.** Requisiti del finale e copertura si adattano:
+erano tarati su dodici e su un libro più corto erano irraggiungibili. Ricorda che
+il progetto non stampa sotto le 60 pagine, e che un caso vale all'incirca otto
+pagine fra impostazione, cast, indizi, appunti e soluzione.
 
 Attenzione a una cosa: gli attributi presenti in **tutti** i casi sono quelli su
 cui si gioca il finale. Se un attributo sparisce da un solo caso, sparisce dal

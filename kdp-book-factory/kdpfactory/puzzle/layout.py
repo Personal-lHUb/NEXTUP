@@ -37,7 +37,6 @@ from ..typeset import (
 from ..typography import register_family, set_default_canvas_font
 from .generator import PuzzleBook
 from .model import Case, Finale
-from .theme import HOW_TO_PLAY
 
 INCH = kdpspecs.INCH
 GRID = colors.HexColor("#9a9a9a")
@@ -280,7 +279,7 @@ def _front_matter(spec: BookSpec, book: PuzzleBook, styles: dict, year: int) -> 
     story.append(DocAction("front_matter_page"))
     story.append(Spacer(1, 0.5 * INCH))
     story.append(Paragraph("How to Play", styles["toc_title"]))
-    for block in HOW_TO_PLAY.split("\n\n"):
+    for block in book.come_si_gioca.split("\n\n"):
         story.append(Paragraph(_bold(block), styles["setting"]))
     story.append(PageBreak())
     return story
@@ -393,12 +392,12 @@ def _case_pages(case: Case, styles: dict, width: float, first: bool) -> list:
     return story
 
 
-def _finale_pages(finale: Finale, styles: dict, width: float) -> list:
-    story: list = [StartOnRecto(), DocAction("chapter_open", "The Mastermind")]
+def _finale_pages(finale: Finale, styles: dict, width: float, numero: int) -> list:
+    story: list = [StartOnRecto(), DocAction("chapter_open", finale.title)]
     story.append(Spacer(1, 0.5 * INCH))
     story.append(
         ChapterNumber(
-            "Case 13",
+            f"Case {numero}",
             styles["chapter_number"].fontName,
             styles["chapter_number"].fontSize,
             colors.HexColor("#777777"),
@@ -467,10 +466,15 @@ def _solutions(book: PuzzleBook, styles: dict) -> list:
         story.extend(block[2:])
 
     if book.finale:
-        block = [Paragraph("Case 13 — The Mastermind", styles["solution_head"])]
+        block = [
+            Paragraph(
+                f"Case {len(book.cases) + 1} — {book.finale.title}", styles["solution_head"]
+            )
+        ]
         block.append(
             Paragraph(
-                "Fill the grid with your twelve answers and the clues leave one row standing.",
+                f"Fill the grid with your {len(book.cases)} answers and the clues "
+                "leave one row standing.",
                 styles["step"],
             )
         )
@@ -528,7 +532,7 @@ def _run(spec, book, output, styles, pages_hint, year, pad_to_even) -> PuzzleTyp
     for index, case in enumerate(book.cases):
         story.extend(_case_pages(case, styles, width, first=index == 0))
     if book.finale:
-        story.extend(_finale_pages(book.finale, styles, width))
+        story.extend(_finale_pages(book.finale, styles, width, len(book.cases) + 1))
     story.extend(_solutions(book, styles))
 
     if pad_to_even:

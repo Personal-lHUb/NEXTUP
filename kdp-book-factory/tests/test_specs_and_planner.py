@@ -182,8 +182,9 @@ class TestCategorieDiProdotto(unittest.TestCase):
 
     def test_la_linea_enigmistica_e_medium_content(self):
         from kdpfactory.puzzle.book import default_book_spec
+        from kdpfactory.puzzle.theme import COLLAUDO
 
-        spec = default_book_spec("x", "Autore")
+        spec = default_book_spec("x", "Autore", COLLAUDO)
         self.assertEqual(spec.content_type, "medium")
         self.assertEqual(spec.validate(), [])
 

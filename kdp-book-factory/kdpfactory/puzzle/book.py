@@ -20,7 +20,7 @@ from ..coverdesign import CoverCopy
 from ..models import BookProject, BookSpec
 from .generator import PuzzleBook, generate_book
 from .layout import typeset_puzzle_book
-from .theme import BOOK_SUBTITLE, BOOK_TITLE
+from .theme import Ambientazione, ambientazione_path, carica
 
 
 @dataclass
@@ -47,17 +47,19 @@ def puzzle_spec_path(project: BookProject) -> Path:
     return project.root / "puzzle.json"
 
 
-def default_book_spec(slug: str, author: str) -> BookSpec:
+def default_book_spec(slug: str, author: str, ambientazione: Ambientazione) -> BookSpec:
+    """La scheda del libro, presa dall'ambientazione che l'autore ha scritto."""
     return BookSpec(
         slug=slug,
-        title=BOOK_TITLE,
-        subtitle=BOOK_SUBTITLE,
+        title=ambientazione.titolo,
+        subtitle=ambientazione.sottotitolo,
         author=author,
         language="en",
-        topic="a deduction puzzle book: twelve cases aboard a night express, and a "
-        "thirteenth that needs all twelve answers",
+        topic=f"a deduction puzzle book set in {ambientazione.luogo}"
+        if ambientazione.luogo
+        else "a deduction puzzle book",
         audience="puzzle solvers who want reasoning rather than word search",
-        promise="thirteen cases that can be solved with a pencil and no guesswork",
+        promise="cases that can be solved with a pencil and no guesswork",
         genre="non-fiction",
         # ogni caso porta impostazione, tabella del cast, indizi, pagina di
         # appunti e soluzione: le pagine sono diverse fra loro per costruzione
@@ -67,9 +69,7 @@ def default_book_spec(slug: str, author: str) -> BookSpec:
         paper="white",
         cover_theme="notturno",
         cover_style="tipografica",
-        # il libro è ambientato su un treno: l'illustrazione non si lascia
-        # decidere alle parole chiave quando la scena è nota
-        cover_art="treno",
+        cover_art="auto",
         body_font="serif",
         body_font_size=11.0,
         leading=15.0,
@@ -81,77 +81,54 @@ def default_book_spec(slug: str, author: str) -> BookSpec:
 
 
 # --------------------------------------------------------------------------
-# Scheda prodotto (scritta a mano: qui non serve un modello)
+# Scheda prodotto e copertina: testi dell'autore, non del sistema
 # --------------------------------------------------------------------------
-def listing_metadata(book: PuzzleBook, spec: BookSpec, pages: int) -> dict:
-    suspects = book.suspects_total
-    cases = len(book.cases)
+def _riempi(testo: str, book: PuzzleBook) -> str:
+    """Sostituisce i numeri veri del libro generato nei testi dell'autore."""
+    return testo.format(
+        casi=len(book.cases) + 1,          # i casi più il finale
+        casi_semplici=len(book.cases),
+        sospetti=f"{book.suspects_total:,}",
+        indizi=book.clues_total,
+    )
+
+
+def listing_metadata(
+    book: PuzzleBook, spec: BookSpec, pages: int, ambientazione: Ambientazione
+) -> dict:
+    """La scheda prodotto del libro, presa dall'ambientazione.
+
+    Non serve un modello: questi testi li scrive l'autore una volta sola, e i
+    numeri — casi, sospetti, indizi — li mette il libro generato.
+    """
+    scheda = ambientazione.scheda
     return {
         "title": spec.title,
         "subtitle": spec.subtitle,
-        "description_paragraphs": [
-            "Thirteen cases. One pencil. No guesswork.",
-            f"A body on the night express, {cases} carriages to search and {suspects:,} "
-            "passengers who all had a reason to be somewhere else. Each case gives you the "
-            "full list of everyone in the carriage — what they wore, what they carried, what "
-            "they were drinking — and a handful of statements that are all true. Cross off "
-            "the impossible and one name is left standing.",
-            "Then comes the thirteenth case. One of the twelve culprits was never working "
-            "alone, and the only way to name them is with all twelve answers in front of you.",
-            "Every case in this book was verified before printing: exactly one solution, and "
-            "not a single clue that could be removed without breaking it. No red herrings, no "
-            "contradictions, no puzzle that turns out to have two answers.",
-        ],
-        "bullets": [
-            f"{cases} standalone cases plus a finale that needs every answer you have",
-            "A difficulty curve from a quiet twenty-four-passenger carriage to a hundred and "
-            "twenty suspects and conditional clues",
-            "A worked example at the front: one full case solved step by step",
-            "Full solutions that show the order of elimination, not just the name",
-            "Room to work on the page — every case has its own notes sheet",
-        ],
-        "closing": "Sharpen a pencil. The train leaves at eleven.",
-        "keywords": [
-            "logic puzzles for adults",
-            "whodunnit brain teaser",
-            "deduction game gift",
-            "screen free evening activity",
-            "1930s train mystery",
-            "detective reasoning challenge",
-            "puzzle gift for dad",
-        ],
-        "categories": [
-            "GAMES & ACTIVITIES / Logic & Brain Teasers",
-            "GAMES & ACTIVITIES / Puzzles",
-            "GAMES & ACTIVITIES / Reference",
-        ],
-        "author_bio": "",
-        "back_cover": "Thirteen cases. One pencil. No guesswork.\n\n"
-        f"{suspects:,} passengers boarded the Ashcombe Night Express. Twelve of them are "
-        "guilty, and one of those twelve planned the lot. Every clue in this book is true, "
-        "every case has exactly one answer, and every answer can be reached by reasoning "
-        "alone.\n\nThe thirteenth case cannot be solved until the other twelve are.",
-        "back_cover_bullets": [
-            f"{cases} cases, {suspects:,} suspects, one mastermind",
-            "Checked by machine: one solution, no wasted clues",
-            "Worked example and full step-by-step solutions",
-        ],
+        "description_paragraphs": [_riempi(p, book) for p in scheda.get("paragrafi", [])],
+        "bullets": [_riempi(b, book) for b in scheda.get("punti", [])],
+        "closing": _riempi(str(scheda.get("chiusura", "")), book),
+        "keywords": list(scheda.get("parole_chiave", [])),
+        "categories": list(scheda.get("categorie", [])),
+        "author_bio": str(scheda.get("biografia", "")),
+        "back_cover": _riempi(str(scheda.get("quarta", "")), book),
+        "back_cover_bullets": [_riempi(b, book) for b in scheda.get("punti_quarta", [])],
     }
 
 
-def cover_copy(book: PuzzleBook, spec: BookSpec) -> CoverCopy:
-    """I testi della prima di copertina per un libro di enigmi.
+def cover_copy(book: PuzzleBook, spec: BookSpec, ambientazione: Ambientazione) -> CoverCopy:
+    """I testi della prima di copertina, dall'ambientazione.
 
-    Il gancio è una domanda (il ciclo resta aperto), i numeri sono in cifre e
-    la garanzia è vera e verificabile — è l'unica cosa che questo libro può
-    promettere e che gli altri non promettono.
+    Il gancio è una domanda (il ciclo resta aperto) e i numeri sono in cifre:
+    sono le regole 6 e 7 del sistema di copertina, e valgono per ogni libro.
     """
+    copertina = ambientazione.copertina
     return CoverCopy(
         title=spec.title,
-        kicker="DEDUCTION PUZZLES",
-        hook="Can you name the killer in every carriage?",
-        stats=f"{len(book.cases) + 1} CASES · {book.suspects_total:,} SUSPECTS · 1 MASTERMIND",
-        badge="Every case has exactly one solution",
+        kicker=str(copertina.get("occhiello", "")),
+        hook=_riempi(str(copertina.get("gancio", "")), book),
+        stats=_riempi(str(copertina.get("numeri", "")), book),
+        badge=str(copertina.get("garanzia", "")),
         author=spec.author,
         subject=spec.title + " " + spec.topic,
     )
@@ -169,13 +146,14 @@ def build(
 ) -> dict:
     """Genera il libro, lo impagina, produce copertina, risposte e scheda."""
     project.ensure_dirs()
-    book = generate_book(puzzle_spec.seed)
+    ambientazione = carica(ambientazione_path(project.root))
+    book = generate_book(puzzle_spec.seed, ambientazione)
 
     interior = project.build_dir / f"{spec.slug}-interno.pdf"
     typeset = typeset_puzzle_book(spec, book, interior)
 
     cover_path = project.build_dir / f"{spec.slug}-copertina.pdf"
-    meta = listing_metadata(book, spec, typeset.pages)
+    meta = listing_metadata(book, spec, typeset.pages, ambientazione)
     cover_info = cover_module.build_cover(
         spec,
         typeset.pages,
@@ -184,7 +162,7 @@ def build(
         bullets=meta["back_cover_bullets"],
         guides=guides,
         genre="enigmi",
-        copy=cover_copy(book, spec),
+        copy=cover_copy(book, spec, ambientazione),
     )
 
     (project.build_dir / "answers.json").write_text(

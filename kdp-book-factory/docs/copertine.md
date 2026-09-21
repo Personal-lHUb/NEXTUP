@@ -47,7 +47,7 @@ Cinque campi, in ordine di importanza percettiva (`CoverCopy`):
 | campo | che cos'è | esempio |
 |---|---|---|
 | `kicker` | l'occhiello: dice il genere in due parole | `DEDUCTION PUZZLES` |
-| `title` | l'elemento dominante | `Twelve Carriages, One Killer` |
+| `title` | l'elemento dominante | il titolo del libro |
 | `hook` | il ciclo aperto | `Can you name the killer in every carriage?` |
 | `stats` | i numeri, in cifre | `13 CASES · 908 SUSPECTS · 1 MASTERMIND` |
 | `badge` | una garanzia vera, breve | `Every case has exactly one solution` |

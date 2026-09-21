@@ -503,16 +503,26 @@ def cmd_puzzle(args) -> int:
     if args.action == "new":
         if root.exists() and not args.force:
             raise SystemExit(f"Esiste già {root}. Usa --force per sovrascrivere.")
+        from .puzzle import theme as puzzle_theme
+
         project = BookProject(root)
         project.ensure_dirs()
-        spec = puzzle_book.default_book_spec(args.slug, args.author)
+        # Prima l'ambientazione: è lei che dice come si chiama il libro.
+        ambientazione_file = puzzle_theme.scrivi_modello(
+            puzzle_theme.ambientazione_path(root)
+        )
+        ambientazione = puzzle_theme.carica(ambientazione_file)
+        spec = puzzle_book.default_book_spec(args.slug, args.author, ambientazione)
         spec.save(project.spec_path)
         puzzle_spec = puzzle_book.PuzzleSpec(seed=args.seed)
         puzzle_spec.save(puzzle_book.puzzle_spec_path(project))
         save_backup(project, args, "libro di enigmi creato")
         print(f"Creato {project.spec_path} e {puzzle_book.puzzle_spec_path(project)}")
-        print(f"Titolo: {spec.title}\nSeme: {puzzle_spec.seed}")
-        print(f"\nProssimo passo: python -m kdpfactory puzzle build {args.slug}")
+        print(f"Ambientazione da scrivere → {ambientazione_file}")
+        print(f"Seme: {puzzle_spec.seed}")
+        print("\nApri l'ambientazione e sostituisci i contenuti di collaudo: è lì che")
+        print("decidi di che cosa parla il libro. Il file spiega ogni campo.")
+        print(f"\nPoi: python -m kdpfactory puzzle build {args.slug}")
         return 0
 
     project, spec = open_project(args)

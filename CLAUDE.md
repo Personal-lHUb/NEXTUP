@@ -54,9 +54,15 @@ rispettare:
   low-content e lo dice.
 
 La linea prosa (`outline` → `write` → `build`, cioè `all`) produce
-full-content; la linea enigmistica (`puzzle`) è un medium-content **specifico**
-— dodici casi di deduzione — e non un motore della categoria: un medium-content
-di altro tipo va ancora progettato.
+full-content; la linea enigmistica (`puzzle`) produce medium-content, e **non
+contiene nessun libro**: l'ambientazione — dove si svolge, chi ci abita, i testi
+dei casi, la scheda — sta in `books/<slug>/ambientazione.json`, che `puzzle new`
+lascia da compilare.
+
+**Il sistema è una fabbrica, non un prodotto.** In `books/` c'è solo `collaudo`,
+che non è un libro: serve alle prove a secco e alla diagnostica. Se ti accorgi
+che un contenuto pubblicabile è finito nel codice o nel collaudo, è nel posto
+sbagliato — va spostato in un libro suo.
 
 ## Il progetto
 

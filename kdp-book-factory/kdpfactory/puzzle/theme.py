@@ -1,109 +1,35 @@
-"""Ambientazione del libro: un espresso notturno degli anni Trenta.
+"""L'ambientazione di un libro di enigmi: il caricatore, non il contenuto.
 
-Dodici vetture, dodici casi, e un finale che si apre solo con le dodici
-soluzioni in mano. L'ambientazione è inventata di sana pianta — nessun treno,
-marchio o opera esistente — ed è l'unica parte di prosa del libro: poche righe
-per caso, scritte a mano una volta sola.
+Qui sta il **motore** — la forma di un caso, i livelli di difficoltà, la forma
+di un attributo — e nient'altro. Che cosa il libro racconti (dove si svolge,
+chi ci abita, i testi dei casi, l'esempio svolto, il finale) è **dato del
+libro**: vive in `books/<slug>/ambientazione.json` e si carica da lì.
+
+È la differenza fra una fabbrica e un prodotto. Finché l'ambientazione stava
+qui dentro, il sistema conteneva un libro e ne poteva produrre uno solo: stesso
+treno, stessi dodici casi, stessi passeggeri, cambiava soltanto il seme.
 """
 
 from __future__ import annotations
 
+import json
+from dataclasses import dataclass, field
+from pathlib import Path
+
 from .model import Attribute
 
-BOOK_TITLE = "Twelve Carriages, One Killer"
-BOOK_SUBTITLE = "A Deduction Puzzle Book: Twelve Cases, One Mastermind. Can You Name Them All?"
-TRAIN = "the Ashcombe Night Express"
-
 # --------------------------------------------------------------------------
-# Attributi
+# Motore: che cosa un caso può chiedere al generatore
 # --------------------------------------------------------------------------
-ATTRIBUTES: dict[str, Attribute] = {
-    "hat": Attribute(
-        key="hat",
-        label="Hat",
-        noun="hat",
-        values=("fedora", "bowler", "cloche", "beret", "homburg", "flat cap"),
-        template="wore {a} {value}",
-        negative_template="did not wear {a} {value}",
-        listed_article=True,
-    ),
-    "coat": Attribute(
-        key="coat",
-        label="Coat",
-        noun="coat",
-        values=("navy", "charcoal", "camel", "crimson", "olive", "ivory"),
-        template="wore {a} {value} coat",
-        negative_template="did not wear {a} {value} coat",
-    ),
-    "luggage": Attribute(
-        key="luggage",
-        label="Luggage",
-        noun="luggage",
-        values=("hatbox", "violin case", "leather trunk", "carpet bag", "briefcase", "birdcage"),
-        template="carried {a} {value}",
-        negative_template="did not carry {a} {value}",
-        listed_article=True,
-    ),
-    "drink": Attribute(
-        key="drink",
-        label="Drink",
-        noun="drink",
-        values=("tea", "brandy", "cocoa", "champagne", "soda water", "coffee"),
-        template="drank {value}",
-        negative_template="did not drink {value}",
-    ),
-    "gloves": Attribute(
-        key="gloves",
-        label="Gloves",
-        noun="gloves",
-        values=("leather", "wool", "lace", "silk"),
-        template="wore {value} gloves",
-        negative_template="did not wear {value} gloves",
-        to_be="were",
-    ),
-    "seat": Attribute(
-        key="seat",
-        label="Seat",
-        noun="seat",
-        values=("window", "aisle"),
-        template="sat in {a} {value} seat",
-        negative_template="did not sit in {a} {value} seat",
-        listed_article=True,
-    ),
-}
+#: I tipi di indizio ammessi a ogni livello. Non sono contenuto: sono le regole
+#: del gioco, e valgono per qualunque ambientazione.
+EASY = ("is", "is_not", "one_of", "cleared")
+MEDIUM = ("is_not", "one_of", "cleared", "same_as", "differs_from", "if_then")
+HARD = ("is_not", "one_of", "same_as", "differs_from", "if_then", "not_both", "exactly_one")
 
-#: presenti in ogni caso: sono gli attributi su cui si gioca il finale
-SHARED_ATTRIBUTES = ("hat", "coat", "luggage")
-
-HONORIFICS = (
-    "Mr", "Mrs", "Miss", "Dr", "Prof.", "Capt.", "Rev.", "Col.", "Major", "Madame",
-)
-
-#: cognomi unici dentro un caso: gli indizi possono nominarli senza ambiguità
-SURNAMES = (
-    "Ash", "Wren", "Blackwood", "Calloway", "Danvers", "Ellery", "Fairbrother",
-    "Grimshaw", "Harrow", "Ingram", "Jellicoe", "Kingsley", "Lanyon", "Marchmont",
-    "Northcote", "Ovington", "Pemberton", "Quill", "Rathbone", "Selwyn", "Thackeray",
-    "Upton", "Vance", "Westaway", "Yardley", "Ambrose", "Barlow", "Carrick", "Dunmore",
-    "Everly", "Fenwick", "Gallagher", "Haddon", "Ivers", "Jarrow", "Kemble", "Lockhart",
-    "Mowbray", "Nesbit", "Orford", "Pike", "Quennell", "Rosslyn", "Sandbach",
-    "Trelawney", "Ufford", "Whitlock", "Yates", "Abernathy", "Braithwaite", "Cardew",
-    "Dunsmore", "Eastcott", "Fothergill", "Garrick", "Hollis", "Inchbald", "Jessop",
-    "Kilbride", "Larkin", "Merriweather", "Norbury", "Oakhurst", "Pargeter", "Quiller",
-    "Redmayne", "Sowerby", "Tregarth", "Underhill", "Vosper", "Wraysbury", "Yelverton",
-    "Ashby", "Bramwell", "Colefax", "Drury", "Enderby", "Fitzalan", "Gorse", "Halliwell",
-    "Isley", "Jocelyn", "Kestrel", "Lymington", "Mallory", "Netherton", "Ockham",
-    "Prideaux", "Quarles", "Ravenscroft", "Sillitoe", "Tamworth", "Ulverston", "Vane",
-    "Wilbraham", "Yorke", "Astley", "Bexley", "Crofton", "Dalrymple", "Elvington",
-    "Farthing", "Glaisher", "Havelock", "Jephson", "Kentish", "Loxley", "Mottram",
-    "Newlyn", "Orme", "Purbeck", "Quintrell", "Rushworth", "Standish", "Thorley",
-    "Urquhart", "Villiers", "Waverley", "Yaxley", "Amberley", "Brightwell", "Coldstream",
-)
+LIVELLI: dict[str, tuple[str, ...]] = {"facile": EASY, "medio": MEDIUM, "difficile": HARD}
 
 
-# --------------------------------------------------------------------------
-# I dodici casi
-# --------------------------------------------------------------------------
 class CaseTheme:
     """Testo e forma di un caso: quante colonne, quanto grande, quanto duro."""
 
@@ -133,145 +59,300 @@ class CaseTheme:
         return size
 
 
-EASY = ("is", "is_not", "one_of", "cleared")
-MEDIUM = ("is_not", "one_of", "cleared", "same_as", "differs_from", "if_then")
-HARD = ("is_not", "one_of", "same_as", "differs_from", "if_then", "not_both", "exactly_one")
+# --------------------------------------------------------------------------
+# Ambientazione: tutto ciò che è del libro e non del sistema
+# --------------------------------------------------------------------------
+@dataclass
+class Ambientazione:
+    """Il libro, in forma di dati: si carica da file, non si scrive nel codice."""
 
-CASES: tuple[CaseTheme, ...] = (
-    CaseTheme(
-        1, "Carriage A — Second Class",
-        "The Conductor's Whistle",
-        "The whistle of Mr Pell, guard of the Ashcombe Night Express, vanished from its "
-        "hook between Ashcombe and Marley Halt. Trivial, until the same whistle was found "
-        "beside a body three carriages down. All {count} passengers holding tickets for "
-        "Carriage A that night are below, and one of them took it.",
-        (("hat", 4), ("coat", 3), ("luggage", 2)),
-        EASY,
-    ),
-    CaseTheme(
-        2, "Carriage B — Second Class",
-        "The Emptied Flask",
-        "The night steward filled every flask at Marley Halt. By Thorn Bridge one had been "
-        "emptied and refilled with something that left a sleeping passenger unable to be "
-        "woken. The steward remembers the carriage, not the face.",
-        (("hat", 4), ("coat", 3), ("luggage", 2), ("drink", 2)),
-        EASY,
-    ),
-    CaseTheme(
-        3, "Carriage C — Family Compartment",
-        "A Birdcage, Opened",
-        "Lady Ockham travels with a canary and a great deal of jewellery. At Thorn Bridge "
-        "the cage stood open and the jewellery was gone. The canary, unhelpfully, returned "
-        "on its own.",
-        (("hat", 4), ("coat", 3), ("luggage", 4)),
-        MEDIUM,
-    ),
-    CaseTheme(
-        4, "Carriage D — Second Class",
-        "The Wrong Ticket",
-        "A ticket punched at Ashcombe turned up in the pocket of a passenger who boarded at "
-        "Thorn Bridge — and the passenger it belonged to has not been seen since.",
-        (("hat", 4), ("coat", 3), ("luggage", 2), ("gloves", 2)),
-        MEDIUM,
-    ),
-    CaseTheme(
-        5, "Carriage E — Dining Car",
-        "Soup for Nine",
-        "Nine bowls of soup left the galley. Eight were eaten. The ninth was carried away by "
-        "someone who had no business in the dining car, and the diner it was meant for never "
-        "reached Cold Harbour.",
-        (("hat", 5), ("coat", 4), ("luggage", 3)),
-        MEDIUM,
-    ),
-    CaseTheme(
-        6, "Carriage F — First Class",
-        "The Locked Compartment",
-        "Compartment 6F was locked from within and empty when forced. The window was shut. "
-        "The key was in the corridor, and the key does not walk.",
-        (("hat", 4), ("coat", 3), ("luggage", 3), ("drink", 2)),
-        MEDIUM,
-    ),
-    CaseTheme(
-        7, "Carriage G — Sleeping Car",
-        "Three Knocks at Two",
-        "At two in the morning three knocks woke half the sleeping car. The berth they came "
-        "from was found open, the bed made, the occupant gone — and the sheets still warm.",
-        (("hat", 5), ("coat", 4), ("luggage", 4)),
-        MEDIUM,
-    ),
-    CaseTheme(
-        8, "Carriage H — Post Van",
-        "The Registered Parcel",
-        "One registered parcel out of four hundred was opened in transit and resealed badly. "
-        "Only a passenger who knew which four hundred to look through could have found it.",
-        (("hat", 4), ("coat", 4), ("luggage", 3), ("gloves", 2)),
-        MEDIUM,
-    ),
-    CaseTheme(
-        9, "Carriage J — Observation Car",
-        "The Hand on the Rail",
-        "A hand was seen on the observation rail as the train crossed Cold Harbour viaduct, "
-        "and a coat was found on the track the next morning. Nobody is missing. Everybody is "
-        "accounted for. Both statements cannot be true.",
-        (("hat", 4), ("coat", 4), ("luggage", 3), ("seat", 2)),
-        HARD,
-    ),
-    CaseTheme(
-        10, "Carriage K — First Class",
-        "Two Tickets, One Name",
-        "Two first-class tickets were issued to the same name for the same berth. One of the "
-        "two travellers is dead. The other has spent the night insisting they never boarded.",
-        (("hat", 4), ("coat", 4), ("luggage", 3), ("drink", 2)),
-        HARD,
-    ),
-    CaseTheme(
-        11, "Carriage L — Guard's Van",
-        "The Stopped Clock",
-        "The guard's clock stopped at 3:14, which is when the brake was pulled and the train "
-        "stood for eleven minutes in open country. Someone got off. Someone got back on.",
-        (("hat", 5), ("coat", 4), ("luggage", 3), ("seat", 2)),
-        HARD,
-    ),
-    CaseTheme(
-        12, "Carriage M — Rear Observation",
-        "The Last Carriage",
-        "By Cold Harbour the rear carriage should have been empty. It was not, and what was "
-        "found there explains every case in this book — once you know who left it.",
-        (("hat", 5), ("coat", 4), ("luggage", 3), ("gloves", 2)),
-        HARD,
-    ),
-)
+    titolo: str
+    sottotitolo: str = ""
+    luogo: str = ""
+    attributi: dict[str, Attribute] = field(default_factory=dict)
+    attributi_comuni: tuple[str, ...] = ()
+    appellativi: tuple[str, ...] = ()
+    cognomi: tuple[str, ...] = ()
+    casi: tuple[CaseTheme, ...] = ()
+    esempio: CaseTheme | None = None
+    finale_titolo: str = ""
+    finale_testo: str = ""
+    come_si_gioca: str = ""
+    #: testi di vendita del libro: scheda prodotto e prima di copertina. Sono
+    #: contenuto d'autore, non del sistema. `{casi}` e `{sospetti}` vengono
+    #: sostituiti con i numeri veri del libro generato.
+    scheda: dict = field(default_factory=dict)
+    copertina: dict = field(default_factory=dict)
 
-EXAMPLE = CaseTheme(
-    0, "Worked example",
-    "The Missing Timetable",
-    "A small case, solved here in full, so that the twelve that follow need no explanation. "
-    "{count} passengers, a handful of clues, one thief.",
-    (("hat", 3), ("coat", 2), ("luggage", 2)),
-    EASY,
-    min_clues=3,   # è un esempio: deve entrare in una pagina e chiarire il metodo
-)
+    def problemi(self) -> list[str]:
+        """Che cosa impedisce di generare il libro. Vuoto = si può partire."""
+        guai: list[str] = []
+        if not self.titolo.strip():
+            guai.append("manca `titolo`")
+        if not self.casi:
+            guai.append("nessun caso in `casi`")
+        if len(self.appellativi) < 1:
+            guai.append("nessun appellativo in `appellativi`")
+        for caso in (*self.casi, *( [self.esempio] if self.esempio else [] )):
+            for chiave, quanti in caso.plan:
+                attributo = self.attributi.get(chiave)
+                if attributo is None:
+                    guai.append(f"caso {caso.number}: l'attributo «{chiave}» non è definito")
+                elif quanti > len(attributo.values):
+                    guai.append(
+                        f"caso {caso.number}: l'attributo «{chiave}» ha "
+                        f"{len(attributo.values)} valori, ne servono {quanti}"
+                    )
+            # Ogni sospetto ha un cognome diverso: gli indizi devono poterlo
+            # nominare senza ambiguità.
+            if caso.cast_size > len(self.cognomi):
+                guai.append(
+                    f"caso {caso.number}: servono {caso.cast_size} cognomi, "
+                    f"ne hai {len(self.cognomi)}"
+                )
+        for chiave in self.attributi_comuni:
+            if chiave not in self.attributi:
+                guai.append(f"`attributi_comuni`: «{chiave}» non è fra gli attributi")
+        return guai
 
-FINALE_TITLE = "The Mastermind"
-FINALE_SETTING = (
-    "Twelve carriages, twelve culprits — and one of them was never working alone. "
-    "One of the twelve planned the other eleven crimes and travelled the whole line to "
-    "watch them happen.\n\n"
-    "The suspects below are the twelve people you have already named. You will need every "
-    "one of your answers: each clue compares the mastermind with the culprit of a case you "
-    "have solved. Fill in the grid, then cross off."
-)
 
-HOW_TO_PLAY = """Every case in this book works the same way.
+def _caso_da_dati(dati: dict, dove: str) -> CaseTheme:
+    livello = str(dati.get("difficolta", "medio"))
+    if livello not in LIVELLI:
+        raise ValueError(
+            f"{dove}: difficoltà «{livello}» sconosciuta. Usa: {', '.join(LIVELLI)}."
+        )
+    piano = tuple((str(k), int(n)) for k, n in dati.get("piano", []))
+    if not piano:
+        raise ValueError(f"{dove}: `piano` vuoto, non si può costruire nessun cast.")
+    return CaseTheme(
+        number=int(dati.get("numero", 0)),
+        carriage=str(dati.get("luogo", "")),
+        title=str(dati.get("titolo", "")),
+        setting=str(dati.get("testo", "")),
+        plan=piano,
+        kinds=LIVELLI[livello],
+        min_clues=dati.get("indizi_minimi"),
+    )
 
-You get a **cast**: every passenger in one carriage, listed with everything that was noticed about them — a hat, a coat, a piece of luggage, sometimes a drink, gloves or a seat. No two passengers in a carriage are alike, and the culprit is one of them.
 
-You get a **set of clues**. Every clue is true. Every clue matters: remove any one of them and the case can no longer be solved, because each was checked by machine before it was printed. There are no red herrings in these pages, and no clue that contradicts another.
+def da_dati(dati: dict) -> Ambientazione:
+    """Costruisce un'ambientazione da un dizionario già letto."""
+    attributi = {}
+    for chiave, valori in (dati.get("attributi") or {}).items():
+        attributi[chiave] = Attribute(
+            key=str(valori.get("key", chiave)),
+            label=str(valori.get("label", chiave.title())),
+            noun=str(valori.get("noun", chiave)),
+            values=tuple(valori.get("values", ())),
+            template=str(valori.get("template", "wore {a} {value}")),
+            negative_template=str(
+                valori.get("negative_template", "did not wear {a} {value}")
+            ),
+            to_be=str(valori.get("to_be", "was")),
+            listed_article=bool(valori.get("listed_article", False)),
+        )
+    esempio = dati.get("esempio")
+    finale = dati.get("finale") or {}
+    return Ambientazione(
+        titolo=str(dati.get("titolo", "")),
+        sottotitolo=str(dati.get("sottotitolo", "")),
+        luogo=str(dati.get("luogo", "")),
+        attributi=attributi,
+        attributi_comuni=tuple(dati.get("attributi_comuni", ())),
+        appellativi=tuple(dati.get("appellativi", ())),
+        cognomi=tuple(dati.get("cognomi", ())),
+        casi=tuple(
+            _caso_da_dati(c, f"caso {c.get('numero', i + 1)}")
+            for i, c in enumerate(dati.get("casi") or [])
+        ),
+        esempio=_caso_da_dati(esempio, "esempio") if esempio else None,
+        finale_titolo=str(finale.get("titolo", "")),
+        finale_testo=str(finale.get("testo", "")),
+        come_si_gioca=str(dati.get("come_si_gioca", "")),
+        scheda=dict(dati.get("scheda") or {}),
+        copertina=dict(dati.get("copertina") or {}),
+    )
 
-Your job is to cross off. Read a clue, run it down the cast, strike out everyone it rules out. When one name is left, that name is the answer — and it is the only possible answer.
 
-**The twelve cases can be solved in any order.** The thirteenth cannot. The final case asks you to name the mastermind behind all of them, and every clue in it compares that person with the culprit of a case you have already solved. Keep your answers: you will need all twelve.
+def ambientazione_path(root: Path) -> Path:
+    return root / "ambientazione.json"
 
-Solutions begin on the page marked *Solutions*, and each one shows the order of elimination — not just the name, but the road to it. Read them only when you have to.
 
-A pencil is better than a pen. Ask anyone who has tried Case 12."""
+def carica(percorso: Path) -> Ambientazione:
+    """Legge l'ambientazione del libro e si ferma con un messaggio utile."""
+    if not percorso.exists():
+        raise SystemExit(
+            f"Manca {percorso}: è il file che dice di che cosa parla il libro.\n"
+            "Lo crea `python -m kdpfactory puzzle new <slug>`, poi va compilato."
+        )
+    try:
+        dati = json.loads(percorso.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as errore:
+        raise SystemExit(f"{percorso} non è JSON valido: {errore}") from errore
+    ambientazione = da_dati(dati)
+    guai = ambientazione.problemi()
+    if guai:
+        raise SystemExit(
+            f"L'ambientazione in {percorso} non è utilizzabile:\n"
+            + "\n".join(f"  - {g}" for g in guai)
+        )
+    return ambientazione
+
+
+# --------------------------------------------------------------------------
+# Ambientazione di collaudo
+# --------------------------------------------------------------------------
+#: Serve a far girare test e prove a secco senza che il sistema contenga un
+#: libro. È dichiaratamente finta: nomi di lettere greche, oggetti astratti,
+#: tre casi minuscoli. Non va pubblicata e non è un modello di scrittura.
+_COLLAUDO_DATI: dict = {
+    "titolo": "Collaudo",
+    "sottotitolo": "Ambientazione di prova, non pubblicabile",
+    "luogo": "the test bench",
+    "attributi": {
+        "colore": {
+            "label": "Colour", "noun": "colour",
+            "values": ["red", "green", "blue", "amber", "violet", "grey"],
+            "template": "carried {a} {value} token",
+            "negative_template": "did not carry {a} {value} token",
+            "listed_article": True,
+        },
+        "forma": {
+            "label": "Shape", "noun": "shape",
+            "values": ["circle", "square", "triangle", "hexagon"],
+            "template": "held {a} {value}",
+            "negative_template": "did not hold {a} {value}",
+            "listed_article": True,
+        },
+        "numero": {
+            "label": "Number", "noun": "number",
+            "values": ["one", "two", "three"],
+            "template": "was marked {value}",
+            "negative_template": "was not marked {value}",
+        },
+    },
+    "attributi_comuni": ["colore", "forma"],
+    "appellativi": ["Tester", "Probe", "Sample"],
+    "cognomi": [f"Unit{n:02d}" for n in range(1, 91)],
+    "casi": [
+        {
+            "numero": 1, "luogo": "Bench A", "titolo": "First Check",
+            "testo": "A test case with {count} entries, used to verify the pipeline.",
+            "piano": [["colore", 4], ["forma", 3], ["numero", 2]], "difficolta": "facile",
+        },
+        {
+            "numero": 2, "luogo": "Bench B", "titolo": "Second Check",
+            "testo": "Another test case with {count} entries.",
+            "piano": [["colore", 5], ["forma", 3], ["numero", 2]], "difficolta": "medio",
+        },
+        {
+            "numero": 3, "luogo": "Bench C", "titolo": "Third Check",
+            "testo": "A larger test case with {count} entries.",
+            "piano": [["colore", 6], ["forma", 4], ["numero", 3]], "difficolta": "difficile",
+        },
+    ],
+    "esempio": {
+        "numero": 0, "luogo": "Worked example", "titolo": "How The Check Works",
+        "testo": "A small worked case with {count} entries.",
+        "piano": [["colore", 3], ["forma", 2], ["numero", 2]],
+        "difficolta": "facile", "indizi_minimi": 3,
+    },
+    "finale": {
+        "titolo": "The Last Check",
+        "testo": "The final test case: it needs the answers of all the others.",
+    },
+    "come_si_gioca": (
+        "Testo segnaposto delle istruzioni: questa ambientazione serve al collaudo "
+        "della pipeline e non va pubblicata."
+    ),
+    "scheda": {
+        "paragrafi": [
+            "Testo segnaposto della scheda prodotto.",
+            "{casi} casi di collaudo, {sospetti} voci in tutto.",
+        ],
+        "punti": ["Punto segnaposto uno", "Punto segnaposto due"],
+        "chiusura": "Chiusura segnaposto.",
+        "parole_chiave": [f"parola chiave di collaudo {n}" for n in range(1, 8)],
+        "categorie": ["Collaudo / Uno", "Collaudo / Due", "Collaudo / Tre"],
+        "quarta": "Quarta di copertina segnaposto.",
+        "punti_quarta": ["{casi} casi", "{sospetti} voci"],
+    },
+    "copertina": {
+    "occhiello": "COLLAUDO",
+    "gancio": "Ambientazione di prova?",
+    "numeri": "{casi} CASI · {sospetti} VOCI",
+    "garanzia": "Ogni caso ha una sola soluzione",
+    },
+}
+
+COLLAUDO = da_dati(_COLLAUDO_DATI)
+
+
+#: Le chiavi di `ambientazione.json`, spiegate all'autore dentro il file stesso:
+#: è il punto in cui si decide di che cosa parla il libro.
+LEGGIMI = [
+    "Questo file è il libro: il sistema mette la meccanica, tu metti il mondo.",
+    "titolo / sottotitolo / luogo: dove si svolge e come si chiama.",
+    "attributi: le caratteristiche dei sospetti. `values` sono i valori possibili,",
+    "  `template` la frase al passato usata negli indizi ('wore a fedora').",
+    "attributi_comuni: quelli presenti in ogni caso; su quelli si gioca il finale.",
+    "appellativi / cognomi: da qui escono i nomi. Servono almeno tanti cognomi",
+    "  quanto il cast più grande (il prodotto dei valori in `piano`).",
+    "casi: uno per capitolo. `piano` dice quanti valori per attributo, e quindi",
+    "  quanto è grande il cast; `difficolta` è facile | medio | difficile.",
+    "esempio: il caso svolto in apertura, piccolo, che spiega il metodo.",
+    "finale: l'ultimo caso, quello che si apre solo con tutte le risposte in mano.",
+    "scheda / copertina: i testi di vendita. `{casi}`, `{sospetti}` e `{indizi}`",
+    "  vengono sostituiti con i numeri veri del libro generato.",
+]
+
+
+def collaudo_dati(casi: int = 3) -> dict:
+    """I dati del collaudo, con il numero di casi che serve alla prova.
+
+    Tre casi bastano a verificare il motore e tengono la suite veloce; per
+    verificare che ne esca un libro davvero pubblicabile ne servono abbastanza
+    da superare il minimo di pagine del progetto.
+    """
+    dati = json.loads(json.dumps(_COLLAUDO_DATI, ensure_ascii=False))
+    modelli = dati["casi"]
+    dati["casi"] = [
+        {
+            **modelli[i % len(modelli)],
+            "numero": i + 1,
+            "titolo": f"Check {i + 1}",
+            "luogo": f"Bench {i + 1}",
+        }
+        for i in range(casi)
+    ]
+    return dati
+
+
+def scrivi_collaudo(percorso: Path, casi: int = 3) -> Path:
+    """Scrive su file l'ambientazione di collaudo.
+
+    Serve ai test e alle prove a secco: la generazione legge sempre da file,
+    perché è il file che rende il libro un dato e non un pezzo di codice.
+    """
+    percorso.parent.mkdir(parents=True, exist_ok=True)
+    percorso.write_text(
+        json.dumps(collaudo_dati(casi), ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return percorso
+
+
+def scrivi_modello(percorso: Path) -> Path:
+    """Lascia un'ambientazione da compilare, come `init` lascia `brief.md`.
+
+    Parte dal collaudo perché sia subito lavorabile: si può generare il libro
+    e vederlo impaginato prima ancora di aver scritto una riga: poi si
+    sostituisce il contenuto, campo per campo.
+    """
+    dati = json.loads(json.dumps(_COLLAUDO_DATI, ensure_ascii=False))
+    dati = {"_leggimi": LEGGIMI, **dati}
+    dati["titolo"] = "Titolo del libro (da scrivere)"
+    dati["sottotitolo"] = "Sottotitolo (da scrivere)"
+    percorso.parent.mkdir(parents=True, exist_ok=True)
+    percorso.write_text(json.dumps(dati, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return percorso

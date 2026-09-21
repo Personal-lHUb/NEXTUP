@@ -100,7 +100,7 @@ Serve Python 3.11+. I font: la pipeline cerca font TrueType di sistema
 ### Prova senza spendere token
 
 ```bash
-python3 -m kdpfactory --dry-run all esempio-metodo-tre-ore
+python3 -m kdpfactory --dry-run all collaudo
 ```
 
 Genera un libro completo con testo segnaposto: serve a collaudare impaginazione,

@@ -1,5 +1,6 @@
 """Test della linea enigmistica: il valore del prodotto è che i casi sono dimostrati."""
 
+import math
 import tempfile
 import unittest
 from pathlib import Path
@@ -12,8 +13,14 @@ from kdpfactory.puzzle import generate_book, solver
 from kdpfactory.puzzle.book import PuzzleSpec, build, check, default_book_spec
 from kdpfactory.puzzle.generator import build_cast, generate_case, shared_attributes
 from kdpfactory.puzzle.model import Attribute, Case, Is, IsNot, Suspect
-from kdpfactory.puzzle.theme import CASES, EXAMPLE
+from kdpfactory.puzzle.theme import COLLAUDO, ambientazione_path, scrivi_collaudo
 
+#: I test girano sull'ambientazione di collaudo: il sistema non contiene
+#: nessun libro, e un test che dipendesse da uno lo rimetterebbe dentro.
+CASES = COLLAUDO.casi
+EXAMPLE = COLLAUDO.esempio
+
+CASI_PUBBLICABILI = 10
 SEED = 20260915
 
 HAT = Attribute(
@@ -91,7 +98,7 @@ class TestSolver(unittest.TestCase):
 class TestGeneratore(unittest.TestCase):
     def test_il_cast_e_il_prodotto_cartesiano(self):
         rng = Random(1)
-        attributes, cast = build_cast(CASES[0], rng)
+        attributes, cast = build_cast(CASES[0], rng, COLLAUDO)
         self.assertEqual(len(cast), CASES[0].cast_size)
         self.assertEqual(len({s.attrs for s in cast}), len(cast))
         self.assertEqual(len({s.name for s in cast}), len(cast))
@@ -99,26 +106,26 @@ class TestGeneratore(unittest.TestCase):
     def test_cognomi_unici_dentro_un_caso(self):
         """Gli indizi citano i sospetti per cognome: due uguali sarebbero ambigui."""
         rng = Random(2)
-        _, cast = build_cast(CASES[-1], rng)
+        _, cast = build_cast(CASES[-1], rng, COLLAUDO)
         surnames = [s.name.split()[-1] for s in cast]
         self.assertEqual(len(set(surnames)), len(surnames))
 
     def test_ogni_caso_generato_supera_la_verifica(self):
         rng = Random(SEED)
-        for theme in (EXAMPLE, CASES[0], CASES[5], CASES[-1]):
-            case = generate_case(theme, rng)
+        for theme in (EXAMPLE, CASES[0], CASES[-1]):
+            case = generate_case(theme, rng, COLLAUDO)
             verdict = solver.verify(case)
             self.assertTrue(verdict.ok, f"Caso {theme.number}: {verdict.problems}")
             self.assertEqual(verdict.solution, case.culprit)
 
     def test_solo_indizi_veri_sul_colpevole(self):
         rng = Random(3)
-        case = generate_case(CASES[4], rng)
+        case = generate_case(CASES[1], rng, COLLAUDO)
         for clue in case.clues:
             self.assertTrue(clue.keeps(case.culprit), f"indizio falso: {clue}")
 
     def test_stesso_seme_stesso_libro(self):
-        first, second = generate_book(SEED), generate_book(SEED)
+        first, second = generate_book(SEED, COLLAUDO), generate_book(SEED, COLLAUDO)
         self.assertEqual(
             [c.culprit.name for c in first.cases], [c.culprit.name for c in second.cases]
         )
@@ -126,18 +133,18 @@ class TestGeneratore(unittest.TestCase):
 
     def test_semi_diversi_libri_diversi(self):
         self.assertNotEqual(
-            [c.culprit.name for c in generate_book(SEED).cases],
-            [c.culprit.name for c in generate_book(SEED + 1).cases],
+            [c.culprit.name for c in generate_book(SEED, COLLAUDO).cases],
+            [c.culprit.name for c in generate_book(SEED + 1, COLLAUDO).cases],
         )
 
 
 class TestLibro(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.book = generate_book(SEED)
+        cls.book = generate_book(SEED, COLLAUDO)
 
-    def test_dodici_casi_piu_esempio_e_finale(self):
-        self.assertEqual(len(self.book.cases), 12)
+    def test_tanti_casi_quanti_ne_dichiara_l_ambientazione(self):
+        self.assertEqual(len(self.book.cases), len(COLLAUDO.casi))
         self.assertIsNotNone(self.book.example)
         self.assertIsNotNone(self.book.finale)
 
@@ -150,7 +157,7 @@ class TestLibro(unittest.TestCase):
         for case in [self.book.example, *self.book.cases]:
             self.assertTrue(solver.verify(case).ok, f"caso {case.number}")
 
-    def test_il_finale_si_gioca_sui_dodici_colpevoli(self):
+    def test_il_finale_si_gioca_su_tutti_i_colpevoli(self):
         finale = self.book.finale
         culprits = {case.culprit.name for case in self.book.cases}
         self.assertEqual({s.name for s in finale.suspects}, culprits)
@@ -162,12 +169,14 @@ class TestLibro(unittest.TestCase):
         self.assertTrue(solver.all_necessary(finale.suspects, finale.clues))
 
     def test_il_finale_chiama_in_causa_quasi_tutti_i_casi(self):
+        """La soglia scala col libro: fissa, su pochi casi sarebbe impossibile."""
         cited = {n for clue in self.book.finale.clues for n in clue.cases}
         cited.add(int(self.book.finale.mastermind.get("case")))
-        self.assertGreaterEqual(len(cited), 8)
+        quota = max(2, math.ceil(len(self.book.cases) * 2 / 3))
+        self.assertGreaterEqual(len(cited), quota)
 
     def test_gli_attributi_condivisi_permettono_i_confronti(self):
-        common = shared_attributes(self.book.cases)
+        common = shared_attributes(self.book.cases, COLLAUDO)
         self.assertGreaterEqual(len(common), 2)
         for case in self.book.cases:
             for key in common:
@@ -175,7 +184,7 @@ class TestLibro(unittest.TestCase):
 
     def test_le_risposte_sono_esportabili(self):
         answers = self.book.answers()
-        self.assertEqual(len(answers["cases"]), 12)
+        self.assertEqual(len(answers["cases"]), len(COLLAUDO.casi))
         self.assertEqual(answers["finale"]["mastermind"], self.book.finale.mastermind.name)
 
 
@@ -188,8 +197,12 @@ class TestProduzione(unittest.TestCase):
         backup.configure(enabled=False)
         cls.project = BookProject(Path(cls.tmp.name) / "enigmi")
         cls.project.ensure_dirs()
-        cls.spec = default_book_spec("enigmi", "Autore Test")
+        cls.spec = default_book_spec("enigmi", "Autore Test", COLLAUDO)
         cls.spec.save(cls.project.spec_path)
+        # La generazione legge l'ambientazione da file: è un dato del libro.
+        # Qui servono abbastanza casi da superare il minimo di pagine: questa
+        # prova verifica che ne esca un libro davvero pubblicabile.
+        scrivi_collaudo(ambientazione_path(cls.project.root), casi=CASI_PUBBLICABILI)
         cls.result = build(cls.project, cls.spec, PuzzleSpec(seed=SEED))
 
     @classmethod

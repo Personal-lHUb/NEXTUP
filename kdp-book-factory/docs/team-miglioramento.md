@@ -74,7 +74,7 @@ Fa il giro completo: misure, le tre analisi in parallelo, la verifica, il
 piano. Si può restringere:
 
 ```
-/migliora twelve-carriages     # un libro solo
+/migliora <slug>               # un libro solo
 /migliora scheda               # solo la resa commerciale
 /migliora codice               # solo la pipeline
 ```
@@ -82,7 +82,7 @@ piano. Si può restringere:
 Oppure si chiama un agente singolo, quando sai già che cosa ti serve:
 
 ```
-Usa l'agente analista-mercato sulla scheda di twelve-carriages.
+Usa l'agente analista-mercato sulla scheda di <slug>.
 ```
 
 ## Che cosa il team non sa
