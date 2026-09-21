@@ -154,7 +154,7 @@ esempi usare, quale taglio dare).
 | `qa <slug>` | controlli di qualità e conformità |
 | `all <slug>` | tutto in sequenza |
 | `list` | elenco dei libri e stato di avanzamento |
-| `diagnostica` | misura tutti i libri e il sistema: costi, resa, sprechi della scheda, difetti ricorrenti (nessuna chiamata API) |
+| `diagnostica` | misura tutti i libri e il sistema: costi, resa, sprechi della scheda, difetti ricorrenti (nessuna chiamata API). I banchi di prova — `book.json` con `banco_di_prova` — restano fuori; `--banchi` li include |
 | `specs --pages 160 --trim 6x9` | misure KDP per una combinazione formato/pagine |
 
 Opzioni globali: `--dry-run`, `--model` (default `claude-opus-5`), `--effort`

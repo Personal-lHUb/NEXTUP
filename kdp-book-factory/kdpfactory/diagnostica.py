@@ -413,11 +413,24 @@ class SystemReport:
         }
 
 
-def analyse(books_dir: Path, root: Path) -> SystemReport:
-    """La diagnostica completa: tutti i libri più le misure sul sistema."""
+def analyse(books_dir: Path, root: Path, *, includi_banchi: bool = False) -> SystemReport:
+    """La diagnostica completa: tutti i libri più le misure sul sistema.
+
+    I banchi di prova — le cartelle che dichiarano `banco_di_prova` in
+    `book.json`, a partire da `collaudo` — restano fuori dai conti. Sono
+    attrezzatura: hanno per forza la scheda vuota, zero parole chiave e un
+    manoscritto segnaposto, e misurarli riempie il rapporto di rilievi ad alto
+    impatto che hanno l'aspetto di un segnale e non lo sono. Con
+    `includi_banchi=True` li si misura lo stesso, per controllare che la
+    diagnostica funzioni quando non c'è nessun libro vero.
+    """
     reports: list[BookReport] = []
+    banchi: list[str] = []
     for book_json in sorted(books_dir.glob("*/book.json")):
         spec = BookSpec.load(book_json)
+        if spec.banco_di_prova and not includi_banchi:
+            banchi.append(spec.slug)
+            continue
         project = BookProject(book_json.parent)
         reports.append(analyse_book(project, spec))
 
@@ -427,6 +440,7 @@ def analyse(books_dir: Path, root: Path) -> SystemReport:
     costo = sum(b.economia.get("costo_api_usd", 0) for b in reports)
     system.totali = {
         "libri": len(reports),
+        "banchi_di_prova_esclusi": banchi,
         "pagine_totali": sum(b.pagine for b in reports),
         "costo_api_totale_usd": round(costo, 2),
         "costo_api_medio_per_libro_usd": round(costo / len(reports), 2) if reports else 0,
@@ -452,6 +466,17 @@ def render(system: SystemReport) -> str:
         f"(${t['costo_api_medio_per_libro_usd']} per libro)"
     )
     lines.append(f"{t['rilievi_ad_alto_impatto']} rilievi ad alto impatto")
+    banchi = t.get("banchi_di_prova_esclusi") or []
+    if banchi:
+        lines.append(
+            f"fuori dai conti perché non sono libri ma attrezzatura: {', '.join(banchi)}"
+        )
+    if not system.libri:
+        lines.append("")
+        lines.append(
+            "Nessun libro da misurare: in `books/` c'è solo il banco di prova. "
+            "I rilievi qui sotto riguardano il codice, non un prodotto."
+        )
     lines.append("")
 
     if system.ricorrenze:

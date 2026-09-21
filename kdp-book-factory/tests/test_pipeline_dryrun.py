@@ -171,7 +171,21 @@ class TestCicloDiImpaginazione(unittest.TestCase):
         """240 pagine, 32 capitoli: 288 → 220 salta 68 pagine su una finestra di 12."""
         result = self.esegui([288, 220, 288, 220], target_pages=240, capitoli=32)
         self.assertEqual(result.iterations, 2)
-        self.assertEqual(result.pages, 220)       # il migliore dei due, non l'ultimo
+        self.assertEqual(result.pages, 220)
+        self.assertFalse(result.in_range)
+
+    def test_si_tiene_l_ultima_misura_anche_quando_e_la_peggiore(self):
+        """Limite dichiarato del freno, non una svista.
+
+        Su `[288, 220]` l'ultima misura è anche la migliore, ed è facile
+        credere che il freno scelga la migliore. Non è così: `revise_length` ha
+        già riscritto i capitoli su disco, quindi tornare a 226 costerebbe
+        un'altra riscrittura dell'intero libro. Il freno serve a non spendere
+        un giro inutile, non a scegliere.
+        """
+        result = self.esegui([226, 300], target_pages=240, capitoli=32)
+        self.assertEqual(result.iterations, 2)
+        self.assertEqual(result.pages, 300)        # 226 era più vicino: si perde
         self.assertFalse(result.in_range)
 
     def test_un_libro_che_converge_non_viene_toccato(self):

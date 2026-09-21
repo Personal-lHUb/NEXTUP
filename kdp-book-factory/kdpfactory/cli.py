@@ -663,7 +663,7 @@ def cmd_diagnostica(args) -> int:
         print(f"Nessun libro in {root}")
         return 0
     project_root = Path(__file__).resolve().parent.parent
-    system = diagnostica.analyse(root, project_root)
+    system = diagnostica.analyse(root, project_root, includi_banchi=args.banchi)
 
     output = Path(args.output) if args.output else project_root / "diagnostica.json"
     output.write_text(
@@ -875,6 +875,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument("--json", action="store_true", help="stampa il rapporto completo in JSON")
     p.add_argument("--output", help="dove salvare il rapporto (default: diagnostica.json)")
+    p.add_argument(
+        "--banchi",
+        action="store_true",
+        help="misura anche i banchi di prova (collaudo): normalmente restano fuori",
+    )
     p.set_defaults(func=cmd_diagnostica)
 
     p = sub.add_parser("specs", help="specifiche KDP per formato e pagine")

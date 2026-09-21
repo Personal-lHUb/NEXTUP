@@ -68,6 +68,11 @@ class BookSpec:
     year: int = 0
     price_eur: float = 0.0
     notes: str = ""                      # istruzioni libere per il modello
+    #: `true` se questa cartella non è un libro ma un banco di prova: la
+    #: pipeline ci gira sopra a secco, la diagnostica la lascia fuori dai
+    #: conti. Senza questo marcatore i difetti dell'attrezzatura di prova
+    #: compaiono nel rapporto con l'aspetto di difetti di un prodotto.
+    banco_di_prova: bool = False
     #: contenuto di `brief.md`: non si salva in book.json, si legge dal file
     brief: str = field(default="", repr=False)
 

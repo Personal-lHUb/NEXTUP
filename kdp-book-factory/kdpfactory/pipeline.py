@@ -117,8 +117,13 @@ def build_until_in_range(
         # Quando il salto misurato è più largo della finestra di accettazione,
         # l'obiettivo sta *dentro* il salto e non è raggiungibile per questa
         # strada: un altro giro ricompra l'intero libro e non avvicina niente.
-        # Ci si ferma qui, sul risultato migliore già ottenuto, invece che dopo
-        # un'altra riscrittura che riporterebbe al punto di partenza.
+        #
+        # ATTENZIONE, ed è un limite dichiarato: ci si ferma sull'**ultima**
+        # misura, non sulla migliore. Se la correzione appena fatta ha
+        # peggiorato le cose, si tiene comunque quella — perché `revise_length`
+        # ha già riscritto i capitoli su disco e qui non c'è modo di tornare
+        # indietro senza ricomprarli. Il freno serve a non spendere un altro
+        # giro inutile, non a scegliere il risultato migliore.
         if pagine_precedenti is not None:
             salto = abs(typeset_result.pages - pagine_precedenti)
             if salto > high - low:

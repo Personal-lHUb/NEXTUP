@@ -40,6 +40,16 @@ Gli sprechi della scheda prodotto si misurano allo stesso modo: una parola
 chiave che ripete una parola già nel titolo è uno slot buttato, perché il
 titolo è indicizzato di suo. Non è un'opinione, è un confronto fra due liste.
 
+**Quello che il rapporto non misura: i banchi di prova.** Una cartella di
+`books/` che dichiara `"banco_di_prova": true` in `book.json` — oggi solo
+`collaudo` — resta fuori dai conti. È attrezzatura, non un prodotto: la sua
+scheda è vuota per definizione e il suo manoscritto è segnaposto, quindi
+misurarla produce rilievi ad alto impatto veri nei numeri e falsi nel
+significato — esattamente il genere di rumore su cui il team aprirebbe un piano
+di lavoro. L'esclusione è scritta nei totali (`banchi_di_prova_esclusi`), e
+`python3 -m kdpfactory diagnostica --banchi` li misura lo stesso quando serve
+controllare la diagnostica stessa.
+
 ## Chi fa cosa
 
 | agente | compito | che cosa consegna |

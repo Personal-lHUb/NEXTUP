@@ -60,9 +60,12 @@ dei casi, la scheda — sta in `books/<slug>/ambientazione.json`, che `puzzle ne
 lascia da compilare.
 
 **Il sistema è una fabbrica, non un prodotto.** In `books/` c'è solo `collaudo`,
-che non è un libro: serve alle prove a secco e alla diagnostica. Se ti accorgi
-che un contenuto pubblicabile è finito nel codice o nel collaudo, è nel posto
-sbagliato — va spostato in un libro suo.
+che non è un libro: serve alle prove a secco. Lo dichiara da sé, con
+`"banco_di_prova": true` in `book.json`, e per questo la diagnostica lo lascia
+fuori dai conti (`--banchi` per misurarlo lo stesso): i difetti
+dell'attrezzatura di prova non sono difetti di un prodotto, e nel rapporto
+hanno lo stesso aspetto. Se ti accorgi che un contenuto pubblicabile è finito
+nel codice o nel collaudo, è nel posto sbagliato — va spostato in un libro suo.
 
 ## Il progetto
 

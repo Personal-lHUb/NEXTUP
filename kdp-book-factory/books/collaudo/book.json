@@ -32,5 +32,6 @@
   "publisher": "",
   "year": 2026,
   "price_eur": 0.0,
-  "notes": ""
+  "notes": "",
+  "banco_di_prova": true
 }

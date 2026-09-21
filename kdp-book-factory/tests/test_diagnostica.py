@@ -223,14 +223,73 @@ class TestQualita(unittest.TestCase):
         self.assertTrue(any("bloccanti" in f.fatto for f in report.rilievi))
 
 
+class TestBanchiDiProva(unittest.TestCase):
+    """L'attrezzatura di prova non è un prodotto: fuori dai conti.
+
+    `collaudo` ha per forza la scheda vuota e il manoscritto segnaposto. Se
+    entra nel rapporto, i suoi difetti si presentano come rilievi ad alto
+    impatto su un libro — e il team di miglioramento apre il piano di lavoro
+    su rumore prodotto dal banco di prova.
+    """
+
+    def banco(self, tmp: Path, slug: str, **overrides) -> None:
+        cartella = tmp / slug
+        cartella.mkdir()
+        demo_spec(slug=slug, **overrides).save(cartella / "book.json")
+
+    def test_il_banco_non_entra_nel_rapporto(self):
+        root = Path(__file__).resolve().parent.parent
+        with tempfile.TemporaryDirectory() as tmp:
+            libri = Path(tmp)
+            self.banco(libri, "collaudo", banco_di_prova=True)
+            self.banco(libri, "libro-vero")
+            system = diagnostica.analyse(libri, root)
+
+        self.assertEqual([b.slug for b in system.libri], ["libro-vero"])
+        # l'esclusione si dichiara, non si nasconde: nei totali c'è scritta
+        self.assertEqual(system.totali["banchi_di_prova_esclusi"], ["collaudo"])
+        self.assertNotIn(
+            "collaudo", json.dumps([b.to_dict() for b in system.libri], ensure_ascii=False)
+        )
+
+    def test_si_possono_misurare_lo_stesso_chiedendolo(self):
+        root = Path(__file__).resolve().parent.parent
+        with tempfile.TemporaryDirectory() as tmp:
+            libri = Path(tmp)
+            self.banco(libri, "collaudo", banco_di_prova=True)
+            system = diagnostica.analyse(libri, root, includi_banchi=True)
+
+        self.assertEqual([b.slug for b in system.libri], ["collaudo"])
+        self.assertEqual(system.totali["banchi_di_prova_esclusi"], [])
+
+    def test_il_collaudo_del_progetto_e_dichiarato_banco(self):
+        """Il marcatore sta in `books/collaudo/book.json`, non in un elenco nel codice."""
+        root = Path(__file__).resolve().parent.parent
+        spec = BookSpec.load(root / "books" / "collaudo" / "book.json")
+        self.assertTrue(spec.banco_di_prova)
+
+
 class TestRapportoCompleto(unittest.TestCase):
     def test_gira_sui_libri_veri_e_si_salva(self):
         root = Path(__file__).resolve().parent.parent
-        system = diagnostica.analyse(root / "books", root)
+        system = diagnostica.analyse(root / "books", root, includi_banchi=True)
         self.assertGreater(system.totali["libri"], 0)
         # deve essere serializzabile: è il file che legge il team di agenti
         json.dumps(system.to_dict(), ensure_ascii=False)
         self.assertIn("DIAGNOSTICA DEL SISTEMA", diagnostica.render(system))
+
+    def test_senza_libri_il_rapporto_lo_dice(self):
+        """Oggi è il caso vero: in `books/` c'è solo il banco di prova."""
+        root = Path(__file__).resolve().parent.parent
+        system = diagnostica.analyse(root / "books", root)
+        testo = diagnostica.render(system)
+
+        self.assertEqual(system.libri, [])
+        self.assertEqual(system.totali["rilievi_ad_alto_impatto"], 0)
+        self.assertIn("Nessun libro da misurare", testo)
+        self.assertIn("collaudo", testo)
+        # le misure sul codice restano: non dipendono dai libri
+        self.assertGreater(system.codice["righe_codice"], 0)
 
     def test_i_rilievi_sono_ordinati_per_impatto(self):
         report = BookReport(slug="prova", rilievi=[

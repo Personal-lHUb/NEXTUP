@@ -14,6 +14,7 @@ correggere costa poco.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -188,6 +189,34 @@ def _pagine_valide(valore) -> int:
     return max(kdpspecs.PROJECT_MIN_PAGES, min(kdpspecs.PROJECT_MAX_PAGES, pagine))
 
 
+def _prezzo_valido(valore) -> float:
+    """Il prezzo proposto, letto com'è scritto su una scheda vera.
+
+    Su `amazon.it` il prezzo è «12,90 €», non `12.9`: la virgola decimale, il
+    simbolo di valuta e gli spazi arrivano dentro il campo. Qui si toglie tutto
+    quello che non è una cifra e si torna a zero se non ne resta niente —
+    `metadata.py` calcola comunque un prezzo consigliato dalle pagine.
+    """
+    if isinstance(valore, (int, float)) and not isinstance(valore, bool):
+        return max(0.0, float(valore))
+    testo = re.sub(r"[^\d,.]", "", str(valore or ""))
+    if not testo:
+        return 0.0
+    # «1.234,56» è europeo, «1,234.56» è anglosassone: decide l'ultimo separatore.
+    if "," in testo and "." in testo:
+        testo = (
+            testo.replace(".", "").replace(",", ".")
+            if testo.rfind(",") > testo.rfind(".")
+            else testo.replace(",", "")
+        )
+    else:
+        testo = testo.replace(",", ".")
+    try:
+        return max(0.0, float(testo))
+    except ValueError:
+        return 0.0
+
+
 def spec_dal_piano(slug: str, piano: dict, autore: str) -> BookSpec:
     """Traduce il piano del posizionamento in una `BookSpec` valida."""
     lingua = str(piano.get("lingua") or "it").strip().lower()[:2] or "it"
@@ -206,7 +235,7 @@ def spec_dal_piano(slug: str, piano: dict, autore: str) -> BookSpec:
         target_pages=_pagine_valide(piano.get("pagine_obiettivo")),
         keywords=[str(k).strip() for k in (piano.get("parole_chiave") or []) if str(k).strip()],
         categories=[str(c).strip() for c in (piano.get("categorie") or []) if str(c).strip()],
-        price_eur=float(piano.get("prezzo") or 0.0),
+        price_eur=_prezzo_valido(piano.get("prezzo")),
         year=date.today().year,
     )
 
@@ -263,21 +292,28 @@ def scrivi(project: BookProject, risultato: Acquisizione, autore: str) -> BookSp
             "viene scritta.\n"
             + "\n".join(f"  ✗ {f.category} — {f.issue}" for f in risultato.bloccanti)
         )
+    # L'analisi si salva per prima: costa quattro chiamate su una pagina intera
+    # con tutte le recensioni, ed è la cosa più cara che il sistema produce.
+    # Se il piano avesse un campo che non regge, si corregge a mano da qui
+    # invece di ricomprare tutto.
+    project.ensure_dirs()
+    acquisizione_path(project).parent.mkdir(parents=True, exist_ok=True)
+    acquisizione_path(project).write_text(
+        json.dumps(risultato.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
     spec = spec_dal_piano(project.root.name, risultato.piano, autore)
     problemi = spec.validate()
     if problemi:
         raise SystemExit(
             "Il posizionamento ha prodotto una scheda non valida:\n"
             + "\n".join(f"  - {p}" for p in problemi)
+            + f"\n\nL'analisi è salva in {acquisizione_path(project)}: "
+            "correggi il piano lì dentro, non serve rifare le chiamate."
         )
-    project.ensure_dirs()
     spec.save(project.spec_path)
     project.brief_path.write_text(
         brief_dal_piano(risultato.piano, risultato.scheda, risultato.asin), encoding="utf-8"
-    )
-    acquisizione_path(project).parent.mkdir(parents=True, exist_ok=True)
-    acquisizione_path(project).write_text(
-        json.dumps(risultato.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8"
     )
     return spec
 

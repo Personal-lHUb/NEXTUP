@@ -326,6 +326,14 @@ usa il modello) produce `diagnostica.json` con:
 Un difetto su un libro è del libro; lo stesso difetto su tre libri è della
 pipeline, e si corregge una volta sola.
 
+**I banchi di prova restano fuori dai conti.** Una cartella che dichiara
+`"banco_di_prova": true` in `book.json` — oggi solo `collaudo` — non entra nel
+rapporto: è attrezzatura, ha per forza la scheda vuota e il manoscritto
+segnaposto, e misurarla riempie i totali di rilievi ad alto impatto che hanno
+l'aspetto di un segnale senza esserlo. L'esclusione si vede
+(`totali.banchi_di_prova_esclusi`); per misurarli lo stesso:
+`python3 -m kdpfactory diagnostica --banchi`.
+
 **Gli agenti:**
 
 | agente | compito | consegna |

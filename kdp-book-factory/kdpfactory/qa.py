@@ -19,9 +19,11 @@ from .prompts import BANNED_OPENERS
 #: Righe fatte per essere riempite a mano: file di trattini bassi o di puntini
 #: di guida. Sono il segno di un medium-content, e su un full-content — il cui
 #: valore «risiede interamente nella sostanza del testo» — non ci devono stare.
-#: I trattini restano fuori di proposito: `---` in Markdown è una linea
-#: orizzontale legittima, non uno spazio da compilare.
-FILL_LINE = re.compile(r"^[ \t_]{12,}$|^[ \t.·]{12,}$", flags=re.M)
+#: Servono almeno dodici caratteri di riempimento *veri*: una riga di soli
+#: spazi non è uno spazio da compilare, è una riga vuota, e qualunque editor ne
+#: lascia. I trattini restano fuori di proposito: `---` in Markdown è una linea
+#: orizzontale legittima.
+FILL_LINE = re.compile(r"^[ \t]*(?:_[ \t]*){12,}$|^[ \t]*(?:[.·][ \t]*){12,}$", flags=re.M)
 
 PLACEHOLDER_PATTERNS = [
     r"\bsegnaposto\b",
