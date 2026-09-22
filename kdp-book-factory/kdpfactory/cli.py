@@ -13,7 +13,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from . import agents, backup, diagnostica, kdpspecs, pipeline, planner, writer
+from . import agents, backup, coverbrief, coverdesign, diagnostica, kdpspecs, pipeline, planner, writer
 from .llm import DEFAULT_MODEL, LLMClient, LLMConfig, api_key_present
 from .models import BookProject, BookSpec, slugify
 
@@ -331,6 +331,40 @@ def cmd_metadata(args) -> int:
             f"  {row['marketplace']:<14} stampa {row['costo_stampa']:.2f} · "
             f"prezzo {row['prezzo_consigliato']:.2f} · royalty {row['royalty_per_copia']:.2f}"
         )
+    return 0
+
+
+def cmd_copertina(args) -> int:
+    """Il brief di copertina per uno strumento grafico. Nessuna chiamata API.
+
+    Il motore disegna già una copertina che funziona in miniatura e non costa
+    niente. Questo comando serve quando si vuole qualcosa che il motore non sa
+    fare — un'atmosfera, una scena, un personaggio — e si è disposti a passare
+    da uno strumento grafico: il sistema scrive il brief, tu porti l'immagine.
+    """
+    project, spec = open_project(args)
+    state = project.load_state()
+    pages = (state.get("build") or {}).get("pagine") or spec.target_pages
+    meta_path = project.build_dir / "metadata.json"
+    meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
+    testi = (state.get("cover") or {}).get("testi") or {}
+    copy = coverdesign.copy_from_dict(testi, spec) if testi else None
+
+    project.ensure_dirs()
+    output = project.build_dir / "copertina-brief.md"
+    if output.exists():
+        save_backup(project, args, "brief di copertina precedente", force=True)
+    output.write_text(
+        coverbrief.brief(spec, pages=pages, metadata=meta, copy=copy), encoding="utf-8"
+    )
+    save_backup(project, args, "brief di copertina")
+
+    categoria = "medium-content" if spec.is_medium_content else "full-content"
+    print(f"Brief di copertina [{categoria}, {pages} pagine]: {output}")
+    print("\nIncollalo nello strumento grafico, poi salva l'immagine che torna in")
+    print(f"  {project.assets_dir / 'copertina.jpg'}")
+    print("e rilancia `build`: viene ritagliata sulla prima, portata a 300 DPI e")
+    print("misurata. Se i pixel non bastano, il controllo qualità lo dice.")
     return 0
 
 
@@ -812,6 +846,13 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("metadata", help="genera la scheda prodotto KDP")
     p.add_argument("slug")
     p.set_defaults(func=cmd_metadata)
+
+    p = sub.add_parser(
+        "copertina",
+        help="brief di copertina da dare a uno strumento grafico (nessuna chiamata API)",
+    )
+    p.add_argument("slug")
+    p.set_defaults(func=cmd_copertina)
 
     p = sub.add_parser("qa", help="controlli di qualità e conformità")
     p.add_argument("slug")

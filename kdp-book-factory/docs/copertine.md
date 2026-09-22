@@ -46,11 +46,24 @@ Cinque campi, in ordine di importanza percettiva (`CoverCopy`):
 
 | campo | che cos'è | esempio |
 |---|---|---|
-| `kicker` | l'occhiello: dice il genere in due parole | `DEDUCTION PUZZLES` |
+| `kicker` | l'occhiello: dice che prodotto è, in due parole | `ENIGMI DI DEDUZIONE` |
 | `title` | l'elemento dominante | il titolo del libro |
-| `hook` | il ciclo aperto | `Can you name the killer in every carriage?` |
-| `stats` | i numeri, in cifre | `13 CASES · 908 SUSPECTS · 1 MASTERMIND` |
-| `badge` | una garanzia vera, breve | `Every case has exactly one solution` |
+| `hook` | il ciclo aperto | `Riesci a dire chi è stato in ogni carrozza?` |
+| `stats` | i numeri, in cifre | `13 CASI · 908 SOSPETTI` |
+| `badge` | una garanzia vera, breve | `Ogni caso ha una sola soluzione` |
+
+I testi di copertina vanno **nella lingua del libro** (`language` in
+`book.json`): un occhiello inglese su una copertina italiana dice al cliente
+che il libro non è per lui, e il clic lo perdi lì. Le etichette di serie stanno
+in `kdpfactory/i18n.py`.
+
+Insieme ai testi viaggiano due campi che non si stampano: `content_type` — la
+categoria di prodotto, che decide quale formula si applica — e `facts`, cioè
+**le cifre che il libro ha davvero**. Chi costruisce la copertina le dichiara
+(la pipeline conta pagine, capitoli e schede pratiche; la linea enigmistica
+conta casi, sospetti e indizi), e il controllo rifiuta qualunque numero
+stampato che non sia in quell'elenco. Un numero in copertina è una promessa al
+cliente: o è contato, o non si stampa.
 
 Il **sottotitolo completo non finisce in copertina**: in miniatura non si legge
 e ruba spazio al titolo. Se non specifichi il gancio, `derive_copy` usa la prima
@@ -119,6 +132,62 @@ proporzioni giuste), più una voce in `ARTS` con le parole chiave, le proporzion
 e quanto è concreta. Due regole: **un solo accento**, e tutto dentro `area` —
 `coverart.draw` isola lo stato grafico, ma non ritaglia niente.
 
+## Le due categorie di prodotto
+
+Le sette regole valgono per ogni libro. Quello che **cambia con la categoria**
+(`content_type` in `book.json`, definita in `CLAUDE.md`) è che cosa si mette in
+copertina — perché medium e full non vendono la stessa cosa.
+
+| | medium-content | full-content |
+|---|---|---|
+| formula | segnale di categoria + beneficio + quantificatore + garanzia | promessa + mondo + metafora visiva |
+| cosa viene prima | la **funzione**: che prodotto è, per chi, quanto contiene | l'**emozione**: che promessa mantiene, in che mondo si entra |
+| il numero | è parte del disegno: la banda d'accento in fondo alla prima esiste per quello | non c'è |
+| la garanzia | sì, se è vera e verificabile | no: racconta il prodotto sbagliato |
+
+Il sistema la fa rispettare dove si misura, e l'agente `copertina` blocca:
+
+- un **medium-content senza quantificatore** — la copertina non dice quanto
+  contiene il libro, che è la prima cosa che questo cliente cerca;
+- un **full-content con le specifiche da scaffale** — numeri e garanzie su
+  un'opera a testo pieno;
+- una **cifra che non corrisponde a nessun dato misurato** del libro.
+
+Resta un avviso, non un blocco, il medium-content senza occhiello: manca il
+segnale di categoria, ma il libro è pubblicabile.
+
+Su un medium-content il quantificatore, se la scheda non lo propone, **lo
+calcola la pipeline**: schede pratiche contate nel manoscritto (le sezioni
+`## In pratica`), capitoli, pagine del PDF finito, e i caratteri grandi come
+garanzia quando il corpo supera i 13 punti. È la stessa regola della linea
+enigmistica, che i suoi numeri li prende dal libro generato.
+
+## Quando il motore non basta: il brief
+
+Il motore disegna copertine che funzionano in miniatura e non costa niente, ma
+c'è una cosa che per costruzione non sa fare: l'**atmosfera**. Una silhouette
+vettoriale su fondo piatto dice *che libro è*; non dice *che mondo è*. Su un
+full-content, dove si compra un'esperienza e non una specifica, quella
+differenza si paga in clic.
+
+Per quei casi il sistema non disegna: scrive il brief.
+
+```bash
+python3 -m kdpfactory copertina <slug>
+```
+
+Produce `build/copertina-brief.md` — in inglese, perché è la lingua in cui gli
+strumenti grafici sbagliano meno — coi dati che il libro ha già: categoria e
+formula, promessa, pubblico, nicchia, testi da stampare (nella lingua del
+libro) con i numeri contati, palette, soglie del sistema, misure di stampa a
+300 DPI, divieti di imitazione e la lista di controllo finale. Nessuna chiamata
+API.
+
+L'immagine che torna rientra dalla porta che esiste già: si salva in
+`assets/copertina.jpg` e al `build` successivo `coverimage.py` la misura, la
+ritaglia sulle proporzioni esatte della prima, la porta a 300 DPI e dice se i
+pixel bastano.
+
 ## L'adattamento per tipo di libro
 
 Il sistema è lo stesso per tutti i libri; cambia l'occhiello e cambia
@@ -129,9 +198,14 @@ pubblici.
 
 | genere | occhiello | illustrazione di riserva |
 |---|---|---|
-| `enigmi` | `DEDUCTION PUZZLES` | `elenco` |
+| `enigmi` | `ENIGMI DI DEDUZIONE` / `DEDUCTION PUZZLES` | `elenco` |
 | `non-fiction` | nessuno | `scala` |
 | `fiction` | nessuno | `porta` |
+
+Solo l'enigmistica ha un occhiello di serie: «NON-FICTION» stampato in
+copertina non è un segnale di categoria, è rumore. Su un medium-content che non
+sia di enigmi l'occhiello lo propone l'agente dei metadati, e se manca il
+controllo lo segnala.
 
 ## Le palette
 

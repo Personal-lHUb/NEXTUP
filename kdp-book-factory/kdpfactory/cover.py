@@ -68,15 +68,23 @@ def build_cover(
     copy: CoverCopy | None = None,
     genre: str = "",
     metadata: dict | None = None,
+    chapters: int = 0,
+    practice: int = 0,
 ) -> dict:
     """Genera il PDF di copertina e ne verifica la resa in miniatura.
 
     La prima di copertina segue il sistema di `coverdesign`: un solo elemento
     dominante, titolo leggibile a 160 px, contrasto misurato, codice di genere.
+
+    `chapters` e `practice` sono i numeri contati sul manoscritto: su un
+    medium-content diventano il quantificatore in copertina, e in ogni caso
+    sono i soli che il controllo accetta di vedere stampati.
     """
     genre = genre or ("enigmi" if getattr(spec, "genre", "") == "puzzle" else spec.genre)
     theme = pick_theme(spec, genre)
-    cover_copy = copy or coverdesign.derive_copy(spec, metadata, genre)
+    cover_copy = copy or coverdesign.derive_copy(
+        spec, metadata, genre, pages=pages, chapters=chapters, practice=practice
+    )
     display = register_family("sans")
     serif = register_family("serif")
     set_default_canvas_font(serif)

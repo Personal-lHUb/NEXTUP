@@ -115,7 +115,8 @@ python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 | `writer.py` | scaletta, capitoli, continuità, revisioni di lunghezza |
 | `typeset.py` | interno PDF (ReportLab Platypus) |
 | `cover.py` | copertina full-wrap: quarta + dorso + prima |
-| `coverdesign.py` | **sistema** di copertina: regole, palette, testi, verifica |
+| `coverdesign.py` | **sistema** di copertina: regole, palette, testi, formule di categoria, verifica |
+| `coverbrief.py` | brief di copertina per uno strumento grafico esterno |
 | `coverart.py` | **illustrazioni vettoriali** della prima |
 | `coverimage.py` | preparazione di una foto fornita dall'autore (300 DPI, velatura) |
 | `epub.py` | EPUB 3 senza dipendenze esterne |
@@ -262,12 +263,37 @@ quella miniatura non esiste. Documentato per esteso in `docs/copertine.md`.
 **Mai**: finti timbri di bestseller, stelline, premi o recensioni. Vietati da KDP
 e comunque portano resi. L'agente `copertina` li blocca (`BANNED_CLAIMS`).
 
-**Testi della prima** (`CoverCopy`): `kicker` (occhiello di genere), `title`,
-`hook` (il ciclo aperto), `stats` (numeri in cifre), `badge` (una garanzia vera),
-`author`, `subject` (serve a scegliere l'illustrazione). Il **sottotitolo completo
-non va in copertina**: in miniatura non si legge e ruba spazio al titolo.
-Sovrascrivibili da `metadata.json` con `cover_kicker`, `cover_hook`,
-`cover_stats`, `cover_badge`.
+**Testi della prima** (`CoverCopy`): `kicker` (occhiello: che prodotto è),
+`title`, `hook` (il ciclo aperto), `stats` (numeri in cifre), `badge` (una
+garanzia vera), `author`, `subject` (serve a scegliere l'illustrazione). Il
+**sottotitolo completo non va in copertina**: in miniatura non si legge e ruba
+spazio al titolo. Sovrascrivibili da `metadata.json` con `cover_kicker`,
+`cover_hook`, `cover_stats`, `cover_badge`. Vanno **nella lingua del libro**
+(etichette di serie in `i18n.py`).
+
+**Le due formule, per categoria di prodotto** (`content_type`, vedi CLAUDE.md):
+
+| | medium-content | full-content |
+|---|---|---|
+| formula | segnale di categoria + beneficio + quantificatore + garanzia | promessa + mondo + metafora visiva |
+| viene prima | la funzione: che prodotto è, per chi, quanto contiene | l'emozione: che promessa mantiene |
+| numeri e garanzie | sì, sono parte del disegno | no: raccontano il prodotto sbagliato |
+
+L'agente `copertina` blocca un medium-content senza quantificatore, un
+full-content con le specifiche da scaffale, e **ogni cifra che non corrisponde
+a un dato misurato del libro**: `CoverCopy.facts` porta i numeri veri (la
+pipeline conta pagine, capitoli e sezioni `## In pratica`; la linea enigmistica
+conta casi, sospetti, indizi) e fuori da quell'elenco non si stampa niente.
+Su un medium-content il quantificatore, se la scheda non lo propone, lo calcola
+la pipeline.
+
+**Quando il motore non basta** — l'atmosfera, una scena, un personaggio: non si
+disegna, si scrive il brief. `python3 -m kdpfactory copertina <slug>` produce
+`build/copertina-brief.md` (in inglese, coi dati del libro, la formula della
+categoria, le soglie, le misure di stampa a 300 DPI e i divieti di imitazione),
+da incollare in uno strumento grafico. L'immagine che torna si salva in
+`assets/copertina.jpg` e al `build` successivo `coverimage.py` la ritaglia,
+la porta a 300 DPI e dice se i pixel bastano. Nessuna chiamata API.
 
 **Sei palette** (`PALETTES`), tutte oltre 7:1 e tutte che staccano dal bianco:
 `notturno` (nero-blu/giallo), `allarme` (nero/rosso), `inchiostro`

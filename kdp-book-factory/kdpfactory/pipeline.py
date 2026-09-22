@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
-from . import agents, backup, coverimage, kdpspecs, planner, qa, typeset, writer
+from . import agents, backup, coverdesign, coverimage, kdpspecs, planner, qa, typeset, writer
 from . import cover as cover_module
 from . import epub as epub_module
 from . import metadata as metadata_module
@@ -204,6 +204,11 @@ def build_package(
         # `cover_stats` e `cover_badge` in `metadata.json` hanno la precedenza.
         metadata=meta,
         genre=spec.genre,
+        # I numeri contati sul manoscritto: su un medium-content sono il
+        # quantificatore in copertina, e sono gli unici che il controllo
+        # accetta di vedere stampati.
+        chapters=len([c for c in outline.chapters if c.role == "chapter"]),
+        practice=coverdesign.count_practice_sections(markdown for _, _, markdown in chapters),
     )
     if cover_info.get("immagine"):
         print("  copertina con immagine dell'autore:")

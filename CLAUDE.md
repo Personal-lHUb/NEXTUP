@@ -51,7 +51,11 @@ rispettare:
   mano, che contraddicono la definizione;
 - su un **medium-content** l'agente di impaginazione misura quante pagine
   hanno la stessa struttura: oltre la metà, il libro è scivolato nel
-  low-content e lo dice.
+  low-content e lo dice;
+- la **copertina** segue la formula della categoria — il medium-content vende
+  la funzione (che prodotto è, quanto contiene), il full-content la promessa —
+  e ogni cifra stampata dev'essere un numero contato sul libro, mai dichiarato
+  (`docs/copertine.md`).
 
 La linea prosa (`outline` → `write` → `build`, cioè `all`) produce
 full-content; la linea enigmistica (`puzzle`) produce medium-content, e **non

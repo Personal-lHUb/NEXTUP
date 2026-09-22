@@ -69,6 +69,13 @@ SEVERITY_BY_KEYWORD = (
     ("blocchi di testo", "importante"),
     ("righe (massimo", "importante"),
     ("non è stato trovato", "bloccante"),
+    # La formula della categoria (CLAUDE.md) si fa rispettare dove si misura:
+    # un medium-content che non dice quanto contiene e un full-content vestito
+    # da prodotto da scaffale sbagliano il cliente, non il gusto.
+    ("senza quantificatore", "bloccante"),
+    ("specifiche da scaffale", "bloccante"),
+    ("non corrispondono a nessun dato", "bloccante"),
+    ("senza segnale di categoria", "importante"),
 )
 
 
@@ -217,4 +224,15 @@ def _read_copy(ctx: AgentContext) -> list[AgentFinding]:
                 suggestion="Usa le cifre: in miniatura si leggono in un colpo d'occhio.",
             )
         )
+
+    findings.extend(
+        AgentFinding(
+            agent=Copertina.name,
+            severity=_severity(problem),
+            category="categoria di prodotto",
+            issue=problem,
+            suggestion=_remedy(problem),
+        )
+        for problem in coverdesign.copy_problems(coverdesign.copy_from_dict(copy, ctx.spec))
+    )
     return findings

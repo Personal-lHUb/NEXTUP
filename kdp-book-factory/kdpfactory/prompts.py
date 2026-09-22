@@ -273,12 +273,33 @@ METADATA_SYSTEM = """Sei un esperto di posizionamento di libri su Amazon. Conosc
 Regole obbligatorie:
 - Non inserire nella descrizione: nomi di altri autori o libri, affermazioni non verificabili ("bestseller", "il migliore"), promesse di risultati garantiti, riferimenti a prezzi o promozioni, link, indirizzi email.
 - Le keyword non devono ripetere parole già presenti nel titolo o nel sottotitolo, non devono contenere nomi di marchi o autori, né termini soggettivi ("il migliore").
+- Nei testi di copertina non scrivere cifre: quante pagine, quanti capitoli, quante schede lo conta il sistema sul libro finito, e un numero che il libro non ha viene rifiutato prima della stampa.
 - Rispondi ESCLUSIVAMENTE con JSON valido, senza blocchi di codice."""
+
+
+#: I testi della prima di copertina cambiano con la categoria di prodotto
+#: (CLAUDE.md): il medium-content si vende dicendo che prodotto è, il
+#: full-content dicendo che promessa mantiene.
+COVER_FIELDS_MEDIUM = """  "cover_kicker": "che tipo di prodotto è, 2-3 parole in maiuscolo (es. SCHEDE PRATICHE, ESERCIZI GUIDATI): è il primo segnale che il cliente legge in miniatura",
+  "cover_hook": "il beneficio funzionale in una riga, max 62 caratteri, meglio se resta in sospeso",
+  "cover_badge": "una garanzia vera e verificabile sul contenuto, max 5 parole, senza cifre (stringa vuota se non ne esiste una onesta)\""""
+
+COVER_FIELDS_FULL = """  "cover_kicker": "il genere in 2-3 parole maiuscole, oppure stringa vuota se il titolo lo dice già",
+  "cover_hook": "il ciclo aperto: una domanda o una promessa incompleta, max 62 caratteri",
+  "cover_badge": "lascia la stringa vuota: su un'opera a testo pieno le garanzie da scaffale raccontano il prodotto sbagliato\""""
 
 
 def metadata_prompt(spec: BookSpec, outline: Outline, sample: str) -> str:
     language = LANGUAGE_NAMES.get(spec.language, spec.language)
+    copertina = COVER_FIELDS_MEDIUM if spec.is_medium_content else COVER_FIELDS_FULL
+    categoria = (
+        "medium-content: un libro da usare, dove ogni pagina propone qualcosa di diverso"
+        if spec.is_medium_content
+        else "full-content: un'opera a testo pieno, dove il valore sta tutto nella sostanza del testo"
+    )
     return f"""Prepara la scheda prodotto Amazon KDP per questo libro, in {language}.
+
+Categoria di prodotto: {categoria}.
 
 {book_bible(spec, outline)}
 
@@ -298,5 +319,8 @@ Rispondi con questo JSON:
   "categories": ["categoria BISAC 1", "categoria BISAC 2", "categoria BISAC 3"],
   "author_bio": "biografia dell'autore in 60-80 parole, in terza persona",
   "back_cover": "testo di quarta di copertina: gancio + 2 paragrafi brevi",
-  "back_cover_bullets": ["3 punti brevi per la quarta di copertina"]
-}}"""
+  "back_cover_bullets": ["3 punti brevi per la quarta di copertina"],
+{copertina}
+}}
+
+I testi di copertina vanno in {language} come il resto della scheda: un occhiello in un'altra lingua dice al cliente che il libro non è per lui."""

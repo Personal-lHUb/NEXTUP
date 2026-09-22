@@ -131,6 +131,16 @@ def cover_copy(book: PuzzleBook, spec: BookSpec, ambientazione: Ambientazione) -
         badge=str(copertina.get("garanzia", "")),
         author=spec.author,
         subject=spec.title + " " + spec.topic,
+        content_type=spec.content_type,
+        # I numeri che questa copertina ha il diritto di stampare sono quelli
+        # che il generatore ha contato: casi, sospetti, indizi. Il controllo
+        # rifiuta qualunque altra cifra, anche se l'ambientazione la scrive.
+        facts=(
+            str(len(book.cases) + 1),
+            str(len(book.cases)),
+            str(book.suspects_total),
+            str(book.clues_total),
+        ),
     )
 
 

@@ -36,6 +36,14 @@ LABELS: dict[str, dict[str, str]] = {
         "isbn": "ISBN",
         "by": "di",
         "continues": "(segue)",
+        # testi di copertina: vanno nella lingua del libro, sempre. Un
+        # occhiello inglese su una copertina italiana dice al cliente che il
+        # libro non è per lui, e il clic lo perdi lì.
+        "cover_kicker_puzzles": "ENIGMI DI DEDUZIONE",
+        "cover_pages": "{n} PAGINE",
+        "cover_chapters": "{n} CAPITOLI",
+        "cover_practice": "{n} SCHEDE PRATICHE",
+        "cover_large_print": "Caratteri grandi",
     },
     "en": {
         "toc": "Contents",
@@ -69,6 +77,11 @@ LABELS: dict[str, dict[str, str]] = {
         "isbn": "ISBN",
         "by": "by",
         "continues": "(continued)",
+        "cover_kicker_puzzles": "DEDUCTION PUZZLES",
+        "cover_pages": "{n} PAGES",
+        "cover_chapters": "{n} CHAPTERS",
+        "cover_practice": "{n} PRACTICE SHEETS",
+        "cover_large_print": "Large print",
     },
 }
 

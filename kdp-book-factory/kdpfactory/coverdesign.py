@@ -24,21 +24,39 @@ Da qui le sette regole che questo modulo applica e verifica:
 7. **Numeri in cifre.** "13 CASES · 908 SUSPECTS" si legge in un colpo d'occhio;
    "tredici casi" va letto.
 
+Le sette regole valgono per ogni libro. Quello che cambia con la **categoria di
+prodotto** (CLAUDE.md) è che cosa si mette in copertina:
+
+- **medium-content** — SEGNALE DI CATEGORIA + BENEFICIO + QUANTIFICATORE +
+  GARANZIA. Prima la funzione: che prodotto è, per chi, quanto contiene. Il
+  numero non è una scritta in piccolo, è parte del disegno — la banda d'accento
+  in fondo alla prima esiste per quello.
+- **full-content** — PROMESSA + MONDO + METAFORA VISIVA. Prima l'emozione: il
+  titolo, un ciclo aperto, un'immagine che dice di che libro si tratta. Le
+  specifiche da scaffale (numeri, garanzie, formato) qui non ci vanno: su
+  un'opera a testo pieno raccontano il prodotto sbagliato.
+
 Una cosa che questo modulo non fa, e non farà: finti timbri di bestseller,
 stelline, recensioni o premi inventati. Oltre a essere vietati da KDP, sono
-promesse che il libro non mantiene — e il reso arriva comunque.
+promesse che il libro non mantiene — e il reso arriva comunque. Per lo stesso
+motivo **ogni cifra stampata in copertina deve corrispondere a un dato misurato
+del libro**: i numeri veri li conta la pipeline, gli altri non si stampano.
 """
 
 from __future__ import annotations
 
 import hashlib
+import re
+from collections.abc import Iterable
 from dataclasses import dataclass, field
+from dataclasses import fields as dataclass_fields
 from pathlib import Path
 
 from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 
 from . import coverart, kdpspecs
+from .i18n import L
 
 INCH = kdpspecs.INCH
 
@@ -146,36 +164,203 @@ class CoverCopy:
     author: str = ""
     #: di che cosa parla il libro, per scegliere l'illustrazione
     subject: str = ""
+    #: categoria di prodotto: decide quale delle due formule si applica
+    content_type: str = "full"      # full | medium
+    #: i numeri che il libro ha davvero, in cifre nude («908», non «908 sospetti»).
+    #: Chi costruisce la copertina li dichiara qui, e il controllo rifiuta
+    #: qualunque cifra stampata che non sia in questo elenco.
+    facts: tuple[str, ...] = ()
+
+    @property
+    def is_medium(self) -> bool:
+        return self.content_type == "medium"
 
     def elements(self) -> int:
         return sum(1 for value in (self.kicker, self.title, self.hook, self.stats) if value)
 
 
-#: l'occhiello per genere; l'illustrazione la sceglie `coverart`
-GENRE_DEFAULTS = {
-    "enigmi": {"kicker": "DEDUCTION PUZZLES"},
-    "non-fiction": {"kicker": ""},
-    "fiction": {"kicker": ""},
-}
+#: L'occhiello dice *che prodotto è*, e va nella lingua del libro: un occhiello
+#: inglese su una copertina italiana dice al cliente che il libro non è per lui.
+#: Solo l'enigmistica ne ha uno di serie — «NON-FICTION» stampato in copertina
+#: non è un segnale di categoria, è rumore.
+GENRE_KICKERS = {"enigmi": "cover_kicker_puzzles"}
+
+#: sopra questo corpo il libro è a caratteri grandi, ed è una garanzia vera
+LARGE_PRINT_PT = 13.0
+
+#: I numeri si leggono anche scritti con i separatori delle migliaia: «1,234» e
+#: «1.234» sono lo stesso fatto.
+_NUMBER = re.compile(r"\d[\d.,]*")
 
 
-def derive_copy(spec, metadata: dict | None = None, genre: str = "non-fiction") -> CoverCopy:
+def numbers_in(text: str) -> set[str]:
+    """Le cifre contenute in un testo, normalizzate: {«13», «908»}."""
+    found = (re.sub(r"\D", "", match) for match in _NUMBER.findall(text or ""))
+    return {digits for digits in found if digits}
+
+
+def genre_kicker(genre: str, language: str) -> str:
+    key = GENRE_KICKERS.get(genre, "")
+    return L(language, key) if key else ""
+
+
+def count_practice_sections(chapters: Iterable[str]) -> int:
+    """Quante schede pratiche ha davvero il manoscritto.
+
+    È il quantificatore del medium-content in prosa, e si conta invece di
+    dichiararlo: la sezione `## In pratica` è quella che il ghostwriter riceve
+    istruzione di scrivere, e o c'è o non c'è.
+    """
+    return sum(
+        1 for markdown in chapters if re.search(r"^##\s+In pratica", markdown, flags=re.M | re.I)
+    )
+
+
+def measured_facts(*, pages: int = 0, chapters: int = 0, practice: int = 0) -> tuple:
+    """I numeri del libro che la copertina ha il diritto di stampare.
+
+    Solo quantità che il cliente può contare aprendo il libro: pagine,
+    capitoli, schede pratiche. Il corpo del carattere, per dire, è misurato ma
+    non è una quantità — metterlo qui aprirebbe la porta a un «11» stampato in
+    copertina che non significa niente.
+    """
+    return tuple(str(v) for v in (pages, chapters, practice) if v)
+
+
+def quantifier(spec, *, pages: int = 0, chapters: int = 0, practice: int = 0) -> str:
+    """La banda di numeri del medium-content, nella lingua del libro.
+
+    Si dice quello che si è contato, in cifre e in due voci al massimo: in
+    miniatura una banda con tre numeri non si legge, si guarda.
+    """
+    language = getattr(spec, "language", "it")
+    voci = []
+    if practice:
+        voci.append(L(language, "cover_practice").format(n=practice))
+    elif chapters:
+        voci.append(L(language, "cover_chapters").format(n=chapters))
+    if pages:
+        voci.append(L(language, "cover_pages").format(n=pages))
+    return " · ".join(voci)
+
+
+def guarantee(spec) -> str:
+    """Una garanzia vera e verificabile: per ora, i caratteri grandi."""
+    if getattr(spec, "body_font_size", 0) >= LARGE_PRINT_PT:
+        return L(getattr(spec, "language", "it"), "cover_large_print")
+    return ""
+
+
+def derive_copy(
+    spec,
+    metadata: dict | None = None,
+    genre: str = "non-fiction",
+    *,
+    pages: int = 0,
+    chapters: int = 0,
+    practice: int = 0,
+) -> CoverCopy:
     """Ricava i testi di copertina dai dati che il libro ha già.
 
     Il sottotitolo completo non finisce in copertina: in miniatura non si legge
     e ruba spazio al titolo. Si usa la sua prima proposizione come gancio.
+
+    La categoria decide il resto. Su un **medium-content** il quantificatore e
+    la garanzia si calcolano dal libro vero quando la scheda non li propone: un
+    numero contato non può mentire, ed è l'unico che KDP non contesta. Su un
+    **full-content** non si calcolano affatto — se compaiono lo stesso, li ha
+    voluti l'autore, e il controllo glielo dice.
     """
     metadata = metadata or {}
-    hook = metadata.get("cover_hook") or _first_clause(spec.subtitle)
+    language = getattr(spec, "language", "it")
+    content_type = getattr(spec, "content_type", "full")
+    facts = measured_facts(pages=pages, chapters=chapters, practice=practice)
+
+    stats = metadata.get("cover_stats", "")
+    badge = metadata.get("cover_badge", "")
+    if content_type == "medium":
+        stats = stats or quantifier(spec, pages=pages, chapters=chapters, practice=practice)
+        badge = badge or guarantee(spec)
+
     return CoverCopy(
         title=spec.title,
-        kicker=metadata.get("cover_kicker", GENRE_DEFAULTS.get(genre, {}).get("kicker", "")),
-        hook=hook,
-        stats=metadata.get("cover_stats", ""),
-        badge=metadata.get("cover_badge", ""),
+        kicker=metadata.get("cover_kicker") or genre_kicker(genre, language),
+        hook=metadata.get("cover_hook") or _first_clause(spec.subtitle),
+        stats=stats,
+        badge=badge,
         author=spec.author,
         subject=subject_of(spec),
+        content_type=content_type,
+        facts=facts,
     )
+
+
+def copy_from_dict(written: dict, spec) -> CoverCopy:
+    """Ricostruisce i testi di copertina da come li ha salvati la lavorazione.
+
+    La categoria e i fatti misurati possono mancare: succede su un libro
+    lavorato prima che la copertina conoscesse le due formule. In quel caso la
+    categoria si prende dalla scheda del libro, e senza fatti il controllo sui
+    numeri tace invece di accusare cifre che nessuno ha mai dichiarato vere.
+    """
+    noti = {f.name for f in dataclass_fields(CoverCopy)}
+    dati = {k: v for k, v in (written or {}).items() if k in noti}
+    dati.setdefault("title", getattr(spec, "title", ""))
+    dati.setdefault("content_type", getattr(spec, "content_type", "full"))
+    dati["facts"] = tuple(str(v) for v in dati.get("facts") or ())
+    return CoverCopy(**dati)
+
+
+# --------------------------------------------------------------------------
+# La formula della categoria, fatta rispettare
+# --------------------------------------------------------------------------
+def copy_problems(copy: CoverCopy) -> list[str]:
+    """Che cosa, nei testi, tradisce la categoria di prodotto del libro.
+
+    Si controlla solo ciò che si misura: la presenza di un quantificatore, la
+    presenza di specifiche da scaffale su un'opera a testo pieno, e la
+    corrispondenza fra le cifre stampate e i fatti del libro. Se una copertina
+    sia *bella* qui non lo decide nessuno.
+    """
+    problems: list[str] = []
+    if copy.is_medium:
+        if not copy.stats:
+            problems.append(
+                "Medium-content senza quantificatore: la copertina non dice quanto "
+                "contiene il libro, che è la prima cosa che questo cliente cerca."
+            )
+        if not copy.kicker:
+            problems.append(
+                "Medium-content senza segnale di categoria: in miniatura non si "
+                "capisce che tipo di prodotto è."
+            )
+    else:
+        scaffale = [name for name, value in (("numeri", copy.stats), ("garanzia", copy.badge))
+                    if value]
+        if scaffale:
+            problems.append(
+                f"Full-content con le specifiche da scaffale del medium-content "
+                f"({', '.join(scaffale)}): su un'opera a testo pieno la copertina "
+                "vende il mondo e la promessa, non il formato."
+            )
+
+    stampate = set()
+    for text in (copy.kicker, copy.hook, copy.stats, copy.badge):
+        stampate |= numbers_in(text)
+    # Senza fatti dichiarati non c'è niente contro cui verificare, e accusare
+    # una cifra di essere inventata quando nessuno ha detto quali siano vere
+    # sarebbe un difetto costruito dal controllo, non trovato.
+    inventate = (
+        sorted(stampate - set(copy.facts) - numbers_in(copy.title), key=len)
+        if copy.facts else []
+    )
+    if inventate:
+        problems.append(
+            f"In copertina compaiono cifre che non corrispondono a nessun dato "
+            f"misurato del libro: {', '.join(inventate)}. Un numero stampato in "
+            "copertina è una promessa al cliente, e questa non la mantiene nessuno."
+        )
+    return problems
 
 
 def subject_of(spec) -> str:
@@ -301,7 +486,12 @@ def title_block_size(copy: CoverCopy, display: str, box: FrontBox) -> tuple[floa
     Si parte dal 13% dell'altezza e si scende solo se le righe non ci stanno —
     mai sotto la soglia di leggibilità in miniatura.
     """
-    longest = max(copy.title.split(), key=len, default="A").upper()
+    # La parola più larga non è quella con più lettere: PRINCIPIANTI (12) è più
+    # stretta di MEDITAZIONE (11), perché le I non occupano niente. Tarare il
+    # corpo sul conteggio delle lettere lo tara sulla parola sbagliata, e quella
+    # vera esce dall'area di sicurezza: in stampa viene rifilata.
+    words = copy.title.upper().split() or ["A"]
+    longest = max(words, key=lambda word: pdfmetrics.stringWidth(word, display, 100))
     ceiling = box.trim_height * 0.13
     floor = box.trim_height * MIN_TITLE_CAP_RATIO / 0.72
     size = min(ceiling, fit_size(longest, display, box.measure, ceiling, floor))
@@ -529,7 +719,13 @@ def audit(
     document = pymupdf.open(pdf_path)
     page = document[0]
     page_height = page.rect.height
-    words = [word for word in title.upper().split() if len(word) > 3]
+    # Le parole corte si scartano perché «di» o «la» si ritrovano ovunque, nel
+    # gancio come nella garanzia. Ma un titolo fatto *solo* di parole corte —
+    # «Tre Ore» — è un titolo eccellente in miniatura: senza il ripiego l'audit
+    # non ne trovava nessuna e lo dichiarava assente, bocciando la copertina
+    # migliore che il sistema sa fare.
+    parole = title.upper().split()
+    words = [word for word in parole if len(word) > 3] or parole
     title_spans: list[dict] = []
     front_spans: list[dict] = []
     top_blocks: set[int] = set()
@@ -541,7 +737,12 @@ def audit(
             vertical = abs(line.get("dir", (1.0, 0.0))[0]) < 0.5
             for span in line.get("spans", []):
                 text = span["text"].strip()
-                if not text or span["bbox"][0] < front_x0 or vertical:
+                # Si scarta solo ciò che sta *interamente* a sinistra della
+                # prima. Con `bbox[0] < front_x0` sparivano proprio le righe di
+                # titolo troppo larghe — quelle che cominciano dentro il dorso e
+                # finiscono oltre il taglio — cioè il difetto peggiore che ci
+                # sia da trovare: in stampa quella parola viene rifilata.
+                if not text or span["bbox"][2] < front_x0 or vertical:
                     continue
                 front_spans.append(span)
                 if any(word in text.upper() for word in words):
@@ -565,7 +766,10 @@ def audit(
 
     cap_px = cap_pt * scale
     cap_ratio = cap_pt / (trim_h * INCH) if cap_pt else 0.0
-    if cap_ratio and cap_ratio < MIN_TITLE_CAP_RATIO:
+    # `title_block_size` si ferma *esattamente* sul minimo: senza tolleranza, il
+    # confronto in virgola mobile (0.05999999999999999 < 0.06) boccia la
+    # copertina che il sistema ha appena disegnato a regola d'arte.
+    if cap_ratio and cap_ratio < MIN_TITLE_CAP_RATIO - 1e-6:
         problems.append(
             f"Titolo troppo piccolo per la miniatura: {cap_px:.0f} px a "
             f"{THUMBNAIL_WIDTH_PX} px di larghezza ({cap_ratio * 100:.1f}% dell'altezza, "

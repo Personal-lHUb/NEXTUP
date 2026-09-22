@@ -9,7 +9,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from kdpfactory import backup, cover, coverart, coverdesign, kdpspecs
+from kdpfactory import backup, cover, coverart, coverbrief, coverdesign, kdpspecs
 from kdpfactory.agents import AgentContext, get_agent
 from kdpfactory.coverdesign import (
     CoverCopy,
@@ -368,7 +368,9 @@ class TestAgenteCopertina(unittest.TestCase):
     def setUp(self):
         backup.configure(enabled=False)
         self.tmp = tempfile.TemporaryDirectory()
-        self.spec = demo_spec()
+        # un libro di enigmi è un medium-content: la sua copertina vive di
+        # segnale di categoria e quantificatore
+        self.spec = demo_spec(content_type="medium")
         self.pdf = Path(self.tmp.name) / "copertina.pdf"
         self.info = cover.build_cover(self.spec, 120, self.pdf, genre="enigmi")
 
@@ -414,11 +416,237 @@ class TestAgenteCopertina(unittest.TestCase):
         findings = get_agent("copertina").run(
             self.context(
                 title=self.spec.title,
+                kicker="DEDUCTION PUZZLES",
                 hook="Can you name the killer in every carriage?",
                 stats="13 CASES · 908 SUSPECTS",
+                content_type="medium",
+                facts=["13", "908"],
             )
         ).findings
         self.assertFalse([f for f in findings if f.severity == "bloccante"])
+
+
+class TestAuditCheVedeIDifetti(unittest.TestCase):
+    """L'audit deve vedere proprio i difetti che manda il libro in stampa storto.
+
+    Sono i due casi in cui prima guardava altrove: la riga di titolo più larga
+    della copertina — che il filtro scartava perché comincia prima del taglio —
+    e il titolo fatto di sole parole corte, che dichiarava assente.
+    """
+
+    def setUp(self):
+        backup.configure(enabled=False)
+        self.tmp = tempfile.TemporaryDirectory()
+
+    def tearDown(self):
+        self.tmp.cleanup()
+        backup.configure(enabled=True)
+
+    def verifica(self, titolo: str) -> dict:
+        spec = demo_spec(
+            title=titolo, subtitle="Un metodo in dodici settimane",
+            language="it", content_type="medium",
+        )
+        info = cover.build_cover(
+            spec, 140, Path(self.tmp.name) / "c.pdf",
+            genre="non-fiction", chapters=12, practice=12,
+        )
+        return info["verifica"]
+
+    def test_la_parola_che_esce_dalla_copertina_viene_vista(self):
+        problemi = self.verifica("Esercizi per la concentrazione")["problemi"]
+        self.assertEqual(len(problemi), 1)
+        self.assertIn("area di sicurezza", problemi[0])
+        self.assertIn("CONCENTRAZIONE", problemi[0])
+
+    def test_il_titolo_al_corpo_minimo_non_e_troppo_piccolo(self):
+        """Il disegno si ferma *sul* minimo: senza tolleranza, il confronto in
+        virgola mobile bocciava la copertina che il sistema ha appena fatto."""
+        verifica = self.verifica("Esercizi per la concentrazione")
+        self.assertEqual(verifica["titolo_percentuale_altezza"], 6.0)
+        self.assertFalse([p for p in verifica["problemi"] if "troppo piccolo" in p])
+
+    def test_un_titolo_di_sole_parole_corte_viene_trovato(self):
+        verifica = self.verifica("Tre Ore")
+        self.assertEqual(verifica["problemi"], [])
+        self.assertGreater(verifica["titolo_percentuale_altezza"], 6.0)
+
+    def test_la_parola_piu_larga_non_e_quella_con_piu_lettere(self):
+        """PRINCIPIANTI ha 12 lettere, MEDITAZIONE 11: la più larga è la seconda.
+
+        Tarare il corpo sul conteggio delle lettere lo tara sulla parola
+        sbagliata, e quella vera esce dalla copertina.
+        """
+        font = register_family("sans")
+        self.assertGreater(len("PRINCIPIANTI"), len("MEDITAZIONE"))
+        self.assertGreater(
+            tracked_width("MEDITAZIONE", font, 100), tracked_width("PRINCIPIANTI", font, 100)
+        )
+        self.assertEqual(self.verifica("Meditazione per principianti")["problemi"], [])
+
+
+class TestFormulaDellaCategoria(unittest.TestCase):
+    """Le due formule di CLAUDE.md, rese eseguibili sui testi di copertina.
+
+    Non si giudica la bellezza: si guarda se la copertina vende il prodotto
+    giusto. Un medium-content che non dice quanto contiene e un full-content
+    vestito da prodotto da scaffale parlano al cliente sbagliato.
+    """
+
+    def problemi(self, **campi) -> list[str]:
+        campi.setdefault("title", "Il Titolo")
+        campi["facts"] = tuple(campi.get("facts", ()))
+        return coverdesign.copy_problems(CoverCopy(**campi))
+
+    def test_medium_senza_quantificatore_non_passa(self):
+        problemi = self.problemi(content_type="medium", kicker="SCHEDE PRATICHE")
+        self.assertTrue(any("senza quantificatore" in p for p in problemi))
+
+    def test_medium_senza_segnale_di_categoria(self):
+        problemi = self.problemi(content_type="medium", stats="120 ESERCIZI")
+        self.assertTrue(any("senza segnale di categoria" in p for p in problemi))
+
+    def test_medium_completo_non_ha_rilievi(self):
+        problemi = self.problemi(
+            content_type="medium", kicker="SCHEDE PRATICHE",
+            stats="120 ESERCIZI", facts=("120",),
+        )
+        self.assertEqual(problemi, [])
+
+    def test_full_con_specifiche_da_scaffale_non_passa(self):
+        problemi = self.problemi(
+            content_type="full", stats="240 PAGINE", badge="Caratteri grandi",
+            facts=("240",),
+        )
+        self.assertEqual(len(problemi), 1)
+        self.assertIn("numeri, garanzia", problemi[0])
+
+    def test_full_nudo_non_ha_rilievi(self):
+        self.assertEqual(
+            self.problemi(content_type="full", hook="E se bastasse un'ora?"), []
+        )
+
+    def test_una_cifra_che_il_libro_non_ha_non_si_stampa(self):
+        problemi = self.problemi(
+            content_type="medium", kicker="ENIGMI", stats="1000 ENIGMI", facts=("120", "240"),
+        )
+        self.assertTrue(any("non corrispondono a nessun dato" in p for p in problemi))
+        self.assertIn("1000", [p for p in problemi if "nessun dato" in p][0])
+
+    def test_i_separatori_delle_migliaia_non_fanno_due_numeri_diversi(self):
+        problemi = self.problemi(
+            content_type="medium", kicker="ENIGMI", stats="1,234 SOSPETTI", facts=("1234",),
+        )
+        self.assertEqual(problemi, [])
+
+    def test_senza_fatti_dichiarati_il_controllo_tace(self):
+        """Un libro lavorato prima di questa regola non va accusato a vuoto."""
+        problemi = self.problemi(content_type="medium", kicker="ENIGMI", stats="13 CASI")
+        self.assertEqual(problemi, [])
+
+
+class TestDatiFunzionali(unittest.TestCase):
+    """Il quantificatore si conta sul libro, non si dichiara."""
+
+    def test_le_schede_pratiche_si_contano_nel_manoscritto(self):
+        capitoli = [
+            "# Uno\n\nTesto.\n\n## In pratica\n\n1. fai questo\n",
+            "# Due\n\nTesto senza esercizi.\n",
+            "# Tre\n\nTesto.\n\n## in pratica\n\n1. fai quest'altro\n",
+        ]
+        self.assertEqual(coverdesign.count_practice_sections(capitoli), 2)
+
+    def test_il_quantificatore_e_nella_lingua_del_libro(self):
+        spec = demo_spec(language="it", content_type="medium")
+        self.assertEqual(
+            coverdesign.quantifier(spec, pages=140, practice=18), "18 SCHEDE PRATICHE · 140 PAGINE"
+        )
+        spec = demo_spec(language="en", content_type="medium")
+        self.assertEqual(
+            coverdesign.quantifier(spec, pages=140, chapters=12), "12 CHAPTERS · 140 PAGES"
+        )
+
+    def test_i_caratteri_grandi_sono_una_garanzia_misurata(self):
+        self.assertEqual(coverdesign.guarantee(demo_spec(body_font_size=14, language="it")),
+                         "Caratteri grandi")
+        self.assertEqual(coverdesign.guarantee(demo_spec(body_font_size=11)), "")
+
+    def test_il_medium_riceve_i_numeri_contati_e_il_full_no(self):
+        medium = coverdesign.derive_copy(
+            demo_spec(content_type="medium", language="it"), pages=140, practice=18
+        )
+        self.assertEqual(medium.stats, "18 SCHEDE PRATICHE · 140 PAGINE")
+        self.assertIn("140", medium.facts)
+
+        full = coverdesign.derive_copy(demo_spec(content_type="full"), pages=140, practice=18)
+        self.assertEqual(full.stats, "")
+        self.assertEqual(full.badge, "")
+
+    def test_la_scheda_prodotto_batte_il_numero_calcolato(self):
+        copy = coverdesign.derive_copy(
+            demo_spec(content_type="medium"), {"cover_stats": "13 CASES"}, pages=140
+        )
+        self.assertEqual(copy.stats, "13 CASES")
+
+    def test_locchiello_del_genere_parla_la_lingua_del_libro(self):
+        self.assertEqual(
+            coverdesign.derive_copy(demo_spec(language="it"), genre="enigmi").kicker,
+            "ENIGMI DI DEDUZIONE",
+        )
+        self.assertEqual(
+            coverdesign.derive_copy(demo_spec(language="en"), genre="enigmi").kicker,
+            "DEDUCTION PUZZLES",
+        )
+
+
+class TestBriefDiCopertina(unittest.TestCase):
+    """Il brief per lo strumento grafico: quello che il motore non sa disegnare."""
+
+    def brief(self, **overrides) -> str:
+        pagine = overrides.pop("pages", 140)
+        metadata = overrides.pop("metadata", {})
+        return coverbrief.brief(demo_spec(**overrides), pages=pagine, metadata=metadata)
+
+    def test_la_categoria_porta_la_sua_formula(self):
+        medium = self.brief(content_type="medium")
+        self.assertIn("BOOK TYPE: MEDIUM-CONTENT", medium)
+        self.assertIn("INTERIOR PREVIEW + QUANTIFIER", medium)
+        self.assertIn("FUNCTION over atmosphere", medium)
+
+        full = self.brief(content_type="full")
+        self.assertIn("BOOK TYPE: FULL-CONTENT", full)
+        self.assertIn("WORLD / EMOTION + VISUAL METAPHOR", full)
+        self.assertIn("EMOTION, IDENTITY and TRANSFORMATION", full)
+
+    def test_le_soglie_del_motore_sono_quelle_scritte_nel_brief(self):
+        """Il brief non inventa regole: cita le costanti che poi verificano il PDF."""
+        testo = self.brief()
+        self.assertIn(f"{coverdesign.THUMBNAIL_WIDTH_PX} px", testo)
+        self.assertIn(f"at least {coverdesign.MIN_CONTRAST:.0f}:1", testo)
+        self.assertIn(f"at most {coverdesign.MAX_TITLE_LINES} lines", testo)
+
+    def test_i_numeri_veri_si_citano_e_gli_altri_si_vietano(self):
+        medium = self.brief(content_type="medium", language="it", pages=146)
+        self.assertIn('Quantifier: "146 PAGINE"', medium)
+        self.assertIn("do not invent, round or add any other number", medium)
+
+        full = self.brief(content_type="full")
+        self.assertIn("Do not print any figure on the cover", full)
+
+    def test_dice_in_che_lingua_va_stampato_il_testo(self):
+        self.assertIn("Written in Italian", self.brief(language="it"))
+        self.assertIn("Written in English", self.brief(language="en"))
+
+    def test_porta_le_misure_di_stampa_del_libro(self):
+        testo = self.brief(trim="6x9", paper="cream", pages=200)
+        larghezza, altezza = kdpspecs.cover_size_in("6x9", 200, "cream")
+        self.assertIn("1800 x 2700 px", testo)              # la sola prima, a 300 DPI
+        self.assertIn(f"{larghezza:.3f}\" x {altezza:.3f}\"", testo)
+
+    def test_vieta_di_imitare_e_di_inventare_riconoscimenti(self):
+        testo = self.brief()
+        self.assertIn("Do not imitate", testo)
+        self.assertIn("No award stamps, star ratings", testo)
 
 
 if __name__ == "__main__":  # pragma: no cover
