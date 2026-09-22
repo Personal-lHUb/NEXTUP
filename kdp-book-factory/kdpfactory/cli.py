@@ -637,7 +637,12 @@ def cmd_concorrente(args) -> int:
         )
 
     client = make_client(args)
-    risultato = acquisizione.analizza(project, client, asin=args.asin)
+    indicazione = args.indicazione or acquisizione.leggi_indicazione(project)
+    if indicazione:
+        print(f"\nIndirizzo editoriale in vigore:\n  {indicazione.splitlines()[0]}")
+    risultato = acquisizione.analizza(
+        project, client, asin=args.asin, indicazione=indicazione
+    )
     print(acquisizione.render(risultato))
 
     spec = acquisizione.scrivi(project, risultato, args.author)
@@ -923,6 +928,12 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("slug")
     p.add_argument("--asin", default="", help="ASIN del libro di riferimento")
     p.add_argument("--author", default="Autore Anonimo", help="autore del libro nuovo")
+    p.add_argument(
+        "--indicazione",
+        default="",
+        help="indirizzo editoriale per il posizionamento; in mancanza si legge "
+        "`concorrente/indicazione.md`",
+    )
     p.add_argument("--force", action="store_true")
     p.set_defaults(func=cmd_concorrente)
 

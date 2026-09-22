@@ -6,9 +6,9 @@ import unittest
 from pathlib import Path
 
 from kdpfactory import concorrente
-from kdpfactory.agents.base import REGISTRY, AgentFinding, ReviewAgent
+from kdpfactory.agents.base import REGISTRY, AgentContext, AgentFinding, ReviewAgent
 from kdpfactory.llm import LLMClient, LLMConfig
-from kdpfactory.models import BookProject
+from kdpfactory.models import BookProject, BookSpec
 
 PAGINA = """Gestire il tempo per liberi professionisti Copertina flessibile - 12 marzo 2024
 di Mario Esempio (Autore)
@@ -226,6 +226,69 @@ class TestTitoloCheDeveStareInCopertina(unittest.TestCase):
         spec = concorrente.scrivi(self.project, risultato, "Iris")
         self.assertTrue(self.project.spec_path.exists())
         self.assertEqual(spec.subtitle, "Recuperare una mattina di lavoro profondo")
+
+
+class TestIndirizzoEditoriale(unittest.TestCase):
+    """Che tipo di libro fare dentro una nicchia lo decide l'editore.
+
+    `posizionamento` decide i dati — titolo, prezzo, pagine, parole chiave —
+    dalla scheda del concorrente e dalle lacune. La linea editoriale no: quella
+    arriva da fuori, e prima non aveva un posto dove stare.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = BookProject(Path(self.tmp.name) / "libro")
+        concorrente.prepara(self.project, "B0TEST")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_si_legge_dal_file_senza_le_istruzioni(self):
+        """Il commento del modulo va scartato per intero, righe di mezzo comprese.
+
+        Scartando solo le righe che *cominciano* con `<!--`, le istruzioni del
+        modulo finivano nel prompt come se fossero la linea editoriale.
+        """
+        concorrente.indicazione_path(self.project).write_text(
+            "# Indirizzo editoriale\n\n"
+            "<!-- Questo file lo legge `concorrente build`.\n"
+            "     Le righe di questo commento non vanno lette.\n"
+            "     Nemmeno questa. -->\n\n"
+            "Onesto sulle fonti.\n",
+            encoding="utf-8",
+        )
+        letta = concorrente.leggi_indicazione(self.project)
+        self.assertEqual(letta, "Onesto sulle fonti.")
+
+    def test_senza_file_non_c_e_nessun_vincolo(self):
+        self.assertEqual(concorrente.leggi_indicazione(self.project), "")
+
+    def test_arriva_al_posizionamento_come_vincolo(self):
+        agente = REGISTRY["posizionamento"]
+        ctx = AgentContext(
+            spec=BookSpec(slug="x", title="(da decidere)", topic="t"),
+            metadata={"scheda": {}, "lacune": {}, "indicazione": "Onesto sulle fonti."},
+        )
+        prompt = agente.user(ctx)
+        self.assertIn("INDICAZIONE DELL'EDITORE", prompt)
+        self.assertIn("Onesto sulle fonti.", prompt)
+        # vincola le scelte, ma non apre la porta a quello che non si fa
+        self.assertIn("non scavalca i divieti", prompt)
+
+    def test_senza_indicazione_il_prompt_resta_quello_di_prima(self):
+        agente = REGISTRY["posizionamento"]
+        ctx = AgentContext(
+            spec=BookSpec(slug="x", title="(da decidere)", topic="t"),
+            metadata={"scheda": {}, "lacune": {}},
+        )
+        self.assertNotIn("INDICAZIONE DELL'EDITORE", agente.user(ctx))
+
+    def test_finisce_nell_analisi_salvata(self):
+        risultato = concorrente.Acquisizione(
+            asin="B0TEST", indicazione="Onesto sulle fonti.", piano=PIANO
+        )
+        self.assertEqual(risultato.to_dict()["indicazione"], "Onesto sulle fonti.")
 
 
 class TestGiroCompleto(unittest.TestCase):

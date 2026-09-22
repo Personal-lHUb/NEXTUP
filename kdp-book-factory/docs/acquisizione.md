@@ -100,6 +100,30 @@ il libro è pronto. Le segnalazioni non bloccanti vengono contate a schermo, da
 rileggere prima di far scrivere il libro — ma non spezzano
 `concorrente build && all`, che è la corsa per cui il comando esiste.
 
+## L'indirizzo editoriale
+
+Gli agenti decidono i **dati**: quale lacuna vale, che titolo, quante pagine,
+che prezzo, quali parole chiave. Non decidono **che tipo di libro** si vuole
+fare dentro quella nicchia: quella è una scelta di chi pubblica, e ha un posto
+suo.
+
+```
+books/<slug>/concorrente/indicazione.md
+```
+
+Se il file c'è, `concorrente build` lo legge e lo passa a `posizionamento` come
+**vincolo**, insieme alla scheda e alle lacune; finisce anche in
+`acquisizione.json`, così resta scritto su cosa è stato deciso il libro. In
+alternativa: `concorrente build <slug> --indicazione "…"`.
+
+Il commento del modulo e i titoli Markdown non vengono letti, come nel brief.
+E il vincolo non scavalca i divieti: un'indicazione che chiedesse di nominare
+il concorrente o di promettere risultati resta una cosa che non si fa.
+
+Serve quando la nicchia è buona ma il modo in cui la serve il concorrente non
+lo è — per esempio quando le recensioni dicono che quel libro inventa i fatti
+controllabili, e il libro nuovo deve essere quello che non lo fa.
+
 ## I quattro agenti
 
 | agente | che cosa fa | dove sbaglia se sbaglia |

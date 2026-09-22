@@ -197,12 +197,27 @@ class Posizionamento(JsonAgent):
     def user(self, ctx: AgentContext) -> str:
         scheda = ctx.metadata.get("scheda", {})
         lacune = ctx.metadata.get("lacune", {})
+        # L'indirizzo editoriale, quando c'è, vincola: è la scelta di chi
+        # pubblica su che tipo di libro fare dentro questa nicchia, e non è
+        # una decisione che spetta a un agente. Non scavalca però i divieti:
+        # un'indicazione che chiedesse di nominare il concorrente o di
+        # promettere risultati resta una cosa che non si fa.
+        indicazione = str(ctx.metadata.get("indicazione") or "").strip()
+        indirizzo = (
+            f"""
+
+INDICAZIONE DELL'EDITORE — vincolante, ma non scavalca i divieti qui sopra
+{indicazione}
+"""
+            if indicazione
+            else ""
+        )
         return f"""LIBRO DI PARTENZA (segnale di mercato, non testo da riusare)
 {json.dumps(scheda, ensure_ascii=False, indent=2)}
 
 QUELLO CHE I SUOI LETTORI NON HANNO TROVATO
 {json.dumps(lacune, ensure_ascii=False, indent=2)}
-
+{indirizzo}
 Decidi il libro nuovo.
 
 Rispondi ESCLUSIVAMENTE con un oggetto JSON valido, senza testo prima o dopo:

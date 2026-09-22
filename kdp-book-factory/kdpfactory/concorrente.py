@@ -55,6 +55,8 @@ class Acquisizione:
     """Quello che il reparto produce, prima che diventi un libro."""
 
     asin: str = ""
+    #: la riga di indirizzo editoriale, se l'editore ne ha data una
+    indicazione: str = ""
     scheda: dict = field(default_factory=dict)
     lacune: dict = field(default_factory=dict)
     piano: dict = field(default_factory=dict)
@@ -68,6 +70,7 @@ class Acquisizione:
     def to_dict(self) -> dict:
         return {
             "asin": self.asin,
+            "indicazione": self.indicazione,
             "scheda": self.scheda,
             "lacune": self.lacune,
             "piano": self.piano,
@@ -91,6 +94,10 @@ def pagina_path(project: BookProject) -> Path:
 
 def acquisizione_path(project: BookProject) -> Path:
     return cartella(project) / "acquisizione.json"
+
+
+def indicazione_path(project: BookProject) -> Path:
+    return cartella(project) / "indicazione.md"
 
 
 # --------------------------------------------------------------------------
@@ -123,7 +130,40 @@ def leggi_pagina(project: BookProject) -> str:
 # --------------------------------------------------------------------------
 # Il reparto al lavoro
 # --------------------------------------------------------------------------
-def analizza(project: BookProject, client: LLMClient, asin: str = "") -> Acquisizione:
+def leggi_indicazione(project: BookProject) -> str:
+    """L'indirizzo editoriale, se l'editore l'ha scritto.
+
+    `posizionamento` decide il libro nuovo dai dati: la scheda del concorrente e
+    le lacune delle sue recensioni. Ma la decisione di *che tipo* di libro fare
+    dentro quella nicchia è dell'editore, non di un agente — e finora non aveva
+    un posto dove stare, se non nella testa di chi lanciava il comando.
+    """
+    percorso = indicazione_path(project)
+    if not percorso.exists():
+        return ""
+    tenute: list[str] = []
+    dentro_commento = False
+    for riga in percorso.read_text(encoding="utf-8").splitlines():
+        nuda = riga.strip()
+        # Il commento va scartato per intero, non riga per riga: un blocco
+        # `<!-- … -->` su più righe lasciava dentro tutto il suo corpo, e le
+        # istruzioni del modulo finivano nel prompt come se fossero la linea
+        # editoriale.
+        if dentro_commento:
+            dentro_commento = "-->" not in nuda
+            continue
+        if nuda.startswith("<!--"):
+            dentro_commento = "-->" not in nuda
+            continue
+        if nuda.startswith("#"):
+            continue
+        tenute.append(riga)
+    return "\n".join(tenute).strip()
+
+
+def analizza(
+    project: BookProject, client: LLMClient, asin: str = "", indicazione: str = ""
+) -> Acquisizione:
     """Fa girare i quattro agenti e restituisce il piano, senza scrivere il libro."""
     pagina = leggi_pagina(project)
     if len(pagina.split()) < 40:
@@ -132,7 +172,7 @@ def analizza(project: BookProject, client: LLMClient, asin: str = "") -> Acquisi
             "Incolla la pagina Amazon del libro, recensioni comprese, e rilancia."
         )
 
-    risultato = Acquisizione(asin=asin)
+    risultato = Acquisizione(asin=asin, indicazione=indicazione or leggi_indicazione(project))
     spec_finta = BookSpec(slug=project.root.name, title="(da decidere)")
 
     scheda = get_agent("scheda-concorrente").run(
@@ -154,7 +194,11 @@ def analizza(project: BookProject, client: LLMClient, asin: str = "") -> Acquisi
     piano = get_agent("posizionamento").run(
         AgentContext(
             spec=spec_finta,
-            metadata={"scheda": risultato.scheda, "lacune": risultato.lacune},
+            metadata={
+                "scheda": risultato.scheda,
+                "lacune": risultato.lacune,
+                "indicazione": risultato.indicazione,
+            },
         ),
         client,
     )
