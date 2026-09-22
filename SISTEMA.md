@@ -4,7 +4,7 @@ Documento di passaggio di consegne. Descrive **esattamente** che cosa esiste, co
 funziona e perché è stato fatto così. Da incollare in una nuova finestra di contesto.
 
 Aggiornato al 22 settembre 2026 · branch `claude/dreamy-archimedes-hf8w45` ·
-264 test verdi, lint pulito, tutto committato e spinto. *(Il numero di commit
+287 test verdi, lint pulito, tutto committato e spinto. *(Il numero di commit
 non si cita: invecchia prima del documento.)*
 
 ---
@@ -84,7 +84,7 @@ NEXTUP/
     ├── books/<slug>/            book.json, brief.md, assets/, manuscript/, build/, state.json
     ├── config/printing_costs.json
     ├── docs/                    documentazione (vedi sotto)
-    ├── tests/                   264 test, nessuna chiamata di rete
+    ├── tests/                   287 test, nessuna chiamata di rete
     └── fonts/                   font TrueType propri (facoltativo)
 ```
 
@@ -92,12 +92,13 @@ NEXTUP/
 `docs/agenti.md`, `docs/checklist-kdp.md`, `docs/copertine.md`,
 `docs/acquisizione.md`, `docs/enigmistica.md`, `docs/materiali.md`,
 `docs/personalizzazione.md`,
-`docs/team-miglioramento.md`, `docs/workflow.md`, più `README.md`.
+`docs/linea-manuale.md`, `docs/team-miglioramento.md`, `docs/workflow.md`, più
+`README.md`.
 
 **Comandi:**
 ```bash
 cd kdp-book-factory
-python3 -m unittest discover -s tests     # 264 test, nessuna rete
+python3 -m unittest discover -s tests     # 287 test, nessuna rete
 ruff check kdpfactory tests
 python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 ```
@@ -118,6 +119,7 @@ python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 | `cover.py` | copertina full-wrap: quarta + dorso + prima |
 | `coverdesign.py` | **sistema** di copertina: regole, palette, testi, formule di categoria, verifica |
 | `coverbrief.py` | brief di copertina per uno strumento grafico esterno |
+| `manuale.py` | **linea manuale**: la fabbrica senza chiave API — brief dei passi che userebbero il modello, e validazione di quello che rientra |
 | `coverart.py` | **illustrazioni vettoriali** della prima |
 | `coverimage.py` | preparazione di una foto fornita dall'autore (300 DPI, velatura) |
 | `epub.py` | EPUB 3 senza dipendenze esterne |
@@ -484,7 +486,7 @@ Il sistema non contiene nessun libro pubblicabile: è una fabbrica. Un libro si
 crea con `init`, con `concorrente new` (da un'analisi di mercato) o con
 `puzzle new`.
 
-**Test: 264**, nessuna chiamata di rete.
+**Test: 287**, nessuna chiamata di rete.
 
 **Rilievi aperti** sul sistema (non su un libro: non ce ne sono). Quelli
 seguiti da *(/migliora)* vengono dalla passata del team del 22 settembre, sono

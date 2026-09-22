@@ -83,4 +83,8 @@ cieco, un fact-checker, la conformità e il controllo di impaginazione).
   (nessun test fa chiamate di rete).
 - Lint: `ruff check kdpfactory tests` dalla stessa cartella.
 - Per provare la pipeline senza spendere token: `--dry-run`.
+- **Senza chiave API** si lavora lo stesso: `manuale <slug> <passo>` produce i
+  brief dei passi che userebbero il modello e valida le risposte che incolli
+  (`kdp-book-factory/docs/linea-manuale.md`). Tutto il resto — impaginazione,
+  copertina, controlli, prezzi, EPUB — non ha mai chiamato il modello.
 - Il testo dei libri e la documentazione del progetto sono in italiano.

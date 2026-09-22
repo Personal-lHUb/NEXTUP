@@ -145,6 +145,7 @@ esempi usare, quale taglio dare).
 | `write <slug>` | scrive i capitoli mancanti (`--only 3,4`, `--overwrite`) |
 | `build <slug>` | impagina, converge sulle pagine, genera copertina ed EPUB |
 | `metadata <slug>` | scheda prodotto, keyword, categorie, prezzi |
+| `manuale <slug> <passo>` | **la fabbrica senza chiave API**: il sistema scrive il brief di scaletta, capitolo o scheda, tu porti la risposta e lui la valida ([`docs/linea-manuale.md`](docs/linea-manuale.md)) |
 | `copertina <slug>` | brief di copertina per uno strumento grafico, compilato coi dati del libro ([`docs/copertine.md`](docs/copertine.md)); nessuna chiamata API |
 | `agents` | elenco del collegio (`--install` li installa in Claude Code) |
 | `backup <slug>` | elenco delle copie, `--now`, `--restore <id>`, `--prune N` |
@@ -279,6 +280,7 @@ kdp-book-factory/
 │   ├── coverdesign.py  sistema di copertina: regole, palette, testi, verifica
 │   ├── coverart.py     illustrazioni vettoriali della prima, scelte dal contenuto
 │   ├── coverbrief.py   brief di copertina per uno strumento grafico esterno
+│   ├── manuale.py      linea manuale: brief e importazioni, senza chiamate al modello
 │   ├── epub.py         EPUB 3
 │   ├── agents/         collegio editoriale: ruoli, revisione, impaginazione
 │   ├── backup.py       snapshot, ripristino, pulizia

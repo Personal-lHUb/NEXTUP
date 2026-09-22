@@ -17,8 +17,20 @@ def generate_outline(spec: BookSpec, client: LLMClient, budget: planner.PageBudg
         label="scaletta (json)",
         max_tokens=16000,
     )
-    outline = Outline.from_dict(raw)
+    outline = normalize_outline(spec, Outline.from_dict(raw), budget)
+    apply_index(spec, outline, client)
+    return outline
 
+
+def normalize_outline(spec: BookSpec, outline: Outline, budget: planner.PageBudget) -> Outline:
+    """Mette in riga una scaletta appena arrivata, chiunque l'abbia scritta.
+
+    È la parte che non chiama il modello: numerazione, introduzione e
+    conclusione come sezioni a sé, budget di parole ripartito. Sta fuori da
+    `generate_outline` perché la stessa scaletta può arrivare da una chiamata
+    API o incollata a mano (`manuale.py`), e le due strade devono produrre lo
+    stesso `outline.json` — non due normalizzazioni che col tempo divergono.
+    """
     # Il modello a volte consegna un numero di capitoli diverso: si rinumera e
     # si aggiungono introduzione e conclusione come sezioni a sé.
     body = [c for c in outline.chapters if c.role not in {"intro", "conclusion"}]
@@ -55,7 +67,6 @@ def generate_outline(spec: BookSpec, client: LLMClient, budget: planner.PageBudg
     planner.apply_budget_to_outline(sequence, planner.distribute_words(budget, spec))
     if not outline.title:
         outline.title = spec.title
-    apply_index(spec, outline, client)
     return outline
 
 

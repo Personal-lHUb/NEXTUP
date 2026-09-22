@@ -13,7 +13,18 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from . import agents, backup, coverbrief, coverdesign, diagnostica, kdpspecs, pipeline, planner, writer
+from . import (
+    agents,
+    backup,
+    coverbrief,
+    coverdesign,
+    diagnostica,
+    kdpspecs,
+    manuale,
+    pipeline,
+    planner,
+    writer,
+)
 from .llm import DEFAULT_MODEL, LLMClient, LLMConfig, api_key_present
 from .models import BookProject, BookSpec, slugify
 
@@ -391,6 +402,78 @@ def cmd_copertina(args) -> int:
     print("e rilancia `build`: viene ritagliata sulla prima, portata a 300 DPI e")
     print("misurata. Se i pixel non bastano, il controllo qualità lo dice.")
     return 0
+
+
+def cmd_manuale(args) -> int:
+    """La fabbrica senza chiave: il sistema scrive i brief, tu porti le risposte.
+
+    Nessuna chiamata al modello, in nessun passo. Serve quando la credenziale
+    non c'è — o quando si vuole scrivere il libro a mano e tenere comunque
+    impaginazione, copertina, controlli e scheda.
+    """
+    project, spec = open_project(args, riscrive=args.importa)
+
+    if args.passo == "stato":
+        print(manuale.riepilogo(project))
+        return 0
+
+    if args.passo == "scaletta":
+        budget = budget_for(project, spec)
+        if not args.importa:
+            percorso = manuale.brief_scaletta(project, spec, budget)
+            print(f"Brief della scaletta: {percorso}")
+            print(f"  {budget.chapters} capitoli · ~{budget.words_per_chapter} parole ciascuno")
+            print(f"\nIncolla la risposta in {manuale.percorso_risposta(project, 'scaletta', 'json')}")
+            print(f"poi: python -m kdpfactory manuale {spec.slug} scaletta --importa")
+            return 0
+        risposta = manuale.leggi_risposta(manuale.percorso_risposta(project, "scaletta", "json"))
+        outline = manuale.importa_scaletta(project, spec, budget, risposta)
+        save_backup(project, args, "scaletta importata a mano")
+        print(f"Scaletta salvata in {project.outline_path}: {len(outline.chapters)} sezioni")
+        for capitolo in outline.chapters:
+            print(f"  {capitolo.number:>2}. {capitolo.title}  ({capitolo.target_words} parole)")
+        return 0
+
+    outline = project.load_outline()
+
+    if args.passo == "capitolo":
+        if not args.numero:
+            raise SystemExit("Serve --numero: quale capitolo.")
+        nome = f"capitolo-{args.numero:02d}"
+        if not args.importa:
+            percorso = manuale.brief_capitolo(project, spec, outline, args.numero)
+            print(f"Brief del capitolo {args.numero}: {percorso}")
+            print(f"\nIncolla la risposta in {manuale.percorso_risposta(project, nome, 'md')}")
+            print(f"poi: python -m kdpfactory manuale {spec.slug} capitolo "
+                  f"--numero {args.numero} --importa")
+            return 0
+        risposta = manuale.leggi_risposta(manuale.percorso_risposta(project, nome, "md"))
+        esito = manuale.importa_capitolo(project, outline, args.numero, risposta)
+        save_backup(project, args, f"capitolo {args.numero} importato a mano")
+        print(f"Capitolo {esito['numero']} — {esito['titolo']}")
+        print(f"  {esito['parole']} parole su {esito['parole_chieste']} chieste "
+              f"({esito['scarto'] * 100:+.0f}%)")
+        if esito["fuori_tolleranza"]:
+            print("  ! fuori tolleranza: l'impaginazione ne risentirà sul conteggio pagine.")
+        return 0
+
+    if args.passo == "scheda":
+        if not args.importa:
+            percorso = manuale.brief_scheda(project, spec, outline)
+            print(f"Brief della scheda prodotto: {percorso}")
+            print(f"\nIncolla la risposta in {manuale.percorso_risposta(project, 'scheda', 'json')}")
+            print(f"poi: python -m kdpfactory manuale {spec.slug} scheda --importa")
+            return 0
+        risposta = manuale.leggi_risposta(manuale.percorso_risposta(project, "scheda", "json"))
+        meta = manuale.importa_scheda(project, risposta)
+        state = project.load_state()
+        pagine = (state.get("build") or {}).get("pagine") or spec.target_pages
+        info = pipeline.write_metadata_files(project, spec, outline, meta, pagine)
+        save_backup(project, args, "scheda importata a mano")
+        print(f"Scheda salvata in {info['listing']}")
+        return 0
+
+    raise SystemExit(f"Passo non riconosciuto: {args.passo}")
 
 
 def cmd_qa(args) -> int:
@@ -892,6 +975,24 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument("slug")
     p.set_defaults(func=cmd_copertina)
+
+    p = sub.add_parser(
+        "manuale",
+        help="la fabbrica senza chiave API: il sistema scrive i brief, tu porti le risposte",
+    )
+    p.add_argument("slug")
+    p.add_argument(
+        "passo",
+        choices=["stato", "scaletta", "capitolo", "scheda"],
+        help="stato: che cosa manca · scaletta/capitolo/scheda: produce il brief",
+    )
+    p.add_argument("--numero", type=int, default=0, help="quale capitolo (passo `capitolo`)")
+    p.add_argument(
+        "--importa",
+        action="store_true",
+        help="invece di produrre il brief, importa la risposta che hai incollato",
+    )
+    p.set_defaults(func=cmd_manuale)
 
     p = sub.add_parser("qa", help="controlli di qualità e conformità")
     p.add_argument("slug")
