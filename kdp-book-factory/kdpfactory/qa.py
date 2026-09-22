@@ -332,6 +332,20 @@ def check_metadata(metadata: dict, spec: BookSpec, report: Report | None = None)
     report = report or Report()
     title = metadata.get("title", spec.title)
     subtitle = metadata.get("subtitle", spec.subtitle)
+    # In copertina e sul dorso è stampato `spec.title`; nel pannello KDP si
+    # incolla questo. Amazon li confronta, e se non coincidono il libro non
+    # passa la revisione. Il sistema non sceglie per te quale sia il titolo
+    # giusto — quello della scheda l'ha scritto un modello che ha letto il
+    # manoscritto vero, quello di `book.json` è più vecchio — ma non li lascia
+    # divergere in silenzio.
+    if title.strip() != spec.title.strip():
+        report.add(
+            "errore",
+            "METADATI",
+            f"La scheda dice «{title}», la copertina stampa «{spec.title}». "
+            "Decidi quale dei due è il libro: allinea `title` in book.json e "
+            "rifai `build`, oppure correggi la scheda. Non caricare così.",
+        )
     if len(title) + len(subtitle) > 200:
         report.add(
             "errore",

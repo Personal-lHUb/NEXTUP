@@ -230,6 +230,28 @@ class TestMarkdown(unittest.TestCase):
         self.assertIn("&lt;tag&gt;", out)
         self.assertIn("&amp;", out)
 
+    def test_apice_inverso_non_rompe_limpaginazione(self):
+        """Un solo apice inverso in un capitolo fermava `build` a libro pagato.
+
+        Le virgolette tipografiche si applicavano dopo i tag e arricciavano
+        anche quelle di `face="..."`: ReportLab non leggeva più il nome del
+        font e sollevava. E Courier, che era il default, non viene incorporato:
+        il controllo di stampa rifiuta il PDF.
+        """
+        from reportlab.lib.styles import getSampleStyleSheet
+        from reportlab.platypus import Paragraph
+
+        markup = mdlite.inline_to_markup('Usa `git status` e poi le "virgolette".')
+        self.assertNotIn("<font", markup)
+        self.assertNotIn("Courier", markup)
+        self.assertIn("“virgolette”", markup)
+        Paragraph(markup, getSampleStyleSheet()["Normal"])  # non deve sollevare
+
+    def test_una_famiglia_mono_registrata_viene_usata(self):
+        """Chi ha un font monospaziato vero lo può passare: è l'unico modo."""
+        markup = mdlite.inline_to_markup("il file `book.json`", mono_font="LiberationMono")
+        self.assertIn('<font face="LiberationMono">book.json</font>', markup)
+
     def test_conteggio_parole_ignora_markup(self):
         self.assertEqual(mdlite.count_words("# Titolo\n\n**due** parole"), 3)
 

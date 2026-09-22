@@ -261,7 +261,7 @@ def _dry_run_findings() -> dict:
 
 def _dry_run_json(user_prompt: str) -> str:
     if "scheda prodotto" in user_prompt:
-        return json.dumps(_dry_run_metadata(), ensure_ascii=False)
+        return json.dumps(_dry_run_metadata(user_prompt), ensure_ascii=False)
     # Reparto di acquisizione: il giro da ASIN a scheda si deve poter provare
     # a costo zero come tutto il resto.
     if "Ecco la scheda del concorrente" in user_prompt:
@@ -366,10 +366,20 @@ def _dry_run_posizionamento() -> dict:
     }
 
 
-def _dry_run_metadata() -> dict:
+def _dry_run_metadata(user_prompt: str = "") -> dict:
+    # Il titolo va ripreso dal prompt, dove la scheda del libro lo scrive in
+    # chiaro (`book_bible`). Un «Titolo segnaposto» non coincide mai con quello
+    # stampato in copertina, e il controllo che confronta i due — quello vero,
+    # che serve a non farsi bloccare da KDP — sparerebbe a ogni prova a secco.
+    titolo = re.search(r"^Titolo: (.+)$", user_prompt, flags=re.M)
+    sottotitolo = re.search(r"^Sottotitolo: (.+)$", user_prompt, flags=re.M)
     return {
-        "title": "Titolo segnaposto",
-        "subtitle": "Sottotitolo segnaposto orientato al beneficio",
+        "title": titolo.group(1).strip() if titolo else "Titolo segnaposto",
+        "subtitle": (
+            sottotitolo.group(1).strip()
+            if sottotitolo
+            else "Sottotitolo segnaposto orientato al beneficio"
+        ),
         "description_paragraphs": [
             "Gancio segnaposto della descrizione.",
             "Secondo paragrafo segnaposto della descrizione del libro.",

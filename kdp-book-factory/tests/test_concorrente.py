@@ -210,6 +210,23 @@ class TestTitoloCheDeveStareInCopertina(unittest.TestCase):
         spec = concorrente.scrivi(self.project, self.risultato("Il Metodo delle Tre Ore"), "Iris")
         self.assertEqual(spec.title, "Il Metodo delle Tre Ore")
 
+    def test_oltre_i_200_caratteri_il_libro_non_si_carica(self):
+        """Il limite di KDP viveva solo in `qa`, cioè a libro già pagato."""
+        risultato = self.risultato("T" * 100)
+        risultato.piano["sottotitolo"] = "S" * 110
+        with self.assertRaises(SystemExit) as caso:
+            concorrente.scrivi(self.project, risultato, "Iris")
+        self.assertIn("210 caratteri", str(caso.exception))
+        self.assertIn("limite di KDP", str(caso.exception))
+
+    def test_il_taglio_nei_risultati_avvisa_ma_non_blocca(self):
+        """Quasi ogni titolo vero supera i 60 caratteri: bloccare sarebbe severità."""
+        risultato = self.risultato("Il Metodo delle Tre Ore")
+        risultato.piano["sottotitolo"] = "Recuperare una mattina di lavoro profondo"
+        spec = concorrente.scrivi(self.project, risultato, "Iris")
+        self.assertTrue(self.project.spec_path.exists())
+        self.assertEqual(spec.subtitle, "Recuperare una mattina di lavoro profondo")
+
 
 class TestGiroCompleto(unittest.TestCase):
     """Da pagina incollata a `book.json`, senza spendere token."""

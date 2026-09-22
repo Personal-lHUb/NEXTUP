@@ -143,6 +143,14 @@ def render_listing(
         "",
         "## Dati del libro",
         f"- **Titolo**: {meta.get('title', spec.title)}",
+        # Se il titolo della scheda non è quello stampato, chi incolla deve
+        # vederlo qui, accanto al campo che sta per copiare: Amazon confronta
+        # copertina e scheda, e una differenza blocca la pubblicazione.
+        *(
+            [f"- **Titolo stampato in copertina**: {spec.title}  ← NON COINCIDE"]
+            if meta.get("title", spec.title).strip() != spec.title.strip()
+            else []
+        ),
         f"- **Sottotitolo**: {meta.get('subtitle', spec.subtitle)}",
         f"- **Autore**: {spec.author}",
         f"- **Lingua**: {spec.language}",

@@ -647,7 +647,16 @@ def cmd_concorrente(args) -> int:
     print(f"\nScritti {project.spec_path} e {project.brief_path}")
     print(f"Dettaglio dell'analisi: {acquisizione.acquisizione_path(project)}")
     print(f"\nRileggi la scheda e il brief, poi: python -m kdpfactory all {spec.slug}")
-    return 1 if risultato.segnalazioni else 0
+    # I bloccanti fermano la scrittura da soli, dentro `scrivi()`: se siamo qui
+    # la scheda esiste ed è valida. Uscire con 1 per una nota di stile faceva
+    # spezzare `concorrente build && all`, che è la corsa per cui il comando
+    # esiste.
+    if risultato.segnalazioni:
+        print(
+            f"\n{len(risultato.segnalazioni)} segnalazioni non bloccanti: "
+            "rileggile qui sopra prima di far scrivere il libro."
+        )
+    return 0
 
 
 def cmd_backup(args) -> int:

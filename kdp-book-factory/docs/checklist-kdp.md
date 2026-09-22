@@ -59,8 +59,13 @@ Le voci contrassegnate con **[auto]** sono già verificate da `kdpfactory qa`.
       riferimenti al prezzo, link o nomi di altri autori.
 - [ ] **[auto]** 7 keyword, ognuna entro 50 caratteri, che non ripetono il titolo.
 - [ ] Tre categorie scelte guardando la classifica reale su Amazon, non a intuito.
-- [ ] Titolo e sottotitolo identici su copertina, interno e scheda: una differenza
-      anche minima è motivo di blocco della pubblicazione.
+- [ ] **[auto]** Titolo identico su copertina e scheda: il controllo qualità
+      confronta il titolo di `build/metadata.json` con quello stampato
+      (`book.json`) e dà errore se divergono. Non sceglie per te quale sia
+      quello giusto — quello della scheda l'ha scritto un agente che aveva
+      letto il manoscritto, quello di `book.json` è più vecchio.
+- [ ] Sottotitolo e nome autore identici su copertina, interno e scheda: una
+      differenza anche minima è motivo di blocco della pubblicazione.
 - [ ] Nome autore identico ovunque (anche l'ordine nome/cognome).
 
 ## 5. Dichiarazioni obbligatorie

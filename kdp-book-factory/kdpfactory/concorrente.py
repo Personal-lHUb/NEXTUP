@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
-from . import coverdesign
+from . import coverdesign, kdpspecs
 from .agents.base import AgentContext, AgentFinding, get_agent
 from .llm import LLMClient
 from .models import BookProject, BookSpec
@@ -181,8 +181,6 @@ def analizza(project: BookProject, client: LLMClient, asin: str = "") -> Acquisi
 # --------------------------------------------------------------------------
 def _pagine_valide(valore) -> int:
     """Le pagine obiettivo, riportate dentro i limiti di progetto."""
-    from . import kdpspecs
-
     try:
         pagine = int(valore)
     except (TypeError, ValueError):
@@ -308,6 +306,15 @@ def scrivi(project: BookProject, risultato: Acquisizione, autore: str) -> BookSp
     # stesse in copertina: il primo ad accorgersene era l'agente `copertina`,
     # alla fine di `all`, cioè dopo aver pagato il libro intero.
     problemi = spec.validate() + coverdesign.title_problems(spec.title, trim=spec.trim)
+    insieme = len(spec.title) + len(spec.subtitle)
+    if insieme > kdpspecs.TITLE_AND_SUBTITLE_MAX_CHARS:
+        # Il limite di KDP esisteva solo in `qa.check_metadata`, cioè alla fine
+        # di `all`: un titolo lungo si scopriva a libro scritto, impaginato e
+        # pagato, e non si carica comunque.
+        problemi.append(
+            f"Titolo + sottotitolo fanno {insieme} caratteri: il limite di KDP è "
+            f"{kdpspecs.TITLE_AND_SUBTITLE_MAX_CHARS} e il libro non si carica."
+        )
     if problemi:
         raise SystemExit(
             "Il posizionamento ha prodotto una scheda non valida:\n"
@@ -319,6 +326,20 @@ def scrivi(project: BookProject, risultato: Acquisizione, autore: str) -> BookSp
     project.brief_path.write_text(
         brief_dal_piano(risultato.piano, risultato.scheda, risultato.asin), encoding="utf-8"
     )
+
+    # Il taglio a 60 caratteri non è un limite di KDP: è dove Amazon tronca nei
+    # risultati di ricerca, e quello che si taglia è sempre la seconda metà.
+    # Non blocca — quasi ogni titolo vero lo supera — ma si guarda adesso, che
+    # correggerlo costa una riga, non alla fine.
+    vetrina = f"{spec.title}: {spec.subtitle}" if spec.subtitle else spec.title
+    taglio = kdpspecs.TITLE_TRUNCATION_CHARS
+    if len(vetrina) > taglio:
+        print(
+            f"\n  ! Nei risultati di ricerca si legge «{vetrina[:taglio]}…»: "
+            f"{len(vetrina) - taglio} caratteri della promessa non si vedono.\n"
+            f"    Se la promessa sta nella seconda metà, spostala prima del taglio "
+            f"in {project.spec_path}."
+        )
     return spec
 
 

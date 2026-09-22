@@ -1,5 +1,6 @@
 """Test end-to-end della pipeline in modalità dry-run (nessuna chiamata API)."""
 
+import json
 import tempfile
 import unittest
 import zipfile
@@ -114,6 +115,34 @@ class TestPipelineDryRun(unittest.TestCase):
         )
         codes = {f.code for f in report.errors}
         self.assertIn("METADATI", codes)
+
+    def test_il_titolo_della_scheda_deve_essere_quello_stampato(self):
+        """In copertina è stampato `spec.title`; su KDP si incolla la scheda.
+
+        Amazon li confronta: se non coincidono il libro non passa la revisione.
+        Il sistema non sceglie per te quale dei due sia giusto — lo dice e basta.
+        """
+        report = qa.check_metadata({"title": "Un Altro Titolo", "subtitle": ""}, self.spec)
+        diversi = [f for f in report.errors if "copertina stampa" in f.message]
+        self.assertEqual(len(diversi), 1)
+        self.assertIn(self.spec.title, diversi[0].message)
+
+        uguale = qa.check_metadata({"title": self.spec.title, "subtitle": ""}, self.spec)
+        self.assertEqual([f for f in uguale.errors if "copertina stampa" in f.message], [])
+
+    def test_in_prova_a_secco_i_due_titoli_coincidono(self):
+        """Il segnaposto non deve far scattare il controllo vero a ogni dry-run.
+
+        Il titolo si riprende dal prompt, dove la scheda del libro lo scrive in
+        chiaro: un «Titolo segnaposto» non coincide mai con quello stampato in
+        copertina, e trasformerebbe ogni prova a secco in un falso allarme.
+        """
+        from kdpfactory import prompts
+        from kdpfactory.llm import dry_run_text
+
+        richiesta = prompts.metadata_prompt(self.spec, self.outline, "estratto del libro")
+        prodotto = json.loads(dry_run_text(richiesta, label="metadati kdp (json)"))
+        self.assertEqual(prodotto["title"], self.spec.title)
 
 
 if __name__ == "__main__":

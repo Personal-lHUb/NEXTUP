@@ -94,9 +94,11 @@ un manoscritto.
 python3 -m kdpfactory all <slug>
 ```
 
-Il comando esce con codice 1 se l'originalità ha lasciato segnalazioni, anche
-non bloccanti: serve a non far proseguire uno script senza che qualcuno le abbia
-lette.
+Il comando esce con **0** quando la scheda è stata scritta: i bloccanti fermano
+da soli la scrittura, dentro `scrivi()`, quindi arrivare in fondo significa che
+il libro è pronto. Le segnalazioni non bloccanti vengono contate a schermo, da
+rileggere prima di far scrivere il libro — ma non spezzano
+`concorrente build && all`, che è la corsa per cui il comando esiste.
 
 ## I quattro agenti
 
@@ -128,6 +130,15 @@ leggibile in miniatura — «CONCENTRAZIONE», da sola, lo è su un 6x9 — la s
 non viene scritta e il comando si ferma. Il controllo (`coverdesign.title_problems`)
 costa sedici millesimi di secondo; l'alternativa era accorgersene alla fine di
 `all`, cioè dopo aver progettato, scritto, impaginato e **pagato** il libro.
+
+Allo stesso punto, e per lo stesso motivo, si controllano gli altri due limiti
+del titolo — che prima vivevano uno in `qa` (cioè a libro pagato) e l'altro
+solo nella diagnostica (cioè dopo la pubblicazione):
+
+| limite | che cos'è | esito |
+|---|---|---|
+| **200 caratteri** titolo + sottotitolo | il limite di KDP: oltre, il libro non si carica | **blocca** |
+| **60 caratteri** di «Titolo: Sottotitolo» | dove Amazon tronca nei risultati di ricerca, e a sparire è sempre la seconda metà | **avvisa**: quasi ogni titolo vero lo supera, bloccarlo sarebbe severità |
 
 L'analisi resta comunque su disco in `concorrente/acquisizione.json`: si
 corregge il titolo lì dentro e si riparte da `concorrente build`, senza

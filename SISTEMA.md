@@ -4,7 +4,7 @@ Documento di passaggio di consegne. Descrive **esattamente** che cosa esiste, co
 funziona e perché è stato fatto così. Da incollare in una nuova finestra di contesto.
 
 Aggiornato al 22 settembre 2026 · branch `claude/dreamy-archimedes-hf8w45` ·
-258 test verdi, lint pulito, tutto committato e spinto. *(Il numero di commit
+264 test verdi, lint pulito, tutto committato e spinto. *(Il numero di commit
 non si cita: invecchia prima del documento.)*
 
 ---
@@ -84,7 +84,7 @@ NEXTUP/
     ├── books/<slug>/            book.json, brief.md, assets/, manuscript/, build/, state.json
     ├── config/printing_costs.json
     ├── docs/                    documentazione (vedi sotto)
-    ├── tests/                   258 test, nessuna chiamata di rete
+    ├── tests/                   264 test, nessuna chiamata di rete
     └── fonts/                   font TrueType propri (facoltativo)
 ```
 
@@ -97,7 +97,7 @@ NEXTUP/
 **Comandi:**
 ```bash
 cd kdp-book-factory
-python3 -m unittest discover -s tests     # 258 test, nessuna rete
+python3 -m unittest discover -s tests     # 264 test, nessuna rete
 ruff check kdpfactory tests
 python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 ```
@@ -484,14 +484,34 @@ Il sistema non contiene nessun libro pubblicabile: è una fabbrica. Un libro si
 crea con `init`, con `concorrente new` (da un'analisi di mercato) o con
 `puzzle new`.
 
-**Test: 258**, nessuna chiamata di rete.
+**Test: 264**, nessuna chiamata di rete.
 
-**Rilievi aperti** sul sistema (non su un libro: non ce ne sono):
+**Rilievi aperti** sul sistema (non su un libro: non ce ne sono). Quelli
+seguiti da *(/migliora)* vengono dalla passata del team del 22 settembre, sono
+stati verificati dall'avvocato del diavolo e il capo collana li ha messi dopo
+il primo libro vero, non prima:
 
 - **3 moduli mai nominati nei test**: `agents/panel.py`, `agents/writing.py`,
   `i18n.py`. `panel.py` è il più serio: `apply_revisions` riscrive i capitoli
   sul posto e l'unica difesa contro un capitolo mutilato è una soglia non
-  coperta da test
+  coperta da test. *(/migliora: il controllo è una sottostringa sul testo dei
+  test — `"cli"` sta dentro `client`, quindi `cli.py` non sarà mai segnalato
+  qualunque sia la sua copertura)*
+- **la quarta di copertina non ha un fondo** *(/migliora)*: in `cover.py` la
+  `y` scende riga dopo riga, e oltre le ~310 parole su 6x9 il testo finisce
+  **sotto il rettangolo bianco del codice a barre**, che viene disegnato dopo e
+  lo cancella. `coverdesign.audit()` guarda solo la prima, quindi nessun
+  controllo lo vede. La soglia da misurare è 113,4 pt, non zero
+- **`budget_for` non dice se la previsione è fuori finestra** *(/migliora)*:
+  con `chapters` fissato a mano il gradino più vicino può stare al 24%
+  dall'obiettivo, e il numero viene stampato come un altro qualsiasi
+- **`price_eur` non lo legge nessuno** *(/migliora)*: il prezzo deciso da
+  `posizionamento` non arriva alla tabella delle royalty, che usa un obiettivo
+  di 3.0 cablato
+- **la royalty europea è calcolata sul lordo** *(/migliora)*: va calcolata al
+  netto dell'IVA (4% sui libri in Italia, 0 nel Regno Unito, fuori base negli
+  Stati Uniti: è un campo del marketplace, non una costante). Vale 0,20 € a
+  copia, sopra un file di costi di stampa dichiarato `DA VERIFICARE`
 - il **ciclo di impaginazione** può ancora scavallare quando parte, perché
   scala tutti i capitoli dello stesso fattore; ora però parte di rado, perché
   il budget nasce tarato sulla scalinata delle pagine (§5.1), e quando si ferma

@@ -130,16 +130,27 @@ def parse(markdown: str) -> list[Block]:
     return blocks
 
 
-def inline_to_markup(text: str, mono_font: str = "Courier") -> str:
-    """Converte il markup inline nel mini-HTML accettato da ReportLab."""
+def inline_to_markup(text: str, mono_font: str = "") -> str:
+    """Converte il markup inline nel mini-HTML accettato da ReportLab.
+
+    `mono_font` accetta solo una famiglia già registrata da `typography`. Senza,
+    il testo fra apici inversi resta nel font del corpo, senza apici: Courier è
+    un font PostScript standard, ReportLab non lo incorpora (misurato: zero
+    `/FontFile`) e il controllo di stampa rifiuta il PDF. Il corsivo non è
+    un'alternativa: confonderebbe il codice in linea con l'enfasi `*…*`.
+    """
     out = escape(text, quote=False)
+    # Le virgolette tipografiche vanno messe **prima** dei tag. Fatte dopo,
+    # questa stessa sostituzione arricciava anche gli apici di `face="..."`:
+    # ReportLab non riusciva più a leggere il nome del font e l'impaginazione
+    # moriva a manoscritto già scritto e pagato, per un solo apice inverso in
+    # un capitolo qualunque.
+    out = re.sub(r'"([^"]*)"', "“\\1”", out)
     out = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", out, flags=re.S)
     out = re.sub(r"(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])", r"<i>\1</i>", out, flags=re.S)
     out = re.sub(r"(?<![\w_])_(?!\s)(.+?)(?<!\s)_(?![\w_])", r"<i>\1</i>", out, flags=re.S)
-    out = re.sub(r"`(.+?)`", rf'<font face="{mono_font}">\1</font>', out, flags=re.S)
-    # Virgolette dritte -> virgolette tipografiche (solo per le doppie).
-    out = re.sub(r'"([^"]*)"', "“\\1”", out)
-    return out
+    codice = rf'<font face="{mono_font}">\1</font>' if mono_font else r"\1"
+    return re.sub(r"`(.+?)`", codice, out, flags=re.S)
 
 
 def plain_text(markdown: str) -> str:
