@@ -293,9 +293,20 @@ class TestRapportoCompleto(unittest.TestCase):
         self.assertIn("DIAGNOSTICA DEL SISTEMA", diagnostica.render(system))
 
     def test_senza_libri_il_rapporto_lo_dice(self):
-        """Oggi è il caso vero: in `books/` c'è solo il banco di prova."""
+        """Quando in `books/` c'è solo attrezzatura, il rapporto non finge.
+
+        Il caso si costruisce qui invece di leggere `books/`: finché il
+        sistema non aveva libri erano la stessa cosa, ma il primo libro vero
+        ha fatto cadere il test — che difendeva lo stato del repo, non il
+        comportamento della diagnostica.
+        """
         root = Path(__file__).resolve().parent.parent
-        system = diagnostica.analyse(root / "books", root)
+        with tempfile.TemporaryDirectory() as tmp:
+            libri = Path(tmp)
+            banco = libri / "collaudo"
+            banco.mkdir()
+            demo_spec(slug="collaudo", banco_di_prova=True).save(banco / "book.json")
+            system = diagnostica.analyse(libri, root)
         testo = diagnostica.render(system)
 
         self.assertEqual(system.libri, [])
@@ -304,6 +315,13 @@ class TestRapportoCompleto(unittest.TestCase):
         self.assertIn("collaudo", testo)
         # le misure sul codice restano: non dipendono dai libri
         self.assertGreater(system.codice["righe_codice"], 0)
+
+    def test_il_banco_resta_fuori_anche_quando_i_libri_ci_sono(self):
+        """Sui libri veri del progetto: `collaudo` non entra mai nei conti."""
+        root = Path(__file__).resolve().parent.parent
+        system = diagnostica.analyse(root / "books", root)
+        self.assertIn("collaudo", system.totali["banchi_di_prova_esclusi"])
+        self.assertNotIn("collaudo", [b.slug for b in system.libri])
 
     def test_i_rilievi_sono_ordinati_per_impatto(self):
         report = BookReport(slug="prova", rilievi=[
