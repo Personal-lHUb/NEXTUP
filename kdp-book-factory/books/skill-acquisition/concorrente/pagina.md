@@ -1,4 +1,4 @@
-<!-- SCHEDA DEL CONCORRENTE — ASIN (non indicato)
+<!-- SCHEDA DEL CONCORRENTE — ASIN B0DPDRC4HZ
 
 Incolla qui sotto la pagina Amazon del libro, così com'è. Non serve pulirla:
 menu, banner e suggerimenti vengono scartati da soli.
