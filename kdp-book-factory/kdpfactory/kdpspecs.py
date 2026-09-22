@@ -66,6 +66,14 @@ MIN_OUTSIDE_MARGIN_BLEED = 0.375
 SPINE_TEXT_MIN_PAGES = 79  # sotto questa soglia KDP non consente testo sul dorso
 BARCODE_ZONE_IN = (2.0, 1.2)  # area da lasciare libera in basso a destra della quarta
 
+#: Quanto entra del titolo nei risultati di ricerca. Il limite di KDP è un
+#: altro — 200 caratteri per titolo e sottotitolo insieme — ma quello che conta
+#: per le vendite è dove Amazon taglia: intorno ai 60 caratteri della stringa
+#: «Titolo: Sottotitolo», e quello che si taglia è sempre la seconda metà,
+#: cioè la promessa.
+TITLE_TRUNCATION_CHARS = 60
+TITLE_AND_SUBTITLE_MAX_CHARS = 200
+
 
 def gutter_margin_in(pages: int) -> float:
     """Margine interno minimo richiesto da KDP per un dato numero di pagine."""

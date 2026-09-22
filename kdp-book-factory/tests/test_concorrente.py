@@ -170,6 +170,47 @@ class TestOriginalita(unittest.TestCase):
         self.assertIn("tema 1", brief_letto)
 
 
+class TestTitoloCheDeveStareInCopertina(unittest.TestCase):
+    """Il titolo lo inventa `posizionamento`: se non sta in copertina, si ferma qui.
+
+    Prima il primo ad accorgersene era l'agente `copertina`, alla fine di
+    `all`: cioè dopo aver progettato, scritto, impaginato e **pagato** il libro
+    intero. Il controllo costa sedici millesimi di secondo e nessun token.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.project = BookProject(Path(self.tmp.name) / "libro")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def risultato(self, titolo: str) -> concorrente.Acquisizione:
+        return concorrente.Acquisizione(
+            asin="B0TEST", scheda={}, lacune={}, piano={**PIANO, "titolo": titolo}
+        )
+
+    def test_un_titolo_troppo_largo_ferma_la_scheda(self):
+        with self.assertRaises(SystemExit) as caso:
+            concorrente.scrivi(self.project, self.risultato("Esercizi di concentrazione"), "Iris")
+        self.assertIn("non sta in copertina", str(caso.exception))
+        self.assertFalse(self.project.spec_path.exists())
+
+    def test_l_analisi_resta_su_disco_per_correggere_il_titolo(self):
+        """Quattro chiamate su una pagina intera non si ricomprano per una parola."""
+        with self.assertRaises(SystemExit) as caso:
+            concorrente.scrivi(self.project, self.risultato("Esercizi di concentrazione"), "Iris")
+        percorso = concorrente.acquisizione_path(self.project)
+        self.assertTrue(percorso.exists())
+        self.assertIn(str(percorso), str(caso.exception))
+        salvata = json.loads(percorso.read_text(encoding="utf-8"))
+        self.assertEqual(salvata["piano"]["titolo"], "Esercizi di concentrazione")
+
+    def test_un_titolo_che_ci_sta_passa(self):
+        spec = concorrente.scrivi(self.project, self.risultato("Il Metodo delle Tre Ore"), "Iris")
+        self.assertEqual(spec.title, "Il Metodo delle Tre Ore")
+
+
 class TestGiroCompleto(unittest.TestCase):
     """Da pagina incollata a `book.json`, senza spendere token."""
 

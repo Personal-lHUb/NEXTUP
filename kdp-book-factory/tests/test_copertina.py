@@ -485,6 +485,53 @@ class TestAuditCheVedeIDifetti(unittest.TestCase):
         self.assertEqual(self.verifica("Meditazione per principianti")["problemi"], [])
 
 
+class TestTitoloCheStaInCopertina(unittest.TestCase):
+    """Un titolo che non sta in copertina non è pubblicabile, per quanto sia bello.
+
+    Si verifica **prima** di scrivere il libro: dopo costa centocinque chiamate
+    al modello, qui costa sedici millesimi di secondo.
+    """
+
+    def test_una_parola_piu_larga_della_copertina_non_passa(self):
+        problemi = coverdesign.title_problems("Esercizi per la concentrazione")
+        self.assertEqual(len(problemi), 1)
+        self.assertIn("CONCENTRAZIONE", problemi[0])
+        self.assertIn("non sta in copertina", problemi[0])
+
+    def test_i_titoli_che_ci_stanno_passano(self):
+        for titolo in ("Tre Ore", "Il Metodo delle Tre Ore", "Meditazione per principianti"):
+            with self.subTest(titolo=titolo):
+                self.assertEqual(coverdesign.title_problems(titolo), [])
+
+    def test_un_titolo_vuoto_lo_dice(self):
+        self.assertTrue(coverdesign.title_problems("   "))
+
+    def test_quattro_righe_non_sono_un_difetto_insanabile(self):
+        """Il disegno preferisce una riga in più che un titolo illeggibile.
+
+        Su questo l'agente `copertina` segnala «importante» sul PDF vero: qui
+        stanno solo i difetti che nessuna impaginazione può salvare.
+        """
+        self.assertEqual(coverdesign.title_problems("Titolo segnaposto del libro nuovo"), [])
+
+    def test_la_copertina_disegnata_conferma_il_verdetto(self):
+        """La prova incrociata: quello che il controllo passa, l'audit non boccia."""
+        backup.configure(enabled=False)
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                for titolo in ("Meditazione per principianti", "Esercizi per la concentrazione"):
+                    spec = demo_spec(title=titolo, language="it")
+                    info = cover.build_cover(spec, 140, Path(tmp) / "c.pdf", genre="non-fiction")
+                    fuori = [p for p in info["verifica"]["problemi"] if "area di sicurezza" in p]
+                    with self.subTest(titolo=titolo):
+                        self.assertEqual(
+                            bool(coverdesign.title_problems(titolo)), bool(fuori),
+                            "il controllo a monte e la misura sul PDF non sono d'accordo",
+                        )
+        finally:
+            backup.configure(enabled=True)
+
+
 class TestFormulaDellaCategoria(unittest.TestCase):
     """Le due formule di CLAUDE.md, rese eseguibili sui testi di copertina.
 

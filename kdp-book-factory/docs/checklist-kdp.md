@@ -48,7 +48,13 @@ Le voci contrassegnate con **[auto]** sono già verificate da `kdpfactory qa`.
 
 ## 4. Scheda prodotto
 
-- [ ] **[auto]** Titolo + sottotitolo entro 200 caratteri.
+- [ ] **[auto]** Titolo + sottotitolo entro 200 caratteri (limite KDP).
+- [ ] **[auto]** La promessa sta nei primi **60 caratteri** di «Titolo: Sottotitolo»:
+      è lì che Amazon taglia nei risultati di ricerca, e a sparire è sempre la
+      seconda metà. Il limite di KDP è un altro, e non è quello che decide il clic.
+- [ ] **[auto]** Il titolo sta in copertina: nessuna parola più larga della prima
+      al corpo minimo leggibile in miniatura (`init` e `concorrente` lo verificano
+      prima che il libro venga scritto).
 - [ ] **[auto]** Descrizione entro 4.000 caratteri, senza claim promozionali,
       riferimenti al prezzo, link o nomi di altri autori.
 - [ ] **[auto]** 7 keyword, ognuna entro 50 caratteri, che non ripetono il titolo.

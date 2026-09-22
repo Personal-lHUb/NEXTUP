@@ -8,6 +8,7 @@ un libro intero: il contesto stabile si paga una volta.
 
 from __future__ import annotations
 
+from . import kdpspecs
 from .models import BookSpec, ChapterPlan, Outline
 
 LANGUAGE_NAMES = {"it": "italiano", "en": "inglese"}
@@ -292,6 +293,11 @@ COVER_FIELDS_FULL = """  "cover_kicker": "il genere in 2-3 parole maiuscole, opp
 def metadata_prompt(spec: BookSpec, outline: Outline, sample: str) -> str:
     language = LANGUAGE_NAMES.get(spec.language, spec.language)
     copertina = COVER_FIELDS_MEDIUM if spec.is_medium_content else COVER_FIELDS_FULL
+    # I due limiti del titolo non sono la stessa cosa e non vanno confusi: 200
+    # caratteri è quanto KDP accetta, 60 è dove Amazon taglia nei risultati —
+    # ed è il secondo a decidere se il libro viene cliccato.
+    taglio = kdpspecs.TITLE_TRUNCATION_CHARS
+    insieme = kdpspecs.TITLE_AND_SUBTITLE_MAX_CHARS
     categoria = (
         "medium-content: un libro da usare, dove ogni pagina propone qualcosa di diverso"
         if spec.is_medium_content
@@ -310,8 +316,8 @@ Estratto dal libro (per cogliere il tono reale):
 
 Rispondi con questo JSON:
 {{
-  "title": "titolo (max 60 caratteri)",
-  "subtitle": "sottotitolo (max 130 caratteri, orientato al beneficio)",
+  "title": "titolo corto e memorabile: «Titolo: Sottotitolo» viene tagliato dopo {taglio} caratteri nei risultati di ricerca, e a sparire è sempre la seconda metà — quindi la promessa deve stare prima del taglio, e le parole lunghe vanno nel sottotitolo",
+  "subtitle": "sottotitolo orientato al beneficio; titolo e sottotitolo insieme entro {insieme} caratteri, che è il limite di KDP",
   "description_paragraphs": ["paragrafo 1 (gancio)", "paragrafo 2", "paragrafo 3"],
   "bullets": ["cosa impari 1", "cosa impari 2", "cosa impari 3", "cosa impari 4", "cosa impari 5"],
   "closing": "frase di chiusura con chiamata all'azione senza riferimenti al prezzo",

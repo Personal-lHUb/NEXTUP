@@ -126,6 +126,90 @@ class TestPlanner(unittest.TestCase):
         self.assertGreater(calibration.scale, 1.0)
 
 
+class TestTaraturaDellePagine(unittest.TestCase):
+    """Le pagine non sono una funzione continua delle parole: sono una scalinata.
+
+    Ogni sezione si apre su pagina dispari e quindi occupa un numero pari di
+    pagine. Fra un gradino e l'altro c'è una pedata piatta dove mille parole in
+    più non spostano niente: è lì che il vecchio calcolo si perdeva, ed è
+    perché il libro usciva sempre sotto l'obiettivo.
+    """
+
+    def spec(self, **kwargs) -> BookSpec:
+        base = dict(slug="t", title="Titolo", topic="argomento", language="it")
+        base.update(kwargs)
+        return BookSpec(**base)
+
+    def test_una_sezione_occupa_sempre_un_numero_pari_di_pagine(self):
+        modello = planner.PageModel(
+            words_per_body_page=350, opening_pages=1.5, fixed_pages=12
+        )
+        for parole in (900, 1500, 1750, 2000, 3000):
+            corpo = modello.pages_for([parole]) - 12
+            self.assertEqual(corpo % 2, 0, f"{parole} parole → {corpo} pagine di corpo")
+
+    def test_fra_due_gradini_le_parole_non_spostano_le_pagine(self):
+        modello = planner.PageModel(
+            words_per_body_page=350, opening_pages=1.5, fixed_pages=12
+        )
+        sezioni = [1700] * 20
+        cresciute = [1750] * 20
+        self.assertEqual(modello.pages_for(sezioni), modello.pages_for(cresciute))
+
+    def test_il_fit_ritrova_il_modello_che_ha_generato_le_misure(self):
+        vero = planner.PageModel(words_per_body_page=400, opening_pages=1.8, fixed_pages=13)
+        osservazioni = [
+            (parole, vero.pages_for([parole]) - 13)
+            for parole in (900, 1200, 1500, 1800, 2100, 2400, 3000)
+        ]
+        stimato = planner._fit_model(osservazioni, 13)
+        for parole in (1000, 1600, 2200, 2800):
+            self.assertEqual(
+                stimato.pages_for([parole]),
+                vero.pages_for([parole]),
+                f"il modello stimato sbaglia il gradino a {parole} parole",
+            )
+
+    def test_la_taratura_porta_il_libro_nella_finestra(self):
+        """La prova che conta: si impagina davvero e si guarda dove cade.
+
+        Senza taratura il PDF esce intorno al 10% sotto l'obiettivo, cioè
+        fuori; con la taratura ci deve cadere dentro, e i capitoli devono
+        restare nell'intervallo di progetto.
+        """
+        import tempfile
+        from pathlib import Path
+
+        from kdpfactory import typeset
+        from kdpfactory.models import Outline
+
+        spec = self.spec(target_pages=100)
+
+        def pagine(wpp: float, cartella: str) -> tuple[int, int]:
+            budget = planner.build_budget(spec, wpp)
+            piani, capitoli = planner._sections_of(spec, planner.distribute_words(budget, spec))
+            esito = typeset.typeset(
+                spec, Outline(title=spec.title, chapters=piani), capitoli,
+                Path(cartella) / "prova.pdf",
+            )
+            return esito.pages, budget.words_per_chapter
+
+        with tempfile.TemporaryDirectory() as tmp:
+            senza, _ = pagine(planner.words_per_page(spec), tmp)
+            tarate = planner.calibrate_words_per_page(spec)
+            con, parole_capitolo = pagine(tarate, tmp)
+
+        basso, alto = round(spec.target_pages * 0.95), round(spec.target_pages * 1.05)
+        self.assertLess(senza, basso, "la stima analitica non sbaglia più per difetto?")
+        self.assertTrue(
+            basso <= con <= alto, f"{con} pagine fuori dalla finestra [{basso}-{alto}]"
+        )
+        self.assertTrue(
+            planner.MIN_WORDS_PER_CHAPTER <= parole_capitolo <= planner.MAX_WORDS_PER_CHAPTER,
+            f"capitoli da {parole_capitolo} parole, fuori intervallo",
+        )
+
+
 class TestMarkdown(unittest.TestCase):
     def test_parsing_blocchi(self):
         blocks = mdlite.parse(

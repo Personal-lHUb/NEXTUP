@@ -3,8 +3,9 @@
 Documento di passaggio di consegne. Descrive **esattamente** che cosa esiste, come
 funziona e perché è stato fatto così. Da incollare in una nuova finestra di contesto.
 
-Aggiornato al 18 settembre 2026 · branch `claude/dreamy-archimedes-hf8w45` · ultimo
-commit `4b30066` · 170 test verdi, lint pulito, tutto committato e spinto.
+Aggiornato al 22 settembre 2026 · branch `claude/dreamy-archimedes-hf8w45` ·
+258 test verdi, lint pulito, tutto committato e spinto. *(Il numero di commit
+non si cita: invecchia prima del documento.)*
 
 ---
 
@@ -83,7 +84,7 @@ NEXTUP/
     ├── books/<slug>/            book.json, brief.md, assets/, manuscript/, build/, state.json
     ├── config/printing_costs.json
     ├── docs/                    documentazione (vedi sotto)
-    ├── tests/                   216 test, nessuna chiamata di rete
+    ├── tests/                   258 test, nessuna chiamata di rete
     └── fonts/                   font TrueType propri (facoltativo)
 ```
 
@@ -96,7 +97,7 @@ NEXTUP/
 **Comandi:**
 ```bash
 cd kdp-book-factory
-python3 -m unittest discover -s tests     # 216 test, nessuna rete
+python3 -m unittest discover -s tests     # 258 test, nessuna rete
 ruff check kdpfactory tests
 python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 ```
@@ -109,7 +110,7 @@ python3 -m kdpfactory --dry-run all <slug>   # prova senza spendere token
 |---|---|
 | `kdpspecs.py` | specifiche KDP: formati, margini, dorso, limiti. `PROJECT_MIN_PAGES=60`, `PROJECT_MAX_PAGES=240` |
 | `models.py` | `BookSpec`, `ChapterPlan`, `Outline`, `BookProject`, `state.json` |
-| `planner.py` | pagine → parole, da metriche reali del font; capitoli fra 1.500 e 2.000 parole; ricalibrazione a posteriori |
+| `planner.py` | pagine → parole; capitoli fra 1.500 e 2.000 parole; **taratura sulla scalinata delle pagine** con due impaginazioni di prova, e ricalibrazione a posteriori |
 | `prompts.py` | tutto il testo mandato al modello: `AUTHOR_RULES`, `BANNED_OPENERS`, `book_bible()`; il contesto per capitolo tenuto a budget (`focus_covered`) |
 | `llm.py` | client Claude: streaming, cache del prefisso, conteggio token e costi, dry-run |
 | `writer.py` | scaletta, capitoli, continuità, revisioni di lunghezza |
@@ -198,9 +199,33 @@ a modo suo.
 Dopo l'editor il libro viene **rimpaginato**: l'editing cambia le parole, e le
 parole decidono le pagine.
 
-**Convergenza sulle pagine**: stima da geometria e metriche del font → impaginato
-vero → parole/pagina misurate → nuovo budget (limitato a ±45%) → riscritture
-mirate → ripete. **Oggi non converge**: vedi §8.
+**Le pagine sono una scalinata, non una retta.** Ogni sezione si apre su pagina
+dispari, quindi occupa un numero **pari** di pagine: fra un gradino e l'altro
+c'è una pedata piatta dove mille parole in più non spostano niente, e il salto
+successivo vale due pagine per sezione — fino a quaranta in un colpo su un
+libro da venti capitoli. È questa la ragione per cui il libro usciva sempre
+sotto l'obiettivo e per cui il ciclo di impaginazione oscillava: si correggevano
+le parole cercando una continuità che non c'è.
+
+**Taratura prima di scrivere** (`planner.measure_page_model`, zero chiamate
+API): si impaginano due libri di prova — struttura dei capitoli veri,
+introduzione e conclusione comprese — e si misura la scalinata: parole per
+pagina piena, costo di un'apertura, pagine fisse. Poi si prova ogni budget
+ammissibile e si sceglie quello che cade sul gradino più vicino all'obiettivo
+(`calibrate_words_per_page`). Costa 1-8 secondi di CPU, resta in `state.json`
+(`words_per_page_measured`, `modello_pagine`) e si paga una volta sola.
+
+Misurato su sette formati (60, 80, 100, 140, 180, 220, 240 pagine): senza
+taratura **7 su 7 fuori** dalla finestra ±5%, sempre per difetto (−10% circa);
+con la taratura **7 su 7 dentro**, e la previsione sbaglia di una pagina. Il
+limite dichiarato: il testo di prova imita la struttura dei capitoli veri, non
+il modo di scrivere del modello — serve a partire vicini, e la misura che conta
+resta quella del primo PDF vero.
+
+**Convergenza sulle pagine** (dopo la stesura): impaginato vero →
+parole/pagina misurate → nuovo budget (limitato a ±45%) → riscritture mirate →
+ripete, con un freno se il salto misurato è più largo della finestra. Ora parte
+di rado, perché il libro nasce già vicino.
 
 **Contesto di chi scrive**: il blocco stabile (regole d'autore + scheda del libro
 con la struttura completa) va in cache; il messaggio del capitolo no, e si
@@ -459,7 +484,7 @@ Il sistema non contiene nessun libro pubblicabile: è una fabbrica. Un libro si
 crea con `init`, con `concorrente new` (da un'analisi di mercato) o con
 `puzzle new`.
 
-**Test: 216**, nessuna chiamata di rete.
+**Test: 258**, nessuna chiamata di rete.
 
 **Rilievi aperti** sul sistema (non su un libro: non ce ne sono):
 
@@ -467,12 +492,13 @@ crea con `init`, con `concorrente new` (da un'analisi di mercato) o con
   `i18n.py`. `panel.py` è il più serio: `apply_revisions` riscrive i capitoli
   sul posto e l'unica difesa contro un capitolo mutilato è una soglia non
   coperta da test
-- il **ciclo di impaginazione non converge** quando i capitoli sono molti: ora
-  si ferma da sé invece di insistere, ma la causa — tutti i capitoli scalati
-  dello stesso fattore, che scavallano insieme — resta
-- i **fattori di riempimento** di `planner.py` restano intoccati: le misure
-  disponibili oscillano del 12% sullo stesso libro e vengono da testo
-  segnaposto. Servirebbe un libro scritto davvero
+- il **ciclo di impaginazione** può ancora scavallare quando parte, perché
+  scala tutti i capitoli dello stesso fattore; ora però parte di rado, perché
+  il budget nasce tarato sulla scalinata delle pagine (§5.1), e quando si ferma
+  tiene l'ultima misura, non la migliore — è un limite dichiarato nel codice
+- la **taratura delle pagine** misura la struttura dei capitoli, non la prosa
+  del modello: il primo libro scritto davvero dirà di quanto sbaglia
+  (`build.storico` in `state.json` lo registra da sé)
 - i **costi di stampa** in `config/printing_costs.json` sono dichiarati
   `DA VERIFICARE`: ogni royalty del sistema poggia su quel file
 

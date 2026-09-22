@@ -120,6 +120,19 @@ dalle recensioni. Senza citazione è un'impressione, e non vale.
 | `importante` | la lacuna dichiarata non compare fra quelle trovate nelle recensioni: il posizionamento è un'opinione travestita da dato |
 | vario | formulazioni caratteristiche riprese, promesse non mantenibili, rivendicazioni vietate |
 
+## Che cosa blocca il titolo
+
+Oltre all'originalità, il titolo proposto da `posizionamento` deve **stare in
+copertina**: se una sua parola è più larga della prima già al corpo minimo
+leggibile in miniatura — «CONCENTRAZIONE», da sola, lo è su un 6x9 — la scheda
+non viene scritta e il comando si ferma. Il controllo (`coverdesign.title_problems`)
+costa sedici millesimi di secondo; l'alternativa era accorgersene alla fine di
+`all`, cioè dopo aver progettato, scritto, impaginato e **pagato** il libro.
+
+L'analisi resta comunque su disco in `concorrente/acquisizione.json`: si
+corregge il titolo lì dentro e si riparte da `concorrente build`, senza
+ricomprare le quattro chiamate sulla pagina incollata.
+
 ## Limiti dichiarati
 
 - **Il reparto non vede Amazon.** Lavora su quello che incolli: se la pagina è

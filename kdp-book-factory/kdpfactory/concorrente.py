@@ -19,6 +19,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
+from . import coverdesign
 from .agents.base import AgentContext, AgentFinding, get_agent
 from .llm import LLMClient
 from .models import BookProject, BookSpec
@@ -303,7 +304,10 @@ def scrivi(project: BookProject, risultato: Acquisizione, autore: str) -> BookSp
     )
 
     spec = spec_dal_piano(project.root.name, risultato.piano, autore)
-    problemi = spec.validate()
+    # Il titolo lo inventa `posizionamento`, e nessuno finora controllava che
+    # stesse in copertina: il primo ad accorgersene era l'agente `copertina`,
+    # alla fine di `all`, cioè dopo aver pagato il libro intero.
+    problemi = spec.validate() + coverdesign.title_problems(spec.title, trim=spec.trim)
     if problemi:
         raise SystemExit(
             "Il posizionamento ha prodotto una scheda non valida:\n"

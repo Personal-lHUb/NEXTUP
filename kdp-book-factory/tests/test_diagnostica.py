@@ -63,6 +63,20 @@ class TestScheda(unittest.TestCase):
         report = self.scheda({"keywords": ["libro regalo"]})
         self.assertTrue(any("generiche" in f.fatto for f in report.rilievi))
 
+    def test_la_soglia_del_taglio_e_una_sola_per_tutto_il_sistema(self):
+        """Il numero che misura la diagnostica è lo stesso che riceve chi scrive
+        la scheda: due copie dello stesso limite prima o poi divergono."""
+        from kdpfactory import kdpspecs, prompts
+        from kdpfactory.models import ChapterPlan, Outline
+
+        self.assertEqual(diagnostica.TITLE_TRUNCATION_CHARS, kdpspecs.TITLE_TRUNCATION_CHARS)
+        testo = prompts.metadata_prompt(
+            demo_spec(), Outline(title="T", chapters=[ChapterPlan(number=1, title="C")]), "x"
+        )
+        self.assertIn(f"tagliato dopo {kdpspecs.TITLE_TRUNCATION_CHARS} caratteri", testo)
+        # e si misura sulla stringa intera, non sul solo titolo
+        self.assertIn("«Titolo: Sottotitolo»", testo)
+
     def test_titolo_troncato_nei_risultati(self):
         lungo = "Un titolo deliberatamente lunghissimo che nei risultati di ricerca non ci sta"
         report = self.scheda({}, demo_spec(title=lungo, subtitle=""))

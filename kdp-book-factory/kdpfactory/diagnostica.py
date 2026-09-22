@@ -30,6 +30,7 @@ import re
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
+from . import kdpspecs
 from . import metadata as metadata_module
 from .models import BookProject, BookSpec
 
@@ -42,8 +43,10 @@ CATEGORY_SLOTS = 3
 DESCRIPTION_MAX_CHARS = 4000
 #: quanto si legge prima di «Leggi di più» sulla scheda
 DESCRIPTION_FOLD_CHARS = 185
-#: oltre questa lunghezza il titolo viene troncato nei risultati di ricerca
-TITLE_TRUNCATION_CHARS = 60
+#: oltre questa lunghezza «Titolo: Sottotitolo» viene troncato nei risultati di
+#: ricerca. Il numero sta in `kdpspecs` con gli altri limiti veri di KDP: è lo
+#: stesso che riceve l'agente che scrive la scheda, e due copie divergono.
+TITLE_TRUNCATION_CHARS = kdpspecs.TITLE_TRUNCATION_CHARS
 
 #: parole troppo generiche per occupare uno slot: non le cerca nessuno da sole
 WEAK_KEYWORDS = {

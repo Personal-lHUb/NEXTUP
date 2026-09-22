@@ -58,8 +58,28 @@ def open_project(args, *, riscrive: bool = False) -> tuple[BookProject, BookSpec
 
 
 def budget_for(project: BookProject, spec: BookSpec) -> planner.PageBudget:
-    """Budget del libro, usando la calibrazione misurata se già disponibile."""
-    measured = project.load_state().get("words_per_page_measured")
+    """Budget del libro, tarato sulle pagine vere prima di spendere un token.
+
+    Senza taratura il primo PDF esce circa il 10% sotto l'obiettivo — sempre
+    fuori dalla finestra — e il libro si ricompra intero per rientrare. Due
+    impaginazioni di prova costano qualche secondo di CPU e zero chiamate al
+    modello, e il risultato resta in `state.json`: si paga una volta sola, e
+    dopo il primo libro vero vince comunque la misura reale.
+    """
+    state = project.load_state()
+    measured = state.get("words_per_page_measured")
+    if not measured:
+        print("Taratura delle pagine (due impaginazioni di prova, nessuna chiamata API)…")
+        modello = planner.measure_page_model(spec)
+        measured = planner.calibrate_words_per_page(spec, modello)
+        previste = planner.predict_pages(spec, measured, modello)
+        project.update_state(
+            words_per_page_measured=round(measured, 1), modello_pagine=modello.to_dict()
+        )
+        print(
+            f"  {measured:.0f} parole per pagina · previsione: {previste} pagine "
+            f"(obiettivo {spec.target_pages})"
+        )
     return planner.build_budget(spec, measured)
 
 
@@ -196,6 +216,11 @@ def cmd_init(args) -> int:
     spec.save(project.spec_path)
     create_author_inputs(project, spec)
     print(f"Creato {project.spec_path}")
+    # Il titolo l'hai scelto tu, quindi non si blocca niente: si avvisa adesso,
+    # che cambiarlo costa una riga di `book.json`, invece che alla fine di
+    # `all`, quando il libro è già scritto e pagato.
+    for problema in coverdesign.title_problems(spec.title, trim=spec.trim):
+        print(f"\n  ⚠ {problema}\n")
     print(f"Argomenti da affrontare  → {project.brief_path}")
     print(f"Immagine di copertina    → {project.assets_dir}/copertina.jpg (o .png)")
     print("Apri il file e completa `topic`, `audience`, `promise` e `notes`: più sono")

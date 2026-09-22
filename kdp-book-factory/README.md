@@ -202,9 +202,21 @@ python3 -m kdpfactory backup <slug> --prune 10       # tieni solo le ultime 10
 
 ## Come viene controllato il numero di pagine
 
-1. **Stima a priori.** Dalla geometria della pagina (formato, margini, corpo,
-   interlinea) e dalle metriche reali del font si calcola quante parole entrano
-   in una pagina. Da lì: parole totali, numero di capitoli, parole per capitolo.
+Prima di tutto, una cosa che non è ovvia: **le pagine sono una scalinata, non
+una retta**. Ogni capitolo si apre su pagina dispari, quindi occupa un numero
+pari di pagine; fra un gradino e l'altro mille parole in più non spostano
+niente, e il salto successivo vale due pagine per capitolo. Cercare l'obiettivo
+correggendo le parole, e basta, non funziona — ed è il motivo per cui il primo
+PDF usciva sempre circa il 10% sotto.
+
+1. **Taratura, prima di scrivere una riga.** Si impaginano due libri di prova
+   con la struttura di quelli veri e si misura la scalinata: parole per pagina
+   piena, costo di un'apertura di capitolo, pagine fisse. Poi si prova ogni
+   budget ammissibile e si sceglie quello che cade sul gradino più vicino
+   all'obiettivo. Costa qualche secondo di CPU e **nessuna chiamata API**;
+   il risultato resta in `state.json` e si paga una volta sola.
+   Misurato su sette formati: senza taratura 7 su 7 fuori dalla finestra ±5%,
+   con la taratura 7 su 7 dentro.
 2. **Misura.** Il PDF viene impaginato per davvero e le pagine si contano.
 3. **Ricalibrazione.** Dal rapporto reale parole/pagina si ricalcola il budget e
    si assegna a ogni capitolo un nuovo obiettivo (correzione limitata a ±45% per
@@ -214,8 +226,8 @@ python3 -m kdpfactory backup <slug> --prune 10       # tieni solo le ultime 10
    allungare o accorciare le frasi.
 5. Si ripete (default: 4 tentativi) finché il PDF non rientra nella finestra.
 
-La misura parole/pagina viene salvata: dalla seconda esecuzione in poi la prima
-stima parte già calibrata sul tuo formato. Se non vuoi spendere token in
+La misura parole/pagina viene salvata: dal libro vero in poi vince quella, che
+conosce anche la densità della prosa e non solo la struttura. Se non vuoi spendere token in
 riscritture: `build --no-rewrite`, oppure allarga la tolleranza
 (`--tolerance 0.1`).
 

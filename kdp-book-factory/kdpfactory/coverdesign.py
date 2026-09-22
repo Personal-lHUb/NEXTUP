@@ -295,6 +295,46 @@ def derive_copy(
     )
 
 
+def title_problems(title: str, *, trim: str = "6x9") -> list[str]:
+    """Questo titolo sta in copertina a misura leggibile? Solo conti, zero token.
+
+    Il controllo sta qui e non nel controllo qualità perché qui costa un file e
+    là costa un manoscritto: quando l'agente `copertina` se ne accorge il libro
+    è già stato progettato, scritto, impaginato e pagato — centocinque chiamate
+    al modello per scoprire una cosa che si misura in sedici millesimi di
+    secondo. Su titoli italiani realistici non è un caso di scuola: una parola
+    come «CONCENTRAZIONE», da sola, è più larga di una prima 6x9 già al corpo
+    minimo leggibile in miniatura.
+
+    Qui stanno **solo i difetti insanabili**, quelli che nessuna scelta di
+    impaginazione può salvare. Un titolo che va su quattro righe, per dire, non
+    è qui: il disegno accetta di scendere di riga pur di non scendere sotto la
+    soglia di leggibilità, e l'agente `copertina` lo segnala come importante
+    sul PDF vero. Fermare la produzione per quello sarebbe severità, non
+    misura.
+    """
+    from .typography import register_family
+
+    display = register_family("sans")
+    trim_width, trim_height = kdpspecs.trim_size_in(trim)
+    measure = trim_width * INCH - 2.4 * SAFE_MARGIN_IN * INCH
+    floor = trim_height * INCH * MIN_TITLE_CAP_RATIO / 0.72
+
+    parole = title.upper().split()
+    if not parole:
+        return ["Il titolo è vuoto."]
+
+    larga = max(parole, key=lambda word: pdfmetrics.stringWidth(word, display, 100))
+    if pdfmetrics.stringWidth(larga, display, floor) > measure:
+        return [
+            f"«{title}» non sta in copertina: la parola «{larga}» supera la larghezza "
+            f"della prima ({trim}) già al corpo minimo leggibile in miniatura. Serve un "
+            "titolo con parole più corte; quelle lunghe vanno nel sottotitolo, che in "
+            "copertina si compone molto più piccolo."
+        ]
+    return []
+
+
 def copy_from_dict(written: dict, spec) -> CoverCopy:
     """Ricostruisce i testi di copertina da come li ha salvati la lavorazione.
 

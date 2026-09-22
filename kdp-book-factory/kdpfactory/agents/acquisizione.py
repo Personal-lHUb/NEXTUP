@@ -172,6 +172,8 @@ Vincoli di produzione, non negoziabili
 - I capitoli escono fra 1.500 e 2.000 parole: non scegliere tu il numero di capitoli, lo calcola il budget dalle pagine. Se ne proponi uno, motivalo.
 - `lingua` è quella del mercato in cui si vende, che è quella del libro di partenza salvo motivo contrario.
 - Le sette parole chiave sono frasi che una persona digita davvero, lunghe abbastanza da sfruttare i 50 caratteri, e **non ripetono parole del titolo che proponi**: il titolo è già indicizzato di suo.
+- Il titolo deve **stare in copertina**. Le parole molto lunghe non ci stanno: «CONCENTRAZIONE», da sola, riempie tutta la larghezza di una prima 6x9 e sfora il taglio. Metti parole corte nel titolo e lascia quelle lunghe al sottotitolo, che in copertina si compone molto più piccolo. Il sistema lo verifica e rifiuta il piano: un titolo che non ci sta non è pubblicabile, per quanto sia bello.
+- Titolo e sottotitolo insieme vengono **tagliati dopo 60 caratteri** nei risultati di ricerca, e quello che si taglia è sempre la seconda metà: la promessa deve stare prima del taglio.
 
 Vietato
 - Nominare il libro di partenza o il suo autore nel titolo, nel sottotitolo, nella descrizione o in copertina. Niente «l'alternativa a X», «meglio di X», «il complemento di X»: sono marchi altrui e KDP li rifiuta.
