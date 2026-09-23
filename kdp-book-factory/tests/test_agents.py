@@ -144,11 +144,47 @@ class TestImpaginazione(unittest.TestCase):
         self.assertAlmostEqual(_measure_first_line_indent(pages, flush, BODY), INDENT, places=1)
 
     def test_riconosce_riga_orfana(self):
+        """Orfana vera: il capoverso comincia in fondo e prosegue sulla pagina dopo."""
         page = full_page(11)
         page[-1] = line(11, LEFT + INDENT, MEASURE - INDENT, y0=page[-1].y0)  # capoverso nuovo
         page[4] = line(11, LEFT + INDENT, MEASURE - INDENT, y0=page[4].y0)    # capoverso certo
-        findings = _check_widows_orphans({11: page}, 11, MEASURE, BODY, "F", {1: LEFT}, INDENT, 1)
+        dopo = full_page(12)                       # righe a filo: il capoverso continua
+        findings = _check_widows_orphans(
+            {11: page, 12: dopo}, 12, MEASURE, BODY, "F", {1: LEFT, 0: LEFT}, INDENT, 1
+        )
         self.assertIn("riga orfana", {f.category for f in findings})
+
+    def test_un_capoverso_che_finisce_in_fondo_non_e_orfano(self):
+        """Una riga è orfana se viene **abbandonata**, non se sta in fondo.
+
+        Su un libro vero questo segnalava sette pagine, tutte chiusure di
+        capitolo: la tipografia stava facendo la cosa giusta e il controllo
+        diceva il contrario.
+        """
+        page = full_page(11)
+        page[-1] = line(11, LEFT + INDENT, MEASURE - INDENT, y0=page[-1].y0)
+        page[4] = line(11, LEFT + INDENT, MEASURE - INDENT, y0=page[4].y0)
+        # di là comincia un capoverso nuovo: di qua non è rimasto niente aperto
+        dopo = full_page(12)
+        dopo[0] = line(12, LEFT + INDENT, MEASURE - INDENT, y0=dopo[0].y0)
+        findings = _check_widows_orphans(
+            {11: page, 12: dopo}, 12, MEASURE, BODY, "F", {1: LEFT, 0: LEFT}, INDENT, 1
+        )
+        self.assertNotIn("riga orfana", {f.category for f in findings})
+
+    def test_una_chiusura_di_capitolo_non_e_orfana(self):
+        """Di là comincia un capitolo nuovo: non c'è nessun capoverso in sospeso."""
+        page = full_page(11)
+        page[-1] = line(11, LEFT + INDENT, MEASURE - INDENT, y0=page[-1].y0)
+        page[4] = line(11, LEFT + INDENT, MEASURE - INDENT, y0=page[4].y0)
+        # l'attacco di capitolo non è rientrato: senza l'elenco delle aperture
+        # sembrerebbe il seguito del capoverso di qua
+        dopo = full_page(12)
+        findings = _check_widows_orphans(
+            {11: page, 12: dopo}, 12, MEASURE, BODY, "F", {1: LEFT, 0: LEFT}, INDENT, 1,
+            aperture={12},
+        )
+        self.assertNotIn("riga orfana", {f.category for f in findings})
 
     def test_riconosce_riga_vedova(self):
         page = full_page(12)

@@ -180,7 +180,15 @@ def inspect_layout(ctx: AgentContext) -> list[AgentFinding]:
     findings: list[AgentFinding] = []
     indent = _measure_first_line_indent(by_page, flush_left, body_size)
     findings += _check_widows_orphans(
-        by_page, page_count, measure, body_size, body_font, flush_left, indent, body_start
+        by_page,
+        page_count,
+        measure,
+        body_size,
+        body_font,
+        flush_left,
+        indent,
+        body_start,
+        aperture={int(p) for p in ctx.chapter_pages.values()},
     )
     findings += _check_frame_overflow(lines, geo)
     findings += _check_hyphen_ladders(by_page)
@@ -340,6 +348,34 @@ def _is_paragraph_opening(
     return abs(line.x0 - (left + indent)) < 1.5
 
 
+def _prosegue_di_la(
+    page_lines: list[Line],
+    flush_left: dict[int, float],
+    indent: float | None,
+    body_size: float,
+    aperture: set[int],
+    page: int,
+) -> bool:
+    """La pagina dopo prosegue il capoverso rimasto aperto?
+
+    Si vede da una cosa sola: la sua prima riga di prosa è una riga di seguito
+    — corpo del testo e nessun rientro di capoverso. Una pagina che apre un
+    capitolo non prosegue niente, per quanto la sua prima riga sia a filo:
+    l'attacco di capitolo non è rientrato per scelta tipografica.
+    """
+    if page in aperture:
+        return False
+    prosa = [
+        line for line in _standalone(page_lines) if _is_prose(line, flush_left, indent)
+    ]
+    if not prosa:
+        return False
+    prima = prosa[0]
+    return round(prima.size, 1) == body_size and not _is_paragraph_opening(
+        prima, flush_left, indent
+    )
+
+
 def _check_widows_orphans(
     by_page: dict[int, list[Line]],
     page_count: int,
@@ -349,7 +385,9 @@ def _check_widows_orphans(
     flush_left: dict[int, float],
     indent: float | None,
     body_start: int = 1,
+    aperture: set[int] | None = None,
 ) -> list[AgentFinding]:
+    aperture = aperture or set()
     widows: list[int] = []
     orphans: list[int] = []
     headings: list[int] = []
@@ -384,7 +422,24 @@ def _check_widows_orphans(
         # pieno di tabelle il corpo più frequente è quello delle celle.
         if last.size >= body_size + 1.5 and last.font != body_font:
             headings.append(page)      # titolo di sezione rimasto in fondo
-        elif last is prose[-1] and _is_paragraph_opening(last, flush_left, indent):
+        elif (
+            last is prose[-1]
+            and _is_paragraph_opening(last, flush_left, indent)
+            # Una riga orfana è una riga **abbandonata**: il capoverso comincia
+            # qui e prosegue di là. Un capoverso che finisce in fondo alla
+            # pagina non ha abbandonato niente — e nemmeno l'ultimo capoverso
+            # di un capitolo, che di là trova un capitolo nuovo. Senza questa
+            # verifica venivano segnalate le chiusure di capitolo, cioè proprio
+            # le pagine in cui la tipografia sta facendo la cosa giusta.
+            and _prosegue_di_la(
+                by_page.get(page + 1, []),
+                flush_left,
+                indent,
+                body_size,
+                aperture,
+                page + 1,
+            )
+        ):
             orphans.append(page)       # prima riga di un capoverso in fondo alla pagina
 
     findings: list[AgentFinding] = []
