@@ -96,7 +96,18 @@ class Report:
 
 
 def _normalized_sentences(text: str) -> list[str]:
-    plain = mdlite.plain_text(text).lower()
+    """Le frasi della prosa dell'autore, per cercare quelle ripetute.
+
+    Le citazioni in blocco (`> `) restano fuori: una battuta ripetuta in un
+    dialogo o in un verbale è la cosa che il libro sta riportando, non una
+    distrazione di chi scrive. Un libro di interviste o di sedute verrebbe
+    segnalato a ogni domanda ricorrente, e la segnalazione seppellirebbe le
+    ripetizioni vere.
+    """
+    prosa = "\n".join(
+        riga for riga in text.splitlines() if not riga.lstrip().startswith(">")
+    )
+    plain = mdlite.plain_text(prosa).lower()
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+", plain) if len(s.split()) >= 8]
 
 

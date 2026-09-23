@@ -44,6 +44,7 @@ LABELS: dict[str, dict[str, str]] = {
         "cover_chapters": "{n} CAPITOLI",
         "cover_practice": "{n} SCHEDE PRATICHE",
         "cover_large_print": "Caratteri grandi",
+        "listing_bullets": "Cosa troverai in questo libro:",
     },
     "en": {
         "toc": "Contents",
@@ -82,6 +83,7 @@ LABELS: dict[str, dict[str, str]] = {
         "cover_chapters": "{n} CHAPTERS",
         "cover_practice": "{n} PRACTICE SHEETS",
         "cover_large_print": "Large print",
+        "listing_bullets": "What you will find in this book:",
     },
 }
 

@@ -14,6 +14,7 @@ from html import escape as _escape
 from pathlib import Path
 
 from . import prompts
+from .i18n import L
 from .llm import LLMClient
 from .models import BookSpec, Outline
 
@@ -33,7 +34,7 @@ def generate_metadata(
     data.setdefault("subtitle", spec.subtitle)
     data.setdefault("keywords", spec.keywords)
     data.setdefault("categories", spec.categories)
-    data["description_html"] = build_description_html(data)
+    data["description_html"] = build_description_html(data, spec.language)
     return data
 
 
@@ -43,8 +44,14 @@ def escape(text: str) -> str:
     return _escape(str(text), quote=False)
 
 
-def build_description_html(meta: dict) -> str:
-    """Descrizione nel sottoinsieme HTML accettato dalla scheda prodotto KDP."""
+def build_description_html(meta: dict, language: str = "it") -> str:
+    """Descrizione nel sottoinsieme HTML accettato dalla scheda prodotto KDP.
+
+    L'etichetta dell'elenco segue la lingua del libro: era fissa in italiano, e
+    su un libro inglese finiva così com'era sulla pagina di amazon.com — una
+    riga in un'altra lingua in mezzo alla descrizione dice al cliente che il
+    libro non è per lui, nel punto in cui sta decidendo.
+    """
     parts: list[str] = []
     paragraphs = meta.get("description_paragraphs") or []
     if paragraphs:
@@ -54,7 +61,7 @@ def build_description_html(meta: dict) -> str:
     bullets = meta.get("bullets") or []
     if bullets:
         items = "".join(f"<li>{escape(b)}</li>" for b in bullets)
-        parts.append("<p><b>Cosa troverai in questo libro:</b></p>")
+        parts.append(f"<p><b>{escape(L(language, 'listing_bullets'))}</b></p>")
         parts.append(f"<ul>{items}</ul>")
     if meta.get("closing"):
         parts.append(f"<p><b>{escape(meta['closing'])}</b></p>")

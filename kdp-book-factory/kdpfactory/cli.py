@@ -315,7 +315,18 @@ def cmd_write(args) -> int:
 def cmd_build(args) -> int:
     project, spec = open_project(args, riscrive=True)
     outline = project.load_outline()
-    client = None if args.no_rewrite else make_client(args)
+    # L'impaginazione non chiama il modello. Lo chiama solo la riscrittura dei
+    # capitoli quando le pagine non tornano — che è un di più, non il lavoro:
+    # senza credenziale si impagina lo stesso e si dice di quanto si sbaglia,
+    # invece di rifiutarsi di stampare un libro già scritto.
+    riscrive = not args.no_rewrite
+    if riscrive and not args.dry_run and not api_key_present():
+        print(
+            "Nessuna credenziale: impagino senza riscrivere i capitoli.\n"
+            "  Se le pagine non rientrano, te lo dico e decidi tu che cosa tagliare."
+        )
+        riscrive = False
+    client = make_client(args) if riscrive else None
     print(f"Impaginazione di «{spec.title}»…")
     result = pipeline.build_until_in_range(
         project,
@@ -324,7 +335,7 @@ def cmd_build(args) -> int:
         client,
         max_iterations=args.iterations,
         tolerance=args.tolerance,
-        allow_rewrite=not args.no_rewrite,
+        allow_rewrite=riscrive,
     )
     pipeline.build_package(project, spec, outline, result, guides=args.guides)
     pipeline.export_manuscript_markdown(project, spec, outline)
@@ -603,7 +614,6 @@ def cmd_agents(args) -> int:
 def cmd_review(args) -> int:
     project, spec = open_project(args)
     outline = project.load_outline()
-    client = make_client(args)
     only = [int(n) for n in args.only.split(",")] if args.only else None
     names = (
         [n.strip() for n in args.agents.split(",")]
@@ -613,9 +623,17 @@ def cmd_review(args) -> int:
     if not names:
         print(f"Il livello «{args.qualita}» non prevede revisione.")
         return 0
+    # Impaginazione e copertina misurano: chiedere la credenziale per farli
+    # girare vorrebbe dire tenere chiusi i controlli che costano zero.
+    client = (
+        make_client(args)
+        if any(not agents.get_agent(n).deterministico for n in names)
+        else None
+    )
     print(f"Revisione di «{spec.title}» — agenti: {', '.join(names)}")
     report = agents.run_review(project, spec, outline, client, agent_names=names, only=only)
-    project.add_usage(client.usage_report())
+    if client:
+        project.add_usage(client.usage_report())
     save_backup(project, args, "revisione del collegio")
     print(report.render())
     print(f"\nRapporto salvato in {project.build_dir / 'revisioni.md'}")

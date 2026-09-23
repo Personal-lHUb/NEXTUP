@@ -255,3 +255,83 @@ class TestNessunaChiamataAlModello(unittest.TestCase):
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
+
+
+class TestSenzaCredenziale(unittest.TestCase):
+    """La fabbrica senza chiave: quello che non chiama il modello deve girare.
+
+    Tre comandi si rifiutavano di partire perché *potevano* usare il modello,
+    non perché dovessero. Un libro già scritto non si impagina, i controlli che
+    misurano non si eseguono, e la seduta trascritta viene segnalata come
+    ripetitiva: sono tre modi diversi di fermare la metà del sistema che non è
+    mai costata un token.
+    """
+
+    def test_gli_agenti_strumentali_si_dichiarano(self):
+        from kdpfactory.agents import REGISTRY
+
+        senza_modello = {a.name for a in REGISTRY.values() if a.deterministico}
+        self.assertEqual(senza_modello, {"impaginazione", "copertina", "revisore-scaletta"})
+        # e ciascuno ha il *suo* comando: due agenti che ne condividono uno
+        # sono due agenti di cui uno manda nel posto sbagliato
+        comandi = [REGISTRY[nome].comando for nome in senza_modello]
+        self.assertEqual(len(set(comandi)), len(comandi))
+
+    def test_ogni_agente_strumentale_esporta_le_proprie_istruzioni(self):
+        from kdpfactory.agents import REGISTRY
+        from kdpfactory.agents.install import render_agent_markdown
+
+        for nome in ("copertina", "revisore-scaletta"):
+            testo = render_agent_markdown(REGISTRY[nome])
+            self.assertIn(REGISTRY[nome].comando, testo)
+            self.assertNotIn("--agents impaginazione", testo, f"{nome}.md manda al posto sbagliato")
+
+    def test_le_battute_di_un_verbale_non_sono_ripetizioni(self):
+        """Un libro di sedute ripete le domande: è quello che sta riportando."""
+        from kdpfactory import qa
+
+        verbale = (
+            "Questo capitolo racconta una seduta e la riporta per intero.\n\n"
+            "> — Che cosa avverti in questo momento della seduta?\n\n"
+            "Poi la seduta è andata avanti per un altro quarto d'ora buono.\n\n"
+            "> — Che cosa avverti in questo momento della seduta?\n"
+        )
+        frasi = qa._normalized_sentences(verbale)
+        self.assertTrue(frasi, "la prosa dell'autore deve restare nel conteggio")
+        self.assertFalse(
+            any("che cosa avverti" in f for f in frasi),
+            "le citazioni in blocco non entrano nel conteggio delle ripetizioni",
+        )
+
+    def test_la_scheda_scritta_a_mano_ha_la_descrizione(self):
+        """La descrizione HTML si costruiva solo sulla linea automatica.
+
+        La scheda incollata usciva con `description_html` vuoto: il campo che
+        il cliente legge prima di decidere, a zero caratteri su 4000.
+        """
+        from kdpfactory import pipeline
+
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        project = BookProject(Path(tmp.name) / "libro")
+        project.ensure_dirs()
+        spec = demo_spec(language="en")
+        meta = {
+            "title": "T", "subtitle": "S",
+            "description_paragraphs": ["Il gancio.", "Il secondo paragrafo."],
+            "bullets": ["primo punto", "secondo punto"],
+            "closing": "La chiusura.",
+            "keywords": ["una frase"], "categories": ["A"],
+        }
+        pipeline.write_metadata_files(project, spec, Outline.from_dict(SCALETTA), meta, 200)
+        listing = (project.build_dir / "kdp-listing.md").read_text(encoding="utf-8")
+        self.assertIn("Il gancio.", listing)
+        self.assertIn("primo punto", listing)
+        self.assertNotIn("Caratteri: 0/4000", listing)
+
+    def test_l_elenco_della_scheda_parla_la_lingua_del_libro(self):
+        from kdpfactory import metadata
+
+        meta = {"description_paragraphs": ["Gancio."], "bullets": ["uno"]}
+        self.assertIn("What you will find", metadata.build_description_html(meta, "en"))
+        self.assertIn("Cosa troverai", metadata.build_description_html(meta, "it"))

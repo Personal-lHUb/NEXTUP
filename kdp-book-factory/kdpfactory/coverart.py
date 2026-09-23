@@ -308,21 +308,36 @@ def orologio(canvas, area: Area, palette: Palette) -> None:
 
 
 def scala(canvas, area: Area, palette: Palette) -> None:
-    """Gradini che salgono verso un punto in accento: un metodo, non un racconto."""
+    """Gradini che salgono verso un punto in accento: un metodo, non un racconto.
+
+    I gradini sono **attaccati**. Con un vuoto fra l'uno e l'altro diventano,
+    in miniatura, le colonne di un grafico a barre — e questa è l'illustrazione
+    di ripiego di tutta la saggistica, quindi il difetto non era di un libro:
+    ogni copertina senza parole chiave riconoscibili usciva da qui vestita da
+    manuale di management. Una scala si riconosce dal profilo continuo, e i
+    montanti la spiegano senza spezzarla.
+    """
     scene = area.fit(1.5)
     steps = 4
-    step_w = scene.width / (steps + 0.6)
+    step_w = scene.width / steps
     unit = scene.height / (steps + 1.2)
 
     for index in range(steps):
         height = unit * (index + 1)
-        x = scene.x + step_w * index * 1.15
+        x = scene.x + step_w * index
         last = index == steps - 1
-        _ink(canvas, palette.accent if last else palette.muted, 1 if last else 0.4)
+        _ink(canvas, palette.accent if last else palette.muted, 1 if last else 0.45)
         canvas.rect(x, scene.y, step_w, height, stroke=0, fill=1)
 
+    # i montanti: righe sottili sul fondo, dove un gradino finisce e comincia
+    # l'altro. Danno la lettura di scala senza aprire un vuoto nel profilo.
+    _pen(canvas, palette.background, max(scene.width * 0.012, 0.8), 0.9)
+    for index in range(1, steps):
+        x = scene.x + step_w * index
+        canvas.line(x, scene.y, x, scene.y + unit * index)
+
     # il punto d'arrivo, sopra l'ultimo gradino
-    top_x = scene.x + step_w * (steps - 1) * 1.15 + step_w / 2
+    top_x = scene.x + step_w * (steps - 0.5)
     top_y = scene.y + unit * steps
     _ink(canvas, palette.accent, 1)
     canvas.circle(top_x, top_y + unit * 0.55, unit * 0.3, stroke=0, fill=1)

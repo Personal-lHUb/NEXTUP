@@ -26,7 +26,7 @@ That does not make them worthless. It makes the *specific wording* of the crucia
 
 ## Three: are the client's words distinguished from the writer's?
 
-In a well-made account you can always tell. Quotation marks, or a consistent attribution, or a change of layout. Read a page and ask: could I list which concrete details came out of the client's mouth?
+Read a page and ask a single question: could you list which of the concrete details came out of the client's mouth? If the account is properly made, you can — there will be quotation marks, or a consistent attribution, or a change of layout doing the work.
 
 If the answer is yes, the account is worth something even where it is unconvincing. If the whole thing flows as a single narrative voice, you cannot separate the testimony from the writing, and the testimony was the only part with any evidential standing.
 
@@ -40,7 +40,7 @@ An account that reports only successful checks did not run any failed ones, or r
 
 This is the cleanest test in the list, because it asks for something that should be there rather than looking for something that should not. A writer who genuinely checked will have a sentence somewhere saying that a search found nothing, and the presence of that sentence tells you more about the book than any number of matches.
 
-Then ask what counted as a match. Was the description written down before the search? How many candidates would have satisfied it? If neither question is addressed, a reported match tells you nothing, however striking it reads.
+Then ask what counted as a match. Is there a record of the description made before anyone went looking, and how many candidates would have satisfied it? If neither question is addressed, a reported match tells you nothing, however striking it reads.
 
 ## Five: what is promised?
 

@@ -317,6 +317,15 @@ def run_qa(
 def write_metadata_files(
     project: BookProject, spec: BookSpec, outline: Outline, meta: dict, pages: int
 ) -> dict:
+    # La descrizione HTML si costruisce qui, non in `generate_metadata`: da
+    # questa porta passano tutte e due le linee, e la scheda scritta a mano
+    # usciva con la descrizione vuota — il campo che più conta nella pagina
+    # prodotto, e l'unico che il cliente legge prima di decidere.
+    if meta.get("description_paragraphs"):
+        meta = {
+            **meta,
+            "description_html": metadata_module.build_description_html(meta, spec.language),
+        }
     config = metadata_module.load_printing_config()
     prices = metadata_module.price_table(pages, config)
     listing = metadata_module.render_listing(spec, meta, pages, prices, config)

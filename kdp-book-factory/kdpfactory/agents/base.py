@@ -132,6 +132,15 @@ class Agent:
     def user(self, ctx: AgentContext) -> str:
         raise NotImplementedError
 
+    @property
+    def deterministico(self) -> bool:
+        """Questo agente misura invece di chiedere: non serve la credenziale.
+
+        Si riconosce dal comando: un agente strumentale non ha un prompt, ha
+        un modo di essere eseguito.
+        """
+        return bool(self.comando)
+
     # -- esecuzione -------------------------------------------------------
     def label(self, ctx: AgentContext) -> str:
         chapter = f" · cap. {ctx.chapter.number}" if ctx.chapter else ""

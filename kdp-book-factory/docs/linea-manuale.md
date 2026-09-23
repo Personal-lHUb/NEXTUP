@@ -54,6 +54,25 @@ si disegna e si misura, `qa` controlla, la scheda calcola i prezzi.
 | `qa`, prezzi, EPUB, brief di copertina | girano | girano, identici |
 | costo | fra $7 e $8 stimati a libro | zero |
 
+### I comandi che si fermavano per niente
+
+Tre comandi chiedevano la credenziale perché *potevano* usare il modello, non
+perché dovessero. Adesso:
+
+- **`build`** senza chiave impagina lo stesso e lo dice. La riscrittura dei
+  capitoli per far tornare le pagine è un di più: se le pagine non rientrano,
+  il comando lo scrive e decidi tu che cosa tagliare. Rifiutarsi di stampare un
+  libro già scritto non serviva a nessuno.
+- **`review --agents impaginazione,copertina`** gira senza credenziale: quei
+  due agenti misurano. Il client si costruisce solo se fra gli agenti chiesti
+  ce n'è almeno uno che parla col modello (`Agent.deterministico`).
+- **la scheda incollata** produce la descrizione HTML. Si costruiva solo dentro
+  `generate_metadata`, cioè solo sulla linea automatica: la scheda scritta a
+  mano usciva con **0 caratteri su 4000** nel campo che il cliente legge per
+  primo. Adesso la costruisce `write_metadata_files`, da cui passano tutte e
+  due le linee, e l'etichetta dell'elenco segue la lingua del libro invece di
+  restare in italiano su una pagina di amazon.com.
+
 Il libro che esce è lo stesso: stessi file, stessi controlli, stesso PDF. Un
 test lo verifica confrontando la scaletta normalizzata dalle due strade — la
 normalizzazione vive in un posto solo (`writer.normalize_outline`), e quel test

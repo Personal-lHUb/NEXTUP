@@ -40,7 +40,7 @@ Three things, and they work whichever way you end up.
 
 **The distinction.** Testimony is not history. What a person says they experienced and what happened in the world are different claims with different evidence, and the border between them is crossed constantly, usually by accident, usually in the verbs. Once you can see it you will see it everywhere, in this subject and in a dozen others that have nothing to do with hypnosis.
 
-**The arithmetic.** A match means something only in proportion to how unlikely it was. Count the attempts before you are impressed by the hits. That single habit would improve the literature of this field more than any discovery could.
+**The arithmetic.** Count the attempts before you are impressed by a hit. A detail that lands is worth exactly as much as the number of ways it could have missed, and that number is almost never counted. The habit alone would improve the literature of this field more than any discovery could.
 
 **And the respect.** The people in this book are not credulous. They came with something — a fear that had outlasted every sensible treatment, a grief that would not move, a dream that had repeated for twenty years — and they did something about it, and several of them are better than they were. Whatever you conclude about where the material comes from, that part is not in dispute.
 
