@@ -39,6 +39,117 @@ def _lines(items: list[str], prefix: str = "- ") -> str:
     return "\n".join(f"{prefix}{item}" for item in items if item) or "- (not specified)"
 
 
+#: Che cosa deve *mostrare* la copertina, categoria per categoria.
+#:
+#: È la parte del brief che decide se la copertina funziona, e non si può
+#: ricavare dai dati del libro: un motore che sceglie da solo finisce sempre
+#: sull'ornamento astratto, perché è l'unica cosa che va bene per tutti. Qui
+#: si dice all'illustratore che cosa esiste nel mondo del libro.
+RAPPRESENTAZIONE: dict[str, str] = {
+    "enigmi": (
+        "Show the puzzles: a readable grid, numbers, clues, a pencil, the shape "
+        "of the thing the buyer will be doing. Someone who solves puzzles must "
+        "recognise the kind of puzzle from the thumbnail alone."
+    ),
+    "coloring": (
+        "Show the artwork the buyer will colour: real illustrations from the "
+        "inside, in the actual style and line weight, not a generic cover drawing."
+    ),
+    "attivita": (
+        "Show the activity: children doing it, the objects involved — scissors, "
+        "letters, numbers, shapes — and a glimpse of a worksheet."
+    ),
+    "planner": (
+        "Show the layouts: a spread, a calendar grid, the stationery of someone "
+        "who plans. The buyer is choosing a system, so show the system."
+    ),
+    "journal": (
+        "Show the act of writing and the life around it: a hand, a page, a quiet "
+        "table — the situation the buyer is imagining for themselves."
+    ),
+    "self-help": (
+        "Show the person, the situation or the one object that stands for the "
+        "change. Not an abstract sunrise: the concrete thing the reader is stuck on."
+    ),
+    "business": (
+        "Show the professional world of the book: the setting, the person, the "
+        "object or the mechanism the argument turns on."
+    ),
+    "cucina": (
+        "Show the food: one finished dish, appetising and specific, shot or drawn "
+        "the way the reader wants it to come out."
+    ),
+    "viaggi": (
+        "Show the destination: a landscape or a place that is recognisably *that* "
+        "place, not a generic beach."
+    ),
+    "bambini": (
+        "Show the characters, expressive and mid-action, in their environment."
+    ),
+    "romance": (
+        "Show the people and what is between them: an interaction, a look, a "
+        "setting that carries the relationship."
+    ),
+    "fiction": (
+        "Show the world: a character, an environment or the one object the story "
+        "turns on. The reader must be able to tell the genre before reading a word."
+    ),
+    "non-fiction": (
+        "Show the concrete subject of the book — the place, the object, the scene "
+        "or the situation it is actually about — rendered as a real thing rather "
+        "than as a symbol of itself."
+    ),
+}
+
+#: lo stile contemporaneo che regge meglio in quella categoria
+STILE: dict[str, str] = {
+    "enigmi": "Clean, high-contrast retail design: the grid is the hero.",
+    "coloring": "Modern illustrated, with the interior line style visible.",
+    "attivita": "Colourful lifestyle illustration, warm and busy but organised.",
+    "planner": "Premium graphic design or clean minimalist.",
+    "journal": "Premium editorial or sophisticated photography.",
+    "self-help": "Premium editorial or bold typography with one strong object.",
+    "business": "Premium graphic design or sophisticated photography.",
+    "cucina": "Sophisticated photography — food sells on appetite.",
+    "viaggi": "Cinematic or sophisticated photography.",
+    "bambini": "Character-based illustration.",
+    "romance": "Modern illustrated or cinematic.",
+    "fiction": "Cinematic, or modern illustrated with a strong central image.",
+    "non-fiction": "Premium editorial or cinematic, depending on how much "
+    "atmosphere the subject carries.",
+}
+
+
+#: come si riconosce la sotto-categoria dalle categorie KDP e dall'argomento.
+#: `spec.genre` distingue solo fiction da non-fiction, che è troppo poco per
+#: dire a un illustratore che cosa disegnare.
+SPIE_CATEGORIA: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("coloring", ("coloring", "colouring", "colorare", "da colorare")),
+    ("attivita", ("activity book", "attività", "workbook", "worksheet")),
+    ("planner", ("planner", "agenda", "organizer")),
+    ("journal", ("journal", "diario", "gratitude")),
+    ("cucina", ("cook", "recipe", "cucina", "ricett", "food & wine", "baking")),
+    ("viaggi", ("travel", "viagg", "guidebook")),
+    ("bambini", ("children", "juvenile", "kids", "bambin", "ragazz", "picture book")),
+    ("romance", ("romance", "rosa")),
+    ("business", ("business", "money", "finance", "marketing", "career", "economia")),
+    ("self-help", ("self-help", "self help", "psycholog", "crescita personale",
+                   "spiritual", "new age", "mind & spirit", "hypnosis", "benessere")),
+)
+
+
+def _chiave(spec: BookSpec, genre: str, nicchia: str = "") -> str:
+    """La categoria da cui prendere la rappresentazione e lo stile."""
+    if (genre or "").strip().lower() == "enigmi":
+        return "enigmi"
+    testo = f"{nicchia} {spec.topic} {' '.join(spec.categories)}".lower()
+    for chiave, spie in SPIE_CATEGORIA:
+        if any(spia in testo for spia in spie):
+            return chiave
+    chiave = (genre or spec.genre or "").strip().lower()
+    return chiave if chiave in RAPPRESENTAZIONE else "non-fiction"
+
+
 def _unique_factor(spec: BookSpec, copy: coverdesign.CoverCopy, genre: str) -> str:
     """Un punto di partenza per il fattore distintivo, non un ordine.
 
@@ -119,6 +230,19 @@ def brief(
     )
     contenuti = metadata.get("bullets") or []
     nicchia = ", ".join(metadata.get("categories") or spec.categories) or spec.topic
+    chiave = _chiave(spec, genre, nicchia)
+    rappresentazione = RAPPRESENTAZIONE[chiave]
+    stile = STILE[chiave]
+    bar_w, bar_h = kdpspecs.BARCODE_ZONE_IN
+    dorso = (
+        f"- Spine width {spine:.3f}\", calculated from {pages} pages on "
+        f"{spec.paper} paper at {spec.trim}. Text is allowed at this page count.\n"
+        f"- Keep at least {coverdesign.SPINE_TEXT_CLEARANCE_IN}\" clear on each side of "
+        "the spine text: the fold moves in production."
+        if kdpspecs.spine_text_allowed(pages)
+        else f"- Spine width {spine:.3f}\". **No spine text**: KDP does not allow it "
+        f"below {kdpspecs.SPINE_TEXT_MIN_PAGES} pages and this book has {pages}."
+    )
     testi = [
         f'Kicker (category signal): "{copy.kicker}"' if copy.kicker else "",
         f'Hook: "{copy.hook}"' if copy.hook else "",
@@ -149,10 +273,42 @@ UNIQUE FACTOR: {_unique_factor(spec, copy, genre)}
 
 ## Core design system
 
-CATEGORY SIGNAL -> BIG PROMISE -> VISUAL PROOF -> TYPOGRAPHIC HIERARCHY -> UNIQUE FACTOR
+CATEGORY SIGNAL -> BIG PROMISE -> REPRESENTATIVE VISUAL -> TYPOGRAPHIC HIERARCHY -> UNIQUE FACTOR
 
 Formula for this category: {formula}
 {priorita}
+
+## The visual must represent the book
+
+This is the instruction that decides whether the cover works. Use figures,
+characters, objects, scenes, illustrations, photography or visual symbols that
+show **what this book is actually about**.
+
+Do not produce an abstract cover when a representative image would say it
+faster. A shape, a gradient or a geometric ornament decorates; a recognisable
+image explains. On a search page the customer is not reading — they are
+scanning for the one cover that looks like the thing they came for.
+
+{rappresentazione}
+
+Avoid: unrelated stock imagery, meaningless abstract shapes, generic decorative
+icons, random objects, visual clutter, and the smooth symmetrical look of an
+image generated without direction. The visual should explain the book, not
+decorate it.
+
+## Visual style
+
+Pick the ONE contemporary approach that fits this niche and commit to it:
+premium editorial · modern illustrated · cinematic · clean minimalist · bold
+typography · colourful lifestyle illustration · sophisticated photography ·
+character-based illustration · premium graphic design · infographic-inspired
+commercial design.
+
+{stile}
+
+The result should look art-directed and current — a cover a working publisher
+would put out this year — not a self-published template and not a generic
+generated image.
 
 The cover must say what the book is within 1-2 seconds when seen as a small
 Amazon thumbnail, {coverdesign.THUMBNAIL_WIDTH_PX} px wide on a white page,
@@ -190,15 +346,53 @@ listed here.
 
 {_lines([t for t in testi if t])}
 
-## Production specification
+## Production specification — PAPERBACK
 
 - Trim size: {spec.trim} in ({trim_w}" x {trim_h}"), {pages} pages, {spec.paper} paper.
 - Front cover alone, at {FRONT_DPI} DPI: {round(trim_w * FRONT_DPI)} x {round(trim_h * FRONT_DPI)} px.
-- Full wrap, if you produce one: {cover_w:.3f}" x {cover_h:.3f}" including a
-  {kdpspecs.BLEED_IN}" bleed on every side, with a {spine:.3f}" spine.
+- Full wrap: ONE continuous image, BACK + SPINE + FRONT, {cover_w:.3f}" x {cover_h:.3f}",
+  including a {kdpspecs.BLEED_IN}" bleed on every side, with a {spine:.3f}" spine.
+  These are the numbers from the page count above; if the page count changes, they
+  all change, and a cover built on the old one is rejected at upload.
+- Every background or image meant to reach the edge must run through the bleed.
 - Keep all text at least {coverdesign.SAFE_MARGIN_IN}" away from every trimmed edge:
   KDP cuts up to 3 mm and what crosses that line is lost in print.
-- No transparency, no colour profile other than the one you export; flatten before saving.
+- At least {FRONT_DPI} DPI, placed at 100% scale, prepared for CMYK printing.
+- No thin decorative border near the trim edge: production variance makes it
+  visibly uneven on one side. If a border is essential, set it well inside.
+
+## Spine
+
+{dorso}
+
+- Spine text must never run onto the front or the back.
+- Keep spine typography simple: it is read at an angle, on a shelf, once.
+
+## Barcode area
+
+Leave {bar_w}" x {bar_h}" free in the lower-right corner of the BACK cover,
+{coverdesign.SAFE_MARGIN_IN}" in from the trim and from the spine. KDP prints the
+barcode there, over whatever is underneath.
+
+- No artwork, text, faces, product information or ornament in that rectangle.
+- A clean white background is the safe choice.
+
+## The file to deliver
+
+- ONE single PDF, unlocked, with back + spine + front in one continuous image.
+- Fonts embedded, images embedded, transparency and layers flattened.
+- No crop marks, no trim marks, no colour bars, no template guides, no
+  placeholder text, no comments or annotations, no hidden objects.
+- No white border from a wrong bleed.
+- Practical target under 40 MB (hard limit 650 MB).
+
+## If the format is not paperback
+
+- HARDCOVER: do not reuse these dimensions. Use the KDP hardcover template; the
+  artwork must extend about 0.51" (15 mm) past the front cover edge for the wrap,
+  and nothing important may sit near the hinge.
+- EBOOK: front cover only, 2560 x 1600 px (ratio 1.6:1 or taller), RGB, JPEG or
+  TIFF. Designed on its own, not cropped out of the wrap.
 
 ## Originality and compliance
 

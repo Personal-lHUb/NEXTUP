@@ -654,6 +654,47 @@ class TestBriefDiCopertina(unittest.TestCase):
         metadata = overrides.pop("metadata", {})
         return coverbrief.brief(demo_spec(**overrides), pages=pagine, metadata=metadata)
 
+    def test_il_brief_dice_che_cosa_mostrare_non_solo_come(self):
+        """La regola che decide se una copertina vende.
+
+        Un brief che elenca soglie di contrasto e non dice mai che cosa
+        disegnare porta all'ornamento astratto, che è l'unica cosa che va
+        bene per tutti i libri e non rappresenta nessuno.
+        """
+        testo = self.brief()
+        self.assertIn("The visual must represent the book", testo)
+        self.assertIn("Do not produce an abstract cover", testo)
+        self.assertIn("meaningless abstract shapes", testo)
+
+    def test_la_rappresentazione_segue_la_categoria(self):
+        cucina = self.brief(metadata={"categories": ["Books > Cookbooks, Food & Wine"]})
+        self.assertIn("Show the food", cucina)
+        self.assertIn("appetite", cucina)
+
+        bambini = self.brief(metadata={"categories": ["Books > Children's Books"]})
+        self.assertIn("Show the characters", bambini)
+        self.assertIn("Character-based illustration", bambini)
+
+        enigmi = coverbrief.brief(demo_spec(), pages=140, genre="enigmi")
+        self.assertIn("Show the puzzles", enigmi)
+
+    def test_una_categoria_sconosciuta_non_resta_senza_indicazione(self):
+        testo = self.brief(metadata={"categories": ["Books > Qualcosa Di Ignoto"]})
+        self.assertIn("Show the concrete subject of the book", testo)
+
+    def test_il_brief_porta_le_specifiche_che_fanno_rimbalzare_il_caricamento(self):
+        testo = self.brief(pages=208)
+        for atteso in ("Barcode area", "The file to deliver", "No crop marks",
+                       "HARDCOVER", "EBOOK", "2560 x 1600"):
+            self.assertIn(atteso, testo)
+
+    def test_il_dorso_segue_il_numero_di_pagine(self):
+        lungo = self.brief(pages=208)
+        self.assertIn("Text is allowed at this page count", lungo)
+        corto = self.brief(pages=70)
+        self.assertIn("**No spine text**", corto)
+        self.assertIn("below 79 pages", corto)
+
     def test_la_categoria_porta_la_sua_formula(self):
         medium = self.brief(content_type="medium")
         self.assertIn("BOOK TYPE: MEDIUM-CONTENT", medium)
@@ -698,3 +739,63 @@ class TestBriefDiCopertina(unittest.TestCase):
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
+
+
+class TestControlliDiProduzione(unittest.TestCase):
+    """Le specifiche KDP: quello che fa rimbalzare il caricamento.
+
+    Non sono questioni di gusto — o le misure tornano o il libro non esce — e
+    per questo sono bloccanti. Ogni controllo qui ha la sua copertina rotta:
+    uno che non scatta mai su un file sbagliato non protegge niente.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.spec = demo_spec()
+        self.pagine = 208
+        self.pdf = Path(self.tmp.name) / "copertina.pdf"
+        cover.build_cover(self.spec, self.pagine, self.pdf, genre="non-fiction")
+
+    def controlla(self, **override):
+        dati = dict(
+            trim=self.spec.trim, pages=self.pagine,
+            paper=self.spec.paper, author=self.spec.author,
+        )
+        dati.update(override)
+        return coverdesign.audit_production(self.pdf, **dati)
+
+    def test_una_copertina_disegnata_dal_sistema_passa(self):
+        self.assertEqual(self.controlla(), [], "il motore non deve produrre file da rifare")
+
+    def test_il_conteggio_pagine_sbagliato_e_bloccante(self):
+        """Il dorso dipende dalle pagine: con un conteggio vecchio, KDP rifiuta."""
+        problemi = " ".join(self.controlla(pages=120))
+        self.assertIn("non corrispondono al calcolo KDP", problemi)
+
+    def test_l_autore_deve_essere_quello_della_scheda(self):
+        problemi = " ".join(self.controlla(author="Qualcun Altro"))
+        self.assertIn("non compare sulla prima di copertina", problemi)
+
+    def test_le_linee_guida_non_vanno_caricate(self):
+        guidata = Path(self.tmp.name) / "guide.pdf"
+        cover.build_cover(self.spec, self.pagine, guidata,
+                          genre="non-fiction", guides=True)
+        problemi = " ".join(coverdesign.audit_production(
+            guidata, trim=self.spec.trim, pages=self.pagine,
+            paper=self.spec.paper, author=self.spec.author,
+        ))
+        self.assertIn("linee di piega", problemi)
+
+    def test_l_area_del_codice_a_barre_resta_libera(self):
+        """Il bordo del rettangolo è sfumato: il controllo campiona dentro.
+
+        Senza il margine, l'antialiasing sul contorno esatto faceva scattare
+        la segnalazione su ogni copertina che il sistema disegna.
+        """
+        self.assertNotIn("codice a barre", " ".join(self.controlla()))
+
+    def test_senza_pdf_non_inventa_rilievi(self):
+        mancante = Path(self.tmp.name) / "non-c-e.pdf"
+        self.assertEqual(len(coverdesign.audit_production(
+            mancante, trim="6x9", pages=100, paper="cream")), 1)

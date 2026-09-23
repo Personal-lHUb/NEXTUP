@@ -348,6 +348,73 @@ def scala(canvas, area: Area, palette: Palette) -> None:
     canvas.setStrokeAlpha(1)
 
 
+def poltrona(canvas, area: Area, palette: Palette) -> None:
+    """Una poltrona reclinabile vuota, di fianco, con una lampada accesa.
+
+    È la stanza in cui si svolge una seduta — ipnosi, terapia, colloquio — e
+    la si riconosce in miniatura da tre cose: lo schienale inclinato, il
+    poggiapiedi alzato, la luce bassa accanto. Una poltrona vuota dice anche
+    di chi non c'è: il posto è per chi guarda.
+
+    L'accento è uno solo, la luce della lampada, come in tutte le altre.
+    """
+    scene = area.fit(1.3, anchor="bottom")
+
+    def px(frazione: float) -> float:
+        return scene.x + scene.width * frazione
+
+    def py(frazione: float) -> float:
+        return scene.y + scene.height * frazione
+
+    # L'alone: cerchi concentrici che si diradano. Un cerchio solo, per quanto
+    # trasparente, in miniatura è un disco con un bordo — un secondo oggetto in
+    # una composizione che ne vuole uno.
+    lampada_x, lampada_y = px(0.86), py(0.60)
+    for passo in range(6, 0, -1):
+        _ink(canvas, palette.accent, 0.035)
+        canvas.circle(lampada_x, lampada_y, scene.width * 0.045 * passo, stroke=0, fill=1)
+
+    # La poltrona è **una** sagoma: schienale inclinato, seduta, poggiapiedi
+    # alzato, tutto attaccato. Disegnata a blocchi separati, in miniatura si
+    # legge come tre rettangoli storti; disegnata di seguito, si legge come una
+    # poltrona reclinabile, che è l'unica cosa che deve dire.
+    _ink(canvas, palette.muted, 0.58)
+    _polygon(canvas, [
+        (px(0.10), py(0.08)),      # piede posteriore
+        (px(0.04), py(0.62)),      # sommità dello schienale, buttata indietro
+        (px(0.20), py(0.66)),      # spalla del poggiatesta
+        (px(0.29), py(0.30)),      # dove lo schienale incontra la seduta
+        (px(0.58), py(0.27)),      # bordo della seduta
+        (px(0.79), py(0.40)),      # punta del poggiapiedi alzato
+        (px(0.81), py(0.31)),
+        (px(0.57), py(0.17)),      # sotto il poggiapiedi
+        (px(0.52), py(0.08)),      # piede anteriore
+    ])
+
+    # La piega fra schienale e seduta: una riga sola, del colore del fondo.
+    # Senza, la sagoma è un blocco; con, è una poltrona in cui ci si siede.
+    _pen(canvas, palette.background, max(scene.width * 0.012, 0.8), 0.8)
+    canvas.line(px(0.29), py(0.30), px(0.215), py(0.635))
+
+    # Il pavimento, appena accennato: tiene tutto in piedi.
+    _pen(canvas, palette.muted, max(scene.height * 0.010, 1.0), 0.45)
+    canvas.line(px(0.02), py(0.08), px(0.98), py(0.08))
+
+    # La lampada: stelo sottile, paralume in accento. L'unico punto acceso.
+    _pen(canvas, palette.muted, max(scene.width * 0.012, 1.0), 0.65)
+    canvas.line(lampada_x, py(0.08), lampada_x, lampada_y)
+    _ink(canvas, palette.accent, 1)
+    _polygon(canvas, [
+        (px(0.79), py(0.72)),
+        (px(0.93), py(0.72)),
+        (px(0.905), py(0.585)),
+        (px(0.815), py(0.585)),
+    ])
+
+    canvas.setFillAlpha(1)
+    canvas.setStrokeAlpha(1)
+
+
 def porta(canvas, area: Area, palette: Palette) -> None:
     """Una porta socchiusa e la luce che ne esce: qualcosa è appena successo."""
     scene = area.fit(0.72)
@@ -435,6 +502,13 @@ ARTS: tuple[Art, ...] = (
         ("house", "home", "door", "secret", "border", "return", "night",
          "casa", "porta", "segreto", "confine", "ritorno", "notte", "soglia"),
         0.72, "una porta socchiusa e la luce che ne esce", concrete=3),
+    Art("poltrona", poltrona,
+        ("hypnosis", "hypnotic", "hypnotist", "regression", "session", "sessions",
+         "chair", "therapy", "therapist", "counselling", "trance", "relaxation",
+         "subconscious", "recall", "interview",
+         "ipnosi", "ipnotica", "regressione", "seduta", "sedute", "poltrona",
+         "terapia", "trance", "rilassamento", "subconscio", "colloquio"),
+        1.3, "una poltrona reclinabile vuota con una lampada accesa", concrete=3),
 )
 
 #: se il contenuto non dice niente di riconoscibile, decide il genere

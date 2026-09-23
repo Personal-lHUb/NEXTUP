@@ -108,12 +108,13 @@ quello che racconta la storia.
 | `orologio` | un quadrante con uno spicchio pieno | le ore che il libro restituisce |
 | `scala` | gradini che salgono | l'ultimo gradino, il punto d'arrivo |
 | `porta` | una porta socchiusa | la luce che ne esce |
+| `poltrona` | una poltrona reclinabile vuota | la lampada accesa accanto |
 
 ### Come viene scelta
 
 1. `cover_art` in `book.json`, se l'autore l'ha indicata (`treno`, `lente`,
-   `elenco`, `orologio`, `scala`, `porta`, oppure `nessuna` per una copertina di
-   solo testo);
+   `elenco`, `orologio`, `scala`, `porta`, `poltrona`, oppure `nessuna` per una
+   copertina di solo testo);
 2. altrimenti dalle **parole chiave** di quello che il libro dice di essere:
    titolo, sottotitolo, argomento, promessa. A parità di parole trovate vince la
    scena più concreta — un treno si ricorda, un segno astratto no;
@@ -175,6 +176,26 @@ Per quei casi il sistema non disegna: scrive il brief.
 ```bash
 python3 -m kdpfactory copertina <slug>
 ```
+
+**La regola che il brief non negozia**: l'immagine deve *rappresentare* il
+libro. Una sagoma astratta, un gradiente o un ornamento geometrico decorano;
+una figura riconoscibile spiega. Chi scorre i risultati non legge — cerca la
+copertina che somiglia alla cosa che è venuto a comprare, e l'ornamento
+astratto è l'unica scelta che va bene per tutti i libri e non rappresenta
+nessuno.
+
+Perciò il brief porta la rappresentazione **della categoria**, ricavata dalle
+categorie KDP del libro: a un ricettario dice di mostrare il piatto finito, a
+un libro per bambini i personaggi in azione, a un'agenda i layout, a un libro
+di enigmi la griglia. Con lo stile contemporaneo che regge meglio in quella
+nicchia, e l'elenco di quello che va evitato — immagini di repertorio scollegate,
+forme astratte, icone decorative, l'aria liscia e simmetrica di un'immagine
+generata senza direzione.
+
+Il brief porta anche le specifiche che fanno rimbalzare il caricamento: misure
+del wrap calcolate sulle pagine vere, dorso, area del codice a barre, requisiti
+del PDF, e le varianti per copertina rigida ed ebook (che non si ricavano da
+quelle del brossurato).
 
 Produce `build/copertina-brief.md` — in inglese, perché è la lingua in cui gli
 strumenti grafici sbagliano meno — coi dati che il libro ha già: categoria e
@@ -259,6 +280,30 @@ python3 -m kdpfactory review <slug> --agents copertina
 Un titolo illeggibile in miniatura, un contrasto sotto 7:1, un testo fuori
 dall'area di sicurezza o una rivendicazione vietata sono **bloccanti**: la
 copertina va rifatta prima di caricarla.
+
+## Le specifiche KDP, misurate sul file
+
+Le regole qui sopra dicono se la copertina vende. Queste dicono se viene
+pubblicata, e sono tutte bloccanti perché fermano il caricamento — che costa
+una settimana ogni volta. Nessuna è opinabile: o le misure tornano o no.
+
+| controllo | che cosa misura |
+|---|---|
+| dimensioni | larghezza e altezza del PDF contro il calcolo KDP: abbondanza + retro + dorso + prima + abbondanza. Il dorso dipende da pagine, carta e formato, quindi una copertina fatta su un conteggio vecchio è sbagliata e non si vede a schermo |
+| una pagina sola | retro, dorso e prima in un'unica immagine continua |
+| codice a barre | i 2"x1,2" in basso a destra della quarta devono essere liberi da inchiostro: KDP ci stampa sopra il codice |
+| testo di dorso | ammesso solo da 79 pagine in su, e dentro le pieghe con 1,6 mm liberi per lato |
+| font | incorporati, come per l'interno |
+| linee guida | se nel file ci sono le pieghe del dorso è il PDF prodotto con `--guides`, che non va caricato |
+| nome dell'autore | uguale a quello della scheda: Amazon confronta i due e blocca la pubblicazione |
+
+Girano sul PDF, non sul codice che lo ha prodotto: valgono anche per una
+copertina disegnata altrove, purché abbia le dimensioni giuste.
+
+Un dettaglio che vale la pena conoscere: l'area del codice a barre si campiona
+**un punto dentro il bordo**, non sul contorno esatto del rettangolo. Sul
+contorno l'antialiasing mescola i due colori, e il controllo segnalerebbe ogni
+copertina che il sistema disegna.
 
 ## Se la copertina la disegni altrove
 

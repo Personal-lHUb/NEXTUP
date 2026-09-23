@@ -899,3 +899,230 @@ def render_thumbnail(pdf_path: Path, output: Path, *, trim: str, pages: int, pap
     pixmap.save(output)
     document.close()
     return output
+
+
+# --------------------------------------------------------------------------
+# Controlli di produzione: quello che KDP rifiuta al caricamento
+# --------------------------------------------------------------------------
+# `audit()` guarda la copertina come la guarda il cliente: in miniatura, sulla
+# pagina dei risultati. Questi controlli guardano il file come lo guarda la
+# tipografia — e sono quelli che fanno rimbalzare un caricamento, che costa una
+# settimana di pubblicazione ogni volta.
+#
+# Nessuno di questi è una questione di gusto. O le misure tornano o no.
+
+#: distanza minima del testo di dorso dalle due pieghe (KDP: 1,6 mm)
+SPINE_TEXT_CLEARANCE_IN = 0.0625
+#: quanto può scostarsi il PDF dalle misure calcolate prima di essere sbagliato
+SIZE_TOLERANCE_PT = 1.0
+#: una zona del codice a barre si considera libera se è quasi bianca ovunque
+BARCODE_MIN_LUMA = 235
+#: si campiona un punto dentro il bordo della zona, non il bordo stesso: sul
+#: contorno esatto del rettangolo l'antialiasing mescola i due colori e
+#: produrrebbe una segnalazione su ogni copertina che il sistema disegna
+BARCODE_INSET_PT = 1.0
+
+
+def audit_production(
+    pdf_path: Path,
+    *,
+    trim: str,
+    pages: int,
+    paper: str,
+    author: str = "",
+) -> list[str]:
+    """I controlli tecnici sul PDF di copertina finito.
+
+    Misura quello che l'elenco di controllo di KDP chiede e che nessuno
+    verifica guardando il file a schermo: le dimensioni contro il calcolo del
+    dorso, l'area del codice a barre, il testo di dorso dentro il dorso, i
+    font incorporati e le linee guida rimaste nel file di produzione.
+    """
+    try:
+        import pymupdf
+    except ImportError:  # pragma: no cover - PyMuPDF è consigliato, non obbligatorio
+        return ["PyMuPDF non installato: controlli di produzione non eseguiti."]
+    if not Path(pdf_path).exists():
+        return ["Nessun PDF di copertina da controllare."]
+
+    trim_w, trim_h = kdpspecs.trim_size_in(trim)
+    spine_in = kdpspecs.spine_width_in(pages, paper)
+    attesa_w, attesa_h = kdpspecs.cover_size_in(trim, pages, paper)
+    bleed = kdpspecs.BLEED_IN
+    spine_x0 = (bleed + trim_w) * INCH
+    spine_x1 = spine_x0 + spine_in * INCH
+
+    document = pymupdf.open(pdf_path)
+    problemi: list[str] = []
+    try:
+        problemi += _controlla_dimensioni(document, attesa_w, attesa_h, spine_in, pages, paper)
+        if len(document) > 1:
+            problemi.append(
+                f"Il PDF di copertina ha {len(document)} pagine: KDP ne accetta una sola, "
+                "con retro, dorso e prima in un'unica immagine continua."
+            )
+        page = document[0]
+        problemi += _controlla_dorso(page, pages, spine_x0, spine_x1, spine_in)
+        problemi += _controlla_codice_a_barre(page, spine_x0, bleed)
+        problemi += _controlla_font(page)
+        problemi += _controlla_guide(page, spine_x0, spine_x1)
+        problemi += _controlla_autore(page, author, bleed, trim_w, spine_in)
+    finally:
+        document.close()
+    return problemi
+
+
+def _controlla_dimensioni(document, attesa_w, attesa_h, spine_in, pages, paper) -> list[str]:
+    """Il difetto che rimbalza il caricamento e che nessuno vede a schermo.
+
+    Il dorso dipende da pagine, carta e formato: se il PDF è stato fatto con un
+    conteggio pagine vecchio, è largo quel tanto che basta a far slittare tutto
+    e KDP lo respinge senza spiegare quale numero non torna.
+    """
+    rect = document[0].rect
+    if (
+        abs(rect.width - attesa_w * INCH) <= SIZE_TOLERANCE_PT
+        and abs(rect.height - attesa_h * INCH) <= SIZE_TOLERANCE_PT
+    ):
+        return []
+    return [
+        f"Le dimensioni del PDF ({rect.width / INCH:.3f}\" x {rect.height / INCH:.3f}\") non "
+        f"corrispondono al calcolo KDP ({attesa_w:.3f}\" x {attesa_h:.3f}\"): "
+        f"{pages} pagine su carta {paper} fanno un dorso di {spine_in:.3f}\". "
+        "Rigenera la copertina sul conteggio pagine definitivo."
+    ]
+
+
+def _controlla_dorso(page, pages, spine_x0, spine_x1, spine_in) -> list[str]:
+    """Testo di dorso: ammesso solo da 79 pagine in su, e dentro le pieghe."""
+    ruotato = []
+    for block in page.get_text("dict")["blocks"]:
+        for line in block.get("lines", []):
+            if abs(line.get("dir", (1.0, 0.0))[0]) >= 0.5:
+                continue                      # orizzontale: non è il dorso
+            for span in line.get("spans", []):
+                if span["text"].strip():
+                    ruotato.append(span)
+    if not ruotato:
+        return []
+
+    if not kdpspecs.spine_text_allowed(pages):
+        return [
+            f"C'è testo sul dorso ma il libro ha {pages} pagine: KDP non lo consente "
+            f"sotto le {kdpspecs.SPINE_TEXT_MIN_PAGES}."
+        ]
+
+    margine = SPINE_TEXT_CLEARANCE_IN * INCH
+    fuori = [
+        span
+        for span in ruotato
+        if span["bbox"][0] < spine_x0 + margine - 0.5
+        or span["bbox"][2] > spine_x1 - margine + 0.5
+    ]
+    if fuori:
+        return [
+            f"Il testo del dorso esce dalle pieghe ({len(fuori)} righe): su un dorso di "
+            f"{spine_in:.3f}\" servono almeno {SPINE_TEXT_CLEARANCE_IN}\" liberi per lato, "
+            "e in stampa la piega si sposta."
+        ]
+    return []
+
+
+def _controlla_codice_a_barre(page, spine_x0, bleed) -> list[str]:
+    """L'area che KDP sovrastampa: se ci finisce sopra qualcosa, lo copre.
+
+    Si guardano i pixel invece degli oggetti: un'illustrazione di fondo che
+    arriva fin lì non è un blocco di testo, ma il codice a barre ci finisce
+    sopra lo stesso e diventa illeggibile allo scanner.
+    """
+    import pymupdf
+
+    bar_w, bar_h = kdpspecs.BARCODE_ZONE_IN
+    x0 = spine_x0 - (SAFE_MARGIN_IN + bar_w) * INCH
+    y0 = (bleed + SAFE_MARGIN_IN) * INCH
+    inset = BARCODE_INSET_PT
+    zona = pymupdf.Rect(
+        x0 + inset,
+        page.rect.height - y0 - bar_h * INCH + inset,
+        x0 + bar_w * INCH - inset,
+        page.rect.height - y0 - inset,
+    )
+    pixmap = page.get_pixmap(clip=zona, colorspace=pymupdf.csGRAY)
+    campioni = pixmap.samples
+    if not campioni:
+        return []
+    minimo = min(campioni)
+    if minimo >= BARCODE_MIN_LUMA:
+        return []
+    scuri = sum(1 for v in campioni if v < BARCODE_MIN_LUMA) / len(campioni)
+    return [
+        f"L'area del codice a barre non è libera: il {scuri:.0%} dell'area di "
+        f'{bar_w}"x{bar_h}" in basso a destra della quarta ha inchiostro sopra '
+        f"(il punto più scuro è a {minimo} di luminosità). KDP ci stampa sopra il codice."
+    ]
+
+
+def _controlla_font(page) -> list[str]:
+    non_incorporati = {
+        font[3]
+        for font in page.get_fonts(full=False)
+        if font[1] == "n/a" or font[0] == 0
+    }
+    if not non_incorporati:
+        return []
+    return [
+        "Font non incorporati nella copertina (KDP li rifiuta): "
+        + ", ".join(sorted(non_incorporati))
+    ]
+
+
+def _controlla_guide(page, spine_x0, spine_x1) -> list[str]:
+    """Linee di taglio e di piega rimaste nel file di produzione.
+
+    Il sistema le disegna solo con `--guides`, che serve a controllare il
+    montaggio. Quel file non va caricato: KDP rifiuta i segni di taglio, e chi
+    ha generato la copertina due settimane fa non si ricorda con quale opzione.
+    """
+    altezza = page.rect.height
+    verticali = 0
+    for disegno in page.get_drawings():
+        for item in disegno["items"]:
+            if item[0] != "l":
+                continue
+            p1, p2 = item[1], item[2]
+            if abs(p1.x - p2.x) > 0.5 or abs(p1.y - p2.y) < altezza * 0.9:
+                continue
+            if any(abs(p1.x - piega) < 1.0 for piega in (spine_x0, spine_x1)):
+                verticali += 1
+    if verticali < 2:
+        return []
+    return [
+        "Nel PDF ci sono le linee di piega del dorso: è il file prodotto con "
+        "`--guides`, che serve a controllare il montaggio e non va caricato. "
+        "Rigenera la copertina senza l'opzione."
+    ]
+
+
+def _controlla_autore(page, author, bleed, trim_w, spine_in) -> list[str]:
+    """Il nome in copertina deve essere quello della scheda KDP, alla lettera.
+
+    Amazon confronta i due e blocca la pubblicazione quando non coincidono: è
+    un controllo che costa niente qui e una settimana di attesa lì.
+    """
+    if not author.strip():
+        return []
+    front_x0 = (bleed + trim_w + spine_in) * INCH
+    testo = " ".join(
+        span["text"]
+        for block in page.get_text("dict")["blocks"]
+        for line in block.get("lines", [])
+        for span in line.get("spans", [])
+        if span["bbox"][2] >= front_x0 and abs(line.get("dir", (1.0, 0.0))[0]) >= 0.5
+    )
+    piatto = " ".join(testo.upper().split())
+    if " ".join(author.upper().split()) in piatto:
+        return []
+    return [
+        f"Il nome dell'autore «{author}» non compare sulla prima di copertina come "
+        "nella scheda: Amazon confronta copertina e metadati e blocca la pubblicazione."
+    ]
