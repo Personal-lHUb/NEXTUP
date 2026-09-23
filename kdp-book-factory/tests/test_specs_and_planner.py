@@ -2,7 +2,7 @@
 
 import unittest
 
-from kdpfactory import kdpspecs, mdlite, planner
+from kdpfactory import kdpspecs, mdlite, metadata, planner
 from kdpfactory.models import BookSpec, ChapterPlan
 
 
@@ -325,3 +325,35 @@ class TestConfineDelFullContent(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestPrezzoDeciso(unittest.TestCase):
+    """`price_eur` in book.json è una decisione editoriale, non un suggerimento.
+
+    Restava non letta: la scheda usciva con il prezzo della formula di default,
+    che non sa niente del concorrente. Su questo libro erano 10,99 invece di
+    16,99, cioè metà della royalty a copia.
+    """
+
+    def test_senza_prezzo_deciso_vale_la_formula(self):
+        righe = metadata.price_table(200)
+        self.assertTrue(all(not r.deciso for r in righe))
+        self.assertTrue(all(r.royalty > 0 for r in righe))
+
+    def test_il_prezzo_deciso_vince_sulla_formula(self):
+        calcolate = {r.marketplace: r.suggested_price for r in metadata.price_table(200)}
+        righe = metadata.price_table(200, price=16.99)
+        for riga in righe:
+            self.assertEqual(riga.suggested_price, 16.99)
+            self.assertTrue(riga.deciso)
+            self.assertGreater(riga.suggested_price, calcolate[riga.marketplace])
+            # la royalty si ricalcola sul prezzo vero, non resta quella di prima
+            self.assertAlmostEqual(riga.royalty, 16.99 * 0.6 - riga.printing_cost, places=2)
+
+    def test_il_minimo_resta_un_pavimento(self):
+        """Sotto il minimo la royalty va in negativo: lì la decisione non passa."""
+        righe = metadata.price_table(240, price=1.00)
+        for riga in righe:
+            self.assertEqual(riga.suggested_price, riga.min_price)
+            self.assertFalse(riga.deciso)
+            self.assertGreaterEqual(riga.royalty, 0)

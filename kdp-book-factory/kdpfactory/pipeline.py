@@ -327,7 +327,7 @@ def write_metadata_files(
             "description_html": metadata_module.build_description_html(meta, spec.language),
         }
     config = metadata_module.load_printing_config()
-    prices = metadata_module.price_table(pages, config)
+    prices = metadata_module.price_table(pages, config, price=spec.price_eur)
     listing = metadata_module.render_listing(spec, meta, pages, prices, config)
     (project.build_dir / "kdp-listing.md").write_text(listing, encoding="utf-8")
     (project.build_dir / "metadata.json").write_text(

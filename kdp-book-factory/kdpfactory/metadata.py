@@ -80,6 +80,9 @@ class PriceRow:
     min_price: float
     suggested_price: float
     royalty: float
+    #: il prezzo viene da `price_eur` in book.json, cioè da una decisione
+    #: editoriale presa sul concorrente vero, non dalla formula di default
+    deciso: bool = False
 
     def to_dict(self) -> dict:
         return {
@@ -89,6 +92,7 @@ class PriceRow:
             "prezzo_minimo": round(self.min_price, 2),
             "prezzo_consigliato": round(self.suggested_price, 2),
             "royalty_per_copia": round(self.royalty, 2),
+            "prezzo_deciso": self.deciso,
         }
 
 
@@ -110,16 +114,28 @@ def _round_to_99(value: float) -> float:
     return candidate if candidate >= value - 1e-9 else base + 1.99
 
 
-def price_table(pages: int, config: dict | None = None, target_royalty: float = 3.0) -> list[PriceRow]:
-    """Prezzo minimo (royalty >= 0) e prezzo consigliato per raggiungere
-    `target_royalty` per copia."""
+def price_table(
+    pages: int,
+    config: dict | None = None,
+    target_royalty: float = 3.0,
+    price: float = 0.0,
+) -> list[PriceRow]:
+    """Prezzo minimo (royalty >= 0) e prezzo di listino per ogni mercato.
+
+    Senza `price`, il listino lo calcola la formula: quanto serve per tirare
+    fuori `target_royalty` a copia. Con `price`, vince quello — perché è la
+    decisione dell'editore, presa guardando che prezzo regge la nicchia, e una
+    formula che non sa niente del concorrente non ha titolo per scavalcarla.
+    Il minimo resta un pavimento: sotto, la royalty va in negativo.
+    """
     config = config or load_printing_config()
     rate = float(config.get("royalty_rate", 0.6))
     rows: list[PriceRow] = []
     for market in config["marketplaces"]:
         cost = printing_cost(pages, market)
         min_price = max(_round_to_99(cost / rate), float(market["prezzo_minimo_consigliato"]))
-        suggested = max(_round_to_99((cost + target_royalty) / rate), min_price)
+        calcolato = max(_round_to_99((cost + target_royalty) / rate), min_price)
+        listino = max(price, min_price) if price > 0 else calcolato
         rows.append(
             PriceRow(
                 marketplace=market["codice"],
@@ -127,8 +143,9 @@ def price_table(pages: int, config: dict | None = None, target_royalty: float = 
                 symbol=market["simbolo"],
                 printing_cost=cost,
                 min_price=min_price,
-                suggested_price=suggested,
-                royalty=suggested * rate - cost,
+                suggested_price=listino,
+                royalty=listino * rate - cost,
+                deciso=price > 0 and listino == price,
             )
         )
     return rows
@@ -193,7 +210,20 @@ def render_listing(
         f"> Costi di stampa aggiornati al: **{config.get('verificato_il')}** — "
         "verifica su kdp.amazon.com prima di pubblicare.",
         "",
-        "| Marketplace | Costo stampa | Prezzo minimo | Prezzo consigliato | Royalty/copia |",
+        # Il prezzo deciso in scheda è una decisione editoriale presa sul
+        # concorrente vero: va detto, perché altrimenti chi incolla vede un
+        # numero e non sa se è una scelta o il risultato di una formula.
+        *(
+            [
+                f"> **Prezzo deciso in scheda: {spec.price_eur:.2f}** (`price_eur` in "
+                "book.json). La tabella lo applica a tutti i mercati; su KDP il listino "
+                "si fissa mercato per mercato, quindi controlla valuta per valuta.",
+                "",
+            ]
+            if spec.price_eur
+            else []
+        ),
+        "| Marketplace | Costo stampa | Prezzo minimo | Prezzo di listino | Royalty/copia |",
         "|---|---|---|---|---|",
     ]
     for row in prices:

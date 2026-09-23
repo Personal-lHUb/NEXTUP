@@ -101,7 +101,10 @@ def _economia(spec: BookSpec, state: dict, pages: int, report: BookReport) -> No
     usage = state.get("usage") or {}
     api_cost = float(usage.get("estimated_cost_usd") or 0.0)
 
-    prices = metadata_module.price_table(pages) if pages else []
+    # Con il prezzo deciso in scheda, la royalty è quella vera: senza, la
+    # diagnostica misurava il libro al prezzo della formula di default e
+    # raccontava un'economia che non era quella del libro.
+    prices = metadata_module.price_table(pages, price=spec.price_eur) if pages else []
     # Si guarda il mercato in dollari: è quello in cui il costo API è confrontabile
     # con la royalty senza passare da un cambio.
     row = next((p for p in prices if p.marketplace.startswith("amazon.com")), None) or (
