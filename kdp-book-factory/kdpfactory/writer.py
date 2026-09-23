@@ -37,10 +37,16 @@ def normalize_outline(spec: BookSpec, outline: Outline, budget: planner.PageBudg
     for chapter in body:
         chapter.role = "chapter"
 
+    # Se chi ha scritto la scaletta ha previsto lui l'apertura o la chiusura,
+    # sono le sue a valere: il segnaposto qui sotto è un ripiego generico, e su
+    # un libro che non è un manuale in trenta giorni si vede.
+    scritte = {c.role: c for c in outline.chapters if c.role in {"intro", "conclusion"}}
+
     sequence: list[ChapterPlan] = []
     if spec.include_intro:
         sequence.append(
-            ChapterPlan(
+            scritte.get("intro")
+            or ChapterPlan(
                 number=0,
                 title=L(spec.language, "introduction"),
                 summary="Perché questo libro, per chi è, cosa ottiene il lettore.",
@@ -51,7 +57,8 @@ def normalize_outline(spec: BookSpec, outline: Outline, budget: planner.PageBudg
     sequence.extend(body)
     if spec.include_conclusion:
         sequence.append(
-            ChapterPlan(
+            scritte.get("conclusion")
+            or ChapterPlan(
                 number=0,
                 title=L(spec.language, "conclusion"),
                 summary="Chiusura del ragionamento e primi 30 giorni di applicazione.",

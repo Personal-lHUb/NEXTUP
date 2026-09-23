@@ -44,21 +44,17 @@ rapporto della pipeline: `severity`, `category`, `issue`, `quote`, `suggestion`.
 #: dalla versione esportata e sostituito dal formato leggibile qui sopra.
 JSON_CONTRACT_MARKER = "Rispondi ESCLUSIVAMENTE con un oggetto JSON"
 
-TOOL_USAGE = """## Come lavorare
-
-Questo agente non usa il modello: misura le coordinate del testo nel PDF
-impaginato. Esegui il controllo e riporta l'esito.
+#: Fallback per un agente strumentale che non dichiara le proprie istruzioni:
+#: dice come si esegue *il suo* controllo, non quello di un altro.
+TOOL_USAGE = """Questo agente non usa il modello: misura, e riporta quello che ha misurato.
 
 ```bash
 cd kdp-book-factory
-python3 -m kdpfactory review <slug> --agents impaginazione
+python3 -m kdpfactory review <slug> --agents {name}
 ```
 
-Se il libro non è ancora impaginato, esegui prima `python3 -m kdpfactory build
-<slug>`. Riporta le segnalazioni così come escono, raggruppate per categoria, e
-indica quali richiedono un intervento sul testo (vedove, orfane, code di
-capitolo) e quali sull'impaginazione (testo fuori gabbia, aperture di capitolo).
-"""
+Riporta le segnalazioni così come escono, raggruppate per categoria, e indica
+quali sono bloccanti."""
 
 
 def _sample_context() -> AgentContext:
@@ -82,8 +78,10 @@ def render_agent_markdown(agent) -> str:
     body += f"# {agent.title}\n\n{agent.description}\n\n"
 
     if not blocks:
-        # Agente strumentale (impaginazione): non ha un prompt, ha un comando.
-        return body + TOOL_USAGE
+        # Agente strumentale: non ha un prompt, ha un comando. Le istruzioni
+        # sono le sue, non quelle del primo agente strumentale che fu scritto.
+        istruzioni = agent.istruzioni or TOOL_USAGE.format(name=agent.name)
+        return body + "## Come lavorare\n\n" + istruzioni.rstrip() + "\n"
 
     rules = blocks[0]  # il primo blocco sono le regole del ruolo
     body += rules.split(JSON_CONTRACT_MARKER)[0].rstrip() + "\n"

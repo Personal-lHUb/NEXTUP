@@ -38,6 +38,7 @@ import json
 from pathlib import Path
 
 from . import planner, prompts, writer
+from .agents import scaletta as revisore_scaletta
 from .llm import extract_json
 from .mdlite import count_words
 from .models import BookProject, BookSpec, Outline
@@ -124,12 +125,11 @@ def brief_scaletta(project: BookProject, spec: BookSpec, budget: planner.PageBud
     return _scrivi(percorso_brief(project, "scaletta"), testo)
 
 
-def importa_scaletta(
-    project: BookProject, spec: BookSpec, budget: planner.PageBudget, testo: str
-) -> Outline:
-    """Valida la scaletta incollata e la salva come `outline.json`."""
-    dati = extract_json(testo)
-    grezza = Outline.from_dict(dati)
+def _leggi_scaletta(testo: str) -> Outline:
+    """Dal testo incollato alla scaletta grezza, con i due rifiuti che non
+    dipendono da nessun giudizio: senza capitoli non è una scaletta, e un
+    capitolo senza titolo non è un capitolo."""
+    grezza = Outline.from_dict(extract_json(testo))
     if not grezza.chapters:
         raise SystemExit(
             "La scaletta non contiene nessun capitolo.\n"
@@ -138,8 +138,55 @@ def importa_scaletta(
     senza_titolo = [c.number for c in grezza.chapters if not c.title.strip()]
     if senza_titolo:
         raise SystemExit(f"Capitoli senza titolo nella scaletta: {senza_titolo}")
+    return grezza
 
-    outline = writer.normalize_outline(spec, grezza, budget)
+
+def esamina_scaletta(
+    project: BookProject, spec: BookSpec, budget: planner.PageBudget, testo: str
+) -> dict:
+    """Passa la scaletta al revisore prima che diventi `outline.json`.
+
+    Un capitolo scritto male si riscrive; una scaletta sbagliata la pagano
+    tutti i capitoli. L'esame si fa sulla scaletta grezza — quella scritta a
+    mano — perché è quella che si corregge: introduzione e conclusione le
+    aggiunge il sistema dopo, e non c'è niente da rivedere lì.
+    """
+    grezza = _leggi_scaletta(testo)
+    rilievi = revisore_scaletta.esamina(
+        grezza, spec, brief=spec.brief or "", capitoli_attesi=budget.chapters
+    )
+    bloccanti = sum(1 for r in rilievi if r.severity == "bloccante")
+    return {
+        "rilievi": rilievi,
+        "bloccanti": bloccanti,
+        "rapporto": rapporto_rilievi(rilievi, grezza),
+    }
+
+
+def rapporto_rilievi(rilievi: list, grezza: Outline) -> str:
+    """Il rapporto del revisore, leggibile a terminale."""
+    righe = [
+        f"REVISORE DI SCALETTA — {grezza.title}",
+        "-" * 52,
+        f"  {len(grezza.chapters)} capitoli proposti",
+    ]
+    if not rilievi:
+        righe.append("  nessun rilievo: la scaletta regge i controlli che si misurano.")
+        return "\n".join(righe)
+    for gravita in ("bloccante", "importante", "minore"):
+        gruppo = [r for r in rilievi if r.severity == gravita]
+        if not gruppo:
+            continue
+        righe.append(f"\n  {gravita.upper()} ({len(gruppo)})")
+        righe.extend(r.render() for r in gruppo)
+    return "\n".join(righe)
+
+
+def importa_scaletta(
+    project: BookProject, spec: BookSpec, budget: planner.PageBudget, testo: str
+) -> Outline:
+    """Valida la scaletta incollata e la salva come `outline.json`."""
+    outline = writer.normalize_outline(spec, _leggi_scaletta(testo), budget)
     outline.save(project.outline_path)
     return outline
 

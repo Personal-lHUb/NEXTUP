@@ -14,6 +14,7 @@ il sistema usa già per le copertine: **non si disegna, si scrive il brief.**
 ```
 python3 -m kdpfactory manuale <slug> stato        # che cosa c'è e che cosa manca
 python3 -m kdpfactory manuale <slug> scaletta     # produce il brief
+python3 -m kdpfactory manuale <slug> scaletta --esamina
 python3 -m kdpfactory manuale <slug> scaletta --importa
 python3 -m kdpfactory manuale <slug> capitolo --numero 3
 python3 -m kdpfactory manuale <slug> capitolo --numero 3 --importa
@@ -46,6 +47,7 @@ si disegna e si misura, `qa` controlla, la scheda calcola i prezzi.
 | | automatica | manuale |
 |---|---|---|
 | scaletta | l'agente la scrive, l'agente `indice` rifà i titoli | la scrivi tu; **i titoli che metti sono definitivi** |
+| controllo della scaletta | `revisore-scaletta`, che non usa il modello | lo stesso, identico |
 | contesto fra capitoli | riassunti scritti dal modello dopo ogni capitolo | i riassunti della scaletta: più poveri, ma veri e gratis |
 | collegio di revisione | lettore cieco, fact-checker, conformità, editor | fermi (usano il modello) |
 | impaginazione, copertina | girano | girano, identici |
@@ -57,11 +59,46 @@ test lo verifica confrontando la scaletta normalizzata dalle due strade — la
 normalizzazione vive in un posto solo (`writer.normalize_outline`), e quel test
 fallisce il giorno in cui qualcuno la duplica.
 
+## Il revisore di scaletta
+
+Un capitolo scritto male si riscrive. Una scaletta sbagliata si paga trenta
+volte, perché ogni capitolo eredita il difetto: due capitoli che dicono la
+stessa cosa diventano tremila parole ripetute, un argomento chiesto in
+`brief.md` e dimenticato nella scaletta non comparirà mai nel libro.
+
+Perciò la scaletta non entra da sola. Prima passa dall'agente
+`revisore-scaletta`, che **non usa il modello**: tutto quello che segnala si
+conta.
+
+| controllo | che cosa misura | gravità |
+|---|---|---|
+| conteggio | i capitoli di contenuto contro quelli che il budget pagine ha pagato | bloccante |
+| lingua | parole grammaticali italiane contro inglesi, rispetto a `language` | bloccante |
+| argomento scoperto | ogni punto elenco di `brief.md` deve avere un capitolo che lo prende | bloccante |
+| promessa di risultato | guarigione, cura, garanzia — negazioni e citazioni escluse | bloccante |
+| sovrapposizione | parole in comune fra due capitoli: oltre il 45% fanno lo stesso capitolo | bloccante / importante |
+| titolo doppio, titolo generico | l'indice è la pagina che si legge nell'anteprima | bloccante / importante |
+| capitolo senza programma | riassunto e punti: chi scrive deve sapere dove finisce | importante |
+| data in scaletta | un anno scritto per esteso va detto come parola di chi parla | importante |
+| titolo in copertina | le stesse misure dell'audit di copertina, applicate qui | importante |
+| quarta, progressione | gancio più due paragrafi; la parte operativa nell'ultimo terzo | minore |
+| cifre da contare | elenca ogni quantità dichiarata in indice e quarta, da verificare sul libro | minore |
+
+Due regole che evitano al revisore di bloccare il lavoro fatto bene: una parola
+vietata **fra virgolette** è citata, non detta (un capitolo intitolato «le sei
+parole che mi rifiuto di usare» non è una rivendicazione), e una **negazione
+entro dieci parole** salva la frase («perché non la chiamerò una prova»).
+
+I bloccanti fermano l'importazione. `--forza` li scavalca, e lo si fa solo
+sapendo perché.
+
 ## Che cosa il sistema controlla su quello che incolli
 
-**Scaletta** — JSON valido, almeno un capitolo, nessun capitolo senza titolo.
-Poi numera le sezioni, aggiunge introduzione e conclusione se `book.json` le
-prevede, e ripartisce il budget di parole calcolato sulle pagine vere.
+**Scaletta** — JSON valido, almeno un capitolo, nessun capitolo senza titolo,
+poi il revisore qui sopra. Se passa: numera le sezioni, aggiunge introduzione e
+conclusione se `book.json` le prevede — **o usa le tue**, se nella scaletta hai
+previsto tu una sezione con `"role": "intro"` o `"conclusion"` — e ripartisce
+il budget di parole calcolato sulle pagine vere.
 
 **Capitolo** — non vuoto, e comincia dal titolo della scaletta (se non c'è, ce
 lo mette). Conta le parole e le confronta con il budget: oltre il 25% di scarto

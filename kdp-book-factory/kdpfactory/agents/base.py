@@ -120,6 +120,10 @@ class Agent:
     max_tokens: ClassVar[int] = 16000
     #: un revisore "cieco" non riceve la scheda del libro né la scaletta
     blind: ClassVar[bool] = False
+    #: gli agenti che non usano il modello non hanno un prompt: hanno un comando.
+    #: Serve a esportarli come subagent di Claude Code con le istruzioni giuste.
+    comando: ClassVar[str] = ""
+    istruzioni: ClassVar[str] = ""
 
     # -- da implementare --------------------------------------------------
     def system(self, ctx: AgentContext) -> list[str]:

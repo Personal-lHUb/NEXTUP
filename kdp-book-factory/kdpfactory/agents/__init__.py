@@ -14,6 +14,8 @@ Produzione
     editor          applica le segnalazioni del collegio
 
 Controllo
+    revisore-scaletta  esamina l'indice prima che diventi un libro: argomenti
+                    scoperti, capitoli gemelli, promesse (senza modello)
     lettore-cieco   legge senza sapere nulla del progetto: dove ci si perde sul
                     capitolo, e sul libro intero se l'indice viene mantenuto
     fact-checker    affermazioni, numeri e citazioni non verificabili
@@ -25,7 +27,7 @@ Controllo
 """
 
 # Gli import registrano gli agenti nel registro.
-from . import acquisizione, copertina, layout, review, writing  # noqa: F401,E402
+from . import acquisizione, copertina, layout, review, scaletta, writing  # noqa: F401,E402
 from .base import (  # noqa: F401
     REGISTRY,
     Agent,

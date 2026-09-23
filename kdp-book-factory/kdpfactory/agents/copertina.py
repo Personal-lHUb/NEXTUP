@@ -42,6 +42,20 @@ class Copertina(Agent):
         "Non usa il modello."
     )
     stage = "controllo"
+    comando = "python3 -m kdpfactory review <slug> --agents copertina"
+    istruzioni = """Questo agente non usa il modello: misura il PDF della copertina e legge i
+testi che ci stanno sopra.
+
+```bash
+cd kdp-book-factory
+python3 -m kdpfactory review <slug> --agents copertina
+```
+
+Se la copertina non è ancora stata disegnata, esegui prima `python3 -m
+kdpfactory build <slug>`. Le misure che contano sono quelle in miniatura: corpo
+del titolo rispetto all'altezza, contrasto, stacco su fondo bianco, testo dentro
+l'area di sicurezza. I rilievi sui testi — gancio, rivendicazioni vietate,
+formula della categoria — si risolvono riscrivendo la copertina, non il libro."""
 
     def system(self, ctx: AgentContext) -> list[str]:  # pragma: no cover - non usato
         return []

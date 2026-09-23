@@ -171,7 +171,7 @@ architetto → indice → ghostwriter → [voce] → impaginazione + copertina
       editor di sviluppo       →            editor  →  nuova impaginazione
 ```
 
-**12 agenti registrati** in `kdpfactory/agents/` (`REGISTRY`):
+**13 agenti registrati** in `kdpfactory/agents/` (`REGISTRY`):
 
 | agente | ruolo | note |
 |---|---|---|
@@ -185,6 +185,7 @@ architetto → indice → ghostwriter → [voce] → impaginazione + copertina
 | `conformita` | controllo | regole di contenuto KDP e rischi legali |
 | `correttore` | controllo | bozze |
 | `editor-sviluppo` | controllo | il libro nel suo insieme |
+| `revisore-scaletta` | controllo | **deterministico**: esamina l'indice prima che diventi un libro — argomenti del brief scoperti, capitoli gemelli, promesse, cifre da contare |
 | `impaginazione` | controllo | **deterministico**: misura le coordinate nel PDF |
 | `copertina` | controllo | **deterministico**: misura la prima + i testi |
 

@@ -96,6 +96,58 @@ class TestLineaManuale(unittest.TestCase):
         )
         self.assertEqual(a_mano.to_dict(), dal_modello.to_dict())
 
+    def test_l_apertura_scritta_dall_autore_batte_il_segnaposto(self):
+        """Il segnaposto parla italiano e di «primi 30 giorni di applicazione».
+
+        Su un libro che non è un manuale, e in inglese, si vede. Chi scrive la
+        scaletta può prevedere lui l'apertura e la chiusura, e allora valgono
+        le sue.
+        """
+        mia = {
+            **SCALETTA,
+            "chapters": [
+                {"number": 0, "title": "A Note on How This Book Reports Things",
+                 "summary": "The ground rules, before any session is told.",
+                 "beats": ["chi sono", "che cosa è cambiato"], "role": "intro"},
+                *SCALETTA["chapters"],
+                {"number": 99, "title": "What I Think, for What It Is Worth",
+                 "summary": "My own opinion, labelled as one.",
+                 "beats": ["la sola tesi", "quello che credo"], "role": "conclusion"},
+            ],
+        }
+        outline = manuale.importa_scaletta(
+            self.project, self.spec, self.budget, json.dumps(mia)
+        )
+        self.assertEqual(outline.chapters[0].title, "A Note on How This Book Reports Things")
+        self.assertEqual(outline.chapters[0].role, "intro")
+        self.assertEqual(outline.chapters[-1].title, "What I Think, for What It Is Worth")
+        self.assertEqual(outline.chapters[-1].role, "conclusion")
+        # i capitoli di contenuto restano quelli, fra l'una e l'altra
+        self.assertEqual(len(outline.chapters), len(SCALETTA["chapters"]) + 2)
+
+    def test_senza_apertura_scritta_resta_il_segnaposto(self):
+        outline = manuale.importa_scaletta(
+            self.project, self.spec, self.budget, json.dumps(SCALETTA)
+        )
+        self.assertEqual(outline.chapters[0].role, "intro")
+        self.assertTrue(outline.chapters[0].title)
+
+    # --- il revisore --------------------------------------------------------
+    def test_la_scaletta_passa_dal_revisore_prima_di_entrare(self):
+        esito = manuale.esamina_scaletta(
+            self.project, self.spec, self.budget, json.dumps(SCALETTA)
+        )
+        self.assertIn("REVISORE DI SCALETTA", esito["rapporto"])
+        self.assertIsInstance(esito["bloccanti"], int)
+
+    def test_il_revisore_conta_i_capitoli_chiesti(self):
+        """Il budget vuole i capitoli che le pagine hanno pagato."""
+        esito = manuale.esamina_scaletta(
+            self.project, self.spec, self.budget, json.dumps(SCALETTA)
+        )
+        self.assertGreaterEqual(esito["bloccanti"], 1)
+        self.assertIn("conteggio", [r.category for r in esito["rilievi"]])
+
     def test_una_scaletta_senza_capitoli_viene_rifiutata(self):
         with self.assertRaises(SystemExit) as caso:
             manuale.importa_scaletta(self.project, self.spec, self.budget, '{"chapters": []}')

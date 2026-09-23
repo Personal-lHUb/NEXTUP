@@ -419,19 +419,31 @@ def cmd_manuale(args) -> int:
 
     if args.passo == "scaletta":
         budget = budget_for(project, spec)
-        if not args.importa:
-            percorso = manuale.brief_scaletta(project, spec, budget)
-            print(f"Brief della scaletta: {percorso}")
-            print(f"  {budget.chapters} capitoli · ~{budget.words_per_chapter} parole ciascuno")
-            print(f"\nIncolla la risposta in {manuale.percorso_risposta(project, 'scaletta', 'json')}")
-            print(f"poi: python -m kdpfactory manuale {spec.slug} scaletta --importa")
+        if args.esamina or args.importa:
+            risposta = manuale.leggi_risposta(
+                manuale.percorso_risposta(project, "scaletta", "json")
+            )
+            esito = manuale.esamina_scaletta(project, spec, budget, risposta)
+            print(esito["rapporto"])
+            if args.esamina:
+                return 1 if esito["bloccanti"] else 0
+            if esito["bloccanti"] and not args.forza:
+                raise SystemExit(
+                    f"\n{esito['bloccanti']} rilievi bloccanti: la scaletta non entra.\n"
+                    f"Correggi {manuale.percorso_risposta(project, 'scaletta', 'json')} "
+                    "e riprova (`--forza` la fa passare lo stesso)."
+                )
+            outline = manuale.importa_scaletta(project, spec, budget, risposta)
+            save_backup(project, args, "scaletta importata a mano")
+            print(f"\nScaletta salvata in {project.outline_path}: {len(outline.chapters)} sezioni")
+            for capitolo in outline.chapters:
+                print(f"  {capitolo.number:>2}. {capitolo.title}  ({capitolo.target_words} parole)")
             return 0
-        risposta = manuale.leggi_risposta(manuale.percorso_risposta(project, "scaletta", "json"))
-        outline = manuale.importa_scaletta(project, spec, budget, risposta)
-        save_backup(project, args, "scaletta importata a mano")
-        print(f"Scaletta salvata in {project.outline_path}: {len(outline.chapters)} sezioni")
-        for capitolo in outline.chapters:
-            print(f"  {capitolo.number:>2}. {capitolo.title}  ({capitolo.target_words} parole)")
+        percorso = manuale.brief_scaletta(project, spec, budget)
+        print(f"Brief della scaletta: {percorso}")
+        print(f"  {budget.chapters} capitoli · ~{budget.words_per_chapter} parole ciascuno")
+        print(f"\nIncolla la risposta in {manuale.percorso_risposta(project, 'scaletta', 'json')}")
+        print(f"poi: python -m kdpfactory manuale {spec.slug} scaletta --importa")
         return 0
 
     outline = project.load_outline()
@@ -991,6 +1003,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--importa",
         action="store_true",
         help="invece di produrre il brief, importa la risposta che hai incollato",
+    )
+    p.add_argument(
+        "--esamina",
+        action="store_true",
+        help="passa la scaletta al revisore senza importarla",
+    )
+    p.add_argument(
+        "--forza",
+        action="store_true",
+        help="importa la scaletta anche con rilievi bloccanti del revisore",
     )
     p.set_defaults(func=cmd_manuale)
 
