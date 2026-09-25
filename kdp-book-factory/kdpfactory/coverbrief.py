@@ -338,11 +338,26 @@ background {palette.background}, deep {palette.deep}, title {palette.title},
 accent {palette.accent}, muted {palette.muted} (palette «{palette.name}»).
 Do not use many colours without a reason.
 
-## Text on the cover
+## Text on the cover — do not put it in the image
 
-Written in {LANGUAGE_NAMES.get(spec.language, spec.language)} — the language of
-the book. Do not translate these strings, and do not add any text that is not
-listed here.
+**Deliver the illustration only. No text, no lettering, no title, no author
+name, no logo, no signature, no watermark anywhere in the image.**
+
+The engine draws every line of text itself, in vector, over what you deliver.
+That is not a preference: it is what keeps the cover checkable. A vector title
+can be measured — cap height against cover height, contrast ratio against the
+background, distance from the trim — and those measurements are what stop a
+cover going out illegible or getting trimmed in print. A title baked into
+pixels can be measured by nobody, keeps whatever spelling the model gave it,
+and shows its edges at 300 DPI.
+
+So: leave the upper third of the composition calm and uncluttered. That is
+where the title goes, and a busy area there costs the cover its contrast.
+
+For reference only: the engine will set the following text, written in
+{LANGUAGE_NAMES.get(spec.language, spec.language)} because that is the language
+of the book. Read it to understand what the image has to support, and do not
+render any of it.
 
 {_lines([t for t in testi if t])}
 

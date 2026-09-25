@@ -66,6 +66,7 @@ def typeset_only(project: BookProject, spec: BookSpec, outline: Outline) -> type
         chapters,
         project.build_dir / f"{spec.slug}-interno.pdf",
         author_bio=state.get("author_bio", ""),
+        assets_dir=project.assets_dir,
     )
 
 
@@ -282,7 +283,7 @@ def run_qa(
     project: BookProject, spec: BookSpec, outline: Outline, result: BuildResult
 ) -> qa.Report:
     chapters = writer.load_chapters(project, outline)
-    report = qa.check_manuscript(spec, outline, chapters)
+    report = qa.check_manuscript(spec, outline, chapters, assets_dir=project.assets_dir)
     if result.interior_pdf:
         qa.check_print_pdf(spec, result.interior_pdf, result.pages, report)
     state = project.load_state()

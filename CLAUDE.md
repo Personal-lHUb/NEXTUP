@@ -18,6 +18,47 @@ la pipeline e per qualsiasi file generato a mano in una sessione.
 - `backup/` non entra in git (contiene PDF e cresce in fretta): resta sul disco.
   Per liberare spazio: `python3 -m kdpfactory backup <slug> --prune 10`.
 
+## Regola permanente: i prompt delle immagini li scrive il sistema
+
+**Ogni immagine di un libro nasce da un prompt prodotto da un comando, non
+scritto a mano nella chat.** Vale per la copertina e per le figure dell'interno.
+
+```
+python3 -m kdpfactory copertina <slug>   # build/copertina-brief.md
+python3 -m kdpfactory immagini <slug>    # build/immagini-brief.md
+```
+
+Nessuno dei due chiama il modello: leggono i dati che il libro ha già —
+categoria, promessa, pubblico, palette, misure di stampa calcolate sulle pagine
+vere — e ne fanno un prompt. I file restano in `build/`, entrano nel backup e si
+rigenerano quando il libro cambia: sono la traccia di come quell'immagine è
+stata chiesta.
+
+Tre cose che questi prompt non negoziano:
+
+- **Il testo lo compone il motore**, sempre, in vettoriale. Il generatore
+  consegna la sola illustrazione: un titolo in pixel non si può misurare, e
+  sono le misure — corpo contro altezza, contrasto, distanza dal taglio — a
+  impedire che esca una copertina illeggibile o rifilata.
+- **L'immagine deve rappresentare il libro.** Una forma astratta decora, una
+  figura riconoscibile spiega. Il brief porta la rappresentazione della
+  categoria, ricavata dalle categorie KDP del libro.
+- **L'interno si stampa in bianco e nero.** Le figure si chiedono già in scala
+  di grigi: se due elementi si distinguono solo per il colore, sulla pagina
+  sono la stessa cosa.
+
+Le figure si dichiarano nel manoscritto **prima che il file esista**:
+
+```markdown
+![che cosa deve mostrare l'immagine](immagini/03-nome.jpg)
+(didascalia facoltativa, fra parentesi, sulla riga dopo)
+```
+
+Finché il file manca, l'impaginazione mette un segnaposto della misura esatta:
+il conteggio pagine è già quello definitivo e non cambia quando le immagini
+arrivano. `qa` segnala come errore quelle mancanti e quelle sotto i 300 DPI
+sulla misura stampata, e come avviso quelle ancora a colori.
+
 ## Le due categorie di prodotto
 
 Ogni libro di questo progetto è **medium-content** oppure **full-content**. La

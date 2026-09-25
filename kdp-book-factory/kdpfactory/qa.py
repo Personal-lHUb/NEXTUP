@@ -12,6 +12,7 @@ from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from . import figure as figure_module
 from . import kdpspecs, mdlite
 from .models import BookSpec, Outline
 from .prompts import BANNED_OPENERS
@@ -116,6 +117,7 @@ def check_manuscript(
     outline: Outline,
     chapters: list[tuple[int, str, str]],
     report: Report | None = None,
+    assets_dir: Path | None = None,
 ) -> Report:
     report = report or Report()
     if not chapters:
@@ -195,6 +197,9 @@ def check_manuscript(
                 "TITOLI",
                 f"Capitolo {number}: titolo nel file «{title}» diverso dalla scaletta «{plan.title}».",
             )
+
+    if assets_dir is not None:
+        _controlla_figure(spec, chapters, assets_dir, report)
 
     # Frasi ripetute fra capitoli diversi
     counter = Counter(sentence for _, sentence in all_sentences)
@@ -410,3 +415,27 @@ def merge(*reports: Report) -> Report:
         merged.findings.extend(report.findings)
         merged.stats.update(report.stats)
     return merged
+
+
+def _controlla_figure(
+    spec: BookSpec,
+    chapters: list[tuple[int, str, str]],
+    assets_dir: Path,
+    report: Report,
+) -> None:
+    """Le immagini dell'interno: ci sono, sono abbastanza grandi, sono in grigio.
+
+    Un'immagine mancante è un errore e non un avviso: il libro si impagina lo
+    stesso — il segnaposto tiene il posto e il conteggio pagine è già quello
+    definitivo — ma un PDF con dei rettangoli tratteggiati dentro non si carica.
+    """
+    geo = kdpspecs.page_geometry(spec.trim, spec.target_pages)
+    totale = 0
+    for numero, _titolo, markdown in chapters:
+        for figura in figure_module.figure_del_manoscritto(markdown, assets_dir, numero):
+            totale += 1
+            for problema in figure_module.problemi(figura, geo.text_width):
+                gravita = "avviso" if "a colori" in problema else "errore"
+                report.add(gravita, "FIGURE", problema)
+    if totale:
+        report.add("info", "FIGURE", f"{totale} figure dichiarate nel manoscritto.")

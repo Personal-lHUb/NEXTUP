@@ -23,6 +23,7 @@ from reportlab.platypus import (
     Flowable,
     Frame,
     HRFlowable,
+    Image,
     KeepTogether,
     PageBreak,
     PageTemplate,
@@ -32,6 +33,7 @@ from reportlab.platypus import (
 )
 from reportlab.platypus.tableofcontents import TableOfContents
 
+from . import figure as figure_module
 from . import kdpspecs, mdlite
 from .i18n import L
 from .models import BookSpec, Outline
@@ -289,6 +291,16 @@ def build_styles(spec: BookSpec) -> dict[str, ParagraphStyle]:
     return {
         "body": style("Body", firstLineIndent=0.22 * INCH),
         "body_first": style("BodyFirst", firstLineIndent=0),
+        # La didascalia è più piccola e centrata, e non è giustificata: una
+        # riga sola giustificata si apre in mezzo e sembra un errore.
+        "caption": style(
+            "Caption",
+            fontSize=size - 1.5,
+            leading=(size - 1.5) * 1.25,
+            textColor=soft,
+            alignment=TA_CENTER,
+            firstLineIndent=0,
+        ),
         "quote": style(
             "Quote",
             leftIndent=0.28 * INCH,
@@ -383,8 +395,79 @@ def build_styles(spec: BookSpec) -> dict[str, ParagraphStyle]:
 # --------------------------------------------------------------------------
 # Costruzione della storia
 # --------------------------------------------------------------------------
+class Segnaposto(Flowable):
+    """Il posto di una figura che non c'è ancora.
+
+    Occupa esattamente lo spazio che occuperà l'immagine, così il conteggio
+    pagine è già quello definitivo: quando il file arriva, il libro non cambia
+    lunghezza. Dentro c'è scritto che cosa deve mostrare, perché una prova di
+    stampa con dei rettangoli vuoti non dice a nessuno che cosa manca.
+    """
+
+    def __init__(self, larghezza: float, altezza: float, descrizione: str, font: str):
+        super().__init__()
+        self.width = larghezza
+        self.height = altezza
+        self.descrizione = descrizione
+        self.font = font
+
+    def draw(self) -> None:
+        canvas = self.canv
+        canvas.saveState()
+        canvas.setStrokeColor(colors.HexColor("#BBBBBB"))
+        canvas.setFillColor(colors.HexColor("#F4F4F4"))
+        canvas.setDash(3, 3)
+        canvas.setLineWidth(0.7)
+        canvas.rect(0, 0, self.width, self.height, stroke=1, fill=1)
+        canvas.setDash()
+        canvas.setFillColor(colors.HexColor("#777777"))
+        corpo = min(9.0, self.height * 0.14)
+        canvas.setFont(self.font, corpo)
+        canvas.drawCentredString(self.width / 2, self.height / 2 + corpo, "IMMAGINE DA PRODURRE")
+        testo = self.descrizione[:90] + ("…" if len(self.descrizione) > 90 else "")
+        canvas.setFont(self.font, corpo * 0.85)
+        canvas.drawCentredString(self.width / 2, self.height / 2 - corpo * 0.6, testo)
+        canvas.restoreState()
+
+
+def _figura_flowables(
+    block: mdlite.Figure, styles: dict, assets_dir: Path | None,
+    measure: float, frame_height: float, prepared_dir: Path | None,
+) -> list:
+    """L'immagine, o il suo segnaposto, più l'eventuale didascalia."""
+    figura = figure_module.risolvi(block, assets_dir or Path("."))
+    larghezza, altezza = figure_module.misura(figura, measure, frame_height)
+
+    if figura.esiste and prepared_dir is not None:
+        sorgente = figure_module.prepara(
+            figura, prepared_dir / f"grigio-{Path(figura.percorso).name}"
+        )
+        disegno = Image(str(sorgente), width=larghezza, height=altezza)
+    elif figura.esiste:
+        disegno = Image(str(figura.file), width=larghezza, height=altezza)
+    else:
+        disegno = Segnaposto(larghezza, altezza, block.descrizione, styles["body"].fontName)
+
+    disegno.hAlign = "CENTER"
+    pezzi: list = [Spacer(1, styles["body"].leading * 0.5), disegno]
+    if block.didascalia:
+        pezzi.append(Spacer(1, styles["body"].leading * 0.25))
+        pezzi.append(Paragraph(mdlite.inline_to_markup(block.didascalia), styles["caption"]))
+    pezzi.append(Spacer(1, styles["body"].leading * 0.5))
+    # Didascalia e immagine non si separano mai: una didascalia orfana in cima
+    # alla pagina dopo è il difetto tipografico più visibile che ci sia.
+    return [KeepTogether(pezzi)]
+
+
 def markdown_to_flowables(
-    markdown: str, styles: dict, *, first_paragraph_flush: bool = True
+    markdown: str,
+    styles: dict,
+    *,
+    first_paragraph_flush: bool = True,
+    assets_dir: Path | None = None,
+    measure: float = 0.0,
+    frame_height: float = 0.0,
+    prepared_dir: Path | None = None,
 ) -> list:
     flowables: list = []
     first_para_done = not first_paragraph_flush
@@ -427,6 +510,19 @@ def markdown_to_flowables(
             first_para_done = True
         elif isinstance(block, mdlite.Quote):
             emit(Paragraph(mdlite.inline_to_markup(block.text), styles["quote"]))
+            first_para_done = True
+        elif isinstance(block, mdlite.Figure):
+            if pending_heading is not None:
+                flowables.append(pending_heading)
+                pending_heading = None
+            flowables.extend(
+                _figura_flowables(
+                    block, styles, assets_dir,
+                    measure or styles["body"].leading * 24,
+                    frame_height or styles["body"].leading * 40,
+                    prepared_dir,
+                )
+            )
             first_para_done = True
         elif isinstance(block, mdlite.Rule):
             flowables.append(Spacer(1, styles["body"].leading * 0.4))
@@ -560,6 +656,7 @@ def typeset(
     *,
     author_bio: str = "",
     year: int | None = None,
+    assets_dir: Path | None = None,
 ) -> TypesetResult:
     """Impagina il libro. `chapters` è una lista (numero, titolo, markdown)."""
     import datetime
@@ -576,7 +673,8 @@ def typeset(
 
     output.parent.mkdir(parents=True, exist_ok=True)
     pad_to_even = False
-    result = _run_typeset(spec, outline, chapters, output, styles, geo, author_bio, year, pad_to_even)
+    result = _run_typeset(spec, outline, chapters, output, styles, geo, author_bio,
+                          year, pad_to_even, assets_dir)
 
     # Due correzioni successive: il margine interno dipende dal numero di pagine
     # (che si conosce solo dopo l'impaginazione) e il totale deve essere pari,
@@ -592,13 +690,15 @@ def typeset(
         geo = kdpspecs.page_geometry(spec.trim, result.pages)
         pad_to_even = pad_to_even or needs_padding
         result = _run_typeset(
-            spec, outline, chapters, output, styles, geo, author_bio, year, pad_to_even
+            spec, outline, chapters, output, styles, geo, author_bio, year,
+            pad_to_even, assets_dir,
         )
     return result
 
 
 def _run_typeset(
-    spec, outline, chapters, output, styles, geo, author_bio, year, pad_to_even=False
+    spec, outline, chapters, output, styles, geo, author_bio, year,
+    pad_to_even=False, assets_dir=None,
 ) -> TypesetResult:
     doc = InteriorDoc(str(output), spec, geo, styles)
     lang = spec.language
@@ -637,7 +737,16 @@ def _run_typeset(
                 spaceBefore=2, spaceAfter=14, hAlign="CENTER",
             )
         )
-        story.extend(markdown_to_flowables(markdown, styles))
+        story.extend(
+            markdown_to_flowables(
+                markdown,
+                styles,
+                assets_dir=assets_dir,
+                measure=geo.text_width,
+                frame_height=geo.text_height,
+                prepared_dir=output.parent / "immagini",
+            )
+        )
         words_by_chapter[number] = mdlite.count_words(markdown)
 
     story.extend(_back_matter(spec, styles, author_bio))

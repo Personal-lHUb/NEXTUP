@@ -19,12 +19,14 @@ from . import (
     coverbrief,
     coverdesign,
     diagnostica,
+    imagebrief,
     kdpspecs,
     manuale,
     pipeline,
     planner,
     writer,
 )
+from . import figure as figure_module
 from .llm import DEFAULT_MODEL, LLMClient, LLMConfig, api_key_present
 from .models import BookProject, BookSpec, slugify
 
@@ -412,6 +414,57 @@ def cmd_copertina(args) -> int:
     print(f"  {project.assets_dir / 'copertina.jpg'}")
     print("e rilancia `build`: viene ritagliata sulla prima, portata a 300 DPI e")
     print("misurata. Se i pixel non bastano, il controllo qualità lo dice.")
+    return 0
+
+
+def cmd_immagini(args) -> int:
+    """I prompt delle figure dell'interno. Nessuna chiamata API.
+
+    Legge il manoscritto, trova le figure dichiarate e scrive un prompt per
+    ciascuna, con lo stile comune a tutto il libro e le misure calcolate sulla
+    gabbia vera. Le figure si dichiarano nel manoscritto anche prima che le
+    immagini esistano: così il conteggio pagine tiene già il loro posto.
+    """
+    project, spec = open_project(args)
+    outline = project.load_outline()
+    capitoli = writer.load_chapters(project, outline)
+    if not capitoli:
+        raise SystemExit(
+            "Nessun capitolo scritto: le figure si dichiarano nel manoscritto, "
+            "e il manoscritto non c'è ancora."
+        )
+
+    figure_trovate: list = []
+    for numero, _titolo, markdown in capitoli:
+        figure_trovate.extend(
+            figure_module.figure_del_manoscritto(markdown, project.assets_dir, numero)
+        )
+
+    if not figure_trovate:
+        print(f"«{spec.title}» non dichiara nessuna figura.")
+        print("\nPer aggiungerne una, scrivi nel manoscritto una riga così:")
+        print("  ![che cosa deve mostrare l'immagine](immagini/03-nome.jpg)")
+        print("  (didascalia facoltativa, fra parentesi, sulla riga dopo)")
+        print("\nIl libro si impagina anche senza il file: al suo posto resta un")
+        print("segnaposto della misura giusta, e il conteggio pagine è già definitivo.")
+        return 0
+
+    project.ensure_dirs()
+    output = project.build_dir / "immagini-brief.md"
+    if output.exists():
+        save_backup(project, args, "prompt delle immagini precedenti", force=True)
+    output.write_text(imagebrief.brief(spec, figure_trovate), encoding="utf-8")
+    save_backup(project, args, "prompt delle immagini")
+
+    mancanti = [f for f in figure_trovate if not f.esiste]
+    print(f"Prompt delle immagini: {output}")
+    print(f"  {len(figure_trovate)} figure dichiarate · {len(mancanti)} da produrre")
+    for figura in figure_trovate:
+        segno = " " if figura.esiste else "·"
+        print(f"    {segno} cap. {figura.capitolo:>2}  {figura.percorso}")
+    if mancanti:
+        print(f"\nSalva le immagini in {figure_module.cartella(project.assets_dir)}")
+        print("poi rilancia `build` e `qa`.")
     return 0
 
 
@@ -1005,6 +1058,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument("slug")
     p.set_defaults(func=cmd_copertina)
+
+    p = sub.add_parser(
+        "immagini",
+        help="prompt delle figure dell'interno, uno per figura (nessuna chiamata API)",
+    )
+    p.add_argument("slug")
+    p.set_defaults(func=cmd_immagini)
 
     p = sub.add_parser(
         "manuale",

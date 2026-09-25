@@ -40,12 +40,30 @@ class Rule:
     pass
 
 
-Block = Heading | Paragraph | BulletList | Quote | Rule
+@dataclass
+class Figure:
+    """Un'immagine nel testo, con quello che deve mostrare.
+
+    `descrizione` non è una didascalia: è il **committente** dell'immagine.
+    È il testo che `immagini` trasforma in prompt, ed è quello che resta nel
+    manoscritto quando il file non c'è ancora — così il libro si impagina
+    comunque e il conteggio pagine tiene già il posto della figura.
+
+    La didascalia, se serve, si scrive nella riga dopo, fra parentesi tonde.
+    """
+
+    descrizione: str
+    percorso: str
+    didascalia: str = ""
+
+
+Block = Heading | Paragraph | BulletList | Quote | Rule | Figure
 
 _BULLET_RE = re.compile(r"^\s*[-*+]\s+(.*)$")
 _ORDERED_RE = re.compile(r"^\s*\d+[.)]\s+(.*)$")
 _HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
 _RULE_RE = re.compile(r"^\s*([-*_])\1{2,}\s*$")
+_FIGURE_RE = re.compile(r"^\s*!\[(?P<descrizione>[^\]]*)\]\((?P<percorso>[^)]+)\)\s*$")
 
 
 def parse(markdown: str) -> list[Block]:
@@ -89,6 +107,26 @@ def parse(markdown: str) -> list[Block]:
             flush_all()
             blocks.append(Rule())
             continue
+
+        figura = _FIGURE_RE.match(line)
+        if figura:
+            flush_all()
+            blocks.append(
+                Figure(
+                    descrizione=figura.group("descrizione").strip(),
+                    percorso=figura.group("percorso").strip(),
+                )
+            )
+            continue
+
+        # La didascalia sta fra parentesi sulla riga subito dopo la figura.
+        # Attaccarla lì invece che dentro `![...]` tiene separate due cose che
+        # servono a due mestieri: quello che l'immagine deve mostrare (il
+        # prompt) e quello che il lettore legge sotto (la didascalia).
+        if line.strip().startswith("(") and line.strip().endswith(")") and blocks:
+            if isinstance(blocks[-1], Figure) and not paragraph and not blocks[-1].didascalia:
+                blocks[-1].didascalia = line.strip()[1:-1].strip()
+                continue
 
         heading = _HEADING_RE.match(line)
         if heading:

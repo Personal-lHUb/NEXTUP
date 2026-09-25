@@ -314,3 +314,70 @@ PDF di copertina delle dimensioni giuste.
 
 `build --guides` disegna rifilo, dorso e area del codice a barre. **Il file con
 le guide non va caricato su KDP.**
+
+## Le figure dentro il libro
+
+La copertina è una sola e deve vendere. Le figure dell'interno sono molte e
+devono spiegare, in bianco e nero, accanto a un testo che le ha già annunciate.
+Mestiere diverso, modulo diverso: `kdpfactory/figure.py` e
+`kdpfactory/imagebrief.py`.
+
+### Si dichiarano prima di esistere
+
+Nel manoscritto:
+
+```markdown
+![che cosa deve mostrare l'immagine](immagini/03-nome.jpg)
+(didascalia facoltativa, fra parentesi, sulla riga dopo)
+```
+
+Il testo fra `![` e `]` non è una didascalia: è il **committente** dell'immagine,
+ed è quello che `immagini` trasforma in prompt. La didascalia, quella che legge
+il cliente, sta nella riga dopo fra parentesi — tenerle separate serve perché
+fanno due mestieri.
+
+Finché il file non c'è, l'impaginazione disegna un **segnaposto della misura
+esatta**, con dentro scritto che cosa manca. Il motivo non è la cortesia: è che
+così il conteggio pagine è già quello definitivo, e il libro non cambia
+lunghezza il giorno in cui le immagini arrivano. Una prova di stampa con dei
+rettangoli tratteggiati dice che cosa manca; una senza immagini non dice niente
+e il libro si allunga dopo.
+
+### I prompt
+
+```bash
+python3 -m kdpfactory immagini <slug>
+```
+
+Un prompt per figura in `build/immagini-brief.md`, in prosa descrittiva — la
+forma che i modelli conversazionali eseguono meglio e l'unica che regge le
+istruzioni negative complesse — più un blocco di parametri in coda per gli
+strumenti che li vogliono, così il brief resta valido cambiando strumento.
+
+Tre vincoli che la copertina non ha:
+
+| vincolo | perché |
+|---|---|
+| **solo scala di grigi** | l'interno si stampa in bianco e nero: due elementi distinti solo dal colore, sulla pagina, sono la stessa cosa |
+| **nessun testo nell'immagine** | le etichette le compone la tipografia, col font del libro e correggibili; un'etichetta generata è pixel, e col refuso si rifà l'immagine |
+| **stile comune a tutte** | venti figure da venti prompt scollegati sembrano prese da venti libri: il brief porta una riga di stile identica per tutto il libro |
+
+Lo stile di base segue la categoria di prodotto: line art da manuale per il
+medium-content (deve reggere la fotocopia), illustrazione editoriale in grigio
+per il full-content.
+
+### Che cosa viene verificato
+
+| controllo | gravità |
+|---|---|
+| l'immagine dichiarata non c'è | **errore**: il libro si impagina, ma non si carica |
+| sotto i 300 DPI **alla misura stampata** | **errore**: 900 px sono magnifici a 3 pollici e inaccettabili a 5 |
+| immagine a colori | avviso: viene convertita, ma due colori possono diventare lo stesso grigio |
+
+La conversione in scala di grigi la fa `build`, scrivendo un file nuovo in
+`build/immagini/`: l'originale è quello che è tornato dallo strumento grafico e
+si rigenera solo rifacendo il prompt.
+
+Una figura non supera mai il 58% dell'altezza della gabbia. Oltre, non è una
+figura ma una tavola: si porta dietro il testo che le stava intorno e lascia un
+buco dove stava.

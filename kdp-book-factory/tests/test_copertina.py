@@ -9,7 +9,17 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from kdpfactory import backup, cover, coverart, coverbrief, coverdesign, kdpspecs
+from kdpfactory import (
+    backup,
+    cover,
+    coverart,
+    coverbrief,
+    coverdesign,
+    figure,
+    imagebrief,
+    kdpspecs,
+    mdlite,
+)
 from kdpfactory.agents import AgentContext, get_agent
 from kdpfactory.coverdesign import (
     CoverCopy,
@@ -722,8 +732,12 @@ class TestBriefDiCopertina(unittest.TestCase):
         self.assertIn("Do not print any figure on the cover", full)
 
     def test_dice_in_che_lingua_va_stampato_il_testo(self):
-        self.assertIn("Written in Italian", self.brief(language="it"))
-        self.assertIn("Written in English", self.brief(language="en"))
+        """Il testo lo compone il motore, ma il brief deve dire in che lingua:
+        serve a chi illustra per capire che cosa l'immagine deve reggere."""
+        italiano = " ".join(self.brief(language="it").split())
+        inglese = " ".join(self.brief(language="en").split())
+        self.assertIn("written in Italian", italiano)
+        self.assertIn("written in English", inglese)
 
     def test_porta_le_misure_di_stampa_del_libro(self):
         testo = self.brief(trim="6x9", paper="cream", pages=200)
@@ -799,3 +813,142 @@ class TestControlliDiProduzione(unittest.TestCase):
         mancante = Path(self.tmp.name) / "non-c-e.pdf"
         self.assertEqual(len(coverdesign.audit_production(
             mancante, trim="6x9", pages=100, paper="cream")), 1)
+
+
+class TestFigureDellInterno(unittest.TestCase):
+    """Le immagini dentro il libro: prima non esistevano affatto.
+
+    Il manoscritto le dichiara, l'impaginazione le mette in pagina, e finché il
+    file non c'è resta un segnaposto della misura esatta — così il conteggio
+    pagine è già quello definitivo e non cambia quando le immagini arrivano.
+    """
+
+    TESTO = (
+        "# Il capitolo\n\nUn capoverso prima.\n\n"
+        "![Una poltrona reclinabile vuota](immagini/01-poltrona.jpg)\n"
+        "(La stanza, un'ora prima.)\n\n"
+        "Un capoverso dopo.\n"
+    )
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = Path(self.tmp.name)
+        self.assets = self.root / "assets"
+        (self.assets / "immagini").mkdir(parents=True)
+
+    def scrivi_immagine(self, nome="01-poltrona.jpg", px=2000, modo="RGB"):
+        from PIL import Image
+
+        percorso = self.assets / "immagini" / nome
+        Image.new(modo, (px, int(px * 0.75)), 128).save(percorso)
+        return percorso
+
+    # --- il manoscritto ---------------------------------------------------
+    def test_la_figura_si_dichiara_nel_manoscritto(self):
+        blocchi = mdlite.parse(self.TESTO)
+        figure_trovate = [b for b in blocchi if isinstance(b, mdlite.Figure)]
+        self.assertEqual(len(figure_trovate), 1)
+        self.assertEqual(figure_trovate[0].percorso, "immagini/01-poltrona.jpg")
+        self.assertEqual(figure_trovate[0].didascalia, "La stanza, un'ora prima.")
+
+    def test_una_riga_fra_parentesi_senza_figura_resta_un_capoverso(self):
+        """La didascalia si attacca solo a una figura, non a qualunque parentesi."""
+        blocchi = mdlite.parse("Un capoverso.\n\n(Una frase fra parentesi.)\n")
+        self.assertTrue(all(isinstance(b, mdlite.Paragraph) for b in blocchi))
+
+    # --- i controlli ------------------------------------------------------
+    def test_un_immagine_che_manca_e_un_errore(self):
+        figure_trovate = figure.figure_del_manoscritto(self.TESTO, self.assets, capitolo=2)
+        problemi = figure.problemi(figure_trovate[0], 396.0)
+        self.assertTrue(any("non c'è ancora" in p for p in problemi))
+
+    def test_i_300_dpi_si_contano_sulla_misura_stampata(self):
+        """Un'immagine magnifica a 3 pollici è inaccettabile a 5."""
+        self.scrivi_immagine(px=1200)
+        trovata = figure.figure_del_manoscritto(self.TESTO, self.assets, capitolo=2)[0]
+        self.assertGreaterEqual(trovata.dpi_a(3 * kdpspecs.INCH), figure.MIN_DPI)
+        self.assertLess(trovata.dpi_a(5 * kdpspecs.INCH), figure.MIN_DPI)
+        problemi = figure.problemi(trovata, 5 * kdpspecs.INCH)
+        self.assertTrue(any("DPI" in p for p in problemi))
+
+    def test_un_immagine_a_colori_viene_segnalata(self):
+        self.scrivi_immagine(px=3000, modo="RGB")
+        trovata = figure.figure_del_manoscritto(self.TESTO, self.assets, capitolo=2)[0]
+        self.assertTrue(trovata.a_colori)
+        self.assertTrue(any("bianco e nero" in p for p in figure.problemi(trovata, 396.0)))
+
+    def test_un_immagine_gia_in_grigio_non_produce_rilievi(self):
+        self.scrivi_immagine(px=3000, modo="L")
+        trovata = figure.figure_del_manoscritto(self.TESTO, self.assets, capitolo=2)[0]
+        self.assertEqual(figure.problemi(trovata, 396.0), [])
+
+    def test_la_figura_non_supera_mai_mezza_gabbia(self):
+        """Una figura alta quanto la pagina si porta dietro il testo."""
+        alta = figure.Figura(descrizione="x", percorso="y.jpg",
+                             larghezza_px=1000, altezza_px=4000)
+        _, altezza = figure.misura(alta, 396.0, 600.0)
+        self.assertLessEqual(altezza, 600.0 * figure.ALTEZZA_MASSIMA + 0.01)
+
+    # --- l'impaginazione --------------------------------------------------
+    def demo(self):
+        from kdpfactory.models import ChapterPlan, Outline
+
+        spec = demo_spec(slug="figure", target_pages=60)
+        outline = Outline(title=spec.title, chapters=[ChapterPlan(number=1, title="Il capitolo")])
+        return spec, outline
+
+    def test_il_segnaposto_occupa_lo_stesso_spazio_dell_immagine(self):
+        """Il conteggio pagine non deve cambiare quando l'immagine arriva."""
+        from kdpfactory import typeset
+
+        spec, outline = self.demo()
+        senza = typeset.typeset(spec, outline, [(1, "Il capitolo", self.TESTO)],
+                                self.root / "build" / "a.pdf", assets_dir=self.assets)
+        self.scrivi_immagine(px=3000)
+        con = typeset.typeset(spec, outline, [(1, "Il capitolo", self.TESTO)],
+                              self.root / "build" / "b.pdf", assets_dir=self.assets)
+        self.assertEqual(senza.pages, con.pages)
+
+    def test_l_immagine_a_colori_viene_convertita_in_grigio(self):
+        from PIL import Image
+
+        from kdpfactory import typeset
+
+        self.scrivi_immagine(px=3000, modo="RGB")
+        spec, outline = self.demo()
+        typeset.typeset(spec, outline, [(1, "Il capitolo", self.TESTO)],
+                        self.root / "build" / "c.pdf", assets_dir=self.assets)
+        convertite = list((self.root / "build" / "immagini").glob("grigio-*"))
+        self.assertEqual(len(convertite), 1)
+        with Image.open(convertite[0]) as immagine:
+            self.assertEqual(immagine.mode, "L")
+
+    # --- i prompt ---------------------------------------------------------
+    def test_il_prompt_vieta_il_colore_e_il_testo(self):
+        figure_trovate = figure.figure_del_manoscritto(self.TESTO, self.assets, capitolo=2)
+        testo = imagebrief.brief(demo_spec(), figure_trovate)
+        self.assertIn("Greyscale only", testo)
+        self.assertIn("No text inside the image", testo)
+        self.assertIn("300 DPI", testo)
+        self.assertIn("immagini/01-poltrona.jpg", testo)
+
+    def test_il_prompt_porta_le_misure_della_gabbia_vera(self):
+        figure_trovate = figure.figure_del_manoscritto(self.TESTO, self.assets, capitolo=2)
+        testo = imagebrief.brief(demo_spec(trim="8.5x11"), figure_trovate)
+        self.assertIn("8.5x11", testo)
+
+    def test_lo_stile_segue_la_categoria_di_prodotto(self):
+        figure_trovate = figure.figure_del_manoscritto(self.TESTO, self.assets, capitolo=2)
+        self.assertIn("line art", imagebrief.brief(demo_spec(content_type="medium"), figure_trovate))
+        self.assertIn("editorial illustration",
+                      imagebrief.brief(demo_spec(content_type="full"), figure_trovate))
+
+
+class TestIlGeneratoreNonScriveIlTesto(unittest.TestCase):
+    def test_il_brief_di_copertina_vieta_il_testo_nell_immagine(self):
+        """Il motore disegna il testo in vettoriale: è ciò che lo rende misurabile."""
+        testo = " ".join(coverbrief.brief(demo_spec(), pages=140).split())
+        self.assertIn("Deliver the illustration only", testo)
+        self.assertIn("do not render any of it", testo)
+        self.assertIn("No text, no lettering, no title, no author name", testo)
