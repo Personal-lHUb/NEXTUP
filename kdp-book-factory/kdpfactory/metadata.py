@@ -44,6 +44,10 @@ def escape(text: str) -> str:
     return _escape(str(text), quote=False)
 
 
+#: I tag che la descrizione KDP accetta, e i soli che questo modulo scrive.
+KDP_DESCRIPTION_TAGS = frozenset({"p", "b", "i", "em", "u", "br", "ul", "ol", "li", "h4", "h5", "h6"})
+
+
 def build_description_html(meta: dict, language: str = "it") -> str:
     """Descrizione nel sottoinsieme HTML accettato dalla scheda prodotto KDP.
 
@@ -55,7 +59,9 @@ def build_description_html(meta: dict, language: str = "it") -> str:
     parts: list[str] = []
     paragraphs = meta.get("description_paragraphs") or []
     if paragraphs:
-        parts.append(f"<h2>{escape(paragraphs[0])}</h2>")
+        # L'attacco in grassetto, non in un titolo: KDP non accetta <h1>-<h3>
+        # e la scheda li mostra come testo, o rifiuta la descrizione.
+        parts.append(f"<p><b>{escape(paragraphs[0])}</b></p>")
         for paragraph in paragraphs[1:]:
             parts.append(f"<p>{escape(paragraph)}</p>")
     bullets = meta.get("bullets") or []

@@ -31,6 +31,15 @@ def normalize_outline(spec: BookSpec, outline: Outline, budget: planner.PageBudg
     API o incollata a mano (`manuale.py`), e le due strade devono produrre lo
     stesso `outline.json` — non due normalizzazioni che col tempo divergono.
     """
+    # I confini delle parti sono scritti con i numeri di chi ha fatto la
+    # scaletta: si ricordano i capitoli, non i numeri, e dopo la rinumerazione
+    # ogni parte riparte dallo stesso capitolo di prima.
+    apre_parte: dict[int, list] = {}
+    for parte in outline.parts:
+        capitolo = next((c for c in outline.chapters if c.number == parte.first_chapter), None)
+        if capitolo is not None:
+            apre_parte.setdefault(id(capitolo), []).append(parte)
+
     # Il modello a volte consegna un numero di capitoli diverso: si rinumera e
     # si aggiungono introduzione e conclusione come sezioni a sé.
     body = [c for c in outline.chapters if c.role not in {"intro", "conclusion"}]
@@ -68,6 +77,8 @@ def normalize_outline(spec: BookSpec, outline: Outline, budget: planner.PageBudg
         )
     for index, chapter in enumerate(sequence, start=1):
         chapter.number = index
+        for parte in apre_parte.get(id(chapter), []):
+            parte.first_chapter = index
 
     outline.chapters = sequence
     outline.target_words_total = budget.total_words

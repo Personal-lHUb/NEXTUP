@@ -126,6 +126,7 @@ Vincoli:
 - {structure_hint}
 - I titoli dei capitoli devono essere specifici e invoglianti, mai generici ("Introduzione al metodo" no, "Perché la lista delle cose da fare ti sta rallentando" sì).
 - Nessun capitolo deve sovrapporsi a un altro: `beats` diversi, angolazioni diverse.
+- Oltre i 20 capitoli, raggruppali in 3-6 parti con un titolo ciascuna (`parts`: il titolo e il numero del primo capitolo della parte). Sotto i 20, lascia `parts` vuoto.
 - Scrivi tutto in {language}.
 
 Rispondi con questo JSON:
@@ -134,6 +135,9 @@ Rispondi con questo JSON:
   "subtitle": "sottotitolo orientato al beneficio, max 120 caratteri",
   "thesis": "l'idea portante del libro in due frasi",
   "back_cover": "testo di quarta di copertina: una frase-gancio, poi 2 paragrafi brevi",
+  "parts": [
+    {{"title": "titolo della parte", "first_chapter": 1}}
+  ],
   "chapters": [
     {{
       "number": 1,

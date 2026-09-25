@@ -6,6 +6,7 @@ LABELS: dict[str, dict[str, str]] = {
     "it": {
         "toc": "Indice",
         "chapter": "Capitolo",
+        "part": "Parte",
         "introduction": "Introduzione",
         "conclusion": "Conclusione",
         "about_author": "L'autore",
@@ -49,6 +50,7 @@ LABELS: dict[str, dict[str, str]] = {
     "en": {
         "toc": "Contents",
         "chapter": "Chapter",
+        "part": "Part",
         "introduction": "Introduction",
         "conclusion": "Conclusion",
         "about_author": "About the Author",
@@ -92,3 +94,19 @@ def L(language: str, key: str) -> str:
     """Etichetta nella lingua richiesta, con fallback sull'italiano."""
     table = LABELS.get(language, LABELS["it"])
     return table.get(key, LABELS["it"].get(key, key))
+
+
+def numero_romano(numero: int) -> str:
+    """I, II, III… per le parti: un numero che non si confonde con i capitoli."""
+    valori = ((50, "L"), (40, "XL"), (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I"))
+    romano = ""
+    for valore, cifra in valori:
+        while numero >= valore:
+            romano += cifra
+            numero -= valore
+    return romano
+
+
+def part_label(language: str, indice: int) -> str:
+    """«Part II», «Parte II»: l'etichetta sopra il titolo di una parte."""
+    return f"{L(language, 'part')} {numero_romano(indice)}"

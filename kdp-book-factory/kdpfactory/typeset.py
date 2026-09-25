@@ -35,7 +35,7 @@ from reportlab.platypus.tableofcontents import TableOfContents
 
 from . import figure as figure_module
 from . import kdpspecs, mdlite
-from .i18n import L
+from .i18n import L, part_label
 from .models import BookSpec, Outline
 from .typography import enable_hyphenation, register_family, set_default_canvas_font
 
@@ -83,6 +83,13 @@ class DocAction(ActionFlowable):
         elif self.action == "chapter_open":
             doc.current_chapter = self.value or ""
             doc.plain_pages.add(doc.page)
+        elif self.action == "part_open":
+            doc.in_parts = True
+            doc.current_part_label = self.value or ""
+            doc.current_chapter = ""
+            doc.plain_pages.add(doc.page)
+        elif self.action == "parts_end":
+            doc.in_parts = False
         elif self.action == "front_matter_page":
             doc.plain_pages.add(doc.page)
 
@@ -193,6 +200,9 @@ class InteriorDoc(BaseDocTemplate):
         self.current_chapter = ""
         self.page_has_content = False
         self.plain_pages: set[int] = set()
+        # Con le parti, i capitoli scendono di un livello nell'indice.
+        self.in_parts = False
+        self.current_part_label = ""
 
     def handle_documentBegin(self):  # noqa: D102
         self._reset_state()
@@ -208,12 +218,16 @@ class InteriorDoc(BaseDocTemplate):
             self.page_has_content = True
         if isinstance(flowable, Paragraph):
             style_name = getattr(flowable.style, "name", "")
-            if style_name == "ChapterTitle":
+            livello = 1 if self.in_parts else 0
+            if style_name == "PartTitle":
+                voce = f"{self.current_part_label} — {flowable.getPlainText()}"
+                self.notify("TOCEntry", (0, voce, self.page))
+            elif style_name == "ChapterTitle":
                 text = flowable.getPlainText()
-                self.notify("TOCEntry", (0, text, self.page))
+                self.notify("TOCEntry", (livello, text, self.page))
                 self.chapter_pages[text] = self.page
             elif style_name == "Heading2" and self.spec.profondita_indice >= 2:
-                self.notify("TOCEntry", (1, flowable.getPlainText(), self.page))
+                self.notify("TOCEntry", (livello + 1, flowable.getPlainText(), self.page))
 
     # -- testatine e folio ------------------------------------------------
     def _decorate(self, canvas, doc):
@@ -338,6 +352,15 @@ def build_styles(spec: BookSpec) -> dict[str, ParagraphStyle]:
             spaceAfter=lead * 0.3,
             alignment=TA_LEFT,
         ),
+        "part_title": style(
+            "PartTitle",
+            fontName=display_font,
+            fontSize=size + 11,
+            leading=(size + 11) * 1.25,
+            alignment=TA_CENTER,
+            spaceBefore=0,
+            spaceAfter=lead * 0.8,
+        ),
         "chapter_title": style(
             "ChapterTitle",
             fontName=display_font,
@@ -374,6 +397,15 @@ def build_styles(spec: BookSpec) -> dict[str, ParagraphStyle]:
             leading=(size + 7) * 1.2,
             alignment=TA_CENTER,
             spaceAfter=lead * 1.5,
+        ),
+        "toc_part": style(
+            "TocPart",
+            fontName=display_font,
+            alignment=TA_LEFT,
+            fontSize=size,
+            leading=lead * 1.1,
+            spaceBefore=lead * 0.7,
+            spaceAfter=lead * 0.15,
         ),
         "toc1": style("Toc1", alignment=TA_LEFT, fontSize=size, leading=lead * 1.1),
         "toc2": style(
@@ -593,6 +625,8 @@ def _front_matter(spec: BookSpec, outline: Outline, styles: dict, year: int) -> 
     # Indice
     toc = TableOfContents()
     toc.levelStyles = [styles["toc1"], styles["toc2"]]
+    if outline.parts:
+        toc.levelStyles = [styles["toc_part"], styles["toc1"], styles["toc2"]]
     toc.dotsMinLevel = 0
     # L'indice è costruito con una tabella e le celle di ReportLab nascono con
     # Helvetica: va forzato il font incorporato, altrimenti il PDF dichiara un
@@ -612,7 +646,9 @@ def _front_matter(spec: BookSpec, outline: Outline, styles: dict, year: int) -> 
 
 def _back_matter(spec: BookSpec, styles: dict, author_bio: str = "") -> list:
     lang = spec.language
-    story: list = []
+    # Le pagine finali non appartengono all'ultima parte: nell'indice tornano
+    # al primo livello.
+    story: list = [DocAction("parts_end")]
     if author_bio:
         story.append(StartOnRecto())
         story.append(DocAction("chapter_open", L(lang, "about_author")))
@@ -628,6 +664,27 @@ def _back_matter(spec: BookSpec, styles: dict, author_bio: str = "") -> list:
     story.append(Spacer(1, 0.25 * INCH))
     story.append(Paragraph(L(lang, "review_text"), styles["body_first"]))
     return story
+
+
+def _part_page(apertura, styles: dict, lang: str) -> list:
+    """La pagina che apre una parte: etichetta, titolo, filetto. Niente folio."""
+    indice, parte = apertura
+    etichetta = part_label(lang, indice)
+    return [
+        DocAction("part_open", etichetta),
+        Spacer(1, 2.3 * INCH),
+        ChapterNumber(
+            etichetta,
+            styles["chapter_number"].fontName,
+            styles["chapter_number"].fontSize + 1,
+            colors.HexColor("#777777"),
+        ),
+        Paragraph(mdlite.inline_to_markup(parte.title), styles["part_title"]),
+        HRFlowable(
+            width="14%", thickness=0.7, color=colors.HexColor("#999999"),
+            spaceBefore=2, spaceAfter=0, hAlign="CENTER",
+        ),
+    ]
 
 
 @dataclass
@@ -713,7 +770,12 @@ def _run_typeset(
     for number, title, markdown in chapters:
         plan = next((c for c in outline.chapters if c.number == number), None)
         role = plan.role if plan else "chapter"
-        if chapter_index:
+        apertura = outline.part_opening(number)
+        if apertura:
+            if chapter_index:
+                story.append(StartOnRecto())
+            story.extend(_part_page(apertura, styles, lang))
+        if chapter_index or apertura:
             story.append(StartOnRecto())
         chapter_index += 1
 

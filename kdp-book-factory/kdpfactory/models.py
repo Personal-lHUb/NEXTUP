@@ -201,6 +201,26 @@ class ChapterPlan:
 
 
 @dataclass
+class PartPlan:
+    """Una parte del libro: un titolo che raggruppa capitoli consecutivi.
+
+    Si dichiara solo il primo capitolo: la parte arriva fino a quello prima
+    della successiva. Così una parte non può saltare un capitolo né
+    sovrapporsi a un'altra, e spostare un confine è cambiare un numero.
+    """
+
+    title: str
+    first_chapter: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> PartPlan:
+        return cls(title=str(data.get("title", "")), first_chapter=int(data.get("first_chapter", 0) or 0))
+
+
+@dataclass
 class Outline:
     """Scaletta completa del libro."""
 
@@ -210,16 +230,22 @@ class Outline:
     back_cover: str = ""                              # testo di quarta di copertina
     chapters: list[ChapterPlan] = field(default_factory=list)
     target_words_total: int = 0
+    #: facoltative: un indice di trenta righe tutte uguali non si legge
+    #: nell'anteprima, cinque parti con i loro capitoli sì
+    parts: list[PartPlan] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        data: dict[str, Any] = {
             "title": self.title,
             "subtitle": self.subtitle,
             "thesis": self.thesis,
             "back_cover": self.back_cover,
             "target_words_total": self.target_words_total,
-            "chapters": [c.to_dict() for c in self.chapters],
         }
+        if self.parts:
+            data["parts"] = [p.to_dict() for p in self.parts]
+        data["chapters"] = [c.to_dict() for c in self.chapters]
+        return data
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> Outline:
@@ -230,7 +256,15 @@ class Outline:
             back_cover=data.get("back_cover", ""),
             target_words_total=int(data.get("target_words_total", 0) or 0),
             chapters=[ChapterPlan.from_dict(c) for c in data.get("chapters", [])],
+            parts=[PartPlan.from_dict(p) for p in data.get("parts") or []],
         )
+
+    def part_opening(self, number: int) -> tuple[int, PartPlan] | None:
+        """La parte che si apre con il capitolo `number`, numerata da 1."""
+        for indice, parte in enumerate(sorted(self.parts, key=lambda p: p.first_chapter), start=1):
+            if parte.first_chapter == number:
+                return indice, parte
+        return None
 
     @classmethod
     def load(cls, path: Path) -> Outline:

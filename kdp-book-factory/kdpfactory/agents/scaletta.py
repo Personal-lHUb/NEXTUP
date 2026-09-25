@@ -649,6 +649,100 @@ def _controlla_titolo(outline: Outline, spec: BookSpec) -> list[AgentFinding]:
     return rilievi
 
 
+#: Oltre questo numero di capitoli, un indice senza parti è una colonna di
+#: righe tutte uguali: nell'anteprima non si capisce dove va il libro.
+PARTI_OLTRE_CAPITOLI = 20
+PARTE_MIN_CAPITOLI = 2
+
+
+def _controlla_parti(outline: Outline) -> list[AgentFinding]:
+    """Le parti coprono il libro senza buchi, e un indice lungo ne ha."""
+    numeri = [c.number for c in outline.chapters]
+    if not outline.parts:
+        contenuto = [c for c in outline.chapters if c.role == "chapter"]
+        if len(contenuto) <= PARTI_OLTRE_CAPITOLI:
+            return []
+        return [
+            _segnala(
+                "minore",
+                "indice senza parti",
+                f"{len(contenuto)} capitoli senza nessuna parte: nell'anteprima l'indice è "
+                "una colonna di titoli e il cliente non vede come è costruito il libro.",
+                suggestion=(
+                    "Raggruppa i capitoli in 3-6 parti: in `parts`, per ciascuna, il titolo e "
+                    "il numero del primo capitolo."
+                ),
+            )
+        ]
+
+    rilievi: list[AgentFinding] = []
+    inizi = [parte.first_chapter for parte in outline.parts]
+    for parte in outline.parts:
+        if parte.first_chapter not in numeri:
+            rilievi.append(
+                _segnala(
+                    "bloccante",
+                    "parte senza capitolo",
+                    f"La parte «{parte.title}» si apre con il capitolo {parte.first_chapter}, "
+                    "che nella scaletta non c'è.",
+                    quote=parte.title,
+                    suggestion="`first_chapter` deve essere il numero di un capitolo della scaletta.",
+                )
+            )
+        if not " ".join(_piatto(parte.title).split()):
+            rilievi.append(
+                _segnala(
+                    "bloccante",
+                    "parte senza titolo",
+                    f"La parte che si apre al capitolo {parte.first_chapter} non ha titolo.",
+                    chapter=parte.first_chapter,
+                )
+            )
+    if inizi != sorted(set(inizi)):
+        rilievi.append(
+            _segnala(
+                "bloccante",
+                "parti in disordine",
+                "Le parti non sono in ordine, o due partono dallo stesso capitolo.",
+                suggestion="Elenca le parti nell'ordine del libro, ciascuna da un capitolo diverso.",
+            )
+        )
+        return rilievi
+
+    prima = min(inizi)
+    scoperti = [c for c in outline.chapters if c.number < prima and c.role == "chapter"]
+    if scoperti:
+        rilievi.append(
+            _segnala(
+                "importante",
+                "capitoli fuori dalle parti",
+                f"{len(scoperti)} capitoli vengono prima della prima parte: nell'indice restano "
+                "sciolti, sopra il primo titolo di parte.",
+                chapter=scoperti[0].number,
+                suggestion=(
+                    "Fai partire la prima parte dal primo capitolo "
+                    "(un'introduzione può restare fuori)."
+                ),
+            )
+        )
+    confini = inizi + [max(numeri) + 1]
+    for parte, inizio, fine in zip(outline.parts, confini, confini[1:], strict=False):
+        dentro = [n for n in numeri if inizio <= n < fine]
+        if len(dentro) < PARTE_MIN_CAPITOLI:
+            rilievi.append(
+                _segnala(
+                    "minore",
+                    "parte di un solo capitolo",
+                    f"La parte «{parte.title}» contiene {len(dentro)} capitolo: una pagina di "
+                    "parte per un capitolo solo è un divisorio, non una parte.",
+                    chapter=inizio,
+                    quote=parte.title,
+                    suggestion="Uniscila alla parte vicina, o sposta il confine.",
+                )
+            )
+    return rilievi
+
+
 # --------------------------------------------------------------------------
 # L'esame
 # --------------------------------------------------------------------------
@@ -667,6 +761,7 @@ def esamina(
     rilievi += _controlla_divieti(outline)
     rilievi += _controlla_sovrapposizioni(outline)
     rilievi += _controlla_titoli(outline)
+    rilievi += _controlla_parti(outline)
     rilievi += _controlla_programma(outline)
     rilievi += _controlla_date(outline)
     rilievi += _controlla_titolo(outline, spec)
@@ -703,7 +798,9 @@ Se ti viene chiesto di esaminare una scaletta a mano, applica le stesse
 regole: ogni argomento di `brief.md` deve avere un capitolo, nessun capitolo
 deve ripetere un altro, nessun titolo deve essere un segnaposto, nessuna
 promessa di risultato, nessuna data presentata come fatto accertato, e ogni
-cifra dichiarata dev'essere contata sul libro."""
+cifra dichiarata dev'essere contata sul libro. Oltre i venti capitoli l'indice
+vuole le parti (`parts`: titolo e primo capitolo di ciascuna), e ogni parte
+deve contenere almeno due capitoli."""
 
     def system(self, ctx: AgentContext) -> list[str]:  # pragma: no cover - non usato
         return []

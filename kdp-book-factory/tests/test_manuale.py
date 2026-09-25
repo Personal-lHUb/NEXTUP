@@ -335,3 +335,19 @@ class TestSenzaCredenziale(unittest.TestCase):
         meta = {"description_paragraphs": ["Gancio."], "bullets": ["uno"]}
         self.assertIn("What you will find", metadata.build_description_html(meta, "en"))
         self.assertIn("Cosa troverai", metadata.build_description_html(meta, "it"))
+
+    def test_la_descrizione_usa_solo_i_tag_che_kdp_accetta(self):
+        """Un <h2> nella descrizione KDP si vede come testo o fa rifiutare la scheda."""
+        import re
+
+        from kdpfactory import metadata
+
+        meta = {
+            "description_paragraphs": ["Gancio.", "Secondo."],
+            "bullets": ["uno", "due"],
+            "closing": "Chiusura.",
+        }
+        html = metadata.build_description_html(meta, "en")
+        tag = set(re.findall(r"</?([a-z0-9]+)", html))
+        self.assertTrue(tag)
+        self.assertLessEqual(tag, metadata.KDP_DESCRIPTION_TAGS)

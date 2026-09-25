@@ -13,7 +13,7 @@ Tutto quello che si cambia senza toccare la logica della pipeline.
 | `body_font` | `serif` o `sans` per il testo corrente (i titoli usano l'altra famiglia) |
 | `body_font_size` | corpo in punti: 10,5-11,5 per la narrativa e la saggistica; 12 per manuali e libri per over 60 |
 | `leading` | interlinea in punti: 1,35-1,45 volte il corpo |
-| `toc_depth` | `1` = solo capitoli nell'indice, `2` = anche le sezioni |
+| `toc_depth` | `1` = solo capitoli nell'indice, `2` = anche le sezioni; `null` = lo decide la categoria (full → 1, medium → 2) |
 | `include_exercises` | aggiunge a ogni capitolo la sezione `## In pratica` |
 | `cover_theme` | palette: `auto`, `notturno`, `allarme`, `inchiostro`, `bosco`, `terracotta`, `indaco` |
 | `cover_art` | illustrazione della prima: `auto` (scelta dal contenuto), `nessuna`, `treno`, `lente`, `elenco`, `orologio`, `scala`, `porta` |

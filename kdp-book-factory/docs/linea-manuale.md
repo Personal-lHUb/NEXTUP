@@ -102,6 +102,7 @@ conta.
 | titolo in copertina | le stesse misure dell'audit di copertina, applicate qui | importante |
 | quarta, progressione | gancio più due paragrafi; la parte operativa nell'ultimo terzo | minore |
 | cifre da contare | elenca ogni quantità dichiarata in indice e quarta, da verificare sul libro | minore |
+| parti | ogni parte si apre su un capitolo che c'è, in ordine, con almeno due capitoli; oltre i 20 capitoli un indice senza parti lo dice | bloccante / importante / minore |
 
 Due regole che evitano al revisore di bloccare il lavoro fatto bene: una parola
 vietata **fra virgolette** è citata, non detta (un capitolo intitolato «le sei
@@ -118,6 +119,26 @@ poi il revisore qui sopra. Se passa: numera le sezioni, aggiunge introduzione e
 conclusione se `book.json` le prevede — **o usa le tue**, se nella scaletta hai
 previsto tu una sezione con `"role": "intro"` o `"conclusion"` — e ripartisce
 il budget di parole calcolato sulle pagine vere.
+
+**Parti** — facoltative, e utili oltre i venti capitoli: un indice di trenta
+righe tutte uguali, nell'anteprima, non dice come è costruito il libro. Si
+dichiarano accanto ai capitoli, con il titolo e il numero del primo capitolo
+di ciascuna; la parte arriva fino al capitolo prima della successiva.
+
+```json
+"parts": [
+  {"title": "Testimony, Not History", "first_chapter": 1},
+  {"title": "Inside the Room", "first_chapter": 6}
+]
+```
+
+I numeri sono quelli della tua scaletta: quando il sistema rinumera
+(aggiungendo un'introduzione, per esempio), le parti lo seguono. Nell'interno
+ogni parte ha la sua pagina, a destra e senza folio, seguita da una bianca;
+nell'indice le parti sono il primo livello e i capitoli stanno sotto; l'EPUB
+annida i capitoli nella loro parte. Un'introduzione può restare fuori dalle
+parti, come una prefazione. Ogni parte costa due pagine: su un libro vicino al
+limite del suo intervallo, contale prima.
 
 **Capitolo** — non vuoto, e comincia dal titolo della scaletta (se non c'è, ce
 lo mette). Conta le parole e le confronta con il budget: oltre il 25% di scarto

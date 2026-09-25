@@ -13,7 +13,7 @@ from html import escape
 from pathlib import Path
 
 from . import mdlite
-from .i18n import L
+from .i18n import L, part_label
 from .models import BookSpec, Outline
 
 CSS = """\
@@ -34,6 +34,9 @@ hr.scene:after { content: "* * *"; }
 .titlepage h1 { page-break-before: avoid; font-size: 2em; }
 .titlepage .author { margin-top: 2em; font-variant: small-caps; }
 .copyright { font-size: 0.85em; color: #333; margin-top: 3em; }
+.part { text-align: center; margin-top: 30%; }
+.part h1 { page-break-before: avoid; margin-top: 0.4em; }
+.part .label { text-indent: 0; text-align: center; letter-spacing: 0.15em; text-transform: uppercase; }
 """
 
 
@@ -116,28 +119,52 @@ def build_epub(
 </div>"""
     documents.append(("title.xhtml", spec.title, _xhtml(spec.title, title_body, lang)))
 
+    # L'indice di navigazione: con le parti, i capitoli stanno dentro la loro.
+    voci: list[tuple[str, str, list[tuple[str, str]]]] = []
+    dentro_una_parte = False
     for number, chapter_title, markdown in chapters:
+        apertura = outline.part_opening(number)
+        if apertura:
+            indice, parte = apertura
+            etichetta = part_label(lang, indice)
+            nome = f"part{indice:02d}.xhtml"
+            titolo = f"{etichetta} — {parte.title}"
+            body = (
+                f'<div class="part">\n<p class="label">{escape(etichetta)}</p>\n'
+                f"<h1>{escape(parte.title)}</h1>\n</div>"
+            )
+            documents.append((nome, titolo, _xhtml(titolo, body, lang)))
+            voci.append((nome, titolo, []))
+            dentro_una_parte = True
+        nome = f"ch{number:02d}.xhtml"
         body = f"<h1>{escape(chapter_title)}</h1>\n{markdown_to_xhtml(markdown)}"
-        documents.append(
-            (f"ch{number:02d}.xhtml", chapter_title, _xhtml(chapter_title, body, lang))
-        )
+        documents.append((nome, chapter_title, _xhtml(chapter_title, body, lang)))
+        if dentro_una_parte:
+            voci[-1][2].append((nome, chapter_title))
+        else:
+            voci.append((nome, chapter_title, []))
 
     if author_bio:
         body = f"<h1>{escape(L(lang, 'about_author'))}</h1>\n{markdown_to_xhtml(author_bio)}"
         about = L(lang, "about_author")
         documents.append(("author.xhtml", about, _xhtml(about, body, lang)))
+        voci.append(("author.xhtml", about, []))
 
     review_body = (
         f"<h1>{escape(L(lang, 'review_title'))}</h1>\n<p class=\"first\">{escape(L(lang, 'review_text'))}</p>"
     )
     review = L(lang, "review_title")
     documents.append(("review.xhtml", review, _xhtml(review, review_body, lang)))
+    voci.append(("review.xhtml", review, []))
 
-    nav_items = "\n".join(
-        f'      <li><a href="{name}">{escape(title)}</a></li>'
-        for name, title, _ in documents
-        if name != "title.xhtml"
-    )
+    def _voce(name: str, title: str, figli: list[tuple[str, str]]) -> str:
+        link = f'<a href="{name}">{escape(title)}</a>'
+        if not figli:
+            return f"      <li>{link}</li>"
+        sotto = "\n".join(f'          <li><a href="{n}">{escape(t)}</a></li>' for n, t in figli)
+        return f"      <li>{link}\n        <ol>\n{sotto}\n        </ol>\n      </li>"
+
+    nav_items = "\n".join(_voce(*voce) for voce in voci)
     nav = _xhtml(
         L(lang, "toc"),
         f"""<nav epub:type="toc" xmlns:epub="http://www.idpf.org/2007/ops" id="toc">
