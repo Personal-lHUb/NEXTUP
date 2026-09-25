@@ -17,10 +17,16 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
 PROJECT_FONTS_DIR = Path(__file__).resolve().parent.parent / "fonts"
+#: font a licenza libera distribuiti col progetto, versionati in git: il
+#: contenitore in cui gira la fabbrica è effimero, e un font che non sta nel
+#: repository sparisce alla sessione dopo. Quelli dell'utente in `fonts/`
+#: vengono prima, così un font con licenza propria sostituisce sempre questi.
+PROJECT_OFL_FONTS_DIR = PROJECT_FONTS_DIR / "ofl"
 
 # Directory in cui cercare i file .ttf, in ordine di priorità.
 FONT_SEARCH_DIRS = [
     PROJECT_FONTS_DIR,
+    PROJECT_OFL_FONTS_DIR,
     Path(os.environ.get("KDPFACTORY_FONTS_DIR", "/nonexistent")),
     Path("/usr/share/fonts/truetype/liberation"),
     Path("/usr/share/fonts/truetype/dejavu"),
@@ -98,6 +104,36 @@ def register_family(family: str) -> str:
         f"Nessun font TrueType trovato per la famiglia {family!r}. "
         f"Copia i file .ttf in {PROJECT_FONTS_DIR} oppure installa i font Liberation/DejaVu."
     )
+
+
+#: Font condensati per il titolo di copertina, in ordine di preferenza. Basta
+#: il peso bold: un titolo di copertina non ha corsivi.
+CONDENSED_DISPLAY_CANDIDATES = (
+    "BarlowCondensed-Bold.ttf",
+    "Oswald-Bold.ttf",
+    "LeagueGothic-Regular.ttf",
+)
+CONDENSED_DISPLAY_NAME = "KDP-display-condensed"
+
+
+def register_condensed_display() -> str | None:
+    """Il font condensato per i titoli di copertina, se ce n'è uno.
+
+    Serve per le parole lunghe. Un sans normale a tutta larghezza mette
+    «REMEMBERED» a 55 punti su una prima di 6 pollici, cioè il 5,8%
+    dell'altezza: leggibile in miniatura, ma non dominante. Lo stesso titolo in
+    un condensato arriva a 84 punti. Restituisce `None` se non ne trova: il
+    titolo resta nel sans di sempre e nessuno se ne accorge.
+    """
+    if CONDENSED_DISPLAY_NAME in _registered:
+        return _registered[CONDENSED_DISPLAY_NAME]
+    for filename in CONDENSED_DISPLAY_CANDIDATES:
+        path = _find(filename)
+        if path:
+            pdfmetrics.registerFont(TTFont(CONDENSED_DISPLAY_NAME, str(path)))
+            _registered[CONDENSED_DISPLAY_NAME] = CONDENSED_DISPLAY_NAME
+            return CONDENSED_DISPLAY_NAME
+    return None
 
 
 def set_default_canvas_font(font_name: str) -> None:

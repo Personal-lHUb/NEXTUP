@@ -212,7 +212,7 @@ class InteriorDoc(BaseDocTemplate):
                 text = flowable.getPlainText()
                 self.notify("TOCEntry", (0, text, self.page))
                 self.chapter_pages[text] = self.page
-            elif style_name == "Heading2" and self.spec.toc_depth >= 2:
+            elif style_name == "Heading2" and self.spec.profondita_indice >= 2:
                 self.notify("TOCEntry", (1, flowable.getPlainText(), self.page))
 
     # -- testatine e folio ------------------------------------------------

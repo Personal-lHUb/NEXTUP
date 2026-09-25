@@ -21,7 +21,7 @@
   "body_font_size": 11.0,
   "leading": 15.5,
   "chapters": 0,
-  "toc_depth": 2,
+  "toc_depth": null,
   "include_exercises": null,
   "include_intro": true,
   "include_conclusion": true,

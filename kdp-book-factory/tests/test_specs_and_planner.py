@@ -357,3 +357,29 @@ class TestPrezzoDeciso(unittest.TestCase):
             self.assertEqual(riga.suggested_price, riga.min_price)
             self.assertFalse(riga.deciso)
             self.assertGreaterEqual(riga.royalty, 0)
+
+
+class TestProfonditaIndice(unittest.TestCase):
+    """L'indice di un full-content mostra i capitoli, non i titoletti.
+
+    Con le sezioni dentro, l'indice di un libro di 32 capitoli occupava 11
+    pagine: più della metà di quello che l'anteprima Amazon fa vedere, e i
+    titoli di capitolo — quelli scritti per vendere — sommersi da voci come
+    «Remembered» o «The check» ripetuto otto volte.
+    """
+
+    def test_il_full_content_mostra_solo_i_capitoli(self):
+        self.assertEqual(BookSpec(slug="a", title="A", content_type="full").profondita_indice, 1)
+
+    def test_il_medium_content_mostra_anche_le_sezioni(self):
+        """In un libro che si consulta le sezioni sono le schede: si cercano."""
+        self.assertEqual(BookSpec(slug="a", title="A", content_type="medium").profondita_indice, 2)
+
+    def test_un_valore_esplicito_dell_autore_vince(self):
+        spec = BookSpec(slug="a", title="A", content_type="full", toc_depth=2)
+        self.assertEqual(spec.profondita_indice, 2)
+
+    def test_un_book_json_senza_la_voce_segue_la_categoria(self):
+        spec = BookSpec.from_dict({"slug": "a", "title": "A", "content_type": "full"})
+        self.assertIsNone(spec.toc_depth)
+        self.assertEqual(spec.profondita_indice, 1)

@@ -192,19 +192,19 @@ class TestTitoloCheDeveStareInCopertina(unittest.TestCase):
 
     def test_un_titolo_troppo_largo_ferma_la_scheda(self):
         with self.assertRaises(SystemExit) as caso:
-            concorrente.scrivi(self.project, self.risultato("Esercizi di concentrazione"), "Iris")
+            concorrente.scrivi(self.project, self.risultato("Precipitevolissimevolmente"), "Iris")
         self.assertIn("non sta in copertina", str(caso.exception))
         self.assertFalse(self.project.spec_path.exists())
 
     def test_l_analisi_resta_su_disco_per_correggere_il_titolo(self):
         """Quattro chiamate su una pagina intera non si ricomprano per una parola."""
         with self.assertRaises(SystemExit) as caso:
-            concorrente.scrivi(self.project, self.risultato("Esercizi di concentrazione"), "Iris")
+            concorrente.scrivi(self.project, self.risultato("Precipitevolissimevolmente"), "Iris")
         percorso = concorrente.acquisizione_path(self.project)
         self.assertTrue(percorso.exists())
         self.assertIn(str(percorso), str(caso.exception))
         salvata = json.loads(percorso.read_text(encoding="utf-8"))
-        self.assertEqual(salvata["piano"]["titolo"], "Esercizi di concentrazione")
+        self.assertEqual(salvata["piano"]["titolo"], "Precipitevolissimevolmente")
 
     def test_un_titolo_che_ci_sta_passa(self):
         spec = concorrente.scrivi(self.project, self.risultato("Il Metodo delle Tre Ore"), "Iris")

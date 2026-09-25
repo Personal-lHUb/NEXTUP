@@ -27,6 +27,27 @@ Le soglie sono costanti in cima a `coverdesign.py`: `MIN_TITLE_CAP_RATIO`,
 `GOOD_TITLE_CAP_RATIO`, `MIN_CONTRAST`, `MAX_TOP_ELEMENTS`, `MAX_TITLE_LINES`,
 `THUMBNAIL_WIDTH_PX`.
 
+### Il titolo in condensato
+
+Sulle parole lunghe il sans normale non arriva alla soglia dominante:
+«REMEMBERED», a tutta larghezza su una prima 6x9, esce a 55 punti, cioè il
+5,8% dell'altezza. Per questo il progetto porta con sé un bastone condensato,
+**Barlow Condensed Bold** (licenza SIL OFL, `fonts/ofl/`, versionato perché il
+contenitore della fabbrica è effimero). Lo stesso titolo lì arriva al 9%.
+
+La scelta la fa `title_font_and_size`, non il gusto: il titolo va in condensato
+se la parola più larga esce dalla gabbia in sans, oppure se il condensato
+guadagna almeno il 10% di corpo (`CONDENSED_MIN_GAIN`). Altrimenti resta nel sans,
+che a parità di corpo si legge meglio. Il controllo a monte (`title_problems`)
+ragiona con gli stessi caratteri, e blocca un titolo solo se la sua parola più
+larga non entra **in nessuno** dei due: bloccare «CONCENTRAZIONE» perché non
+entra nel sans vorrebbe dire fermare un titolo che la copertina compone
+benissimo.
+
+Se `fonts/ofl/` manca, il titolo torna al sans e nessun controllo cambia
+significato. Si possono aggiungere altri condensati in
+`CONDENSED_DISPLAY_CANDIDATES` (`kdpfactory/typography.py`).
+
 ## Quello che il sistema non farà
 
 Niente finti timbri di bestseller, stelline, recensioni o premi inventati.

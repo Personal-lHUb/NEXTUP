@@ -303,8 +303,9 @@ def title_problems(title: str, *, trim: str = "6x9") -> list[str]:
     è già stato progettato, scritto, impaginato e pagato — centocinque chiamate
     al modello per scoprire una cosa che si misura in sedici millesimi di
     secondo. Su titoli italiani realistici non è un caso di scuola: una parola
-    come «CONCENTRAZIONE», da sola, è più larga di una prima 6x9 già al corpo
-    minimo leggibile in miniatura.
+    come «CONCENTRAZIONE», da sola, in un sans normale è più larga di una prima
+    6x9 già al corpo minimo leggibile in miniatura, e ci entra solo se il
+    progetto ha un condensato (`fonts/ofl/`).
 
     Qui stanno **solo i difetti insanabili**, quelli che nessuna scelta di
     impaginazione può salvare. Un titolo che va su quattro righe, per dire, non
@@ -313,7 +314,7 @@ def title_problems(title: str, *, trim: str = "6x9") -> list[str]:
     sul PDF vero. Fermare la produzione per quello sarebbe severità, non
     misura.
     """
-    from .typography import register_family
+    from .typography import register_condensed_display, register_family
 
     display = register_family("sans")
     trim_width, trim_height = kdpspecs.trim_size_in(trim)
@@ -324,8 +325,17 @@ def title_problems(title: str, *, trim: str = "6x9") -> list[str]:
     if not parole:
         return ["Il titolo è vuoto."]
 
-    larga = max(parole, key=lambda word: pdfmetrics.stringWidth(word, display, 100))
-    if pdfmetrics.stringWidth(larga, display, floor) > measure:
+    # Si ragiona con i caratteri che la copertina userà davvero: se c'è un
+    # condensato e la parola ci entra, la copertina la comporrà lì. Misurare
+    # solo il sans bloccherebbe in partenza un titolo che si stampa benissimo.
+    caratteri = [display] + [f for f in (register_condensed_display(),) if f]
+
+    def non_entra(font: str) -> bool:
+        larga_qui = max(parole, key=lambda word: pdfmetrics.stringWidth(word, font, 100))
+        return pdfmetrics.stringWidth(larga_qui, font, floor) > measure
+
+    if all(non_entra(font) for font in caratteri):
+        larga = max(parole, key=lambda word: pdfmetrics.stringWidth(word, display, 100))
         return [
             f"«{title}» non sta in copertina: la parola «{larga}» supera la larghezza "
             f"della prima ({trim}) già al corpo minimo leggibile in miniatura. Serve un "
@@ -547,6 +557,35 @@ def title_block_size(copy: CoverCopy, display: str, box: FrontBox) -> tuple[floa
 
 
 
+#: il condensato si usa solo se fa crescere il titolo almeno di tanto: sotto,
+#: in miniatura la differenza non si vede, e un cambio di carattere si paga
+#: sempre in coerenza con il resto della copertina
+CONDENSED_MIN_GAIN = 1.10
+
+
+def title_font_and_size(
+    copy: CoverCopy, display: str, condensed: str | None, box: FrontBox
+) -> tuple[str, float, list[str]]:
+    """Il carattere e il corpo del titolo: il sans di sempre, o il condensato.
+
+    Decide la parola più larga. «TRE ORE» sta benissimo nel sans; «REMEMBERED»
+    no, perché a tutta larghezza si ferma sotto la soglia che rende un titolo
+    dominante. Il condensato entra solo quando la guadagna.
+    """
+    size, lines = title_block_size(copy, display, box)
+    if not condensed:
+        return display, size, lines
+    c_size, c_lines = title_block_size(copy, condensed, box)
+    # Se nel sans la parola più larga non entra nemmeno al corpo minimo, il
+    # condensato non è un guadagno: è l'unico modo di non farla rifilare.
+    parole = copy.title.upper().split() or ["A"]
+    larga = max(parole, key=lambda word: pdfmetrics.stringWidth(word, display, 100))
+    esce = pdfmetrics.stringWidth(larga, display, size) > box.measure + 0.5
+    if esce or c_size >= size * CONDENSED_MIN_GAIN:
+        return condensed, c_size, c_lines
+    return display, size, lines
+
+
 # -- prima di copertina -----------------------------------------------------
 def draw_front(
     canvas,
@@ -559,6 +598,7 @@ def draw_front(
     genre: str = "non-fiction",
     over_image: bool = False,
     art_name: str = "auto",
+    condensed: str | None = None,
 ) -> DrawResult:
     """Disegna la prima di copertina secondo il sistema.
 
@@ -585,16 +625,18 @@ def draw_front(
         y -= box.safe * 0.4
 
     # 2. titolo: l'elemento dominante
-    title_size, lines = title_block_size(copy, display, box)
+    title_font, title_size, lines = title_font_and_size(copy, display, condensed, box)
     canvas.setFillColor(colors.HexColor(title_color))
     y -= title_size * 0.92
     for line in lines:
-        canvas.setFont(display, title_size)
+        canvas.setFont(title_font, title_size)
         canvas.drawCentredString(center, y, line)
         y -= title_size * 1.02
 
     # 3. filetto d'accento, largo quanto la riga più lunga del titolo
-    widest = max((pdfmetrics.stringWidth(line, display, title_size) for line in lines), default=0)
+    widest = max(
+        (pdfmetrics.stringWidth(line, title_font, title_size) for line in lines), default=0
+    )
     y += title_size * 0.28
     canvas.setStrokeColor(colors.HexColor(palette.accent))
     canvas.setLineWidth(3)

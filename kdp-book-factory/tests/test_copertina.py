@@ -8,6 +8,7 @@ decidono se in miniatura il libro si vede o no.
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from kdpfactory import (
     backup,
@@ -225,7 +226,15 @@ class TestCopertinaGenerata(unittest.TestCase):
                     drawn = span["bbox"][2] - span["bbox"][0]
                     from reportlab.pdfbase import pdfmetrics
 
-                    expected = pdfmetrics.stringWidth(text, font, span["size"])
+                    from kdpfactory.typography import register_condensed_display
+
+                    # il titolo può essere nel condensato: si misura col suo font
+                    usato = (
+                        register_condensed_display()
+                        if "Condensed" in span["font"]
+                        else font
+                    )
+                    expected = pdfmetrics.stringWidth(text, usato, span["size"])
                     self.assertAlmostEqual(drawn, expected, delta=1.0)
                     checked += 1
         document.close()
@@ -447,8 +456,18 @@ class TestAuditCheVedeIDifetti(unittest.TestCase):
     def setUp(self):
         backup.configure(enabled=False)
         self.tmp = tempfile.TemporaryDirectory()
+        # Il difetto da trovare esiste solo col sans: nel condensato
+        # «CONCENTRAZIONE» entra. Il punto di questi test è che l'audit veda
+        # una parola che esce, quindi la parola deve uscire.
+        from unittest import mock
+
+        self.senza_condensato = mock.patch(
+            "kdpfactory.cover.register_condensed_display", return_value=None
+        )
+        self.senza_condensato.start()
 
     def tearDown(self):
+        self.senza_condensato.stop()
         self.tmp.cleanup()
         backup.configure(enabled=True)
 
@@ -503,10 +522,18 @@ class TestTitoloCheStaInCopertina(unittest.TestCase):
     """
 
     def test_una_parola_piu_larga_della_copertina_non_passa(self):
-        problemi = coverdesign.title_problems("Esercizi per la concentrazione")
+        """Ventisei lettere non entrano in una prima 6x9 in nessun carattere."""
+        problemi = coverdesign.title_problems("Precipitevolissimevolmente")
+        self.assertEqual(len(problemi), 1)
+        self.assertIn("PRECIPITEVOLISSIMEVOLMENTE", problemi[0])
+        self.assertIn("non sta in copertina", problemi[0])
+
+    def test_senza_condensato_concentrazione_non_entra(self):
+        """Nel solo sans «CONCENTRAZIONE» esce dalla prima: il controllo lo vede."""
+        with mock.patch("kdpfactory.typography.register_condensed_display", return_value=None):
+            problemi = coverdesign.title_problems("Esercizi per la concentrazione")
         self.assertEqual(len(problemi), 1)
         self.assertIn("CONCENTRAZIONE", problemi[0])
-        self.assertIn("non sta in copertina", problemi[0])
 
     def test_i_titoli_che_ci_stanno_passano(self):
         for titolo in ("Tre Ore", "Il Metodo delle Tre Ore", "Meditazione per principianti"):
@@ -952,3 +979,72 @@ class TestIlGeneratoreNonScriveIlTesto(unittest.TestCase):
         self.assertIn("Deliver the illustration only", testo)
         self.assertIn("do not render any of it", testo)
         self.assertIn("No text, no lettering, no title, no author name", testo)
+
+
+
+class TestTitoloCondensato(unittest.TestCase):
+    """Le parole lunghe stanno in copertina solo in un carattere condensato.
+
+    «REMEMBERED» nel sans normale, a tutta larghezza di una prima 6x9, si ferma
+    al 5,8% dell'altezza: leggibile, non dominante. Nel condensato arriva al 9%.
+    """
+
+    def test_il_condensato_e_disponibile(self):
+        """È in `fonts/ofl/`, versionato: il contenitore è effimero."""
+        from kdpfactory.typography import register_condensed_display
+
+        self.assertIsNotNone(register_condensed_display())
+
+    def test_una_parola_lunga_passa_al_condensato(self):
+        from kdpfactory.typography import register_condensed_display, register_family
+
+        condensato = register_condensed_display()
+        copia = CoverCopy(title="What They Remembered")
+        font, size, _ = coverdesign.title_font_and_size(
+            copia, register_family("sans"), condensato, demo_box()
+        )
+        self.assertEqual(font, condensato)
+        sans, _ = title_block_size(copia, register_family("sans"), demo_box())
+        self.assertGreater(size, sans * coverdesign.CONDENSED_MIN_GAIN)
+
+    def test_un_titolo_corto_resta_nel_sans(self):
+        """Dove il sans basta, il cambio di carattere non si paga."""
+        from kdpfactory.typography import register_condensed_display, register_family
+
+        sans = register_family("sans")
+        font, _, _ = coverdesign.title_font_and_size(
+            CoverCopy(title="Tre Ore"), sans, register_condensed_display(), demo_box()
+        )
+        self.assertEqual(font, sans)
+
+    def test_senza_condensato_tutto_resta_come_prima(self):
+        from kdpfactory.typography import register_family
+
+        sans = register_family("sans")
+        font, _, _ = coverdesign.title_font_and_size(
+            CoverCopy(title="What They Remembered"), sans, None, demo_box()
+        )
+        self.assertEqual(font, sans)
+
+    def test_il_controllo_a_monte_ragiona_col_condensato(self):
+        """«CONCENTRAZIONE» nel sans non entra; nel condensato sì.
+
+        Se il controllo a monte misurasse solo il sans, bloccherebbe in
+        partenza un titolo che la copertina poi compone benissimo.
+        """
+        self.assertEqual(coverdesign.title_problems("Esercizi per la concentrazione"), [])
+
+    def test_la_copertina_vera_di_un_titolo_lungo_supera_la_soglia_dominante(self):
+        backup.configure(enabled=False)
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                spec = demo_spec(title="What They Remembered")
+                info = cover.build_cover(spec, 208, Path(tmp) / "c.pdf", genre="non-fiction")
+                verifica = info["verifica"]
+                self.assertGreaterEqual(
+                    verifica["titolo_percentuale_altezza"] / 100,
+                    coverdesign.GOOD_TITLE_CAP_RATIO,
+                )
+                self.assertFalse([p for p in verifica["problemi"] if "area di sicurezza" in p])
+        finally:
+            backup.configure(enabled=True)

@@ -187,7 +187,7 @@ class TestControlliChePescano(unittest.TestCase):
 
     def test_un_titolo_illeggibile_in_miniatura_si_dice(self):
         dati = copy.deepcopy(BUONA)
-        dati["title"] = "An Extraordinarily Circumlocutory Disquisition Concerning Remembrance"
+        dati["title"] = "Antidisestablishmentarianism Reconsidered"
         self.assertTrue(
             {"titolo in copertina", "titolo troppo lungo"} & categorie(esamina(dati)),
             "un titolo che non entra in copertina deve essere detto qui, non a libro stampato",

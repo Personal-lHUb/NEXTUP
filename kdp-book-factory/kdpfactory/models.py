@@ -55,7 +55,9 @@ class BookSpec:
     body_font_size: float = 11.0
     leading: float = 15.5                # interlinea in punti
     chapters: int = 0                    # 0 = calcolato dal planner
-    toc_depth: int = 2                   # 1 = solo capitoli nell'indice, 2 = anche le sezioni
+    #: 1 = solo capitoli nell'indice, 2 = anche le sezioni; `None` = lo decide
+    #: la categoria (vedi `profondita_indice`)
+    toc_depth: int | None = None
     #: esercizi/checklist a fine capitolo; `None` = lo decide la categoria
     include_exercises: bool | None = None
     include_intro: bool = True
@@ -90,6 +92,22 @@ class BookSpec:
     @property
     def is_medium_content(self) -> bool:
         return self.content_type == "medium"
+
+    @property
+    def profondita_indice(self) -> int:
+        """Quanti livelli di titoli entrano nell'indice.
+
+        Un full-content si legge di seguito: il cliente che apre l'anteprima
+        deve vedere i capitoli, che sono scritti per vendere, e non i titoletti
+        interni, che sono scritti per orientarsi a metà capitolo e fuori
+        contesto non dicono niente. Con le sezioni dentro, l'indice di un
+        libro di 32 capitoli occupava 11 pagine — più della metà di quello che
+        l'anteprima Amazon mostra. Un medium-content invece si consulta: lì le
+        sezioni sono le schede, e il cliente le vuole trovare.
+        """
+        if self.toc_depth is not None:
+            return int(self.toc_depth)
+        return 2 if self.is_medium_content else 1
 
     # --- validazione -----------------------------------------------------
     def validate(self) -> list[str]:

@@ -18,7 +18,11 @@ from reportlab.pdfgen import canvas as pdfcanvas
 from . import coverdesign, coverimage, kdpspecs
 from .coverdesign import CoverCopy, FrontBox, Palette
 from .models import BookSpec
-from .typography import register_family, set_default_canvas_font
+from .typography import (
+    register_condensed_display,
+    register_family,
+    set_default_canvas_font,
+)
 
 INCH = kdpspecs.INCH
 #: unico riferimento per il margine di sicurezza: disegno e verifica devono
@@ -146,6 +150,7 @@ def build_cover(
         genre=genre,
         over_image=image_report is not None,
         art_name=getattr(spec, "cover_art", "auto"),
+        condensed=register_condensed_display(),
     )
 
     # --- dorso -------------------------------------------------------------
