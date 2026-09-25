@@ -363,6 +363,10 @@ render any of it.
 
 ## Production specification — PAPERBACK
 
+The engine assembles the printed wrap from the front illustration you deliver.
+These numbers are the shape it will be printed at: make the illustration for
+that shape, not the wrap itself.
+
 - Trim size: {spec.trim} in ({trim_w}" x {trim_h}"), {pages} pages, {spec.paper} paper.
 - Front cover alone, at {FRONT_DPI} DPI: {round(trim_w * FRONT_DPI)} x {round(trim_h * FRONT_DPI)} px.
 - Full wrap: ONE continuous image, BACK + SPINE + FRONT, {cover_w:.3f}" x {cover_h:.3f}",
@@ -394,20 +398,27 @@ barcode there, over whatever is underneath.
 
 ## The file to deliver
 
-- ONE single PDF, unlocked, with back + spine + front in one continuous image.
-- Fonts embedded, images embedded, transparency and layers flattened.
-- No crop marks, no trim marks, no colour bars, no template guides, no
-  placeholder text, no comments or annotations, no hidden objects.
-- No white border from a wrong bleed.
-- Practical target under 40 MB (hard limit 650 MB).
+- ONE image: the FRONT illustration only, portrait, at least
+  {round(trim_w * FRONT_DPI)} x {round(trim_h * FRONT_DPI)} px, RGB, PNG or high-quality JPEG.
+  More pixels are fine; fewer are not.
+- Let the artwork run to every edge: the engine crops it to the trim with its
+  bleed, so keep anything important at least {coverdesign.SAFE_MARGIN_IN}" inside.
+- No text of any kind, no border, no frame, no mock-up, no 3D book render.
+
+What the engine then sends to KDP, for reference, so nobody has to redo it:
+ONE single PDF, unlocked, back + spine + front in one continuous image, fonts
+and images embedded, transparency flattened. No crop marks, no trim marks, no
+colour bars, no template guides, no placeholder text, no comments or
+annotations, no hidden objects, no white border from a wrong bleed. Practical
+target under 40 MB (hard limit 650 MB).
 
 ## If the format is not paperback
 
 - HARDCOVER: do not reuse these dimensions. Use the KDP hardcover template; the
   artwork must extend about 0.51" (15 mm) past the front cover edge for the wrap,
   and nothing important may sit near the hinge.
-- EBOOK: front cover only, 2560 x 1600 px (ratio 1.6:1 or taller), RGB, JPEG or
-  TIFF. Designed on its own, not cropped out of the wrap.
+- EBOOK: front cover only, 2560 x 1600 px (2560 tall, 1600 wide: ratio 1.6:1 or
+  taller), RGB, JPEG or TIFF. Designed on its own, not cropped out of the wrap.
 
 ## Originality and compliance
 
@@ -422,12 +433,13 @@ barcode there, over whatever is underneath.
 
 1. The category is recognisable at a glance.
 2. The promise is understandable immediately.
-3. The title is readable at thumbnail size.
+3. The upper third is calm enough for a large title to stay readable at thumbnail size.
 4. There is one dominant visual idea.
 5. There is exactly one unique factor.
 6. It does not look generic.
-7. The hierarchy is obvious.
+7. The hierarchy is obvious once the title is set over it.
 8. Nothing resembles a competitor's cover.
 9. No trademark, logo, mascot or proprietary identity is used.
 10. It looks like a commercially viable Amazon KDP cover.
+11. There is no text, letter or number anywhere in the image.
 """

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from .. import prompts
 from .base import AgentContext, JsonAgent, WriterAgent, filter_findings, register
+from .competenze import confini
 
 
 @register
@@ -23,7 +24,7 @@ class Architetto(JsonAgent):
     max_tokens = 16000
 
     def system(self, ctx: AgentContext) -> list[str]:
-        return [prompts.OUTLINE_SYSTEM]
+        return [prompts.OUTLINE_SYSTEM + "\n\n" + confini("architetto")]
 
     def user(self, ctx: AgentContext) -> str:
         chapters = ctx.metadata.get("chapters", 10)
@@ -31,25 +32,70 @@ class Architetto(JsonAgent):
         return prompts.outline_prompt(ctx.spec, chapters, words)
 
 
-INDEX_RULES = """Sei l'agente che produce l'indice di un libro: l'elenco dei capitoli nell'ordine in cui si leggono, con il titolo esatto che comparirà nel sommario.
+INDEX_RULES = """Sei l'agente che scrive l'indice di un libro: il titolo esatto di ogni capitolo e di ogni parte, come comparirà nel sommario.
 
-L'indice non è una formalità tipografica. È la prima pagina che un cliente apre nell'anteprima «Guarda dentro» su Amazon, ed è spesso l'ultima cosa che guarda prima di decidere se comprare. Un indice fatto bene si legge in venti secondi e fa capire che cosa si impara. Un indice fatto male sembra l'elenco degli appunti di qualcun altro.
+L'indice non è una formalità tipografica. È la prima pagina che un cliente apre nell'anteprima «Guarda dentro» su Amazon, ed è spesso l'ultima cosa che guarda prima di decidere se comprare. Un indice fatto bene si legge in venti secondi e fa capire che cosa si impara, o che cosa succede. Un indice fatto male sembra l'elenco degli appunti di qualcun altro.
 
 Che cosa rende buono un titolo di capitolo
-1. DICE CHE COSA SI OTTIENE, non di che cosa si parla. «Dire di no senza perdere il cliente», non «La gestione delle richieste».
-2. STA IN UNA RIGA. Oltre le otto o nove parole va a capo nel sommario e si legge peggio.
+1. DICE CHE COSA SI OTTIENE, o che cosa succede, non di che cosa si parla. «Dire di no senza perdere il cliente», non «La gestione delle richieste».
+2. STA IN UNA RIGA DEL SOMMARIO: di norma sotto i 55 caratteri, spazi compresi. Oltre va a capo e si legge peggio; il revisore di scaletta lo misura sulla pagina vera.
 3. NON SI CONFONDE con gli altri. Se due titoli si somigliano, il lettore non capisce perché sono due capitoli separati.
 4. È CONCRETO. Cose che si vedono, non nomi astratti in -zione e -ità.
 5. STA IN PIEDI DA SOLO. Chi sfoglia il libro salta direttamente a un capitolo: il titolo deve reggere anche fuori dall'indice.
+6. RISPETTA LE REGOLE DEL LIBRO. Se il libro si vieta una parola, una promessa o un'affermazione, il suo indice non la usa: un titolo che promette una guarigione in un libro che non ne promette è la prima cosa che un recensore cita.
 
-La sequenza
-L'ordine dei capitoli è un argomento, non un elenco. Ogni capitolo deve rendere possibile il successivo. Se due capitoli si possono scambiare senza che cambi niente, o sono lo stesso capitolo o l'ordine è sbagliato: dillo in `notes`.
+I titoli delle parti
+Se la scaletta ha delle parti, ognuna prende un titolo di due-cinque parole che nomina il tratto di strada che il lettore percorre in quei capitoli («Dentro la stanza», «Quello che si può verificare»). Non ripete il titolo di uno dei suoi capitoli e non contiene il numero: «Parte II» lo scrive l'impaginazione.
+
+Nei full-content il sommario mostra parti e capitoli; nei medium-content anche le sezioni, che però non riscrivi: sono titoletti del testo.
 
 Che cosa NON fai
-- Non scrivi il libro e non cambi il contenuto dei capitoli: lavori sui titoli e sull'ordine.
-- Non aggiungi e non togli capitoli: il numero lo decide il budget di pagine, e cambiarlo manderebbe il libro fuori dalle pagine obiettivo.
+- Non cambi l'ordine, il numero dei capitoli né i confini delle parti: la struttura l'ha progettata l'architetto, e il numero lo decide il budget di pagine. Se una sequenza non regge, lo dirà l'editor di sviluppo sul libro scritto.
+- Non scrivi il libro e non cambi il contenuto dei capitoli: lavori sui titoli.
 - Niente numero dentro il titolo («Capitolo 3: …»): lo aggiunge l'impaginazione.
-- Niente sottotitoli, due punti o trattini che raddoppiano il titolo: una riga, una promessa."""
+- Niente sottotitoli, due punti o trattini che raddoppiano il titolo: una riga, una promessa.
+
+""" + confini("indice")
+
+
+INDEX_ISTRUZIONI = """Lavori sulla scaletta, non sul libro scritto: l'indice si fissa **prima**
+della stesura, perché il ghostwriter scrive ogni capitolo sul suo titolo.
+
+## Dove leggere
+
+- linea manuale: `books/<slug>/manuale/scaletta.json` (la scaletta che hai
+  davanti, con i numeri come li ha scritti l'autore);
+- linea con la chiave API: `books/<slug>/outline.json`;
+- e sempre `books/<slug>/book.json` per lingua, lettore, promessa e le note di
+  linea editoriale (`notes`): è lì che il libro dichiara le sue regole.
+
+## Che cosa consegni
+
+Un blocco JSON pronto da incollare al posto delle voci corrispondenti della
+scaletta, con **gli stessi numeri e lo stesso ordine**:
+
+```json
+{
+  "chapters": [{"number": 1, "title": "il titolo definitivo"}],
+  "parts": [{"first_chapter": 2, "title": "il titolo della parte"}],
+  "notes": "una frase sull'indice nel suo insieme"
+}
+```
+
+Se la scaletta non ha parti, `parts` resta vuoto: le parti le decide
+l'architetto, non tu.
+
+## Dopo di te
+
+Chi applica i titoli rilancia il revisore di scaletta, che misura quello che tu
+non puoi misurare a occhio — titoli doppi, titoli generici, titoli che vanno a
+capo nel sommario, titolo del libro che non entra in copertina:
+
+```bash
+python3 -m kdpfactory manuale <slug> scaletta --esamina
+```
+
+Non modificare nessun file: consegni il testo, lo applica chi ti ha chiamato."""
 
 
 @register
@@ -57,36 +103,51 @@ class Indice(JsonAgent):
     name = "indice"
     title = "Indice dei capitoli"
     description = (
-        "Produce l'indice del libro: il titolo definitivo di ogni capitolo e l'ordine in "
-        "cui si leggono. È la pagina che un cliente guarda nell'anteprima prima di comprare."
+        "Scrive l'indice del libro: il titolo definitivo di ogni capitolo e di ogni parte, "
+        "nell'ordine già deciso. È la pagina che un cliente guarda nell'anteprima prima "
+        "di comprare."
     )
     max_tokens = 8000
+    istruzioni = INDEX_ISTRUZIONI
 
     def system(self, ctx: AgentContext) -> list[str]:
         return [INDEX_RULES]
 
     def user(self, ctx: AgentContext) -> str:
-        chapters = ctx.outline.chapters if ctx.outline else []
+        outline = ctx.outline
+        chapters = outline.chapters if outline else []
         righe = "\n".join(
             f"{c.number}. [{c.role}] {c.title} — {c.summary}" for c in chapters
         )
+        parti = sorted(outline.parts, key=lambda p: p.first_chapter) if outline else []
+        blocco_parti = (
+            "\n\nParti, ciascuna con il capitolo da cui comincia:\n"
+            + "\n".join(f"- dal capitolo {p.first_chapter}: {p.title}" for p in parti)
+            if parti
+            else ""
+        )
+        regole = f"\nRegole del libro: {ctx.spec.notes}" if ctx.spec.notes else ""
         return f"""Ecco la scaletta di «{ctx.spec.title}», libro in {ctx.spec.language} per {ctx.spec.audience or 'un lettore generico'}.
-Promessa del libro: {ctx.spec.promise or '(non dichiarata)'}
+Promessa del libro: {ctx.spec.promise or '(non dichiarata)'}{regole}
 
 Capitoli in bozza, con la sintesi di ciascuno:
-{righe}
+{righe}{blocco_parti}
 
 Riscrivi i titoli perché funzionino da indice, mantenendo esattamente {len(chapters)} voci
-nello stesso ordine e con gli stessi numeri. Le voci con ruolo `intro` e `conclusion` sono
-introduzione e conclusione: lasciale al loro posto e dai anche a loro un titolo che dica
-qualcosa, se quello attuale è generico.
+nello stesso ordine e con gli stessi numeri, e {len(parti)} parti con gli stessi capitoli
+di partenza. Le voci con ruolo `intro` e `conclusion` sono introduzione e conclusione:
+lasciale al loro posto e dai anche a loro un titolo che dica qualcosa, se quello attuale
+è generico.
 
 Rispondi ESCLUSIVAMENTE con un oggetto JSON valido, senza testo prima o dopo:
 {{
   "chapters": [
     {{"number": 1, "title": "il titolo definitivo", "promise": "che cosa si porta a casa il lettore, una riga"}}
   ],
-  "notes": "una frase sull'indice nel suo insieme; qui segnali anche i capitoli che si sovrappongono o un ordine che non regge"
+  "parts": [
+    {{"first_chapter": 1, "title": "il titolo della parte"}}
+  ],
+  "notes": "una frase sull'indice nel suo insieme"
 }}"""
 
 
@@ -130,7 +191,7 @@ Che cosa NON tocchi
 - La struttura del Markdown.
 - La lunghezza: lo scarto rispetto al testo ricevuto deve restare entro il 5%.
 
-Restituisci il capitolo completo riscritto, in Markdown, e nient'altro: nessun commento, nessun elenco delle modifiche."""
+""" + confini("voce") + """Restituisci il capitolo completo riscritto, in Markdown, e nient'altro: nessun commento, nessun elenco delle modifiche."""
 
 
 @register

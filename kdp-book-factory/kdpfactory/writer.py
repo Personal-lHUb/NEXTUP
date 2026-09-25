@@ -116,6 +116,20 @@ def apply_index(spec: BookSpec, outline: Outline, client: LLMClient) -> str:
     for chapter in outline.chapters:
         if titoli.get(chapter.number):
             chapter.title = titoli[chapter.number]
+
+    # Le parti con le stesse regole: si applicano tutte o nessuna, e solo sulla
+    # parte che parte dallo stesso capitolo — i confini non sono dell'indice.
+    parti = result.data.get("parts") or []
+    nuove: dict[int, str] = {}
+    for voce in parti:
+        if isinstance(voce, dict):
+            try:
+                nuove[int(voce.get("first_chapter"))] = str(voce.get("title", "")).strip()
+            except (TypeError, ValueError):
+                continue
+    if outline.parts and all(nuove.get(p.first_chapter) for p in outline.parts):
+        for parte in outline.parts:
+            parte.title = nuove[parte.first_chapter]
     return str(result.data.get("notes", ""))
 
 

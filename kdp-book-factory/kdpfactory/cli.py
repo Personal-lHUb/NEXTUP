@@ -291,6 +291,23 @@ def cmd_outline(args) -> int:
     print(f"\nScaletta salvata in {project.outline_path}")
     for chapter in outline.chapters:
         print(f"  {chapter.number:2d}. {chapter.title}  ({chapter.target_words} parole)")
+
+    # Lo stesso cancello della linea manuale: una scaletta sbagliata la pagano
+    # tutti i capitoli, e qui correggerla costa un file, non trenta chiamate.
+    from .agents.scaletta import esamina as esamina_scaletta
+    from .manuale import rapporto_rilievi
+
+    rilievi = esamina_scaletta(
+        outline, spec, brief=spec.brief or "", capitoli_attesi=budget.chapters
+    )
+    print("\n" + rapporto_rilievi(rilievi, outline))
+    bloccanti = [r for r in rilievi if r.severity == "bloccante"]
+    if bloccanti:
+        print(
+            f"\n{len(bloccanti)} rilievi bloccanti: correggi {project.outline_path} "
+            f"prima di `write {spec.slug}`."
+        )
+        return 1
     print(f"\nProssimo passo: python -m kdpfactory write {spec.slug}")
     return 0
 
@@ -581,6 +598,21 @@ def cmd_all(args) -> int:
         outline = writer.generate_outline(spec, client, budget)
         project.ensure_dirs()
         outline.save(project.outline_path)
+        from .agents.scaletta import esamina as esamina_scaletta
+        from .manuale import rapporto_rilievi
+
+        rilievi = esamina_scaletta(
+            outline, spec, brief=spec.brief or "", capitoli_attesi=budget.chapters
+        )
+        bloccanti = [r for r in rilievi if r.severity == "bloccante"]
+        # In prova a secco la scaletta è un segnaposto: il cancello si guarda,
+        # non si chiude.
+        if bloccanti and not args.dry_run:
+            print(rapporto_rilievi(rilievi, outline))
+            raise SystemExit(
+                f"\nLa scaletta ha {len(bloccanti)} rilievi bloccanti: correggi "
+                f"{project.outline_path} e rilancia `all` senza --force."
+            )
     else:
         outline = project.load_outline()
         print("1/6 · scaletta già presente")

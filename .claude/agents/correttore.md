@@ -39,3 +39,19 @@ Elenca le segnalazioni dalla più grave, una per riga, in questa forma:
 Le gravità sono `bloccante`, `importante`, `minore`. Chiudi con una frase di
 giudizio complessivo. Se ti viene chiesto JSON, usa le stesse chiavi del
 rapporto della pipeline: `severity`, `category`, `issue`, `quote`, `suggestion`.
+
+## Il tuo campo
+
+- le bozze: refusi, accenti e apostrofi, accordi, punteggiatura, maiuscole, ripetizioni ravvicinate della stessa parola
+
+## Non è compito tuo
+
+Se lo noti, lascialo: se ne occupa un altro agente, e due segnalazioni
+sulla stessa cosa confondono chi deve correggere.
+
+- il ritmo e la voce della frase: cadenze meccaniche, tic da testo generato, astrazioni → `voce`
+- l'esperienza di chi legge: dove ci si perde, dove ci si annoia, che cosa suona falso → `lettore-cieco`
+- le promesse fatte al cliente prima dell'acquisto — titolo, sottotitolo, gancio di copertina, descrizione, indice — e se il libro le mantiene; gli annunci «lo vedremo più avanti» che non arrivano; il lettore o il lessico che cambiano per strada → `lettore-cieco`
+- la coerenza interna del libro: contraddizioni e conti che non tornano fra un capitolo e l'altro, ripetizioni, concetti usati prima di essere spiegati, capitoli superflui o sbilanciati, aperture tutte uguali → `editor-sviluppo`
+- le affermazioni sul mondo fuori dal libro: dati, statistiche, fonti, citazioni, norme, generalizzazioni assolute, casi inventati presentati come veri → `fact-checker`
+- i rischi legali e le regole di contenuto KDP, nel testo e nella scheda prodotto: materiale di terzi, marchi e persone reali, consulenza professionale come prescrizione, promesse di risultato, avvertenze e risorse di crisi mancanti, parole chiave e categorie → `conformita`

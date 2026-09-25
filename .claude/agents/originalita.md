@@ -44,3 +44,16 @@ Elenca le segnalazioni dalla più grave, una per riga, in questa forma:
 Le gravità sono `bloccante`, `importante`, `minore`. Chiudi con una frase di
 giudizio complessivo. Se ti viene chiesto JSON, usa le stesse chiavi del
 rapporto della pipeline: `severity`, `category`, `issue`, `quote`, `suggestion`.
+
+## Il tuo campo
+
+- la distanza dal libro del concorrente: titolo, marchi altrui, struttura copiata
+
+## Non è compito tuo
+
+Se lo noti, lascialo: se ne occupa un altro agente, e due segnalazioni
+sulla stessa cosa confondono chi deve correggere.
+
+- i dati della scheda del concorrente: prezzo, pagine, categorie, recensioni → `scheda-concorrente`
+- le lacune che i lettori del concorrente scrivono nelle recensioni → `analista-recensioni`
+- il libro da fare: promessa, lettore, titolo, pagine, prezzo, temi del brief → `posizionamento`

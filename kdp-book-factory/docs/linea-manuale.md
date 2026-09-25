@@ -46,10 +46,10 @@ si disegna e si misura, `qa` controlla, la scheda calcola i prezzi.
 
 | | automatica | manuale |
 |---|---|---|
-| scaletta | l'agente la scrive, l'agente `indice` rifà i titoli | la scrivi tu; **i titoli che metti sono definitivi** |
+| scaletta | l'agente la scrive, l'agente `indice` rifà i titoli | la scrivi tu; l'agente `indice` di Claude Code rifà i titoli se lo chiami («usa indice su books/<slug>/manuale/scaletta.json»), prima di `--esamina` |
 | controllo della scaletta | `revisore-scaletta`, che non usa il modello | lo stesso, identico |
 | contesto fra capitoli | riassunti scritti dal modello dopo ogni capitolo | i riassunti della scaletta: più poveri, ma veri e gratis |
-| collegio di revisione | lettore cieco, fact-checker, conformità, editor | fermi (usano il modello) |
+| collegio di revisione | lettore cieco, fact-checker, conformità, editor | fermi nella pipeline; da Claude Code girano come subagent, uno per competenza ([`linee-guida.md`](linee-guida.md)) |
 | impaginazione, copertina | girano | girano, identici |
 | `qa`, prezzi, EPUB, brief di copertina | girano | girano, identici |
 | costo | fra $7 e $8 stimati a libro | zero |
@@ -103,6 +103,7 @@ conta.
 | quarta, progressione | gancio più due paragrafi; la parte operativa nell'ultimo terzo | minore |
 | cifre da contare | elenca ogni quantità dichiarata in indice e quarta, da verificare sul libro | minore |
 | parti | ogni parte si apre su un capitolo che c'è, in ordine, con almeno due capitoli; oltre i 20 capitoli un indice senza parti lo dice | bloccante / importante / minore |
+| titolo su due righe | la larghezza del titolo nel sommario, col carattere, il corpo e la giustezza del PDF | minore |
 
 Due regole che evitano al revisore di bloccare il lavoro fatto bene: una parola
 vietata **fra virgolette** è citata, non detta (un capitolo intitolato «le sei

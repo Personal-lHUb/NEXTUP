@@ -44,6 +44,9 @@ costo di stampa erode la royalty e il rischio di parti deboli cresce.
 
 ## 3. Produzione
 
+La sequenza completa — fasi, cancelli, chi lavora e come lo si chiama nelle
+due linee — è in [`linee-guida.md`](linee-guida.md). In breve, con la chiave API:
+
 ```bash
 python3 -m kdpfactory init "Titolo di lavoro" --pages 140 --topic "..." --audience "..."
 $EDITOR books/<slug>/book.json          # il passaggio che conta

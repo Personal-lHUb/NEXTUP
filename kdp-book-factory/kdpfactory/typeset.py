@@ -173,6 +173,7 @@ class InteriorDoc(BaseDocTemplate):
         self.styles = styles
         self.toc_entries: list[tuple[int, str, int]] = []
         self.chapter_pages: dict[str, int] = {}
+        self.part_pages: dict[str, int] = {}
         self._reset_state()
 
         # Padding a zero: i margini sono già quelli calcolati da `kdpspecs`, e i
@@ -222,6 +223,7 @@ class InteriorDoc(BaseDocTemplate):
             if style_name == "PartTitle":
                 voce = f"{self.current_part_label} — {flowable.getPlainText()}"
                 self.notify("TOCEntry", (0, voce, self.page))
+                self.part_pages[voce] = self.page
             elif style_name == "ChapterTitle":
                 text = flowable.getPlainText()
                 self.notify("TOCEntry", (livello, text, self.page))
@@ -694,6 +696,7 @@ class TypesetResult:
     words: int
     chapter_pages: dict[str, int] = field(default_factory=dict)
     words_by_chapter: dict[int, int] = field(default_factory=dict)
+    part_pages: dict[str, int] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -701,6 +704,7 @@ class TypesetResult:
             "pages": self.pages,
             "words": self.words,
             "chapter_pages": self.chapter_pages,
+            "part_pages": self.part_pages,
             "words_by_chapter": {str(k): v for k, v in self.words_by_chapter.items()},
         }
 
@@ -824,4 +828,5 @@ def _run_typeset(
         words=sum(words_by_chapter.values()),
         chapter_pages=dict(doc.chapter_pages),
         words_by_chapter=words_by_chapter,
+        part_pages=dict(doc.part_pages),
     )

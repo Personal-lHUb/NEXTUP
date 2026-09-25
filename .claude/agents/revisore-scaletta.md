@@ -26,4 +26,18 @@ Se ti viene chiesto di esaminare una scaletta a mano, applica le stesse
 regole: ogni argomento di `brief.md` deve avere un capitolo, nessun capitolo
 deve ripetere un altro, nessun titolo deve essere un segnaposto, nessuna
 promessa di risultato, nessuna data presentata come fatto accertato, e ogni
-cifra dichiarata dev'essere contata sul libro.
+cifra dichiarata dev'essere contata sul libro. Oltre i venti capitoli l'indice
+vuole le parti (`parts`: titolo e primo capitolo di ciascuna), e ogni parte
+deve contenere almeno due capitoli.
+
+## Il tuo campo
+
+- le misure della scaletta: argomenti del brief scoperti, capitoli gemelli, conteggio dei capitoli, date e cifre dichiarate, parti valide, titoli che non stanno su una riga o in copertina
+
+## Non è compito tuo
+
+Se lo noti, lascialo: se ne occupa un altro agente, e due segnalazioni
+sulla stessa cosa confondono chi deve correggere.
+
+- la struttura del libro: tesi, sequenza e contenuto dei capitoli, raggruppamento in parti, testo di quarta → `architetto`
+- il testo dell'indice: il titolo definitivo di ogni capitolo e di ogni parte → `indice`

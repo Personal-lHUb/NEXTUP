@@ -165,7 +165,9 @@ Opzioni globali: `--dry-run`, `--model` (default `claude-opus-5`), `--effort`
 Il livello di lavorazione decide quanti agenti entrano in gioco:
 `--qualita bozza` (solo stesura), `standard` (default: stesura + collegio +
 editor), `alta` (in più stile e correttore di bozze). Dettagli in
-[`docs/agenti.md`](docs/agenti.md).
+[`docs/agenti.md`](docs/agenti.md); la sequenza completa di produzione, fase
+per fase, con i cancelli e l'agente responsabile di ogni passo, in
+[`docs/linee-guida.md`](docs/linee-guida.md).
 
 Ogni comando è ripetibile: `write` salta i capitoli già scritti, `build` si può
 rilanciare quante volte serve. Il lavoro si interrompe e si riprende senza
@@ -318,7 +320,8 @@ Tre cose che il codice non può fare al posto tuo:
    che si spacciano per opere di altri autori, niente consigli medici, legali o
    finanziari presentati come consulenza professionale.
 
-La checklist completa è in [`docs/checklist-kdp.md`](docs/checklist-kdp.md); il
+Le linee guida di produzione sono in [`docs/linee-guida.md`](docs/linee-guida.md);
+la checklist completa in [`docs/checklist-kdp.md`](docs/checklist-kdp.md); il
 collegio editoriale in [`docs/agenti.md`](docs/agenti.md); la linea enigmistica
 in [`docs/enigmistica.md`](docs/enigmistica.md); i materiali da
 fornire in [`docs/materiali.md`](docs/materiali.md); il

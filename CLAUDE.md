@@ -59,6 +59,31 @@ il conteggio pagine è già quello definitivo e non cambia quando le immagini
 arrivano. `qa` segnala come errore quelle mancanti e quelle sotto i 300 DPI
 sulla misura stampata, e come avviso quelle ancora a colori.
 
+## Regola permanente: un libro si fa con le linee guida, un agente per competenza
+
+**La produzione segue `kdp-book-factory/docs/linee-guida.md`**: le fasi in
+quell'ordine, e non si passa alla successiva col cancello aperto (zero
+bloccanti del revisore di scaletta, pagine nell'intervallo, zero errori di
+`qa`).
+
+**Ogni competenza ha un solo agente**, elencato in
+`kdpfactory/agents/competenze.py`. Quando chiami un agente, chiedigli il suo
+campo e nient'altro; non chiedere a due agenti la stessa cosa. Tre confini da
+ricordare:
+
+- le **promesse** del libro — titolo, descrizione, indice — le giudica solo il
+  `lettore-cieco`, che le legge dalla vetrina (`build/vetrina.md`) e non apre
+  mai scaletta, `book.json`, brief o rapporti di altri;
+- i **conti interni** e le contraddizioni fra capitoli sono dell'`editor-sviluppo`;
+  il `fact-checker` guarda solo il mondo fuori dal libro;
+- la **copertina** è tutta dell'agente `copertina`: il prompt lo produce
+  `kdpfactory copertina <slug>`, l'agente lo verifica e corregge i dati da cui
+  nasce, poi misura quello che torna.
+
+Per spostare un confine si cambia la tabella delle competenze e si rigenerano
+i file degli agenti (`python3 -m kdpfactory agents --install ../.claude/agents`),
+non si modifica a mano un file in `.claude/agents/`.
+
 ## Le due categorie di prodotto
 
 Ogni libro di questo progetto è **medium-content** oppure **full-content**. La

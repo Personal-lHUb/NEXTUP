@@ -743,6 +743,42 @@ def _controlla_parti(outline: Outline) -> list[AgentFinding]:
     return rilievi
 
 
+#: Lo spazio che nel sommario prendono i puntini e il numero di pagina.
+RISERVA_NUMERO_PT = 36.0
+
+
+def _controlla_righe_indice(outline: Outline, spec: BookSpec) -> list[AgentFinding]:
+    """Un titolo che va a capo nel sommario si legge peggio, ed è la pagina
+    dell'anteprima: si misura con il carattere, il corpo e la giustezza veri."""
+    from reportlab.pdfbase import pdfmetrics
+
+    from ..typography import register_family
+
+    corpo_testo = register_family(spec.body_font)
+    corpo_parti = register_family("sans" if spec.body_font == "serif" else "serif")
+    giustezza = kdpspecs.page_geometry(spec.trim, spec.target_pages).text_width - RISERVA_NUMERO_PT
+    voci = [(c.number, c.title, corpo_testo) for c in outline.chapters]
+    voci += [(p.first_chapter, p.title, corpo_parti) for p in outline.parts]
+    rilievi = []
+    for numero, titolo, font in voci:
+        larghezza = pdfmetrics.stringWidth(titolo, font, spec.body_font_size)
+        if larghezza <= giustezza:
+            continue
+        rilievi.append(
+            _segnala(
+                "minore",
+                "titolo su due righe",
+                f"«{titolo}» nel sommario va a capo: {larghezza / 72:.2f}\" contro "
+                f"{giustezza / 72:.2f}\" di riga utile ({spec.trim}, corpo {spec.body_font_size:g}).",
+                chapter=numero,
+                quote=titolo,
+                suggestion="Accorcialo di qualche parola: l'indice si legge in venti secondi, "
+                "riga per riga.",
+            )
+        )
+    return rilievi
+
+
 # --------------------------------------------------------------------------
 # L'esame
 # --------------------------------------------------------------------------
@@ -762,6 +798,7 @@ def esamina(
     rilievi += _controlla_sovrapposizioni(outline)
     rilievi += _controlla_titoli(outline)
     rilievi += _controlla_parti(outline)
+    rilievi += _controlla_righe_indice(outline, spec)
     rilievi += _controlla_programma(outline)
     rilievi += _controlla_date(outline)
     rilievi += _controlla_titolo(outline, spec)

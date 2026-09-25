@@ -11,6 +11,7 @@ from pathlib import Path
 
 from ..models import BookSpec
 from .base import REGISTRY, AgentContext
+from .competenze import competenze_di, fuori_campo
 
 HEADER = """---
 name: {name}
@@ -57,6 +58,36 @@ Riporta le segnalazioni così come escono, raggruppate per categoria, e indica
 quali sono bloccanti."""
 
 
+#: Nei prompt i confini stanno in fondo alle regole, in maiuscolo; nel file
+#: esportato diventano una sezione a sé, una volta sola anche per chi ha due
+#: modi di lavorare.
+CONFINI_MARKER = "IL TUO CAMPO"
+
+
+def _regole(testo: str) -> str:
+    """Le regole del ruolo, senza confini e senza contratto JSON."""
+    return testo.split(CONFINI_MARKER)[0].split(JSON_CONTRACT_MARKER)[0].rstrip()
+
+
+def _campo(nome: str) -> str:
+    proprie = competenze_di(nome)
+    if not proprie:
+        return ""
+    righe = ["", "## Il tuo campo", ""] + [f"- {c.cosa}" for c in proprie]
+    altre = fuori_campo(nome)
+    if altre:
+        righe += [
+            "",
+            "## Non è compito tuo",
+            "",
+            "Se lo noti, lascialo: se ne occupa un altro agente, e due segnalazioni",
+            "sulla stessa cosa confondono chi deve correggere.",
+            "",
+        ]
+        righe += [f"- {c.cosa} → `{c.agente}`" for c in altre]
+    return "\n".join(righe) + "\n"
+
+
 def _sample_context() -> AgentContext:
     """Contesto minimo usato solo per rendere leggibile il prompt esportato."""
     return AgentContext(spec=BookSpec(slug="esempio", title="(titolo del libro)"))
@@ -81,15 +112,25 @@ def render_agent_markdown(agent) -> str:
         # Agente strumentale: non ha un prompt, ha un comando. Le istruzioni
         # sono le sue, non quelle del primo agente strumentale che fu scritto.
         istruzioni = agent.istruzioni or TOOL_USAGE.format(name=agent.name)
-        return body + "## Come lavorare\n\n" + istruzioni.rstrip() + "\n"
+        return body + "## Come lavorare\n\n" + istruzioni.rstrip() + "\n" + _campo(agent.name)
 
-    rules = blocks[0]  # il primo blocco sono le regole del ruolo
-    body += rules.split(JSON_CONTRACT_MARKER)[0].rstrip() + "\n"
-    compito = (
-        "segnalare, non correggere" if agent.stage == "controllo" else "produrre il testo richiesto"
-    )
-    body += USAGE.format(compito=compito)
-    return body
+    # Chi lavora in più modi (il lettore cieco: capitolo e libro intero)
+    # esporta le regole di ciascuno; gli altri il primo blocco, che sono le
+    # regole del ruolo.
+    modi = agent.regole_esportate() or [("", blocks[0])]
+    for titolo, regole in modi:
+        if titolo:
+            body += f"\n## {titolo}\n\n"
+        body += _regole(regole) + "\n"
+    if agent.istruzioni:
+        body += "\n## Come lavorare\n\n" + agent.istruzioni.rstrip() + "\n"
+    else:
+        compito = (
+            "segnalare, non correggere" if agent.stage == "controllo"
+            else "produrre il testo richiesto"
+        )
+        body += USAGE.format(compito=compito)
+    return body + _campo(agent.name)
 
 
 def install_claude_code_agents(target: Path) -> list[Path]:

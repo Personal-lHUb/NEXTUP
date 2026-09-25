@@ -5,18 +5,38 @@ passa da chi lo progetta, chi lo scrive, chi lo rilegge, chi lo corregge e chi
 lo controlla prima della stampa. Il collegio riproduce quella catena, con una
 regola che vale per tutti: **i revisori segnalano, non riscrivono**. L'unico che
 mette le mani nel testo dopo la stesura è l'editor, e lo fa applicando le
-segnalazioni degli altri.
+segnalazioni degli altri. E una seconda regola: **una competenza, un solo
+responsabile** — nessuna cosa viene guardata da due agenti (vedi sotto).
 
 ```
-architetto → indice → ghostwriter → [voce] → impaginazione + copertina
-                                                    │
-        lettore cieco (capitolo) ┐                  │
-        fact-checker             ├─ segnalazioni ───┤
-        conformità               │                  │
-        correttore               │                  │
-        lettore cieco (libro)    │                  ▼
-        editor di sviluppo       →             editor  →  nuova impaginazione
+architetto → indice → revisore-scaletta → ghostwriter → [voce] → impaginazione
+                                                                     │
+      lettore cieco (capitolo; libro con la vetrina) ┐               │
+      editor di sviluppo                             │               │
+      fact-checker                                   ├ segnalazioni ─┤
+      conformità (testo; scheda)                     │               ▼
+      correttore                                     ┘  editor → nuova impaginazione
+                                                                     │
+                            copertina: prompt → immagine dell'autore → misure
 ```
+
+La sequenza completa, con i cancelli fra una fase e l'altra e il modo di
+chiamare ogni agente nelle due linee, è in [`linee-guida.md`](linee-guida.md).
+
+## Una competenza, un solo responsabile
+
+Prima il lettore cieco, l'editor di sviluppo e la conformità controllavano
+tutti e tre se il libro manteneva le sue promesse, e il fact-checker contava i
+casi del libro insieme all'editor di sviluppo: sullo stesso libro sono arrivate
+quattro segnalazioni della stessa contraddizione, in quattro formulazioni.
+
+Adesso l'elenco delle competenze sta in un posto solo,
+`kdpfactory/agents/competenze.py`, e ogni competenza ha un responsabile. Da
+lì ogni agente riceve, in fondo al suo prompt, **il suo campo** e **quello che
+non è compito suo**, con il nome di chi se ne occupa; lo stesso finisce nei
+file di Claude Code. Un test fallisce se una competenza ha due responsabili o
+se un agente non ne ha nessuna. Per spostare un confine si cambia la tabella,
+non un prompt.
 
 ---
 
@@ -40,7 +60,8 @@ consegnano `book.json` + `brief.md`. Documentati per esteso in
 | Agente | Mestiere |
 |---|---|
 | `architetto` | Progetta la struttura: tesi portante, sequenza dei capitoli, promessa di ciascuno, testo di quarta. Non scrive il libro. |
-| `indice` | Produce l'indice: il titolo definitivo di ogni capitolo e l'ordine in cui si leggono. L'architetto dà ai capitoli titoli che li **descrivono**; questo li riscrive perché li **vendano**, perché l'indice è la pagina che il cliente apre nell'anteprima «Guarda dentro» prima di decidere. Non aggiunge né toglie capitoli: il numero lo decide il budget di pagine. |
+| `indice` | Scrive l'indice: il titolo definitivo di ogni capitolo e di ogni parte. L'architetto dà ai capitoli titoli che li **descrivono**; questo li riscrive perché li **vendano**, perché l'indice è la pagina che il cliente apre nell'anteprima «Guarda dentro» prima di decidere. Non tocca l'ordine, il numero dei capitoli né i confini delle parti, che sono dell'architetto. Da Claude Code lavora anche nella linea manuale, sulla scaletta prima dell'importazione. |
+| `revisore-scaletta` | Misura la scaletta prima che diventi un libro: argomenti del brief scoperti, capitoli gemelli, conteggio, date e cifre dichiarate, parti valide, titoli che non stanno su una riga del sommario o in copertina. **Non usa il modello.** Gira in tutte e due le linee, e i bloccanti fermano la scrittura. |
 | `ghostwriter` | Scrive un capitolo per volta, con la scaletta, la voce del libro e il budget di parole. Riceve l'elenco di ciò che è già stato detto, per non ripetersi. |
 | `voce` | Revisione di stile: ritmo delle frasi, varietà dei capoversi, tic da testo prodotto in serie, lessico concreto. Non aggiunge né toglie contenuti, e mantiene la lunghezza entro il 5%. |
 | `editor` | Applica le segnalazioni del collegio, capitolo per capitolo, senza toccare ciò che nessuno ha segnalato e rispettando il budget di parole. |
@@ -49,13 +70,13 @@ consegnano `book.json` + `brief.md`. Documentati per esteso in
 
 | Agente | Che cosa cerca |
 |---|---|
-| `lettore-cieco` | Legge **senza scaletta, senza scheda del libro, senza sapere che cosa il capitolo dovrebbe dimostrare**: solo le pagine, come chi ha comprato il libro. Lavora a due livelli. **Sul capitolo**: dove ha perso il filo, dove ha saltato righe, quale promessa non è stata mantenuta, che cosa avrebbe chiesto all'autore. **Sul libro intero**: riceve l'indice — l'unica cosa che ha visto prima di pagare — e verifica che ogni capitolo consegni quello che il suo titolo annuncia e che il contesto non cambi per strada: il destinatario che si sposta, i termini che cambiano nome, una definizione contraddetta più avanti, un «lo vedremo poi» che non arriva mai. Continua a non ricevere la scaletta, nemmeno qui. |
-| `fact-checker` | Affermazioni presentate come fatti e non verificabili: percentuali, "gli studi dimostrano", citazioni, nomi di istituti, cifre precise, generalizzazioni assolute. Le citazioni inventate sono sempre bloccanti: su carta non si correggono più. |
-| `conformita` | Regole di contenuto KDP e rischi legali: materiale di terzi, marchi e persone reali, consulenza medica/legale/fiscale formulata come prescrizione, promesse di risultato, coerenza fra il capitolo e la promessa del libro. |
+| `lettore-cieco` | Legge **senza scaletta, senza scheda del libro, senza sapere che cosa il capitolo dovrebbe dimostrare**: solo le pagine, come chi ha comprato il libro. Lavora a due livelli. **Sul capitolo**: dove ha perso il filo, dove ha saltato righe, che cosa si aspettava e non è arrivato, che cosa suona falso. **Sul libro intero**: riceve la **vetrina** (`build/vetrina.md`: titolo, sottotitolo, gancio di copertina, descrizione, indice con le pagine) — l'unica cosa che ha visto prima di pagare — e verifica che il libro mantenga quelle promesse voce per voce e che il contesto non cambi per strada: il destinatario che si sposta, i termini che cambiano nome, un «lo vedremo poi» che non arriva mai. È **l'unico** agente che giudica le promesse. Continua a non ricevere la scaletta; dentro Claude Code il suo file elenca i soli file che può aprire. |
+| `fact-checker` | Affermazioni **sul mondo fuori dal libro** presentate come fatti e non verificabili: percentuali, "gli studi dimostrano", citazioni, nomi di istituti, cifre precise, norme, generalizzazioni assolute. Le citazioni inventate sono sempre bloccanti: su carta non si correggono più. I conti che il libro fa su sé stesso non sono suoi: sono dell'editor di sviluppo. |
+| `conformita` | Regole di contenuto KDP e rischi legali, **sul testo e sulla scheda prodotto**: materiale di terzi, marchi e persone reali, consulenza medica/legale/fiscale formulata come prescrizione, promesse di risultato, avvertenze e risorse di crisi mancanti; sulla scheda, parole chiave con nomi o marchi altrui, categorie fuorvianti, credenziali che l'autore non ha. |
 | `correttore` | Bozze, parola per parola: refusi, accenti e apostrofi (perché, qual è, po'), accordi, punteggiatura, maiuscole incoerenti, ripetizioni ravvicinate, frasi rimaste a metà. |
-| `editor-sviluppo` | Il libro come oggetto unico: progressione, capitoli che si sovrappongono, contraddizioni fra capitoli, promesse dell'introduzione mai mantenute, aperture tutte uguali. |
+| `editor-sviluppo` | Il libro come oggetto unico, con la scaletta davanti: progressione, capitoli che si sovrappongono e ripetizioni, **contraddizioni e conti che non tornano** fra un capitolo e l'altro (quanti casi, quante volte, quale nome), concetti usati prima di essere spiegati, equilibrio, aperture tutte uguali. |
 | `impaginazione` | Il PDF impaginato, non il manoscritto: righe vedove e orfane, titoli rimasti in fondo alla pagina, code di capitolo, testo fuori gabbia, scalette di sillabazione, capitoli che si aprono sulla pagina sbagliata. **Non usa il modello**: misura le coordinate del testo, quindi non costa nulla e non sbaglia per opinione. Sui **medium-content** misura in più la **varietà delle pagine**: se più della metà ha la stessa struttura il libro è scivolato nel low-content, ed è il confine scritto in `CLAUDE.md`. |
-| `copertina` | La prima di copertina vista come la vede il cliente: larga 160 pixel, su fondo bianco. Corpo del titolo, contrasto, stacco dalla pagina dei risultati, affollamento, testo dentro l'area di sicurezza; più i testi, che devono contenere un ciclo aperto e nessuna rivendicazione vietata da KDP. **Non usa il modello**: misura il PDF. Il sistema è documentato in [`copertine.md`](copertine.md). |
+| `copertina` | L'unico agente della copertina, in due tempi. **Il prompt**: lo produce `kdpfactory copertina <slug>` dai dati del libro, l'agente lo verifica su sette punti e ne corregge le fonti, mai il testo. **La copertina che torna**: la prima vista come la vede il cliente, larga 160 pixel su fondo bianco — corpo del titolo, contrasto, stacco, affollamento, area di sicurezza, specifiche KDP, testi. **Non usa il modello**. Il sistema è documentato in [`copertine.md`](copertine.md). |
 
 ---
 

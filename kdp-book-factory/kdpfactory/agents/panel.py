@@ -15,7 +15,7 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .. import backup
+from .. import backup, vetrina
 from ..llm import LLMClient
 from ..mdlite import count_words, strip_title
 from ..models import BookProject, BookSpec, Outline
@@ -30,10 +30,12 @@ from .base import (
 
 # Agenti che leggono un capitolo per volta.
 CHAPTER_REVIEWERS = ("lettore-cieco", "fact-checker", "conformita", "correttore")
-# Agenti che guardano il libro intero o il PDF. Il lettore cieco compare anche
-# qui: sul capitolo dice dove ci si perde, sul libro verifica che ogni capitolo
-# mantenga quello che l'indice prometteva.
-BOOK_REVIEWERS = ("lettore-cieco", "editor-sviluppo", "impaginazione", "copertina")
+# Agenti che guardano il libro intero, la scheda o il PDF. Il lettore cieco
+# compare anche qui: sul capitolo dice dove ci si perde, sul libro verifica che
+# il libro mantenga quello che la vetrina prometteva. La conformità, dopo i
+# capitoli, legge la scheda prodotto: parole chiave e descrizione sono il primo
+# testo che Amazon controlla.
+BOOK_REVIEWERS = ("lettore-cieco", "editor-sviluppo", "conformita", "impaginazione", "copertina")
 # Agenti che misurano invece di leggere: non ricevono il modello.
 MEASURING_REVIEWERS = ("impaginazione", "copertina")
 
@@ -201,9 +203,9 @@ def _book_digest(
     return "\n\n".join(parts)
 
 
-def _indice(outline: Outline) -> str:
-    """L'indice come lo vede chi apre l'anteprima: solo numero e titolo."""
-    return "\n".join(f"{c.number}. {c.title}" for c in outline.chapters)
+def _indice(outline: Outline, language: str = "it") -> str:
+    """L'indice come lo vede chi apre l'anteprima: parti, numero e titolo."""
+    return vetrina.indice(outline, language)
 
 
 def run_review(
@@ -265,6 +267,16 @@ def run_review(
                 cover_copy=cover.get("testi", {}),
             )
             result = agent.run(ctx, None)
+        elif agent.name == "conformita":
+            # Sul libro la conformità legge la scheda prodotto. Senza scheda,
+            # o con una revisione ristretta a certi capitoli, non c'è niente
+            # da leggere qui.
+            meta_path = project.build_dir / "metadata.json"
+            if only or not meta_path.exists():
+                continue
+            meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            ctx = AgentContext(spec=spec, metadata={"scheda": vetrina.scheda(meta, spec)})
+            result = agent.run(ctx, client)
         elif agent.blind:
             if only:
                 # Revisione ristretta a certi capitoli: leggere il libro intero
@@ -278,7 +290,7 @@ def run_review(
                 spec=spec,
                 outline=None,
                 text=_book_digest(project, outline, blind=True),
-                metadata={"indice": _indice(outline)},
+                metadata={"vetrina": vetrina.da_progetto(project, spec, outline)},
             )
             result = agent.run(ctx, client)
         else:

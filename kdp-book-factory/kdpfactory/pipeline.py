@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
-from . import agents, backup, coverdesign, coverimage, kdpspecs, planner, qa, typeset, writer
+from . import agents, backup, coverdesign, coverimage, kdpspecs, planner, qa, typeset, vetrina, writer
 from . import cover as cover_module
 from . import epub as epub_module
 from . import metadata as metadata_module
@@ -32,6 +32,7 @@ class BuildResult:
     epub_path: Path | None = None
     history: list[dict] = field(default_factory=list)
     chapter_pages: dict[str, int] = field(default_factory=dict)
+    part_pages: dict[str, int] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -43,6 +44,7 @@ class BuildResult:
             "copertina_pdf": str(self.cover_pdf) if self.cover_pdf else None,
             "epub": str(self.epub_path) if self.epub_path else None,
             "chapter_pages": self.chapter_pages,
+            "part_pages": self.part_pages,
             "storico": self.history,
         }
 
@@ -92,6 +94,7 @@ def build_until_in_range(
         result.words = typeset_result.words
         result.interior_pdf = typeset_result.pdf_path
         result.chapter_pages = typeset_result.chapter_pages
+        result.part_pages = typeset_result.part_pages
         result.in_range = low <= typeset_result.pages <= high
         result.history.append(
             {
@@ -223,6 +226,9 @@ def build_package(
     result.epub_path = epub_path
 
     project.update_state(build=result.to_dict(), cover=cover_info)
+    # La vetrina si riscrive con le pagine vere: è quello che il lettore cieco
+    # riceve come promessa del libro.
+    vetrina.scrivi(project, spec, outline)
     return result
 
 
@@ -341,6 +347,7 @@ def write_metadata_files(
         encoding="utf-8",
     )
     project.update_state(metadata=meta, author_bio=meta.get("author_bio", ""))
+    vetrina.scrivi(project, spec, outline)
     return {"listing": str(project.build_dir / "kdp-listing.md"), "prezzi": [p.to_dict() for p in prices]}
 
 

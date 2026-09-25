@@ -132,6 +132,12 @@ class Agent:
     def user(self, ctx: AgentContext) -> str:
         raise NotImplementedError
 
+    def regole_esportate(self) -> list[tuple[str, str]]:
+        """Le regole da scrivere nel file di Claude Code, se l'agente lavora in
+        più modi: (titolo della sezione, regole). Vuoto = il primo blocco di
+        `system`, che per quasi tutti è il ruolo intero."""
+        return []
+
     @property
     def deterministico(self) -> bool:
         """Questo agente misura invece di chiedere: non serve la credenziale.

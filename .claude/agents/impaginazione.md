@@ -22,3 +22,14 @@ Se il libro non è ancora impaginato, esegui prima `python3 -m kdpfactory build
 <slug>`. Riporta le segnalazioni così come escono, raggruppate per categoria, e
 indica quali richiedono un intervento sul testo (vedove, orfane, code di
 capitolo) e quali sull'impaginazione (testo fuori gabbia, aperture di capitolo).
+
+## Il tuo campo
+
+- l'interno impaginato: vedove, orfane, code di capitolo, testo fuori gabbia, aperture, varietà delle pagine di un medium-content
+
+## Non è compito tuo
+
+Se lo noti, lascialo: se ne occupa un altro agente, e due segnalazioni
+sulla stessa cosa confondono chi deve correggere.
+
+- la copertina: il prompt dell'illustrazione e delle figure interne, le misure del PDF di copertina, i testi stampati sulla copertina → `copertina`
