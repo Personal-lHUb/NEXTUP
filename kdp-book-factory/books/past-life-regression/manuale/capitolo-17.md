@@ -86,7 +86,7 @@ I mention that it happened because it is the sort of thing that usually gets rep
 
 Nothing. Comprehensively nothing, and this time by his own decision.
 
-No date — refused, directly, three times. No place. No name for himself, no name for the man beside him, no unit, no commander, no side. No manufactured object: mud, straps, weather and a sound.
+No date — asked for three times, and refused, flatly, the third. No place. No name for himself, no name for the man beside him, no unit, no commander, no side. No manufactured object: mud, straps, weather and a sound.
 
 There is a version of this session that a writer could date. Straps cutting into shoulders, deep mud, a repeated far-off percussion: those three details would be enough to make most readers supply a specific conflict, and a writer could simply let them, without ever committing to it. I am not going to do that. Callum did not say when. He said no.
 
@@ -100,7 +100,7 @@ It did not. Not at two months, not at a year. Callum still gets it, at roughly t
 
 I am putting that in because the absence of an outcome is itself a finding about this work, and because the chapter would read quite differently without it. Every other session in this book so far has had something afterwards — sleep, a swimming pool, a woman finding the afternoon remarkable. This one has a man who came about a specific problem, had an interesting afternoon, and still has the problem.
 
-He is not dissatisfied, which surprised me. When I asked him directly whether he felt the session had been worth doing, he said yes, without hesitation, and gave a reason I did not expect: that he had spent four years assuming the smell meant something was wrong with him, and that the afternoon had not fixed it but had made it "a thing that happens rather than a symptom."
+He is not dissatisfied, which surprised me. When I asked him directly whether he felt the session had been worth doing, he said yes, without hesitation, and gave a reason I did not expect: that he had spent four years assuming the smell meant something was wrong with him, and that the afternoon had not fixed it but had made it "a thing that happens rather than a symptom." That is his phrase, not a medical judgement: a smell with no source is something to keep a doctor informed about, and he has.
 
 I do not know what to do with that and I am not going to dress it up as a result. He arrived with a problem and left with the same problem and a different relationship to it. Whether that counts for anything is his judgement, not mine, and he says it does.
 
@@ -110,7 +110,7 @@ What I will not do is what the genre would do here, which is quietly reclassify 
 
 I have run many sessions in which a client would not, or could not, give a date, and I have almost never seen one written up.
 
-The reason is structural. A session without a when cannot be a story about a specific past, so it cannot be verified, so it cannot be published as a case — and so the literature of this field is quietly filtered, session by session, in favour of the ones that produced numbers. That filtering is invisible. Nobody decided it. Every individual writer simply chose their most interesting material, and the aggregate effect is a body of work suggesting that sessions routinely yield datable content.
+The reason is structural. A session without a when cannot be a story about a specific past, so it cannot be verified, so it cannot be published as a case — and so the literature of this field is quietly filtered, session by session, in favour of the ones that produced numbers. That filtering is invisible. I doubt anybody decided it. Each writer, I suspect, simply chose their most interesting material, and the aggregate effect is a body of work suggesting that sessions routinely yield datable content.
 
 They do not. In my practice, a session yielding a date the client volunteered without being asked is rare enough that I can remember each one. What sessions yield is mud.
 

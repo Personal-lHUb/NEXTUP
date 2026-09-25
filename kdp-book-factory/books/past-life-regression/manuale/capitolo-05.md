@@ -4,13 +4,13 @@ The discipline this book is trying to keep is not maintained by disclaimers. A d
 
 None of the six is a lie. That is what makes them difficult. Each one is a perfectly good English word doing a perfectly ordinary job somewhere else, and each one, used here, quietly asserts something nobody in the room is in a position to assert.
 
-I have struck all six from my practice and from these pages. Here they are, with what I say instead.
+I have struck all six from my practice and from these pages, with one exception I owe you an account of, because it is on the cover. *What They Remembered* is the clients' word, not mine. It is the word nearly everyone uses about their own session afterwards, and this is a book about what they say, so the title quotes them. Inside the covers I use it in my own voice only for ordinary memories of this life, which are what it was made for. Here are the six, with what I say instead.
 
 ## Remembered
 
 The commonest, and the one that does the most damage.
 
-"Remembered" is a success verb. You cannot remember something that did not happen; if it did not happen, you did not remember it, you imagined it or confabulated it or produced it. Built into the word is the claim that there was an event and that this is retrieval. Write *she remembered a stone quay* and you have settled the entire question in a subordinate clause, before the reader has been shown anything at all.
+In ordinary English, "remembered" is a success verb. In that sense you cannot remember something that did not happen; if it did not happen, you did not remember it, you imagined it or confabulated it or produced it. Psychologists would add that people can feel they remember things that never happened, which is exactly why the word should not be doing the deciding. Built into the word is the claim that there was an event and that this is retrieval. Write *she remembered a stone quay* and you have settled the entire question in a subordinate clause, before the reader has been shown anything at all.
 
 Instead I write: *she described*. Or *she said*. Or, when I want to keep the strangeness of how the material arrives, *she reported being aware of*. Those are all flat, and flat is the point. They report the room.
 
@@ -20,7 +20,7 @@ There is a cost, and it is worth naming. "Described" is a colder word than "reme
 
 The same problem in a smarter suit. "Recalled" sounds more careful than "remembered" — more clinical, more like a report — and it smuggles the identical claim.
 
-Worse, it tends to appear in the passive: *details were recalled*. The passive removes the person entirely, which is extraordinary when you think about it, because the person is the only thing in the room we have any evidence about. A session has exactly one witness and a sentence in the passive voice deletes her.
+Worse, it tends to appear in the passive: *details were recalled*. The passive removes the person entirely, which is extraordinary when you think about it, because the person is the only thing in the room we have any evidence about. A session has exactly one witness to what is happening inside it, and a sentence in the passive voice deletes her.
 
 Instead: *she said*, with the subject restored. Always the subject. In fourteen years I have not found a single sentence about a session that is improved by taking the client out of it.
 
@@ -52,7 +52,7 @@ Instead I write out the whole thing, at length, in the flattest way I can manage
 
 The last one, and the one I hear most often from other practitioners rather than from writers.
 
-"Verified" means checked and found true, and in this work it is almost always used to mean *checked and found not to be contradicted*, which is a completely different thing. A session detail that the record does not contradict has not been verified. It has been found unfalsifiable, usually because the record for that time and place is too thin to falsify anything at all.
+"Verified" means checked and found true, and in my experience, in this work it is usually used to mean *checked and found not to be contradicted*, which is a completely different thing. A session detail that the record does not contradict has not been verified. It has been found unfalsifiable, usually because the record for that time and place is too thin to falsify anything at all.
 
 Instead: *I looked, and the record has nothing to say about it either way.* That is what happened. It is not an exciting sentence. It is, in my experience, the true sentence about four cases in five.
 
@@ -76,7 +76,7 @@ Here is a short passage of my own, from my notebook, written before I had any of
 
 *Client remembered a childhood near water, recalled a brother, returned to the moment of the accident. Details of the boat seem to confirm the period.*
 
-Twenty-two words, and there is not one thing in it I could defend. Every verb is doing work the evidence cannot pay for. Struck of all six words, the same note reads:
+Twenty-five words, and there is not one thing in it I could defend. Every verb is doing work the evidence cannot pay for. Struck of those words, the same note reads:
 
 *Client described a childhood near water and a brother. Described an accident. Gave details of a boat; I have not checked them and would not know where to start.*
 

@@ -14,7 +14,7 @@ None of it is complicated and none of it will make the session work. What it wil
 
 This applies to this book as much as any other. If you have an appointment in the next fortnight, put it down until afterwards. I mean that, and I am aware of what it costs me to say it.
 
-**And do not do anything unusual the night before.** No fasting, no substances, no all-night preparation, no ritual. It does not help and it changes how you arrive.
+**And do not do anything unusual the night before.** No fasting, no alcohol or recreational drugs, no all-night preparation, no ritual. It does not help and it changes how you arrive. Take any prescribed medication exactly as usual, and if you are being treated for anything, tell the person treating you before you book, as described in the chapter on the intake.
 
 ## What to bring
 
@@ -46,7 +46,7 @@ Say these out loud, in the practitioner's hearing, and listen to the answers. No
 
 **What happens to the recording.** Thirty seconds.
 
-**And what you are expecting.** Say it, however foolish it sounds. *I think I'll get nothing.* *I think I'll be somewhere hot.* *I think it'll be about my father.* Once it has been said in the room by both of you, it becomes a known object rather than a hidden one, and if something matching it turns up you will both be able to hold it more lightly.
+**And what you are expecting.** Say it, however foolish it sounds. *I think I'll get nothing.* *I think I'll be somewhere hot.* *I think it'll be about my father.* Once it has been said in the room by both of you, it stops being hidden, for the reason given in the chapter on the intake.
 
 That last one is the piece of advice I would keep if I could only keep one.
 
@@ -54,7 +54,7 @@ That last one is the piece of advice I would keep if I could only keep one.
 
 **Arrive early and sit in the car for ten minutes.** Or on a wall, or in a café. Arriving straight from a motorway or a difficult morning into a reclining chair does not work; the settling takes twice as long and sometimes does not happen at all. Ten minutes of doing nothing beforehand is worth more than anything else on this list.
 
-**Go to the lavatory.** I am not going to dress this up. An hour and a half is a long time and the single most common reason a session gets interrupted is entirely ordinary.
+**Go to the lavatory.** I am not going to dress this up. An hour and a half is a long time, and in my experience the commonest reason a session gets interrupted is entirely ordinary.
 
 **Wear something you can be still in.** Nothing that digs in when you are horizontal, nothing with a waistband you will become aware of at minute forty. Take your shoes off if you are offered.
 
@@ -66,13 +66,13 @@ That last one is the piece of advice I would keep if I could only keep one.
 
 Here it is, flatly.
 
-There is roughly a one in four chance that you will get nothing much, and a meaningful chance you will get nothing at all. That is not a reflection on you and it does not mean you are resistant or closed or insufficiently spiritual. It happens to sceptics and believers at about the same rate.
+There is roughly a one in four chance that you will get nothing much, and a meaningful chance you will get nothing at all. That is not a verdict on you, and it does not mean you are resistant or closed or insufficiently spiritual. People do differ in how readily they respond to hypnosis, but in my practice — uncounted, as I have said — sceptics and believers get nothing about equally often.
 
 If you do get something, it will probably not look like the accounts you have read. It will be fragments: a temperature, a texture, an unnamed person, something you are doing with your hands. It will very likely not contain a date, a place name or anything you could look up, and there is every chance it will not resolve into a story at all. You may find yourself describing a wall for twenty minutes.
 
-You will be awake throughout and you will remember all of it. You will probably think it did not work.
+You will almost certainly be awake throughout, and most people remember most of it — though not, a fortnight later, in the form it had on the day, which is why you write it down. You will probably think it did not work.
 
-Afterwards, you may feel that something has shifted. You may not. Both are ordinary, and which one happens is not predictable from how good the session seemed at the time — the most vivid session I ran last year was followed by nothing at all, and a dull hour in a field was followed by a woman finally putting down a grief she had carried for two years.
+Afterwards, you may feel that something has shifted. You may not. Both are ordinary, and which one happens is not predictable from how good the session seemed at the time — the most vivid session I ran last year was followed by nothing at all, and a dull hour in a field was followed, three months later, by a woman writing that a grief of nearly two years was no longer in front of her — which is what she said, not something I can show the session did.
 
 And you will not find out whether any of it was real. That question will not resolve, this afternoon or ever, and a practitioner who offers to resolve it for you is offering something they do not have.
 
@@ -82,7 +82,7 @@ At the end, when you are standing at the door with your coat on and you ask the 
 
 If it is *yes, that was a real life* — or any of its softer cousins, *that felt very authentic*, *you clearly went somewhere real*, *I've heard that before and it always checks out* — then you have been handed something that is not available to the person handing it to you. They were in the room. So were you. Neither of you has any access whatsoever to whether there was a kitchen with a stone floor.
 
-What you want to hear is something like what I say: that what happened to you happened, that you were not performing, that the material is yours, and that whether it corresponds to anything is not knowable by either of you.
+What you want to hear is something like what I say: that what happened to you happened, that nothing you did looked like performing, that the material is yours, and that whether it corresponds to anything is not knowable by either of you.
 
 It is a smaller answer. It is also the only one that will still be true in six months, when you have looked things up and thought about it and told one person and reread what you wrote that night.
 

@@ -2,7 +2,7 @@
 
 A question can hand a person the answer without either of you noticing. That sentence is the whole of the craft in this job, and everything else — the chair, the blanket, the breathing — is arrangement around it.
 
-The problem is not that clients are gullible. It is that a person in that state has stopped filtering, and a question arriving from outside does not land as a question. It lands as material. Ask a woman who has just described a floor what she can see through the window, and there is now a window, and there was not one before.
+The problem is not that clients are gullible. It is that a person in that state filters far less than usual, and a question arriving from outside does not land as a question. It lands as material. Ask a woman who has just described a floor what she can see through the window, and there is now a window, and there was not one before.
 
 ## Two questions, one silence
 
@@ -16,7 +16,7 @@ The first is almost empty. It asks for a report and specifies nothing: not a sen
 
 The second contains an entire world. It asserts that there is a century, which asserts a past, which asserts that the client is somewhere in it. It asks for a number, which means a number is expected, which means one will usually be produced — and once a number has been said out loud, everything afterwards arranges itself around it. The client is not lying. She has been handed a frame and, being deeply relaxed and cooperative, she has furnished it.
 
-I have listened to recordings of other practitioners asking that second question, and I have listened to recordings of myself asking it, and in every case you can hear the session change shape in the following ninety seconds. It becomes more specific, more confident, and less interesting, because from then on it is answering rather than reporting.
+I have listened to recordings of other practitioners asking that second question, and I have listened to recordings of myself asking it, and in nearly every case I have heard, you can hear the session change shape in the following ninety seconds. It becomes more specific, more confident, and less interesting, because from then on it is answering rather than reporting.
 
 ## The question I used for two years
 
@@ -60,7 +60,7 @@ People find this disappointing when I describe it. They expect a technique.
 
 The thing nobody warns you about is that not speaking is not neutral either.
 
-If a client says something and I say nothing, the silence has a shape. Held too long after a particular sentence, it says: *that was interesting, go on.* Broken too quickly after another, it says: *that was not.* A client in that state is exquisitely attuned to the person in the room, far more than in ordinary conversation, and they will read the rhythm of my silences as feedback and adjust.
+If a client says something and I say nothing, the silence has a shape. Held too long after a particular sentence, it says: *that was interesting, go on.* Broken too quickly after another, it says: *that was not.* In my experience a client in that state is exquisitely attuned to the person in the room — far more, as far as I can tell, than in ordinary conversation — and will read the rhythm of my silences as feedback and adjust.
 
 I know this because of a session in which I was distracted. My father was in hospital; I was there, doing the work, and about forty minutes in I lost a stretch of perhaps two minutes to worrying about something else entirely. When I listened back, the client's material had gone flat and repetitive in exactly that stretch and picked up again when I did. She had not noticed anything consciously. She told me afterwards it had been a good session.
 
@@ -84,8 +84,8 @@ You can do this without any training, and it will change how you read this genre
 
 Find a striking detail — a name, a place, a date, an object. Now look backwards up the page for where that word first appears. If its first appearance is in the practitioner's mouth, the detail is worth nothing, however emphatically the client confirms it afterwards. Confirmation in that state is not evidence; agreement is cheap and the client has no reason to resist.
 
-Second test: count who is talking. In a well-run session the client's words outnumber the practitioner's by something like ten to one. Transcripts where the practitioner is doing a third of the talking are not sessions, they are collaborations, and the material in them belongs to both people.
+Second test: count who is talking. In my sessions, and in the ones I would call well run, the client's words outnumber the practitioner's by something like ten to one. Transcripts where the practitioner is doing a third of the talking are not sessions, they are collaborations, and the material in them belongs to both people.
 
 Third: look for the closed questions. *Was it summer? Were you alone? Was he angry?* Each one offers a yes, and a yes costs nothing. Open questions cost something to answer, which is why the answers are worth reading.
 
-Apply all three to the sessions in the middle of this book. I have printed my own questions in the transcripts rather than only the answers, which is not the usual practice and makes the accounts clumsier to read, and this is why. A session account that hides the questions is asking to be taken on trust, and there is no reason on earth to extend it.
+Apply all three to the sessions in the middle of this book. I have printed my own questions in the accounts rather than only the answers, which makes them clumsier to read, and this is why. A session account that hides the questions is asking to be taken on trust, and there is no reason on earth to extend it.

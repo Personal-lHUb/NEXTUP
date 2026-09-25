@@ -2,9 +2,9 @@
 
 Session speech does not read the way session speech is usually printed. It is slower, poorer, more repetitive and considerably stranger, and almost none of that survives the journey to a page. What survives is the content, tidied into sentences, and the tidying removes the most distinctive thing about the material.
 
-So here is four minutes of it, transcribed as it happened, with nothing taken out. This is Ellen, whose full session appears later on. It is the fourth minute after she began describing rather than settling.
+So here is four minutes of it, set down the way it sounds: the gaps timed, the false starts and repetitions left where they fell, nothing tidied. This is Ellen, whose full session appears later on. It is the first four minutes after she stopped settling and began describing.
 
-## Four minutes, exactly as they are
+## Four minutes, as near as paper allows
 
 > — What are you aware of?
 >
@@ -42,7 +42,7 @@ So here is four minutes of it, transcribed as it happened, with nothing taken ou
 >
 > — She doesn't come in here much but if she comes in. *(nine seconds)* It's fine. It's fine, I've got time.
 
-That is four minutes. Perhaps a hundred and thirty words of actual speech, more than half of it fragments, with a hundred and twelve seconds of silence in it.
+That is four minutes. A hundred and twenty-seven words of speech from her, more than half of them in fragments, with a hundred and twelve seconds of timed silence in it.
 
 ## What is in there
 
@@ -54,15 +54,15 @@ Then the window, which is too high, and which she says twice with a different em
 
 There is no scene here. Nobody has described a room, a house, a village, a century, or themselves. There is a wall, a window, a back, a pan and a woman who might come in. The material is almost entirely sensory and almost entirely at arm's length.
 
-This is what sessions are like. The vivid continuous narratives that characterise the published literature are not lies; they are what you get when you take material like this, remove the gaps, join the fragments into sentences, supply the connective tissue, and write it up six months later. The content survives. The texture does not.
+This is what sessions are like. The vivid continuous narratives that characterise the published literature are not, I think, lies; they look to me like what you get when you take material like this, remove the gaps, join the fragments into sentences, supply the connective tissue, and write it up six months later. The content survives. The texture does not.
 
 ## The present tense, and the pronouns
 
 Two things in that transcript are typical to the point of being diagnostic.
 
-The first is that Ellen is entirely in the present tense. Not "there was a wall" — *it's a good wall*. Not "I was scraping" — *I'm doing the scraping*. Clients almost never narrate in the past tense while they are in it, and when the past tense creeps in it is usually a sign that they have surfaced and started reporting on the experience rather than having it.
+The first is that Ellen is entirely in the present tense. Not "there was a wall" — *it's a good wall*. Not "I was scraping" — *I'm doing the. Scraping it.* Clients almost never narrate in the past tense while they are in it, and when the past tense creeps in it is usually a sign that they have surfaced and started reporting on the experience rather than having it.
 
-The second is the pronoun. *If she comes in.* Ellen has not told me who "she" is, and I have not asked, and in the full session she never identifies her. People in that chair use definite pronouns for people they have not introduced, in a way nobody does in ordinary speech. It is as though the referent is obvious, which from the inside it presumably is.
+The second is the pronoun. *If she comes in.* Ellen has not told me who "she" is, and I have not asked, and in the full session she never identifies her. People in that chair use definite pronouns for people they have not introduced, far more often than people do in ordinary speech. It is as though the referent is obvious, which from the inside it presumably is.
 
 There is a third thing that happens with pronouns and it is the one that unsettles practitioners. Occasionally a client will slip, mid-sentence, from "I" to "she" about the same figure — *I'm carrying it up and she's too tired to* — and then slip back. I have no explanation for this. It is not distress and it does not seem to mark anything in the material.
 
@@ -70,11 +70,11 @@ There is a third thing that happens with pronouns and it is the one that unsettl
 
 The thing I cannot give you on paper is how Ellen sounded.
 
-Slower, obviously, at about a third of her normal speed. Quieter. But also, and this is the part that is hard to describe, flatter — the ordinary music of speech, the rising and falling that carries attitude, is largely gone. Sentences arrive on one note and stop. The judgement *it's a good wall though* was delivered in exactly the same register as *my back hurts*, which in conversation would be impossible.
+Slower, obviously, at about a third of her normal speed. Quieter. But also, and this is the part that is hard to describe, flatter — the ordinary music of speech, the rising and falling that carries attitude, is largely gone. Sentences arrive on one note and stop. The judgement *it's a good wall though* was delivered in exactly the same register as *my back hurts*, which in conversation would be very unusual.
 
 Every so often something else happens, and it happened once with Ellen about half an hour after this passage. The flatness broke and a sentence came out with a completely different shape to it — faster, with a different rhythm, and with a vowel that was not hers. It lasted perhaps four seconds. Then it was gone and she was back to the flat delivery.
 
-I do not know what that is. I am not going to tell you what it is. It is the single most common reason practitioners in this field end up making claims they cannot support, because sitting next to it is genuinely startling and the mind supplies an explanation very fast. What I can tell you is that it is a real phenomenon, that it happens in perhaps one session in ten, and that a written transcript makes it invisible.
+I do not know what that is. I am not going to tell you what it is. I suspect it is one of the commonest reasons practitioners in this field end up making claims they cannot support, because sitting next to it is genuinely startling and the mind supplies an explanation very fast. What I can tell you is that it is a real phenomenon, that it happens in perhaps one session in ten, and that a written transcript makes it invisible.
 
 ## What tidying takes away
 
@@ -82,7 +82,7 @@ If I clean that passage up, I get this:
 
 *She found herself in a cold, damp-walled room with a high window, standing at a stove and scraping a burnt pan, anxious that another woman — whom she did not name — would come in before she had finished. She noted, with something like affection, that the wall was thick enough that she could not hear them through it.*
 
-Fifty-nine words against a hundred and thirty, and it reads better. But count what has gone.
+Fifty-seven words against a hundred and twenty-seven, and it reads better. But count what has gone.
 
 The gaps are gone, so the material now arrives at conversational speed and sounds like recollection rather than retrieval. The repetitions are gone — *it's up here, it's up here* — and with them the sense of somebody looking at something. The false starts are gone, and the false starts were where you could see her working. The order is gone: the tidy version puts the room first and the wall inside it, which is the opposite of how it arrived. And the word "them" has been smoothed into a plausible antecedent when in fact she never said who she could not hear.
 
@@ -100,16 +100,16 @@ Watch the repetitions. *It's up here. It's up here.* A repeated phrase in that c
 
 Watch who is named and who is not. Ellen has a "she" and a "them" and never identifies either, and never will. Unresolved pronouns are ordinary in this material. An account in which every figure has a name and a relationship is either an unusual session or an edited one.
 
-And watch the arithmetic of the silences. A hundred and twelve seconds of silence in four minutes is normal. When you read a transcript in which the exchanges run on without gaps, you are either reading a session that was unusually fluent — they exist, and they are worth noting as unusual — or you are reading a document from which the gaps have been removed, which is nearly always what has happened.
+And watch the arithmetic of the silences. A hundred and twelve seconds of silence in four minutes is normal. When you read a transcript in which the exchanges run on without gaps, you are either reading a session that was unusually fluent — they exist, and they are worth noting as unusual — or you are reading a document from which the gaps have been removed, which, in the accounts I have read, is usually what has happened.
 
 None of this tells you what the material is. It tells you how close you are standing to it.
 
 ## Why I have stopped doing it
 
-I tidied transcripts for years. Everyone does; the untidied version is exhausting to read and no publisher wants pages of ellipses.
+I tidied transcripts for years. Most people who write this material up do, as far as I can tell; the untidied version is exhausting to read, and I have never met a publisher who wanted pages of ellipses.
 
-What changed my mind was going back through my own written-up accounts against the recordings, which I did for the first time while preparing this book. I found that the tidying had done something I had not intended: in almost every case it had made the material more coherent than it was, and the increase in coherence had nudged my own interpretation. A woman who had produced eleven fragments about a wall had become, in my notes, a woman with a life. The life had been constructed by me, in the act of writing it down neatly, in good faith, over about twenty minutes at a kitchen table.
+What changed my mind was going back through my own written-up accounts against the recordings, all of them, while preparing this book. I had spot-checked before; I had never done the whole set. I found that the tidying had done something I had not intended: in almost every case it had made the material more coherent than it was, and the increase in coherence had nudged my own interpretation. A woman who had produced eleven fragments about a wall had become, in my notes, a woman with a life. The life had been constructed by me, in the act of writing it down neatly, in good faith, over about twenty minutes at a kitchen table.
 
-So the session chapters in this book are printed rough. They are harder going than they would otherwise be, and a couple of them barely hold together as reading. That is what I have to offer: the material as it arrived, with the gaps in, and my questions left in beside it so you can see what I put there.
+So the session chapters in this book stay as close to the rough as I can make them and still be read. Where there is speech, it keeps its gaps and false starts. Where I have summarised, I say so, and I keep my questions beside the answers so you can see what I put there. They are harder going than they would otherwise be, and a couple of them barely hold together as reading.
 
-What you do with it is your business. But you are getting the same thing I got, which is more than I can say for the accounts I used to write.
+What you do with it is your business. But you are getting something much closer to what I got, which is more than I can say for the accounts I used to write.

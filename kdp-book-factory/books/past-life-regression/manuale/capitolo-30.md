@@ -12,7 +12,7 @@ Ask them. Nobody minds. A practitioner who minds has answered the question.
 
 A serious answer contains a number, or at least a proportion: *about one in eight gets nothing, another one in eight gets very little, and you would not be unusual.* It also contains what happens next — that you would not be pressed, that the session would be stopped honestly, and what the money arrangement is.
 
-An answer that cannot conceive of the question is the first warning. Everybody has empty sessions. A practitioner who does not is either new or is producing material where there is none.
+An answer that cannot conceive of the question is the first warning. In my experience everybody has empty sessions. A practitioner who does not is either new or is producing material where there is none.
 
 **Two: do you record, and do I get the recording?**
 
@@ -30,9 +30,9 @@ This is the one that separates people, and the answer you want is specific and s
 
 You want the second half of that sentence to exist. A practitioner who is clear that they are not a clinician, not a therapist, not qualified to diagnose or treat anything, is telling you they know where the edge is. Someone who lists qualifications and never mentions a limit has no edge.
 
-**Six: what do you say if I ask you whether it was real?**
+**Six: what do you say if I ask you whether it was real — or what I should do next?**
 
-The answer you want is some version of: *I'll tell you what you said and I won't tell you what it means.* What you are testing is not their metaphysics but whether they will tell you what you want to hear at the door, when you are vulnerable and grateful and asking.
+The answer you want is some version of: *I'll tell you what you said and I won't tell you what it means.* What you are testing is not their metaphysics but whether they will tell you what you want to hear at the door, when you are vulnerable and grateful and asking — and whether they will let an afternoon answer a question about your future: whether to move, to leave, to try again for a child. The answer to that part should be no.
 
 **Seven: can I ask about someone who won't be there?**
 
@@ -40,7 +40,7 @@ The answer should be no, with a reason. A practitioner who will put your dead mo
 
 ## The four answers that should end the call
 
-**"You'll definitely get something."** Nobody can say this. It is false about one afternoon in four, and a practitioner who says it either has not noticed or is selling.
+**"You'll definitely get something."** Nobody can say this. In my practice it is false about one afternoon in eight, and very nearly false about another one in eight, and a practitioner who says it either has not noticed or is selling.
 
 **"I can tell you what it means."** Interpretation belongs to the person whose afternoon it was. Someone offering to supply it is offering to author your experience.
 
@@ -64,7 +64,7 @@ The unglamorous practicalities, which tell you as much as the answers do.
 
 **Recording.** Covered above. The one addition: ask what happens to the recording afterwards. It should be yours, and their copy should be deleted or kept only with your agreement.
 
-**Consent.** If they write, publish, teach or post about sessions, you should be told at the point of booking, not asked afterwards. And you should be able to say no without it affecting anything.
+**Consent.** If they write, publish, teach or post about sessions, you should be told at the point of booking, and asked again afterwards, with the text in front of you, before anything about your session is used. And you should be able to say no without it affecting anything.
 
 ## The practices I think are indefensible
 
@@ -82,9 +82,9 @@ Having spent a chapter teaching suspicion, I should mark the things that look li
 
 **Vocabulary.** Words like soul, spirit, energy, karma. A practitioner who uses the field's ordinary vocabulary is speaking the language of their trade and of most of their clients. It tells you nothing about their standards. Judge the answers to the seven questions, not the furniture of the sentences they arrive in.
 
-**A home practice.** Most of this work happens in spare rooms and converted garages, including mine. A clinical setting is not a credential and the absence of one is not a warning.
+**A home practice.** A great deal of this work happens in spare rooms and converted garages, including mine. A clinical setting is not a credential and the absence of one is not a warning.
 
-**No formal qualification in hypnotherapy.** This is an unregulated field in most places, and the certificates available vary enormously in what they require. A certificate is weak evidence in either direction. What they say about their limits tells you far more than what they say about their training.
+**No formal qualification in hypnotherapy.** In many places, including where I work, hypnotherapy is not regulated by law; elsewhere there are registration requirements, and a few countries restrict hypnosis to licensed health professionals, so find out which applies where you live. Where it is unregulated, the certificates available vary enormously in what they require, and a certificate on its own proves little. Its absence is not nothing either: ask what training they have had, whether they carry professional insurance, whether they belong to a register with a published complaints procedure, and who they refer people to when a session touches something clinical. What they say about their limits still tells you more than what they say about their training.
 
 **Not being able to answer question one with a precise number.** Very few practitioners count properly, including, in any rigorous sense, me. What matters is whether the question is recognised as a real one. An honest *I'd guess a fifth, but I've never counted, and I should* is a better answer than a confident statistic.
 
@@ -92,6 +92,6 @@ Having spent a chapter teaching suspicion, I should mark the things that look li
 
 The thing you are shopping for is not confidence. It is someone who will tell you what they cannot do.
 
-A practitioner who says *I don't know whether it's real, I won't tell you what it means, I can't promise you anything will change, and about a quarter of my sessions produce nothing* has just made a worse sales pitch than anyone else you will speak to.
+A practitioner who says *I don't know whether it's real, I won't tell you what it means, I can't promise you anything will change, and about a quarter of my sessions produce little or nothing* has just made a worse sales pitch than anyone else you will speak to.
 
 They have also told you exactly what you are buying, which is two or three hours of careful attention and an honest account of what happened. That is a real thing and it is worth paying for, and if it is not what you want, this is a good moment to find that out.

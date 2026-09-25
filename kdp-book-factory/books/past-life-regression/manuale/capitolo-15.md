@@ -8,7 +8,7 @@ You have already met four minutes of her session, earlier in this book. What fol
 
 ## The room
 
-The first material was the wall, the window and the pan, as transcribed earlier. From there it thickened considerably, which is unusual — most sessions thin out rather than the reverse.
+The first material was the wall, the window and the pan, as set down earlier. From there it thickened considerably, which is unusual — most sessions thin out rather than the reverse.
 
 Over about fifty minutes she gave me, in fragments and out of order:
 
@@ -48,7 +48,7 @@ I spent, in total, about six hours over three evenings.
 
 I looked for the name as a personal name, in the spellings that seemed plausible from the recording and in several that did not, across the obvious general sources and two specialist name databases. Names of that shape exist. They exist across a wide geography and a long period, and there are diminutive forms of several common names that could produce something sounding like it.
 
-I looked for the room. This is where the exercise becomes absurd, and I want to walk you through the absurdity, because the absurdity is the finding. A kitchen with a stone floor, a high window and a heavy pan describes something in the order of tens of millions of rooms across several centuries and most of a continent. There is no search. There is no database of rooms. The only thing that would narrow it is a place name or a date, and she gave neither.
+I looked for the room. This is where the exercise becomes absurd, and I want to walk you through the absurdity, because the absurdity is the finding. A kitchen with a stone floor, a high window and a heavy pan describes millions of rooms at the very least, across several centuries and a great deal of the world. There is no search. There is no database of rooms. The only thing that would narrow it is a place name or a date, and she gave neither.
 
 I looked for the combination — the name plus anything else in the session — which is the only search that could possibly have meant anything. There was nothing to combine it with.
 
@@ -88,7 +88,7 @@ She has not had another session and says she probably will not. She describes th
 
 Having said all that, there are three details in this session I have not been able to put down, and it would be dishonest to leave them out because they complicate the tidy account above.
 
-The first is the rocking stone. Ellen mentioned it three times, at intervals of roughly twenty minutes, with no prompting from me and no apparent awareness that she had mentioned it before. On the third occasion she added something: "you get used to which one it is." That is not a description, it is a habit, and habits are a peculiar thing for an invented scene to contain. Nobody constructing a room puts in a floor stone that rocks and then forgets about it and then comes back to it with a practical note about living with it.
+The first is the rocking stone. Ellen mentioned it three times, at intervals of roughly twenty minutes, with no prompting from me and no apparent awareness that she had mentioned it before. On the third occasion she added something: "you get used to which one it is." That is not a description, it is a habit, and habits are a peculiar thing for an invented scene to contain. I would not expect somebody constructing a room to put in a floor stone that rocks, forget about it, and then come back to it with a practical note about living with it.
 
 The second is the high window. She was frustrated by it in the session and remained mildly frustrated by it afterwards — a window you cannot see out of is an obstruction, and an imagined room does not usually obstruct its own occupant. When people furnish a scene, they tend to furnish it with things they can use.
 
@@ -102,4 +102,4 @@ Because it is the session I would have written up dishonestly, if I were going t
 
 It has everything the genre wants: an unusual name, repeated; a room with tactile specifics; a rocking stone; an emotional undertow about a person who is "little." Given six hours and a willingness to write *appears to correspond*, I could have made this chapter sing.
 
-What it actually is, is a woman who spent an afternoon describing a kitchen, produced a name nobody can trace, and found the experience remarkable and unresolved. That is the whole of it, and putting it in the middle of the book unresolved is the most useful thing I can do with it.
+What it actually is, is a woman who spent an afternoon describing a kitchen, produced a name I could not trace, and found the experience remarkable and unresolved. That is the whole of it, and putting it in the middle of the book unresolved is the most useful thing I can do with it.

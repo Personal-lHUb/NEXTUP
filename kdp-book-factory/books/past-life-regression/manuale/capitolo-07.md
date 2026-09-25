@@ -20,7 +20,7 @@ The whole thing takes forty minutes if it takes any time at all. I have never re
 
 ## Why the second question changes everything
 
-Expectation is the single largest contaminant in this work, and the reason is not that people fake things. Almost nobody fakes anything; I will come back to that too. The reason is that a person in a suggestible state, who has a clear idea of the sort of material that is wanted, will produce that material without any intention of doing so and with complete sincerity.
+Expectation is, in my experience, the largest contaminant in this work, and the reason is not that people fake things. Almost nobody fakes anything; I will come back to that too. The reason is that a person in a suggestible state who has a clear idea of the sort of material that is wanted will very often produce it, without meaning to and with complete sincerity.
 
 So I ask what they are expecting, and I ask it neutrally, and then I say it back to them out loud.
 
@@ -52,7 +52,7 @@ That I do not know whether it is real and will not pretend to. This is the one t
 
 That they can stop at any point, that stopping is not a failure, and that they will not be "stuck" — a fear a remarkable number of people carry in and almost none of them mention until asked.
 
-And that nothing said in the room goes anywhere. If I want to write about it, I will ask afterwards, showing them what I have written, and a no is a no with no explanation required.
+And that nothing said in the room goes anywhere. They were told when they booked that I write about this work; if I want to write about their session, I will ask afterwards, showing them what I have written, and a no is a no with no explanation required.
 
 ## What is actually on the form
 
@@ -70,11 +70,11 @@ The form also says they can withdraw consent to being written about at any time,
 
 It happens, rarely, and almost never in the way you would expect.
 
-Nobody comes in trying to fake a session. In fourteen years I am fairly confident it has not happened once; there is no advantage in it, nobody is watching, and the whole thing costs money. What happens instead is that people are not straight with me in the intake, and it is always for the same reason: they are embarrassed about why they have come.
+As far as I can tell, nobody comes in intending to fake a session; there is no advantage in it, nobody is watching, and the whole thing costs money. Once or twice a client with nothing arriving has started supplying something to fill the silence, which is a different thing, and you will meet it later in the book. What happens far more often is that people are not straight with me in the intake, and it is nearly always for the same reason: they are embarrassed about why they have come.
 
 A man says he is curious, generally, intellectually, and it emerges three-quarters of the way through the afternoon that his brother died eight months ago. A woman says she has no particular expectations and turns out to have read a great deal on the subject and to have a very specific idea of what ought to happen.
 
-I do not think of this as lying. It is what people do in first conversations about things that matter to them, and the remedy is not to press. The remedy is the fourth question — *is there anything you would rather not find?* — which gives a person a sanctioned way to gesture at the thing without naming it. Quite often the answer is a long pause and then "no, not really," said in a tone that tells me there is, and that is enough. I have it now. I do not need the content.
+I do not think of this as lying. It is what people do in first conversations about things that matter to them, and the remedy is not to press. The remedy is the fourth question — *is there anything you would rather not find?* — which gives a person a sanctioned way to gesture at the thing without naming it. Quite often the answer is a long pause and then "no, not really," said in a tone that tells me there is, and that is usually enough. I have it now. I do not need the content. I learned once, the hard way, how much work "usually" is doing in that sentence, and the chapter about the session I stopped is about what it cost.
 
 What I do need is to have noticed, because the material that arrives in the session will be shaped by whatever they came in carrying, and I would rather know what it is before it turns up wearing a costume.
 

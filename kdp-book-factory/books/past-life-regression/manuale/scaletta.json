@@ -2,7 +2,29 @@
   "title": "What They Remembered",
   "subtitle": "Past-Life Sessions, Honestly Told",
   "thesis": "A regression session is testimony: an accurate record of what a person said and felt in a chair, and not a record of the world outside it. This book reports eight sessions in full, checks every claim inside them that can be checked, says plainly what came back, and argues that what the work does for a person is worth taking seriously whether or not the past life is.",
-  "back_cover": "She described the staircase before I asked about the house.\n\nI have sat with people in that chair for years, and I can tell you exactly what they say when they get there. This book reports eight sessions in full: the words, the pauses, the crying, the things that came out in a voice the person does not use. Where a session touched something that can be looked up — a name, a date, a place, an object — I looked it up, and I tell you what came back, including the times it came back empty.\n\nWhat I will not do is dress a session up as proof. A regression is testimony, not history, and the difference is the whole book. You will finish it knowing what happens minute by minute in a session, what a practitioner should refuse to promise you, how to prepare for your own, and how to read every other account on this shelf without either swallowing it whole or throwing it out.",
+  "back_cover": "She described the staircase before I asked about the house.\n\nThis book follows nine sessions from the chair to the check: the words, the pauses, the crying, the things that come out in a voice the person does not use. They are composite accounts, written from the way such sessions go, and nobody in them is a real, identifiable client. Wherever a session touches something that could be looked up — a name, a date, a place, an object — the book shows what checking it involves and what such checks honestly return, including the times they come back empty.\n\nWhat it will not do is dress a session up as proof. A regression is testimony, not history, and the difference is the whole book. You will finish it knowing what happens minute by minute in a session, what a practitioner should refuse to promise you, how to prepare for your own, and how to read every other account on this shelf without either swallowing it whole or throwing it out.",
+  "parts": [
+    {
+      "title": "Testimony, Not History",
+      "first_chapter": 1
+    },
+    {
+      "title": "Inside the Room",
+      "first_chapter": 6
+    },
+    {
+      "title": "Nine Sessions",
+      "first_chapter": 12
+    },
+    {
+      "title": "What Can Be Checked",
+      "first_chapter": 20
+    },
+    {
+      "title": "After the Chair",
+      "first_chapter": 27
+    }
+  ],
   "chapters": [
     {
       "number": 0,
@@ -126,7 +148,7 @@
     },
     {
       "number": 10,
-      "title": "Coming Back: the Last Ten Minutes Nobody Writes About",
+      "title": "Coming Back, and the Fortnight Most Accounts Leave Out",
       "summary": "The return is the part of the session that books skip and practitioners cannot afford to, because it determines what the client walks out carrying. Covers the count up, the re-orientation, the first thing people say, and the care that belongs to the hour after rather than the hour during.",
       "beats": [
         "How I bring someone back, and why I never do it quickly",
@@ -246,7 +268,7 @@
     },
     {
       "number": 20,
-      "title": "Eight Sessions, One Threshold: What Repeats and What Never Does",
+      "title": "Nine Sessions, One Threshold: What Repeats and What Never Does",
       "summary": "Steps back from the eight accounts and reports the patterns across them as patterns: thresholds, staircases, water, the reluctance to give numbers, the sensory details that arrive first. States clearly that a recurring pattern is a fact about sessions, not evidence about lives.",
       "beats": [
         "What repeats in these eight and across the wider run of my practice: the threshold, the small domestic object, the weather",

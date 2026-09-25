@@ -32,7 +32,7 @@ Then, about an hour in, this:
 >
 > — It's got a bird on it. *(pause)* Not a real bird. On the top of the twist there's a bird, and it's got its head round like this. Looking back.
 
-She described it for about four minutes: an iron gate latch, a ring handle with a twisting mechanism, and a small cast bird at the top of the twist with its head turned backwards over its own body.
+She described it for about four minutes: an iron gate latch, a ring handle with a twisting mechanism, and a small iron bird at the top of the twist with its head turned backwards over its own body.
 
 That is unusual. Gate latches of the ring-and-twist kind are common enough. A backward-looking bird on one is not a general feature, and it is the sort of thing that either exists somewhere or does not.
 
@@ -40,9 +40,9 @@ That is unusual. Gate latches of the ring-and-twist kind are common enough. A ba
 
 I looked, because it was findable and because that is the only honest thing to do with a detail like that.
 
-It took four days. There is a documented style of ironwork — a regional tradition, with a number of surviving examples in public collections and photographic archives — in which exactly this appears: the ring-and-twist latch, with a small bird finial, head turned back along the body. It is a recognised motif. It has a name in the literature of the craft.
+It took four days, and in the end it was one photograph, in a local-history archive of photographs of farm buildings: a gate with a ring-and-twist latch and, at the top of the twist, a small iron bird with its head turned back along its body. One gate. I could not find out who made it, or whether the design appears anywhere else, or whether it was anything more than one smith's fancy, and nothing I found gave it a name. The bird looking back over its own body is an old motif — heralds have a word for it, *regardant* — but on a gate latch I found it once. It was her latch, though: the ring, the twist, the bird looking back. It existed somewhere outside that room.
 
-I sat with that for a while. I am not going to pretend to a detachment I did not have. For about forty minutes I thought I had something, and I had the feeling that I imagine every practitioner in this field has had at some point, which is a kind of vertigo: the sense of a door opening onto a much larger room.
+I sat with that for a while. I am not going to pretend to a detachment I did not have. For about forty minutes I thought I had something, and I had the feeling that I imagine most practitioners in this field have had at some point, which is a kind of vertigo: the sense of a door opening onto a much larger room.
 
 I want to be honest about that forty minutes, because it explains a great deal about why this field's literature looks the way it does. The feeling is not stupidity and it is not credulity. It is what happens to anybody who has sat in a room with someone for two hours and then finds the thing they described. The corrective is not being cleverer. The corrective is what I did next, which was to phone Ruth.
 
@@ -68,13 +68,13 @@ A session of two hours produces, in my experience, somewhere between forty and a
 
 Almost all of those are unfalsifiable — a cold floor, a heavy bag, a person who is late. But some proportion, perhaps one in ten, is specific enough that it could in principle be looked up. Call it six checkable details per session.
 
-I have run a great many sessions. Multiply six by several hundred and you have a number in the thousands: thousands of checkable details, produced over years, by people who between them have watched every documentary, walked round every museum, and been taken on every school trip in the country.
+I have run a great many sessions. Multiply six by several hundred and you have a number in the thousands: thousands of details that could in principle have been checked, produced over years, by people who between them have watched every documentary, walked round every museum, and been taken on every school trip in the country.
 
-Out of those thousands, one produced a clean match. One.
+I have not looked them all up. I look when a client asks, and over the years that has come to a few dozen. Among those few dozen, one produced a clean match. One. And the thousands I never looked at count too, because each of them was a chance for a forgotten leaflet or a half-watched documentary to surface; had I checked them all, I would expect to have found more gates.
 
-That is not a remarkable rate. That is close to what you would expect from the ordinary operation of memory, given the number of attempts. And the moment you count the attempts, the feeling of significance drains out of the single hit, because significance was never about the hit — it was about not having counted.
+I do not know what rate ordinary memory would produce — I have not found anyone who has tried to measure it — but one clean match on that scale is not a rate that needs anything beyond ordinary memory to explain it. And the moment you count the attempts, the feeling of significance drains out of the single hit, because significance was never about the hit — it was about not having counted.
 
-This is the arithmetic that most accounts in this field do not perform, and I do not think that is usually dishonesty. A practitioner writing up a striking case is not thinking about the several hundred sessions that produced nothing. They are not in the room. They are not in the book either, which is precisely the problem.
+This is the arithmetic that most of the accounts I have read do not perform, and I do not think that is usually dishonesty. A practitioner writing up a striking case is not thinking about the several hundred sessions that produced nothing. They are not in the room. They are not in the book either, which is precisely the problem.
 
 ## Why I will not call it proof
 
@@ -88,7 +88,7 @@ There is a form of words that gets used at this point in other people's accounts
 
 I want to show you the alternatives, because the difference between them is a choice a writer makes rather than a fact about the session.
 
-**The first version** stops before the phone call. The client describes an unusual object in detail; the object turns out to be a documented regional motif; the writer reports both and moves on. Every sentence in it is true. It is also the most misleading of the three, because the reader will complete the argument themselves, and the writer will have arranged for them to complete it without ever having made the claim. This is, I think, the commonest form of dishonesty in this field, and the one that is easiest to commit without noticing.
+**The first version** stops before the phone call. The client describes an unusual object in detail; an object just like it turns out to exist; the writer reports both and moves on. Every sentence in it is true. It is also the most misleading of the three, because the reader will complete the argument themselves, and the writer will have arranged for them to complete it without ever having made the claim. This is, I think, the commonest form of dishonesty in this field, and the one that is easiest to commit without noticing.
 
 **The second version** makes the phone call and then manages it. It reports the forge, and then adds that Ruth's memory of the trip is "fragmentary at best," that she "could not confirm the leaflet contained the motif," and that "the specificity of her description arguably exceeds what a single childhood exposure would account for." Every one of those is defensible in isolation. Together they perform scepticism while steering the reader back to the preferred conclusion, and they are harder to catch than the first version precisely because they look like rigour.
 
@@ -100,7 +100,7 @@ The reason I am spelling this out is that you will meet the first two versions c
 
 Something, but less than it looked like, and worth stating precisely.
 
-A woman with no interest in ironwork produced, in a relaxed state, an accurate description of an object she had almost certainly seen once at the age of eight and had no conscious memory of whatsoever. That is a real finding about memory, and it is genuinely interesting. Most of us cannot retrieve the contents of a leaflet from four decades ago on demand.
+A woman with no interest in ironwork produced, in a relaxed state, a close description of an object she had probably seen at the age of eight — and very probably on a leaflet on the family dresser for years afterwards — and could not recall until a phone call brought it back. One case proves nothing about memory, but it fits something psychologists have described for a long time, forgotten material resurfacing without its source, which they call cryptomnesia. It is genuinely interesting. Most of us cannot retrieve the contents of a leaflet from four decades ago on demand.
 
 What it is not is a finding about a past life. The session did not produce a name, a date, a place or a person. It produced a gate latch, and we found where the gate latch came from.
 

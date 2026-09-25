@@ -54,7 +54,7 @@ Her session had a shape, which Bernadette's did not — a sense of a journey bei
 
 Both sessions contained, independently, a piece of cloth that mattered.
 
-Bernadette had cloth over her knees that she kept smoothing — a repeated, absent gesture, mentioned four times. Jo had something on her head, twice, which she could not describe and which was, when I asked her afterwards, "a cloth, but it wasn't a hat."
+Bernadette had cloth over her knees that she kept smoothing — a repeated, absent gesture, mentioned four times. Jo had something on her head, twice, which she could not describe in the chair and which was, when I asked her afterwards, "folded cloth, I think — something you put there so the load sits right."
 
 Both sessions also contained a strong sense of waiting for or following a person who was not described. Bernadette waiting for people to stop talking; Jo following somebody ahead without knowing why.
 
@@ -66,13 +66,13 @@ I want to do this properly, because "the sisters both described cloth" is the ki
 
 Cloth appears in a large proportion of sessions. So does waiting. So does following. Between them, Bernadette and Jo produced perhaps a hundred and twenty discrete details across two afternoons, and two of those details rhymed at a level of generality that would let almost any two sessions rhyme.
 
-The honest way to put it is this: if you gave me any two of the sessions in this book and asked me to find two overlapping elements, I could do it every time. I have just tried it, with Maureen and Callum, who have nothing in common: both sessions contain cold on one side of the body and a repeated action performed out of habit. That is the same quality of match as the cloth, and nobody would think it meant anything.
+The honest way to put it is this: if you gave me any two of the sessions in this book and asked me to find two overlapping elements, I could do it every time. I have just tried it, with Maureen and Callum, who have nothing in common: both sessions contain cold arriving early and something returned to again and again — her stairs, his mud. That is the same quality of match as the cloth, and nobody would think it meant anything.
 
 What would have meant something is a shared specific. If Jo had produced a backward-looking bird on a gate latch, or Bernadette had said *Mirushka*, we would have something worth a chapter of its own. Neither did, and in two sessions by two sisters raised in the same house, that absence is more interesting than the presence of cloth.
 
 ## What they said to each other
 
-I let them compare notes, which meant breaking my usual rule twice in one case.
+I let them compare notes, which meant breaking a second rule in one case: the first was booking them at all, and the second is that I do not discuss one client's session with another.
 
 They did it in front of me, at their request, and it took about twenty minutes. Bernadette was disappointed by her own session and said so cheerfully. Jo was more affected than she let on and got slightly defensive about it.
 
@@ -98,7 +98,7 @@ There is an obvious next step and I did not take it, and I want to say why, beca
 
 The obvious step is to do this deliberately and at scale. Recruit pairs — siblings, spouses, strangers matched for age and background — run them through an identical protocol, record everything, and have somebody who was not in the room score the overlaps against a pre-agreed list of categories. Do it a hundred times. Publish the rate.
 
-That would be worth something. It would be the first thing anyone asked for, and the reason nobody has a good answer to it is not that the question is difficult.
+That would be worth something. It would be the first thing anyone asked for, and as far as I know nobody has a good answer to it — which is not because the question is difficult.
 
 I have not done it for three reasons, and only one of them reflects well on me. The first is that I am a practitioner, not a researcher, and I have neither the training to design that study nor the statistical competence to analyse it, and a badly designed version would be worse than nothing because it would produce a number people would quote.
 
@@ -110,10 +110,10 @@ I am reporting the sisters as an anecdote, then, and labelling it as one. Two se
 
 ## What the pair demonstrates
 
-One thing, and it is worth the two chapters' worth of material it took to establish.
+One thing, and it is worth the two afternoons it took to establish.
 
-The procedure is the same. The room is the same, the chair is the same, the induction is the same, the practitioner is the same, and the questions are the same three in rotation. Two women with shared genetics, a shared childhood and a shared cultural diet went through an identical process a fortnight apart and produced sessions with almost nothing in common — different settings, different postures, different emotional registers, different lengths, different depths.
+The procedure is the same. The room is the same, the chair is the same, the induction is the same, the practitioner is the same, and the questions are the same three in rotation. Two women with much of their genetics, a childhood and a cultural diet in common went through an identical process a fortnight apart and produced sessions with almost nothing in common — different settings, different postures, different emotional registers, different lengths, different depths.
 
-Whatever this material is, it is not coming from the method. The method is a constant here and the output varied enormously. It is coming from the person, and it appears to be coming from something quite deep in the person, because both of them recognised their own session as characteristic of themselves the moment it was over.
+Whatever this material is, the method alone does not seem to decide it: the method was a constant here and the output varied enormously. Two sessions cannot tell you more than that. What they suggest is that it comes from the person, and from something quite deep in the person, because both of them recognised their own session as characteristic of themselves the moment it was over.
 
 That does not tell you what the source is. It tells you where to look.

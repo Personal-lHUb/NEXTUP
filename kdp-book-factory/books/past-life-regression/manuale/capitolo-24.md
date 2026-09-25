@@ -20,6 +20,8 @@ A woman I will call Sandra described, over about half an hour, a garden. She des
 
 Not a full address. A street name, in a city, which she volunteered without being asked, and which is the only volunteered place name I have had in fourteen years.
 
+I am not printing it. This is the exception to my own rule that I promised earlier. A street name is not an entry in an archive; it is people's homes, and printing it would send readers to stand outside a stranger's wall, or worse. So on this one detail you will have to take me on trust, which is exactly the position this book tries never to put you in, and I would rather say so than pretend otherwise.
+
 She wanted me to go and look. She was quite insistent about it and, when I hesitated, mildly hurt — she had produced the one thing the field says it wants and the practitioner did not seem interested.
 
 So let me explain what "going and looking" actually involves, because the phrase does a great deal of work in accounts of this kind and almost none of it is examined.
@@ -28,9 +30,9 @@ So let me explain what "going and looking" actually involves, because the phrase
 
 **Somebody owns it.** Land belongs to a person, a company, a council, a church or a trust. Digging on it without permission is trespass, and depending on where you are and what you disturb it can be a great deal more than trespass.
 
-**Getting permission means explaining why.** This is the part people do not think through. You must go to a stranger — a homeowner, a parish council — and say that a woman in a reclining chair in another city has told you something is buried in their garden, and ask them to let you excavate it. I have made this sort of approach once, in a different context, and I would encourage anyone who thinks it sounds straightforward to imagine receiving the call.
+**Getting permission means explaining why.** This is the part people do not think through. You must go to a stranger — a homeowner, a landlord, a housing association — and say that a woman in a reclining chair in another city has told you something is buried in their garden, and ask them to let you excavate it. I have made this sort of approach once, in a different context, and I would encourage anyone who thinks it sounds straightforward to imagine receiving the call.
 
-**Then there is the law about what is in the ground.** In most jurisdictions, objects of any age found in the earth are subject to specific legislation: they must be reported, they may belong to the state, and there are criminal penalties for getting it wrong. An amateur digging a hole and lifting something out has, in the best case, destroyed the context that would have made the find meaningful, and in the worst case committed an offence.
+**Then there is the law about what comes out of the ground.** Many countries have specific rules for finds, especially old ones: in some, anything archaeological must be reported and belongs to the state; in England and Wales, anything that counts as treasure must by law be reported to the coroner, and not doing so is an offence. And even where no such rule applies, what you lift out of a stranger's garden is generally theirs, not yours. An amateur digging a hole and lifting something out has, in the best case, destroyed the context that would have made the find meaningful, and in the worst case committed an offence.
 
 **And it costs money.** Doing it properly — which means an archaeologist, a method, a record — is not a weekend activity.
 
@@ -62,7 +64,7 @@ What I will say is what I ask when I read one, and what happens to most of them 
 
 *Who else knew?* A local story, a family legend, a line in a guidebook — any of these can reach a person and be forgotten.
 
-Most published accounts cannot answer the second question, and the second question is the one that matters. In the absence of a contemporaneous record of the prediction, there is nothing to assess.
+Most of the published accounts I have read cannot answer the second question, and the second question is the one that matters. In the absence of a contemporaneous record of the prediction, there is nothing to assess.
 
 ## What I would accept
 
@@ -70,15 +72,15 @@ It seems only fair, having spent a chapter explaining why none of this convinces
 
 A prediction made and recorded before anybody goes anywhere. Written down, dated, witnessed by someone with no stake in it, and specific enough to be wrong: not "something," but an object of a stated kind, of a stated material, at a stated depth, in a location the client could not have visited or read about.
 
-A search conducted by people who have not seen the prediction. This is the step that is never taken and it is not difficult: the person digging should not know what they are looking for, and the person who knows should not be there.
+A search conducted by people who have not seen the prediction. This is the step I have never seen taken in any account I have read, and it is not difficult: the person digging should not know what they are looking for, and the person who knows should not be there.
 
-A location with no local tradition attached. If there is a story in the village about something buried by the church, the whole exercise is worthless, and the check for that is an afternoon in a local archive.
+A location with no local tradition attached. If there is a story in the village about something buried by the church, the whole exercise is worthless, and the check for that starts with an afternoon in a local archive.
 
 And a client whose access to the site can be ruled out. Not just "she says she has never been" — a genuine effort to establish it, which usually means somebody other than the practitioner asking the question.
 
-I want to be clear that I am not setting an impossible standard as a way of dismissing the whole category. Every element of that list is ordinary. It is how you would test any claim about the physical world, and it costs a few hundred pounds and the goodwill of a landowner.
+I want to be clear that I am not setting an impossible standard as a way of dismissing the whole category. Every element of that list is ordinary. It is how you would test any claim about the physical world, and it costs money, time and the goodwill of a landowner, none of them in impossible quantities.
 
-The reason it has not been done — or has not been done in a form that survives inspection — is not that it is hard. It is that the people best placed to do it are the people least keen to find out, and I include myself in that. I have had one street name in fourteen years and I did not go.
+The reason it has not been done — or has not been done in a form that survives inspection — is not that it is hard. I suspect it is that the people best placed to do it are the people least keen to find out, and I include myself in that. I have had one street name in fourteen years and I did not go.
 
 ## The honest version of the claim
 

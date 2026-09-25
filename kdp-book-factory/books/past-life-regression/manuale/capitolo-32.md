@@ -1,6 +1,6 @@
 # What I Think, for What It Is Worth
 
-I have kept my own opinion out of thirty chapters. Here it is, in four pages, clearly marked as an opinion and not as a finding.
+I have kept my opinion out of the reporting, and allowed it one sentence in the chapter on ordinary explanations. Here it is in full, in four pages, clearly marked as an opinion and not as a finding.
 
 You are entitled to skip it. Nothing in the rest of the book depends on it, and I have written it last and put it here so that a reader who wants only the reportable part can close the book before this page and lose nothing.
 
@@ -12,17 +12,17 @@ People who do this work frequently report, afterwards, that something has change
 
 That is it. It is a claim about what people say, and it can be checked by doing better follow-up than I have done. It would stand unaltered if every session in this book turned out to be pure invention, and unaltered if every one turned out to be accurate history.
 
-Everything else in these pages is either testimony — what was said in a room, reported as carefully as I can — or a check, reported with what it found, which four times out of eight was nothing.
+Everything else in these pages is either testimony — what was said in a room, reported as carefully as I can — or a check, reported with what it found — which, in six of the eight session chapters, was nothing to check at all, and in one more was a search that came back empty.
 
 ## What I think, labelled as belief
 
 I do not know what happens in that chair. That is not modesty and it is not a rhetorical position I have adopted for the book; after fourteen years it is the honest state of my mind, and it has become more rather than less honest over time.
 
-What I lean towards, on the days I have to lean somewhere, is that this material is generated rather than retrieved — that whatever produces it is doing something closer to what a mind does in a dream than to what a mind does when it recalls a holiday. I find the asymmetry persuasive: the texture without the facts, the wall without the year, the certainty about a step and the blankness about a name. That is not what memory looks like. It is very much what generation looks like.
+What I lean towards, on the days I have to lean somewhere, is that this material is generated rather than retrieved — that whatever produces it is doing something closer to what a mind does in a dream than to what a mind does when it recalls a holiday. I find the asymmetry suggestive: the texture without the facts, the wall without the year, the certainty about a step and the blankness about a name. In fairness, ordinary memory also loses names and dates first, so the asymmetry does not settle the matter; it is simply the pattern I find easiest to read as generation.
 
 And I notice, immediately, that this is the view a person in my position would find comfortable. It permits me to take my clients seriously, to take the material seriously, and to avoid ever having to defend a proposition about the past. It is suspiciously convenient and I have not been able to argue myself out of it.
 
-Three things it does not cover, named already: the asymmetry, which I use as evidence but cannot explain; the voice, perhaps once in ten sessions, of which I have no account whatsoever; and the reluctance — clients who stop at doors and refuse dates, which is strange behaviour for a process that is supposed to be making things up.
+Three things it does not cover comfortably, named already: the asymmetry, which I lean on and cannot fully explain; the voice, perhaps once in ten sessions, for which role enactment is the obvious reading and may not be the whole one; and the reluctance — clients who stop at doors and refuse dates, which I would not have predicted from a process that is making things up.
 
 I would not build anything on those three. A conclusion that tidied them away would not be my actual opinion, and this chapter is the one place where my actual opinion is the content.
 
@@ -42,7 +42,7 @@ Three things, and they work whichever way you end up.
 
 **The arithmetic.** Count the attempts before you are impressed by a hit. A detail that lands is worth exactly as much as the number of ways it could have missed, and that number is almost never counted. The habit alone would improve the literature of this field more than any discovery could.
 
-**And the respect.** The people in this book are not credulous. They came with something — a fear that had outlasted every sensible treatment, a grief that would not move, a dream that had repeated for twenty years — and they did something about it, and several of them are better than they were. Whatever you conclude about where the material comes from, that part is not in dispute.
+**And the respect.** The people in this book are not credulous. Each of them came with something real and did something about it, and several of them told me afterwards that something had changed. That is their testimony, and it deserves the same respect as the rest — no more certainty than that, and no less.
 
 ## The question left where it belongs
 
@@ -50,8 +50,8 @@ I said at the front that I would keep the two reports separate and never tell yo
 
 What I have not done is answer the question you came with. I could not, and the ones who say otherwise are offering you something they do not possess.
 
-So it goes back to you, which is where it started. Eight afternoons, reported as carefully as I know how. Four checks that found nothing, one that found something and then dissolved it, three sessions with nothing in them to check at all. The ordinary explanations at their full strength, and the three places I can see the edge of what I understand.
+So it goes back to you, which is where it started. Nine afternoons in eight chapters, reported as carefully as I know how. Six with nothing in them to check at all, one search that found nothing, and one match that dissolved in a five-minute phone call. The ordinary explanations at their full strength, and the three places I can see the edge of what I understand.
 
-That is the whole estate. Ruth's line is still the best thing anyone has said to me about it, and I will end with it rather than with anything of my own:
+That is the whole estate, and I will end with Ruth rather than with anything of my own:
 
 *So my brain kept a leaflet for forty-eight years and wouldn't give it back until I lay down. That's worse, isn't it. That's much more frightening than the other thing.*

@@ -56,15 +56,15 @@ You can usually tell the difference from the shape of the text. A book that chec
 
 It seems useful to show the near misses, because they are more instructive than the rule.
 
-**The war.** In writing up Callum's session I had, in an early draft, the phrase "the kind of mud that comes up in accounts of trench warfare." Every word of that is hedged and defensible. It also plants a specific conflict in the reader's head, from a session in which the client explicitly declined to say when he was, three times. I cut it. What is left is thinner and it is the only version I can defend.
+**The war.** In writing up Callum's session I had, in an early draft, a phrase comparing the mud to accounts of one particular kind of warfare. Every word of it was hedged and defensible. It also planted a specific conflict in the reader's head, from a session in which the client, asked three times, declined to say when he was. I cut it, and I am not reprinting it here. What is left is thinner and it is the only version I can defend.
 
-**The name.** I had written, about Ellen's *Mirushka*, that the name "is found in several eastern European traditions." That is true as far as I could establish. It is also completely irrelevant, because names being found in traditions is not a finding about Ellen, and its only function in the paragraph was to make the reader feel that something had been located. It went.
+**The name.** I had written a sentence placing Ellen's *Mirushka* within a particular family of naming traditions. I am not repeating it here, for the reason I cut it: whether or not it was accurate, a name being found in traditions is not a finding about Ellen, and its only function in the paragraph was to make the reader feel that something had been located. It went.
 
-**The latch.** My first draft of the gate-latch chapter described the motif as "regionally distinctive," which is how one source characterised it. When I looked properly, "distinctive" was doing more work than the evidence supported — the form appears across a wider area than that phrasing implies. The chapter now says "a documented style" and "a recognised motif," which is duller and accurate.
+**The latch.** My first draft of the gate-latch chapter described what I had found as a regional tradition with a name of its own, which is how the caption beside the photograph put it. When I looked further, I could not find that tradition, or any name for it, anywhere else: what I had was one photograph of one gate and one caption's opinion of it. The chapter now says exactly that, which is duller and, as far as I could establish, accurate.
 
 **The statistic.** I had a sentence giving a specific figure for the number of human beings who have ever lived, quoted to three significant figures, which I had picked up somewhere years ago and could not source. The chapter on famous lifetimes now says "a very large number" and explains why the argument does not need better than that. Losing the figure cost the paragraph some force and gained it the property of being true.
 
-All four survived at least one draft. Three of the four were caught by the same method, which is reading my own sentences and asking what they are *for*.
+All four survived at least one draft. Three of the four were caught by the same method, which is reading my own sentences and asking what they are *for*. The fourth, the statistic, was caught the ordinary way: I went to source it and could not.
 
 ## What to do when you find one
 
@@ -80,9 +80,9 @@ And tell them. Most writers would rather know. If I have got something wrong in 
 
 ## Why I have written this chapter at all
 
-Because it is the chapter that explains the other twenty-nine.
+Because it is the chapter that explains the rest of them.
 
-The care taken over the checking in this book is disproportionate to what the checking found. I searched for six hours for a name and found nothing. I spent four days on a gate latch and then dissolved my own best case with a phone call. I have reported four sessions that contain nothing to check, and said so four times, in the same flat words.
+The care taken over the checking in this book is disproportionate to what the checking found. I searched for six hours for a name and found nothing. I spent four days on a gate latch and then dissolved my own best case with a phone call. I have reported six sessions that contain nothing to check, and said so six times, in the same flat words.
 
 That is a poor return on effort if the purpose was to build a case. It is not why I did it.
 

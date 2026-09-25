@@ -82,13 +82,13 @@ She also said that the cold down one side had been "completely real" and that sh
 
 ## The three months after
 
-I heard from her twice.
+I heard from her three times.
 
-At two days, in reply to my note, she said she had slept through and had assumed it was a coincidence. At about eleven weeks, she wrote again, unprompted, to say that she had slept through most nights since and that she had stopped counting stairs.
+At two days, in reply to my note, she said she had slept through and had assumed it was a coincidence. At about ten weeks, she wrote again, unprompted, to say that she had slept through most nights since and that she had stopped counting stairs. A few weeks after that she rang, and we talked for half an hour.
 
 That second one surprised me more than the first. She said she had noticed it on a staircase at her daughter's house — that she had got to the top and realised she had not counted — and that it had felt, in her words, "like putting down a bag."
 
-I have no mechanism to offer. I do not know why an afternoon of describing a cold stairwell would affect a woman's sleep, and I am not going to construct a reason, because constructing reasons is how this field talks itself into things. What I can report is what she reported: that the waking stopped around the time of the session and had not come back at three months, and that a lifelong habit went with it.
+I have no mechanism to offer. I do not know why an afternoon of describing a cold stairwell would affect a woman's sleep, and I am not going to construct a reason, because constructing reasons is how this field talks itself into things. What I can report is what she reported: that the waking stopped around the time of the session and had not come back by that phone call, at three months, and that a lifelong habit went with it.
 
 She is also one person, with no control condition, reporting on herself to somebody she had reason to want to please. All of that is true simultaneously.
 
@@ -98,9 +98,9 @@ There is almost nothing here to check, and I want to go through it properly rath
 
 No name — hers or anybody else's. No place name. No date, no period, no indication of when any of this was supposed to be. No object with any distinguishing features: a gap, a window, a landing, a door. No event.
 
-The one element that is even theoretically checkable is the staircase itself: a stair that rises, turns, rises, turns, and has forty-one steps to the top. That is a real architectural form and there are many thousands of buildings containing something like it. There is no register of staircases. There is no search that could be performed, and if I told you I had "found the building," I would be telling you that I had found *a* building, which is not the same thing and never has been.
+The one element that is even theoretically checkable is the staircase itself: a stair that rises, turns, rises, turns, and has forty-one steps to the top. That is a real architectural form and there are many thousands of buildings containing something like it. There is no register of staircases you could search by the number of their steps. There is no search that could be performed, and if I told you I had "found the building," I would be telling you that I had found *a* building, which is not the same thing and never has been.
 
-So: nothing. The honest note on this session is that it contains no checkable content whatsoever, which is the commonest result in this work and the one that almost never gets printed.
+So: nothing. The honest note on this session is that it contains no checkable content whatsoever, which is the commonest result in this work and, in the accounts I have read, the one that least often gets printed.
 
 ## What she wrote down that night
 
@@ -112,9 +112,9 @@ She lists the cold, the gap, the turning, the counting, the door, the landing. S
 
 She did not tell me what she thought was in there, and I have never asked.
 
-I include this for two reasons. The first is that it is exactly the kind of detail that gets lost, and it was lost from my account of the session, because it never entered the room. Had she not written it down within a day it would almost certainly have gone entirely; at eleven weeks, when we spoke, she had no clear memory of having had the thought at all.
+I include this for two reasons. The first is that it is exactly the kind of detail that gets lost, and it was lost from my account of the session, because it never entered the room. Had she not written it down within a day it would almost certainly have gone entirely; at three months, when we spoke, she had no clear memory of having had the thought at all.
 
-The second is her own hedge, which is better than most of the hedging in the published literature on this subject. *I am still fairly sure I was making it up. But I knew.* Both halves held at once, neither one collapsed into the other. If this book has a house style, that sentence is it, and it was written by a retired school administrator at eleven o'clock at night who had never given the matter a moment's thought before that afternoon.
+The second is her own hedge, which is better than most of the hedging I have read in the published literature on this subject. *I am still fairly sure I was making it up. But I knew.* Both halves held at once, neither one collapsed into the other. If this book has a house style, that sentence is it, and it was written by a retired school administrator at eleven o'clock at night who had never given the matter a moment's thought before that afternoon.
 
 ## What I take from it
 
@@ -126,4 +126,4 @@ The second is that the stair-counting habit is genuinely interesting and genuine
 
 The third is the sleep, which is the only part with any consequence attached, and about which I am claiming nothing beyond the fact that she told me.
 
-That is the shape of nearly every session in this book. Something odd in the room, nothing to check, and a person who says her life is slightly different afterwards. It is less than the genre usually offers. It is what I have.
+That is the shape of many of the sessions in this book. Something odd in the room, nothing to check, and a person who says her life is slightly different afterwards. It is less than the genre usually offers. It is what I have.

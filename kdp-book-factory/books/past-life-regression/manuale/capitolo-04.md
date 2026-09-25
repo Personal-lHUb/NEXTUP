@@ -1,8 +1,8 @@
 # The Same Session, Told Twice
 
-What follows is one session written out twice. It was short — forty minutes of useful material from a woman I will call Ingrid, who had come about something unrelated and got this instead.
+What follows is one session written out twice. It was short — forty minutes of useful material from a woman I will call Ingrid, who had come about a fear of motorway driving and got this instead.
 
-Read the first version, then the second. Nothing has been added in between. No detail appears in the second that is not in the first; I have invented nothing, embellished nothing, and moved nothing. Only the framing changes. I want you to see how much a reader is asked to swallow when a writer changes nothing but the verbs.
+Read the first version, then the second. Both come from the same forty minutes. The first reports them; the second is written the way this material is usually written, and everything it adds I will point to afterwards. No detail of the session itself has been changed in either. I want you to see how much a reader is asked to swallow when a writer changes the framing and lets the framing bring its own details.
 
 ## Version one: what she said
 
@@ -38,7 +38,7 @@ Ingrid emerged from the session shaken, her hands still cold to the touch an hou
 
 ## What changed
 
-Set them side by side and count. I make it seven.
+Set them side by side and count. I make it seven large changes, and a handful of small ones I will leave you to spot: *late afternoon*, when she said early or late; *woollen*; *chapped*; *an hour later*.
 
 **One.** *Returned to a life.* She described things; the second version says a life existed and she went back to it. That is the whole claim of the field, inserted in the first five words, before any evidence has been offered.
 
@@ -72,8 +72,8 @@ I have thought about that last remark a great deal. It is in version one, in a f
 
 I am not going to pretend the second version is worse writing. It is better writing, by most ordinary measures. It has momentum. It has a scene and a threat and a small ache at the end. If you read the two aloud to a room, the second one holds them.
 
-That is precisely the problem, and it is why this is not a matter of a few careless authors. The pressure runs entirely one way. Version two is what a reader picks up in a shop and reads for thirty seconds; version one is what they can still trust on page two hundred. The first thirty seconds is where books are bought, so the machinery of publishing — including the writer's own ear — pushes constantly toward the version that cannot survive scrutiny.
+That is precisely the problem, and it is why this is not a matter of a few careless authors. The pressure runs entirely one way. Version two is what a reader picks up in a shop and reads for thirty seconds; version one is what they can still trust on page two hundred. Most books, I suspect, are bought or put back in the first thirty seconds, so the machinery of publishing — including the writer's own ear — pushes constantly toward the version that cannot survive scrutiny.
 
 And it does not survive it. A reader who enjoys version two and then wonders which port, and starts looking, finds that there is nothing to find, because there was never anything there: the port was assembled by the author out of a wall and some rope. The reader does not conclude that the author over-wrote one passage. The reader concludes that the whole book is like this, and closes it.
 
-I would rather have the reader at page two hundred. That is a commercial decision as much as an ethical one, and I have made it knowingly. Every session in the rest of this book is written in the first voice, and Ingrid's session, told straight, is the least impressive material in it. I have put it at the front on purpose.
+I would rather have the reader at page two hundred. That is a commercial decision as much as an ethical one, and I have made it knowingly. Every session in the rest of this book is written in the first voice, and Ingrid's session, told straight, is among the least impressive material in it. I have put it at the front on purpose.

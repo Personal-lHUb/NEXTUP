@@ -94,7 +94,7 @@ What I can report is the sequence: a man who had avoided open water for two deca
 
 There is nothing to check, and this time the nothing is unusually complete.
 
-No name. No place. No date. No period — he gave no indication of when any of it was supposed to be, and there was nothing in the material to date it by: rope is rope, and water is water, and a man looking at both could be standing anywhere in ten thousand years of human history.
+No name. No place. No date. No period — he gave no indication of when any of it was supposed to be, and there was nothing in the material to date it by: rope is rope, and water is water, and a man looking at both could be standing anywhere in human history.
 
 No object with distinguishing features. No event, even: nothing happened in this session. A man held a rope and looked at some water and declined to look at something in it.
 
@@ -122,4 +122,4 @@ The story as usually told has a mechanism in it. A man is frightened of water; u
 
 What actually happened has the first step and the third step and a hole where the middle should be. Douglas described a rope and some water and was badly frightened for two minutes, and some months later he could go in a swimming pool. Between those two facts there is no mechanism I can give you. I do not know whether he drowned, whether anyone drowned, whether the material was about drowning at all.
 
-The fear moved. That part is real, it is his, and it is the only thing in this chapter I would defend.
+The fear moved, as far as he and the people around him can tell. That part is real, it is his, and it is the only thing in this chapter I would defend.

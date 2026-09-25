@@ -8,7 +8,7 @@ Mine costs me a certain amount of money every year and one client in particular 
 
 People arrive with symptoms. A man with pain in his shoulder that four doctors have not explained. A woman with a compulsion she is ashamed of. A parent whose child is not eating.
 
-The session will produce material. It always does, and the material will attach itself to the symptom, because that is what the mind does with a symptom and an afternoon of free association: it joins them. He will describe a fall, or a weight, or a blow. She will describe a room she could not leave.
+The session will very probably produce material, and the material will attach itself to the symptom, because that is what the mind does with a symptom and an afternoon of free association: it joins them. He will describe a fall, or a weight, or a blow. She will describe a room she could not leave.
 
 And then the two of us will be sitting in a room with a story that explains the shoulder, and the story will be satisfying, and it will be the only explanation on offer. That is a dangerous object to hand somebody who has been in pain for two years.
 
@@ -82,4 +82,4 @@ Four refusals. Not a code of ethics, not a charter, just four things I will not 
 
 I have seen much longer lists, and I am suspicious of them, because a long list tends to be about the practitioner rather than the client. These four exist because each one names a specific way this work can hurt somebody: by substituting for medicine, by impersonating foresight, by manufacturing contact, by selling an outcome.
 
-They are also the four questions I would ask a practitioner before booking, phrased as questions rather than as statements. A chapter near the end of this book puts them in that form, along with the answers that should make you comfortable and the ones that should make you put the phone down.
+They are also the four questions I would ask a practitioner before booking, phrased as questions rather than as statements. A chapter near the end of this book puts all four in that form, among a few others, along with the answers that should make you comfortable and the ones that should make you put the phone down.

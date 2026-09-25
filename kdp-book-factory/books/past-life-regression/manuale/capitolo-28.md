@@ -2,7 +2,7 @@
 
 Everything up to here has been subtraction. No proof, no confirmation, no dates, no verification, no promises. This chapter is the one thing I am willing to add, and I want to state it with enough precision that you can disagree with it accurately.
 
-It is a narrow claim. It is narrower than what this field usually offers and, I think, more defensible than anything else on the shelf.
+It is a narrow claim. It is narrower than what this field usually offers and, I think, more defensible than most of what I have read on the shelf.
 
 ## Three people at three months
 
@@ -20,7 +20,7 @@ At three months: *It's stopped. I keep expecting it back. My wife says I'm easie
 
 At a year: still stopped.
 
-**Maureen**, whose session appears earlier in this book, stopped waking at three in the morning and stopped counting stairs.
+**Maureen**, whose session appears earlier in this book, stopped waking in the small hours and stopped counting stairs.
 
 Three people. Three self-reports. No control, no blinding, no follow-up by anybody but me, and a strong incentive on all three to tell me something good.
 
@@ -44,13 +44,13 @@ That is the whole claim. It is about what happens after, it rests on what people
 
 *That I did it.* I do not know why Gill stopped being braced. Nothing in her session was about her husband. The honest description is that she spent an afternoon in a chair and three months later her grief sat differently, and any mechanism I offered would be an invention.
 
-*That it was the session rather than the passage of time.* Grief moves. Dreams stop. Phobias ease. All three of my examples had been going on for a long time, which makes spontaneous change less likely but does not make it impossible, and there is no version of this in which I can rule it out.
+*That it was the session rather than the passage of time.* Grief moves. Dreams stop. Fears sometimes ease. All three of my examples had been going on for a long time, which makes spontaneous change less likely but does not make it impossible, and there is no version of this in which I can rule it out.
 
-*That anyone should expect it.* A quarter of my sessions produce nothing at all. Of those that produce something, some are followed by a reported change and many are not. A reader booking a session on the strength of this chapter would be doing something I have tried hard not to encourage.
+*That anyone should expect it.* About one session in eight of mine produces nothing at all, and another one in eight very little. Of those that produce something, some are followed by a reported change and many are not. A reader booking a session on the strength of this chapter would be doing something I have tried hard not to encourage.
 
-*That it is treatment.* It is not, I am not qualified to provide it, and the session I ended early is in this book precisely because the distinction matters more than anything else in it.
+*That it is treatment.* It is not, I am not qualified to provide it, and the session I ended early is in this book precisely because the distinction matters more than anything else in it. If your own grief has stopped moving, the first people to talk to are your doctor or a bereavement service — in the UK, Cruse Bereavement Support; elsewhere, your doctor or a local hospice can point you to one. Nothing in this chapter is a reason to see a hypnotist instead of them.
 
-*That the mechanism is anything in particular.* It might be the material. It might be an hour of undivided attention, which almost nobody gets. It might be the act of deciding to do something about a thing you have carried for twenty years, of which booking is the first step and the session is the second. I cannot distinguish these and neither can anyone else.
+*That the mechanism is anything in particular.* It might be the material. It might be an hour of undivided attention, which almost nobody gets. It might be the act of deciding to do something about a thing you have carried for twenty years, of which booking is the first step and the session is the second. I cannot distinguish these, and nobody could from records like mine.
 
 ## Why my evidence is weak, stated plainly
 
@@ -84,14 +84,14 @@ The large claim — that these sessions recover real lives — cannot be support
 
 A field that rests its case there has built on ground that cannot bear it, and every reader who checks will find that out. That is the mechanism by which this shelf loses its readers, one at a time, and it is entirely self-inflicted.
 
-The modest claim sits on ground that can bear it. People do report changes. That is observable, it is the ordinary currency of every talking profession, and it does not require anyone to believe anything about the seventeenth century. It is also, I think, the thing that actually matters to the people in the chair — not one of my clients has ever come to me wanting to prove a metaphysical proposition. They come because something is stuck.
+The modest claim sits on ground that can bear it. People do report changes. That is observable, it is the ordinary currency of every talking profession, and it does not require anyone to believe anything about the seventeenth century. It is also, I think, the thing that actually matters to the people in the chair — hardly any of my clients have come to me wanting to prove a metaphysical proposition. They come because something is stuck.
 
 And there is a practical point. A claim this narrow cannot be destroyed by a sceptical reader with a search engine, because it does not depend on any fact about the world outside the people making it. It can only be tested the way such claims are tested: by better follow-up than I have done.
 
 ## What I would want, if anyone ever does this properly
 
-Three-month and twelve-month follow-up on every client, collected by a third party, with the same questions asked of everyone including the people whose sessions produced nothing. That last group is the control that is sitting there unused in every practice in this country.
+Three-month and twelve-month follow-up on every client, collected by a third party, with the same questions asked of everyone including the people whose sessions produced nothing. That last group is a comparison sitting unused in my practice, and I suspect in most others.
 
-If the people who got nothing report change at the same rate as the people who got a vivid life, that tells us the content is not what does the work, which would be the most useful finding this field could produce and would cost almost nothing to establish.
+If the people who got nothing report change at the same rate as the people who got a vivid life, that would strongly suggest the content is not what does the work, which would be the most useful finding this field could produce and would cost almost nothing to establish.
 
 I would like to know. I think I would like to know. That hesitation is in the sentence on purpose, and it is the most honest thing in this chapter.

@@ -6,11 +6,11 @@ If you have just had a session, this is the chapter to read. If you are thinking
 
 Across fourteen years, the reasons people give in the intake fall overwhelmingly into three groups. Not three problems — three shapes.
 
-**A fear that has outlasted its explanations.** Water, heights, enclosed spaces, dentists, flying, bridges. What these people have in common is not the fear but its history: they have usually tried the sensible things and the sensible things have helped in the way sensible things help, which is real and partial. They arrive slightly apologetic, and they arrive with the fear well described, because they have described it to several professionals already.
+**A fear that has outlasted its explanations.** Water, heights, enclosed spaces, dentists, flying, bridges. What these people have in common is not the fear but its history: they have usually tried the sensible things and the sensible things have helped in the way sensible things help, which is real and partial. They arrive slightly apologetic, and they arrive with the fear well described, because they have described it to several professionals already. Douglas, and his water, belonged here.
 
-**A grief that has stopped moving.** Not fresh grief — I turn fresh grief away, as described earlier. This is grief at eighteen months, two years, five years, where the person is functioning and something is not right and they cannot say what. Gill's phrase was the best I have heard: *stuck in a way I can't explain without sounding ungrateful.*
+**A grief that has stopped moving.** Not fresh grief — I turn fresh grief away, as described earlier. This is grief at eighteen months, two years, five years, where the person is functioning and something is not right and they cannot say what. Gill's phrase, from the previous chapter, is the most exact I have heard: *stuck in a way I can't explain to anybody without sounding ungrateful.*
 
-**A repetition.** A dream that comes back, a place that pulls at them, a reaction they have to something ordinary that is out of all proportion. This group is the most varied and the most cheerful; they are usually not in distress, they are curious, and they have often been carrying the thing for decades without minding much.
+**A repetition.** A dream that comes back, a place that pulls at them, a reaction they have to something ordinary that is out of all proportion. This group is the most varied and the most cheerful; they are usually not in distress, they are curious, and they have often been carrying the thing for decades without minding much. Yusuf's corridor, twice a month for twenty years, was one of these; so, in its way, was Maureen's counting.
 
 What people say afterwards divides along the same lines, and unevenly. The fears and the repetitions produce more reported change than the grief does. I do not know why, and the numbers behind that sentence are the unsystematic impressions described in the previous chapter, so weigh them accordingly.
 
@@ -18,21 +18,19 @@ What people say afterwards divides along the same lines, and unevenly. The fears
 
 Do one thing and avoid one thing.
 
-**Do the write-up.** Within twenty-four hours, ideally before you sleep. Write what arrived, not what it means: not *I was a weaver* but *my hands were doing something repetitive and I had a sense of being indoors for a long time.* Include the fragments that did not fit. Include the modern word that turned up in the middle of an old scene, and the detail you are fairly sure came from a film, and the bit you left out in the room because it seemed too silly to say.
+**Do the write-up.** Within twenty-four hours, ideally before you sleep, in the way the chapter on testimony describes: what arrived, not what it means, including the fragments that did not fit and the bit you left out in the room because it seemed too silly to say.
 
 That last category is the important one. Maureen's most interesting sentence never entered the session at all; it went into her notebook at eleven o'clock at night, and had she not written it down it would have vanished entirely within a fortnight.
 
-**Avoid deciding what it means.** The urge is strongest in the first hour and the interpretation formed then is the one that sticks. It is also, almost always, the most obvious available reading — the one that connects the material to whatever you walked in thinking about. That may be right. You have no way of knowing yet, and a premature interpretation forecloses every other one.
+**Avoid deciding what it means.** In my experience the urge is strongest in the first hour, and the interpretation formed then tends to be the one that sticks. It is also, almost always, the most obvious available reading — the one that connects the material to whatever you walked in thinking about. That may be right. You have no way of knowing yet, and a premature interpretation forecloses every other one.
 
 ## The fortnight
 
-Session material consolidates. It starts as impressions and, over roughly two weeks, becomes a story with a beginning and an end.
-
-That is normal. It happens to every kind of memory. What is peculiar here is that nothing corrects it. An ordinary memory meets the world and gets adjusted; you go back to the street and the pub is three doors along. Session material never meets anything. It firms up unopposed, and the version you have at a month is smoother, more confident and less accurate than the version you had at a day.
+Session material settles. It starts as impressions and, in my experience over the first couple of weeks, becomes a story with a beginning and an end. That is the drift described in the chapter on testimony, and what is peculiar here is only that nothing in the world pushes back against it.
 
 So: sit with it. Re-read what you wrote, without editing it. Notice, if you can bear to, where your remembered version has drifted from the written one — that gap is the most interesting thing the whole exercise produces, and almost nobody has access to it because almost nobody writes anything down.
 
-Expect the aftermath to be uneven. People commonly report a lift for a few days, then a flat patch, then something steadier. Tears can arrive a week later attached to nothing. Sleep changes in both directions. None of this means anything has gone wrong.
+Expect the aftermath to be uneven. People commonly report a lift for a few days, then a flat patch, then something steadier. Tears can arrive a week later attached to nothing. Sleep changes in both directions. On its own, none of this means anything has gone wrong; the signs that do are at the end of this chapter.
 
 And expect the material to attach itself to your actual life. It does this without being asked. A detail from the session will connect to a memory from your childhood, or to something in your marriage, and the connection will feel like a discovery. Write it down and hold it loosely; a mind that has just spent an hour making connections does not stop at the door.
 
@@ -58,13 +56,13 @@ Some of what comes up in these sessions is not session material. It is a life, a
 
 Here is how I tell, and here is how you can tell about yourself.
 
-**If it is from this life, it belongs elsewhere.** Martin's session produced a low room. What it actually produced was two years of something he had told nobody, and that is not a matter for a hypnotist. If what surfaces is recognisably about your own history — a real person, a real event, something you can date — that is a signal, not a session.
+**If it is from this life, it belongs elsewhere.** Martin's session produced a low room. What it actually produced was two years of something he had told nobody, and that is not a matter for a hypnotist. If what surfaces is recognisably about your own history — a real person, a real event, something you can date — that is a signal, not a session. And treat it as something that came up, not something established: material about real people in your own life can feel exactly like memory and still be wrong. Do not act on it, and do not confront anyone with it, until you have talked it through with someone qualified.
 
-**If the distress persists past a fortnight.** Unsettledness in the days after is ordinary. Distress that is still there at two weeks, or that is getting worse rather than flatter, is not something to sit with and write about. Speak to your GP.
+**If the distress persists past a fortnight.** Unsettledness in the days after is ordinary. Distress that is still there at two weeks, or that is getting worse rather than flatter, is not something to sit with and write about — and if it is severe at any point, enough to stop you sleeping, working or looking after yourself, do not wait for the fortnight. Speak to your GP or family doctor.
 
 **If you find yourself needing another session to feel all right.** That is the clearest sign of all, and it is the one people are least likely to notice about themselves.
 
-**If anything about it touches harm to yourself.** Then this is not the right room, and the right room exists, and going there is not a failure of the afternoon.
+**If anything about it touches harm to yourself**, do not wait and do not sit with it: speak to someone today — your doctor; your local emergency number, if you are in danger now; or a crisis line, such as Samaritans on 116 123 in the UK and Ireland, or 988 by call or text in the US. This is not the right room, the right room exists, and going there is not a failure of the afternoon.
 
 I say a version of all of this to every client before they leave, and I say it in the certain knowledge that about a third of them will not hear it, because they have just had an unusual experience and are not listening to practical advice. Which is why it is also here, in writing, at the end of a chapter you can come back to.
 
@@ -82,7 +80,7 @@ Some advice, from watching a great many people get this wrong.
 
 **Be ready for the joke.** Somebody will make one. Bernadette made one to her own sister within ninety seconds. It is not usually contempt; it is people managing an awkward register.
 
-**And consider not telling anyone for a fortnight.** Every time you tell the story it consolidates, and you will be telling a version that is already smoother than the afternoon was. The people who kept it to themselves for two weeks, in my experience, have a more interesting account at the end of it than the people who told it on day one and then told it eleven more times.
+**And consider not telling anyone for a fortnight.** Every time you tell the story it settles a little further, and you will be telling a version that is already smoother than the afternoon was. The people who kept it to themselves for two weeks, in my experience, have a more interesting account at the end of it than the people who told it on day one and then told it eleven more times.
 
 ## What the fortnight is actually for
 

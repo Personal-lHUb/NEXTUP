@@ -1,6 +1,6 @@
-# Coming Back: the Last Ten Minutes Nobody Writes About
+# Coming Back, and the Fortnight Most Accounts Leave Out
 
-Accounts of this work almost always end with the material. The client describes the last thing, there is a paragraph of reflection, and the chapter closes. What happened between the last described image and the client walking out of the building is not considered to be part of the story.
+The accounts of this work I have read nearly always end with the material. The client describes the last thing, there is a paragraph of reflection, and the chapter closes. What happened between the last described image and the client walking out of the building is not considered to be part of the story.
 
 It is at least a third of the job, and if it goes badly it is the part the client is still dealing with a fortnight later.
 
@@ -16,7 +16,7 @@ The count up is slow, from one to five, with a sentence between each number. Not
 
 Then they open their eyes, and then I stop talking entirely for a minute or so, because the worst thing you can do to somebody at that moment is ask them a question.
 
-I have never brought anyone back quickly and I am aware that some practitioners do, on the grounds that the state is light and the transition is trivial. The state is light. The transition is not trivial, because what has to happen is not a change of consciousness but a change of position: the person has been inside something and now has to be outside it, looking at it, deciding what it was. That takes a few minutes and it cannot be hurried by counting faster.
+I have never brought anyone back quickly and I am aware that some practitioners do, on the grounds that the state is light and the transition is trivial. The state is usually light. The transition is not trivial, because what has to happen is not a change of consciousness but a change of position: the person has been inside something and now has to be outside it, looking at it, deciding what it was. That takes a few minutes and it cannot be hurried by counting faster.
 
 ## The first sentence
 
@@ -34,7 +34,7 @@ What almost nobody says, incidentally, is anything about the content. The interp
 
 ## The ordinary physical aftermath
 
-People are not prepared for this, and nobody writes about it, so here it is in plain terms.
+People are not prepared for this, and accounts of this work rarely mention it, so here it is in plain terms.
 
 They are often cold, and shivery for a few minutes in a way that is out of proportion to the room temperature. The blanket stays on.
 
@@ -42,7 +42,7 @@ They are frequently hungry. Genuinely, urgently hungry, the way you are after sw
 
 Some people are groggy for half an hour, in the manner of an afternoon nap that went on too long. Some are the opposite: bright, talkative, slightly overwound, and those are the ones I keep longest, because the brightness tends to drop away sharply about an hour later.
 
-Tears are common and are not a sign of anything having gone wrong. They often arrive after the session rather than during it, sometimes without any accompanying emotion the client can identify, which alarms people considerably and should not.
+Tears are common, and in my experience they are not a sign of anything having gone wrong. They often arrive after the session rather than during it, sometimes without any accompanying emotion the client can identify, which alarms people considerably and should not. Distress that goes on for more than a few days is a different matter, and a matter for a doctor; the chapter on the weeks after a session says when not to wait.
 
 And a proportion get a headache, mild, frontal, lasting an hour or two. I have no explanation. I mention it because a client who gets one and has not been told it happens will spend the evening wondering what has been done to them.
 
@@ -50,7 +50,7 @@ And a proportion get a headache, mild, frontal, lasting an hour or two. I have n
 
 Four things, in the same order every time, and I keep them until the client is fully upright and has had something to drink.
 
-That they should not decide what any of it means today. The urge to interpret is strongest in the first hour and the interpretation formed then is the one that sticks, and it is usually the most obvious reading rather than the best one.
+That they should not decide what any of it means today. In my experience the urge to interpret is strongest in the first hour, the interpretation formed then tends to be the one that sticks, and it is usually the most obvious reading rather than the best one.
 
 That they should write it down before they sleep, in the way described earlier in this book — what arrived, not what it means, including the parts that did not fit.
 
@@ -64,7 +64,7 @@ I send a short message two days after every session. It has three lines in it an
 
 About a third reply. Of those, most say something brief and friendly. Perhaps one in six says something substantial, and it is nearly always the same sort of thing: that something has shifted, or that a detail from the session has attached itself to something in their actual life, or that they have been sleeping differently.
 
-The reason for the note is not therapeutic ambition. It is that the window in which a person most needs to be able to ask a question is two to four days out, and by then the session feels like a transaction that concluded, and most people will not initiate contact about a transaction that concluded. Removing that barrier costs me four lines.
+The reason for the note is not therapeutic ambition. It is that, in my experience, the window in which a person most needs to be able to ask a question is two to four days out, and by then the session feels like a transaction that concluded, and most people will not initiate contact about a transaction that concluded. Removing that barrier costs me four lines.
 
 It also, I will admit, gives me the only follow-up data I have. Everything I know about what this work does for people comes from those replies and from the conversations that occasionally follow them, and it is a thin and self-selected record. I would rather say so than present it as something sturdier.
 
@@ -78,7 +78,7 @@ So there is an hour afterwards, and it has a shape. I listen to nothing and writ
 
 The writing-up takes about forty minutes for a full session and it is the least enjoyable part of the job. It is also the part that has to happen that day. I know this because I have tested it against the recordings: a write-up done the same afternoon and a write-up done three days later are noticeably different documents, and the later one is smoother, more confident and less accurate in exactly the ways you would expect.
 
-There is an emotional component too, and it would be dishonest to leave it out of a chapter about the last ten minutes. Some sessions stay with you. A woman crying about a child she could not name is not something you put down by washing a cup, and after a few of those in a month I am noticeably worse company at home. Practitioners in this field talk about this rarely and should talk about it more; there is no supervision structure of the kind clinicians have, and most of us are managing it privately and improvising.
+There is an emotional component too, and it would be dishonest to leave it out of a chapter about coming back. Some sessions stay with you. A woman crying about a child she could not name is not something you put down by washing a cup, and after a few of those in a month I am noticeably worse company at home. Practitioners in this field talk about this rarely and should talk about it more; past-life work sits largely outside the supervision arrangements clinicians have, and most practitioners I know are managing it privately and improvising.
 
 What I have settled on is unremarkable: a limit on sessions per week, the hour afterwards, and one person I can describe a difficult afternoon to, anonymised, who is not a client and not a practitioner.
 

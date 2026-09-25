@@ -4,7 +4,7 @@ Ray got nothing.
 
 Not a thin session. Nothing: an hour and five minutes of a sixty-seven-year-old man lying comfortably in a reclining chair, warm, relaxed, entirely awake, reporting on the colour behind his eyelids.
 
-This is the last of the eight full sessions in this book and it is here because leaving it out is how the shelf ends up lying to you. Every practitioner has these. Nobody prints them. The cumulative effect of nobody printing them is a literature in which booking a session reliably produces a life, and that is not what booking a session reliably produces.
+This is the last of the eight session chapters in this book, and it is here because leaving it out is how the shelf ends up lying to you. Every practitioner has these. Almost nobody prints them, and the cumulative effect is a literature in which booking a session reliably produces a life, and that is not what booking a session reliably produces.
 
 ## Ray
 
@@ -42,21 +42,21 @@ I waited. Four minutes, twice. Waiting is the first and best tool and it costs n
 
 I went back to the body. Weight, temperature, the chair, the blanket. Sometimes a client who is not producing images is producing sensations and has not thought to mention them. Ray reported that his left foot was slightly cooler than his right, which was true and which he found mildly interesting.
 
-I asked about sound rather than sight. A proportion of people are not visual and will produce nothing in response to "what can you see" while having plenty available to "what can you hear." He heard the traffic. He heard, he said, "a pipe somewhere in the building," which there is.
+I asked about sound rather than sight. Some people produce little in response to "what can you see" and a good deal more to "what can you hear," so I ask both. He heard the traffic. He heard, he said, "a pipe somewhere in the building," which there is.
 
 I offered a different starting point. Not an image — I do not supply images — but a different kind of question: *is there anything that feels important at the moment?* He thought about it and said, "Not really, no."
 
 I deepened further, twice, spending about six minutes on it in total.
 
-And then, at around minute fifty, I stopped trying.
+And then, at around minute fifty, I stopped trying. That is later than I usually leave it. Every physical sign said he was there, and I kept expecting the material to follow the signs.
 
 ## Why I stopped
 
 Because continuing would have started to be pressure, and pressure is how sessions get manufactured.
 
-There is a thing that happens at about the fifty-minute mark of an empty session, and any honest practitioner will recognise it. The client knows nothing is happening. You know nothing is happening. Both of you are aware that money has been paid, and that the afternoon is a failure, and that the failure is more embarrassing for the client than for you.
+There is a thing that happens at about the fifty-minute mark of an empty session, and I would expect any honest practitioner to recognise it. The client knows nothing is happening. You know nothing is happening. Both of you are aware that money has been paid, and that the afternoon is a failure, and that the failure is more embarrassing for the client than for you.
 
-At that point, a question with any shape at all will be answered. Not dishonestly — the client is not going to lie. But a person who is relaxed, cooperative, slightly embarrassed and keen for the afternoon to have been worth something will, if handed a frame, furnish it. I could have got Ray a life in about four minutes. I am fairly confident of that, and I am not proud of being confident of it.
+At that point, a question with any shape at all will be answered. Not dishonestly — most clients are not going to lie. But a person who is relaxed, cooperative, slightly embarrassed and keen for the afternoon to have been worth something will, if handed a frame, furnish it. I could have got Ray a life in about four minutes. I am fairly confident of that, and I am not proud of being confident of it.
 
 So instead I told him what was happening, out loud, in the ordinary voice: *Ray, this isn't settling into anything today, and that happens. Do you want to keep going for a bit, or shall we stop?*
 
@@ -88,7 +88,7 @@ There is nothing to check because there is nothing.
 
 I am going to leave the section that short, because the alternative — spinning three paragraphs out of an absence — would be doing the opposite of what this chapter is for.
 
-## The four empty sessions I did not print
+## The three empty sessions I did not print
 
 Ray's is the one I have written out, and there were three others I considered, and the reason I chose his rather than theirs is instructive.
 
@@ -112,8 +112,6 @@ If the answer is none, or if the answer is a vague reassurance about everyone ge
 
 I had a choice about what went in this slot. I have sessions that are more vivid than Ray's, more emotionally complete, more quotable. Any of them would have made a better chapter and a better book, in the short and obvious sense of better.
 
-But a book with eight sessions in it, all of which produced a life, would be making a claim about the base rate without ever stating it. The claim would be implicit, undefended and false, and it would be delivered not by any sentence I had written but by the shape of the table of contents.
+But eight session chapters, all of which produced a life, would be making a claim about the base rate without ever stating it. The claim would be implicit, undefended and false, and it would be delivered not by any sentence I had written but by the shape of the table of contents.
 
-The shelf is full of books doing exactly that, mostly without meaning to. Each writer chose their best material; nobody lied; and the aggregate tells a reader that this reliably works.
-
-So: seven sessions that produced something, and Ray, who produced a dark red colour behind his eyes and fifteen minutes of silence and, by his own account, the quietest hour he had had in three years.
+So: eight sessions that produced something, and Ray, who produced a dark red colour behind his eyes and fifteen minutes of silence and, by his own account, the quietest hour he had had in three years.

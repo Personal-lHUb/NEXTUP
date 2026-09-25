@@ -1,30 +1,30 @@
 # Why Almost Nobody Is a Nobody
 
-Somebody prominent turns up in my room perhaps twice a year.
+Somebody prominent turns up in my room perhaps once or twice a year.
 
 I want to handle this without mockery, because mockery is the standard treatment and it is both cruel and lazy. A person who arrives at the end of a session believing they have found something extraordinary about themselves is not a fool. They have had a vivid experience, they have reached the obvious conclusion, and the people who laugh at them have usually never lain in that chair.
 
-But the arithmetic has to be done, and nobody does it out loud.
+But the arithmetic has to be done, and it is rarely done in the room, with the client, out loud.
 
 ## The arithmetic
 
-Estimates of how many human beings have ever lived vary, and the variation is not small — the number depends on where you start counting and what you count, and reasonable people put it anywhere from the high tens of billions upwards. Call it a very large number and leave it there; the argument does not need precision.
+Estimates of how many human beings have ever lived vary, and the variation is not small — the number depends on where you start counting and what you count, and reasonable people put it anywhere from several tens of billions to well over a hundred billion. Call it a very large number and leave it there; the argument does not need precision.
 
 Now the other number: how many of those people would a person today have heard of? Not scholars — people. Names that would mean something to a client lying in a chair.
 
-Even generously — every ruler with a recognisable name, every figure from every popular film and school syllabus, every saint and general and inventor anyone could place — you are talking about a few thousand. Perhaps ten thousand if you are being very liberal about it.
+Even generously — every ruler with a recognisable name, every figure from every popular film and school syllabus, every saint and general and inventor anyone could place — my own rough guess is a few thousand — perhaps ten thousand if you are very liberal — and the argument survives even if I am out by a factor of ten.
 
 Divide one by the other. The proportion of all human lives that are recognisable to a modern person is something in the order of one in ten million, and that is being kind.
 
 If session material were drawn at random from lived human experience, a practitioner running a session a week for a working lifetime would expect to encounter a recognisable name approximately never. Not rarely. Never, in a hundred careers.
 
-I get two a year.
+I get one or two a year.
 
 ## What that tells you, and what it does not
 
-It does not tell you the clients are lying. I want to say that clearly, because it is the conclusion people jump to and it is wrong. In my experience the clients are never lying. The material arrives the same way all session material arrives — unbidden, in fragments, with the same physical signs and the same texture.
+It does not tell you the clients are lying. I want to say that clearly, because it is the conclusion people jump to and it is wrong. In my experience the clients are almost never lying. The material arrives the same way all session material arrives — unbidden, in fragments, with the same physical signs and the same texture.
 
-What it tells you is that the identification is being supplied, and that it is being supplied from the obvious place: the enormously disproportionate representation of a few thousand people in everything we read, watch and are taught. Those names are available in a way that a fourteenth-century weaver's name is not available, because nobody knows the weaver's name, including the weaver's descendants.
+What it tells you is that the identification is being supplied, and that it is being supplied from the obvious place: the enormously disproportionate representation of a few thousand people in everything we read, watch and are taught. Those names are available in a way that a fourteenth-century weaver's name is not available, because almost nobody knows the name of any particular fourteenth-century weaver, very probably including the weaver's descendants.
 
 A mind producing a life under these conditions will reach for what it has. What it has is what it has been given.
 
@@ -74,7 +74,7 @@ The reply goes: people who are drawn to this work are not a random sample of hum
 
 I have heard both versions put seriously, by thoughtful people, and neither is absurd.
 
-Here is why I do not think either rescues the numbers. Both arguments require a selection effect of an extraordinary magnitude. To move from one in ten million to one in a few hundred — which is roughly my observed rate — you need a filter operating with a strength that has no parallel anywhere else in human affairs. It is not enough for prominent lives to be somewhat over-represented; they would have to be over-represented by a factor in the tens of thousands.
+Here is why I do not think either rescues the numbers. Both arguments require a selection effect of an extraordinary magnitude. To move from one in ten million to one in thirty or so — which, over several hundred sessions, is roughly my observed rate — you need a filter hundreds of thousands of times stronger than chance, and the only filter I know of that strong is the one described above: what we read, watch and are taught. It is not enough for prominent lives to be somewhat over-represented; they would have to be over-represented by a factor in the hundreds of thousands.
 
 And there is a second problem, which is that the selection effect would have to be remarkably well-informed. The famous names that turn up in my room are, overwhelmingly, the ones that are famous *now*, in this country, to a person with an ordinary education. They track the school syllabus and the television schedules with a fidelity that is difficult to explain by any mechanism that is not simply availability.
 

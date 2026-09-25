@@ -2,7 +2,7 @@
 
 Suppose a session does produce something checkable. A name, a date, a place. What happens next?
 
-In the literature, what happens next is usually one sentence: *the records confirm*, or *no trace could be found*. Neither sentence tells you anything, because neither tells you what was searched, how complete it was, or what a match would have to look like to mean something.
+In the accounts I have read, what happens next is usually one sentence: *the records confirm*, or *no trace could be found*. Neither sentence tells you anything, because neither tells you what was searched, how complete it was, or what a match would have to look like to mean something.
 
 This chapter is the boring version of that sentence, written out at length, so that you can never be satisfied by the short one again.
 
@@ -10,13 +10,13 @@ This chapter is the boring version of that sentence, written out at length, so t
 
 Broadly, four kinds, and their coverage is wildly uneven.
 
-**Registers of birth, marriage and death.** These are the backbone of any search and they are much younger and much patchier than people assume. Systematic civil registration is a modern invention in most of the world. Before it, you are relying on parish or equivalent religious records, which exist in some places, for some periods, in variable condition, having survived fire, flood, war, damp and indifference. Enormous populations — the poor, the mobile, the enslaved, anyone outside the established religion of their area — appear in none of them.
+**Registers of birth, marriage and death.** These are the backbone of any search and they are much younger and much patchier than people assume. Systematic civil registration is a modern invention in most of the world. Before it, you are relying on parish or equivalent religious records — which usually note baptisms and burials rather than births and deaths — and which exist in some places, for some periods, in variable condition, having survived fire, flood, war, damp and indifference. Large groups are badly served by them: the mobile, recorded somewhere other than where they lived; the enslaved, who often appear, if at all, as property rather than as people; minorities whose own registers have not survived; and the poor, who are usually there, but as a name and a date and nothing more.
 
-**Property and tax records.** Better survival in some places, because governments care about money. But they record property-holders, which is a minority, and they record the household head, which usually means one man standing in for everybody under his roof.
+**Property and tax records.** Better survival in some places, because governments care about money. But most of them record those who held property or paid tax, often only the head of the household, with everyone else under the roof reduced to a number or left out — though a few, such as poll-tax lists, name more people than you would expect.
 
-**Institutional records.** Military, ecclesiastical, guild, school, hospital. Excellent where they exist. They exist for institutions, which means they capture the tiny fraction of lives that touched one, and they capture that fraction in the institution's own terms.
+**Institutional records.** Military, ecclesiastical, guild, school, hospital. Excellent where they exist. They exist for institutions, which means they capture the lives that touched one — for most of history a small fraction, growing only with conscription, compulsory schooling and the modern hospital — and they capture them in the institution's own terms.
 
-**Everything else.** Letters, diaries, newspapers, photographs, gravestones, court proceedings. Rich, fascinating, and radically unrepresentative: preserved because somebody was literate, or notable, or unlucky enough to be prosecuted.
+**Everything else.** Letters, diaries, newspapers, photographs, gravestones, court proceedings. Rich, fascinating, and radically unrepresentative: preserved because somebody was literate, or notable, or caught up in a court case.
 
 Put together, the documentary record is not a thin version of the past. It is a sample, selected for wealth, settlement, literacy, institutional contact and luck, and it excludes the overwhelming majority of human beings who have ever lived.
 
@@ -42,7 +42,7 @@ Now consider a client who gives an unusual name, a specific small settlement, a 
 
 The difference between those two cases is not the quality of the session. It is arithmetic: how many candidates would satisfy the description? If the answer is thousands, a match is noise. If the answer is one, a match is a finding.
 
-Almost every match reported in this field is the first kind. In fourteen years I have not personally encountered the second kind, and the one near-miss I have — the gate latch described earlier in this book — turned out to have a five-minute explanation.
+Almost every match I have seen reported is the first kind. In fourteen years I have not personally encountered the second kind, and the one near-miss I have — the gate latch described earlier in this book — turned out to have a five-minute explanation.
 
 ## The three ways a loose match gets reported as a tight one
 
@@ -50,11 +50,11 @@ These are the mechanisms, and once you can name them you will see them constantl
 
 **Post-hoc narrowing.** The client gave a name and a general region. The searcher finds a candidate in a specific village. The account then reports the village as though the client had supplied it. Nobody lies; the village simply migrates from the finding into the description.
 
-**Counting the hits and not the attempts.** Six checkable details were produced; one matched; the account reports the one. This is the single commonest error in the field and it is not usually deliberate, because the other five stop feeling like attempts the moment they fail.
+**Counting the hits and not the attempts.** Six checkable details were produced; one matched; the account reports the one. In the accounts I have read, this is the commonest error of all, and it is not usually deliberate, because the other five stop feeling like attempts the moment they fail.
 
 **Allowing the interpreter to do the matching.** The client said "the long building." The searcher finds a record of a granary. A granary is long. This gets reported as a match, and every step of it was performed by the person doing the searching.
 
-The defence against all three is to write the description down, in full, before searching, and to treat any detail not in that document as inadmissible. I do this. It is tedious and it has cost me two chapters.
+The defence against all three is to write the description down, in full, before searching, and to treat any detail not in that document as inadmissible. I do this. It is tedious, and it has cost me two chapters I would have liked to write: two sessions whose matches existed only once the description had been sharpened after the search.
 
 ## The check I run, in order
 
@@ -66,7 +66,7 @@ Second, I write down, before searching, what a meaningful match would look like 
 
 Third, I search, and I log where I looked and for how long. The log goes in the file.
 
-Fourth, I ask the client about ordinary sources — school trips, documentaries, books in the house, relatives with stories. This is the step that is nearly always skipped, and in the one case in this book where a match appeared, this step is what dissolved it. It takes five minutes.
+Fourth, I ask the client about ordinary sources — school trips, documentaries, books in the house, relatives with stories. In the accounts I have read, this is the step most often skipped, and in the one case in this book where a match appeared, this step is what dissolved it. It takes five minutes.
 
 Fifth, I write the result, including the case where the result is nothing, and I do not adjust the description to fit.
 
@@ -78,7 +78,7 @@ A client says: *my name is Anne. I'm near the water. There's a mill.*
 
 Write it down exactly. Three claims: a common first name, proximity to water, a mill.
 
-Now the pre-registration step. How many candidates would satisfy this? In any reasonably populated region over any two-hundred-year window, the number of women called Anne living within sight of water near a mill is not in the hundreds. It is in the tens of thousands, at least. Mills were everywhere; water was everywhere; Anne was one of the commonest names there has been.
+Now the pre-registration step. How many candidates would satisfy this? In a county-sized region of England over any two-hundred-year window, the number of women called Anne living within sight of water near a mill is not in the hundreds. It is very likely in the thousands, quite possibly the tens of thousands. Mills were common; water was everywhere; Anne was for centuries one of the commonest names in England.
 
 So before I search, I write: *this search cannot produce an informative result. A match is certain and means nothing.*
 
@@ -98,4 +98,4 @@ For the overwhelming majority of sessions, the documentary record cannot help. T
 
 That is not a temporary state pending better archives. The records that would be needed were never made.
 
-What follows from it is the position this whole book takes. If the historical question is closed to us, then the honest thing to do is report the testimony accurately, check the rare checkable claim properly, say plainly when nothing comes back — and put the weight of the argument somewhere it can actually rest, which is on what this work does for the people who do it. That is the subject of a later chapter, and it is the only claim I make.
+What follows from it is the position this whole book takes. If the historical question is closed to us, then the honest thing to do is report the testimony accurately, check the rare checkable claim properly, say plainly when nothing comes back — and put the weight of the argument somewhere it can actually rest, which is on what this work does for the people who come to it. That is the subject of a later chapter, and it is the only claim I make.
