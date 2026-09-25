@@ -749,6 +749,9 @@ class TestBriefDiCopertina(unittest.TestCase):
         self.assertIn(f"{coverdesign.THUMBNAIL_WIDTH_PX} px", testo)
         self.assertIn(f"at least {coverdesign.MIN_CONTRAST:.0f}:1", testo)
         self.assertIn(f"at most {coverdesign.MAX_TITLE_LINES} lines", testo)
+        # 0.085 arrotondato a «8%» diceva al grafico una soglia che il PDF non accetta
+        self.assertIn(f"({coverdesign.GOOD_TITLE_CAP_RATIO * 100:g}% is where", testo)
+        self.assertNotIn("(8% is where", testo)
 
     def test_i_numeri_veri_si_citano_e_gli_altri_si_vietano(self):
         medium = self.brief(content_type="medium", language="it", pages=146)

@@ -318,8 +318,8 @@ surrounded by twenty others.
 
 - One dominant visual concept; no competing focal points.
 - The title is the primary text element and must stay readable at thumbnail size:
-  its capital height must reach at least {coverdesign.MIN_TITLE_CAP_RATIO:.0%} of the
-  cover height ({coverdesign.GOOD_TITLE_CAP_RATIO:.0%} is where it becomes dominant),
+  its capital height must reach at least {coverdesign.MIN_TITLE_CAP_RATIO * 100:g}% of the
+  cover height ({coverdesign.GOOD_TITLE_CAP_RATIO * 100:g}% is where it becomes dominant),
   on at most {coverdesign.MAX_TITLE_LINES} lines.
 - Contrast between title and background of at least {coverdesign.MIN_CONTRAST:.0f}:1.
 - The background must separate from the white search page: avoid pale, washed
