@@ -478,3 +478,4 @@ Ogni regola qui sopra viene da un difetto trovato su un libro vero.
 | la linea API non passava dal revisore di scaletta | 1 | il cancello è lo stesso nelle due linee |
 | progettato per 120 pagine, impaginato in 184: la taratura stimava 592 parole per pagina piena contro 355 vere, e le parti non erano nel conto | 1, `revisore-scaletta` | la taratura usa sezioni di lunghezza diversa e un budget che regge il ±5% di testo; le pagine si ricontano sulla scaletta |
 | il revisore bloccava «secure» come promessa di guarigione e contava «due» come numero in un libro inglese | 1, `revisore-scaletta` | parole intere, cifre nella lingua del libro |
+| 47 capoversi con l'ultima riga di poche lettere, e il rilievo dava solo i numeri di pagina | 5, `impaginazione` | il rilievo cita ogni capoverso con le sue ultime parole: si ritrova nel manoscritto e si accorcia di una parola |
