@@ -1,6 +1,6 @@
 # Lining Up Due Dates With Your Paydays
 
-Your master list already tells you what each bill costs and when it is due. What it doesn't show, by itself, is whether the money will be in the account on that day. A due date is a fixed point set by the company that sends the bill. A payday is a fixed point set by whoever pays you. The two schedules were never designed to fit together, and nobody but you is in a position to line them up.
+Will the money be in the account on the day a bill is due? Your master list can't say: it shows what each bill costs and when it is due, not what the balance will be that day. A due date is a fixed point set by the company that sends the bill. A payday is a fixed point set by whoever pays you. The two schedules were never designed to fit together, and nobody but you is in a position to line them up.
 
 The bill calendar is where they finally meet. It doesn't need to be clever. It needs to show, on one page or one screen, the days money arrives and the days money has to leave. Seen together, those two sets of dates tell you which paycheck is carrying which bill and where the thin stretches of the month fall.
 
@@ -24,7 +24,7 @@ The fix starts with assigning each bill to a paycheck on purpose instead of by h
 
 The same reasoning applies to any bill due just before a payday. Electricity on the 13th, two days before the next deposit, belongs to the paycheck of the 1st. The safer moment to pay it is soon after that paycheck lands, not on the 12th, when the balance is at its lowest. Luis's electric bill usually arrives near the end of the previous month, so he now pays it on the 2nd. Paying early works only once the bill for that period has been issued, so the payment is applied to the right amount; with a variable bill, that means waiting until the actual bill is in hand. Leave room, too, for the time a payment takes to reach the provider: each company explains on its bill or website how and when payments are credited, and the method you use, whether online, by phone or by mail, changes how many days that takes.
 
-Weekends matter here too. When a due date falls on a Saturday, a Sunday or a holiday, some providers count a payment on the next business day as on time and others expect it before the weekend. The bill or the provider's billing page usually says which. Until you know, the cautious choice is to treat the earlier day as the due date.
+Weekends matter here too. When a due date falls on a Saturday, a Sunday or a holiday, some providers count a payment on the next business day as on time and others expect it before the weekend. The bill or the provider's billing page usually says which. For credit cards, a federal rule settles part of this: if the card company doesn't accept mail on the due date, a mailed payment arriving the next business day can't be treated as late. For other methods, the cardholder agreement explains how your card handles it. Until you know, the cautious choice is to treat the earlier day as the due date.
 
 ## Asking to move a due date
 
@@ -38,7 +38,7 @@ Policies differ because billing systems differ. Credit card companies often let 
 
 Expect the first bill after a change to look unusual. To reach the new date, the billing cycle has to stretch or shrink once. Move a due date later and the next bill may cover more days than usual, so it comes in larger; move it earlier and it may cover fewer days and come in smaller. A flat-rate service may add or subtract a partial month to even things out. The change can also take a cycle or two to go through, so until a bill actually shows the new date, keep paying by the date printed on the latest one.
 
-Here is an example. Beth is paid once a month, on the 1st. Her credit card was due on the 27th, when that paycheck was nearly a month old and her account was running low. She found the option in her card account and moved the due date to the 6th. The statement that followed covered about five weeks of purchases instead of four, so the balance on it was larger than usual, but it came due after payday, which was the point. Her phone company told her the date on her account couldn't be moved, so she leaves that bill due on the 25th and pays it in the first week of the month, as soon as it's issued.
+Beth is paid once a month, on the 1st. Her credit card was due on the 27th, when that paycheck was nearly a month old and her account was running low. She found the option in her card account and moved the due date to the 6th. The statement that followed covered about five weeks of purchases instead of four, so the balance on it was larger than usual, but it came due after payday, which was the point. Her phone company told her the date on her account couldn't be moved, so she leaves that bill due on the 25th and pays it in the first week of the month, as soon as it's issued.
 
 ## One home for the list and the calendar
 
