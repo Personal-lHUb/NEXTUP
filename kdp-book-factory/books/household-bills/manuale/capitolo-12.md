@@ -16,7 +16,7 @@ Other bills earn a closer look before they are automated, or instead of it. Vari
 
 Then there are bills with a history. If a provider has billed you twice for the same month, applied a charge you never agreed to, or quietly raised a price at the end of a promotion, reading each bill before it is paid gives you a chance to catch the next one. Once a few clean months have gone by, you can revisit the choice. Nothing about this decision is permanent.
 
-Here is an example. Gloria's car insurance and phone plan are the same every month, so she lets both run automatically. Her electric bill ranges from about $70 in spring to over $200 in August, and last winter it came in based on an estimated reading that was well above her real use. She decides to keep paying that one by hand, which means reading it first. Her internet bill is fixed, but the promotional price ends in March. She keeps it automatic but marks March on her calendar as the month to look at the bill before it clears.
+Here is an example. Gloria's car insurance and phone plan are the same every month, so she lets both run automatically. Her water bill stays modest most of the year and climbs each summer with the garden sprinklers, and last July a leak in the irrigation line pushed it higher still. She decides to keep paying that one by hand, which means reading it first. Her internet bill is fixed, but the promotional price ends in March. She keeps it automatic but marks March on her calendar as the month to look at the bill before it clears.
 
 ## Two ways a payment can run automatically
 
@@ -28,7 +28,7 @@ In the second, **your bank sends the money**. Many banks offer a bill pay servic
 
 The trade-off is timing and upkeep. The bank may send the payment electronically or mail a paper check on your behalf, and delivery can take several days depending on the payee and the bank, so the send date and the arrival date are not the same. Your bank's bill pay screen usually shows an estimated delivery date, and that date, not the send date, is the one to compare with the due date. And if the bill varies, a repeating payment from your bank sends the same figure each time unless you change it.
 
-Take Gloria's rent as an example. Her landlord doesn't take card payments or run an online portal, but accepts checks. A repeating payment through her bank's bill pay, set to arrive a few days before the 1st, fits well: the rent stays the same for the length of her lease, and the landlord never needs her account details.
+Gloria's rent fits the second kind. Her landlord doesn't take card payments or run an online portal, but accepts checks. A repeating payment through her bank's bill pay, set to arrive a few days before the 1st, fits well: the rent stays the same for the length of her lease, and the landlord never needs her account details.
 
 ## How a card's autopay amount is set
 
@@ -40,7 +40,7 @@ Credit cards add a choice that other bills don't have. Most card issuers let you
 
 **Autopaying a fixed amount** sends the same figure each month, say $250. That makes the draw on your account predictable. If the statement balance is higher, the difference carries over, with interest under the card's terms, just as it would after a minimum payment. What happens when the fixed amount is lower than the minimum, or higher than what you owe, depends on the issuer; the autopay settings page or the card's customer service can tell you.
 
-Here is an example of why the answer depends on the household. Ray has one card and a checking account that his paychecks fill on the 1st and the 15th. His card is due on the 22nd. In a typical month the statement balance is around $400, which the account covers without strain. In January, after the holidays, it was $1,300, and a pull that size on the 22nd would have taken most of his mid-month paycheck.
+Ray's case shows why the answer depends on the household. He has one card and a checking account that his paychecks fill on the 1st and the 15th. His card is due on the 22nd. In a typical month the statement balance is around $400, which the account covers without strain. In January, after the holidays, it was $1,300, and a pull that size on the 22nd would have taken most of his mid-month paycheck.
 
 With the statement balance option, the statement is paid in full each month, and the account has to absorb months like January. With the minimum, the pulls stay small, and the rest of the balance keeps collecting interest. A fixed amount lands somewhere between the two. None of the three is right in general. What each one does on Ray's own calendar is what decides it, and Ray is the one who knows what his account can carry.
 
@@ -58,4 +58,4 @@ It also helps to note which kind each one is, pulled by the company or sent by y
 
 Sit down with your master list and go through it bill by bill. For each one, write one of three words next to it: automatic, by hand, or undecided. Undecided is a perfectly good answer: it marks the bills where you don't yet know the amount, the history or the timing well enough to choose. For every bill marked automatic, check that the pull date, the amount and the paying account are written down, and that the date is on your calendar.
 
-Then pick one autopay to set up or adjust this week. It might be a fixed bill you have been paying by hand out of habit, or a card autopay whose amount no longer fits your paydays. Make that one change, write it on the list, and let the undecided ones wait.
+If a bill is already clearly marked automatic, this week can be the time to set up or adjust its autopay, perhaps a fixed bill you have been paying by hand out of habit, or a card autopay whose amount no longer fits your paydays. If every bill is still undecided, that's fine too. Before a first pull, it helps to know what your bank does when the balance falls short; the next chapter, on the account behind autopay, covers that. Write any change on the list, and let the undecided ones wait.
