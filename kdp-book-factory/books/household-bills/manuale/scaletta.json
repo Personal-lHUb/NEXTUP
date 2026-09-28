@@ -1,0 +1,354 @@
+{
+  "title": "Bills in Order",
+  "subtitle": "A Household Guide to Paying on Time and Catching Up When You Fall Behind",
+  "thesis": "Bills are usually paid late because the setup is scattered, not because the person paying them is careless: due dates, notices and paydays each run on their own schedule, and nothing brings them together. One list, one home for it, a calendar tied to paydays and a short routine bring them together, and knowing what each bill puts at stake and whom to call gives the reader a calm next step when a payment slips or the money isn't there.",
+  "back_cover": "When a bill gets paid late, it's rarely because someone didn't care; it's because the due dates, the notices and the paydays were never in one place.\n\nBills in Order shows you how to build your own way of handling bills for your home, one short chapter at a time. You'll gather every recurring bill into one list, from the electric bill to the registration that comes once a year, and give it one home: a notebook, a spreadsheet or your bank's own tools. You'll learn to read a bill and a card statement and to line up due dates with paydays. You'll decide what goes on autopay and what you check by hand, and settle into a short weekly check, a monthly review and a yearly one. Each chapter ends with one step you can take that week.\n\nWhen a payment slips or the money won't stretch, the book stays calm and practical, and it never judges. It explains what each kind of bill puts at stake, who to call, what to ask for and where to find help, from utility assistance to nonprofit credit counseling. It tells you how things work, what your options are and where to check the rules that change from state to state. It's a book to read, not a notebook to fill in. It's written for whoever handles the bills, and for anyone who wants to hand it to someone who does.",
+  "parts": [
+    {"title": "Why Bills Slip Through", "first_chapter": 1},
+    {"title": "One List and One Home", "first_chapter": 3},
+    {"title": "Paydays, Due Dates and Autopay", "first_chapter": 9},
+    {"title": "The Hidden Bills and the Routine", "first_chapter": 13},
+    {"title": "When a Payment Slips or Money Runs Short", "first_chapter": 17},
+    {"title": "Safe, Shared and Carried Forward", "first_chapter": 23}
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Why Bills Slip, and Why It's Rarely Laziness",
+      "summary": "Opens the book with the everyday reasons a bill gets paid late: due dates spread across the month, notices arriving by paper, email and app, an autopay nobody remembers, and paydays that don't line up with due dates. It comes first because a reader who stops blaming themselves can start fixing the setup instead.",
+      "beats": [
+        "Due dates scattered across the month, each set by a different company on its own schedule, so no single day ever shows the whole picture.",
+        "Notices split between the mailbox, the inbox and phone apps, and bills that stop sending any reminder once they go paperless or onto autopay.",
+        "The autopay set up years ago that nobody remembers until the card it charges expires or the account behind it runs low.",
+        "Paydays that land after the due dates they're meant to cover, and how a household with enough money over the month can still come up short on a given day.",
+        "This week's step: from memory, write down the bills you worry about most and where their notices usually turn up. That rough note is where the full list will start."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 2,
+      "title": "Paid, Due or Missing: What Order Really Means",
+      "summary": "Sets out the goal the whole book works toward: being able to see for every bill whether it is paid, due or missing, without relying on memory. It lays out the parts of the system the reader will build and what order can and cannot do, so the method that follows has a clear finish line.",
+      "beats": [
+        "The three states every bill is always in (paid, due or missing), and why memory and a pile of mail can't show them reliably.",
+        "The parts of the system in the order the book builds them: one list, one home, a calendar tied to paydays, clear autopay choices and a short routine.",
+        "What order does and doesn't do: it heads off the fee that comes from oversight, it can't make money appear, and the book says so plainly.",
+        "Where to begin depending on your situation, including a direct route to the chapters on falling behind for the reader who is already there.",
+        "This week's step: pick the bill that worries you most and find out today whether it is paid, due or missing."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 3,
+      "title": "Tracking Down Every Bill Your Household Pays",
+      "summary": "Shows how to find every recurring bill, including the ones that never arrive in the mailbox, by working through bank and card history, statements, email and the household's own routines. It comes before anything is set up because a system built on a partial list fails on the bill that was left off.",
+      "beats": [
+        "Working back through bank and card history to catch every repeating charge, and why one month of history isn't enough to reveal bills that come every few months or once a year.",
+        "Checking every account and card in the household, including the ones a spouse or partner pays from, so nobody's bills are left out.",
+        "Searching email folders and paper files for renewal notices, receipts and welcome messages that point to bills still running.",
+        "A category-by-category walk-through (housing, utilities, phone and internet, insurance, loans and cards, vehicles, health, subscriptions) to catch what the history missed.",
+        "This week's step: go through one account's history and start a rough list of every payee that appears more than once."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 4,
+      "title": "Reading a Household Bill Without Guessing",
+      "summary": "Walks through a typical utility or service bill line by line, so the reader knows which date and which amount really matter. It comes before the master list is filled in because the list can only be as accurate as the reader's reading of the bills behind it.",
+      "beats": [
+        "Statement date, service period and due date: three dates that look alike and mean different things.",
+        "Current charges, previous balance, past-due amount and total due, and how to tell which one the company expects by the due date.",
+        "Estimated versus actual meter readings, how an estimate shows on the bill, and what happens when the real reading catches up.",
+        "Fees and extra lines in general terms (late charges, taxes, surcharges), and why their names and amounts vary by provider and by state.",
+        "This week's step: take one current utility bill and find its due date and the amount due, and check whether the reading was estimated."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 5,
+      "title": "What a Credit Card Statement Is Telling You",
+      "summary": "Explains the parts of a credit card statement that decide whether a payment counts as on time and what carrying a balance involves. It follows the household bill because cards run on different rules, and the reader needs those rules before recording cards or choosing how they get paid.",
+      "beats": [
+        "The closing date versus the payment due date, and why the gap between them matters.",
+        "The grace period in general terms: when interest on new purchases can be avoided and what usually ends it, with a reminder to check the card's own terms.",
+        "Statement balance, current balance and minimum payment, and what the statement's own notice about paying only the minimum is showing.",
+        "Where late fees, interest charges and penalty rates appear on the statement, described in general terms because they differ from card to card.",
+        "This week's step: for each card in the household, find the closing date, the due date and the statement balance, and note all three next to that card on the rough list."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 6,
+      "title": "What to Write Down for Every Bill on the List",
+      "summary": "Turns the rough list into a master list by setting out what to record for each bill: payee, amount, due date, how it's paid, from which account and whom to contact. It follows the reading chapters because each detail now has a clear meaning, and it comes before the home is chosen because what the list holds decides what the home must do.",
+      "beats": [
+        "The core details for each bill: payee, fixed or variable amount, due date, payment method, paying account and a way to reach the company.",
+        "Recording a variable bill honestly, as a typical range rather than last month's figure.",
+        "What never goes on the list (full account numbers, passwords, security answers), and how to note just enough to identify an account safely.",
+        "Marking how often each bill comes and whether it's currently paid automatically or by hand, so the list shows its own gaps.",
+        "This week's step: fill in the details for every bill on the rough list. Put a question mark wherever something is unknown, and track the answers down one bill at a time."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 7,
+      "title": "Notebook, Spreadsheet or Bank Tools: Picking a Home",
+      "summary": "Compares the three types of place a bill system can live (a paper notebook, a spreadsheet and the tools built into a bank's website or app) without naming any product. It then explains in words how to set up whichever the reader picks so that paid, due and missing show at a glance.",
+      "beats": [
+        "What a paper notebook does well (always at hand, no logins, easy for anyone in the family) and where it falls short (no reminders, hard to reorganize).",
+        "What a spreadsheet does well (sorting by due date, totals, easy to copy each year) and its weak points (it has to be opened, and it needs a backup).",
+        "What a bank's built-in tools offer (bill pay, alerts, a list of scheduled payments) and their limit: they see only that bank's accounts.",
+        "Laying out the chosen home, described in prose, so each bill shows its status for the month, and keeping one home as the master even when others feed it.",
+        "This week's step: choose the home, move the master list into it and mark this month's bills as paid, due or missing."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 8,
+      "title": "One Safe Spot for Notices, Statements and Logins",
+      "summary": "Gives every incoming notice and stored document one destination, and makes it a safe one: a spot for paper mail, one folder for billing emails, useful alerts, and secure storage for statements and account access. It closes the building part because the list stays current only if everything that feeds it arrives in one place.",
+      "beats": [
+        "Routing notices: one spot for paper bills, one email folder or address for billing messages, and checking that every provider has your current contact details.",
+        "Paper versus electronic statements, bill by bill, and the trade-offs for readers who prefer paper or rarely check email.",
+        "Which alerts are worth turning on (due-date reminders, payment confirmations, low-balance warnings) and how to avoid drowning in them.",
+        "Keeping statements and account access safe: a locked file or box, a secure way to store passwords, what to shred, and checking before discarding records you're unsure about.",
+        "This week's step: set up the paper spot and the email folder, and update your contact details with any provider that still has an old address or number."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 9,
+      "title": "Lining Up Due Dates With Your Paydays",
+      "summary": "Builds the bill calendar by placing every due date against the days money actually arrives, so the reader sees which paycheck covers which bill and where the tight weeks fall. It opens the part on timing because autopay and every later routine rest on this calendar.",
+      "beats": [
+        "Setting due dates and paydays side by side on one month view, and spotting the weeks when several bills fall before the next deposit.",
+        "Assigning each bill to the paycheck that will cover it, and paying some bills early when their due date falls just before payday.",
+        "Asking a provider to move a due date: what to say, why policies differ from company to company, and why the first bill after a change can be larger or smaller than usual.",
+        "Keeping the calendar in the same home as the list so the two never disagree.",
+        "This week's step: map this month's due dates against your paydays, then call one provider whose due date falls in the tightest week and ask whether it can be moved."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 10,
+      "title": "Biweekly Paychecks and Income That Won't Sit Still",
+      "summary": "Adapts the calendar for households whose money doesn't arrive on the same dates each month: biweekly pay, gig and commission work, seasonal jobs and benefits paid on their own schedule. It follows the basic calendar because these are the cases where a simple payday map stops working.",
+      "beats": [
+        "Biweekly versus twice-monthly pay, why they aren't the same, and what to do with the months when a third paycheck arrives.",
+        "Income from gig work, commissions, tips or seasonal jobs, and the approach some households use of planning bills around a lean month rather than a good one.",
+        "A holding account: money goes in as it arrives and bills are paid out of it on their dates, so the bills no longer depend on when a job pays.",
+        "Retirement and benefit income that arrives once a month, and lining up several due dates behind a single deposit.",
+        "This week's step: look at your deposits over the past few months, see how uneven they really are, and choose which calendar approach fits your household."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 11,
+      "title": "Choosing What Goes on Autopay and What Doesn't",
+      "summary": "Sets out how to decide, bill by bill, what to automate and what to keep paying or checking by hand, including how the amount of a card's autopay is set. It comes after the calendar because a sensible autopay depends on knowing when the money will be there.",
+      "beats": [
+        "Bills that tend to suit autopay (fixed amounts, steady due dates) and those worth watching by hand first (variable amounts, bills with a history of errors or surprises).",
+        "Company-pulled autopay versus payments sent from your bank's bill pay, and how control and timing differ between the two.",
+        "For credit cards, the choice between autopaying the minimum, the statement balance or a fixed amount: what each option does, and why the choice depends on your own situation.",
+        "Recording every automatic payment on the master list with its date, amount and paying account, so nothing runs unseen.",
+        "This week's step: go through the list, mark each bill as automatic, paid by hand or still to decide, and set up or adjust one autopay."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 12,
+      "title": "The Account Behind Autopay, and How to Stop It",
+      "summary": "Covers the account that funds automatic payments: which account it is, what happens when it runs short, and how overdraft coverage works in general terms. It ends with how to change or stop an automatic payment cleanly, which every household needs once more than one is running.",
+      "beats": [
+        "Choosing which account funds autopay, and why some households keep bills in an account separate from everyday spending.",
+        "What happens when a payment hits an account without enough in it: returned payments, overdraft coverage, fees from both the bank and the biller, and why the details depend on your bank and on what you're enrolled in.",
+        "Changing or stopping an automatic payment: telling the company, telling the bank, asking about timing and stop-payment options, and checking the next statement to confirm it stopped.",
+        "Replacing a card or closing an account without leaving automatic payments pointed at it.",
+        "This week's step: ask your bank how overdraft coverage is set on the account that pays your bills, and note what they tell you in your system."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 13,
+      "title": "The Bills You Forget Until They Arrive",
+      "summary": "Offers light guidance on what to remember: insurance premiums, property tax, registrations, annual renewals, subscriptions and free trials that don't follow the monthly rhythm. It comes once the monthly machinery is in place because these are the bills that slip past a system built only for monthly ones.",
+      "beats": [
+        "Insurance premiums billed once or twice a year, and property tax paid directly or folded into a mortgage payment through an escrow account that can change the payment when it's reviewed.",
+        "Vehicle registrations, license renewals, annual memberships and other renewals that arrive with little warning.",
+        "Subscriptions and free trials that turn into paid plans, how they hide on card statements, and how to find the real way to cancel.",
+        "Putting each irregular bill on the calendar with a reminder set well before its due date, not on it.",
+        "This week's step: add every yearly and quarterly bill to the calendar with an early reminder, and look up one subscription or free trial you'd forgotten about."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 14,
+      "title": "Setting a Little Aside for the Irregular Bills",
+      "summary": "Explains the simple idea of setting a little aside each month so the irregular bills don't land all at once, and the types of place that money can be kept. It follows the forgotten bills because once they are on the calendar, the reader can see what they add up to over a year.",
+      "beats": [
+        "Adding up a year of irregular bills and splitting the total into monthly shares, leaving room for bills whose amount changes.",
+        "Where the set-aside money can sit (a separate savings account, a labeled sub-account or a cash envelope) and the trade-offs of each type.",
+        "Starting when there's little to spare: saving for the nearest big bill first rather than for all of them at once.",
+        "What to do when a big bill arrives before the set-aside has caught up, and how to start again after drawing it down.",
+        "This week's step: take the next irregular bill on the calendar, work out its monthly share, and choose where that money will sit."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 15,
+      "title": "The Short Weekly Check and What It Looks For",
+      "summary": "Describes a brief weekly routine: confirming what has cleared, looking at what is due before the next check, and dealing with whatever has arrived since the last one. It opens the routine because a small habit repeated often keeps the list in step with the bank account.",
+      "beats": [
+        "Choosing a fixed time and place for the check, tied to something that already happens every week.",
+        "Cleared versus pending: confirming that last week's payments actually went through, and marking them paid.",
+        "Looking ahead to the bills due before the next check and making sure the money will be in the right account when they're paid.",
+        "Emptying the paper spot and the email folder and adding anything new to the list.",
+        "This week's step: do a first weekly check, however short, and put the next one on the calendar."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 16,
+      "title": "The Monthly Review and What's Left Over",
+      "summary": "Sets out a longer monthly look that matches statements to the list, catches errors, double charges and price increases, and shows what is left after the fixed bills and the set-aside. It is where the bill system becomes a simple picture of the household's month, the home-budget use many readers want, without a daily spending diary.",
+      "beats": [
+        "Matching each statement against the list to spot errors, double charges and quiet price increases.",
+        "Questioning a charge: calling the company first, then the general dispute rights for cards and bank accounts, with a reminder to check the deadlines with your card issuer or bank.",
+        "Income, minus the fixed bills, minus the set-aside: seeing what's left for everything else without tracking every purchase.",
+        "Updating the list and the calendar for any change found during the month.",
+        "This week's step: hold a first monthly review with last month's statements, and write down one figure, what was left after the fixed bills and the set-aside."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 17,
+      "title": "The First Days After a Missed Payment",
+      "summary": "Gives a calm sequence for the days right after a payment is missed by mistake, returned by the bank or turned into an overdraft. It opens the part on trouble because the most common slip is usually also the simplest to set right when it's handled early.",
+      "beats": [
+        "Working out exactly what happened: a missed due date, a payment returned for lack of funds, a payment that went through and overdrew the account, or a bill that never arrived.",
+        "Paying what's owed as soon as you can and confirming it posted, including when the provider's records and the bank's disagree.",
+        "Breaking the chain: automatic retries of a returned payment, further overdraft charges, and the next bill due before the account has recovered.",
+        "Checking whether a late fee was added or the account's status changed, and keeping a note of the dates, amounts and names from every call.",
+        "This week's step: if a payment has slipped, call the provider, confirm what's owed and what has been charged, and note what they tell you."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 18,
+      "title": "Fee Waivers and What Reaches Your Credit Report",
+      "summary": "Explains how to ask a provider or bank to waive a late or overdraft fee, and how a late payment can reach the credit reports. It follows the first days because once the bill is paid, these are the two questions the reader is usually left with.",
+      "beats": [
+        "Asking for a waiver: who to ask, what to say about your history with the account and what went wrong, and asking again or politely escalating if the first answer is no.",
+        "Why a waiver is a request and not a right, and why policies differ between providers.",
+        "The difference between a payment that is late on a lender's own books and one that is reported late to the credit bureaus, and asking the lender directly when it reports.",
+        "Getting your credit reports free from the official source set up under federal law, reading the payment history, and disputing a mistake in writing.",
+        "This week's step: if a fee has been charged, call and ask for it to be waived, then request your credit reports and read the payment history on each."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 19,
+      "title": "When the Money Won't Stretch: What Each Bill Risks",
+      "summary": "Explains without judgment what is at stake with each kind of bill when there isn't enough to pay them all: housing, utilities, insurance, secured loans, credit cards and medical bills. It comes before any call is made so the reader understands what each bill puts at stake, as information and not as instructions.",
+      "beats": [
+        "Rent and mortgage: the steps a landlord or loan servicer generally has to take, and why the timing and protections depend on state law and on the lease or loan.",
+        "Utilities and insurance: shutoff notices, lapses in coverage, and what reconnection or reinstatement can involve, which varies by provider and state.",
+        "Secured loans such as car loans, where the lender can take back the property, compared with unsecured debts such as credit cards, and what each can lead to.",
+        "Medical bills: asking for an itemized bill, checking it for errors, asking about financial assistance, and why the rules on how medical debt appears on credit reports need checking because they have changed.",
+        "This week's step: using the list you already have, sort the bills due this month by what each one puts at stake, so any call you make starts from a clear picture."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 20,
+      "title": "Calling Before the Due Date: What to Ask For",
+      "summary": "Walks through the call to a provider before a payment is missed: how to prepare, what to ask for, and what hardship programs and payment plans generally involve. It follows the chapter on stakes because the reader now knows what each bill puts at stake and can decide which calls to make.",
+      "beats": [
+        "Preparing for the call: the account details, what you can pay and when, and a short, honest account of what changed.",
+        "What to ask for: a later date, a partial payment, a payment arrangement, a hardship program, a deferral or a forbearance, and what each of these usually means.",
+        "Getting any agreement in writing, noting who you spoke to, and asking what happens if a plan payment is missed.",
+        "When the answer is no: asking for the hardship or collections department or a supervisor, and what to try next.",
+        "This week's step: before its due date, call the provider behind the bill that worries you most and ask what options they offer."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 21,
+      "title": "Help Beyond the Provider: Programs and Counselors",
+      "summary": "Maps the help available outside the company that sent the bill: utility assistance programs, shutoff protections that vary by state, nonprofit credit counseling, housing counselors and legal aid. It follows the provider call because these programs often work alongside a payment plan, and the provider is often the one who points to them.",
+      "beats": [
+        "Utility assistance programs run by government agencies and community organizations: how to find the local one and what they usually ask for.",
+        "Shutoff protections tied to weather, medical need or age, which vary by state, and how to check them with your state's utility regulator.",
+        "Nonprofit credit counseling: what a counselor does, how to tell a genuine nonprofit from a company selling debt relief, and what to ask about fees.",
+        "Housing counselors and legal aid for tenants and homeowners facing eviction or foreclosure, and when to speak to an attorney.",
+        "This week's step: look up your utility's assistance and shutoff-protection options and the nearest nonprofit credit counseling agency, and keep their contact details with your list."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 22,
+      "title": "Quick Loans: How They Work and What They Cost",
+      "summary": "Explains, as information and without judgment, how payday loans, auto title loans, pawn loans, rent-to-own, paycheck advance apps and buy-now-pay-later plans work, and how to compare what they cost. It closes the part on money running short because these offers tend to appear just when other options seem used up.",
+      "beats": [
+        "How each type works: what you borrow against, when repayment is due, and what happens if it isn't repaid on time.",
+        "Reading the cost: a flat fee versus an annual percentage rate, and why a small fee on a very short loan can work out to a high yearly rate.",
+        "Rollovers and repeat borrowing, and how one short loan can turn into several.",
+        "Rules and legality that vary by state, and how to check whether a lender is licensed where you live.",
+        "This week's step: if you're weighing one of these loans, write down the total you would repay and the date it's due, and set it beside the options from the previous two chapters."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 23,
+      "title": "Spotting a Fake Bill Before You Pay It",
+      "summary": "Describes the payment scams aimed at households: shutoff-threat calls demanding immediate payment, fake invoices, and look-alike emails and texts. It opens the last part because a well-kept list is also a quick way to recognize a bill that doesn't belong.",
+      "beats": [
+        "The shutoff-threat call: pressure to pay right now, requests for unusual payment methods such as gift cards, wire transfers or payment apps, and why urgency is the giveaway.",
+        "Fake invoices and renewal notices for services you never ordered or already pay for elsewhere.",
+        "Look-alike emails and texts that copy a real provider's look, and why their links and phone numbers shouldn't be used.",
+        "Checking with the real provider through the number on your own bill or list, and where to report a scam if you've paid or shared details.",
+        "This week's step: make sure every contact number on your list came from a real bill or the provider's official site, never from a message you received."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 24,
+      "title": "Sharing the Bills With a Partner or a Teenager",
+      "summary": "Covers the household where more than one person pays, or soon will: partners and housemates splitting bills, and a teenager learning how bills work. It comes late in the book because sharing a system is easier once there is a system to share.",
+      "beats": [
+        "Common ways couples and housemates split bills (one joint account, separate accounts with a shared pot, each person owning certain bills) and what each arrangement asks of the list.",
+        "Joint accounts and bills in both names: what shared responsibility means, explained in general terms.",
+        "Making the list and the calendar visible to both adults, and a short regular sit-down so one person isn't carrying it all alone.",
+        "Teaching a teenager with a real bill such as a phone plan or a subscription: reading it, paying it, and seeing what happens when it's late.",
+        "This week's step: show the list to the other adult in the house, or to a teenager, and agree on who checks which bills."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 25,
+      "title": "Taking Over the Bills, and Leaving Clear Notes",
+      "summary": "Explains how to take over the bills for an aging parent or a partner who can no longer manage them, and how to leave clear notes so someone could step in for you. It follows the chapter on sharing because a handover is sharing under pressure, and it goes more smoothly when it's prepared in advance.",
+      "beats": [
+        "Starting a takeover gently: rebuilding the other person's list from their mail and accounts, together with them wherever possible.",
+        "The authority to act: authorized access to accounts, the third-party notification many utilities offer, and powers of attorney, described in general terms, with an attorney as the place to confirm what applies in your state.",
+        "Warning signs in an older relative's bills: missed payments, duplicate subscriptions and unfamiliar charges.",
+        "Leaving clear notes on where everything is (the list, its home, the accounts and who to call), stored safely and known to someone you trust.",
+        "This week's step: write a short note that tells a trusted person where your list is kept and how to reach it, and let them know it exists."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 26,
+      "title": "The Yearly Review That Carries It Into Next Year",
+      "summary": "Closes the book with a yearly review that carries the system into the next year: renewals and annual bills rolled forward, the list and calendar refreshed, old records archived. It comes last because this review is what lets the routine carry on from one year to the next.",
+      "beats": [
+        "Choosing a date for the review and putting it on the calendar a year ahead.",
+        "Carrying forward: updating amounts, due dates and renewal dates, and noticing what changed over the year.",
+        "Removing bills that ended, adding new ones, and confirming every automatic payment still draws from the right account.",
+        "Archiving the year's statements, refreshing the handover note, and checking the set-aside against next year's irregular bills.",
+        "This week's step: put the yearly review on the calendar, and note what this year taught you about your household's bills."
+      ],
+      "role": "chapter"
+    }
+  ]
+}

@@ -211,7 +211,75 @@ class TestQuantitaDichiarate(unittest.TestCase):
         self.assertEqual(revisore.quantita_dichiarate(Outline.from_dict(dati)), [])
 
 
+class TestParoleIntere(unittest.TestCase):
+    """Dal rodaggio di household-bills: nove bloccanti, sei dei quali falsi.
+
+    Una parola vietata si cerca come parola: «cure» dentro «secure» non è una
+    promessa di guarigione, e «no» dentro «know» non è una negazione.
+    """
+
+    def _promesse(self, beat: str) -> list:
+        dati = copy.deepcopy(BUONA)
+        # Solo il beat in prova: i beats della scaletta buona hanno già un «not»
+        # e uno «stop» a meno di dieci parole, che salverebbero qualsiasi frase.
+        dati["chapters"][0]["summary"] = "A walk through the first session for a new reader."
+        dati["chapters"][0]["beats"] = [beat]
+        vietate = {"promessa di risultato", "linguaggio da prova"}
+        return [r for r in esamina(dati) if r.category in vietate]
+
+    def test_una_parola_vietata_dentro_un_altra_non_scatta(self):
+        for beat in ("Secure storage for statements and logins",
+                     "Health insurance, secured loans and the premiums billed once a year",
+                     "How the monthly review improves nothing by itself"):
+            with self.subTest(beat=beat):
+                self.assertEqual(self._promesse(beat), [])
+
+    def test_una_parola_che_contiene_no_non_salva_la_promessa(self):
+        self.assertNotEqual(self._promesse("You will know this work heals grief"), [])
+
+    def test_una_parola_con_il_trattino_negata_passa(self):
+        self.assertEqual(self._promesse("This is not a life-changing book, and says so"), [])
+
+    def test_senza_negazione_il_trattino_blocca(self):
+        self.assertNotEqual(self._promesse("A life-changing routine for your bills"), [])
+
+
+class TestCifreNellaLinguaDelLibro(unittest.TestCase):
+    def test_in_inglese_due_e_una_scadenza(self):
+        dati = copy.deepcopy(BUONA)
+        dati["chapters"][0]["title"] = "The Bills Due Before Payday"
+        trovate = {n for _, n in revisore.quantita_dichiarate(Outline.from_dict(dati), "en")}
+        self.assertNotIn("due (2)", trovate)
+
+    def test_in_italiano_due_e_un_numero(self):
+        dati = copy.deepcopy(BUONA)
+        dati["chapters"][0]["title"] = "Le due scadenze che contano"
+        trovate = {n for _, n in revisore.quantita_dichiarate(Outline.from_dict(dati), "it")}
+        self.assertIn("due (2)", trovate)
+
+    def test_il_revisore_usa_la_lingua_della_scheda(self):
+        dati = copy.deepcopy(BUONA)
+        dati["back_cover"] = "Every bill that falls due.\n\nPaid or due.\n\nNothing else."
+        rilievi = [r for r in esamina(dati) if r.category == "cifre da contare"]
+        self.assertEqual(rilievi, [])
+
+
 class TestLetturaDelBrief(unittest.TestCase):
+    def test_il_brief_dell_acquisizione_da_come_argomenti_solo_i_temi(self):
+        """«Che cosa il libro NON fa» e «che cosa va mantenuto» non sono capitoli."""
+        from kdpfactory import concorrente
+
+        piano = {
+            "titolo": "Bills in Order", "argomento": "household bills",
+            "lettore": "whoever pays the bills", "promessa": "one list, one routine",
+            "la_lacuna_che_copre": "an editorial choice",
+            "che_cosa_tiene": ["The family reader, seniors included, and a plain, concrete tone."],
+            "argomenti": ["The master list: finding every recurring bill and what to note."],
+            "che_cosa_non_fa": ["No investing, retirement planning, wealth building or tax preparation."],
+        }
+        brief = concorrente.brief_dal_piano(piano, {"titolo": "Altro"}, "B000")
+        self.assertEqual(revisore.argomenti_del_brief(brief), piano["argomenti"])
+
     def test_i_divieti_del_brief_non_diventano_argomenti_da_coprire(self):
         argomenti = revisore.argomenti_del_brief(BRIEF)
         self.assertEqual(len(argomenti), 2)

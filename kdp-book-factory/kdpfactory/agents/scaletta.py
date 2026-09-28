@@ -126,14 +126,21 @@ NEGAZIONI = (
 #: parla, non come fatto
 DATA = re.compile(r"\b(1[0-9]{3}|20[0-9]{2})\b")
 
-#: quantità da verificare sul libro vero, in cifre o in lettere
-NUMERI_IN_LETTERE = {
-    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,
-    "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12, "twenty": 20,
-    "thirty": 30, "forty": 40, "fifty": 50, "hundred": 100,
-    "due": 2, "tre": 3, "quattro": 4, "cinque": 5, "sei": 6, "sette": 7,
-    "otto": 8, "nove": 9, "dieci": 10, "dodici": 12, "venti": 20, "trenta": 30,
+#: quantità da verificare sul libro vero, in cifre o in lettere, per lingua.
+#: Vanno tenute separate: «due» in inglese è una scadenza, «sei» in italiano è
+#: anche un verbo, e un elenco unico conta come cifre le parole dell'altra lingua.
+NUMERI_PER_LINGUA = {
+    "en": {
+        "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,
+        "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12, "twenty": 20,
+        "thirty": 30, "forty": 40, "fifty": 50, "hundred": 100,
+    },
+    "it": {
+        "due": 2, "tre": 3, "quattro": 4, "cinque": 5, "sei": 6, "sette": 7,
+        "otto": 8, "nove": 9, "dieci": 10, "dodici": 12, "venti": 20, "trenta": 30,
+    },
 }
+NUMERI_IN_LETTERE = {**NUMERI_PER_LINGUA["en"], **NUMERI_PER_LINGUA["it"]}
 
 #: marcatori di capitolo pratico: servono a misurare la progressione
 MARCATORI_PRATICI = (
@@ -182,6 +189,27 @@ def _senza_citazioni(testo: str) -> str:
     return VIRGOLETTE.sub(" ", testo)
 
 
+def _contiene(piatto: str, parola: str) -> bool:
+    """La parola c'è come parola, non come pezzo di un'altra.
+
+    «cure» sta dentro «secure» e «secured», «heal» dentro «health», «proves»
+    dentro «improves»: un confronto fra stringhe bloccava come promessa di
+    guarigione un capitolo sull'archivio sicuro delle bollette.
+    """
+    return re.search(rf"(?<![a-z0-9]){re.escape(_piatto(parola))}(?![a-z0-9])", piatto) is not None
+
+
+def _e_negazione(parola: str) -> bool:
+    """«not», «never», «senza»… presi interi; le radici lunghe anche come inizio.
+
+    Il confronto per sottostringa contava come negazione «no» dentro «know» e
+    «notices», e «non» dentro «nonprofit»: bastava una di quelle parole vicino
+    a una promessa di guarigione perché la promessa passasse.
+    """
+    nuda = parola.strip(".,;:!?()«»\"“”")
+    return any(nuda == n or (len(n) >= 5 and nuda.startswith(n)) for n in NEGAZIONI)
+
+
 def _negato(testo: str, parola: str) -> bool:
     """C'è una negazione entro dieci parole dalla parola vietata?
 
@@ -189,13 +217,13 @@ def _negato(testo: str, parola: str) -> bool:
     frasi che rispettano la linea editoriale, non che la violano. Senza questo
     controllo il revisore bloccherebbe proprio i capitoli scritti bene.
     """
-    parole = _piatto(testo).replace("-", " ").split()
-    bersaglio = _piatto(parola).split()[0]
+    parole = _piatto(testo).replace("’", "'").replace("-", " ").split()
+    bersaglio = _piatto(parola).replace("-", " ").split()[0]
     for indice, corrente in enumerate(parole):
-        if not corrente.strip(".,;:!?").startswith(bersaglio):
+        if corrente.strip(".,;:!?()«»\"“”") != bersaglio:
             continue
         intorno = parole[max(0, indice - FINESTRA_NEGAZIONE): indice + FINESTRA_NEGAZIONE]
-        if any(any(n in p for n in NEGAZIONI) for p in intorno):
+        if any(_e_negazione(p) for p in intorno):
             return True
     return False
 
@@ -343,7 +371,11 @@ def argomenti_del_brief(brief: str) -> list[str]:
 
     Sono i punti elenco del modulo: ognuno può continuare su più righe
     rientrate. Le sezioni di divieto (`must NOT`, `non deve`) restano fuori,
-    perché sono vincoli, non capitoli da scrivere.
+    perché sono vincoli, non capitoli da scrivere. Restano fuori anche le due
+    sezioni che il brief dell'acquisizione (`concorrente.brief_dal_piano`)
+    scrive accanto ai temi: «che cosa il libro NON fa» è l'elenco delle cose
+    che non ci devono essere, e «che cosa va mantenuto» sono qualità del libro
+    — il tono, l'ordine, la facilità — che nessun capitolo può «coprire».
     """
     argomenti: list[str] = []
     corrente: list[str] = []
@@ -354,7 +386,10 @@ def argomenti_del_brief(brief: str) -> list[str]:
             titolo = _piatto(spoglia)
             saltare = any(
                 spia in titolo
-                for spia in ("must not", "non deve", "da evitare", "what must", "tono", "tone")
+                for spia in (
+                    "must not", "non deve", "da evitare", "what must", "tono", "tone",
+                    "non fa", "does not", "doesn't", "va mantenuto", "si aspettano",
+                )
             )
             if corrente:
                 argomenti.append(" ".join(corrente))
@@ -435,7 +470,7 @@ def _controlla_divieti(outline: Outline) -> list[AgentFinding]:
         testo = _senza_citazioni(grezzo)
         piatto = _piatto(testo)
         for parola in PROMESSE:
-            if parola in piatto and not _negato(testo, parola):
+            if _contiene(piatto, parola) and not _negato(testo, parola):
                 rilievi.append(
                     _segnala(
                         "bloccante",
@@ -449,7 +484,7 @@ def _controlla_divieti(outline: Outline) -> list[AgentFinding]:
                 )
                 break
         for parola in PROVE:
-            if parola in piatto and not _negato(testo, parola):
+            if _contiene(piatto, parola) and not _negato(testo, parola):
                 rilievi.append(
                     _segnala(
                         "importante",
@@ -486,12 +521,14 @@ def _controlla_date(outline: Outline) -> list[AgentFinding]:
     return rilievi
 
 
-def quantita_dichiarate(outline: Outline) -> list[tuple[str, str]]:
+def quantita_dichiarate(outline: Outline, lingua: str = "") -> list[tuple[str, str]]:
     """Le cifre stampate in copertina, in quarta e nell'indice.
 
     Nessuna di queste si può dichiarare: si contano sul libro. L'agente non
-    sa contarle al posto dell'autore, ma sa dire quali sono.
+    sa contarle al posto dell'autore, ma sa dire quali sono. Le cifre in
+    lettere si cercano nella lingua del libro; senza lingua, in tutte e due.
     """
+    numeri = NUMERI_PER_LINGUA.get(lingua, NUMERI_IN_LETTERE)
     fonti = [("titolo", outline.title), ("sottotitolo", outline.subtitle),
              ("quarta", outline.back_cover)]
     fonti += [(f"capitolo {c.number}", c.title) for c in outline.chapters]
@@ -502,13 +539,13 @@ def quantita_dichiarate(outline: Outline) -> list[tuple[str, str]]:
         for numero in re.findall(r"\b\d+\b", testo):
             trovate.append((dove, numero))
         for parola in re.findall(r"[a-z]+", _piatto(testo)):
-            if parola in NUMERI_IN_LETTERE:
-                trovate.append((dove, f"{parola} ({NUMERI_IN_LETTERE[parola]})"))
+            if parola in numeri:
+                trovate.append((dove, f"{parola} ({numeri[parola]})"))
     return trovate
 
 
-def _controlla_quantita(outline: Outline) -> list[AgentFinding]:
-    quantita = quantita_dichiarate(outline)
+def _controlla_quantita(outline: Outline, lingua: str = "") -> list[AgentFinding]:
+    quantita = quantita_dichiarate(outline, lingua)
     if not quantita:
         return []
     elenco = "; ".join(f"{dove}: {numero}" for dove, numero in quantita[:12])
@@ -804,7 +841,7 @@ def esamina(
     rilievi += _controlla_titolo(outline, spec)
     rilievi += _controlla_quarta(outline)
     rilievi += _controlla_progressione(outline)
-    rilievi += _controlla_quantita(outline)
+    rilievi += _controlla_quantita(outline, spec.language)
     return sorted(rilievi, key=lambda r: r.sort_key)
 
 
