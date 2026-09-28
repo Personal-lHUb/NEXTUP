@@ -106,6 +106,8 @@ def build_epub(
 
     documents: list[tuple[str, str, str]] = []  # (filename, title, xhtml)
 
+    # L'avvertenza del libro, se ne ha una sua; altrimenti quella generica.
+    avvertenza = escape(spec.disclaimer.strip()) or L(lang, "disclaimer_body")
     title_body = f"""<div class="titlepage">
 <h1>{escape(spec.title)}</h1>
 {f'<p class="first"><em>{escape(spec.subtitle)}</em></p>' if spec.subtitle else ''}
@@ -115,7 +117,7 @@ def build_epub(
 <p class="first">© {year} {escape(spec.author)}. {L(lang, 'copyright')}</p>
 <p class="first">{L(lang, 'copyright_body')}</p>
 <p class="first">{L(lang, 'ai_disclosure')}</p>
-<p class="first">{L(lang, 'disclaimer_title')}: {L(lang, 'disclaimer_body')}</p>
+<p class="first">{L(lang, 'disclaimer_title')}: {avvertenza}</p>
 </div>"""
     documents.append(("title.xhtml", spec.title, _xhtml(spec.title, title_body, lang)))
 

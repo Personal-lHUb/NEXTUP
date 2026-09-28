@@ -70,6 +70,11 @@ class BookSpec:
     year: int = 0
     price_eur: float = 0.0
     notes: str = ""                      # istruzioni libere per il modello
+    #: l'avvertenza della pagina di copyright, se questo libro ne vuole una sua.
+    #: Vuota, vale quella generica di `i18n`, che non dice di che consulenza non
+    #: si tratta né che le regole cambiano: a un libro su soldi, salute o diritto
+    #: non basta (rodaggio household-bills, controllo di conformità).
+    disclaimer: str = ""
     #: `true` se questa cartella non è un libro ma un banco di prova: la
     #: pipeline ci gira sopra a secco, la diagnostica la lascia fuori dai
     #: conti. Senza questo marcatore i difetti dell'attrezzatura di prova

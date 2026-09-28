@@ -598,7 +598,7 @@ def _front_matter(spec: BookSpec, outline: Outline, styles: dict, year: int) -> 
         f"© {year} {spec.author}. {L(lang, 'copyright')}",
         L(lang, "copyright_body"),
         "",
-        L(lang, "disclaimer_title") + ": " + L(lang, "disclaimer_body"),
+        L(lang, "disclaimer_title") + ": " + (spec.disclaimer.strip() or L(lang, "disclaimer_body")),
         "",
         L(lang, "ai_disclosure"),
         "",

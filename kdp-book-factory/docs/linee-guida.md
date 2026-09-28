@@ -169,6 +169,12 @@ Le `notes` di `book.json` sono la **linea editoriale**: che cosa il libro si
 vieta (una promessa, una parola, un tipo di affermazione). Tutti gli agenti
 che scrivono le ricevono, e l'indice le rispetta nei titoli.
 
+Un libro che parla di soldi, salute o diritto ha bisogno anche di un'avvertenza
+sua nella pagina di copyright: `disclaimer` in `book.json`, che dice di che
+consulenza il libro non è e che le regole cambiano. Vuoto, vale quella generica,
+uguale per tutti i libri. Lo chiede la conformità, e lo si scrive prima della
+fase 8.
+
 ### 0 · Acquisizione — solo se il libro nasce da una scheda Amazon
 
 | | |
