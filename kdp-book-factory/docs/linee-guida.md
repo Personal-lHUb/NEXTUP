@@ -47,6 +47,44 @@ non la chat.
 
 ---
 
+## Chi chiama gli agenti: nessuno, si chiamano da soli
+
+Gli agenti non aspettano che qualcuno si ricordi di loro: ognuno **scatta
+quando la sua fase lo richiede**.
+
+- **Con la chiave API** li chiama la pipeline: `all` fa lavorare architetto,
+  indice, revisore di scaletta, ghostwriter, voce, collegio, editor,
+  impaginazione e copertina — prompt compreso — nell'ordine delle fasi.
+- **Nella linea manuale** li chiama la sessione di Claude Code che sta
+  lavorando al libro, **senza chiedere il permesso**: è un'istruzione
+  permanente di `CLAUDE.md`. La sessione si ferma e chiede solo per le
+  decisioni dell'autore (elencate più avanti) e quando serve l'immagine di
+  copertina, che l'autore genera.
+
+| quando | chi scatta | come |
+|---|---|---|
+| la scaletta è scritta o cambia | `indice`, poi `revisore-scaletta` | subagent, poi `manuale <slug> scaletta --esamina` |
+| un capitolo è importato | nessuno: si continua a scrivere | — |
+| il libro è impaginato (ogni `build`) | `impaginazione` | `review <slug> --agents impaginazione` |
+| tutti i capitoli sono scritti e impaginati | `lettore-cieco` (libro), `editor-sviluppo`, `fact-checker` a blocchi di otto capitoli, `conformita` sul testo — **in parallelo**, perché i campi non si toccano | subagent in background |
+| il livello è `alta` | in più `correttore`, capitolo per capitolo | subagent |
+| le correzioni sono applicate | di nuovo `impaginazione`; e l'agente che aveva dato un bloccante, solo sui capitoli corretti, per verificare che sia chiuso | comando e subagent |
+| la scheda è importata | `conformita` sulla scheda | subagent su `build/kdp-listing.md` |
+| l'impaginazione è definitiva | `copertina`, primo tempo: il prompt | `copertina <slug>` (e `immagini <slug>` se ci sono figure) |
+| arriva `assets/copertina.jpg` | `copertina`, secondo tempo: le misure | `build`, poi `review <slug> --agents copertina` |
+| prima di consegnare | `qa` e `diagnostica` | comandi |
+
+Tre regole per la sessione che li chiama:
+
+- **Un agente, il suo campo.** Il messaggio che lancia un agente gli chiede
+  solo quello che la tabella delle competenze gli assegna, e al lettore cieco
+  non passa niente oltre ai capitoli e alla vetrina.
+- **Un agente che cade si rilancia.** Se si ferma per un limite d'uso o un
+  errore, lo si rilancia quando il limite è passato: la sua competenza non la
+  copre nessun altro, quindi saltarlo vuol dire lasciarla scoperta.
+- **Si aspetta la fase intera** prima di correggere, e si riferisce all'autore
+  quando la fase è chiusa, non a ogni agente che finisce.
+
 ## Chi fa che cosa
 
 Il campo di ogni agente del collegio di produzione. È la stessa tabella di

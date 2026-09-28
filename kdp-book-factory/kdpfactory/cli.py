@@ -669,6 +669,14 @@ def cmd_all(args) -> int:
 
     pipeline.export_manuscript_markdown(project, spec, outline)
 
+    # Il primo tempo dell'agente copertina: il prompt dell'illustrazione, sulle
+    # pagine definitive. Non chiama il modello, e senza questo passo la
+    # copertina restava quella del motore finché qualcuno non se ne ricordava.
+    print("\nPrompt delle immagini (agente copertina)")
+    cmd_copertina(args)
+    if any("![" in testo for _, _, testo in writer.load_chapters(project, outline)):
+        cmd_immagini(args)
+
     report = pipeline.run_qa(project, spec, outline, result)
     project.add_usage(client.usage_report())
     print(report.render())

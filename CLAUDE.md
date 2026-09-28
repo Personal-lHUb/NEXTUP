@@ -66,6 +66,16 @@ quell'ordine, e non si passa alla successiva col cancello aperto (zero
 bloccanti del revisore di scaletta, pagine nell'intervallo, zero errori di
 `qa`).
 
+**Gli agenti si chiamano da soli.** Quando lavori a un libro, chiami tu
+l'agente responsabile nel momento in cui la fase lo richiede — con il comando
+se misura, come subagent se legge — **senza chiedere il permesso**: questa
+regola è l'autorizzazione. La tabella «quando scatta chi» è in
+`linee-guida.md`. Gli agenti di una stessa fase che non si toccano (il collegio
+di controllo) partono in parallelo, in background. Un agente fermato da un
+limite d'uso si rilancia quando il limite passa, non si salta. Ti fermi a
+chiedere solo per le decisioni dell'autore (categoria, titolo, promessa, voce
+narrante, prezzo, pubblicazione) e quando serve l'immagine di copertina.
+
 **Ogni competenza ha un solo agente**, elencato in
 `kdpfactory/agents/competenze.py`. Quando chiami un agente, chiedigli il suo
 campo e nient'altro; non chiedere a due agenti la stessa cosa. Tre confini da

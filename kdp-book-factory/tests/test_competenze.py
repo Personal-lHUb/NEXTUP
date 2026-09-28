@@ -222,6 +222,26 @@ class TestLineeGuida(unittest.TestCase):
                 self.assertIn(f"`{nome}`", tabella)
 
 
+class TestAgentiInAutonomia(unittest.TestCase):
+    """Ogni agente di produzione ha un momento in cui scatta da solo."""
+
+    def test_ogni_agente_di_produzione_sa_quando_scatta(self):
+        radice = Path(__file__).resolve().parent.parent
+        testo = (radice / "docs" / "linee-guida.md").read_text(encoding="utf-8")
+        tabella = testo.split("## Chi chiama gli agenti")[1].split("## Chi fa che cosa")[0]
+        acquisizione = {c.agente for c in COMPETENZE if c.fase == "acquisizione"}
+        # scrivono dentro la pipeline o su richiesta del capitolo: non hanno un grilletto
+        scrivono = {"architetto", "ghostwriter", "voce", "editor"}
+        for nome in sorted(set(REGISTRY) - acquisizione - scrivono):
+            with self.subTest(agente=nome):
+                self.assertIn(f"`{nome}`", tabella)
+
+    def test_claude_md_autorizza_la_sessione(self):
+        claude = (Path(__file__).resolve().parents[2] / "CLAUDE.md").read_text(encoding="utf-8")
+        self.assertIn("Gli agenti si chiamano da soli", claude)
+        self.assertIn("senza chiedere il permesso", claude)
+
+
 class TestPannello(unittest.TestCase):
     def test_la_conformita_sta_anche_fra_i_revisori_del_libro(self):
         self.assertIn("conformita", agents.panel.BOOK_REVIEWERS)
