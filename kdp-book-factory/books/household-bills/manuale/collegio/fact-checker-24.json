@@ -1,0 +1,44 @@
+{
+  "agente": "fact-checker",
+  "capitoli": [
+    24
+  ],
+  "notes": "Nel capitolo non ci sono dati, statistiche o fonti inventate, e quasi tutto è ben cautelato («may», «can», «often», con il rimando finale al fornitore e allo stato). Prima della stampa vanno però ristrette tre regole del mondo presentate come valide ovunque: la sequenza tolleranza-avviso per l'affitto, la data di sospensione di telefono e internet «fissata dal contratto» e il numero della commissione statale sull'avviso di distacco.",
+  "findings": [
+    {
+      "severity": "importante",
+      "category": "affitto: tolleranza e avviso presentati come universali",
+      "issue": "Il testo presenta come regola generale che, per l'affitto, la data che conta sia la fine della tolleranza «in your lease» e che dopo scatti da sé il termine dell'avviso di pagamento. Non vale ovunque, per quattro motivi. Molti contratti non prevedono alcuna tolleranza, e in alcuni stati la fissa la legge, con durate diverse. Spesso la tolleranza rinvia solo la penale, mentre l'affitto risulta in ritardo già dal giorno dopo la scadenza. Il termine dell'avviso comincia solo quando il padrone di casa lo notifica. In alcune città contano anche le norme locali.",
+      "quote": "For rent, it's the end of the grace period in your lease and, after that, the number of days a notice to pay allows",
+      "suggestion": "Togliere la sequenza automatica e l'idea che la tolleranza esista sempre, per esempio: «For rent, it's the date rent counts as late under your lease, and the end of any grace period your lease or your state's law allows. If the landlord serves a notice to pay, the days it gives, set by state law and in some places by local rules, become the next date that matters.»"
+    },
+    {
+      "severity": "importante",
+      "category": "telefono e internet: data di sospensione",
+      "issue": "Il testo dice che la data di sospensione la fissa il contratto. Per telefono e internet di solito non è così. Molti servizi sono mensili senza vincolo o prepagati. Le condizioni generali permettono di sospendere il servizio se non si paga, ma non fissano una data sul calendario: quella compare, se compare, sull'avviso di arretrato, sulla bolletta o nell'account online. La stessa regola torna nell'esempio di Brenda: «under her contract, service will be suspended on the 25th».",
+      "quote": "For a phone or internet account, it's the suspension date the contract sets.",
+      "suggestion": "Riformulare così: «For a phone or internet account, it's the suspension date on the past-due notice, the bill or your online account; if none is stated, that date is the first question of the call.» Nell'esempio, sostituire il passaggio con «the past-due notice says service will be suspended on the 25th»."
+    },
+    {
+      "severity": "importante",
+      "category": "commissione statale data per scontata",
+      "issue": "Il testo dà per certo che l'avviso di distacco porti sul retro il numero della commissione statale e che sia lei l'ente a cui rivolgersi. Questo vale per le aziende regolate dalla commissione, di solito quelle private. In molti stati le aziende municipali e le cooperative elettriche sono escluse dalle sue regole a tutela dei consumatori. Se il numero compare sull'avviso, e dove, dipende dallo stato e dall'azienda. Chi ha un'azienda municipale o una cooperativa cercherebbe un ente che non ha competenza sul suo caso.",
+      "quote": "Had the company's answers not matched the notice, the state commission's number on the back would have been her next call.",
+      "suggestion": "Nell'esempio, legare il fatto al caso di Brenda: «…the state utility commission's number, printed on her notice, would have been her next call.» Qui, oppure dove il libro presenta la commissione, aggiungere il limite: «If your utility is regulated by the state commission (city-owned utilities and co-ops often aren't), the notice often says how to reach it.»"
+    },
+    {
+      "severity": "minore",
+      "category": "generalizzazione sulle carte di credito",
+      "issue": "La frase è assoluta e viene presentata come un fatto. I programmi di difficoltà delle banche spesso chiedono reddito e spese, quindi in parte tengono conto degli altri debiti. Il punto vero è che ogni emittente tratta solo il proprio conto, senza coordinarsi con gli altri.",
+      "quote": "where separate calls to each card company produce terms that assume the others don't exist",
+      "suggestion": "Riformulare così: «…where each card company sets terms for its own account only, without coordinating with the others.»"
+    },
+    {
+      "severity": "minore",
+      "category": "regole locali omesse",
+      "issue": "La chiusa lega le regole su distacchi e sfratti solo allo stato. In varie città e contee valgono anche norme locali sugli sfratti. Per le aziende municipali e le cooperative, spesso le regole sui distacchi le fissa l'ente stesso, non lo stato.",
+      "quote": "depend on the provider and, where shutoff and eviction rules come in, on your state.",
+      "suggestion": "Allargare il rimando: «…depend on the provider and, where shutoff and eviction rules come in, on your state and, in some places, your city or county.»"
+    }
+  ]
+}
