@@ -1,0 +1,62 @@
+{
+  "agente": "lettore-cieco",
+  "findings": [
+    {
+      "severity": "importante",
+      "category": "promessa non mantenuta / dove ci si perde",
+      "problem": "L'introduzione dice a chi è già in arretrato di saltare direttamente alla Parte V e promette che per le telefonate urgenti non serve un sistema in ordine. I capitoli di quella parte però danno per scontato che il lettore abbia già la lista e il calendario delle paghe costruiti nelle parti II e III. Chi segue il consiglio dell'introduzione arriva a «Catching Up When Several Bills Are Behind» e trova istruzioni che si appoggiano a strumenti che non ha. Il lettore in difficoltà, cioè proprio quello a cui l'introduzione ha aperto la scorciatoia, si ritrova a improvvisare.",
+      "chapter": "01 Introduction; Part V: 18 The First Days After a Missed Payment, 20 What Each Bill Puts at Stake When Money Runs Short, 24 Catching Up When Several Bills Are Behind",
+      "quote": "«If you are already behind, go straight to the part called *Falling Behind and Catching Up*; its last chapter shows the way back, step by step.» (01) / «Before each call, open the bill calendar you built around your paydays.» (24) / «Open your master list and pick out the bills due between today and the end of the month.» (20)",
+      "suggestion": "Serve una versione ridotta per chi arriva direttamente nella Parte V. Basterebbero due righe all'inizio di «The First Days After a Missed Payment» o di «Catching Up When Several Bills Are Behind»: se lista e calendario ancora non ci sono, basta un foglio con i giorni di paga e, per ogni bolletta arretrata, la data che conta e l'importo. In alternativa l'introduzione dovrebbe dire quali passaggi minimi fare prima."
+    },
+    {
+      "severity": "importante",
+      "category": "annunciato e non arriva / lettore che cambia",
+      "problem": "Il capitolo si rivolge a due lettori: il figlio che prende in mano le bollette di un genitore e il coniuge che deve sostituire un partner malato. Contiene anche una sezione pensata per tutti, la nota per chi dovesse subentrare. Il passo della settimana però vale solo per chi ha un genitore anziano: il coniuge non riceve un passo, e nemmeno chi un genitore da seguire non ce l'ha. La nota per chi subentra non viene mai assegnata come compito. Il capitolo successivo la dà per esistente: chi ha seguito il libro passo dopo passo arriva a «A Yearly Review…» e non sa di quale nota si stia parlando.",
+      "chapter": "27 Taking Over the Bills for an Aging Parent → 28 A Yearly Review to Get Ready for Next Year's Bills",
+      "quote": "«Choose one first step to take with your parent, not for them.» (27) / «Next, open the handover note and read it as if you were the person who had to use it tomorrow.» (28)",
+      "suggestion": "Nel passo di «Taking Over the Bills for an Aging Parent» servirebbe un'alternativa per chi non ha un genitore da seguire o sta sostituendo il partner: scrivere la propria nota per chi subentra, visto che il capitolo stesso dice «That page is worth writing for your household too, at any age.». Così «A Yearly Review…» ritrova una nota che il lettore ha davvero scritto."
+    },
+    {
+      "severity": "importante",
+      "category": "promessa della vetrina — gancio di copertina",
+      "problem": "Il gancio che compare sulla copertina è il sottotitolo troncato a metà frase. Si ferma proprio prima di «Fall Behind», cioè la metà della promessa che parla a chi è in arretrato, e sulla copertina sembra un refuso. Oltre a essere tagliato, ripete il sottotitolo e non aggiunge niente.",
+      "chapter": "vetrina — copertina",
+      "quote": "«A Household Guide to Paying on Time and Catching Up When You…»",
+      "suggestion": "Sulla copertina serve una frase completa. Può essere il sottotitolo per intero o un gancio vero e diverso dal sottotitolo. Se i puntini di sospensione vengono solo da come vetrina.md mostra il testo e non sono stampati in copertina, questa segnalazione si può ignorare. La composizione della copertina spetta all'agente copertina."
+    },
+    {
+      "severity": "minore",
+      "category": "dove ci si perde",
+      "problem": "Quando il capitolo imposta la home del sistema, le parole di stato sono tre e il testo chiede di usare sempre le stesse. Il passo della settimana però introduce una quarta parola, «sent», spiegata solo otto capitoli dopo, in «A Short Weekly Check…». Chi sta preparando il foglio di calcolo con l'ombreggiatura legata alle parole non sa se «sent» è uno stato a sé e come colorarlo. Un inciso nel paragrafo di Mia rimanda a «A Short Weekly Check…», ma il passo chiede di usare la parola subito.",
+      "chapter": "08 Picking a Notebook, Spreadsheet or Your Bank's Tools",
+      "quote": "«in each cell you type a status: paid with the date, due, or missing. Use exactly the same words every time.» / «anything still on its way is sent.»",
+      "suggestion": "Nel paragrafo sull'impaginazione della home basta una riga: «sent» è un segno in più sulla stessa strada, la bolletta resta due finché il pagamento non risulta addebitato. In alternativa si toglie «sent» dal passo di questo capitolo."
+    },
+    {
+      "severity": "minore",
+      "category": "dove ci si perde",
+      "problem": "In «Tracking Down Every Bill…» le quattro ricerche (gli altri conti, la conversazione in casa, la ricerca nelle email, il giro per categorie) vanno fatte, una sera ciascuna, prima del capitolo sulla registrazione dei dettagli. Arrivato lì, il lettore legge che «aspettano ancora» e non capisce se avrebbe dovuto averle già fatte o se vengono dopo. Nessun capitolo successivo le riprende, e il capitolo seguente apre con «Your master list now holds every bill with the details that matter», come se fossero già state fatte.",
+      "chapter": "07 Recording the Details That Matter for Each Bill (rispetto a 04 Tracking Down Every Bill Your Household Pays)",
+      "quote": "«The other accounts, the conversation at home, the email search and the walk through the categories still wait for their evenings.»",
+      "suggestion": "Serve un'indicazione sola e chiara del momento. Per esempio: se non le hai ancora fatte, falle prima di questo passo. Oppure: falle adesso, una per sera, e aggiungi alla lista quello che trovano."
+    },
+    {
+      "severity": "minore",
+      "category": "dove ci si perde",
+      "problem": "Il titolo di sezione promette sei dettagli, la sezione su frequenza e modalità di pagamento ne aggiunge due come «marks» e il passo della settimana ne chiede otto. Si ricostruisce, ma per un momento il lettore torna indietro a contarli.",
+      "chapter": "07 Recording the Details That Matter for Each Bill",
+      "quote": "«The six details every bill needs» / «give it the eight details»",
+      "suggestion": "Serve un solo numero dall'inizio alla fine. Oppure il passo dice «the six details, plus the two marks»."
+    },
+    {
+      "severity": "minore",
+      "category": "noia / righe saltate",
+      "problem": "Il paragrafo sui debiti non garantiti è un blocco unico. Mette in fila penali, tasso di mora, charge-off, agenzia di recupero, causa, sentenza in contumacia, pignoramento dello stipendio, redditi protetti, limiti federali e statali. Qui ho cominciato a saltare righe, e la frase che conta di più, il termine per rispondere alla causa, arriva in fondo quando l'attenzione è già calata.",
+      "chapter": "20 What Each Bill Puts at Stake When Money Runs Short",
+      "quote": "«Unsecured debts have no property attached.»",
+      "suggestion": "Dividere in due tempi: che cosa succede nei primi mesi, poi che cosa succede se arriva una causa. La frase sul termine per rispondere va messa in evidenza da sola."
+    }
+  ],
+  "notes": "Ho letto /home/user/NEXTUP/kdp-book-factory/books/household-bills/build/vetrina.md e poi, per intero e in ordine, i capitoli da /home/user/NEXTUP/kdp-book-factory/books/household-bills/manuscript/01.md a 29.md. Non ho aperto altri file. Il messaggio di incarico non conteneva riassunti né intenzioni dell'autore da ignorare. La vetrina non contiene la descrizione (la pagina Amazon), quindi quella promessa non l'ho potuta verificare: ho controllato solo titolo, sottotitolo, gancio di copertina e indice. Se la descrizione esiste, va rigenerata la vetrina e riletta. A parte i punti segnalati, il libro mantiene quello che promette. Titolo e sottotitolo arrivano tutti e due: le parti I–IV consegnano il «paying on time», la Parte V il «catching up when you fall behind». Ogni voce dell'indice, titoli delle sei parti compresi, consegna quello che annuncia; «Asking for More Time Before the Due Date» dà anche più del titolo, con la sezione sul dopo scadenza. I rimandi interni arrivano tutti dove promettono: 04→17 per le contestazioni, 04→21 per deferment e forbearance, 08→16 per «sent», 12→13, 13→15, 20→22 per le tutele contro il distacco, 20→24 per Brenda seguita settimana per settimana, 24→19 per il credito, 01→16 per la sera scelta. Il lettore resta lo stesso dall'inizio alla fine, l'adulto che gestisce le bollette in una casa americana. I cambi di destinatario (partner o figlio adolescente nel 26, genitore o coniuge nel 27) sono annunciati dal titolo. Anche il lessico regge: master list, i tre stati paid/due/missing, set-aside; holding account e bills account sono collegati esplicitamente. L'introduzione promette di dire «varia da stato a stato» invece di dare cifre, e mantiene: i capitoli 20–23 sono pieni di questi rinvii, che appesantiscono ma sono coerenti con il patto iniziale. Il ritorno di Dana nella conclusione chiude bene la scena d'apertura. Non c'è un punto in cui avrei chiuso il libro. Gli unici tratti in cui ho rallentato sono il paragrafo segnalato nel capitolo 20 e le parti procedurali sulle contestazioni in «A Monthly Review of Statements and What's Left Over»."
+}
