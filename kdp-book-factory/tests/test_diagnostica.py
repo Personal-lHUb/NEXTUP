@@ -115,6 +115,21 @@ class TestScheda(unittest.TestCase):
         self.assertEqual(report.scheda["parole_chiave_usate"], 1)
         self.assertEqual(report.scheda["categorie_usate"], 1)
 
+    def test_la_terza_categoria_non_si_chiede_a_ogni_costo(self):
+        """Una categoria sola è un buco; con due, la terza deve corrispondere al libro.
+
+        Nel rodaggio il rilievo «alto» sulle due categorie ha spinto a cercarne una di
+        riempimento, e la conformità l'ha tolta: non corrispondeva al contenuto.
+        """
+        def rilievo(categorie):
+            report = self.scheda({"categories": categorie})
+            return next(f for f in report.rilievi if "categorie su" in f.fatto)
+
+        self.assertEqual(rilievo(["A"]).impatto, "alto")
+        due = rilievo(["A", "B"])
+        self.assertEqual(due.impatto, "medio")
+        self.assertIn("riempimento", due.leva)
+
     def test_i_primi_caratteri_della_descrizione_sono_estratti(self):
         testo = "A" * 400
         report = self.scheda({"description_paragraphs": [testo]})

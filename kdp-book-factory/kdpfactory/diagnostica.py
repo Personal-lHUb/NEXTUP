@@ -295,10 +295,17 @@ def _scheda(state: dict, spec: BookSpec, report: BookReport) -> None:
             f"Parole chiave che si sovrappongono fra loro: {', '.join(doppioni[:3])}.",
         ))
     if len(categories) < CATEGORY_SLOTS:
+        # Con una sola categoria il libro è in una classifica: è un buco vero.
+        # Con due, la terza vale solo se corrisponde all'argomento: nel rodaggio
+        # household-bills questo rilievo «alto» ha spinto due volte verso una
+        # categoria di riempimento, e la conformità l'ha tolta due volte.
         report.rilievi.append(Finding(
-            "scheda", "alto",
+            "scheda", "alto" if len(categories) < CATEGORY_SLOTS - 1 else "medio",
             f"{len(categories)} categorie su {CATEGORY_SLOTS}: ogni categoria è una "
             "classifica in cui si può entrare.",
+            "Una in più solo se descrive l'argomento del libro: una categoria che non "
+            "gli corrisponde porta il lettore sbagliato e KDP può toglierla. Due giuste "
+            "valgono più di tre con una di riempimento.",
         ))
     if len(titolo_esteso) > TITLE_TRUNCATION_CHARS:
         report.rilievi.append(Finding(

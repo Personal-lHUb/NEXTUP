@@ -483,3 +483,4 @@ Ogni regola qui sopra viene da un difetto trovato su un libro vero.
 | il sottotitolo prometteva «Catching Up When You Fall Behind» e nessun capitolo mostrava il rientro | 4, `lettore-cieco` | ogni promessa del sottotitolo ha un capitolo che la mantiene; se manca, si scrive prima della scheda |
 | il brief di copertina chiedeva 1800 x 2700 px, il motore ritaglia la prima con l'abbondanza: l'immagine usciva a 291 DPI | 7, `copertina` | i pixel si chiedono sull'area che il motore ritaglia davvero |
 | un libro sulle bollette di casa riceveva la rappresentazione «business»: il mondo professionale, cioè un ufficio | 7, `copertina` | la finanza di casa ha la sua voce: una cucina la sera, non un ufficio |
+| la diagnostica chiedeva la terza categoria come rilievo alto; due volte se n'è cercata una di riempimento, e due volte la conformità l'ha tolta | 6, `conformita` | una categoria sola è un buco; con due, la terza entra solo se descrive l'argomento del libro |
