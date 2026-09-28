@@ -1,0 +1,135 @@
+{
+  "agente": "editor-sviluppo",
+  "capitoli": "01-29",
+  "notes": "Verifica di chiusura, con la numerazione nuova a 29 sezioni. Le correzioni hanno retto. I rimandi controllati puntano tutti al capitolo giusto dopo lo slittamento: last chapter (11), last two chapters (7, 12), previous two chapters (23), next chapter (12), the last in this part (20), its last chapter (1), e i rimandi per titolo nei capp. 4, 5, 13, 16, 18, 20, 21, 22, 24, 26 e 28. Anche i conti degli esempi tornano. Brenda fra i capp. 20 e 24: 286 = 2×143; le due rate da 71,50 fanno 143; lo scarto di 140 slitta sull'affitto e viene pagato il 12 del mese dopo; il residuo di 71,50 dopo la rata spostata è giusto; la chiusura a circa dieci settimane dalla prima chiamata del 9 è giusta. Howard: 1.800 + 110 + 70 = 1.980, scarto 180. Omar: 1.344 / 12 = 112, poi 120 × 2 = 240 accantonati e 320 da coprire. Dana è coerente fra i capp. 1 e 29 (giovedì sera, mezz'ora ripresa dal 16). Mia e Howard restano coerenti fra i capp. 8, 16 e 28 su strumenti, segno «sent» e conto accantonato. Tornano anche Luis, Nina, Hank, Rita, Glen, Doris, Kevin e Terrence. Nessun bloccante. Dei rilievi precedenti importanti ne restano aperti due, in forma ridotta (aperture, formula d'esempio). Le correzioni ne hanno introdotti tre nuovi: il cap. 3 contro il 7 sulle bollette variabili, il cap. 4 contro il 7 sulle serate di ricerca, l'apertura del 24 che ricalca il 20.\nEsito punto 1 (numero vecchio → nuovo):\n[imp] 27→28 bolletta variabile come intervallo: RISOLTO.\n[imp] 8→8 Mia segna paid all'avviso: RISOLTO (ora «sent», poi «paid» all'addebito; passo corretto).\n[imp] 6→6 grace period con due significati: RISOLTO (il 6 lo distingue da quello del 5; il 19 è chiaro).\n[imp] 4→4 deferment/forbearance: RISOLTO (formula generica con rimando al 21, stesso termine).\n[imp] 3→3 sovrapposizione con l'introduzione: RISOLTO (mappa e punto di partenza ridotti a rimandi).\n[imp] 20→20 tutele contro il distacco spiegate due volte: RISOLTO (il 20 rimanda al 22, il 22 rimanda al 5, serrature solo nel 22). Piccolo residuo nel nuovo 24, segnalato a parte.\n[imp] 18→18 NSF e overdraft rispiegati: RISOLTO.\n[imp] 13→13 conto separato uguale all'holding account: RISOLTO (rimando al cap. 11).\n[imp] 16→16 carta sostituita in sei capitoli: RISOLTO (il 16 ha una riga; Terrence nel 28 è legato al consiglio del 13).\n[imp] 14→14 nome dell'addebito sull'estratto conto: RISOLTO.\n[imp] 12→12 Gloria uguale a Keisha: RISOLTO (ora acqua e irrigazione).\n[imp] 16→16 Paula uguale a Mia: RISOLTO (Mia ripresa). Residuo minore: viene ripresentata come nuova.\n[imp] 27→28 pensionati duplicati: RISOLTO (Victor e Bev tolti, Frank camionista, Howard ricorrente nei capp. 8, 16, 28).\n[imp] 13→13 apertura uguale al 12: RISOLTO.\n[imp] 10→10 aperture «Your master list»: IN PARTE (9, 10 e 28 riscritti; restano 5/6 e 8, e le riscritture usano tre volte la domanda). Aperto come minore.\n[imp] 16→16 formula «Here is an example» / «Take, as an example»: IN PARTE (da circa 60 a 27 occorrenze, ma ancora in 26 capitoli su 27). APERTO.\n[min] 8 «two» punti deboli: RISOLTO. [min] 14 escrow chiamato holding account: RISOLTO. [min] 16 «sent» come quarto stato: RISOLTO. [min] 13 pulled/sent rispiegati: RISOLTO. [min] 21 annotazione delle chiamate ripetuta: RISOLTO (rimando al 18). [min] 21 «When the answer is no»: RISOLTO. [min] 16 sera scelta nel cap. 1: RISOLTO. [min] 25→26 intestatario: RISOLTO. [min] 28→29 chiusura che ricalca il 16: RISOLTO. [min] 1 mappa senza il genitore anziano: RISOLTO.\n[min] 20 termini definiti più volte: IN PARTE (restano escrow nei capp. 4/14 e APR nei capp. 6/23). APERTO.\n[min] 27→28 cifre ricorrenti ($140, gennaio/luglio): IN PARTE (Terrence ora $124, gli altri restano). APERTO.",
+  "findings": [
+    {
+      "severity": "importante",
+      "category": "contraddizione fra capitoli",
+      "chapter": 3,
+      "issue": "Il cap. 3, dove definisce lo stato «due», dice che per una bolletta variabile basta la cifra del mese scorso. Il cap. 7 dice il contrario: «the easy move is to write down whatever the last one said. That figure is usually misleading». L'esempio di Keisha ($74 contro un intervallo da 68 a 212) serve proprio a smontare quella cifra. Il cap. 28 ora si è allineato al 7, quindi il 3 resta l'unico capitolo a sostenere l'opposto.",
+      "quote": "For a bill that changes from month to month, such as electricity, last month's amount is close enough until the new one arrives.",
+      "suggestion": "Riformulare il cap. 3 in modo che non contraddica il 7, per esempio: «a rough figure is enough to call it due; the chapter on recording each bill's details shows how to note the range it moves in»."
+    },
+    {
+      "severity": "importante",
+      "category": "contraddizione fra capitoli",
+      "chapter": 7,
+      "issue": "Il passo del cap. 4 assegna le altre quattro ricerche (gli altri conti, la conversazione in casa, la ricerca nella posta, il giro per categorie) a serate da fare «before the chapter on recording each bill's details», cioè prima del 7. Il 7 invece si apre dicendo che quelle ricerche aspettano ancora. Chi ha seguito il 4 le ha già fatte e legge che non le ha fatte. Chi le ha rimandate non sa più quando farle. Il 7 ripete anche l'istruzione del passo del 4: confrontare la lista con la nota scritta a memoria, cominciando dai «Not sure».",
+      "quote": "The other accounts, the conversation at home, the email search and the walk through the categories still wait for their evenings.",
+      "suggestion": "Scegliere un solo momento per queste ricerche. Se vanno fatte prima del 7, nel 7 scrivere «if any of them is still waiting, do it before you fill in the details». Se possono venire dopo, correggere il passo del 4. Nel 7 togliere il confronto con la nota a memoria, o ridurlo a un richiamo."
+    },
+    {
+      "severity": "importante",
+      "category": "aperture uguali",
+      "chapter": 24,
+      "issue": "Il capitolo nuovo si apre con la stessa immagine del cap. 20, l'altro capitolo di Brenda e della stessa parte: tutte le bollette che chiedono la stessa cosa nello stesso momento. Il cap. 20 dice «every bill seems to demand the same thing at the same moment», e il 24 riprende la stessa idea con parole quasi uguali. Chi legge i due capitoli a quattro di distanza sente la ripetizione.",
+      "quote": "When several bills are behind at once, each one asks for the same thing: attention, now.",
+      "suggestion": "Aprire il 24 da Brenda o da quello che il lettore ha in mano dopo il cap. 20 (la lista divisa per posta in gioco) e arrivare subito al metodo: l'ordine per data."
+    },
+    {
+      "severity": "importante",
+      "category": "formula ripetuta in tutto il libro",
+      "chapter": 8,
+      "issue": "Le formule «Here is an example.» e «Take, as an example, …» sono scese da circa sessanta a ventisette. Restano però in 26 capitoli su 27 (tutti dal 2 al 28 tranne il 24), quasi sempre all'ingresso del primo personaggio. Il cap. 8 le usa tutte e due a poche righe di distanza, per Howard e per Mia. Il lettore sa già in che punto del capitolo la troverà.",
+      "quote": "Here is an example. Howard is retired and pays fourteen recurring bills.",
+      "suggestion": "Far entrare i personaggi con il nome e con quello che fanno («Howard is retired and pays fourteen recurring bills»). Tenere la formula in due o tre punti al massimo, dove serve dire che le cifre sono scelte per il conto, come fanno già i capp. 6 e 23."
+    },
+    {
+      "severity": "minore",
+      "category": "aperture uguali",
+      "chapter": 6,
+      "issue": "Restano alcune aperture uguali. I capp. 5 e 6, consecutivi, cominciano ancora tutti e due con «A utility bill…». Il cap. 8 comincia ancora con «Your master list…». Le riscritture hanno usato lo stesso espediente tre volte: i capp. 9, 10 e 13 si aprono con una domanda («Where did your last bill…?», «Will the money be in the account…?», «Which account actually pays…?»), e i primi due sono consecutivi. Anche i capp. 27 e 28, consecutivi, hanno lo stesso andamento: «A handover of the bills rarely arrives…» e «Your household's bills rarely change…».",
+      "quote": "A utility bill covers a stretch of time that has already ended",
+      "suggestion": "Aprire il 6 dall'estratto conto della carta, per esempio da Loretta. Variare almeno una delle due domande consecutive (9 o 10) e uno dei due «rarely» (27 o 28)."
+    },
+    {
+      "severity": "minore",
+      "category": "personaggio ripreso come nuovo",
+      "chapter": 16,
+      "issue": "Mia e Howard tornano, come chiesto, ma sono ripresentati come esempi nuovi e con la stessa descrizione della prima volta. Mia «works rotating shifts at a hospital» nel cap. 8 e di nuovo nel 16. Howard entra nel 28 con «Here is an example. Howard, who keeps his bills in a paper notebook». Per Omar, Carla, Andre e Brenda il libro scrive invece «again» o «back to». Il lettore non capisce se sono le stesse persone.",
+      "quote": "Here is an example. Mia works rotating shifts at a hospital, so no weekday is reliably free.",
+      "suggestion": "Riprenderli con un richiamo esplicito, come per gli altri («Mia, whose spreadsheet we met in the chapter on choosing a home, …», «Howard again: …»), e togliere la descrizione ripetuta."
+    },
+    {
+      "severity": "minore",
+      "category": "concetto usato prima di essere spiegato",
+      "chapter": 8,
+      "issue": "Il cap. 8 fa usare il segno «sent» prima che il 16 lo spieghi. Nella stessa pagina, per il foglio di calcolo prescrive tre sole parole («paid with the date, due, or missing. Use exactly the same words every time»), e per il quaderno non prevede nessun segno intermedio. Poi il passo chiede di segnare «sent» quello che è ancora in viaggio. Chi usa il quaderno non sa come farlo.",
+      "quote": "Open your bank and card history to see what has already cleared, and mark those paid; anything still on its way is sent.",
+      "suggestion": "Nel cap. 8 dire in una frase che cos'è «sent» e come si segna nel quaderno e nel foglio. In alternativa, nel passo scrivere «leave it as due until it clears» e lasciare «sent» al cap. 16."
+    },
+    {
+      "severity": "minore",
+      "category": "filo interrotto",
+      "chapter": 28,
+      "issue": "Il cap. 28 fa riaprire e aggiornare la nota per chi dovesse subentrare come se il lettore l'avesse già scritta. Il passo del cap. 27 però riguarda solo chi ha un genitore anziano (sedersi con lui, oppure chiamare per la third-party notification) e non chiede di scriverla: nel 27 la nota compare solo come consiglio nel testo. Chi non ha un genitore da seguire arriva al 28 senza nota, e non ha avuto nessun passo nel 27.",
+      "quote": "Next, open the handover note and read it as if you were the person who had to use it tomorrow.",
+      "suggestion": "Aggiungere al passo del 27 la stesura della nota, per tutti: una pagina che dice dove sta la lista e a chi rivolgersi. In alternativa, nel 28 scrivere «open the handover note, or write it now if you haven't»."
+    },
+    {
+      "severity": "minore",
+      "category": "sovrapposizione",
+      "chapter": 24,
+      "issue": "Il cap. 21 ha ora una sezione «Calling after the due date» che contiene già il metodo del 24: partire dalla data del prossimo passo indicata sull'avviso e dall'importo che lo ferma, poi proporre la parte scaduta a rate che il calendario regge. Il 24 lo rispiega da capo senza rimandare al 21, e il 21 non rimanda al 24.",
+      "quote": "Beside each date, note the amount needed by that date. It is often less than the full balance.",
+      "suggestion": "Nel 24 richiamare la sezione del 21 in una riga e dedicare lo spazio a quello che è solo suo: l'ordine fra più bollette e il calendario. In alternativa, ridurre la sezione del 21 a un rimando al 24."
+    },
+    {
+      "severity": "minore",
+      "category": "spiegazione data due volte",
+      "chapter": 24,
+      "issue": "Il rilievo sulle commissioni era stato chiuso lasciando nel cap. 5 l'unica spiegazione dell'eccezione per aziende comunali e cooperative (il 22 ci rimanda). Il cap. 24 la rimette in una parentesi.",
+      "quote": "(city-owned utilities and co-ops often aren't regulated by it)",
+      "suggestion": "Togliere la parentesi, oppure sostituirla con un rimando al cap. 5."
+    },
+    {
+      "severity": "minore",
+      "category": "formula ripetuta",
+      "chapter": 24,
+      "issue": "La cautela che chiude gli esempi è diventata una formula. Il cap. 22 scrive «Tyrone's result is one way it can go, not a promise», e due capitoli dopo il 24 ripete la stessa costruzione.",
+      "quote": "Here is one way Brenda's weeks can go, not a promise of how yours will.",
+      "suggestion": "Cambiare la frase in uno dei due capitoli. Nel 24 può bastare la frase successiva, che lega già l'esito al fornitore e allo stato."
+    },
+    {
+      "severity": "minore",
+      "category": "dettagli d'esempio ricorrenti",
+      "chapter": 15,
+      "issue": "La cifra di Terrence è passata a $124, ma $140 compare ancora in cinque esempi che non c'entrano fra loro: la bolletta elettrica del cap. 2, l'assicurazione auto di Luis nel 10, il saldo di Hank nel 13, l'aumento di Tanya nel 14 e il bollo di Rita nel 15. È anche lo scarto di Brenda, sette volte fra i capp. 20 e 24. L'assicurazione auto con rinnovo a gennaio e luglio è ancora sia di Tomás (cap. 4) sia di Neil (cap. 14).",
+      "quote": "Rita's calendar shows her car registration due in two months at $140",
+      "suggestion": "Cambiare la cifra in almeno tre dei cinque esempi, a cominciare da Tanya e Rita, che sono in capitoli consecutivi, così lo scarto di Brenda resta l'unico $140 del libro. Spostare i mesi di rinnovo di Neil."
+    },
+    {
+      "severity": "minore",
+      "category": "termini definiti più volte",
+      "chapter": 23,
+      "issue": "L'APR è definito nel cap. 6 («the yearly interest rate on that balance, expressed as a percentage») e il cap. 23 lo ridefinisce da capo. L'escrow è definito nel cap. 4 («meaning the lender or loan servicer collects part of the tax and insurance with each payment») e il 14 lo rispiega per intero senza richiamare il 4. Il 20, invece, ora rimanda correttamente al 14.",
+      "quote": "Credit cards and car loans quote an annual percentage rate, or APR: the cost of borrowing expressed as a yearly percentage.",
+      "suggestion": "Nel 23 basta un richiamo breve al cap. 6. Per l'escrow, lasciare la spiegazione completa nel 14 e ridurre il 4 a un accenno con rimando, o viceversa."
+    },
+    {
+      "severity": "minore",
+      "category": "concetto usato prima di essere spiegato",
+      "chapter": 14,
+      "issue": "«Premium» compare dal cap. 2 in poi (Walt, poi i capp. 3, 4, 7, 12 e 13) ma viene definito solo nel 14. «Servicer» compare due volte nel cap. 4 prima della definizione del 14. Eppure il cap. 1 promette che ogni termine sarà spiegato la prima volta che compare.",
+      "quote": "the premium, meaning the price of the coverage",
+      "suggestion": "Spostare la spiegazione alla prima occorrenza (cap. 2 per premium, cap. 4 per servicer) e nel 14 usare i termini senza definirli."
+    },
+    {
+      "severity": "minore",
+      "category": "rimando in avanti presentato come già letto",
+      "chapter": 13,
+      "issue": "Il cap. 13 rimanda al cap. 15, sul denaro da mettere da parte, con «as in the chapter on…», come se il lettore l'avesse già letto. Invece ci deve ancora arrivare.",
+      "quote": "A third can hold the money set aside for irregular bills, as in the chapter on setting a little aside for them.",
+      "suggestion": "Scrivere «as the chapter on setting a little aside for them will describe» oppure «a later chapter explains how»."
+    },
+    {
+      "severity": "minore",
+      "category": "conto che non torna",
+      "chapter": 5,
+      "issue": "Il titoletto annuncia quattro importi, ma il riquadro di Greg ne mostra cinque: previous balance, payment received, balance forward, current charges, total amount due. Chi conta le cifre dell'esempio arriva a cinque.",
+      "quote": "Four amounts and the one that counts",
+      "suggestion": "Togliere il numero dal titoletto («The amounts, and the one that counts») oppure dire nel testo che il pagamento ricevuto è un accredito e non un importo dovuto."
+    }
+  ]
+}

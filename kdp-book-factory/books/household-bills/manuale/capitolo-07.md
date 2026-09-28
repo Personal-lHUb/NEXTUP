@@ -4,7 +4,7 @@ You built your rough list by working through statements and card history, and fo
 
 The important word there is *same*. When every bill carries the same details in the same order, a missing one shows up as a gap you can see. On an uneven list, the electric bill might have six notes and the water bill only one, and nothing points to the weak spots. On an even list, where every bill has the same slots and the water bill has four of them empty, you can see exactly where to look.
 
-First, lay the note you wrote from memory beside your rough list. Add any bill on it that the statements missed, and fill in the ones marked "Not sure" first. The other accounts, the conversation at home, the email search and the walk through the categories still wait for their evenings.
+First, make sure the list is whole. If any of the searches from the chapter on tracking down every bill is still waiting, the other accounts, the conversation at home, the email or the walk through the categories, do it before you fill in the details, and add what it turns up.
 
 ## The six details every bill needs
 
@@ -24,7 +24,7 @@ First, lay the note you wrote from memory beside your rough list. Add any bill o
 
 With a variable bill, the easy move is to write down whatever the last one said. That figure is usually misleading. Last month is a single point in a pattern that shifts with the seasons, the weather and how many people were home.
 
-Take, as an example, Keisha, who is filling in her list in late April. Her most recent electric bill was $74, and she's about to write that number down. Before she does, she pulls up the past twelve months on the utility's website. The bills ran from $68 in the spring to $212 in August, after a heat wave kept the air conditioner running, with a second peak of $165 in January. Had she written down $74, her list would have been close for about four months of the year and far off for the rest.
+Keisha is filling in her list in late April. Her most recent electric bill was $74, and she's about to write that number down. Before she does, she pulls up the past twelve months on the utility's website. The bills ran from $68 in the spring to $212 in August, after a heat wave kept the air conditioner running, with a second peak of $165 in January. Had she written down $74, her list would have been close for about four months of the year and far off for the rest.
 
 So Keisha writes: variable, $65 to $215, highest in July and August, second peak in January. That one line tells her more than any single number could. It shows that the bill is modest most of the year, when it climbs and roughly how high it has gone. It's also honest. She isn't pretending to know next month's figure. She's only recording what the bill has actually done.
 
@@ -50,6 +50,6 @@ None of these would have come to light from a list of names. Each one came from 
 
 ## This week's step
 
-Sit down with your rough list and the statements and bills you've already gathered. Take each bill in turn and give it the eight details: who you pay and how the charge shows up, fixed or variable, the usual due date, how it's paid, which account or card it comes from, a contact number copied from a real bill, how often it arrives and whether it's on autopay today. Don't stop to look anything up. Wherever you don't know an answer, put a question mark and move on. That's the whole step, even if it takes more than one evening.
+Sit down with your rough list and the statements and bills you've already gathered. Take each bill in turn and give it the six details and the two marks: who you pay and how the charge shows up, fixed or variable, the usual due date, how it's paid, which account or card it comes from, a contact number copied from a real bill, how often it arrives and whether it's on autopay today. Don't stop to look anything up. Wherever you don't know an answer, put a question mark and move on. That's the whole step, even if it takes more than one evening.
 
 As an optional extra, later in the week, track down one question mark: log in to the account, find the statement or call the number on the bill. Each question mark that's left points to a specific thing to find out, not a worry you can't name.

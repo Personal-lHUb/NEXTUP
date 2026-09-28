@@ -1,6 +1,6 @@
 # Introduction
 
-Take Dana, a mother of two, on a Thursday evening in October. She is an example rather than a real person, but her evening may sound familiar. With the kids in bed, she sits down at the kitchen table with the week's mail. On top is the credit card statement, and inside it, a late fee. She is sure she paid that card. Then it comes back to her: she paid the *other* card, the one for groceries and gas, that same afternoon, and in her head the two payments became one.
+Take Dana, a mother of two, on a Thursday evening in October. She is an example rather than a real person, like everyone you'll meet in these pages, but her evening may sound familiar. With the kids in bed, she sits down at the kitchen table with the week's mail. On top is the credit card statement, and inside it, a late fee. She is sure she paid that card. Then it comes back to her: she paid the *other* card, the one for groceries and gas, that same afternoon, and in her head the two payments became one.
 
 She goes looking for the water bill to see whether it went out, and finds it under a school flyer, still sealed. A sticky note on the fridge reads "car insurance, Nov?" in her own handwriting, with no year. On her phone, the bank's app shows three alerts she hasn't opened. None of it is hard to understand. There is simply a lot of it, spread across too many places for one tired person to hold in her head.
 

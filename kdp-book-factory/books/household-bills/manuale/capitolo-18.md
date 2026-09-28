@@ -12,7 +12,7 @@ The fourth is a bill that never reached you, perhaps because a paper statement w
 
 Two screens usually settle the question: the bank's transaction history and the provider's own account page or statement. The bank tells you what left your account and whether it came back. The provider tells you what it received and what it now says you owe.
 
-Take, as an example, Andre, whose electric bill is paid by autopay from his checking account. A text from the utility says his payment "could not be processed." His bank's history shows the payment on the due date, marked as returned, with a fee beside it. That is a returned payment, not a forgotten one. The electric bill is still unpaid, and the bank has charged him for the attempt.
+Andre's electric bill is paid by autopay from his checking account. A text from the utility says his payment "could not be processed." His bank's history shows the payment on the due date, marked as returned, with a fee beside it. That is a returned payment, not a forgotten one. The electric bill is still unpaid, and the bank has charged him for the attempt.
 
 The four cases also point you to where the work is. A missed date or a bill that never arrived is settled with the provider. After an overdraft, the provider has been paid, and what needs attention is the bank account. A returned payment, as Andre's shows, involves both.
 

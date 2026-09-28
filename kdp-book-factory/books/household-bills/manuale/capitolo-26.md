@@ -12,7 +12,7 @@ In the first arrangement, both paychecks land in one account and every shared bi
 
 ### Separate accounts and a shared pot
 
-In the second, each person keeps their own account and moves an agreed amount into a shared one that pays the shared bills. Take, as an example, Jess and Paul. Rent, electricity, internet and the car insurance come out of their shared account, and each of them transfers a set amount into it on their own payday. For them, the transfers belong on the list and the calendar as if they were bills, with a date and an amount. A transfer that lands on the 3rd is no help to rent due on the 1st. Their list also needs a clear line between shared bills and personal ones, so that Paul's gym membership doesn't quietly draw on money meant for the electric company.
+In the second, each person keeps their own account and moves an agreed amount into a shared one that pays the shared bills. Jess and Paul do it this way. Rent, electricity, internet and the car insurance come out of their shared account, and each of them transfers a set amount into it on their own payday. For them, the transfers belong on the list and the calendar as if they were bills, with a date and an amount. A transfer that lands on the 3rd is no help to rent due on the 1st. Their list also needs a clear line between shared bills and personal ones, so that Paul's gym membership doesn't quietly draw on money meant for the electric company.
 
 ### Each person owns certain bills
 

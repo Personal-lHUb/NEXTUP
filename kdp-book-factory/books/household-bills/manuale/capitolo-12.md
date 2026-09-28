@@ -16,7 +16,7 @@ Other bills earn a closer look before they are automated, or instead of it. Vari
 
 Then there are bills with a history. If a provider has billed you twice for the same month, applied a charge you never agreed to, or quietly raised a price at the end of a promotion, reading each bill before it is paid gives you a chance to catch the next one. Once a few clean months have gone by, you can revisit the choice. Nothing about this decision is permanent.
 
-Here is an example. Gloria's car insurance and phone plan are the same every month, so she lets both run automatically. Her water bill stays modest most of the year and climbs each summer with the garden sprinklers, and last July a leak in the irrigation line pushed it higher still. She decides to keep paying that one by hand, which means reading it first. Her internet bill is fixed, but the promotional price ends in March. She keeps it automatic but marks March on her calendar as the month to look at the bill before it clears.
+Gloria's car insurance and phone plan are the same every month, so she lets both run automatically. Her water bill stays modest most of the year and climbs each summer with the garden sprinklers, and last July a leak in the irrigation line pushed it higher still. She decides to keep paying that one by hand, which means reading it first. Her internet bill is fixed, but the promotional price ends in March. She keeps it automatic but marks March on her calendar as the month to look at the bill before it clears.
 
 ## Two ways a payment can run automatically
 

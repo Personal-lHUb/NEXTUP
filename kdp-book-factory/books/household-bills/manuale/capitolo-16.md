@@ -8,7 +8,7 @@ A check that happens "sometime this weekend" tends not to happen. What makes a w
 
 The place matters almost as much as the time. The check needs three things within reach: the list, the account history, and whatever holds the paper mail and billing email. If your list lives in a notebook in a kitchen drawer and the account opens on a laptop in another room, sit where both can be open at once. Walking back and forth between rooms is exactly the kind of small friction that lets a routine lapse.
 
-Here is an example. Mia works rotating shifts at a hospital, so no weekday is reliably free. What does repeat is Sunday evening, when she lays out her kids' clothes for the school week. She does the check right after, at the dining table, with her spreadsheet and the bank's website open side by side and the mail basket next to her laptop. If a family visit swallows her Sunday, her backup is Monday evening. She keeps a backup because a check pushed back one day still does its job, while a check skipped until the following Sunday leaves two weeks unseen.
+Mia, whose spreadsheet came up in the chapter on picking a notebook, spreadsheet or your bank's tools, has no reliably free weekday, because her hospital shifts rotate. What does repeat is Sunday evening, when she lays out her kids' clothes for the school week. She does the check right after, at the dining table, with her spreadsheet and the bank's website open side by side and the mail basket next to her laptop. If a family visit swallows her Sunday, her backup is Monday evening. She keeps a backup because a check pushed back one day still does its job, while a check skipped until the following Sunday leaves two weeks unseen.
 
 ## Cleared or only pending
 
@@ -22,7 +22,7 @@ One simple way to cover the gap is a second mark for "sent." It isn't a fourth s
 
 Autopay needs this look as much as anything paid by hand. An automatic payment does not check itself. It can fail because a card on file expired, or it can come out for a different amount than the bill you saw. The weekly check isn't the place for a line-by-line comparison with the statement. It only asks whether the payment happened and whether the amount is roughly what you expected. If something looks off, write a note beside it so it doesn't slip away.
 
-Howard is retired and still pays the water bill by check. His notebook shows the water bill with a dot beside it: mailed eight days ago. Because the line shows a dot and not a check mark, he looks for the check number in his account history, and it isn't there. His checks to the water department have always cleared within a few days, so he calls the utility. The check arrived and simply hasn't been deposited yet, and he writes the date of the call on the line. Had he marked it paid when he mailed it, the first sign of trouble, if there had been any, would have been a late notice.
+Howard, the retiree from the same chapter, still pays the water bill by check. His notebook shows the water bill with a dot beside it: mailed eight days ago. Because the line shows a dot and not a check mark, he looks for the check number in his account history, and it isn't there. His checks to the water department have always cleared within a few days, so he calls the utility. The check arrived and simply hasn't been deposited yet, and he writes the date of the call on the line. Had he marked it paid when he mailed it, the first sign of trouble, if there had been any, would have been a late notice.
 
 ## What's due before the next check
 

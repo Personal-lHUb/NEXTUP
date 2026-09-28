@@ -30,7 +30,7 @@ A buy-now-pay-later plan splits a purchase into installments. A common version t
 
 ## A flat fee versus a yearly rate
 
-Many quick loans quote their price as a flat fee, such as so many dollars for every $100 borrowed. A fee is easy to picture, and for a two-week loan it can look modest. Credit cards and car loans quote an annual percentage rate, or APR: the cost of borrowing expressed as a yearly percentage. Putting everything on the same yearly scale is what lets you compare a two-week loan with a five-year one.
+Many quick loans quote their price as a flat fee, such as so many dollars for every $100 borrowed. A fee is easy to picture, and for a two-week loan it can look modest. Credit cards and car loans quote an APR, the annual percentage rate from the chapter on credit card statements. Putting everything on the same yearly scale is what lets you compare a two-week loan with a five-year one.
 
 Doris borrows $200 the week her rent comes due. The fee is $20, and the full $220 is due in 14 days. The numbers are picked to make the arithmetic easy, not to describe what lenders charge where you live. Twenty dollars on $200 is 10 percent, and it buys two weeks. A year holds about 26 two-week stretches, so 10 percent every two weeks works out to roughly 260 percent a year. Nothing about the fee changed, only the scale, and the scale is what lets you set the fee beside the rate on a credit card or a personal loan.
 

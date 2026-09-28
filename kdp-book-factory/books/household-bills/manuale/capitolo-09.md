@@ -2,7 +2,7 @@
 
 Where did your last bill first reach you, and how long did it sit there before you saw it? Your list stays accurate only if what feeds it keeps arriving where you can find it. A bill buried in a pile of catalogs, a renewal notice sent to an email address nobody opens, a text about a new due date lost under a dozen others: each is a gap between what is happening and what your list shows. Closing those gaps takes fewer places to look, not more attention.
 
-Take, as an example, Carla, who keeps her master list in a spreadsheet and updates it faithfully. Her water bill comes by mail, her phone bill by email, and her car insurance through an online account that texts her when a document is ready. Each arrives somewhere different, and the spreadsheet knows only what Carla carries to it. The list is sound. What fails is the path in.
+Carla keeps her master list in a spreadsheet and updates it faithfully. Her water bill comes by mail, her phone bill by email, and her car insurance through an online account that texts her when a document is ready. Each arrives somewhere different, and the spreadsheet knows only what Carla carries to it. The list is sound. What fails is the path in.
 
 ## One spot for paper
 

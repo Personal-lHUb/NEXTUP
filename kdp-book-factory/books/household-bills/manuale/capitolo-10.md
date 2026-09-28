@@ -1,6 +1,6 @@
 # Lining Up Due Dates With Your Paydays
 
-Will the money be in the account on the day a bill is due? Your master list can't say: it shows what each bill costs and when it is due, not what the balance will be that day. A due date is a fixed point set by the company that sends the bill. A payday is a fixed point set by whoever pays you. The two schedules were never designed to fit together, and nobody but you is in a position to line them up.
+Knowing when a bill is due doesn't tell you whether the money will be in the account that day. Your master list shows what each bill costs and when it is due, not what the balance will be. A due date is a fixed point set by the company that sends the bill. A payday is a fixed point set by whoever pays you. The two schedules were never designed to fit together, and nobody but you is in a position to line them up.
 
 The bill calendar is where they finally meet. It doesn't need to be clever. It needs to show, on one page or one screen, the days money arrives and the days money has to leave. Seen together, those two sets of dates tell you which paycheck is carrying which bill and where the thin stretches of the month fall.
 
@@ -16,7 +16,7 @@ Add up the bills inside each stretch, and look for two patterns. One is a pay pe
 
 ## Which paycheck pays which bill
 
-Take, as an example, Luis. He is paid on the 1st and the 15th, about $2,000 each time after taxes. His rent of $1,250 is due on the 1st, the car payment of $320 on the 3rd, car insurance of $140 on the 8th, his phone at $75 on the 12th, and electricity, which runs between $90 and $160, on the 13th. His credit card payment is due on the 19th and the internet on the 24th.
+Luis is paid on the 1st and the 15th, about $2,000 each time after taxes. His rent of $1,250 is due on the 1st, the car payment of $320 on the 3rd, car insurance of $140 on the 8th, his phone at $75 on the 12th, and electricity, which runs between $90 and $160, on the 13th. His credit card payment is due on the 19th and the internet on the 24th.
 
 On his month view the problem is plain. The first pay period carries rent, the car, insurance, the phone and electricity, which together take nearly the whole deposit at its top. The second carries two bills. For months Luis had been paying the electric bill two days late, on the 15th, and blaming himself for it. The calendar shows that the bill simply sat in the tightest week of his month.
 

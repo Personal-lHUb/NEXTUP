@@ -1,6 +1,6 @@
 # A Yearly Review to Get Ready for Next Year's Bills
 
-Your household's bills rarely change all at once. They drift. The internet price creeps up by a few dollars in March and again in September. A credit card is reissued with a new number. A subscription ends, a new one begins, and a newly bought car may bring a registration due in a different month. Each change is small enough for the weekly check and monthly review to absorb, which is exactly how a year of them can leave your master list describing a household that no longer quite exists.
+Your household's bills don't change all at once. They drift. The internet price creeps up by a few dollars in March and again in September. A credit card is reissued with a new number. A subscription ends, a new one begins, and a newly bought car may bring a registration due in a different month. Each change is small enough for the weekly check and monthly review to absorb, which is exactly how a year of them can leave your master list describing a household that no longer quite exists.
 
 The yearly review is where you catch the drift. It uses the same list, calendar and records you already keep, so there is nothing new to build. What changes is the distance you look from. A single month shows you what is due; twelve months side by side show you what has moved.
 
@@ -10,7 +10,7 @@ Any date can work, but some are easier than others. A good choice is a point whe
 
 Plan on an afternoon, or two shorter sittings if that suits you better. Put the review on whatever calendar the household actually looks at, with a reminder a week earlier to gather the year's statements and the login details you'll need. Then do the part that keeps the habit alive: before you finish this year's review, put next year's on the calendar. A review that has to be remembered from scratch every twelve months is a review that quietly stops happening.
 
-Here is an example. Howard, who keeps his bills in a paper notebook, chooses the second Saturday of February, after his December statements arrive and before his property tax installment comes due in spring. The date goes on the kitchen wall calendar and in the reminders on his phone, and each February the last thing he does is write in the following year's date.
+Howard, with his paper notebook, chooses the second Saturday of February, after his December statements arrive and before his property tax installment comes due in spring. The date goes on the kitchen wall calendar and in the reminders on his phone, and each February the last thing he does is write in the following year's date.
 
 ## Carrying the year forward
 
@@ -38,7 +38,7 @@ With the list current, clear out the year behind you. Gather the year's paper st
 
 How long to keep each kind of record has no single answer. It depends on the document and on your situation: a letter confirming that a debt was paid in full, for example, can matter much longer than an ordinary utility bill. For anything connected to your taxes, check with a tax professional or look at the guidance the IRS publishes on keeping records. Whatever you decide to throw away, shred it, since statements carry account numbers, addresses and other personal details.
 
-Next, open the handover note and read it as if you were the person who had to use it tomorrow. The year's changes all belong in it: the new checking account, the reissued card, the subscription that ended, the new agent at the insurance company, the new website for paying the water bill. A note that was accurate in January and wrong by December can send a helper to a closed account. Put the date on it so anyone reading it knows how current it is.
+Next, open the handover note, or write it now if you haven't, and read it as if you were the person who had to use it tomorrow. The year's changes all belong in it: the new checking account, the reissued card, the subscription that ended, the new agent at the insurance company, the new website for paying the water bill. A note that was accurate in January and wrong by December can send a helper to a closed account. Put the date on it so anyone reading it knows how current it is.
 
 Finally, check the set-aside for irregular bills against the year ahead. It was sized to last year's bills, so any increase you've just found in an annual or quarterly bill shows up here first. Add up next year's irregular bills using the new amounts you've just recorded, then compare that total with what your monthly set-aside will come to over twelve months.
 

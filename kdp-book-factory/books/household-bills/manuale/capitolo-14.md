@@ -6,21 +6,21 @@ What these bills share is not their size, though some are large. It is their rhy
 
 ## Insurance that bills once or twice a year
 
-Auto policies are often written for six months at a time, and if you pay in full, the premium, meaning the price of the coverage, comes due twice a year. Homeowners and renters policies usually run for a year. Life insurance and other policies may bill annually, twice a year or quarterly, depending on how each was set up.
+Auto policies are often written for six months at a time, and if you pay in full, the premium comes due twice a year. Homeowners and renters policies usually run for a year. Life insurance and other policies may bill annually, twice a year or quarterly, depending on how each was set up.
 
 The renewal is where these bills slip. A few weeks before a policy ends, the insurer usually sends a renewal notice with the new premium, and that notice may land in an email inbox you rarely open or in an envelope that looks like advertising. If the premium isn't paid, the policy can lapse, and a lapse is worse than a late fee: the coverage itself stops. How long an insurer waits before canceling, and what warning it must give first, varies by state and by company; your policy documents and your state's insurance department are the places to check.
 
-Here is an example. Neil's car insurance renews every six months, in January and July. In January he pays on time, because the holiday bills have him watching his account closely. In July the renewal notice arrives while he is traveling, and the first he hears of it is a second letter saying his coverage will end in nine days. In January something reminded him; in July nothing did.
+Neil's car insurance renews every six months, in January and July. In January he pays on time, because the holiday bills have him watching his account closely. In July the renewal notice arrives while he is traveling, and the first he hears of it is a second letter saying his coverage will end in nine days. In January something reminded him; in July nothing did.
 
 ## Property tax and the escrow account
 
 Property tax is set and collected locally, by a county, city, town or school district, and the schedule depends on where the home is. Some places bill once a year, some twice, some in quarterly installments. The tax bill itself, or the local tax collector's office, tells you when it is due and how it can be paid.
 
-If you have a mortgage, you may never see that bill. Many lenders collect property tax through an escrow account, an account the mortgage servicer keeps for you. The servicer is the company that handles your loan payments. Each month part of your mortgage payment goes into it, and when the tax bill or the homeowners insurance premium comes due, the servicer pays it from there. From your side, both bills disappear into one monthly number.
+If you have a mortgage, you may never see that bill. Many lenders collect property tax through an escrow account, an account the mortgage servicer keeps for you. Each month part of your mortgage payment goes into it, and when the tax bill or the homeowners insurance premium comes due, the servicer pays it from there. From your side, both bills disappear into one monthly number.
 
 That number is not fixed. The servicer reviews the escrow account at least once a year, as federal rules require, and compares what it collected with what it paid out. If the tax or the insurance went up, the account comes up short, and the monthly payment can rise to cover the gap and the higher cost ahead. The servicer sends a statement explaining the review and the new amount, and it tends to look like routine paperwork.
 
-Tanya's mortgage payment has been drawn by autopay for four years. Her county reassessed her home, the escrow review caught the higher tax, and her payment went up by $140 a month. The letter explained it all. It sat unopened on the counter until the larger draft came out of her account.
+Tanya's mortgage payment has been drawn by autopay for four years. Her county reassessed her home, the escrow review caught the higher tax, and her payment went up by $115 a month. The letter explained it all. It sat unopened on the counter until the larger draft came out of her account.
 
 Two moments deserve a line on your list. The first is the escrow review: note the month the statement usually arrives, so you open it when it comes. The second is the day the mortgage is paid off or refinanced, because escrow can end or change, and the tax and insurance bills the servicer used to handle may start coming to you. A household that has never paid its own property tax can miss a whole cycle before noticing it now has to.
 

@@ -10,7 +10,7 @@ Then work out what you can actually pay, and when. The whole call rests on this 
 
 Last, prepare a short, honest account of what changed. One or two sentences are enough: your hours were cut, a car repair used up the money set aside, a partner moved out, a medical bill arrived. You don't owe anyone your whole story, and you don't need to apologize for it. The representative needs to know whether this is a one-time gap or something that will last a few months, because that decides which options they can look at. If you know when things should improve, say so.
 
-Here is an example. Maria's electric bill is $214, due on June 18. The second job that used to cover it ended in May. Before she calls, she writes down her account number, the amount, the due date and two lines: "I lost a part-time job last month. I can pay $100 on the 18th and the remaining $114 on July 2, when my next paycheck arrives." She also lists the questions she wants answered, so she won't forget them on hold.
+Maria's electric bill is $214, due on June 18. The second job that used to cover it ended in May. Before she calls, she writes down her account number, the amount, the due date and two lines: "I lost a part-time job last month. I can pay $100 on the 18th and the remaining $114 on July 2, when my next paycheck arrives." She also lists the questions she wants answered, so she won't forget them on hold.
 
 ## What you can ask for
 

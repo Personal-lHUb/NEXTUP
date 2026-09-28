@@ -6,7 +6,7 @@ Your master list now holds every bill with the details that matter, but it still
 
 A notebook is always where you left it. There is nothing to log into, no password to reset, no update that moves the buttons overnight. You can open it at the kitchen table beside the day's mail, and anyone in the family can read it: a partner who has never paid a bill online, a teenager, a parent who would rather not use a screen. Writing a bill by hand also slows you down just enough to notice things, like a water bill that is higher than last quarter's.
 
-Here is an example. Howard is retired and pays fourteen recurring bills. Some go out automatically, some he pays by check, and one, the lawn service, he pays in cash when the crew comes by. His notebook holds all three kinds in the same way. His bank has no record of the lawn crew; his notebook does.
+Howard is retired and pays fourteen recurring bills. Some go out automatically, some he pays by check, and one, the lawn service, he pays in cash when the crew comes by. His notebook holds all three kinds in the same way. His bank has no record of the lawn crew; his notebook does.
 
 The weak points are just as plain. A notebook cannot remind you of anything: it sits closed in a drawer, so it works only if opening it is already part of your week. It is also hard to reorganize. If you write your bills in due-date order and a new one turns up in the middle of the year, you end up squeezing it into a margin or starting the page over. And every total, whether it's this month's bills or last winter's electricity, is arithmetic you do yourself.
 
@@ -14,7 +14,7 @@ The weak points are just as plain. A notebook cannot remind you of anything: it 
 
 A spreadsheet is a grid on a computer or phone where each row can hold one bill and each column one detail. Its strength is that it rearranges itself. Sort by due date and your bills line up in the order the month will bring them. Ask it to add up a column of amounts and it does. When the year ends, you can copy the whole file, clear the marks, and start again with every payee, contact number and account already in place.
 
-Take, as an example, Mia, who works rotating shifts at a hospital and keeps track of twenty-two recurring bills for her household. On the first of the month she sorts the list by due date; when she wants to see where the money goes, she sorts it by amount. A new subscription takes her a few seconds to add, and it falls into the right place the next time she sorts.
+Mia works rotating shifts at a hospital and keeps track of twenty-two recurring bills for her household. On the first of the month she sorts the list by due date; when she wants to see where the money goes, she sorts it by amount. A new subscription takes her a few seconds to add, and it falls into the right place the next time she sorts.
 
 The weak points are three. A spreadsheet is as silent as a notebook: it helps only when you open it, and a file buried in a folder is easier to forget than a notebook on the counter. It also needs a backup. If the file lives on one laptop and that laptop fails or is stolen, the list goes with it, so a copy kept somewhere else, on a second drive or in an online storage account, protects months of work. And some people in your home may find a spreadsheet harder to follow than a page of handwriting, which matters if they ever need to step in.
 
@@ -50,6 +50,6 @@ Howard works the same way on paper. His bank texts him when a check clears, and 
 
 Choose your home this week. If you are unsure, the one closest to how you already handle bills is often the easiest to keep: a notebook if you pay at the kitchen table with a pen, a spreadsheet if you are at a computer anyway, and the bank's tools as a helper unless every bill truly runs through that bank. You don't need anything special; a plain notebook or a blank spreadsheet file is enough.
 
-Then move your master list into it, with the fixed details written or typed once. Set up this month, and mark each bill. Open your bank and card history to see what has already cleared, and mark those paid; anything still on its way is sent. The ones still ahead are due.
+Then move your master list into it, with the fixed details written or typed once. Set up this month, and mark each bill. Open your bank and card history to see what has already cleared, and mark those paid; anything still on its way is sent, a note that it has left but not yet cleared, so it still counts as due; in a notebook, a dot does the same job. The ones still ahead are due.
 
 Any bill whose due date has passed with no payment, or that you expected but haven't seen, gets marked missing. That group is not a verdict on anyone. It is the list of what to look into next, and it is now written down in one place.

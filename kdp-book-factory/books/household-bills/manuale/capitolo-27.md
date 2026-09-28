@@ -1,6 +1,6 @@
 # Taking Over the Bills for an Aging Parent
 
-A handover of the bills rarely arrives on a date anyone chose. It tends to show up as a small thing that doesn't fit: a past-due notice on the counter, a call from a company, a check register left blank for three weeks. Take, as an example, Martha, who is 81 and has paid her household's bills from the same kitchen drawer for more than forty years. Her son Steve, visiting on a Sunday, sees a second notice from the water utility under the fruit bowl. Martha is embarrassed and says she must have mislaid the first one. Nothing about this is a crisis yet, which makes it the moment when a takeover can still be done slowly, with her, and on her terms.
+A handover of the bills rarely arrives on a date anyone chose. It tends to show up as a small thing that doesn't fit: a past-due notice on the counter, a call from a company, a check register left blank for three weeks. Martha is 81 and has paid her household's bills from the same kitchen drawer for more than forty years. Her son Steve, visiting on a Sunday, sees a second notice from the water utility under the fruit bowl. Martha is embarrassed and says she must have mislaid the first one. Nothing about this is a crisis yet, which makes it the moment when a takeover can still be done slowly, with her, and on her terms.
 
 The same moment comes for couples. A partner who always handled the bills has a stroke, a long illness or a diagnosis that makes paperwork hard, and the other has to learn the system from the outside. The paperwork is much the same as with a parent. What differs is that you may share some accounts and still be locked out of others.
 
@@ -48,4 +48,4 @@ A note nobody knows about helps nobody. Tell one person you trust that it exists
 
 ## This week's step
 
-Choose one first step to take with your parent, not for them. Ask when they'd like to sit down together with their bills and the last two months of bank statements, and let them pick the day. If that feels too soon, suggest they call the water utility with you to ask about third-party notification, so the next past-due notice reaches you too.
+Choose one first step to take with your parent, not for them. Ask when they'd like to sit down together with their bills and the last two months of bank statements, and let them pick the day. If that feels too soon, suggest they call the water utility with you to ask about third-party notification, so the next past-due notice reaches you too. If there is no parent's system to take over, or you are stepping in for a partner, write your own handover note this week instead: one page that says where the list lives, which accounts pay the bills and whom to tell, kept with your important papers.

@@ -6,7 +6,7 @@ The bills here are utilities and household services: electricity, gas, water and
 
 ## Three dates that look alike
 
-Here is an example. Priya opens her electric bill and finds three dates near the top. One reads *Statement date: April 8*. Another reads *Service period: March 6 – April 5*. The third, in a shaded box, reads *Due date: April 29*. The three are printed in similar type, and for months Priya had treated the first date her eye landed on as the deadline, paying three weeks before she had to.
+Priya opens her electric bill and finds three dates near the top. One reads *Statement date: April 8*. Another reads *Service period: March 6 – April 5*. The third, in a shaded box, reads *Due date: April 29*. The three are printed in similar type, and for months Priya had treated the first date her eye landed on as the deadline, paying three weeks before she had to.
 
 The **statement date**, sometimes called the bill date or issue date, is the day the company prepared the bill. It says nothing about when to pay. The **service period**, also called the billing period, is the stretch of days the charges cover. On a metered utility it ends before the statement date, because the company has to read the meter and run the numbers first. Internet and phone bills often work the other way and charge for the month ahead. The **due date** is the one that decides whether you are on time: the day the payment has to reach the company.
 
@@ -14,7 +14,7 @@ Read the wording around the due date closely. Many bills say *payment must be re
 
 The gap between the statement date and the due date varies. Some companies allow several weeks and others much less, and for regulated utilities state rules may set a minimum. Only your own bills show the gap on each one.
 
-## Four amounts and the one that counts
+## The amounts, and the one that counts
 
 The amounts are where most misreadings happen, because a bill usually shows its arithmetic and each step gets a line of its own. Greg's gas bill this month has a summary box that shows a previous balance of $142.60, a payment received of $100.00, a balance forward of $42.60, current charges of $118.35 and a total amount due of $160.95.
 

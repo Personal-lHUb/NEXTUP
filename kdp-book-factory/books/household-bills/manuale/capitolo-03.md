@@ -6,7 +6,7 @@ Every system needs a finish line, or you can't tell whether it's working. Here, 
 
 A bill is always in one of three states. It is **paid** when the money has left your account and reached the company that billed you, and you have seen proof. That proof might be a cleared transaction in your bank history, a zero balance on the provider's website, or a message from the company saying the payment was received. A payment you scheduled but haven't seen clear is not paid yet. It's a promise that hasn't been kept or broken. The same goes for a check still in the mail or a payment your bank lists as pending. And if you paid less than the bill asked for, the part you didn't pay is still due.
 
-A bill is **due** when you know it exists, you know roughly how much it is and the date it must be paid by, and the money hasn't gone out yet. For a bill that changes from month to month, such as electricity, last month's amount is close enough until the new one arrives. Due is a healthy state. Most of your bills spend most of the month there, and that's fine as long as you can see the date coming.
+A bill is **due** when you know it exists, you know roughly how much it is and the date it must be paid by, and the money hasn't gone out yet. For a bill that changes from month to month, such as electricity, a rough figure is enough to call it due; the chapter on recording each bill's details shows how to note the range it moves in. Due is a healthy state. Most of your bills spend most of the month there, and that's fine as long as you can see the date coming.
 
 Bills on autopay are due too, until you see the money clear. An automatic payment changes who presses the button, not what you need to know: you still want the date in front of you, so you can make sure the money is in the account that day. Treat the date printed on the bill as the one that counts. Some providers allow a little time after it before charging a fee and some allow none; it varies from one to the next. A system built on the printed date doesn't need to know which.
 
@@ -26,7 +26,7 @@ Memory has a harder problem still: it can't hold an absence. You can't remember 
 
 A pile of mail has a different weakness. It shows what arrived, in the order it arrived, but not what was done about it. An opened envelope looks the same whether you paid it or set it aside for Friday. A paper bill can also go on showing the full amount due after your payment has cleared, because it was printed before the money got there.
 
-Here is an example. Marcus handles the bills for a family of four. On a Sunday evening he wonders whether the water bill is paid. He's fairly sure it is. He remembers paying it, and the envelope on the counter has been opened.
+Marcus handles the bills for a family of four. On a Sunday evening he wonders whether the water bill is paid. He's fairly sure it is. He remembers paying it, and the envelope on the counter has been opened.
 
 He checks the bank history and finds a payment to the water utility five weeks ago. That was last month's bill. This one is due in four days, and nothing has gone out. Marcus wasn't careless. His memory was right about something that had happened, and the envelope was right about something that had arrived. Neither could tell him where the bill stood that evening.
 
