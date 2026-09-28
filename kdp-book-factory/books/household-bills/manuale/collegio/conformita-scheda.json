@@ -1,0 +1,34 @@
+{
+  "agente": "conformita",
+  "notes": "Sui punti per cui KDP rifiuta un titolo la scheda è pulita. Le sette parole chiave non contengono marchi, nomi di autori, titoli di altri libri, riferimenti ai programmi Amazon né parole del titolo. Nei testi rivolti al cliente non ci sono prezzi, classifiche, recensioni o promesse di risparmio. La biografia dichiara lo pseudonimo senza attribuirgli credenziali. Prima della pubblicazione vanno corrette due categorie su tre, che mettono il libro davanti a lettori che cercano altro, più due ritocchi minori di formulazione nella descrizione e nella quarta.",
+  "findings": [
+    {
+      "severity": "importante",
+      "category": "categorie — contenuto non corrispondente",
+      "issue": "In Bookkeeping stanno i manuali di contabilità: partita doppia, registri di un'attività, tenuta dei conti per la piccola impresa. Il libro non tratta di contabilità e, per linea editoriale, non contiene registri né righe da compilare. Chi arriva da questa categoria cerca un manuale per la sua attività o un registro da riempire e compra il libro sbagliato. Il rischio è doppio, perché il concorrente diretto è proprio un quaderno da compilare.",
+      "quote": "Books &gt; Business &amp; Money &gt; Accounting &gt; Bookkeeping",
+      "suggestion": "Sostituire con «Books &gt; Reference &gt; Consumer Guides». Il libro parla di rapporti con i fornitori, richieste di rimborso delle penali, bollette false e costo dei prestiti rapidi, cioè di tutela del consumatore. Prima di confermare, verificare che la categoria compaia nel selettore KDP del mercato amazon.com; se non c'è, toglierla e basta. La correzione va fatta anche in `categories` di book.json, da cui la scheda viene rigenerata."
+    },
+    {
+      "severity": "importante",
+      "category": "categorie — promessa di risultato implicita",
+      "issue": "Il manoscritto non parla mai di punteggio di credito: «score» non compare in nessun capitolo. Tocca la storia creditizia solo nel capitolo 19, su come si leggono i report e come si contesta un errore. Credit Ratings &amp; Repair colloca il libro fra i titoli che promettono di alzare il punteggio o di «riparare» il credito. È una promessa di risultato implicita che la linea editoriale esclude. Il controllo sul capitolo 24 l'aveva già segnalata: chi arriva da questa categoria può credere che mettersi in regola cancelli i ritardi dalla storia creditizia.",
+      "quote": "Books &gt; Business &amp; Money &gt; Personal Finance &gt; Credit Ratings &amp; Repair",
+      "suggestion": "Togliere la categoria: KDP non obbliga a usarne tre. Il blocco sostitutivo diventa: «- Books &gt; Business &amp; Money &gt; Personal Finance &gt; Budgeting &amp; Money Management» e «- Books &gt; Reference &gt; Consumer Guides». Se l'autore vuole comunque una terza categoria, ne scelga una sulla gestione della casa e non sul credito, e la verifichi nel selettore. Da correggere anche in book.json."
+    },
+    {
+      "severity": "minore",
+      "category": "consulenza finanziaria — formulazione prescrittiva",
+      "issue": "«Know what to do» presenta il libro come se dicesse al lettore che cosa fare quando i soldi non bastano. È il linguaggio della consulenza, che la descrizione stessa esclude poco sopra («information, not financial or legal advice») e che la linea editoriale vieta: il libro spiega le opzioni, non dice che cosa fare con i soldi. Nel terzo paragrafo, «what to do in the first days after a missed payment» ha la stessa sfumatura.",
+      "quote": "Know what to do when a payment slips, the money runs short or several bills are behind at once",
+      "suggestion": "Punto elenco: «Understand your options when a payment slips, the money runs short or several bills are behind at once». Terzo paragrafo: «what happens in the first days after a missed payment and what you can do about it». Da correggere in metadata e nella descrizione HTML."
+    },
+    {
+      "severity": "minore",
+      "category": "avvertenze — quarta di copertina",
+      "issue": "La quarta dice chi chiamare e che cosa chiedere quando un pagamento salta. A differenza della descrizione, però, non dice che si tratta di informazione generale e che vale per gli Stati Uniti. Il cartaceo è in vendita anche su amazon.co.uk e amazon.it, dove chi guarda la quarta può pensare che quelle indicazioni valgano per il suo paese.",
+      "quote": "it gives you a calm next step: what each bill puts at stake, whom to call, what to ask for and where to find help",
+      "suggestion": "Aggiungere in fondo alla quarta una riga breve: «General information for U.S. households, not financial or legal advice.» Se c'è spazio per il corpo e i margini lo verifica l'agente copertina."
+    }
+  ]
+}
