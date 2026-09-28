@@ -1,0 +1,71 @@
+{
+  "agente": "fact-checker",
+  "capitoli": "01-07",
+  "notes": "Non ci sono citazioni o statistiche inventate né problemi bloccanti, e il testo quasi sempre rimanda a dove controllare; in otto punti però presenta come vero ovunque, o come deciso solo dal contratto, qualcosa che dipende da leggi federali, dallo stato o dal fornitore.",
+  "findings": [
+    {
+      "severity": "importante",
+      "category": "procedura senza scadenza",
+      "chapter": 4,
+      "issue": "04.md: sugli addebiti che nessuno riconosce il testo indica solo una telefonata. Nel capitolo, e anche nel passo della settimana, quelle voci restano con il punto interrogativo per una sera successiva, come se non ci fosse fretta. Nella legge federale USA invece la tutela dipende dai tempi. Per conti correnti e carte di debito (Electronic Fund Transfer Act) quanto paga il titolare per un addebito non autorizzato può crescere se non lo segnala entro 60 giorni dall'estratto conto. Per le carte di credito, le garanzie della contestazione (Fair Credit Billing Act) richiedono una comunicazione scritta entro 60 giorni dall'estratto.",
+      "quote": "If nobody in the house recognizes a charge at all, say so on that call, so the issuer can explain your options.",
+      "suggestion": "Aggiungere che un addebito che nessuno riconosce non va lasciato per un'altra sera, per esempio: “Don't let a charge nobody recognizes wait. Under federal rules, your protection can depend on reporting it promptly, and a credit card dispute may need to be made in writing within a set time after the statement. Call, and ask how and by when to put it in writing.” In 06.md, nella chiusura sulle righe dell'estratto che non tornano, basta aggiungere: “if a line looks wrong, ask how to dispute it in writing.”"
+    },
+    {
+      "severity": "importante",
+      "category": "norma federale attribuita al contratto",
+      "chapter": 6,
+      "issue": "06.md: secondo il testo, sul tasso di penale decide tutto il contratto della carta. Non è così. Il Truth in Lending Act, modificato dal CARD Act del 2009 (Regulation Z), impone un preavviso scritto di 45 giorni prima di un aumento del tasso, anche per penale. Permette di applicare la penale al saldo esistente solo dopo un ritardo di oltre 60 giorni e obbliga a toglierla dopo sei pagamenti minimi puntuali consecutivi. Stesso problema in «Those details vary by card» a proposito di orario limite e scadenze nel weekend: la legge fissa dei minimi (non prima delle 17 del giorno di scadenza; il pagamento per posta che arriva il primo giorno lavorativo dopo una scadenza non lavorativa vale come puntuale).",
+      "quote": "The card's terms set whether a card has a penalty rate at all, what triggers it, how much notice you get and how it ends",
+      "suggestion": "Riformulare: “Whether a card has a penalty rate and what triggers it are set by the card's terms, within limits set by federal law. That law also requires advance notice before a rate goes up and sets conditions for applying a penalty rate to an existing balance and for bringing it back down. The notice, the agreement or the card company can tell you how this applies to your card.” Nel passo sull'orario e sul weekend: “within limits set by federal rules, the card's terms say…”. Se si vogliono dare le cifre (45 e 60 giorni, sei pagamenti), prima della stampa vanno verificate sul testo in vigore della Regulation Z."
+    },
+    {
+      "severity": "importante",
+      "category": "generalizzazione tecnica",
+      "chapter": 5,
+      "issue": "05.md: la regola assoluta non vale per le case con pannelli solari in scambio sul posto (net metering). Lì il contatore bidirezionale può mostrare registri separati per l'energia prelevata e per quella immessa, oppure un valore netto che scende. Non vale nemmeno per un contatore sostituito dopo l'ultima bolletta, o per uno che ha superato il valore massimo ed è ripartito da zero. Il lettore trarrebbe la conclusione sbagliata sulla stima.",
+      "quote": "Meters only count up, so if the meter today shows a lower number than the bill claims, the estimate ran high.",
+      "suggestion": "Limitare la regola: “A standard meter only counts up, so on most homes, if the meter today shows a lower number than the bill claims, the estimate ran high. If you have solar panels that send power back to the grid, or the meter was replaced recently, ask the company how to read yours.”"
+    },
+    {
+      "severity": "importante",
+      "category": "prassi di fornitore presentata come universale",
+      "chapter": 5,
+      "issue": "05.md: il testo descrive un solo modello di budget billing come se valesse per tutte le utenze. In realtà i piani cambiano da un fornitore all'altro. Alcuni fissano la rata per un anno e poi fanno un conguaglio (true-up o settle-up) con un addebito o un credito. Altri ricalcolano la rata ogni mese o ogni pochi mesi su una media mobile, quindi la rata non è sempre uguale. La differenza accumulata arriva comunque, alla fine dell'anno o quando si esce dal piano.",
+      "quote": "On a budget billing or level payment plan, the company spreads a year of usage into equal monthly amounts.",
+      "suggestion": "Riformulare: “On a budget billing or level payment plan, the company averages your usage and bills a steadier amount each month. How often that amount is recalculated, and when the difference between the plan and your actual usage is settled (often once a year, or when you leave the plan), depends on the utility. The plan's terms or the company can tell you.”"
+    },
+    {
+      "severity": "importante",
+      "category": "regola che cambia da stato a stato",
+      "chapter": 7,
+      "issue": "07.md: la durata dell'immatricolazione del veicolo la decide lo stato. Diversi stati usano periodi di due anni (per esempio New York e il Maryland) o fanno scegliere al proprietario una durata di più anni. Presentarla come annuale fa segnare la frequenza sbagliata. Le etichette proposte subito dopo («monthly», «every two months», «quarterly», «yearly») non lasciano posto a scadenze più lunghe di un anno, e i dodici mesi di storico di 04.md non le fanno comparire.",
+      "quote": "Registrations, memberships and many subscriptions come once a year.",
+      "suggestion": "Riformulare: “Memberships and many subscriptions come once a year. A vehicle registration renews on a schedule your state sets, which may be every year or every two years or more; the registration card shows the date.” Aggiungere “every two years” fra le etichette di frequenza. In 04.md, dopo la frase sui dodici mesi, aggiungere che le spese che tornano ogni due anni o più non compaiono nello storico e si trovano con il giro delle carte."
+    },
+    {
+      "severity": "minore",
+      "category": "definizione tecnica imprecisa",
+      "chapter": 4,
+      "issue": "04.md: la definizione è incompleta su tre punti. Deferment e forbearance possono anche ridurre la rata invece di sospenderla. Per i prestiti federali le concede il servicer, e alcune sospensioni scattano da sole, per esempio durante l'iscrizione all'università. Durante la pausa gli interessi possono continuare a maturare (in forbearance di regola, in deferment su molti prestiti), quindi quando i pagamenti riprendono il saldo o la rata possono essere diversi.",
+      "quote": "The pause may be called deferment or forbearance, both of which mean a temporary stop the lender has agreed to.",
+      "suggestion": "Riformulare: “The pause may be called deferment or forbearance, both of which mean a temporary pause or reduction in payments approved by the lender or the loan servicer. Interest may keep building during it, depending on the loan, so ask the servicer what the payment will be when billing restarts.”"
+    },
+    {
+      "severity": "minore",
+      "category": "descrizione tecnica imprecisa",
+      "chapter": 4,
+      "issue": "04.md: di solito chi gestisce il conto escrow e riceve la rata è il loan servicer, spesso diverso dal lender originale. Inoltre la rata non cambia subito quando cambiano tasse o assicurazione, come fa pensare la frase successiva («when those costs change, the monthly payment changes with them»). Viene adeguata dopo la revisione periodica del conto, di norma annuale, a volte con un ammanco da coprire.",
+      "quote": "Your mortgage may have an escrow account, meaning the lender collects part of the tax and insurance with each payment and pays those bills for you.",
+      "suggestion": "Riformulare: “…meaning the company you send the mortgage payment to, the lender or the loan servicer that manages the loan, collects part of the tax and insurance with each payment and pays those bills for you. It reviews the account, usually once a year, and when those costs have changed, the monthly payment is adjusted.”"
+    },
+    {
+      "severity": "minore",
+      "category": "nomi di enti presentati come esaustivi",
+      "chapter": 5,
+      "issue": "05.md: il nome dell'ente regolatore statale delle utenze non si riduce a due. Ci sono per esempio il Board of Public Utilities (New Jersey), il Department of Public Utilities (Massachusetts), la State Corporation Commission (Virginia), la Corporation Commission (Arizona) e la Utilities and Transportation Commission (Washington). Chi cerca solo i due nomi indicati può non trovarlo. Più avanti, nel paragrafo sulla penale di ritardo, le utenze comunali ricadono fra quelle regolate dal «contract or terms of service», ma seguono le regole del comune.",
+      "quote": "For the utilities it regulates, the state public utility commission publishes those rules. Some states call it the public service commission.",
+      "suggestion": "Riformulare: “…the state agency that regulates utilities publishes those rules. It is often called the public utility commission or public service commission, but some states use another name, such as a board, department or corporation commission; your state government's website lists it.” Nel paragrafo sulla late charge aggiungere: “for a city-run utility, the city's own rules.”"
+    }
+  ]
+}

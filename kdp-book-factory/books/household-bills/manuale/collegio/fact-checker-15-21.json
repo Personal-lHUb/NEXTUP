@@ -1,0 +1,71 @@
+{
+  "agente": "fact-checker",
+  "capitoli": "15-21",
+  "notes": "The block is written carefully. It has no invented sources, no statistics dressed up as facts, and it hedges well on medical debt, utility shutoffs and foreclosure. The problems that remain are a few stable federal rules that the text presents as the bank's or the card issuer's choice (provisional credit on debit disputes, taking away a promotional rate after a slip of a few days), plus some state or federal limits it leaves out (rent late fees, wage garnishment, getting a repossessed car back) and a heavy reliance on the CFPB as the only reference.",
+  "findings": [
+    {
+      "severity": "importante",
+      "category": "federal rule presented as the bank's discretion",
+      "chapter": 17,
+      "issue": "For electronic transfers (EFTA/Regulation E, 12 CFR 1005.11), money coming back during a debit dispute is not only up to the bank. If the bank does not resolve the error within 10 business days (20 for new accounts), it generally has to credit the disputed amount provisionally while it keeps investigating. It may make that credit depend on written confirmation of the dispute. The passage also leaves out that for charges you never authorized, how much you can be held responsible for depends on how quickly you report them.",
+      "quote": "A disputed debit charge has already left your account, and whether and how quickly any of it comes back during the bank's review depends on that bank's process.",
+      "suggestion": "Rewrite along these lines: «A disputed debit charge has already left your account. Federal rules for electronic transfers generally require the bank either to finish its review quickly or to put the disputed amount back in your account provisionally while it keeps looking; it may ask you to confirm the dispute in writing first. For a charge you never authorized, how soon you report it also affects how much of it you can be held responsible for. The bank's error-resolution notice and the FTC and CFPB websites explain the timelines.» You can drop the number of days if you want to stay in line with the book's policy, but not the fact that the rule is federal."
+    },
+    {
+      "severity": "importante",
+      "category": "credit cards: wrong rule",
+      "chapter": 18,
+      "issue": "Under the CARD Act (Regulation Z, 12 CFR 1026.55), an issuer generally cannot raise the rate on the existing balance, and that includes ending a promotional rate early, unless the minimum payment is more than 60 days late. A higher rate on new purchases needs advance written notice. In a chapter about 'the first days' after a missed payment, the passage suggests the card's terms alone could take away the promotional rate. That is not how it works.",
+      "quote": "A card issuer may have ended a promotional rate, depending on the card's terms.",
+      "suggestion": "Replace with something like: «On a credit card, a late payment can bring a late fee. Federal rules generally don't let the issuer take away a promotional rate or raise the rate on the balance you already carry unless a payment is more than 60 days late, and a higher rate on new purchases requires written notice first. Your card's terms and any notice you receive say what applies.» Chapter 20 has a sentence on the same point that should be brought into line: «Missed payments bring late fees and, under many card agreements, a higher penalty interest rate.»"
+    },
+    {
+      "severity": "importante",
+      "category": "state limit left out",
+      "chapter": 20,
+      "issue": "The lease does not decide the grace period and late fee on its own. Many states and some cities require a minimum grace period or cap rent late fees. For example, in New York no fee can be charged before rent is 5 days late, and the fee is capped at $50 or 5% of the rent, whichever is less. In Massachusetts no late fee is allowed until rent is 30 days late. A reader could accept a fee that isn't lawful. The same applies to the parallel sentence on mortgages («The loan documents set the grace period and the late fee»): some loan types and some states have caps.",
+      "quote": "If you rent, your lease sets the due date, any grace period and the late fee.",
+      "suggestion": "Rewrite: «If you rent, your lease states the due date, any grace period and the late fee. Many states and some cities also require a minimum grace period or limit how much a landlord can charge, so the lease isn't always the last word; a legal aid office or your state attorney general's tenant guide can tell you what applies.» Do the same for the mortgage sentence («...within limits that some states and some loan programs set»)."
+    },
+    {
+      "severity": "minore",
+      "category": "federal right attributed to the contract",
+      "chapter": 17,
+      "issue": "What you still have to pay during a card dispute comes from federal law, not the issuer's terms. Once you send a written notice of a billing error within the deadline, you don't have to pay the disputed amount or the charges tied to it until the investigation ends, and the issuer can't report it as late. You do have to pay the rest of the bill. In the same paragraph, the notice deadlines are said to be 'set out in your cardholder or account agreement'. In fact federal law sets them (60 days from the statement, for cards and for electronic transfers alike), and the notices only summarize them.",
+      "quote": "the issuer's terms explain what you still need to pay while the question is open.",
+      "suggestion": "Rewrite: «Under federal rules, while a card dispute filed the right way is open, you generally don't have to pay the amount in question, only the rest of the bill; the \"billing rights\" notice that comes with your statements explains how.» In the paragraph before, change «are set out in your cardholder or account agreement» to «are set by federal rules and summarized in the notices your card issuer and bank send you»."
+    },
+    {
+      "severity": "minore",
+      "category": "federal cap left out",
+      "chapter": 20,
+      "issue": "Limits on wage garnishment don't come only from the states. The federal Consumer Credit Protection Act caps garnishment for ordinary debts nationwide, and states can only lower that cap. Some states (Texas, Pennsylvania, North Carolina and South Carolina among them) do not allow wage garnishment for most consumer debts at all. On federal benefits, a federal rule automatically protects part of what has been deposited directly into a bank account.",
+      "quote": "Some money, such as many federal benefits, is generally protected, and states set their own limits.",
+      "suggestion": "Rewrite: «Some money, such as many federal benefits, is generally protected. Federal law also caps how much of a paycheck can be taken for ordinary debts, and some states set lower limits or don't allow wage garnishment for most consumer debts at all. A legal aid office can tell you what applies where you live.»"
+    },
+    {
+      "severity": "minore",
+      "category": "universal rule presented as varying by state",
+      "chapter": 20,
+      "issue": "Under UCC Article 9 (§9-623), a borrower in every state has the right to redeem the car before it is sold by paying off the whole debt plus costs. Only reinstatement, getting the car back by catching up on missed payments, depends on the state. In the same paragraph, «in many states it can do so without going to court first» understates things: repossession without a court order is allowed in nearly every state, with few exceptions (Wisconsin in most consumer cases, Louisiana).",
+      "quote": "Depending on the state, you may be able to get the car back by catching up or by paying off the loan.",
+      "suggestion": "Rewrite: «Before the sale, you can generally get the car back by paying off the whole loan plus the lender's costs; some states also let you get it back by catching up on the missed payments. The notice the lender sends before the sale should explain how.» Change «in many states» to «in most states»."
+    },
+    {
+      "severity": "minore",
+      "category": "overly absolute generalization",
+      "chapter": 19,
+      "issue": "This holds for a fee charged correctly. A fee charged in error, or above what the law allows, is not a favor to ask for but an error you can dispute. Examples: a card payment that arrived before the cutoff on the due date, a card late fee larger than the minimum payment due (not allowed under the CARD Act), or a rent late fee above the state cap.",
+      "quote": "That's why a company can charge it, and it's also why you can't insist it be removed.",
+      "suggestion": "Qualify it: «...and, when the fee was charged correctly, it's also why you can't insist it be removed. If the fee itself looks wrong (the payment actually arrived on time, or the amount is higher than the agreement or the law allows), that is an error to dispute, not a favor to ask.»"
+    },
+    {
+      "severity": "minore",
+      "category": "reference that may go out of date",
+      "chapter": 19,
+      "issue": "Here, and in the sentence on dispute timelines («within timelines set by law that the CFPB's site describes»), the printed book relies only on the CFPB website. Since 2025 the agency has faced staff cuts, removed content and litigation over its funding, so this may become a dead reference. The rule itself is stable and federal: under FCRA §605, most negative items, late payments included, stay on a report for up to seven years, and a bureau generally has 30 days to investigate a dispute. Neither has changed in decades.",
+      "quote": "The CFPB's website explains the current limits, and it is a better guide than a figure you heard secondhand.",
+      "suggestion": "Always pair the CFPB with the FTC's consumer pages (as you already do for free reports) and with the bureaus' own dispute pages. Or state the federal rule with the book's usual hedge: «Under federal law, most negative information, including late payments, can stay on your report for up to seven years, and some states set shorter limits for certain items; the FTC's and CFPB's consumer pages explain the details.»"
+    }
+  ]
+}
