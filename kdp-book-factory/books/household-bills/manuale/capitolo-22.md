@@ -1,0 +1,51 @@
+# Finding Utility Assistance, Counselors and Legal Aid
+
+The company that sent the bill is not the only place to turn. Around it sits a second layer of help: public programs that pay part of an energy bill, state rules that can hold off a shutoff, nonprofit counselors who look at all your debts together, and free legal help when a home is at risk. Most of it is a phone call away, but none of it comes looking for you. Often the provider itself mentions it first, when the person arranging your payment plan says a local agency might cover part of the balance. Knowing the programs ahead of time means you recognize the lead when you hear it.
+
+## Help with energy and water bills
+
+The best-known program is the Low Income Home Energy Assistance Program, usually shortened to LIHEAP. The money is federal, but Washington doesn't hand it out directly. States, and many tribes, run their own versions, often through local community action agencies or county social services offices, and each sets its own income limits, application windows and benefit amounts. Some open heating help in the fall and cooling help in the summer, and many keep a separate crisis fund for households that already have a shutoff notice. Utilities often run their own assistance funds too, sometimes paid for by customer donations, and churches and local charities may help with a single bill.
+
+Finding the local door is usually easier than it sounds. In most of the country you can dial 211, a free referral line, and ask who takes energy assistance applications where you live. Your state's LIHEAP office lists its local agencies, and the utility's customer service line can usually name the programs that pay toward its bills. For water and sewer, ask the water utility directly, because help there is patchier and often run by the city itself.
+
+The paperwork is similar almost everywhere. Expect to be asked for identification, proof of income for everyone in the household (recent pay stubs, a benefits letter, an unemployment statement), a recent bill with the account number, and the shutoff notice if you have one. Some programs also want a lease or other proof of address, and Social Security numbers for household members. This is where the safe spot for notices and statements earns its keep: when the bills and pay stubs already sit in one place, gathering them takes an evening instead of a week.
+
+Here is an example. Tyrone's gas bill has climbed all winter, and in March a notice arrives saying service may be disconnected in ten days. He calls 211 and is referred to the community action agency in his county, which takes crisis applications on weekday mornings. The intake worker asks for a month of pay stubs, his partner's benefits letter, the gas bill and the notice. The agency approves a payment toward the balance and sends it straight to the gas company, and Tyrone sets up a plan with the company for the rest. He never sees the money himself, which is how most of these programs work.
+
+Tyrone's result is one way it can go, not a promise. Funding is set year by year, and some agencies run out before the season ends, keep waiting lists, or limit how often a household can receive help. Requirements and amounts change from state to state and from one year to the next. If one program is closed, ask the same agency what else it knows about.
+
+## Shutoff protections and where the rules live
+
+Separate from any assistance, most states limit when and how a utility can cut off service. The protections tend to fall into three groups. Weather rules, where they exist, stop disconnections during cold spells or across the winter months, and some states also protect customers during extreme heat. Medical rules let a doctor or other licensed provider certify that someone in the home has a serious condition or relies on powered equipment, which delays a shutoff for a set period. Some states add protections for older residents, people with disabilities or homes with very young children.
+
+Almost all of these protections postpone a shutoff rather than cancel a debt: what's owed stays owed, and the balance usually keeps growing through the protected period. Many come with conditions, such as applying for assistance or keeping to a payment plan, and a medical certificate may need renewing after a set number of days. Alongside them, states set notice rules: how far ahead, and in what form, a utility must warn you before it disconnects.
+
+The place to check the rules for your address is your state's utility regulator. Depending on the state it is called the public utilities commission, the public service commission or something close. Its website usually has a consumer page on disconnection rules, and it takes complaints from customers who believe a utility broke them. One detail trips people up: city-owned utilities and rural electric cooperatives may not fall under the commission's rules at all. If your service comes from one of these, ask the utility for its written disconnection policy.
+
+## Nonprofit credit counseling
+
+When the trouble is spread across several bills, especially credit cards, a nonprofit credit counselor looks at the whole picture at once. In a first session, often free or low-cost, the counselor goes through your income, your fixed bills and your debts, and explains the options that fit your situation. Sometimes that is a budget and a few calls you can make yourself. Sometimes it is a debt management plan: you make one monthly payment to the agency, the agency pays your creditors, and creditors often agree to lower interest or drop some fees on the accounts in the plan. A plan usually means closing the cards involved and can run for several years; a good counselor says so plainly.
+
+### Telling a counselor from a debt relief seller
+
+Companies selling "debt relief" or "debt settlement" advertise in the same places and use similar words. The signals are in what they ask of you. A company that tells you to stop paying your creditors and send money into a special account instead is describing settlement, not counseling, and while you wait, late fees, collection calls and damage to your credit can pile up. Promises to cut your debt by a fixed percentage, guarantees of any kind, pressure to sign on the first call and large fees due before any work has been done are all reasons to stop and check.
+
+A genuine agency usually asks about your whole budget, not only your debts, and sends written information before you agree to anything. Many belong to national associations of nonprofit counseling agencies that set standards and certify counselors. The U.S. Trustee Program, part of the Department of Justice, also publishes a list of approved agencies; it exists for people considering bankruptcy, but reading it commits you to nothing. Your state attorney general's office handles consumer complaints, and you can ask it about a company before you sign anything.
+
+### Questions about fees
+
+"Nonprofit" describes how an organization is set up, not what it charges, so ask. What does the first session cost? If a plan is suggested, what are the setup fee and the monthly fee, and can either be reduced or waived when money is tight? Are counselors paid more when a client enrolls in a plan? What happens if you miss a plan payment? Some states cap these fees; the agency should know what applies where you live.
+
+Take, as an example, Holly, who carries balances on three cards. In the same week she gets an unsolicited call from a company promising to cut her debt in half for a fee paid up front, and she calls an agency her card issuer's hardship line named. The agency offers a free hour to go through her whole budget and emails its fee schedule before the appointment. Side by side, the two calls make the difference plain, whatever Holly decides afterward.
+
+## Housing counselors and legal aid
+
+When rent or a mortgage is the bill at risk, two other kinds of help come in. Housing counseling agencies approved by the Department of Housing and Urban Development, or HUD, work with renters and homeowners, usually at no charge. For a homeowner behind on payments, a counselor can explain the options a mortgage servicer may offer, help gather the paperwork and sometimes contact the servicer with you. For a renter, a counselor can point to local rental assistance and explain what a landlord must do before an eviction. HUD's website lists approved agencies, and a HUD phone line refers callers to them.
+
+Legal aid organizations give free civil legal help to people who meet their income limits. Eviction and foreclosure are legal processes with deadlines, and tenant and homeowner rights differ by state and sometimes by city. Legal aid offices are often stretched and can't take every case, so it helps to call early. If they can't help, a state or local bar association's lawyer referral service and law school clinics are other places to ask.
+
+Some moments call for an attorney rather than a counselor: when you receive court papers such as an eviction summons or a foreclosure complaint, when a notice sets a sale date for your home, or when a landlord changes the locks or shuts off utilities without a court order, which most states don't allow. Court papers usually carry a deadline to respond or appear, and missing it can let the case go ahead without your side being heard. Be wary, too, of anyone who contacts you after a foreclosure filing and asks for money up front to save the house; the approved counselors described above don't sell rescues.
+
+## This week's step
+
+Look up three things for your own home while nothing is urgent. Find your gas or electric utility's page on assistance and shutoff protections, then read your state utility commission's consumer page to see which protections apply where you live. Next, find the nearest nonprofit credit counseling agency through one of the routes above, and note its phone number and hours. Put the names, numbers and websites with your master list, beside the provider contacts, so that if a notice ever arrives, the next call is already written down.
