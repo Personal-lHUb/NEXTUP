@@ -26,7 +26,7 @@
     },
     {
       "title": "Safe, Shared and Carried Forward",
-      "first_chapter": 23
+      "first_chapter": 24
     }
   ],
   "chapters": [
@@ -318,6 +318,19 @@
     },
     {
       "number": 23,
+      "title": "Catching Up When Several Bills Are Behind",
+      "summary": "Shows a method, not a ranking, for getting from several bills behind to current again. The past-due bills are lined up by the dates that matter, the calls are made in that order, and every agreement goes on the calendar beside the paydays, where the weekly check follows it until the list shows each bill as paid or due. It closes the part on falling behind because it brings the stakes, the calls, the outside help and the price of quick loans from the chapters before into one sequence the reader follows over several weeks, through Brenda's month from the chapter on stakes.",
+      "beats": [
+        "Putting what's behind in order by date, not by importance. For each past-due bill, find the next date that matters: a disconnection date on a notice, the days a notice to pay allows under state law and the lease, a suspension date in a phone contract, or the deadline of a plan already running. Find also the amount needed by that date, which may be less than the full balance. The dates decide the order of the calls; what gets paid stays the reader's decision. Here is an example: Brenda's list shows the electric bill two months behind, with a notice for the 18th and $143 needed to stop the shutoff, a phone bill a month behind, and rent due on the 1st under her lease's grace period.",
+        "Making the calls in that order, one at a time. Before each call, check the calendar. Every agreement goes on it beside the paydays, and each installment is entered as a bill with its own date, amount and paying account. That way each call starts from what has already been promised, and no new plan is accepted without seeing whether it fits after the ones before it.",
+        "The weekly check now follows the plan: confirming that each installment posted, keeping the call notes with the bill, and reading each new statement to see the past-due amount come down. When an installment is about to slip, call before its date and use the answer already on file about what a missed payment does. When it has already slipped, call the same day, ask whether the arrangement still stands and get any new terms in writing.",
+        "When it's time to take the list, the calendar and the call notes to a nonprofit credit counselor: installments that no longer fit between paydays, a second missed installment, several cards behind at once, calls that lead nowhere. Then what 'current again' looks like on the list: each bill back to paid or due, no past-due amount on the statement, the plan's last installment posted and confirmed in writing, and the plan's entries taken off the calendar. This is told as one way Brenda's weeks can go, not a promise, because whether a provider agrees and how long catching up takes depend on the provider and, for shutoff and eviction rules, on the state.",
+        "This week's step: put every bill that is behind in order of its next date that matters, note beside each one that date and the amount needed by it, and make the first call on the list. Before you make the second call, put whatever was agreed on the calendar beside your paydays."
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 24,
       "title": "Spotting a Fake Bill Before You Pay It",
       "summary": "Describes the payment scams aimed at households: shutoff-threat calls demanding immediate payment, fake invoices, and look-alike emails and texts. It opens the last part because a well-kept list is also a quick way to recognize a bill that doesn't belong.",
       "beats": [
@@ -330,7 +343,7 @@
       "role": "chapter"
     },
     {
-      "number": 24,
+      "number": 25,
       "title": "Sharing the Bills With a Partner or a Teenager",
       "summary": "Covers the household where more than one person pays, or soon will: partners and housemates splitting bills, and a teenager learning how bills work. It comes late in the book because sharing a system is easier once there is a system to share.",
       "beats": [
@@ -343,7 +356,7 @@
       "role": "chapter"
     },
     {
-      "number": 25,
+      "number": 26,
       "title": "Taking Over the Bills for an Aging Parent",
       "summary": "Explains how to take over the bills for an aging parent or a partner who can no longer manage them, and how to leave clear notes so someone could step in for you. It follows the chapter on sharing because a handover is sharing under pressure, and it goes more smoothly when it's prepared in advance.",
       "beats": [
@@ -356,7 +369,7 @@
       "role": "chapter"
     },
     {
-      "number": 26,
+      "number": 27,
       "title": "A Yearly Review to Get Ready for Next Year's Bills",
       "summary": "Closes the book with a yearly review that carries the system into the next year: renewals and annual bills rolled forward, the list and calendar refreshed, old records archived. It comes last because this review is what lets the routine carry on from one year to the next.",
       "beats": [

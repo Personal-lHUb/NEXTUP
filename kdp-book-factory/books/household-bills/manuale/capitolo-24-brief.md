@@ -1,4 +1,4 @@
-<!-- CAPITOLO 24 — Spotting a Fake Bill Before You Pay It
+<!-- CAPITOLO 24 — Catching Up When Several Bills Are Behind
 
      Prodotto dalla linea manuale: qui non c'è nessuna chiamata al modello.
      Porta tutto il testo qui sotto (dalla riga «SISTEMA» in giù) a un modello,
@@ -6,7 +6,7 @@
 
        /home/user/NEXTUP/kdp-book-factory/books/household-bills/manuale/capitolo-24.md
 
-     Poi importala. Markdown, che comincia con «# Spotting a Fake Bill Before You Pay It». Il budget è di 1701 parole.
+     Poi importala. Markdown, che comincia con «# Catching Up When Several Bills Are Behind». Il budget è di 1701 parole.
 
      Le righe fra <!-- e --> non fanno parte del prompt. -->
 
@@ -45,8 +45,8 @@ Argomento: How an American household keeps track of its recurring bills (utiliti
 Lettore tipo: The adult who handles the bills in an American home. That might be a parent juggling utilities, rent or mortgage, a couple of credit cards, insurance and subscriptions. It might be a retiree who pays some bills by autopay and some by hand and wants fewer surprises. It might be someone just hit by a late fee or an overdraft who wants a routine that holds, or someone already behind who needs to know the next step without being judged. They are not finance enthusiasts. They read a chapter at a time at the kitchen table and want to start that same evening. The book is also for the person who hands it to a relative, or to a client who struggles with money.
 Promessa al lettore: A way of handling bills that the reader builds for their own home. It starts with one list of every recurring bill and one place where it all lives, on paper, in a spreadsheet or in the bank's own tools. Due dates are lined up with paydays. The reader decides what goes on autopay and what gets checked by hand, and a short weekly check and monthly review become habit. When a payment is missed or the money doesn't stretch, the book gives a calm, step-by-step way to respond: what each kind of bill puts at stake, who to call, what to ask for, and where to find help. It explains how things work and what the options are. It does not promise savings or outcomes.
 Tono e voce: Plain, warm and practical, like a patient friend who has done the household paperwork for years. Short sentences, no jargon, and every unavoidable term explained the first time it appears. No lectures and no shame about being behind. Concrete American household situations, not abstractions. The book explains how things work and what a reader can do. It never tells them what they must do with their money. Where figures, fees or protections vary by state or provider, it says so and says where to check.
-Formato di stampa: 6x9 pollici, circa 120 pagine
-Istruzioni aggiuntive dell'editore: PREZZO: 11,99 USD di listino, mercato amazon.com (il campo si chiama price_eur per ragioni storiche). A 120 pagine 6x9 crema la stampa costa 2,29 USD e la royalty è 4,90 USD a copia; il prezzo della formula sarebbe 8,99. Il concorrente, un quaderno da compilare, sta a 9,99.
+Formato di stampa: 6x9 pollici, circa 184 pagine
+Istruzioni aggiuntive dell'editore: PREZZO: 12,99 USD di listino, mercato amazon.com (il campo si chiama price_eur per ragioni storiche). Deciso dall'autore sulle pagine vere: 184 pagine 6x9 crema, stampa 3,06 USD, royalty 4,74 USD a copia. Il progetto era 120 pagine a 11,99: la taratura sbagliava la densità (corretta), e l'autore ha scelto di tenere il testo intero. Il concorrente, un quaderno da compilare, sta a 9,99.
 LINEA EDITORIALE, vincolante per chi scrive: è un libro da leggere, non un quaderno — nessuna griglia, nessun registro vuoto, nessuna riga da compilare; il libro spiega come impostare il proprio registro su carta, in un foglio di calcolo o negli strumenti della banca, senza stamparne uno. Informazione, non consulenza finanziaria personale: spiega come funzionano le cose e quali sono le opzioni, non dice al lettore che cosa deve fare con i suoi soldi, e rimanda a un consulente del credito no-profit, a un avvocato o al fornitore dove serve. Nessuna promessa di risparmio o di risultato (niente «never be late again», niente cifre risparmiate). Penali, periodi di tolleranza, protezioni contro il distacco delle utenze e regole sul credito cambiano da stato a stato e da fornitore a fornitore: dove cambiano, il libro lo dice e dice dove controllare, invece di dare un numero. Nessun marchio, banca, app o servizio nominato come consiglio: si descrivono i tipi di strumento. Rispetto pieno per chi è rimasto indietro: nessun giudizio, e un capitolo vero su che cosa fare quando i soldi non bastano. Il lettore è americano: utenze, carte di credito, addebiti automatici, affitto o mutuo, abbonamenti.
 VOCE NARRANTE, decisa dall'autore sui primi due capitoli: seconda persona, rivolta al lettore; l'autrice non dice mai «I» e non racconta esperienze proprie (è uno pseudonimo: nessuna biografia inventata). Gli esempi con persone hanno un nome e sono dichiarati come esempi («Here is an example», «Take, as an example»), mai come casi reali. Ogni capitolo chiude con una sezione «## This week's step», in prosa, senza niente da compilare.
 ARGOMENTI RICHIESTI DALL'AUTORE (da coprire tutti, senza aggiungerne di estranei)
@@ -123,27 +123,28 @@ Tesi portante: Bills are usually paid late because the setup is scattered, not b
 21. Asking for More Time Before the Due Date — Walks through the call to a provider before a payment is missed: how to prepare, what to ask for, and what hardship programs and payment plans generally involve. It follows the chapter on stakes because the reader now knows what each bill puts at stake and can decide which calls to make.
 22. Finding Utility Assistance, Counselors and Legal Aid — Maps the help available outside the company that sent the bill: utility assistance programs, shutoff protections that vary by state, nonprofit credit counseling, housing counselors and legal aid. It follows the provider call because these programs often work alongside a payment plan, and the provider is often the one who points to them.
 23. Comparing What Payday and Other Quick Loans Cost — Explains, as information and without judgment, how payday loans, auto title loans, pawn loans, rent-to-own, paycheck advance apps and buy-now-pay-later plans work, and how to compare what they cost. It closes the part on money running short because these offers tend to appear just when other options seem used up.
-24. Spotting a Fake Bill Before You Pay It — Describes the payment scams aimed at households: shutoff-threat calls demanding immediate payment, fake invoices, and look-alike emails and texts. It opens the last part because a well-kept list is also a quick way to recognize a bill that doesn't belong.
-25. Sharing the Bills With a Partner or a Teenager — Covers the household where more than one person pays, or soon will: partners and housemates splitting bills, and a teenager learning how bills work. It comes late in the book because sharing a system is easier once there is a system to share.
-26. Taking Over the Bills for an Aging Parent — Explains how to take over the bills for an aging parent or a partner who can no longer manage them, and how to leave clear notes so someone could step in for you. It follows the chapter on sharing because a handover is sharing under pressure, and it goes more smoothly when it's prepared in advance.
-27. A Yearly Review to Get Ready for Next Year's Bills — Closes the book with a yearly review that carries the system into the next year: renewals and annual bills rolled forward, the list and calendar refreshed, old records archived. It comes last because this review is what lets the routine carry on from one year to the next.
-28. Conclusion — Chiusura del ragionamento e primi 30 giorni di applicazione.
+24. Catching Up When Several Bills Are Behind — Shows a method, not a ranking, for getting from several bills behind to current again. The past-due bills are lined up by the dates that matter, the calls are made in that order, and every agreement goes on the calendar beside the paydays, where the weekly check follows it until the list shows each bill as paid or due. It closes the part on falling behind because it brings the stakes, the calls, the outside help and the price of quick loans from the chapters before into one sequence the reader follows over several weeks, through Brenda's month from the chapter on stakes.
+25. Spotting a Fake Bill Before You Pay It — Describes the payment scams aimed at households: shutoff-threat calls demanding immediate payment, fake invoices, and look-alike emails and texts. It opens the last part because a well-kept list is also a quick way to recognize a bill that doesn't belong.
+26. Sharing the Bills With a Partner or a Teenager — Covers the household where more than one person pays, or soon will: partners and housemates splitting bills, and a teenager learning how bills work. It comes late in the book because sharing a system is easier once there is a system to share.
+27. Taking Over the Bills for an Aging Parent — Explains how to take over the bills for an aging parent or a partner who can no longer manage them, and how to leave clear notes so someone could step in for you. It follows the chapter on sharing because a handover is sharing under pressure, and it goes more smoothly when it's prepared in advance.
+28. A Yearly Review to Get Ready for Next Year's Bills — Closes the book with a yearly review that carries the system into the next year: renewals and annual bills rolled forward, the list and calendar refreshed, old records archived. It comes last because this review is what lets the routine carry on from one year to the next.
+29. Conclusion — Chiusura del ragionamento e primi 30 giorni di applicazione.
 
 RICHIESTA
 ---------
 Scrivi il capitolo indicato, completo e pronto per la stampa.
 
 Numero del capitolo: 24
-Titolo del capitolo: Spotting a Fake Bill Before You Pay It
+Titolo del capitolo: Catching Up When Several Bills Are Behind
 Ruolo: chapter
-Sintesi: Describes the payment scams aimed at households: shutoff-threat calls demanding immediate payment, fake invoices, and look-alike emails and texts. It opens the last part because a well-kept list is also a quick way to recognize a bill that doesn't belong.
+Sintesi: Shows a method, not a ranking, for getting from several bills behind to current again. The past-due bills are lined up by the dates that matter, the calls are made in that order, and every agreement goes on the calendar beside the paydays, where the weekly check follows it until the list shows each bill as paid or due. It closes the part on falling behind because it brings the stakes, the calls, the outside help and the price of quick loans from the chapters before into one sequence the reader follows over several weeks, through Brenda's month from the chapter on stakes.
 
 Punti da coprire:
-- The shutoff-threat call: pressure to pay right now, requests for unusual payment methods such as gift cards, wire transfers or payment apps, and why urgency is the giveaway.
-- Fake invoices and renewal notices for services you never ordered or already pay for elsewhere.
-- Look-alike emails and texts that copy a real provider's look, and why their links and phone numbers shouldn't be used.
-- Checking with the real provider through the number on your own bill or list, and where to report a scam if you've paid or shared details.
-- This week's step: make sure every contact number on your list came from a real bill or the provider's official site, never from a message you received.
+- Putting what's behind in order by date, not by importance. For each past-due bill, find the next date that matters: a disconnection date on a notice, the days a notice to pay allows under state law and the lease, a suspension date in a phone contract, or the deadline of a plan already running. Find also the amount needed by that date, which may be less than the full balance. The dates decide the order of the calls; what gets paid stays the reader's decision. Here is an example: Brenda's list shows the electric bill two months behind, with a notice for the 18th and $143 needed to stop the shutoff, a phone bill a month behind, and rent due on the 1st under her lease's grace period.
+- Making the calls in that order, one at a time. Before each call, check the calendar. Every agreement goes on it beside the paydays, and each installment is entered as a bill with its own date, amount and paying account. That way each call starts from what has already been promised, and no new plan is accepted without seeing whether it fits after the ones before it.
+- The weekly check now follows the plan: confirming that each installment posted, keeping the call notes with the bill, and reading each new statement to see the past-due amount come down. When an installment is about to slip, call before its date and use the answer already on file about what a missed payment does. When it has already slipped, call the same day, ask whether the arrangement still stands and get any new terms in writing.
+- When it's time to take the list, the calendar and the call notes to a nonprofit credit counselor: installments that no longer fit between paydays, a second missed installment, several cards behind at once, calls that lead nowhere. Then what 'current again' looks like on the list: each bill back to paid or due, no past-due amount on the statement, the plan's last installment posted and confirmed in writing, and the plan's entries taken off the calendar. This is told as one way Brenda's weeks can go, not a promise, because whether a provider agrees and how long catching up takes depend on the provider and, for shutoff and eviction rules, on the state.
+- This week's step: put every bill that is behind in order of its next date that matters, note beside each one that date and the amount needed by it, and make the first call on the list. Before you make the second call, put whatever was agreed on the calendar beside your paydays.
 
 GIÀ TRATTATO NEI CAPITOLI PRECEDENTI (non ripeterlo):
 - The First Days After a Missed Payment: Gives a calm sequence for the days right after a payment is missed by mistake, returned by the bank or turned into an overdraft. It opens the part on trouble because the most common slip is usually also the simplest to set right when it's handled early.
@@ -156,8 +157,8 @@ GIÀ TRATTATO NEI CAPITOLI PRECEDENTI (non ripeterlo):
 I 17 capitoli ancora precedenti stanno nella struttura completa del libro, nella scheda qui sopra: non ripetere nemmeno quelli.
 
 Sintesi del capitolo precedente: Explains, as information and without judgment, how payday loans, auto title loans, pawn loans, rent-to-own, paycheck advance apps and buy-now-pay-later plans work, and how to compare what they cost. It closes the part on money running short because these offers tend to appear just when other options seem used up.
-Il capitolo successivo sarà: Sharing the Bills With a Partner or a Teenager (non anticiparlo, non annunciarlo)
+Il capitolo successivo sarà: Spotting a Fake Bill Before You Pay It (non anticiparlo, non annunciarlo)
 
 
 Lunghezza richiesta: 1701 parole (scarto massimo 10%).
-Comincia direttamente con `# Spotting a Fake Bill Before You Pay It`.
+Comincia direttamente con `# Catching Up When Several Bills Are Behind`.

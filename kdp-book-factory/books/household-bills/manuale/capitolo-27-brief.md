@@ -1,12 +1,12 @@
-<!-- CAPITOLO 27 — A Yearly Review to Get Ready for Next Year's Bills
+<!-- CAPITOLO 26 — Taking Over the Bills for an Aging Parent
 
      Prodotto dalla linea manuale: qui non c'è nessuna chiamata al modello.
      Porta tutto il testo qui sotto (dalla riga «SISTEMA» in giù) a un modello,
      oppure scrivilo a mano, e salva la risposta in:
 
-       /home/user/NEXTUP/kdp-book-factory/books/household-bills/manuale/capitolo-27.md
+       /home/user/NEXTUP/kdp-book-factory/books/household-bills/manuale/capitolo-26.md
 
-     Poi importala. Markdown, che comincia con «# A Yearly Review to Get Ready for Next Year's Bills». Il budget è di 1701 parole.
+     Poi importala. Markdown, che comincia con «# Taking Over the Bills for an Aging Parent». Il budget è di 1701 parole.
 
      Le righe fra <!-- e --> non fanno parte del prompt. -->
 
@@ -133,31 +133,31 @@ RICHIESTA
 ---------
 Scrivi il capitolo indicato, completo e pronto per la stampa.
 
-Numero del capitolo: 27
-Titolo del capitolo: A Yearly Review to Get Ready for Next Year's Bills
+Numero del capitolo: 26
+Titolo del capitolo: Taking Over the Bills for an Aging Parent
 Ruolo: chapter
-Sintesi: Closes the book with a yearly review that carries the system into the next year: renewals and annual bills rolled forward, the list and calendar refreshed, old records archived. It comes last because this review is what lets the routine carry on from one year to the next.
+Sintesi: Explains how to take over the bills for an aging parent or a partner who can no longer manage them, and how to leave clear notes so someone could step in for you. It follows the chapter on sharing because a handover is sharing under pressure, and it goes more smoothly when it's prepared in advance.
 
 Punti da coprire:
-- Choosing a date for the review and putting it on the calendar a year ahead.
-- Carrying forward: updating amounts, due dates and renewal dates, and noticing what changed over the year.
-- Removing bills that ended, adding new ones, and confirming every automatic payment still draws from the right account.
-- Archiving the year's statements, refreshing the handover note, and checking the set-aside against next year's irregular bills.
-- This week's step: put the yearly review on the calendar, and note what this year taught you about your household's bills.
+- Starting a takeover gently: rebuilding the other person's list from their mail and accounts, together with them wherever possible.
+- The authority to act: authorized access to accounts, the third-party notification many utilities offer, and powers of attorney, described in general terms, with an attorney as the place to confirm what applies in your state.
+- Warning signs in an older relative's bills: missed payments, duplicate subscriptions and unfamiliar charges.
+- Leaving clear notes on where everything is (the list, its home, the accounts and who to call), stored safely and known to someone you trust.
+- This week's step: write a short note that tells a trusted person where your list is kept and how to reach it, and let them know it exists.
 
 GIÀ TRATTATO NEI CAPITOLI PRECEDENTI (non ripeterlo):
+- What Each Bill Puts at Stake When Money Runs Short: Explains without judgment what is at stake with each kind of bill when there isn't enough to pay them all: housing, utilities, insurance, secured loans, credit cards and medical bills. It comes before any call is made so the reader understands what each bill puts at stake, as information and not as instructions.
 - Asking for More Time Before the Due Date: Walks through the call to a provider before a payment is missed: how to prepare, what to ask for, and what hardship programs and payment plans generally involve. It follows the chapter on stakes because the reader now knows what each bill puts at stake and can decide which calls to make.
 - Finding Utility Assistance, Counselors and Legal Aid: Maps the help available outside the company that sent the bill: utility assistance programs, shutoff protections that vary by state, nonprofit credit counseling, housing counselors and legal aid. It follows the provider call because these programs often work alongside a payment plan, and the provider is often the one who points to them.
 - Comparing What Payday and Other Quick Loans Cost: Explains, as information and without judgment, how payday loans, auto title loans, pawn loans, rent-to-own, paycheck advance apps and buy-now-pay-later plans work, and how to compare what they cost. It closes the part on money running short because these offers tend to appear just when other options seem used up.
 - Spotting a Fake Bill Before You Pay It: Describes the payment scams aimed at households: shutoff-threat calls demanding immediate payment, fake invoices, and look-alike emails and texts. It opens the last part because a well-kept list is also a quick way to recognize a bill that doesn't belong.
 - Sharing the Bills With a Partner or a Teenager: Covers the household where more than one person pays, or soon will: partners and housemates splitting bills, and a teenager learning how bills work. It comes late in the book because sharing a system is easier once there is a system to share.
-- Taking Over the Bills for an Aging Parent: Explains how to take over the bills for an aging parent or a partner who can no longer manage them, and how to leave clear notes so someone could step in for you. It follows the chapter on sharing because a handover is sharing under pressure, and it goes more smoothly when it's prepared in advance.
 
-I 20 capitoli ancora precedenti stanno nella struttura completa del libro, nella scheda qui sopra: non ripetere nemmeno quelli.
+I 19 capitoli ancora precedenti stanno nella struttura completa del libro, nella scheda qui sopra: non ripetere nemmeno quelli.
 
-Sintesi del capitolo precedente: Explains how to take over the bills for an aging parent or a partner who can no longer manage them, and how to leave clear notes so someone could step in for you. It follows the chapter on sharing because a handover is sharing under pressure, and it goes more smoothly when it's prepared in advance.
-Il capitolo successivo sarà: Conclusion (non anticiparlo, non annunciarlo)
+Sintesi del capitolo precedente: Covers the household where more than one person pays, or soon will: partners and housemates splitting bills, and a teenager learning how bills work. It comes late in the book because sharing a system is easier once there is a system to share.
+Il capitolo successivo sarà: A Yearly Review to Get Ready for Next Year's Bills (non anticiparlo, non annunciarlo)
 
 
 Lunghezza richiesta: 1701 parole (scarto massimo 10%).
-Comincia direttamente con `# A Yearly Review to Get Ready for Next Year's Bills`.
+Comincia direttamente con `# Taking Over the Bills for an Aging Parent`.

@@ -1,12 +1,12 @@
-<!-- CAPITOLO 25 — Sharing the Bills With a Partner or a Teenager
+<!-- CAPITOLO 24 — Spotting a Fake Bill Before You Pay It
 
      Prodotto dalla linea manuale: qui non c'è nessuna chiamata al modello.
      Porta tutto il testo qui sotto (dalla riga «SISTEMA» in giù) a un modello,
      oppure scrivilo a mano, e salva la risposta in:
 
-       /home/user/NEXTUP/kdp-book-factory/books/household-bills/manuale/capitolo-25.md
+       /home/user/NEXTUP/kdp-book-factory/books/household-bills/manuale/capitolo-24.md
 
-     Poi importala. Markdown, che comincia con «# Sharing the Bills With a Partner or a Teenager». Il budget è di 1701 parole.
+     Poi importala. Markdown, che comincia con «# Spotting a Fake Bill Before You Pay It». Il budget è di 1701 parole.
 
      Le righe fra <!-- e --> non fanno parte del prompt. -->
 
@@ -133,31 +133,31 @@ RICHIESTA
 ---------
 Scrivi il capitolo indicato, completo e pronto per la stampa.
 
-Numero del capitolo: 25
-Titolo del capitolo: Sharing the Bills With a Partner or a Teenager
+Numero del capitolo: 24
+Titolo del capitolo: Spotting a Fake Bill Before You Pay It
 Ruolo: chapter
-Sintesi: Covers the household where more than one person pays, or soon will: partners and housemates splitting bills, and a teenager learning how bills work. It comes late in the book because sharing a system is easier once there is a system to share.
+Sintesi: Describes the payment scams aimed at households: shutoff-threat calls demanding immediate payment, fake invoices, and look-alike emails and texts. It opens the last part because a well-kept list is also a quick way to recognize a bill that doesn't belong.
 
 Punti da coprire:
-- Common ways couples and housemates split bills (one joint account, separate accounts with a shared pot, each person owning certain bills) and what each arrangement asks of the list.
-- Joint accounts and bills in both names: what shared responsibility means, explained in general terms.
-- Making the list and the calendar visible to both adults, and a short regular sit-down so one person isn't carrying it all alone.
-- Teaching a teenager with a real bill such as a phone plan or a subscription: reading it, paying it, and seeing what happens when it's late.
-- This week's step: show the list to the other adult in the house, or to a teenager, and agree on who checks which bills.
+- The shutoff-threat call: pressure to pay right now, requests for unusual payment methods such as gift cards, wire transfers or payment apps, and why urgency is the giveaway.
+- Fake invoices and renewal notices for services you never ordered or already pay for elsewhere.
+- Look-alike emails and texts that copy a real provider's look, and why their links and phone numbers shouldn't be used.
+- Checking with the real provider through the number on your own bill or list, and where to report a scam if you've paid or shared details.
+- This week's step: make sure every contact number on your list came from a real bill or the provider's official site, never from a message you received.
 
 GIÀ TRATTATO NEI CAPITOLI PRECEDENTI (non ripeterlo):
+- The First Days After a Missed Payment: Gives a calm sequence for the days right after a payment is missed by mistake, returned by the bank or turned into an overdraft. It opens the part on trouble because the most common slip is usually also the simplest to set right when it's handled early.
 - Fee Waivers and What Reaches Your Credit Report: Explains how to ask a provider or bank to waive a late or overdraft fee, and how a late payment can reach the credit reports. It follows the first days because once the bill is paid, these are the two questions the reader is usually left with.
 - What Each Bill Puts at Stake When Money Runs Short: Explains without judgment what is at stake with each kind of bill when there isn't enough to pay them all: housing, utilities, insurance, secured loans, credit cards and medical bills. It comes before any call is made so the reader understands what each bill puts at stake, as information and not as instructions.
 - Asking for More Time Before the Due Date: Walks through the call to a provider before a payment is missed: how to prepare, what to ask for, and what hardship programs and payment plans generally involve. It follows the chapter on stakes because the reader now knows what each bill puts at stake and can decide which calls to make.
 - Finding Utility Assistance, Counselors and Legal Aid: Maps the help available outside the company that sent the bill: utility assistance programs, shutoff protections that vary by state, nonprofit credit counseling, housing counselors and legal aid. It follows the provider call because these programs often work alongside a payment plan, and the provider is often the one who points to them.
 - Comparing What Payday and Other Quick Loans Cost: Explains, as information and without judgment, how payday loans, auto title loans, pawn loans, rent-to-own, paycheck advance apps and buy-now-pay-later plans work, and how to compare what they cost. It closes the part on money running short because these offers tend to appear just when other options seem used up.
-- Spotting a Fake Bill Before You Pay It: Describes the payment scams aimed at households: shutoff-threat calls demanding immediate payment, fake invoices, and look-alike emails and texts. It opens the last part because a well-kept list is also a quick way to recognize a bill that doesn't belong.
 
-I 18 capitoli ancora precedenti stanno nella struttura completa del libro, nella scheda qui sopra: non ripetere nemmeno quelli.
+I 17 capitoli ancora precedenti stanno nella struttura completa del libro, nella scheda qui sopra: non ripetere nemmeno quelli.
 
-Sintesi del capitolo precedente: Describes the payment scams aimed at households: shutoff-threat calls demanding immediate payment, fake invoices, and look-alike emails and texts. It opens the last part because a well-kept list is also a quick way to recognize a bill that doesn't belong.
-Il capitolo successivo sarà: Taking Over the Bills for an Aging Parent (non anticiparlo, non annunciarlo)
+Sintesi del capitolo precedente: Explains, as information and without judgment, how payday loans, auto title loans, pawn loans, rent-to-own, paycheck advance apps and buy-now-pay-later plans work, and how to compare what they cost. It closes the part on money running short because these offers tend to appear just when other options seem used up.
+Il capitolo successivo sarà: Sharing the Bills With a Partner or a Teenager (non anticiparlo, non annunciarlo)
 
 
 Lunghezza richiesta: 1701 parole (scarto massimo 10%).
-Comincia direttamente con `# Sharing the Bills With a Partner or a Teenager`.
+Comincia direttamente con `# Spotting a Fake Bill Before You Pay It`.
