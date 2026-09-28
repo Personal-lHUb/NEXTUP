@@ -4,11 +4,13 @@ You built your rough list by working through statements and card history, and fo
 
 The important word there is *same*. When every bill carries the same details in the same order, a missing one shows up as a gap you can see. On an uneven list, the electric bill might have six notes and the water bill only one, and nothing points to the weak spots. On an even list, where every bill has the same slots and the water bill has four of them empty, you can see exactly where to look.
 
+First, lay the note you wrote from memory beside your rough list. Add any bill on it that the statements missed, and fill in the ones marked "Not sure" first. The other accounts, the conversation at home, the email search and the walk through the categories still wait for their evenings.
+
 ## The six details every bill needs
 
 **Who you pay.** Write the company's name the way it appears on the bill. Then check how the same payment shows up on your bank or card statement, because the two often don't match. A hospital might bill under its full name and charge under a short code. An insurance premium might appear under the parent company's name. If they differ, note both. The second name is the one you'll be searching for when you scan your account for a charge. It also helps to note whose name the account is in, because companies often discuss an account only with the person named on it or with someone that person has authorized.
 
-**How much.** Mark each bill as fixed or variable. Rent, a car payment, most insurance premiums and many subscriptions are fixed: the same figure every time until the company tells you it's changing. Utilities, phone plans with extra charges and credit cards are variable. For a fixed bill, write the amount. A variable bill needs a different kind of entry, covered below.
+**How much.** Mark each bill as fixed or variable. Rent, a car payment, most insurance premiums and many subscriptions are fixed: the same figure every time until the company tells you it's changing. Utilities, phone plans with extra charges and credit cards are variable. *Fixed* describes the amount, not the schedule: the electric bill is a regular monthly bill, but a variable one. For a fixed bill, write the amount. A variable bill needs a different kind of entry, covered below.
 
 **When it's due.** Record the due date as the day of the month it usually falls on, such as "the 15th." A single calendar date would be out of date in four weeks. The date that belongs here is the due date, not the statement date or the day the envelope arrived. The last two chapters showed where to find it on a bill and on a card statement. Some due dates drift a day or two from month to month, especially on bills tied to a meter-reading cycle. If yours moves, write down the days it moves between.
 
@@ -38,27 +40,16 @@ What you *can* write is just enough to tell accounts apart. The usual choice is 
 
 ## How often it comes, and who pays it now
 
-Two more marks finish each line. The first is how often the bill comes. Most bills are monthly, but not all. Some towns bill water and sewer every other month, and some insurance is billed quarterly or twice a year. Property tax, for households that pay it directly rather than through the mortgage, follows a schedule set locally. Registrations, memberships and many subscriptions come once a year. Write "monthly," "every two months," "quarterly" or "yearly" beside each bill, so the rare ones don't get lost in a list where almost everything else is monthly. For any bill that comes less often than monthly, add the month or months it usually arrives and record the due date as a month and day.
+Two more marks finish each line. The first is how often the bill comes. Most bills are monthly, but not all. Some towns bill water and sewer every other month, and some insurance is billed quarterly or twice a year. Property tax, for households that pay it directly rather than through the mortgage, follows a schedule set locally. Memberships and many subscriptions come once a year. A vehicle registration renews on your state's schedule, every year, every two years or longer; the registration card shows the date. Write "monthly," "every two months," "quarterly," "yearly" or "every two years" beside each bill, so the rare ones don't get lost in a list where almost everything else is monthly. For any bill that comes less often than monthly, add the month or months it usually arrives and record the due date as a month and day.
 
 The second mark is whether the bill is paid automatically or by hand right now. This isn't a decision, only a record of how things stand today. "Auto" or "by hand" is enough.
 
-This is where the list starts to show its own gaps. Take, as an example, Frank, a retiree who pays some bills by autopay and some by check. As he fills in the details, three things turn up that he hadn't noticed. First, his homeowner's insurance and two subscriptions all charge a credit card that was replaced last fall after a suspicious charge. He isn't sure the new number ever reached any of them. Second, his water bill is marked quarterly and by hand, but he has no idea when the next one is due. Third, a gym membership he stopped using months ago has no contact number anywhere in his papers.
+This is where the list starts to show its own gaps. Frank drives a long-haul truck and is away from home two weeks at a time. As he fills in the details, three things turn up that he hadn't noticed. First, his homeowner's insurance and two subscriptions all charge a credit card that was replaced last fall after a suspicious charge. He isn't sure the new number ever reached any of them. Second, his water bill is marked quarterly and by hand, but he has no idea when the next one is due, or whether he'll be on the road that week. Third, a gym membership he stopped using months ago has no contact number anywhere in his papers.
 
 None of these would have come to light from a list of names. Each one came from a detail that was blank, uncertain or didn't match the rest. Frank now has three specific things to find out, which is much easier to deal with than a vague sense that something might be off.
 
 ## This week's step
 
-Sit down with your rough list and the statements and bills you've already gathered. Take each bill in turn and give it the full set of details:
+Sit down with your rough list and the statements and bills you've already gathered. Take each bill in turn and give it the eight details: who you pay and how the charge shows up, fixed or variable, the usual due date, how it's paid, which account or card it comes from, a contact number copied from a real bill, how often it arrives and whether it's on autopay today. Don't stop to look anything up along the way. Wherever you don't know an answer, put a question mark and move on. That's the whole step, even if it takes more than one evening.
 
-- who you pay, and how the charge shows up on your statement
-- fixed or variable, with an amount or a range
-- the usual due date
-- how it's paid
-- which account or card it comes from
-- a contact number copied from a real bill
-- how often it arrives
-- whether it's on autopay today
-
-Don't stop to look anything up along the way. Wherever you don't know an answer, put a question mark and move on to the next detail.
-
-When every bill has its details, look at where the question marks landed. Pick one bill and track down its answers: log in to the account, find the statement or call the number on the bill. Then move to the next. One bill at a time is plenty, and you don't have to finish in a single evening. By the end of the week, some lines will be complete and some will still carry a mark or two. Each question mark that's left will point to a specific thing to find out, not a worry you can't name.
+As an optional extra, later in the week, track down one question mark: log in to the account, find the statement or call the number on the bill. Each question mark that's left points to a specific thing to find out, not a worry you can't name.
