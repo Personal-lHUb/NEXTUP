@@ -1,0 +1,49 @@
+# Catching Up When Several Bills Are Behind
+
+When several bills are behind at once, each one asks for the same thing: attention, now. The notices pile up, the balances look bigger side by side, and nothing on the table says which call comes first. You already know what each bill puts at stake, how to ask a provider for more time, where outside help sits and how to weigh what a quick loan costs. Catching up means using those pieces in one order, over several weeks, until your list shows every bill as paid or due again.
+
+## Line up what's behind by date
+
+Start with the bills that are behind, and for each one find the next date that matters. That is the day something changes if nothing is paid or arranged. On a utility bill, it's the disconnection date on the shutoff notice. For rent, it's the end of the grace period in your lease and, after that, the number of days a notice to pay allows, which your state's law and your lease decide. For a phone or internet account, it's the suspension date the contract sets. If a payment plan is already running on any bill, its next installment has a deadline too, and missing it can end the plan.
+
+Beside each date, note the amount needed by that date. It is often less than the full balance. A shutoff notice may state the amount that stops the disconnection, and a provider may accept part of a balance to hold off the next step. Where the paperwork doesn't say, the amount becomes the first question of the call.
+
+Then sort by date, earliest first. This is not a ranking of which bill matters most. That weighing belongs to the chapter on stakes, and it stays yours. The dates decide only the order of the calls, because a call made before a date has more room in it than one made after. What gets paid, and how much, remains your decision on every call.
+
+Take Brenda again, the example from the chapter on what each bill puts at stake. She rents, she is paid on the 12th and the 26th, and even counting the electric bill at the $143 that stops the shutoff, her month comes up $140 short. Her list shows the electric bill two months behind, $286 in all, with a disconnection date of the 18th and $143 needed to stop it. The phone bill is a month behind, $90, and under her contract, service will be suspended on the 25th. Rent isn't late yet, but it's due on the 1st, and her lease allows a grace period through the 5th. Her calls go in that order: electric, phone, landlord.
+
+## One call at a time, with the calendar open
+
+Before each call, open the bill calendar you built around your paydays. When a provider agrees to something, it goes onto that calendar before you dial the next number. Enter each installment as a bill of its own, with the date it's due, the amount and the account it comes from. A promise made on the phone then sits beside the paycheck that will cover it, just like the rent.
+
+This is what keeps one agreement from quietly breaking another. Each call starts from what you've already promised. When the next provider offers terms, you can look at the paydays and see whether the new installment fits after the earlier ones. If it doesn't, you can say so while you're still on the line and ask for a different date or amount. A quick loan offer that turns up in the middle of all this would be one more agreement of the same kind. You can weigh its cost the way the chapter on quick loans describes, and before you decide, its repayment can go on the calendar like any installment, so you can see which payday it would take from and what else sits there.
+
+Brenda calls the electric company on the 9th. The representative confirms the 18th and the $143, and offers to spread the other $143 over her next two bills, $71.50 on each, due on the 20th. Brenda asks what happens if an installment is missed and writes down the answer: the arrangement ends and the remaining balance comes due at once. The representative also mentions an assistance program, and Brenda applies that week. She enters the $143 on the 12th, from her checking account, and the two installments on the 20th of the next two months. The assistance stays off the calendar, because nothing has been approved. Had the company's answers not matched the notice, the state commission's number on the back would have been her next call.
+
+The next morning she calls the phone company. The first offer is the full $90 by the 25th. Her calendar shows the 12th already carrying the $143, and the 26th arriving a day after the suspension date. She says so and asks to pay the $90 on the 26th with service kept on. The company agrees and sends a confirmation by text, and the $90 goes on the calendar for the 26th.
+
+Rent comes third. On her calendar, the $140 gap falls on the 26th, the paycheck that covers the rent. Which bill absorbs it is Brenda's choice, and another household might choose differently. Her idea is to ask the landlord to accept all but $140 by the 5th and the rest on the 12th. Before calling, she checks next month's 12th. It would then hold the $140 and the first $71.50 on the electric bill, due on the 20th, which is tight but fits. The landlord agrees and confirms by email that no late fee will be added.
+
+## The weekly check follows the plan
+
+Once agreements are on the calendar, your weekly check takes on a new job. Each week, confirm that every installment due since the last check actually posted, on the provider's account and not only in your bank history. Keep the notes from each call with that bill, where its statements live, including the answer about what a missed installment does. When a new statement arrives, read the past-due line. It should come down by what you paid, and if it doesn't, those notes are what you bring to the next call.
+
+Brenda's check on the 15th shows the $143 posted and her electric account noted as on a payment arrangement. The 18th comes and goes with the power on. On the 29th, the $90 shows as received by the phone company. Her notes from each call already sit in the folder with that company's statements.
+
+Sometimes an installment is about to slip. Call before its date and start from the answer already in your notes about what a missed installment does, so you're asking for a specific change instead of hoping for one. If it has already slipped, call that same day. Ask whether the arrangement still stands, and get any new terms in writing before you move the entry on the calendar.
+
+In the second month, Brenda's weekly check on the 15th shows that the $140 went to her landlord on the 12th as agreed, but that the paycheck came in smaller after a canceled shift. The $71.50 due on the 20th won't fit until the 26th. Her note says a missed installment ends the arrangement, so she calls that day and asks to move the payment to the 26th. The company agrees and confirms by email, and she moves the entry. The statement that follows shows the past-due amount down to $71.50.
+
+## When to bring in a counselor
+
+Some patterns say it's time to take the list, the calendar and the call notes to a nonprofit credit counselor, the kind described in the chapter on outside help. One is installments that no longer fit between paydays, however you move them. Another is a second missed installment on the same plan, which often means the plan, and not one hard month, is the problem. A third is several credit cards behind at once, where separate calls to each card company produce terms that assume the others don't exist. The last is calls that lead nowhere: the same refusal, or no answer, after you've asked clearly. With the three records in hand, the first meeting starts from what has been promised to whom, rather than being spent rebuilding it.
+
+## What current again looks like
+
+*Current again* is something you can check on the list. Each bill is back to paid or due, with nothing marked past due. The latest statement for each one shows no past-due amount. For each plan, the last installment has posted and the provider has confirmed in writing that the arrangement is complete. Then the plan's entries come off the calendar, so the paydays ahead show only the regular bills.
+
+Here is one way Brenda's weeks can go, not a promise of how yours will. The phone account shows no past-due amount after the 26th of the first month, and the landlord's receipt for the $140 closes the rent. The last $71.50 posts on the 20th of the third month, about ten weeks after her first call. She asks the electric company to confirm in writing that the arrangement is finished and, when it does, takes the installments off her calendar. The assistance application is still under review, and if it's approved, the credit goes on the list the day it's confirmed. Whether a provider agrees, and how long catching up takes, depend on the provider and, where shutoff and eviction rules come in, on your state.
+
+## This week's step
+
+Take every bill that is behind and put it in order of its next date that matters, earliest first. Beside each one, in your notebook, spreadsheet or bank tool, note that date and the amount needed by it. Where either is missing, note the question to ask. Then make the first call on the list, with your calendar open in front of you. Before you make the second call, put whatever was agreed on the calendar beside your paydays, each installment with its date, its amount and the account it comes from. If the dates are close together, the second call can follow ten minutes later, as long as it starts after the first agreement is written down.

@@ -16,17 +16,17 @@ Here is an example. Neil's car insurance renews every six months, in January and
 
 Property tax is set and collected locally, by a county, city, town or school district, and the schedule depends on where the home is. Some places bill once a year, some twice, some in quarterly installments. The tax bill itself, or the local tax collector's office, tells you when it is due and how it can be paid.
 
-If you have a mortgage, you may never see that bill. Many lenders collect property tax through an escrow account, a holding account kept by the mortgage servicer, the company that handles your loan payments. Each month part of your mortgage payment goes into it, and when the tax bill or the homeowners insurance premium comes due, the servicer pays it from there. From your side, both bills disappear into one monthly number.
+If you have a mortgage, you may never see that bill. Many lenders collect property tax through an escrow account, an account the mortgage servicer keeps for you. The servicer is the company that handles your loan payments. Each month part of your mortgage payment goes into it, and when the tax bill or the homeowners insurance premium comes due, the servicer pays it from there. From your side, both bills disappear into one monthly number.
 
-That number is not fixed. The servicer reviews the escrow account, usually once a year, and compares what it collected with what it paid out. If the tax or the insurance went up, the account comes up short, and the monthly payment can rise to cover the gap and the higher cost ahead. The servicer sends a statement explaining the review and the new amount, and it tends to look like routine paperwork.
+That number is not fixed. The servicer reviews the escrow account at least once a year, as federal rules require, and compares what it collected with what it paid out. If the tax or the insurance went up, the account comes up short, and the monthly payment can rise to cover the gap and the higher cost ahead. The servicer sends a statement explaining the review and the new amount, and it tends to look like routine paperwork.
 
-Take, as an example, Tanya, whose mortgage payment has been drawn by autopay for four years. Her county reassessed her home, the escrow review caught the higher tax, and her payment went up by $140 a month. The letter explained all of it. It sat unopened on the counter until the larger draft came out of her checking account.
+Tanya's mortgage payment has been drawn by autopay for four years. Her county reassessed her home, the escrow review caught the higher tax, and her payment went up by $140 a month. The letter explained all of it. It sat unopened on the counter until the larger draft came out of her checking account.
 
 Two moments deserve a line on your list. The first is the escrow review: note the month the statement usually arrives, so you open it when it comes. The second is the day the mortgage is paid off or refinanced, because escrow can end or change, and the tax and insurance bills the servicer used to handle may start coming to you. A household that has never paid its own property tax can miss a whole cycle before noticing it now has to.
 
 ## Registrations, licenses and renewals that arrive quietly
 
-Vehicle registration is renewed with your state's motor vehicle agency, on a cycle the state sets: every year in many places, every two years in others. Some states mail a notice, some send an email, some leave it to you. In some states, renewal also requires an emissions or safety inspection first, which turns a quick payment into an errand. A driver's license renews on a longer cycle, and whether you can renew by mail, online or only in person varies too. The state agency's website lists the schedule and what each renewal needs.
+Vehicle registration is renewed on a cycle your state sets, often every one or two years and sometimes longer, through the state's motor vehicle agency or, in some states, a county office. Some states mail a notice, some send an email, some leave it to you. In some states, renewal also requires an emissions or safety inspection first, which turns a quick payment into an errand. A driver's license renews on a longer cycle, and whether you can renew by mail, online or only in person varies too. The state agency's website lists the schedule and what each renewal needs.
 
 Then come the smaller yearly and quarterly bills, easy to lose because each one seems minor. A warehouse club membership. Dues to a professional association or a union. Homeowners association dues billed quarterly or once a year. A home warranty, alarm monitoring, security software. Water, sewer or trash service billed every three months in some towns. Many of these renew automatically, so the only warning may be a single email a few weeks ahead, and the charge lands on whatever card was on file when you signed up.
 
@@ -36,17 +36,17 @@ A subscription is a repeating charge for a service, whether you still use it or 
 
 ### How they hide on a card statement
 
-A subscription doesn't always show on a statement under the name you know it by. The line may carry an abbreviation of the company's legal name, a parent company, or the payment processor that handled the charge. If you signed up through your phone's app store, the charge usually appears under the store's name, with nothing to say which app it is for. Yearly plans are the hardest to spot: the charge comes once, twelve months after you last thought about it, at an amount that matches nothing you remember paying.
+A subscription doesn't always show on a statement under the name you know it by. The chapters on tracking down every bill and on recording each bill's details explain the names a charge can carry and how to note them. If you signed up through your phone's app store, the charge usually appears under the store's name, often with little or nothing to say which app it is for. Yearly plans are the hardest to spot: the charge comes once, twelve months after you last thought about it, at an amount that matches nothing you remember paying.
 
-When a line puzzles you, two places usually identify it: the purchase history and subscriptions list in your app store account, and a search of your email for "receipt" or "renewal" around the date of the charge. Once you know what it is, note it on the master list under both names, the one you know and the one on the statement.
+When a line puzzles you, two places usually identify it: the purchase history and subscriptions list in your app store account, and a search of your email for "receipt" or "renewal" around the date of the charge.
 
 ### Finding the real way to cancel
 
 Deleting an app does not cancel its subscription, and ignoring a trial does not end it either. A subscription is usually canceled through the same channel where it started. If you signed up in the app store, the cancellation happens in the app store's subscription settings. If you signed up on the company's website, look for the account or billing settings there. If the service came bundled with your phone or internet plan, the cancellation goes through that provider. Where there is no cancel button, the help pages usually say whether it takes a call or a chat.
 
-Here is another example. Neil started a photo-editing trial on his tablet to fix a few pictures before a family event, and deleted the app the same weekend. Two months later he noticed a charge under the app store's name for a full year of the service. Deleting the app had changed nothing, because the subscription lived in his app store account.
+Neil started a photo-editing trial on his tablet to fix a few pictures before a family event, and deleted the app the same weekend. Two months later he noticed a charge under the app store's name for a full year of the service. Deleting the app had changed nothing, because the subscription lived in his app store account.
 
-If you cancel, keep the confirmation email or write down the confirmation number, and check the next statement to make sure the charge has stopped. Some states have their own rules on automatic renewals and on how easy cancellation must be; your state attorney general's consumer protection office is the place to check.
+If you cancel, keep the confirmation email or write down the confirmation number, and check the next statement to make sure the charge has stopped. Some states have their own rules on automatic renewals and on how easy cancellation must be; your state attorney general's office, or in some states a separate consumer protection agency, is the place to check.
 
 ## A reminder that comes early
 

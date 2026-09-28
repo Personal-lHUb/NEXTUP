@@ -4,13 +4,19 @@ Every system needs a finish line, or you can't tell whether it's working. Here, 
 
 ## Three states, and only three
 
-A bill is always in one of three states. It is **paid** when the money has left your account and reached the company that billed you, and you have seen proof. That proof might be a cleared transaction in your bank history, a zero balance on the provider's website, or a message from the company saying the payment was received. A payment you scheduled but haven't seen clear is not paid yet. It's a promise that hasn't been kept or broken.
+A bill is always in one of three states. It is **paid** when the money has left your account and reached the company that billed you, and you have seen proof. That proof might be a cleared transaction in your bank history, a zero balance on the provider's website, or a message from the company saying the payment was received. A payment you scheduled but haven't seen clear is not paid yet. It's a promise that hasn't been kept or broken. The same goes for a check still in the mail or a payment your bank lists as pending. And if you paid less than the bill asked for, the part you didn't pay is still due.
 
-A bill is **due** when you know it exists, you know roughly how much it is and the date it must be paid by, and the money hasn't gone out yet. Due is a healthy state. Most of your bills spend most of the month there, and that's fine as long as you can see the date coming.
+A bill is **due** when you know it exists, you know roughly how much it is and the date it must be paid by, and the money hasn't gone out yet. For a bill that changes from month to month, such as electricity, last month's amount is close enough until the new one arrives. Due is a healthy state. Most of your bills spend most of the month there, and that's fine as long as you can see the date coming.
+
+Bills on autopay are due too, until you see the money clear. An automatic payment changes who presses the button, not what you need to know: you still want the date in front of you, so you can make sure the money is in the account that day. Treat the date printed on the bill as the one that counts. Some providers allow a little time after it before charging a fee and some allow none; it varies from one to the next. A system built on the printed date doesn't need to know which.
 
 A bill is **missing** when you can't place it. Maybe the statement you expected never showed up. Maybe the automatic payment that should have gone out last Tuesday isn't in your account history. Or maybe you simply don't know: you think the car insurance is handled, but you couldn't say when it last came out. Missing is the dangerous state because it's quiet. A due bill has a date attached, and a date gets your attention. A missing bill makes no noise until a late notice arrives.
 
+Missing describes what you know, not what has happened. The car insurance you can't place may have come out on time last month, or it may be due next week, or the card it charges may have expired and left it past its date. From where you sit you can't tell which, and that is the whole trouble. It's also why getting a bill out of missing always takes the same move: find a record, and the bill lands in one of the other two states.
+
 Bills move through these states in a loop. The electric bill arrives and becomes due. You pay it and it becomes paid. A few weeks later a new one arrives and it's due again. A fee from oversight starts when a bill slips out of that loop and into missing without anyone noticing.
+
+One question sorts almost any bill: what could you point to? Proof that the money arrived means paid. A date and an amount, and no payment yet, mean due. If you can't point to anything, the bill is missing, however sure you feel. And every answer comes with a date, because the loop keeps turning: paid this week says nothing about the statement that arrives next week.
 
 ## Why memory and a pile of mail can't tell you
 
@@ -24,31 +30,25 @@ Here is an example. Marcus handles the bills for a family of four. On a Sunday e
 
 He checks the bank history and finds a payment to the water utility five weeks ago. That was last month's bill. This one is due in four days, and nothing has gone out. Marcus wasn't careless. His memory was right about something that had happened, and the envelope was right about something that had arrived. Neither could tell him where the bill stood that evening.
 
+Marcus pays the water bill that night, and it stays due until he sees the payment clear. Then, since he's already at the table, he turns the water envelope over and goes down every other bill he can think of, writing each one's state on the back. The electric bill shows a cleared payment from last week, and the amount matches this month's statement: paid. The mortgage comes out automatically on the first, and this month's payment is there too: paid. The phone bill comes out of his partner's account, not his. He asks her to check her account history rather than answer from memory, and she finds this month's payment: paid.
+
+The car insurance is harder. He knows it's billed twice a year, but he couldn't say which months, and nothing from the insurer appears in the history he can see. He writes it down as missing, logs in to the insurer's website, and finds the next premium due in five weeks. It moves to due, with the date and the amount beside it. The premium is larger than he would have guessed, which is worth knowing five weeks out rather than five days.
+
+What he can't do is sort a bill he never thinks of. When he runs out of names, he stops, and a yearly renewal charged to a card he rarely uses stays missing without his knowing it. Records can answer the question for any bill you name. Naming them all is the list's job, which is why the system starts there.
+
 ## The parts you'll build
 
-The system in this book has five parts, and each one leans on the one before, so the book builds them in order. The first is **one list**. It holds every recurring bill the household pays, including the quarterly and yearly ones and those that never come in the mail. For each bill, the list holds the few details you need to act on it: who gets paid, roughly how much, when, how, from which account, and whom to call. Before you fill those in, the book shows how to read a household bill and a credit card statement, because the list is only as accurate as your reading of the paper behind it.
-
-The second is **one home** for the list and everything that feeds it. That home can be a paper notebook, a spreadsheet or the tools built into your bank's website or app. Whichever you pick, paper notices, billing emails, statements and account logins also get one safe place, so nothing lands where you won't think to look. The third is **a calendar tied to paydays**. Every due date is set against the days money actually comes in, so you can see which paycheck covers which bill and where the tight weeks fall. Households paid every two weeks, or on no fixed schedule, get their own adjustments.
-
-The fourth is **clear autopay choices**. You decide, bill by bill, what gets paid automatically and what you pay or check by hand, and you keep watch over the account the automatic payments draw from. The fifth is **a short routine**. There's a brief weekly check of what cleared and what's coming, and a longer monthly look at statements and what's left after the fixed bills. A yearly review then carries everything into the next year. Along the way, the bills that don't follow the monthly rhythm get their own attention. Those include insurance premiums, property tax, registrations and annual renewals, and the book also covers setting a little aside each month so they don't all land at once.
-
-Each part answers a piece of the three-state question. The list tells you which bills exist, so no bill goes missing just because nobody knew about it. The home tells you where to look. The calendar tells you when each bill becomes urgent. The autopay choices tell you which payments you only need to confirm and which you need to make. The routine keeps every answer current.
+The introduction has already described the system you'll build, and the chapters that follow take its parts one at a time, in order. Each part answers a piece of the three-state question. The list tells you which bills exist, so a bill is far less likely to go missing just because nobody knew about it. The home tells you where to look. The calendar tells you when each bill becomes urgent. The autopay choices tell you which payments you only need to confirm and which you need to make. The routine keeps every answer current.
 
 ## What order can do, and what it can't
 
 Order heads off one kind of cost: the kind that comes from oversight. One is the late fee on a bill you had the money for but didn't see coming. Another is the overdraft charge when an automatic payment hit an account you'd forgotten to move money into. A third is the declined payment when the card on file expired. A system that keeps every bill in view is aimed squarely at those. It won't catch everything, because a company can be slow to record a payment and a notice can go astray. What it gives you is a place where those problems can show up before a late notice does.
 
-Order can't make money appear. If what comes in each month is less than what the bills add up to, a tidy list won't close that gap, and this book won't pretend it can. What order can do is show you the gap sooner.
+As the introduction said, order can't make a tight month loose. What it can do is show you the shortfall sooner.
 
-Take, as an example, Ellen, who works hourly at a clinic. Once her calendar is laid out, she sees that her rent and her car payment both fall due before her second paycheck of the month. Together they come to more than the first paycheck leaves in the account. The calendar didn't cause that, and it can't fix it. It showed her the problem nine days ahead instead of on the morning the rent was due. Those nine days give her time to call the landlord or the lender while both accounts are still up to date, which is a different conversation from calling after a payment has been missed.
+Ellen works hourly at a clinic. Once her calendar is laid out, she sees that her rent and her car payment both fall due before her second paycheck of the month. Together they come to more than the first paycheck leaves in the account. The calendar didn't cause that, and it can't fix it. It showed her the problem nine days ahead instead of on the morning the rent was due. Those nine days give her time to call the landlord or the lender while both accounts are still up to date, which is a different conversation from calling after a payment has been missed.
 
-## Where to begin
-
-Where you start depends on where you are. If your bills are mostly paid on time and you want fewer surprises, read on in order. The building chapters are meant to be taken one at a time, a step a week, and each one assumes you've done the one before it. If you're taking over the bills for a parent or a partner who can no longer manage them, the chapter on that handover near the end of the book may be a better first stop.
-
-If a late fee or an overdraft charge has just landed, you can deal with that first. The part of the book on trouble opens with the first days after a missed payment and how to ask for a fee to be waived. Fees, and whether and when a late payment is reported, vary by provider, and some rules depend on where you live. Those chapters tell you where to check. Once the immediate problem is settled, come back and start the list.
-
-If you are already behind, or you can see this month that the money won't stretch, go straight to the chapters on falling behind. They cover what each kind of bill puts at stake, how to call a provider before the due date, and where to find help outside the company that sent the bill. Protections against utility shutoffs, for instance, differ from state to state, and those chapters point you to the kinds of offices that can tell you what applies where you live. The system can wait. Nothing in it requires you to be caught up before you start.
+If you are already behind, or you can see this month that the money won't stretch, begin where the introduction points you. The system can wait. Nothing in it requires you to be caught up before you start.
 
 ## This week's step
 

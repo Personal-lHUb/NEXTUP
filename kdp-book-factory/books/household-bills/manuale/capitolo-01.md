@@ -26,10 +26,12 @@ Nor does it promise a perfect record or a dollar figure saved. Order can't make 
 
 ## How to use this book
 
-Read one chapter at a time. The chapters are short enough for one sitting, and each ends with a single step you can take that week, often that same evening. The step is written out in plain sentences, with nothing to fill in on the page.
+Read one chapter at a time. The chapters are short enough for one sitting, and each ends with one step for the week, sometimes spread over several evenings. The step is written out in plain sentences, with nothing to fill in on the page.
 
-The chapters build on one another, so the order matters. You find your bills and learn to read them, then record them and give the list a home. Next comes timing: the calendar first, autopay after it, because an automatic payment is only as safe as the money in the account on the day it goes out. After that come the bills that don't arrive every month, then the weekly and monthly habits, then the chapters on trouble. The last stretch covers fake bills, sharing the work at home and a yearly review.
+The chapters build on one another, so the order matters. You find your bills and learn to read them, then record them and give the list a home. Next comes timing: the calendar first, autopay after it, because an automatic payment is only as safe as the money in the account on the day it goes out. After that come the bills that don't arrive every month, then the weekly and monthly habits, then the chapters on trouble, ending with *Catching Up When Several Bills Are Behind*. The last stretch covers fake bills, sharing the work at home, an aging parent's bills and a yearly review.
 
-If you are already behind, go straight to the part called *Falling Behind and Catching Up*. You don't need a tidy system to call a utility company before a due date or to ask about a payment plan. Deal with what's pressing, then come back to the beginning; the system is easier to build once the urgent calls are made.
+If you are already behind, go straight to the part called *Falling Behind and Catching Up*; its last chapter shows the way back, step by step. You don't need a tidy system to call a utility company before a due date or to ask about a payment plan. Deal with what's pressing, then come back to the beginning; the system is easier to build once the urgent calls are made.
 
-For this week, the step is small: choose your evening. Pick one night a week when you can have half an hour undisturbed at the table where the mail tends to land. Then keep it the way you would keep any other appointment.
+## This week's step
+
+The step is small: choose your evening. Pick one night a week when you can have half an hour undisturbed at the table where the mail tends to land. That same evening will later hold your weekly check. Then keep it the way you would keep any other appointment.
