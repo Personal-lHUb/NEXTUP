@@ -32,7 +32,7 @@ Whichever home you pick, the layout rests on one idea. The details that rarely c
 
 In a notebook, that usually means the full master list on the first few pages, one entry per bill, followed by a page or a two-page spread for each month. The month's page starts with the month and year. Below it, the bills run in due-date order, one line each, with the payee, the due date and the amount, and room at the end of the line for the status.
 
-When a bill is paid, write the payment date in that space, with a confirmation number if you got one. A line with nothing at the end is still due. Once its due date passes with nothing written, or when a bill you expected hasn't arrived, it gets a mark of its own for missing, a circled question mark for instance. At the start of each month you copy the list onto a fresh page. It takes a few minutes, and copying by hand is itself a check that nothing has dropped off.
+When a bill is paid, write the payment date in that space, with a confirmation number if you got one. A line with nothing at the end is still due. Once its due date passes with nothing written, or when a bill you expected hasn't arrived, it gets a mark of its own for missing, a circled question mark for instance. At the start of each month you copy the list onto a fresh page. It takes a few minutes, and copying by hand is a check that nothing has dropped off.
 
 In a spreadsheet, the simplest layout is one row per bill. The first columns hold the fixed details from the master list, including the usual amount, so a total at the bottom shows roughly what a month of bills adds up to. After them come twelve columns, one per month, and in each cell you type a status: paid with the date, due, or missing. Use exactly the same words every time. Many spreadsheet programs can shade a cell according to what it says, dark for missing and light for paid, so the month shows from across the room; that only works if the words match. If you'd rather keep a separate sheet for each month, copied from the master at the start of the month, that works too.
 
@@ -44,7 +44,7 @@ Once more than one tool is involved, it is tempting to let each keep its own ver
 
 Here is how that might look for Mia. Her spreadsheet is the master. Her bank's bill pay sends the electricity and phone payments, and her credit card, from a different bank, is paid by an autopay set up on the card's website. When an alert tells her the electricity payment went out, she types sent in that cell, a mark the chapter on the weekly check explains, and changes it to paid once the payment has cleared. She marks the card payment paid when it clears, too. If the bank and the spreadsheet ever disagree, she works out which one is right before she marks anything, so the answer always ends up in the master.
 
-Howard works the same way on paper. His bank texts him when a check clears, and he writes the date in his notebook that evening. The text is handy, but the notebook is where he would look if someone asked whether the gas bill was paid.
+Howard works the same way on paper. His bank texts him when a check clears, and he writes the date in his notebook that evening. The text is handy, but the notebook is where he would look if asked whether the gas bill was paid.
 
 ## This week's step
 
@@ -52,4 +52,4 @@ Choose your home this week. If you are unsure, the one closest to how you alread
 
 Then move your master list into it, with the fixed details written or typed once. Set up this month, and mark each bill. Open your bank and card history to see what has already cleared, and mark those paid; anything still on its way is sent. The ones still ahead are due.
 
-Any bill whose due date has passed with no payment, or that you expected but haven't seen, gets marked missing. That group is not a verdict on anyone. It is simply the list of what to look into next, and it is now written down in one place.
+Any bill whose due date has passed with no payment, or that you expected but haven't seen, gets marked missing. That group is not a verdict on anyone. It is the list of what to look into next, and it is now written down in one place.

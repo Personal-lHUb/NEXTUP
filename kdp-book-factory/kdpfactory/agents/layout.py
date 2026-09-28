@@ -548,6 +548,15 @@ def _check_short_last_lines(
     ]
     if len(tiny) < 5:
         return []
+    # Il numero di pagina non basta a correggere: il capoverso si ritrova nel
+    # manoscritto dalle sue ultime parole, cioè dalla riga prima di quella corta.
+    in_order = sorted(lines, key=lambda line: (line.page, line.y0))
+    before = {id(b): a for a, b in zip(in_order, in_order[1:], strict=False)}
+    cases = []
+    for line in sorted(tiny, key=lambda line: (line.page, line.y0)):
+        previous = before.get(id(line))
+        tail = " ".join(previous.text.split()[-5:]) + " " if previous else ""
+        cases.append(f"p. {line.page}: «…{tail}{line.text}»")
     return [
         AgentFinding(
             agent=Impaginazione.name,
@@ -555,6 +564,7 @@ def _check_short_last_lines(
             category="righe finali troppo corte",
             issue=f"{len(tiny)} capoversi finiscono con una riga di poche lettere "
             f"(pagine {_pages_label(sorted({line.page for line in tiny}))}).",
+            quote=" · ".join(cases),
             suggestion="Una riga finale sotto il 12% della giustezza lascia un buco visibile: "
             "aggiungi o togli una parola al capoverso.",
         )

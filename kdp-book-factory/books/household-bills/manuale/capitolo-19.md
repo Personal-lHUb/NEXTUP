@@ -20,7 +20,7 @@ Before you hang up, whatever the answer, note the date, the name or ID of the pe
 
 ### When the first answer is no
 
-A no on the first call is not always the final answer. Representatives don't all have the same authority. You can ask, politely, whether anyone else can review the request, such as a supervisor or the department that handles account adjustments. You can also thank the person, end the call and try again another day. Some people ask whether part of the fee can be credited when the whole of it can't.
+A no on the first call is not always the final answer. Representatives don't all have the same authority. You can ask, politely, whether anyone else can review the request, such as a supervisor or the department that handles account adjustments. You can also thank the person, end the call and try again later. Some people ask whether part of the fee can be credited when all of it can't.
 
 Carl was charged a $35 overdraft fee when an insurance premium came out two days before his paycheck arrived. The first person he spoke with said the bank doesn't waive overdraft fees. Carl asked whether someone else could look at it, was told no, and called back the next week. The second representative credited half. That's a partial result, and with a different representative the answer might have stayed no. When each person you reach gives the same answer, that is usually the policy, and the fee stands.
 

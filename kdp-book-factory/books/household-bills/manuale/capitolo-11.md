@@ -42,7 +42,7 @@ Once the account holds enough to cover the bills until the next income can reaso
 
 Nina set one up after a January when her rent came due in the slowest week of the slowest month. All her client payments and tip deposits now go into one checking account used for nothing but the bills, and on the 1st and 15th she moves a fixed amount to her everyday account.
 
-The idea has limits. It needs a starting balance to work, and building that can take months. A second account may come with monthly fees or minimum balance rules that differ from bank to bank, so the account terms are the place to check. Transfers between two different banks can take a business day or more, which matters when a due date is close. And it doesn't create money: in a long slow stretch, the balance falls. What it changes is visibility. A falling balance shows up weeks before a due date, while there's still time to call someone.
+The idea has limits. It needs a starting balance to work, and building that can take months. A second account may come with monthly fees or minimum balance rules that differ from bank to bank, so check the account terms. Transfers between two different banks can take a business day or more, which matters when a due date is close. And it doesn't create money: in a long slow stretch, the balance falls. What it changes is visibility. A falling balance shows up weeks before a due date, while there's still time to call someone.
 
 ## One deposit, many due dates
 

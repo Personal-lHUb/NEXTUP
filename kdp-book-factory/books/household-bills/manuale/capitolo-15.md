@@ -28,9 +28,9 @@ Whichever type you choose, it helps to keep a note in your bill system of how mu
 
 ## Starting when there's little to spare
 
-Twelve monthly shares assume a year's head start and room in the month for the full amount. Many households have neither. The next big bill may be six weeks away, and the share for everything together may be more than the month can hold.
+Twelve monthly shares assume a year's head start and room in the month for the full amount. Many households have neither. The next big bill may be six weeks away, and the combined share may be more than the month can hold.
 
-There is a smaller way in: set aside for the nearest big bill first and leave the others for later. Rita's calendar shows her car registration due in two months at $140, her renters insurance due in six months at $210 and an annual membership due in ten months at $60. Saving for all three at once would take about $111 a month from the start. Instead, she divides the registration by the two months left and puts $70 aside each month. Once it's paid, she turns to the renters insurance, now four months off, and sets aside about $53 a month. The membership comes after that. This way, the most she needs in any month is $70.
+There is a smaller way in: set aside for the nearest big bill first and leave the others for later. Rita's calendar shows her car registration due in two months at $140, her renters insurance due in six months at $210 and an annual membership due in ten months at $60. Saving for all three at once would take about $111 a month from the start. Instead, she divides the registration by the two months left and puts $70 aside each month. Once it's paid, she turns to the renters insurance, now four months off, and sets aside about $53 a month. The membership comes after that. The most she needs in any month is $70.
 
 This works because each target is small and its finish date is close enough to see. Every bill that gets covered frees up its share for the next one in line. Over time, as the month allows, the later bills can start gathering earlier, until each one has its full cycle to build up in.
 

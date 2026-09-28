@@ -10,7 +10,7 @@ A bill is **due** when you know it exists, you know roughly how much it is and t
 
 Bills on autopay are due too, until you see the money clear. An automatic payment changes who presses the button, not what you need to know: you still want the date in front of you, so you can make sure the money is in the account that day. Treat the date printed on the bill as the one that counts. Some providers allow a little time after it before charging a fee and some allow none; it varies from one to the next. A system built on the printed date doesn't need to know which.
 
-A bill is **missing** when you can't place it. Maybe the statement you expected never showed up. Maybe the automatic payment that should have gone out last Tuesday isn't in your account history. Or maybe you simply don't know: you think the car insurance is handled, but you couldn't say when it last came out. Missing is the dangerous state because it's quiet. A due bill has a date attached, and a date gets your attention. A missing bill makes no noise until a late notice arrives.
+A bill is **missing** when you can't place it. Maybe the statement you expected never showed up. Maybe the automatic payment that should have gone out last Tuesday isn't in your account history. Or maybe you simply don't know: you think the car insurance is handled, but you couldn't say when it last came out. Missing is the dangerous state because it's quiet. A due bill has a date, and a date gets your attention. A missing bill is silent until a late notice arrives.
 
 Missing describes what you know, not what has happened. The car insurance you can't place may have come out on time last month, or it may be due next week, or the card it charges may have expired and left it past its date. From where you sit you can't tell which, and that is the whole trouble. It's also why getting a bill out of missing always takes the same move: find a record, and the bill lands in one of the other two states.
 
@@ -34,7 +34,7 @@ Marcus pays the water bill that night, and it stays due until he sees the paymen
 
 The car insurance is harder. He knows it's billed twice a year, but he couldn't say which months, and nothing from the insurer appears in the history he can see. He writes it down as missing, logs in to the insurer's website, and finds the next premium due in five weeks. It moves to due, with the date and the amount beside it. The premium is larger than he would have guessed, which is worth knowing five weeks out rather than five days.
 
-What he can't do is sort a bill he never thinks of. When he runs out of names, he stops, and a yearly renewal charged to a card he rarely uses stays missing without his knowing it. Records can answer the question for any bill you name. Naming them all is the list's job, which is why the system starts there.
+What he can't do is sort a bill he never thinks of. When he runs out of names, he stops, and a yearly renewal charged to a card he rarely uses stays missing without his knowing it. Records can answer the question for any bill you name. Naming them all is the list's job, and the system starts there.
 
 ## The parts you'll build
 

@@ -14,7 +14,7 @@ Here is an example. Maria's electric bill is $214, due on June 18. The second jo
 
 ## What you can ask for
 
-Providers use their own names for these options, and the same word can mean different things at two companies. What follows is what each one usually means. On the call, ask the representative to explain exactly what their version involves.
+Providers use their own names for these options, and the same word can mean different things at two companies. What follows is what each one usually means. Ask the representative to explain exactly what their version involves.
 
 ### A later date
 

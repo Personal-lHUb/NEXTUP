@@ -20,7 +20,7 @@ If you have a mortgage, you may never see that bill. Many lenders collect proper
 
 That number is not fixed. The servicer reviews the escrow account at least once a year, as federal rules require, and compares what it collected with what it paid out. If the tax or the insurance went up, the account comes up short, and the monthly payment can rise to cover the gap and the higher cost ahead. The servicer sends a statement explaining the review and the new amount, and it tends to look like routine paperwork.
 
-Tanya's mortgage payment has been drawn by autopay for four years. Her county reassessed her home, the escrow review caught the higher tax, and her payment went up by $140 a month. The letter explained all of it. It sat unopened on the counter until the larger draft came out of her checking account.
+Tanya's mortgage payment has been drawn by autopay for four years. Her county reassessed her home, the escrow review caught the higher tax, and her payment went up by $140 a month. The letter explained it all. It sat unopened on the counter until the larger draft came out of her account.
 
 Two moments deserve a line on your list. The first is the escrow review: note the month the statement usually arrives, so you open it when it comes. The second is the day the mortgage is paid off or refinanced, because escrow can end or change, and the tax and insurance bills the servicer used to handle may start coming to you. A household that has never paid its own property tax can miss a whole cycle before noticing it now has to.
 
@@ -42,7 +42,7 @@ When a line puzzles you, two places usually identify it: the purchase history an
 
 ### Finding the real way to cancel
 
-Deleting an app does not cancel its subscription, and ignoring a trial does not end it either. A subscription is usually canceled through the same channel where it started. If you signed up in the app store, the cancellation happens in the app store's subscription settings. If you signed up on the company's website, look for the account or billing settings there. If the service came bundled with your phone or internet plan, the cancellation goes through that provider. Where there is no cancel button, the help pages usually say whether it takes a call or a chat.
+Deleting an app does not cancel its subscription, and ignoring a trial doesn't end it. A subscription is usually canceled through the same channel where it started. If you signed up in the app store, the cancellation happens in the app store's subscription settings. If you signed up on the company's website, look for the account or billing settings there. If the service came bundled with your phone or internet plan, the cancellation goes through that provider. Where there is no cancel button, the help pages usually say whether it takes a call or a chat.
 
 Neil started a photo-editing trial on his tablet to fix a few pictures before a family event, and deleted the app the same weekend. Two months later he noticed a charge under the app store's name for a full year of the service. Deleting the app had changed nothing, because the subscription lived in his app store account.
 

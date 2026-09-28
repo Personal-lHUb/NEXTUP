@@ -34,7 +34,7 @@ A full year of history is the best source when you can get it, because it covers
 
 Your master list is meant to be handy. It may sit on the kitchen counter or live on a shared computer. You might photograph it to check from work, or hand it to a relative who covers for you while you're away. Anything written on it should be something you wouldn't mind a stranger reading.
 
-That rules out a few things entirely. Full account numbers stay off. So do passwords, PINs, answers to security questions and Social Security numbers. Those are what someone would need to get into an account or pass as you on the phone. A list that holds them stops being a tool and becomes a key. Your logins do need a home, but a locked one, not a page that travels around the house.
+That rules out a few things entirely. Full account numbers stay off. So do passwords, PINs, answers to security questions and Social Security numbers. Those are what someone would need to get into an account or pass as you on the phone. A list that holds them stops being a tool and becomes a key. Your logins do need a home, but a locked one, not a page left around the house.
 
 What you *can* write is just enough to tell accounts apart. The usual choice is the last four digits of an account or card number. They're printed on statements, and many companies ask for them when you call to confirm which account you mean. A plain nickname helps too. "Joint checking ending 0932" or "the blue card ending 4417" tells you exactly which account is meant, and it's useless to anyone trying to get in. If you have two accounts with the same company, such as two phone lines or two car policies, add a word that separates them, like "the older car" or "the kids' line."
 
@@ -50,6 +50,6 @@ None of these would have come to light from a list of names. Each one came from 
 
 ## This week's step
 
-Sit down with your rough list and the statements and bills you've already gathered. Take each bill in turn and give it the eight details: who you pay and how the charge shows up, fixed or variable, the usual due date, how it's paid, which account or card it comes from, a contact number copied from a real bill, how often it arrives and whether it's on autopay today. Don't stop to look anything up along the way. Wherever you don't know an answer, put a question mark and move on. That's the whole step, even if it takes more than one evening.
+Sit down with your rough list and the statements and bills you've already gathered. Take each bill in turn and give it the eight details: who you pay and how the charge shows up, fixed or variable, the usual due date, how it's paid, which account or card it comes from, a contact number copied from a real bill, how often it arrives and whether it's on autopay today. Don't stop to look anything up. Wherever you don't know an answer, put a question mark and move on. That's the whole step, even if it takes more than one evening.
 
 As an optional extra, later in the week, track down one question mark: log in to the account, find the statement or call the number on the bill. Each question mark that's left points to a specific thing to find out, not a worry you can't name.

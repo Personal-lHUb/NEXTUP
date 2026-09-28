@@ -40,7 +40,7 @@ All of this comes down to one move: you make the contact, using a number you alr
 
 When you call, you don't need a long explanation. Say you received a call, letter or message about your account and want to know whether it's genuine. Give your account number from your own records, not from the message. The representative can tell you whether any balance is due, whether any notice is on file, and whether anything needs doing. Many providers also want to hear about fakes that use their name, and may tell you where to forward the message.
 
-Sometimes you'll learn the message was real. That's fine. You can pay it through the channel you always use, and you've spent five minutes making sure.
+Sometimes you'll learn the message was real. That's fine. You can pay it the way you always do, and you've spent five minutes making sure.
 
 ## If you already paid or shared details
 
@@ -48,7 +48,7 @@ These scams are run by people who do this all day, and they catch careful, organ
 
 Start with your own bank or the company that issued your card. Call the number on the back of the card or on your statement, explain what happened, and ask what can be done: stopping a payment that hasn't gone through yet, disputing a card charge, or replacing the card. Whether money can be recovered depends on how it was sent and how quickly it's reported, and sometimes it can't be. For gift cards, contact the company that issued the card using the number printed on it, and keep the card and the receipt. If you shared a password, change it right away through the provider's real site, and anywhere else you used the same one. If you gave out your Social Security number or other details that could be used to open credit in your name, the Federal Trade Commission's identity theft site, IdentityTheft.gov, lays out the next steps, including fraud alerts and credit freezes.
 
-Then report it. The Federal Trade Commission collects reports of fraud and scams, and your state attorney general's office, or in some states a separate consumer protection agency, handles complaints. Your local police can take a report too, which a bank may ask for. Let the real provider know as well, so they can flag your account. While it's fresh, write down the dates, the amounts, the number that called and what was said; each call goes faster with notes in hand.
+Then report it. The Federal Trade Commission collects reports of fraud and scams, and your state attorney general's office, or in some states a separate consumer protection agency, handles complaints. Your local police can take a report too, which a bank may ask for. Let the real provider know, so they can flag your account. While it's fresh, write down the dates, the amounts, the number that called and what was said; each call goes faster with notes in hand.
 
 ## This week's step
 

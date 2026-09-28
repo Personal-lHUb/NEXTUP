@@ -14,7 +14,7 @@ Then there are the bills that don't come every month at all: a car insurance pre
 
 ## Notices in three different places
 
-Not so long ago, nearly every bill came in an envelope. Now your bills can arrive in at least three places. Some still come by mail. Some come by email, often to whichever address you used when you signed up, which may not be the one you check every day. Some live only inside a company's website or app, announced by a notification on your phone that you can swipe away in half a second.
+Not so long ago, nearly every bill came in an envelope. Now your bills can arrive in at least three places. Some still come by mail. Some come by email, often to whichever address you used when you signed up, which may not be the one you check every day. Some live only inside a company's website or app, announced by a phone notification you can swipe away in half a second.
 
 Each channel has its own way of hiding a bill. Paper gets stacked with ads and catalogs. Email gets sorted into a folder you rarely open, or it arrives as a short message saying your statement is ready, with no amount and no date unless you log in. A phone notification shows up while you're driving or cooking and is gone by the time you look again. None of this is a lapse of attention on your part. It's three separate mailboxes, and you're expected to empty all three.
 
@@ -50,4 +50,4 @@ When a bill slips, the usual response is a private promise to be more careful an
 
 Before you build anything, set aside ten minutes this week and write down, from memory, the bills you worry about most. Don't open your bank account or go through the mail yet. The point is to see what your memory is carrying on its own. A sheet of paper, the back of an envelope or a note on your phone will do. Next to each bill, add a few words about where its notices usually turn up: the mailbox, a particular email address, an app, or nowhere you can think of. If a bill is on autopay and you aren't sure which card or account pays it, say so in the note. "Not sure" is a useful answer, because it marks the first place to look.
 
-The note will be incomplete, and it's meant to be. It doesn't need to be tidy, and nobody else has to see it. Keep it somewhere you'll find it again, in the kitchen drawer or tucked into this book. That rough note is where the full list will start.
+The note will be incomplete, and it's meant to be. It doesn't need to be tidy, and nobody else has to see it. Keep it somewhere you'll find it again, in the kitchen drawer or in this book. That rough note is where the list begins.

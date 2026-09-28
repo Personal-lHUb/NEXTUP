@@ -12,7 +12,7 @@ The **statement date**, sometimes called the bill date or issue date, is the day
 
 Read the wording around the due date closely. Many bills say *payment must be received by*, which means the money has to arrive by that day, not just leave your hands. A check mailed on the due date will arrive after it. An online or phone payment can take a business day or more to be credited. The bill or the company's payment page usually says how long each method takes. Some bills also print a line such as *amount due after* followed by a date and a higher figure. That line does not give you extra time to pay. It shows what the bill becomes once a late charge is added.
 
-The gap between the statement date and the due date varies. Some companies allow several weeks and others much less, and for regulated utilities state rules may set a minimum. Only your own bills can tell you the gap on each one.
+The gap between the statement date and the due date varies. Some companies allow several weeks and others much less, and for regulated utilities state rules may set a minimum. Only your own bills show the gap on each one.
 
 ## Four amounts and the one that counts
 
@@ -48,4 +48,4 @@ Names and amounts change with the provider, the state and sometimes the town, so
 
 ## This week's step
 
-Take one current utility bill, on paper or on screen, and give it ten quiet minutes. Find the due date and read the words beside it, so you know whether the payment has to be sent or received by that day. Find the total amount due. Then run the subtraction from the previous balance and the last payment, to see whether that payment was credited and whether any part of the total is past due. Last, look next to the meter reading for the word or letter that says whether it was actual or estimated. If it was estimated, compare the number on the meter with the one on the bill the next time you can get to it. The due date and the amount you found are the two facts the rest of the system will rely on for this bill.
+Take one current utility bill, on paper or on screen, and give it ten quiet minutes. Find the due date and read the words beside it, so you know whether the payment has to be sent or received by that day. Find the total amount due. Then run the subtraction from the previous balance and the last payment, to see whether that payment was credited and whether any part of the total is past due. Last, look next to the meter reading for the word or letter that says whether it was actual or estimated. If it was estimated, compare the number on the meter with the one on the bill next time you can get to it. The due date and the amount you found are the two facts the rest of the system relies on for this bill.

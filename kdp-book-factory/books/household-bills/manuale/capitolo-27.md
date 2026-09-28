@@ -38,7 +38,7 @@ What matters more than any single item is the pattern over several months. One l
 
 ## Notes so someone could step in for you
 
-Steve's first month would have been easier with one page from Martha saying where things were. That page is worth writing for your own household too, at any age. The person who pays the bills can end up in a hospital, far from home or unreachable for a few weeks, and the bills keep arriving on their own schedule.
+Steve's first month would have been easier with one page from Martha saying where things were. That page is worth writing for your household too, at any age. Whoever pays the bills can end up in a hospital, far from home or unreachable for a few weeks, and the bills keep arriving on their own schedule.
 
 The note doesn't hold the whole system; it points to it. It says where the list lives: the notebook on the hall closet shelf, the spreadsheet with its file name and the computer it sits on, or the bank's tools and which bank. It names the accounts the bills are paid from, which bills run on autopay, and which are paid by hand and would be missed first if nobody stepped in. For who to call, your list already holds the contacts, so the note adds only the people who aren't on it, such as the attorney who drew up a power of attorney, and where the signed copy is kept.
 

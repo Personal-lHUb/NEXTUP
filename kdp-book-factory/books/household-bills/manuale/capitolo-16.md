@@ -16,11 +16,11 @@ Start by looking back. Take every payment that fell due since the last check, wh
 
 A **pending** transaction is one the bank knows about but hasn't finished processing. Its amount can still change, and now and then a pending item disappears altogether. A **cleared** transaction, which many banks call *posted*, has gone all the way through and is now part of the account's record. Banks don't all use the same labels or show pending items the same way. The time between the two stages also varies with the bank and the kind of payment. The bank's help pages, or a call to its customer service line, will tell you what its own labels mean.
 
-Mark a bill paid only when its payment has cleared. When you press "send" or drop an envelope in the mailbox, the money hasn't reached the provider yet, and a payment can still fail along the way. It can be returned for lack of funds, sent to an account number that's no longer valid, or held up in the mail. If the list says paid at that moment, it will go on saying paid while the provider is still waiting.
+Mark a bill paid only when its payment has cleared. When you press "send" or drop an envelope in the mailbox, the money hasn't reached the provider yet, and a payment can still fail along the way. It can be returned for lack of funds, sent to an outdated account number, or held up in the mail. If the list says paid at that moment, it will go on saying paid while the provider is still waiting.
 
 One simple way to cover the gap is a second mark for "sent." It isn't a fourth state beside paid, due and missing: a sent bill is still due, just further along, because the payment has gone out but the bill isn't paid yet. On paper, it might be a small dot that becomes a check mark once the payment clears. In a spreadsheet, a status column can read *sent* and later *paid*. In the bank's own tools, a scheduled payment usually carries a status of its own, which you can read the same way. Whichever you use, *sent* is the mark worth watching: the money has left your hands but hasn't landed yet.
 
-Autopay needs this look as much as anything paid by hand. An automatic payment does not check itself. It can fail because a card on file expired, or it can come out for a different amount than the bill you saw. The weekly check isn't the place for a line-by-line comparison with the statement. It only asks whether the payment happened and whether the amount is roughly what you expected. If something looks off, write a short note beside it so it doesn't slip away.
+Autopay needs this look as much as anything paid by hand. An automatic payment does not check itself. It can fail because a card on file expired, or it can come out for a different amount than the bill you saw. The weekly check isn't the place for a line-by-line comparison with the statement. It only asks whether the payment happened and whether the amount is roughly what you expected. If something looks off, write a note beside it so it doesn't slip away.
 
 Howard is retired and still pays the water bill by check. His notebook shows the water bill with a dot beside it: mailed eight days ago. Because the line shows a dot and not a check mark, he looks for the check number in his account history, and it isn't there. His checks to the water department have always cleared within a few days, so he calls the utility. The check arrived and simply hasn't been deposited yet, and he writes the date of the call on the line. Had he marked it paid when he mailed it, the first sign of trouble, if there had been any, would have been a late notice.
 
@@ -36,13 +36,13 @@ Sometimes the look forward shows a gap: a bill due before the paycheck meant to 
 
 ## Emptying the paper spot and the email folder
 
-Last comes everything that arrived since the last check: the paper in the spot where mail collects, the messages in the billing folder, any alerts or texts from providers. Go through each item and decide where it belongs. The aim is to leave the spot and the folder empty, so that next week everything in them is new.
+Last comes everything that arrived since the last check: the paper in the spot where mail collects, the messages in the billing folder, any alerts or texts from providers. Go through each item and decide where it belongs. The aim is to leave the spot and the folder empty, so next week everything in them is new.
 
 Most items fall into a few kinds. A bill already on your list needs only its amount and due date written in, if they change from month to month. A bill for something new, such as a subscription someone in the house started or a medical bill after a visit, gets its own line on the list and its date on the calendar. A notice of change, like a new amount, a new due date or a new card number, means updating the line it affects. Anything that needs no action, like an advertisement or a statement kept only for your records, goes into storage or the shredder.
 
 Notices of change are the easiest to miss, because nothing about them looks urgent. In Howard's mail this week is a letter from the electric company saying that his averaged monthly payment goes up starting next month. It asks him to pay nothing, and it would be easy to leave on the counter. He changes the amount in his notebook, so that when the higher payment comes out, the list already expects it.
 
-A replacement card is a notice of change too: update every bill still charged to the old number that same week, as the chapter on the account behind autopay explains.
+A new card is a notice of change too: update every bill charged to the old number that same week, as the chapter on the account behind autopay explains.
 
 ## When a week gets skipped
 

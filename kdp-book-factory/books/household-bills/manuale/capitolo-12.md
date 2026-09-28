@@ -28,7 +28,7 @@ In the second, **your bank sends the money**. Many banks offer a bill pay servic
 
 The trade-off is timing and upkeep. The bank may send the payment electronically or mail a paper check on your behalf, and delivery can take several days depending on the payee and the bank, so the send date and the arrival date are not the same. Your bank's bill pay screen usually shows an estimated delivery date, and that date, not the send date, is the one to compare with the due date. And if the bill varies, a repeating payment from your bank sends the same figure each time unless you change it.
 
-Gloria's rent fits the second kind. Her landlord doesn't take card payments or run an online portal, but accepts checks. A repeating payment through her bank's bill pay, set to arrive a few days before the 1st, fits well: the rent stays the same for the length of her lease, and the landlord never needs her account details.
+Gloria's rent fits the second kind. Her landlord doesn't take card payments but accepts checks. A repeating payment through her bank's bill pay, set to arrive a few days before the 1st, fits well: the rent stays the same for the length of her lease, and the landlord never needs her account details.
 
 ## How a card's autopay amount is set
 
@@ -36,7 +36,7 @@ Credit cards add a choice that other bills don't have. Most card issuers let you
 
 **Autopaying the minimum** means the card is paid on time every month, as long as the money is there, and the payment stays relatively small. Whatever remains after the minimum carries over to the next month as a balance, and the card charges interest on it according to its terms. The minimum keeps the account current, meaning not past due. It doesn't, by itself, bring the balance down quickly.
 
-**Autopaying the statement balance** pays the full amount the statement showed. On most cards, paying that balance in full by the due date is what keeps new purchases from being charged interest, though the exact terms are in your cardholder agreement. The catch is that the amount moves with your spending. A quiet month pulls a small amount; the month after a car repair or the holidays pulls a large one, and the checking account has to hold it on that day.
+**Autopaying the statement balance** pays the full amount the statement showed. On most cards, paying that balance in full by the due date is what keeps new purchases from being charged interest, though the exact terms are in your cardholder agreement. But the amount moves with your spending. A quiet month pulls a small amount; the month after a car repair or the holidays pulls a large one, and the checking account has to hold it on that day.
 
 **Autopaying a fixed amount** sends the same figure each month, say $250. That makes the draw on your account predictable. If the statement balance is higher, the difference carries over, with interest under the card's terms, just as it would after a minimum payment. What happens when the fixed amount is lower than the minimum, or higher than what you owe, depends on the issuer; the autopay settings page or the card's customer service can tell you.
 

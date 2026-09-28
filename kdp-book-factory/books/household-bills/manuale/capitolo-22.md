@@ -20,7 +20,7 @@ Separate from any assistance, most states limit when and how a utility can cut o
 
 Almost all of these protections postpone a shutoff rather than cancel a debt: what's owed stays owed, and the balance usually keeps growing through the protected period. Many come with conditions, such as applying for assistance or keeping to a payment plan, and a medical certificate may need renewing after a set number of days. Alongside them, states set notice rules: how far ahead, and in what form, a utility must warn you before it disconnects.
 
-The place to check the rules for your address is your state's utility regulator. Its website usually has a consumer page on disconnection rules, and it takes complaints from customers who believe a utility broke them. The chapter on reading a household bill explains what it is called and which providers it doesn't cover.
+The place to check the rules is your state's utility regulator. Its website usually has a consumer page on disconnection rules, and it takes complaints from customers who believe a utility broke them. The chapter on reading a household bill explains what it is called and which providers it doesn't cover.
 
 ## Nonprofit credit counseling
 
@@ -30,7 +30,7 @@ When the trouble is spread across several bills, especially credit cards, a nonp
 
 Companies selling "debt relief" or "debt settlement" advertise in the same places and use similar words. The signals are in what they ask of you. A company that tells you to stop paying your creditors and send money into a special account instead is describing settlement, not counseling, and while you wait, late fees, collection calls and damage to your credit can pile up. Promises to cut your debt by a fixed percentage, guarantees of any kind, pressure to sign on the first call and large fees due before any work has been done are all reasons to stop and check.
 
-A genuine agency usually asks about your whole budget, not only your debts, and sends written information before you agree to anything. Many belong to national associations of nonprofit counseling agencies that set standards and certify counselors. The U.S. Trustee Program, part of the Department of Justice, also publishes a list of agencies approved for the counseling required before a bankruptcy filing (in Alabama and North Carolina, the courts' bankruptcy administrators keep it). Approval covers that counseling only, not debt management plans, but it shows an agency has passed a federal review, and reading the list commits you to nothing. Your state attorney general's office, or in some states a separate consumer protection agency, takes consumer complaints, and you can ask it about a company before you sign anything.
+A genuine agency usually asks about your whole budget, not only your debts, and sends written information before you agree to anything. Many belong to national associations of nonprofit counseling agencies that set standards and certify counselors. The U.S. Trustee Program, part of the Department of Justice, publishes a list of agencies approved for the counseling required before a bankruptcy filing (in Alabama and North Carolina, the courts' bankruptcy administrators keep it). Approval covers that counseling only, not debt management plans, but it shows an agency has passed a federal review, and reading the list commits you to nothing. Your state attorney general's office, or in some states a separate consumer protection agency, takes complaints, and you can ask it about a company before you sign anything.
 
 ### Questions about fees
 

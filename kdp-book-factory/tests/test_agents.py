@@ -11,6 +11,7 @@ from kdpfactory.agents.layout import (
     Line,
     _check_frame_overflow,
     _check_hyphen_ladders,
+    _check_short_last_lines,
     _check_widows_orphans,
     _flush_left_by_parity,
     _measure_first_line_indent,
@@ -231,6 +232,23 @@ class TestImpaginazione(unittest.TestCase):
             ln.text = ln.text.rstrip("-") + "-"
         findings = _check_hyphen_ladders({7: page})
         self.assertEqual(findings[0].category, "scaletta di sillabazione")
+
+    def test_righe_finali_corte_dicono_quale_capoverso(self):
+        """Il numero di pagina non basta per correggere: servono le ultime parole.
+
+        Nel rodaggio il rilievo diceva «47 capoversi, pagine 7, 14, 17…», e per
+        ritrovarli nel manoscritto bisognava aprire il PDF pagina per pagina.
+        """
+        righe = []
+        for page in range(20, 25):
+            pagina = full_page(page, count=4)
+            pagina[2].text = f"che finisce con le parole del capoverso {page}"
+            pagina[3] = line(page, LEFT, MEASURE * 0.05, text="due.", y0=pagina[3].y0)
+            righe += pagina
+        findings = _check_short_last_lines(righe, MEASURE, BODY, {0: LEFT, 1: LEFT}, INDENT)
+        self.assertEqual(findings[0].category, "righe finali troppo corte")
+        self.assertIn("p. 20: «…le parole del capoverso 20 due.»", findings[0].quote)
+        self.assertEqual(findings[0].quote.count("p. "), 5)
 
     def test_senza_pdf_lo_dichiara(self):
         result = agents.get_agent("impaginazione").run(AgentContext(spec=BookSpec(slug="t", title="T")))
