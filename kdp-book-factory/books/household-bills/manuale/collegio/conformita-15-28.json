@@ -1,0 +1,47 @@
+{
+  "agente": "conformita",
+  "capitoli": "15-28",
+  "notes": "Il blocco 15–28 non ha problemi di conformità seri. Non riproduce materiale di terzi e non nomina marchi, banche, app o persone reali: FTC, CFPB, HUD, LIHEAP, IRS, SSA e 211 sono enti e servizi pubblici citati come rinvio, non come consiglio. Tutti gli esempi con un nome sono dichiarati come esempi e non c'è nessuna promessa di risultato. Il testo rinvia spesso ad avvocati, all'assistenza legale gratuita, ai consulenti del credito no-profit e alle autorità statali. Mancano però tre cose: un'avvertenza specifica per chi, come suggerisce l'introduzione, salta direttamente alla parte sui ritardi; il rinvio legale per chi riceve una citazione per un debito; un modo concreto di chiedere aiuto se si sospetta lo sfruttamento di un genitore anziano.",
+  "findings": [
+    {
+      "severity": "importante",
+      "category": "avvertenza generale mancante",
+      "chapter": 18,
+      "issue": "L'introduzione (01.md) dice che il libro non è consulenza e rinvia a consulente, avvocato o fornitore, ma manda chi è in ritardo direttamente alla parte «Falling Behind and Catching Up», e il cap. 18 che la apre non ripete questa cornice. L'avvertenza della pagina di copyright, uguale per tutti i libri e generata da kdpfactory/i18n.py senza un campo per cambiarla, è generica: non parla di consulenza legale, finanziaria, fiscale o sul credito e non dice che norme e programmi cambiano per stato e nel tempo.",
+      "quote": "What helps is a short sequence, done in order over the next few days.",
+      "suggestion": "(a) Aprire il cap. 18 con due o tre frasi: queste pagine spiegano come funzionano le cose e non sono consulenza legale, finanziaria o sul credito; le regole cambiano da stato a stato e nel tempo; davanti a una causa, a uno sfratto, a un pignoramento o a un debito grande il riferimento è un avvocato o l'assistenza legale gratuita, oppure un consulente del credito no-profit. (b) Dare a questo libro un'avvertenza propria sulla pagina di copyright: non è consulenza legale, finanziaria, fiscale o sul credito; norme, tariffe e programmi variano per stato e cambiano; le informazioni sono aggiornate alla data dell'edizione."
+    },
+    {
+      "severity": "importante",
+      "category": "rinvio legale mancante",
+      "chapter": 20,
+      "issue": "Per i debiti non garantiti e per quelli medici il cap. 20 descrive la causa, la sentenza anche quando non ci si difende, il pignoramento dello stipendio e il blocco del conto, ma a quel punto non rinvia a nessun professionista. Il cap. 22, che elenca i momenti in cui serve un avvocato, cita solo la citazione per sfratto e l'azione di pignoramento della casa, non la causa di un creditore o di un'agenzia di recupero crediti.",
+      "quote": "This path is usually slower than a repossession, but court papers come with their own deadline to respond.",
+      "suggestion": "Aggiungere nel cap. 20, subito dopo la frase citata: chi riceve una citazione per un debito può chiedere a un ufficio di assistenza legale gratuita o a un avvocato quali possibilità ha, prima che la scadenza passi. Nel cap. 22 aggiungere «a lawsuit from a creditor or a debt collector» alle carte giudiziarie per cui serve un avvocato."
+    },
+    {
+      "severity": "importante",
+      "category": "contatto concreto mancante",
+      "chapter": 26,
+      "issue": "Nel caso più delicato del capitolo, il sospetto che un anziano sia sfruttato, il testo dà il nome del servizio di protezione degli adulti (adult protective services) ma non dice come trovarlo. Non dice nemmeno che cosa fare se il denaro sta uscendo in quel momento, eppure il resto del libro dice sempre dove controllare.",
+      "quote": "every state has an adult protective services program, sometimes under another name, that takes reports.",
+      "suggestion": "Aggiungere come raggiungerlo: il sito dei servizi sociali dello stato, il 211 già citato nel cap. 22, oppure l'Eldercare Locator, servizio pubblico federale per gli anziani (nome e riferimenti da far verificare al fact-checker). Aggiungere una frase per l'urgenza: se il denaro sta uscendo ora, chiamare subito la banca o la società della carta come nel cap. 24; in caso di pericolo immediato o di furto, la polizia."
+    },
+    {
+      "severity": "minore",
+      "category": "avvertenza incompleta",
+      "chapter": 24,
+      "issue": "La sezione per chi ha già dato dei dati a un truffatore copre carta, conto e password, ma non il caso con più conseguenze: il numero di previdenza sociale (Social Security number) o altri dati con cui si può aprire credito a nome del lettore. Il rinvio sul furto d'identità esiste nel cap. 19, ma il lettore che arriva a questa pagina non lo trova.",
+      "quote": "If you shared a password, change it right away through the provider's real site, and anywhere else you used the same one.",
+      "suggestion": "Aggiungere una frase: se hai dato il Social Security number o altri dati personali, la parte del sito della FTC dedicata al furto d'identità spiega i passi successivi, compresi gli avvisi e i blocchi sui report di credito. I dettagli vanno fatti verificare al fact-checker."
+    },
+    {
+      "severity": "minore",
+      "category": "rinvio sanitario mancante",
+      "chapter": 26,
+      "issue": "Il capitolo tocca la salute (ictus, diagnosi, perdita della capacità di agire). Elenca anche un insieme di segnali, cioè pagamenti saltati, posta non aperta e addebiti inspiegati, senza mai rinviare a un medico, mentre per la parte legale rinvia correttamente all'avvocato.",
+      "quote": "may mean the job has become more than she wants to carry alone, and that calls for an unhurried conversation rather than a quiet takeover.",
+      "suggestion": "Aggiungere una frase leggera, senza diagnosi: se il cambiamento è nuovo o improvviso, può valere la pena parlarne con il suo medico, con il suo accordo. Il tono resta quello del capitolo: prima si chiede a lei."
+    }
+  ]
+}
