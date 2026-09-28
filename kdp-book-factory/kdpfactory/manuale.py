@@ -141,6 +141,20 @@ def _leggi_scaletta(testo: str) -> Outline:
     return grezza
 
 
+def pagine_della_scaletta(
+    project: BookProject, spec: BookSpec, budget: planner.PageBudget, outline: Outline
+) -> int | None:
+    """Le pagine che farà la scaletta, dal modello tarato in `state.json`.
+
+    Senza modello (nessuna taratura ancora fatta) non si inventa un numero.
+    """
+    modello = planner.PageModel.from_dict(project.load_state().get("modello_pagine"))
+    if modello is None:
+        return None
+    capitoli = sum(1 for c in outline.chapters if c.role == "chapter")
+    return planner.outline_pages(spec, budget, modello, capitoli, len(outline.parts))
+
+
 def esamina_scaletta(
     project: BookProject, spec: BookSpec, budget: planner.PageBudget, testo: str
 ) -> dict:
@@ -153,7 +167,11 @@ def esamina_scaletta(
     """
     grezza = _leggi_scaletta(testo)
     rilievi = revisore_scaletta.esamina(
-        grezza, spec, brief=spec.brief or "", capitoli_attesi=budget.chapters
+        grezza,
+        spec,
+        brief=spec.brief or "",
+        capitoli_attesi=budget.chapters,
+        pagine_previste=pagine_della_scaletta(project, spec, budget, grezza),
     )
     bloccanti = sum(1 for r in rilievi if r.severity == "bloccante")
     return {

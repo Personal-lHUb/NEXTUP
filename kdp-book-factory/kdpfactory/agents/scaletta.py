@@ -819,16 +819,50 @@ def _controlla_righe_indice(outline: Outline, spec: BookSpec) -> list[AgentFindi
 # --------------------------------------------------------------------------
 # L'esame
 # --------------------------------------------------------------------------
+def _controlla_pagine(spec: BookSpec, pagine_previste: int | None) -> list[AgentFinding]:
+    """Le pagine che farà questa scaletta, parti comprese, contro l'obiettivo.
+
+    La taratura sceglie il budget prima che la scaletta esista; il numero di
+    capitoli e le parti li decide l'architetto dopo, e ogni parte costa due
+    pagine. Qui si rifà il conto sulla scaletta scritta, quando correggerla
+    costa un file: nel rodaggio di household-bills lo si è scoperto a libro
+    scritto, 184 pagine su 120.
+    """
+    if not pagine_previste or not spec.target_pages:
+        return []
+    obiettivo = spec.target_pages
+    basso, alto = round(obiettivo * 0.95), round(obiettivo * 1.05)
+    if basso <= pagine_previste <= alto:
+        return []
+    scarto = abs(pagine_previste - obiettivo) / obiettivo
+    return [
+        _segnala(
+            "bloccante" if scarto > 0.10 else "importante",
+            "pagine fuori obiettivo",
+            f"Con questi capitoli e queste parti il libro farà circa {pagine_previste} "
+            f"pagine, contro un obiettivo di {obiettivo} [{basso}-{alto}].",
+            suggestion=(
+                "Cambia il numero di capitoli o di parti prima di scrivere, oppure, se il "
+                "libro deve davvero essere più lungo o più corto, cambia l'obiettivo "
+                "(`target_pages` in book.json): è una decisione dell'autore, e cambia "
+                "prezzo e dorso."
+            ),
+        )
+    ]
+
+
 def esamina(
     outline: Outline,
     spec: BookSpec,
     *,
     brief: str = "",
     capitoli_attesi: int = 0,
+    pagine_previste: int | None = None,
 ) -> list[AgentFinding]:
     """Tutti i controlli, in ordine di quanto costa il difetto se passa."""
     rilievi: list[AgentFinding] = []
     rilievi += _controlla_conteggio(outline, capitoli_attesi)
+    rilievi += _controlla_pagine(spec, pagine_previste)
     rilievi += _controlla_lingua(outline, spec)
     rilievi += _controlla_copertura(outline, brief or spec.brief or "")
     rilievi += _controlla_divieti(outline)

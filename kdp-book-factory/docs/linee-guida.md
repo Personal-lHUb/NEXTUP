@@ -204,6 +204,10 @@ Che cosa deve avere una scaletta prima di passare:
   quelle che restano finiscono nell'elenco delle cifre da contare sul libro
   finito;
 - **il titolo del libro entra in copertina** a misura leggibile.
+- **le pagine previste stanno nell'intervallo**, parti comprese: il revisore
+  le conta sulla scaletta con il modello tarato, perché il numero di capitoli
+  e le parti li decide l'architetto dopo il budget, e ogni parte costa due
+  pagine.
 
 #### L'agente `indice`
 
@@ -466,3 +470,5 @@ Ogni regola qui sopra viene da un difetto trovato su un libro vero.
 | il brief chiedeva «solo l'illustrazione» e poi «un PDF con dorso e retro» | 7, `copertina` | si consegna l'illustrazione; il PDF lo fa il motore |
 | il lettore cieco dentro Claude Code poteva aprire la scaletta | 4 | la vetrina e i capitoli, nient'altro |
 | la linea API non passava dal revisore di scaletta | 1 | il cancello è lo stesso nelle due linee |
+| progettato per 120 pagine, impaginato in 184: la taratura stimava 592 parole per pagina piena contro 355 vere, e le parti non erano nel conto | 1, `revisore-scaletta` | la taratura usa sezioni di lunghezza diversa e un budget che regge il ±5% di testo; le pagine si ricontano sulla scaletta |
+| il revisore bloccava «secure» come promessa di guarigione e contava «due» come numero in un libro inglese | 1, `revisore-scaletta` | parole intere, cifre nella lingua del libro |

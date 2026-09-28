@@ -15,7 +15,7 @@ Il secondo passaggio è quello che porta davvero il libro dentro l'intervallo:
 from __future__ import annotations
 
 import math
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 
 from . import kdpspecs
@@ -195,11 +195,36 @@ def build_budget(spec: BookSpec, words_per_page_override: float | None = None) -
 #
 #: di quanto si allunga e si accorcia il libro di prova rispetto alla stima
 CALIBRATION_FACTORS = (0.85, 1.30)
+#: lunghezze diverse fra le sezioni di uno stesso libro di prova. Con sezioni
+#: tutte uguali ogni libro dava un solo punto sulla scalinata, due libri due
+#: punti: troppo pochi per separare la densità dal costo d'apertura, e il fit
+#: sceglieva fra migliaia di coppie equivalenti. Nel rodaggio di
+#: household-bills stimava 592 parole per pagina piena contro 355 vere, e il
+#: libro progettato per 120 pagine ne è uscito da 184.
+CALIBRATION_SECTION_SPREAD = (0.6, 0.9, 1.2, 1.5)
+#: quanto il testo scritto si scosta dal budget. Il budget si sceglie perché
+#: resti nella finestra anche così: i capitoli di un libro sono tutti lunghi
+#: uguale, quindi saltano il gradino tutti insieme, e un budget in bilico sul
+#: bordo del gradino costa due pagine per capitolo al primo 1% in più.
+CALIBRATION_WRITING_DRIFT = (0.95, 1.0, 1.05)
+#: versione della taratura salvata in `state.json`: uno stato tarato con una
+#: versione precedente si ritara da solo, perché la misura vecchia è quella
+#: sbagliata. Una misura presa sul PDF vero (`CALIBRATION_FROM_PDF`) vince.
+CALIBRATION_VERSION = 2
+CALIBRATION_FROM_PDF = "pdf"
 #: ogni quante parole il testo di prova apre una sezione `##`, come i capitoli veri
 CALIBRATION_SECTION_WORDS = 450
 #: entro quanto si cerca il budget migliore, in frazione della stima analitica
 CALIBRATION_SEARCH = (0.6, 2.0)
 CALIBRATION_STEPS = 280
+
+#: oltre quanti capitoli la scaletta li raggruppa in parti (lo chiede il prompt
+#: dell'architetto e lo controlla il revisore), quante parti ci si aspetta
+#: prima che la scaletta esista, e quanto costa una parte: la pagina del
+#: titolo si apre su dispari e ha una bianca dietro
+PARTS_ABOVE_CHAPTERS = 20
+EXPECTED_PARTS = 4
+PART_PAGES = 2
 
 #: ruolo di una sezione → chiave della sua etichetta in `i18n`
 ROLE_LABELS = {"intro": "introduction", "conclusion": "conclusion", "chapter": "chapter"}
@@ -208,6 +233,11 @@ ROLE_LABELS = {"intro": "introduction", "conclusion": "conclusion", "chapter": "
 def _even(value: float) -> int:
     """Pagine occupate davvero: ogni sezione si apre su dispari e chiude su pari."""
     return 2 * math.ceil(value / 2)
+
+
+def expected_parts(chapters: int) -> int:
+    """Le parti che avrà una scaletta di tanti capitoli, prima che esista."""
+    return EXPECTED_PARTS if chapters > PARTS_ABOVE_CHAPTERS else 0
 
 
 def role_label(role: str) -> str:
@@ -237,12 +267,12 @@ class PageModel:
     opening_pages: float
     fixed_pages: float
 
-    def pages_for(self, sections: list[int]) -> int:
-        """Le pagine che farebbe un libro con queste sezioni."""
+    def pages_for(self, sections: list[int], parts: int = 0) -> int:
+        """Le pagine che farebbe un libro con queste sezioni e tante parti."""
         corpo = sum(
             _even(self.opening_pages + parole / self.words_per_body_page) for parole in sections
         )
-        return int(round(self.fixed_pages + corpo))
+        return int(round(self.fixed_pages + corpo + parts * PART_PAGES))
 
     def to_dict(self) -> dict:
         return {
@@ -250,6 +280,20 @@ class PageModel:
             "pagine_di_apertura": round(self.opening_pages, 2),
             "pagine_fisse": round(self.fixed_pages, 1),
         }
+
+    @classmethod
+    def from_dict(cls, dati: dict | None) -> PageModel | None:
+        """Il modello salvato in `state.json`, o niente se non c'è."""
+        if not dati:
+            return None
+        try:
+            return cls(
+                words_per_body_page=float(dati["parole_per_pagina_piena"]),
+                opening_pages=float(dati["pagine_di_apertura"]),
+                fixed_pages=float(dati["pagine_fisse"]),
+            )
+        except (KeyError, TypeError, ValueError):
+            return None
 
 
 def sample_chapter(spec: BookSpec, words: int) -> str:
@@ -304,7 +348,10 @@ def _fit_model(osservazioni: list[tuple[int, int]], fixed_pages: float) -> PageM
     errore_minimo = None
     for densita_int in range(180, 701):
         densita = float(densita_int)
-        for apertura_int in range(5, 61):
+        # Da zero: un'apertura che occupa mezza riga di titolo costa meno di
+        # mezza pagina, e il pavimento a 0,5 spingeva il fit verso densità
+        # troppo alte per compensare.
+        for apertura_int in range(0, 61):
             apertura = apertura_int / 10
             errore = sum(
                 (_even(apertura + parole / densita) - pagine) ** 2
@@ -333,10 +380,15 @@ def measure_page_model(spec: BookSpec, workdir: Path | None = None) -> PageModel
 
     osservazioni: list[tuple[int, int]] = []
     fisse: list[int] = []
+    variazioni = CALIBRATION_SECTION_SPREAD
     with tempfile.TemporaryDirectory() as tmp:
         cartella = Path(workdir) if workdir else Path(tmp)
         for fattore in CALIBRATION_FACTORS:
-            piani, capitoli = _sections_of(spec, [max(200, int(w * fattore)) for w in parti])
+            parole_prova = [
+                max(200, int(w * fattore * variazioni[i % len(variazioni)]))
+                for i, w in enumerate(parti)
+            ]
+            piani, capitoli = _sections_of(spec, parole_prova)
             esito = typeset_module.typeset(
                 spec,
                 Outline(title=spec.title, subtitle=spec.subtitle, chapters=piani),
@@ -359,9 +411,27 @@ def measure_page_model(spec: BookSpec, workdir: Path | None = None) -> PageModel
     return _fit_model(osservazioni, sum(fisse) / len(fisse))
 
 
-def predict_pages(spec: BookSpec, wpp: float, model: PageModel) -> int:
-    """Quante pagine farebbe il libro con questo budget."""
-    return model.pages_for(distribute_words(build_budget(spec, wpp), spec))
+def predict_pages(spec: BookSpec, wpp: float, model: PageModel, drift: float = 1.0) -> int:
+    """Quante pagine farebbe il libro con questo budget, parti comprese.
+
+    `drift` simula un testo scritto più lungo o più corto del budget.
+    """
+    budget = build_budget(spec, wpp)
+    sezioni = [int(parole * drift) for parole in distribute_words(budget, spec)]
+    return model.pages_for(sezioni, expected_parts(budget.chapters))
+
+
+def outline_pages(
+    spec: BookSpec, budget: PageBudget, model: PageModel, chapters: int, parts: int
+) -> int:
+    """Le pagine di una scaletta vera: i suoi capitoli e le sue parti.
+
+    La taratura sceglie il budget prima che la scaletta esista, e le parti le
+    decide l'architetto dopo. Qui si rifà il conto sulla scaletta scritta,
+    quando correggerla costa ancora un file.
+    """
+    su_misura = replace(budget, chapters=max(1, chapters))
+    return model.pages_for(distribute_words(su_misura, spec), parts)
 
 
 def calibrate_words_per_page(spec: BookSpec, model: PageModel | None = None) -> float:
@@ -390,13 +460,20 @@ def calibrate_words_per_page(spec: BookSpec, model: PageModel | None = None) -> 
     minimo, massimo = (stimate * f for f in CALIBRATION_SEARCH)
     passo = (massimo - minimo) / CALIBRATION_STEPS
 
-    migliore, scarto_migliore = stimate, None
+    # Si misura lo scarto peggiore fra testo scritto corto, giusto e lungo,
+    # e a parità quello del testo giusto: un budget che cade sull'obiettivo
+    # solo se il ghostwriter scrive esattamente il numero chiesto non regge.
+    migliore, punteggio_migliore = stimate, None
     for indice in range(CALIBRATION_STEPS + 1):
         candidato = minimo + indice * passo
-        scarto = abs(predict_pages(spec, candidato, model) - spec.target_pages)
-        if scarto_migliore is None or scarto < scarto_migliore:
-            migliore, scarto_migliore = candidato, scarto
-            if scarto == 0:
+        scarti = [
+            abs(predict_pages(spec, candidato, model, drift) - spec.target_pages)
+            for drift in CALIBRATION_WRITING_DRIFT
+        ]
+        punteggio = (max(scarti), scarti[len(scarti) // 2])
+        if punteggio_migliore is None or punteggio < punteggio_migliore:
+            migliore, punteggio_migliore = candidato, punteggio
+            if punteggio == (0, 0):
                 break
     return migliore
 

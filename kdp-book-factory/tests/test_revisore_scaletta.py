@@ -244,6 +244,32 @@ class TestParoleIntere(unittest.TestCase):
         self.assertNotEqual(self._promesse("A life-changing routine for your bills"), [])
 
 
+class TestPagineDellaScaletta(unittest.TestCase):
+    """Le pagine si contano sulla scaletta, prima di scrivere, parti comprese."""
+
+    def _pagine(self, previste: int):
+        spec = spec_demo(target_pages=120)
+        rilievi = revisore.esamina(
+            Outline.from_dict(BUONA), spec, brief=BRIEF, pagine_previste=previste
+        )
+        return [r for r in rilievi if r.category == "pagine fuori obiettivo"]
+
+    def test_nella_finestra_non_dice_niente(self):
+        self.assertEqual(self._pagine(118), [])
+
+    def test_poco_fuori_e_importante(self):
+        self.assertEqual([r.severity for r in self._pagine(130)], ["importante"])
+
+    def test_molto_fuori_blocca(self):
+        # il caso del rodaggio: 184 pagine su 120
+        rilievi = self._pagine(184)
+        self.assertEqual([r.severity for r in rilievi], ["bloccante"])
+        self.assertIn("184", rilievi[0].issue)
+
+    def test_senza_modello_non_inventa_un_numero(self):
+        self.assertEqual(self._pagine(None), [])
+
+
 class TestCifreNellaLinguaDelLibro(unittest.TestCase):
     def test_in_inglese_due_e_una_scadenza(self):
         dati = copy.deepcopy(BUONA)

@@ -210,6 +210,73 @@ class TestTaraturaDellePagine(unittest.TestCase):
         )
 
 
+class TestTaraturaSuUnLibroVero(unittest.TestCase):
+    """Dal rodaggio di household-bills: progettato per 120 pagine, uscito da 184.
+
+    Le sezioni di prova erano tutte lunghe uguale, e due libri di prova davano
+    due soli punti sulla scalinata: il fit sceglieva 592 parole per pagina
+    piena contro 355 vere, e metteva il budget sul bordo del gradino, dove
+    l'1% di testo in più costava due pagine a capitolo.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.spec = BookSpec(
+            slug="t", title="Bills in Order", topic="household bills", language="en",
+            target_pages=120,
+        )
+        cls.modello = planner.measure_page_model(cls.spec)
+
+    def _pagine_vere(self, parole: list[int], parti: int = 0) -> int:
+        """Impagina davvero un libro con queste sezioni e conta le pagine."""
+        import tempfile
+        from pathlib import Path
+
+        from kdpfactory import typeset
+        from kdpfactory.models import Outline, PartPlan
+
+        piani, capitoli = planner._sections_of(self.spec, parole)
+        passo = max(1, len(piani) // max(1, parti)) if parti else 0
+        parts = [
+            PartPlan(title=f"Part {i + 1}", first_chapter=piani[1 + i * passo].number)
+            for i in range(parti)
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            esito = typeset.typeset(
+                self.spec,
+                Outline(title=self.spec.title, chapters=piani, parts=parts),
+                capitoli,
+                Path(tmp) / "vero.pdf",
+            )
+        return esito.pages
+
+    def test_il_modello_prevede_capitoli_di_lunghezza_mai_provata(self):
+        # 1.701 parole: il budget con cui il libro vero è stato progettato,
+        # che il vecchio modello metteva in 4 pagine e l'impaginazione in 6.
+        sezioni = [1070] + [1701] * 10 + [860]
+        previste = self.modello.pages_for(sezioni)
+        vere = self._pagine_vere(sezioni)
+        self.assertLessEqual(abs(previste - vere), 2, f"previste {previste}, vere {vere}")
+
+    def test_le_parti_entrano_nel_conto(self):
+        sezioni = [1070] + [1700] * 8 + [860]
+        vere = self._pagine_vere(sezioni, parti=3)
+        self.assertLessEqual(abs(self.modello.pages_for(sezioni, 3) - vere), 2)
+
+    def test_il_budget_regge_un_testo_un_po_piu_lungo_o_piu_corto(self):
+        wpp = planner.calibrate_words_per_page(self.spec, self.modello)
+        basso, alto = round(120 * 0.95), round(120 * 1.05)
+        for drift in planner.CALIBRATION_WRITING_DRIFT:
+            pagine = planner.predict_pages(self.spec, wpp, self.modello, drift)
+            self.assertTrue(basso <= pagine <= alto, f"testo ×{drift}: {pagine} pagine")
+
+    def test_il_modello_si_rilegge_dallo_stato(self):
+        riletto = planner.PageModel.from_dict(self.modello.to_dict())
+        self.assertAlmostEqual(riletto.words_per_body_page, self.modello.words_per_body_page)
+        self.assertIsNone(planner.PageModel.from_dict({}))
+        self.assertIsNone(planner.PageModel.from_dict({"parole_per_pagina_piena": "x"}))
+
+
 class TestMarkdown(unittest.TestCase):
     def test_parsing_blocchi(self):
         blocks = mdlite.parse(

@@ -154,7 +154,10 @@ def build_until_in_range(
         # successive a partire calibrate. Non la vede nessun altro progetto —
         # un archivio per formato/corpo/interlinea/lingua non esiste, e ogni
         # libro nuovo ricomincia la taratura da capo.
-        project.update_state(words_per_page_measured=calibration.measured_words_per_page)
+        project.update_state(
+            words_per_page_measured=calibration.measured_words_per_page,
+            taratura_versione=planner.CALIBRATION_FROM_PDF,
+        )
         if abs(calibration.scale - 1) < 0.01:
             print("    scostamento minimo: nessuna riscrittura necessaria.")
             break

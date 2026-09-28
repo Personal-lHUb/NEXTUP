@@ -81,13 +81,19 @@ def budget_for(project: BookProject, spec: BookSpec) -> planner.PageBudget:
     """
     state = project.load_state()
     measured = state.get("words_per_page_measured")
-    if not measured:
+    versione = state.get("taratura_versione")
+    superata = bool(state.get("modello_pagine")) and versione not in (
+        planner.CALIBRATION_VERSION, planner.CALIBRATION_FROM_PDF
+    )
+    if not measured or superata:
         print("Taratura delle pagine (due impaginazioni di prova, nessuna chiamata API)…")
         modello = planner.measure_page_model(spec)
         measured = planner.calibrate_words_per_page(spec, modello)
         previste = planner.predict_pages(spec, measured, modello)
         project.update_state(
-            words_per_page_measured=round(measured, 1), modello_pagine=modello.to_dict()
+            words_per_page_measured=round(measured, 1),
+            modello_pagine=modello.to_dict(),
+            taratura_versione=planner.CALIBRATION_VERSION,
         )
         print(
             f"  {measured:.0f} parole per pagina · previsione: {previste} pagine "
@@ -295,10 +301,14 @@ def cmd_outline(args) -> int:
     # Lo stesso cancello della linea manuale: una scaletta sbagliata la pagano
     # tutti i capitoli, e qui correggerla costa un file, non trenta chiamate.
     from .agents.scaletta import esamina as esamina_scaletta
-    from .manuale import rapporto_rilievi
+    from .manuale import pagine_della_scaletta, rapporto_rilievi
 
     rilievi = esamina_scaletta(
-        outline, spec, brief=spec.brief or "", capitoli_attesi=budget.chapters
+        outline,
+        spec,
+        brief=spec.brief or "",
+        capitoli_attesi=budget.chapters,
+        pagine_previste=pagine_della_scaletta(project, spec, budget, outline),
     )
     print("\n" + rapporto_rilievi(rilievi, outline))
     bloccanti = [r for r in rilievi if r.severity == "bloccante"]
@@ -599,10 +609,14 @@ def cmd_all(args) -> int:
         project.ensure_dirs()
         outline.save(project.outline_path)
         from .agents.scaletta import esamina as esamina_scaletta
-        from .manuale import rapporto_rilievi
+        from .manuale import pagine_della_scaletta, rapporto_rilievi
 
         rilievi = esamina_scaletta(
-            outline, spec, brief=spec.brief or "", capitoli_attesi=budget.chapters
+            outline,
+            spec,
+            brief=spec.brief or "",
+            capitoli_attesi=budget.chapters,
+            pagine_previste=pagine_della_scaletta(project, spec, budget, outline),
         )
         bloccanti = [r for r in rilievi if r.severity == "bloccante"]
         # In prova a secco la scaletta è un segnaposto: il cancello si guarda,
