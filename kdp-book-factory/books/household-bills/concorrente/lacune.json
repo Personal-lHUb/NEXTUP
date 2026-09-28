@@ -1,0 +1,69 @@
+{
+  "lettore_reale": "Chi tiene a mano i conti di casa e paga ogni mese le stesse bollette: casalinghe e genitori, anziani («I think it’s a great way if you’re a senior»), chi vuole togliere foglietti e post-it dalla scrivania. Lo usa come un piccolo bilancio familiare, per vedere dove vanno i soldi, quanto resta e quanto mette da parte, più che come semplice checklist delle bollette. Non compare nessun «money manager» professionista, salvo chi lo consiglia ai clienti che faticano a gestire i soldi.",
+  "confidenza": "bassa",
+  "perche_questa_confidenza": "In pagina ci sono 13 recensioni complete, non 14: 8 dagli Stati Uniti e 5 da altri paesi. Undici sono a 5 stelle, una a 4 e una a 3; nessuna è a 1 o 2 stelle. Solo 4 superano le due frasi (AAA, Stories from the Shopping Cart, Literary Omnivore, Sylvie); le altre sono di una riga o due. Le valutazioni da 1 a 3 stelle sono circa il 16% di 3.081, cioè circa 490 lettori, e qui ne è rappresentato uno solo: la sua lamentela riguarda la rilegatura. I due segnali critici che esistono (una persona che non ha abbastanza pagine, alcune che dicono che non vale il prezzo) vengono dal riepilogo «Customers say». È una sintesi generata da Amazon, non la parola di un lettore, e non se ne può citare nessun testo. Le recensioni positive concordano molto fra loro: ordine, impaginazione chiara, tutto in un posto. Per questo la sezione «da non toccare» è abbastanza solida, mentre le lacune sono quasi da ricavare. Per alzare la confidenza bisogna incollare le recensioni filtrate a 1, 2 e 3 stelle.",
+  "lacune": [
+    {
+      "tema": "registro delle spese giornaliere",
+      "ricorrenze": 1,
+      "che_cosa_manca": "Una pagina dove annotare le spese di ogni giorno, da lasciare aperta sul bancone della cucina. Il libro invece è costruito attorno alla pagina mensile delle bollette. È una mia deduzione dall'uso che la lettrice descrive: la sua lamentela esplicita riguarda la rilegatura, non le pagine. Una sola voce, quindi resta un indizio da verificare, non una tendenza.",
+      "citazioni": [
+        "I was under the impression It was a spiral notebook which I liked that idea because then I could flip the page and leave the notebook open on my counter and chart all my spending for that day."
+      ],
+      "vale_un_libro": false
+    }
+  ],
+  "da_non_toccare": [
+    {
+      "punto": "Impaginazione chiara e subito utilizzabile, senza istruzioni da studiare. Il riepilogo Amazon lo conferma («simple yet effective layout and easy-to-use format»).",
+      "citazioni": [
+        "The layout is clear, easy to follow, and well thought out.",
+        "It's a budgeting book very well layed out and very useful",
+        "It keeps all our bills in order and it’s easy to set up and I think it’s a great way if you’re a senior"
+      ]
+    },
+    {
+      "punto": "Tutto in un solo posto: il quaderno prende il posto di foglietti, post-it ed estratti sparsi, e lo spazio nella pagina mensile basta per le note.",
+      "citazioni": [
+        "This has really helped to tidy up the space next to my computer; no more chaos of loose papers and sticky notes because there's room on the monthly page for those things.",
+        "Having up to four years of billing records in one place makes it simple to track due dates, payments, and recurring bills without feeling overwhelmed."
+      ]
+    },
+    {
+      "punto": "Si vede subito che cosa è stato pagato, che cosa manca e che cosa scade: lo si compra per evitare ritardi e penali.",
+      "citazioni": [
+        "It's a much, MUCH better way to keep track of which bills got paid and which ones may have failed to arrive",
+        "It’s a great way to visually track bills, plan ahead, and avoid missed payments or costly bank overdraft fees.",
+        "Very good to have, keeps you up with regular payments and then money left for other things"
+      ]
+    },
+    {
+      "punto": "Va oltre le bollette: entrate, quanto resta, risparmi e note. È questo che lo trasforma in un bilancio di casa.",
+      "citazioni": [
+        "It has helped me see where my money goes and where it should go",
+        "make notes, keep track of anything I am saving for and so on."
+      ]
+    },
+    {
+      "punto": "Un solo volume che dura più anni: la durata pluriennale è un motivo d'acquisto, citato nel titolo stesso di una recensione.",
+      "citazioni": [
+        "This book will last 4 years",
+        "The 960 billing records allow for precise financial documentation, helping households maintain stability."
+      ]
+    },
+    {
+      "punto": "Una guida leggera, che suggerisce che cosa ricordare, e un uso di sostegno per chi deve rimettere in ordine i conti. Il riepilogo Amazon lo conferma («teaches money management skills»).",
+      "citazioni": [
+        "It keeps everything organized and also gives you ideas and subjects that you should remember and take care of.",
+        "when my clients struggle with managing their finances, I often recommend something like this to help them stay organized."
+      ]
+    }
+  ],
+  "prezzo": "Nessuna recensione in pagina si lamenta del prezzo. Literary Omnivore (4 stelle) lo definisce «an inexpensive and handy way to keep track of what you owe each month». wilfredo coriano (5 stelle) intitola la recensione «The price» e nel testo scrive soltanto «Good product». Il segnale contrario viene solo dal riepilogo Amazon («While some customers consider it a good value, others say it's not worth the money», tema «Value for money», 27 menzioni) e nessun lettore lo scrive in pagina. È un dato di posizionamento da verificare sulle recensioni da 1 a 3 stelle, non una lacuna di contenuto.",
+  "scartate": [
+    "Sylvie, 3 stelle («It is not a spiral notebook and I fear that the binder will fall apart,… we’ll see… if they want to improve the product make it a spiral notebook.»): la richiesta della spirale e il timore che la rilegatura ceda riguardano il formato fisico, non il contenuto. Il timore poi è una previsione su una copia ricevuta il giorno prima («I got mine yesterday…»), non un difetto osservato. Il cartaceo KDP non prevede comunque la spirale. Tengo solo l'uso che descrive, riportato nella lacuna sopra.",
+    "Elogi della copia fisica, esclusi anche da «da non toccare» perché riguardano la stampa e non il contenuto: «The paper quality is exceptional», «the sturdy binding holds up even with frequent handling» (Stories from the Shopping Cart) e «The notebook is sturdy» (AAA). La stessa recensione di Stories from the Shopping Cart parla di un libro «five year» invece che quadriennale e aggiunge una statistica e un versetto biblico che non dicono nulla sul libro.",
+    "Recensioni senza contenuto analizzabile: «Very nice to work with thank you» (Mark Presley), «Great book» (Geraldine Delissio), «Good product» (wilfredo coriano), «Pratico e utile» (monica giuliani).",
+    "Riepilogo «Customers say», «one customer mentions not having enough pages to record everything»: è una sintesi di Amazon, non la parola di un lettore, parla di una sola persona e nella stessa frase è contraddetta da «several customers noting there's plenty of room for bill lists». Non la dichiaro lacuna: si potrà verificare quando saranno incollate le recensioni da 1 a 3 stelle."
+  ]
+}
