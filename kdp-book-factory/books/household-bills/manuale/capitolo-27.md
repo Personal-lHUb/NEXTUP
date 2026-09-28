@@ -4,7 +4,7 @@ A handover of the bills rarely arrives on a date anyone chose. It tends to show 
 
 The same moment comes for couples. A partner who always handled the bills has a stroke, a long illness or a diagnosis that makes paperwork hard, and the other has to learn the system from the outside. The paperwork is much the same as with a parent. What differs is that you may share some accounts and still be locked out of others.
 
-## Starting with her, not around her
+## Starting with them, not around them
 
 The first task is the one you began your own system with: finding every bill. The difference is that the mail and the accounts belong to someone else, and that person is still in charge of them. Steve could gather Martha's statements while she naps and have a tidy list by dinner. He would also be taking something from her without asking, and he would miss the explanations only she can give.
 
@@ -26,15 +26,15 @@ A power of attorney goes further. It is a legal document in which one person, th
 
 The person signing has to understand what they are agreeing to, which is the strongest reason to raise the subject while things are still going well. Once that window has closed, the route is often a court process, called guardianship or conservatorship depending on the state, which tends to be slower and more expensive. Some government benefits also have their own arrangement. The Social Security Administration, for instance, appoints a representative payee to manage benefits for someone who can't, and a power of attorney does not stand in for that role. An elder law attorney, or a legal aid office if fees are a concern, can tell you what applies where your parent or partner lives.
 
-## Reading her bills with respect
+## Reading their bills with respect
 
 Once you can see the accounts, you may notice things that worry you. Three come up often: payments that were always on time start to slip, the same subscription appears twice, and charges arrive from names you don't recognize. None of these is a verdict on the person. Each is a reason to ask a question, and to ask her first.
 
 Most have ordinary causes. A missed payment may follow a bill whose new envelope looked like advertising. A duplicate subscription often starts with a renewal notice that reads like a new offer and gets paid in good faith.
 
-Take Martha's statements as an example. Steve finds the same gardening magazine charged twice in one season, once by card and once by check, and a $19.99 charge from a name he has never seen. He asks her about both before calling anyone. The magazine was renewed twice after two reminder letters, and one call cancels the extra. The unfamiliar name, Martha remembers, is the one her pharmacy uses on statements.
+In Martha's statements, Steve finds the same gardening magazine charged twice in one season, once by card and once by check, and a $19.99 charge from a name he has never seen. He asks her about both before calling anyone. The magazine was renewed twice after two reminder letters, and one call cancels the extra. The unfamiliar name, Martha remembers, is the one her pharmacy uses on statements.
 
-What matters more than any single item is the pattern over several months. One late fee can happen to anyone. A run of them, alongside unopened mail and charges nobody can explain, may mean the job has become more than she wants to carry alone, and that calls for an unhurried conversation rather than a quiet takeover. Some signs point to someone taking advantage: repeated payments to a person or company she can't describe, or money moving in ways she didn't intend. For a pattern that suggests an older adult is being exploited, every state has an adult protective services program, sometimes under another name, that takes reports.
+What matters more than any single item is the pattern over several months. One late fee can happen to anyone. A run of them, alongside unopened mail and charges nobody can explain, may mean the job has become more than she wants to carry alone, and that calls for an unhurried conversation rather than a quiet takeover. If the change is new or sudden, it may be worth raising with her doctor too, if she agrees. Some signs point to someone taking advantage: repeated payments to a person or company she can't describe, or money moving in ways she didn't intend. For a pattern that suggests an older adult is being exploited, every state has an adult protective services program, sometimes under another name, that takes reports. To find it, check your state's social services website, dial 211, or call the Eldercare Locator, a free federal service, at 1-800-677-1116. If money is leaving her accounts right now, call the bank or card company at once, as in the chapter on fake bills; for theft or immediate danger, call the police.
 
 ## Notes so someone could step in for you
 
@@ -48,4 +48,4 @@ A note nobody knows about helps nobody. Tell one person you trust that it exists
 
 ## This week's step
 
-Write a short note, half a page is plenty, for one person you trust. Say where your bill list is kept, whether in a notebook, a file or your bank's tools, and how they would reach it without you. Leave passwords out and say where access is stored instead. Put the note with your important papers. Then tell that person, on the phone or at the kitchen table, that the note exists and where to find it. If you're helping a parent, sitting down to write hers together is a gentle way to open the conversation.
+Choose one first step to take with your parent, not for them. Ask when they'd like to sit down together with their bills and the last two months of bank statements, and let them pick the day. If that feels too soon, suggest they call the water utility with you to ask about third-party notification, so the next past-due notice reaches you too.
