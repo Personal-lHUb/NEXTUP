@@ -1,6 +1,6 @@
 # Asking for More Time Before the Due Date
 
-A bill that hasn't been missed yet is still an open conversation. Before the due date, your account is usually current: no late fee has been added and no past-due notice has gone out. Many providers have more room for a customer in that position than for one already behind, since working something out early usually costs them less than chasing a payment later. None of this guarantees a yes. It does mean that a call made this week can go very differently from the same call three weeks from now.
+A bill that hasn't been missed yet is still an open conversation. Before the due date, your account is usually current: no late fee has been added and no past-due notice has gone out. Many providers have more room for a customer in that position than for one already behind, since working something out early usually costs them less than chasing a payment later. None of this guarantees a yes. It does mean that a call made this week can go very differently from the same call three weeks from now. If the due date has already passed, see the section on calling after it.
 
 ## Getting ready for the call
 
@@ -32,17 +32,17 @@ A payment arrangement, often called a payment plan, usually spreads an amount yo
 
 A hardship program is usually a set of temporary terms for customers whose circumstances have changed. With credit cards, it may include a lower interest rate, a smaller minimum payment or fees paused for a set number of months; in exchange, the card may be frozen for new purchases or closed. These programs are not always advertised, so asking for one by name can help. Find out how long it lasts, what happens when it ends, and how the account will appear on your credit reports while you're in it.
 
-Take Leon, as a second example. His hours at the warehouse have been cut until September, and the $85 minimum on his credit card is due on the 22nd. He can manage about $40 a month for now. He calls the number on the back of his card and asks, in those words, whether the issuer has a hardship program and what it involves.
+Leon's hours at the warehouse have been cut until September, and the $85 minimum on his credit card is due on the 22nd. He can manage about $40 a month for now. He calls the number on the back of his card and asks, in those words, whether the issuer has a hardship program and what it involves.
 
-### A deferral or a forbearance
+### A deferment or a forbearance
 
-These words mostly come up with loans: car loans, mortgages, student loans. A deferral usually moves one or more payments to later, often to the end of the loan. A forbearance usually lets you pay less, or nothing, for a set period. Some lenders use the two words loosely, or one word for both. With either, interest may keep adding up, and the amount put off has to be repaid somehow; ask whether it comes due in one lump sum, is spread over later payments or is added after the last one. Three skipped payments due together in a single month are a very different thing from three payments tacked onto the end.
+These words mostly come up with loans: car loans, mortgages, student loans. A deferment (some lenders say deferral) usually moves one or more payments to later, often to the end of the loan. A forbearance usually lets you pay less, or nothing, for a set period. Some lenders use the two words loosely, or one word for both. With either, interest may keep adding up, and the amount put off has to be repaid somehow; ask whether it comes due in one lump sum, is spread over later payments or is added after the last one. Three skipped payments due together in a single month are a very different thing from three payments tacked onto the end.
 
 ## Keeping a record of what was agreed
 
 An agreement made over the phone is only as strong as the proof that it was made. Before you hang up, ask for it in writing: an email, a letter or a message in your online account stating the amounts, the dates and what the provider will do in return, such as holding off on late fees. If nothing can be sent right away, ask for a confirmation number and when the written version will arrive.
 
-During the call, write down the date and time, the name or employee ID of the person you spoke with, and what they said. Maria's note, in the example, reads: "June 12, 10:40, rep ID 4471. $100 on the 18th, $114 on July 2, no late fee." If something goes wrong later, that line is worth more than the memory of a friendly conversation. File it with the provider's other billing papers, and add the new dates to your list and calendar so the plan's payments are tracked like any other bill.
+Keep a note of the call as the chapter on the first days after a missed payment describes; Maria's reads: "June 12, 10:40, rep ID 4471. $100 on the 18th, $114 on July 2, no late fee." File it with the provider's other billing papers, and add the new dates to your list and calendar so the plan's payments are tracked like any other bill.
 
 Before the call ends, ask one more question that is easy to forget: what happens if a plan payment is missed? At some providers, a single missed installment cancels the arrangement and the whole remaining balance becomes due. Others will adjust the plan if you call before the installment date. Knowing which rule applies tells you how much room you have, and when to pick up the phone again.
 
@@ -50,13 +50,17 @@ If the bill is rent, the other side of the call may be a landlord rather than a 
 
 ## When the answer is no
 
-A no from the first person who answers is not always the provider's final word. Front-line representatives often work from a short list of what they may offer, and other teams may have more room. Ask whether there is a hardship department or a team that handles payment arrangements. At some companies that team sits inside collections, even for customers who haven't missed a payment, and being transferred there is not a sign that something has gone wrong. If that doesn't help, ask for a supervisor, plainly: "I understand you can't offer this. Is there someone who can look at my account?"
+Front-line representatives often work from a short list of what they may offer, and other teams may have more room. Ask whether there is a hardship department or a team that handles payment arrangements. At some companies that team sits inside collections, even for customers who haven't missed a payment, and being transferred there is not a sign that something has gone wrong. If that doesn't help, ask for a supervisor or call back another day, as the chapter on fee waivers describes.
 
 Leon's first call, in the example, starts with a no: the representative sees no program on his account. He asks for the hardship team, waits on hold, and is told the issuer can lower his payments for six months if he agrees to have the card closed to new purchases. He asks for the terms in writing, asks whether the offer will still stand tomorrow, and takes the evening to decide.
 
-A call can also end with a final no. If it does, ask what the provider can do instead, even if it's less than you asked for. Find out whether there is a written application or an online form, and which documents it needs. Ask whether the answer might change after a certain date, or once part of the balance is paid. You can also call back another day, since a different representative sometimes reads the same policy differently.
+A call can also end with a final no. If it does, ask what the provider can do instead, even if it's less than you asked for. Find out whether there is a written application or an online form, and which documents it needs. Ask whether the answer might change after a certain date, or once part of the balance is paid.
 
-Some providers work the other way and only open certain options once an account is behind. If you hear that, ask exactly what the first days late would bring: which fee, which notice, and when anything would be reported. Then you are deciding with the facts in front of you. Write down a no as carefully as you would a yes: the date, the name and what was said give the next call somewhere to start.
+Some providers work the other way and only open certain options once an account is behind. If you hear that, ask exactly what the first days late would bring: which fee, which notice, and when anything would be reported. Then you are deciding with the facts in front of you. Write down a no as carefully as you would a yes: it gives the next call somewhere to start.
+
+## Calling after the due date
+
+After the date, start from the amount owed today, fees included, and the date the latest notice gives for the next step, such as a shutoff. On the call, ask what payment would stop it, and whether the late fee can be removed once a plan is in place. Then propose two parts: each new bill paid on time, and the past-due balance in installments your calendar can carry. Had Maria called on June 25, she might have offered "$100 today, the rest over my next two bills."
 
 ## This week's step
 
