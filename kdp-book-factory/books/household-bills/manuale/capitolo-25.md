@@ -1,6 +1,6 @@
 # Spotting a Fake Bill Before You Pay It
 
-Your master list tells you which companies you pay, roughly how much, on which day, and how each bill reaches you. That makes it a reference, and a reference is exactly what a fake bill can't survive. People who send fake bills count on most households not knowing offhand who they pay or what they owe. With your list in hand, checking takes a minute. The scams aimed at households come in a few familiar shapes, and each one tries to get you to pay before you look.
+People who send fake bills count on most households not knowing offhand who they pay or what they owe. Your master list tells you which companies you pay, roughly how much, on which day, and how each bill reaches you. That makes it a reference, and a reference is exactly what a fake bill can't survive. With your list in hand, checking takes a minute. The scams aimed at households come in a few familiar shapes, and each one tries to get you to pay before you look.
 
 ## The call that says your power goes off in an hour
 
@@ -16,7 +16,7 @@ What Lynn can do is simple. She can say she will call the company back, hang up,
 
 ## Invoices for things you never ordered
 
-Not every fake bill arrives with a threat. Some come quietly, looking dull and official, and rely on being paid along with everything else in the pile. Take, as an example, a letter that reaches Arturo, who pays the bills for his household. It is headed "Renewal Notice" and shows an account number, a due date and $189 for another year of a home warranty plan, but when he checks his list there is no home warranty on it, and there never has been. The letter is a sales offer dressed up as a bill, sometimes with a line in small print admitting as much.
+Not every fake bill arrives with a threat. Some come quietly, looking dull and official, and rely on being paid along with everything else in the pile. Arturo, who pays the bills for his household, opens a letter headed "Renewal Notice." It shows an account number, a due date and $189 for another year of a home warranty plan, but when he checks his list there is no home warranty on it, and there never has been. The letter is a sales offer dressed up as a bill, sometimes with a line in small print admitting as much.
 
 A close cousin is the notice for something you already pay somewhere else. A letter or email says a service is about to lapse, whether it's a magazine subscription, antivirus software or a roadside assistance plan, and invites you to renew through this sender. You may really have the service, but the sender is not the company you pay. Paying the notice means paying twice: once to your actual provider and once to someone who may deliver nothing at all.
 
@@ -46,9 +46,9 @@ Sometimes you'll learn the message was real. That's fine. You can pay it through
 
 These scams are run by people who do this all day, and they catch careful, organized people too. If you paid or gave out information, you did nothing shameful; you were targeted. What matters now is speed.
 
-Start with your own bank or the company that issued your card. Call the number on the back of the card or on your statement, explain what happened, and ask what can be done: stopping a payment that hasn't gone through yet, disputing a card charge, or replacing the card. Whether money can be recovered depends on how it was sent and how quickly it's reported, and sometimes it can't be. For gift cards, contact the company that issued the card using the number printed on it, and keep the card and the receipt. If you shared a password, change it right away through the provider's real site, and anywhere else you used the same one.
+Start with your own bank or the company that issued your card. Call the number on the back of the card or on your statement, explain what happened, and ask what can be done: stopping a payment that hasn't gone through yet, disputing a card charge, or replacing the card. Whether money can be recovered depends on how it was sent and how quickly it's reported, and sometimes it can't be. For gift cards, contact the company that issued the card using the number printed on it, and keep the card and the receipt. If you shared a password, change it right away through the provider's real site, and anywhere else you used the same one. If you gave out your Social Security number or other details that could be used to open credit in your name, the Federal Trade Commission's identity theft site, IdentityTheft.gov, lays out the next steps, including fraud alerts and credit freezes.
 
-Then report it. The Federal Trade Commission collects reports of fraud and scams, and your state attorney general's office handles consumer complaints. Your local police can take a report too, which a bank may ask for. Let the real provider know as well, so they can flag your account. While it's fresh, write down the dates, the amounts, the number that called and what was said; each call goes faster with notes in hand.
+Then report it. The Federal Trade Commission collects reports of fraud and scams, and your state attorney general's office, or in some states a separate consumer protection agency, handles complaints. Your local police can take a report too, which a bank may ask for. Let the real provider know as well, so they can flag your account. While it's fresh, write down the dates, the amounts, the number that called and what was said; each call goes faster with notes in hand.
 
 ## This week's step
 
