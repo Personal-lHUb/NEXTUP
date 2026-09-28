@@ -25,7 +25,9 @@ rimossa da KDP, e il libro con lei.
 
 from __future__ import annotations
 
-from . import coverart, coverdesign, kdpspecs
+import math
+
+from . import coverart, coverdesign, coverimage, kdpspecs
 from .models import BookSpec
 
 #: quanto deve essere larga l'immagine della sola prima, a 300 DPI
@@ -71,6 +73,12 @@ RAPPRESENTAZIONE: dict[str, str] = {
         "Show the person, the situation or the one object that stands for the "
         "change. Not an abstract sunrise: the concrete thing the reader is stuck on."
     ),
+    "casa-finanze": (
+        "Show the household situation the book is about: a real home and the "
+        "moment of dealing with the bills — a kitchen table in the evening, a few "
+        "envelopes, a lamp — not an office, a chart or a pile of coins. Paper stays "
+        "blank: a calendar or a bill with readable dates and amounts is text."
+    ),
     "business": (
         "Show the professional world of the book: the setting, the person, the "
         "object or the mechanism the argument turns on."
@@ -109,6 +117,7 @@ STILE: dict[str, str] = {
     "planner": "Premium graphic design or clean minimalist.",
     "journal": "Premium editorial or sophisticated photography.",
     "self-help": "Premium editorial or bold typography with one strong object.",
+    "casa-finanze": "Warm editorial illustration or natural-light photography of a real home.",
     "business": "Premium graphic design or sophisticated photography.",
     "cucina": "Sophisticated photography — food sells on appetite.",
     "viaggi": "Cinematic or sophisticated photography.",
@@ -132,6 +141,9 @@ SPIE_CATEGORIA: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("viaggi", ("travel", "viagg", "guidebook")),
     ("bambini", ("children", "juvenile", "kids", "bambin", "ragazz", "picture book")),
     ("romance", ("romance", "rosa")),
+    # Prima di «business»: un libro sulle bollette di casa parla di soldi, ma la
+    # sua immagine è una cucina, non un ufficio (rodaggio household-bills).
+    ("casa-finanze", ("personal finance", "household", "budgeting", "bollette", "finanze di casa")),
     ("business", ("business", "money", "finance", "marketing", "career", "economia")),
     ("self-help", ("self-help", "self help", "psycholog", "crescita personale",
                    "spiritual", "new age", "mind & spirit", "hypnosis", "benessere")),
@@ -183,6 +195,11 @@ def brief(
     palette = coverdesign.pick_palette(spec, genre)
 
     trim_w, trim_h = kdpspecs.trim_size_in(spec.trim)
+    # I pixel si chiedono sull'area che il motore ritaglia davvero — la prima
+    # con la sua abbondanza —, non sul formato rifilato: 1800 x 2700 px su un
+    # 6x9 uscivano a 291 DPI e davano l'avviso (rodaggio household-bills).
+    panel_w, panel_h = coverimage.front_panel_size_in(spec.trim)
+    px_w, px_h = math.ceil(panel_w * FRONT_DPI), math.ceil(panel_h * FRONT_DPI)
     cover_w, cover_h = kdpspecs.cover_size_in(spec.trim, pages, spec.paper)
     spine = kdpspecs.spine_width_in(pages, spec.paper)
     medium = copy.is_medium
@@ -368,7 +385,7 @@ These numbers are the shape it will be printed at: make the illustration for
 that shape, not the wrap itself.
 
 - Trim size: {spec.trim} in ({trim_w}" x {trim_h}"), {pages} pages, {spec.paper} paper.
-- Front cover alone, at {FRONT_DPI} DPI: {round(trim_w * FRONT_DPI)} x {round(trim_h * FRONT_DPI)} px.
+- Front cover with its bleed ({panel_w:.3f}" x {panel_h:.3f}"), at {FRONT_DPI} DPI: {px_w} x {px_h} px.
 - Full wrap: ONE continuous image, BACK + SPINE + FRONT, {cover_w:.3f}" x {cover_h:.3f}",
   including a {kdpspecs.BLEED_IN}" bleed on every side, with a {spine:.3f}" spine.
   These are the numbers from the page count above; if the page count changes, they
@@ -399,7 +416,7 @@ barcode there, over whatever is underneath.
 ## The file to deliver
 
 - ONE image: the FRONT illustration only, portrait, at least
-  {round(trim_w * FRONT_DPI)} x {round(trim_h * FRONT_DPI)} px, RGB, PNG or high-quality JPEG.
+  {px_w} x {px_h} px, RGB, PNG or high-quality JPEG.
   More pixels are fine; fewer are not.
 - Let the artwork run to every edge: the engine crops it to the trim with its
   bleed, so keep anything important at least {coverdesign.SAFE_MARGIN_IN}" inside.

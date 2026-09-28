@@ -5,6 +5,7 @@ che di una copertina si possono misurare — e che sono anche quelle che
 decidono se in miniatura il libro si vede o no.
 """
 
+import math
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,6 +17,7 @@ from kdpfactory import (
     coverart,
     coverbrief,
     coverdesign,
+    coverimage,
     figure,
     imagebrief,
     kdpspecs,
@@ -715,6 +717,32 @@ class TestBriefDiCopertina(unittest.TestCase):
         enigmi = coverbrief.brief(demo_spec(), pages=140, genre="enigmi")
         self.assertIn("Show the puzzles", enigmi)
 
+    def test_le_bollette_di_casa_non_sono_un_ufficio(self):
+        """Un libro sulle bollette parla di soldi, ma la sua immagine è una cucina.
+
+        Nel rodaggio «money» e «finance» mandavano il brief sulla voce business
+        («Show the professional world of the book»), cioè verso un ufficio.
+        """
+        casa = self.brief(metadata={"categories": [
+            "Books > Business & Money > Personal Finance > Budgeting & Money Management"]})
+        self.assertIn("Show the household situation", casa)
+        self.assertNotIn("professional world", casa)
+        impresa = self.brief(metadata={"categories": ["Books > Business & Money > Marketing"]})
+        self.assertIn("professional world", impresa)
+
+    def test_i_pixel_chiesti_sono_quelli_che_il_motore_ritaglia(self):
+        """Il motore ritaglia la prima con la sua abbondanza, non il formato rifilato.
+
+        Il brief chiedeva 1800 x 2700 px per un 6x9: l'immagine usciva a 291 DPI
+        e il controllo qualità dava l'avviso.
+        """
+        testo = self.brief(trim="6x9")
+        larghezza, altezza = coverimage.front_panel_size_in("6x9")
+        attesi = f"{math.ceil(larghezza * 300)} x {math.ceil(altezza * 300)} px"
+        self.assertEqual(attesi, "1838 x 2775 px")
+        self.assertIn(attesi, testo)
+        self.assertNotIn("1800 x 2700 px", testo)
+
     def test_una_categoria_sconosciuta_non_resta_senza_indicazione(self):
         testo = self.brief(metadata={"categories": ["Books > Qualcosa Di Ignoto"]})
         self.assertIn("Show the concrete subject of the book", testo)
@@ -772,7 +800,7 @@ class TestBriefDiCopertina(unittest.TestCase):
     def test_porta_le_misure_di_stampa_del_libro(self):
         testo = self.brief(trim="6x9", paper="cream", pages=200)
         larghezza, altezza = kdpspecs.cover_size_in("6x9", 200, "cream")
-        self.assertIn("1800 x 2700 px", testo)              # la sola prima, a 300 DPI
+        self.assertIn("1838 x 2775 px", testo)              # la prima con l'abbondanza, a 300 DPI
         self.assertIn(f"{larghezza:.3f}\" x {altezza:.3f}\"", testo)
 
     def test_vieta_di_imitare_e_di_inventare_riconoscimenti(self):
