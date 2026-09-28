@@ -1,6 +1,6 @@
 # A Safe Spot for Notices, Statements and Logins
 
-Your master list now has a home. It stays accurate only if what feeds it keeps arriving where you can find it. A bill buried in a pile of catalogs, a renewal notice sent to an email address nobody opens, a text about a new due date lost under a dozen others: each is a gap between what is happening and what your list shows. Closing those gaps takes fewer places to look, not more attention.
+Where did your last bill first reach you, and how long did it sit there before you saw it? Your list stays accurate only if what feeds it keeps arriving where you can find it. A bill buried in a pile of catalogs, a renewal notice sent to an email address nobody opens, a text about a new due date lost under a dozen others: each is a gap between what is happening and what your list shows. Closing those gaps takes fewer places to look, not more attention.
 
 Take, as an example, Carla, who keeps her master list in a spreadsheet and updates it faithfully. Her water bill comes by mail, her phone bill by email, and her car insurance through an online account that texts her when a document is ready. Each arrives somewhere different, and the spreadsheet knows only what Carla carries to it. The list is sound. What fails is the path in.
 
@@ -18,9 +18,9 @@ Some households open a separate email address used only for bills. It keeps bill
 
 ## Making sure every notice can reach you
 
-The best routing does nothing if the provider is sending to the wrong place. People move, change phone numbers, stop using an old email account or lose a work address when they change jobs. The provider rarely finds out unless someone tells it, and from its side the notice went out as usual.
+The best routing does nothing if the provider is sending to the wrong place. People move, change phone numbers, stop using an old email account or lose a work address when they change jobs. The provider may not find out unless someone tells it. A postal change of address catches some paper mail for a while, but not email or phone numbers, and from the provider's side the notice went out as usual.
 
-Here is an example. Devon took out his renters insurance years ago using an email address he has since abandoned; everything else moved to his new address, but the policy never did. The renewal notice, with a higher price for the coming year, went to the old address. He found out when a larger payment than usual left his checking account. Nothing was hidden from him. The message simply went where he no longer looked.
+Devon took out his renters insurance years ago using an email address he has since abandoned; everything else moved to his new address, but the policy never did. The renewal notice, with a higher price for the coming year, went to the old address. He found out when a larger payment than usual left his checking account. Nothing was hidden from him. The message simply went where he no longer looked.
 
 For each provider on your master list, confirm three details: the mailing address, email address and phone number on file. Most online accounts show them on a profile or settings page; otherwise, call the customer service number on a recent bill. Check again after any move or change of number, since that is when these details go stale.
 
@@ -62,4 +62,4 @@ Some records deserve a second look before they go. Statements that back up somet
 
 ## This week's step
 
-This week, set up the two destinations. Pick the spot for paper mail, put a tray or basket there, and tell everyone who brings in the mail where it goes. Then create a billing folder in the email account you read most often and add a rule for each provider on your master list. Finally, work down the list and check the mailing address, email and phone number each provider has on file, correcting any that point to an old home, an old number or an inbox you no longer open. You don't need to finish every account in one sitting. Start with the bills you pay by hand, which rely most on a notice reaching you.
+This week, pick the spot for paper mail, put a tray or basket there, and tell everyone who brings in the mail where it goes. That is the whole step. The rest is optional and can wait for other evenings: a billing folder in the email account you read most often, with a rule for each provider on your master list, and a check of the mailing address, email and phone number each provider has on file, correcting any that point to an old home, an old number or an inbox you no longer open. If you get to that check, start with the bills you pay by hand, which rely most on a notice reaching you.
