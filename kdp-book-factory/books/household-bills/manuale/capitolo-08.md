@@ -16,7 +16,7 @@ A spreadsheet is a grid on a computer or phone where each row can hold one bill 
 
 Take, as an example, Mia, who works rotating shifts at a hospital and keeps track of twenty-two recurring bills for her household. On the first of the month she sorts the list by due date; when she wants to see where the money goes, she sorts it by amount. A new subscription takes her a few seconds to add, and it falls into the right place the next time she sorts.
 
-The weak points are two. A spreadsheet is as silent as a notebook: it helps only when you open it, and a file buried in a folder is easier to forget than a notebook on the counter. It also needs a backup. If the file lives on one laptop and that laptop fails or is stolen, the list goes with it, so a copy kept somewhere else, on a second drive or in an online storage account, protects months of work. And some people in your home may find a spreadsheet harder to follow than a page of handwriting, which matters if they ever need to step in.
+The weak points are three. A spreadsheet is as silent as a notebook: it helps only when you open it, and a file buried in a folder is easier to forget than a notebook on the counter. It also needs a backup. If the file lives on one laptop and that laptop fails or is stolen, the list goes with it, so a copy kept somewhere else, on a second drive or in an online storage account, protects months of work. And some people in your home may find a spreadsheet harder to follow than a page of handwriting, which matters if they ever need to step in.
 
 ## What your bank's tools offer
 
@@ -24,7 +24,7 @@ Many banks and credit unions build bill tools into their website or app, and wha
 
 The appeal is that the payment and the record sit in the same place. A bill paid through bill pay is recorded the moment it goes out, without you writing anything down. Alerts add something paper and a spreadsheet can't do on their own: they reach you when you aren't looking.
 
-The limit is just as built in: your bank sees only its own accounts. A credit card from another bank, a loan payment drawn from an account somewhere else, a bill paid in cash or by money order, an autopay you set up on the provider's own website: none of these appear in its list of scheduled payments. There is a quieter gap as well. The list shows what is scheduled, not what is owed. A bill you never set up simply isn't there, so the screen can tell you what is paid and what is coming, but not what is missing.
+The limit is just as built in: your bank's bill tools see only the payments that run through that bank. A credit card from another bank, a loan payment drawn from an account somewhere else, a bill paid in cash or by money order, an autopay you set up on the provider's own website: none of these appear in its list of scheduled payments. There is a quieter gap as well. The list shows what is scheduled, not what is owed. A bill you never set up simply isn't there, so the screen can tell you what is paid and what is coming, but not what is missing.
 
 ## Setting up the home so the month shows at a glance
 
@@ -42,7 +42,7 @@ With a bank's tools, the list of scheduled payments does part of the layout for 
 
 Once more than one tool is involved, it is tempting to let each keep its own version of the truth. The bank shows three payments, the card's website shows its autopay, the notebook holds the rest, and a bill slips through the gap between them because each place looked complete on its own. The way out is to name one home as the master. Everything else becomes a feeder: it can pay bills, send alerts and show you what happened, but a bill's status is settled only when it is marked in the master.
 
-Here is how that might look for Mia. Her spreadsheet is the master. Her bank's bill pay sends the electricity and phone payments, and her credit card, from a different bank, is paid by an autopay set up on the card's website. When an alert tells her the electricity payment went out, she types paid in that cell, and she does the same when the card payment clears. If the bank and the spreadsheet ever disagree, she works out which one is right before she marks anything, so the answer always ends up in the master.
+Here is how that might look for Mia. Her spreadsheet is the master. Her bank's bill pay sends the electricity and phone payments, and her credit card, from a different bank, is paid by an autopay set up on the card's website. When an alert tells her the electricity payment went out, she types sent in that cell, a mark the chapter on the weekly check explains, and changes it to paid once the payment has cleared. She marks the card payment paid when it clears, too. If the bank and the spreadsheet ever disagree, she works out which one is right before she marks anything, so the answer always ends up in the master.
 
 Howard works the same way on paper. His bank texts him when a check clears, and he writes the date in his notebook that evening. The text is handy, but the notebook is where he would look if someone asked whether the gas bill was paid.
 
@@ -50,6 +50,6 @@ Howard works the same way on paper. His bank texts him when a check clears, and 
 
 Choose your home this week. If you are unsure, the one closest to how you already handle bills is often the easiest to keep: a notebook if you pay at the kitchen table with a pen, a spreadsheet if you are at a computer anyway, and the bank's tools as a helper unless every bill truly runs through that bank. You don't need anything special; a plain notebook or a blank spreadsheet file is enough.
 
-Then move your master list into it, with the fixed details written or typed once. Set up this month, and mark each bill. Open your bank and card history to see what has already gone out, and mark those paid. The ones still ahead are due.
+Then move your master list into it, with the fixed details written or typed once. Set up this month, and mark each bill. Open your bank and card history to see what has already cleared, and mark those paid; anything still on its way is sent. The ones still ahead are due.
 
 Any bill whose due date has passed with no payment, or that you expected but haven't seen, gets marked missing. That group is not a verdict on anyone. It is simply the list of what to look into next, and it is now written down in one place.
