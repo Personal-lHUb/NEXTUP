@@ -1,15 +1,16 @@
-# Ricerca web — il sistema (valgono per tutti i libri)
+# Cowork · regole KDP — il sistema (valgono per tutti i libri)
 
-Richieste della fabbrica per Cowork, su dati che la pipeline usa per ogni libro
-e che vengono da Amazon KDP. Le regole comuni sono in `RICERCA-WEB.md`, alla
-radice del repository. Le risposte vanno in `risposte.md`, in questa stessa
-cartella, con la stessa numerazione. I file di configurazione e il codice li
-aggiorna la fabbrica, con i test: Cowork riporta i numeri, non li modifica.
+Richiesta della fabbrica per Cowork, con le regole di `CLAUDE.md` («Regola
+permanente: collaborazione con Cowork via GitHub»). La risposta va in
+`cowork-kdp-risposta.md`, in questa stessa cartella, con la stessa numerazione.
+Sono dati che la pipeline usa per ogni libro e che vengono da Amazon KDP.
+`printing_costs.json` e il codice li aggiorna la fabbrica, con i test: Cowork
+riporta i numeri, non li modifica.
 
 Per ogni punto: il valore trovato, l'URL della pagina KDP e la data della
 verifica. Se la pagina non c'è più o dice un'altra cosa, riportalo.
 
-1. **Costi di stampa del cartaceo** — `config/printing_costs.json`, oggi
+1. **Costi di stampa del cartaceo** — `printing_costs.json`, in questa cartella, oggi
    `"verificato_il": "DA VERIFICARE"`. Il prezzo e la royalty di ogni libro
    dipendono da qui. Nella pagina KDP dei costi di stampa (oggi
    https://kdp.amazon.com/help/topic/G201834340) riporta, per il bianco e nero

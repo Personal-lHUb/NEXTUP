@@ -94,15 +94,26 @@ Per spostare un confine si cambia la tabella delle competenze e si rigenerano
 i file degli agenti (`python3 -m kdpfactory agents --install ../.claude/agents`),
 non si modifica a mano un file in `.claude/agents/`.
 
-## Regola permanente: la ricerca web passa da Cowork
+## Regola permanente: collaborazione con Cowork via GitHub
 
-Il container non raggiunge Amazon né KDP, e gli agenti lavorano senza web.
-Quello che va cercato fuori — dati del concorrente, selettore delle categorie,
-costi di stampa KDP, affermazioni del libro da verificare sulla fonte ufficiale
-prima della stampa — si scrive come richiesta in una cartella `ricerca/`
-(`kdp-book-factory/ricerca/` per il sistema, `books/<slug>/ricerca/` per un
-libro). Cowork risponde in `risposte.md` accanto, e i dati entrano nei file del
-libro solo passando dalla fabbrica. Le regole sono in `RICERCA-WEB.md`.
+Questo container non raggiunge amazon.com, kdp.amazon.com né il computer
+dell'autore. Quello che serve da lì lo fa una sessione **Cowork** (app Claude
+Desktop) che lavora sulla copia locale del repo, aperta in GitHub Desktop.
+Il canale è il branch `claude/dreamy-archimedes-hf8w45`, e lo scambio passa da
+file, non dalla chat:
+
+- **Richiesta a Cowork**: un file `cowork-<argomento>.md` nella cartella del
+  libro a cui serve (es. `books/<slug>/manuale/cowork-amazon.md`), con le
+  istruzioni complete e il formato di risposta. Commit e push.
+- **Risposta di Cowork**: nello stesso posto, `cowork-<argomento>-risposta.md`,
+  con data e ora di ogni verifica. Cowork committa in locale, l'autore fa push
+  da GitHub Desktop.
+- A inizio sessione: `git pull` e cerca risposte nuove con
+  `git ls-files '*cowork-*-risposta.md'`.
+- Cowork non modifica codice, `book.json`, manoscritto né agenti: scrive solo i
+  file di risposta. Applicare i risultati resta compito di questa sessione.
+- Le cartelle dove serve una ricerca web, e che cosa cercare in ciascuna, sono
+  elencate in `RICERCA-WEB.md`, alla radice del repo.
 
 ## Le due categorie di prodotto
 
