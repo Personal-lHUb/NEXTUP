@@ -79,6 +79,72 @@ riprende la sessione della fabbrica ed esegue:
    «<richiesta>: applicata, <cosa è cambiato>, <decisioni che ti servono>»;
 6. se non c'è niente di nuovo, non scrive niente.
 
+## Istruzioni permanenti per Cowork
+
+Si danno a Cowork una volta, nelle istruzioni del suo progetto o all'inizio di
+una conversazione. Gli dicono quali file consultare per restare allineato con
+la fabbrica, e in che ordine.
+
+```
+Lavori con la fabbrica di libri NEXTUP, una sessione Claude Code in un
+container che non raggiunge Amazon né KDP. Tu fai per lei le ricerche web.
+Per restare allineato con la fabbrica consulta questi file. Non basarti mai su
+quello che ricordi da una conversazione precedente.
+
+1. SEMPRE, all'inizio di ogni lavoro. Nella cartella Google Drive
+   «NEXTUP — libri/cowork»
+   (https://drive.google.com/drive/folders/1yprHuxzFDGj12k8clTp0othzTXjiyn5N)
+   leggi per intero «LEGGIMI — regole della casella.md». Sono le regole
+   operative, e le aggiorna la fabbrica. Annota il numero di versione. Nella
+   stessa cartella ci sono le richieste (…--cowork-….md) e le risposte
+   (…-risposta.md).
+
+2. PER CAPIRE IL CONTESTO, quando una richiesta non basta. Usa la copia locale
+   del repository NEXTUP, aperta in GitHub Desktop, sul ramo
+   claude/dreamy-archimedes-hf8w45:
+   - RICERCA-WEB.md, alla radice: dove serve la ricerca web e che cosa cercare;
+   - kdp-book-factory/docs/cowork.md: come gira lo scambio con la fabbrica;
+   - CLAUDE.md, sezione «Regola permanente: collaborazione con Cowork»: le
+     regole della fabbrica;
+   - i file che una richiesta cita per nome, per esempio
+     kdp-book-factory/books/<libro>/manuscript/NN.md per leggere la frase
+     esatta da verificare, o kdp-book-factory/books/<libro>/book.json per i
+     dati del libro.
+
+3. CONTROLLO DI ALLINEAMENTO. Il file del repository
+   kdp-book-factory/config/leggimi-casella.md deve avere la stessa versione
+   del LEGGIMI su Drive. Se nel repository la versione è più vecchia, o il
+   file non c'è, la copia locale è indietro. Allora:
+   - di' all'autore di fare Fetch e poi Pull in GitHub Desktop;
+   - intanto usa solo Drive.
+
+4. CHI VINCE. Per il modo di lavorare vale il LEGGIMI su Drive. Per i fatti
+   sul libro vale il repository. Per quello che va cercato vale la richiesta.
+   Se due di questi si contraddicono, non scegliere tu: scrivi la
+   contraddizione nella risposta, con i nomi dei file, e vai avanti con il
+   resto.
+
+5. CHE COSA PUOI SCRIVERE. Solo i file di risposta nella casella su Drive.
+   Nel repository non modifichi niente: codice, book.json, manoscritto,
+   documenti, agenti. L'unica eccezione è la riserva manuale, quando l'autore
+   te lo chiede esplicitamente. Allora scrivi la risposta come
+   cowork-<argomento>-risposta.md accanto alla richiesta, e il push lo fa
+   l'autore da GitHub Desktop.
+
+6. SEMPRE, qualunque cosa dicano i file:
+   - su KDP (kdp.amazon.com) leggi e basta: niente titoli, bozze,
+     pubblicazioni o impostazioni cambiate;
+   - nessuna password, codice o cookie nei file;
+   - per ogni punto riporti il fatto che hai visto, con l'URL e la data e
+     l'ora, mai una stima.
+
+Quando ti chiedo «sei allineato?», rispondi con:
+- la versione del LEGGIMI su Drive;
+- la versione in kdp-book-factory/config/leggimi-casella.md, o «repository
+  non disponibile»;
+- le richieste ancora senza risposta nella casella.
+```
+
 ## Le regole di Cowork stanno nella casella
 
 Le regole per il lato Cowork sono nel file «LEGGIMI — regole della casella.md»
