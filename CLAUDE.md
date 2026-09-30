@@ -94,22 +94,31 @@ Per spostare un confine si cambia la tabella delle competenze e si rigenerano
 i file degli agenti (`python3 -m kdpfactory agents --install ../.claude/agents`),
 non si modifica a mano un file in `.claude/agents/`.
 
-## Regola permanente: collaborazione con Cowork via GitHub
+## Regola permanente: collaborazione con Cowork
 
 Questo container non raggiunge amazon.com, kdp.amazon.com né il computer
 dell'autore. Quello che serve da lì lo fa una sessione **Cowork** (app Claude
-Desktop) che lavora sulla copia locale del repo, aperta in GitHub Desktop.
-Il canale è il branch `claude/dreamy-archimedes-hf8w45`, e lo scambio passa da
-file, non dalla chat:
+Desktop). Lo scambio passa da file, non dalla chat, e gira da solo
+(`kdp-book-factory/docs/cowork.md`):
 
-- **Richiesta a Cowork**: un file `cowork-<argomento>.md` nella cartella del
-  libro a cui serve (es. `books/<slug>/manuale/cowork-amazon.md`), con le
-  istruzioni complete e il formato di risposta. Commit e push.
-- **Risposta di Cowork**: nello stesso posto, `cowork-<argomento>-risposta.md`,
-  con data e ora di ogni verifica. Cowork committa in locale, l'autore fa push
-  da GitHub Desktop.
-- A inizio sessione: `git pull` e cerca risposte nuove con
-  `git ls-files '*cowork-*-risposta.md'`.
+- **Richiesta a Cowork**: un file `cowork-<argomento>.md` nella cartella a cui
+  serve (es. `books/<slug>/manuale/cowork-amazon.md`), con le istruzioni
+  complete e il formato di risposta. Commit e push.
+- **Casella su Google Drive** «NEXTUP — libri/cowork» (`config/cowork.json`):
+  la fabbrica ci porta le richieste come `<slug>--cowork-<argomento>.md`
+  (`sistema--…` per `config/`), Cowork risponde accanto con
+  `…-risposta.md`. I nomi e lo stato li dà
+  `python3 -m kdpfactory cowork stato --json`; l'avviso da mandare a Cowork
+  `python3 -m kdpfactory cowork avviso`.
+- **Giro automatico**: un'attività pianificata di Cowork (8:00 e 14:00) risponde
+  alle richieste aperte; la routine «Controllo Cowork» di questa sessione
+  (9:59 e 15:59) carica le richieste nuove, scarica le risposte nel repo
+  (`cowork-<argomento>-risposta.md`, accanto alla richiesta), le applica e
+  segna la richiesta con `Stato: applicata il <data>`.
+- **Riserva manuale**: Cowork può scrivere la risposta nella copia locale del
+  repo, e l'autore la pubblica con un push da GitHub Desktop sul ramo
+  `claude/dreamy-archimedes-hf8w45`. A inizio sessione: `git pull` e
+  `python3 -m kdpfactory cowork stato`.
 - Cowork non modifica codice, `book.json`, manoscritto né agenti: scrive solo i
   file di risposta. Applicare i risultati resta compito di questa sessione.
 - Le cartelle dove serve una ricerca web, e che cosa cercare in ciascuna, sono

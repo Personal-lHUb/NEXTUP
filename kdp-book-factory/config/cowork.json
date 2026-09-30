@@ -1,0 +1,6 @@
+{
+  "_nota": "La casella su Google Drive dove la fabbrica mette le richieste a Cowork e Cowork scrive le risposte. I nomi dei file li calcola `python3 -m kdpfactory cowork stato --json`.",
+  "cartella": "NEXTUP — libri/cowork",
+  "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N",
+  "cartella_url": "https://drive.google.com/drive/folders/1yprHuxzFDGj12k8clTp0othzTXjiyn5N"
+}

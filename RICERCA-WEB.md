@@ -6,11 +6,11 @@ fact-checker, per esempio, giudica le affermazioni del libro in base a quello
 che sa già. Qui sotto sono elencate le cartelle dove serve una ricerca web.
 La fa Cowork, sul computer dell'autore.
 
-Lo scambio segue la regola di `CLAUDE.md`, «collaborazione con Cowork via
-GitHub»:
+Lo scambio segue la regola di `CLAUDE.md`, «collaborazione con Cowork»:
 - la richiesta è in `cowork-<argomento>.md`;
-- la risposta va in `cowork-<argomento>-risposta.md`, nella stessa cartella;
-- il ramo è `claude/dreamy-archimedes-hf8w45`;
+- la risposta va in `cowork-<argomento>-risposta.md`;
+- il passaggio si fa dalla casella Google Drive «NEXTUP — libri/cowork», in
+  automatico (`kdp-book-factory/docs/cowork.md`);
 - Cowork scrive solo i file di risposta.
 
 ## Le cartelle dove serve il web

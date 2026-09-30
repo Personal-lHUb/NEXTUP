@@ -1,8 +1,8 @@
 # Cowork · regole KDP — il sistema (valgono per tutti i libri)
 
 Richiesta della fabbrica per Cowork, con le regole di `CLAUDE.md` («Regola
-permanente: collaborazione con Cowork via GitHub»). La risposta va in
-`cowork-kdp-risposta.md`, in questa stessa cartella, con la stessa numerazione.
+permanente: collaborazione con Cowork via GitHub»). La risposta va in `cowork-kdp-risposta.md` accanto a questo file — nella casella
+Drive «NEXTUP — libri/cowork» si chiama `sistema--cowork-kdp-risposta.md` — con la stessa numerazione.
 Sono dati che la pipeline usa per ogni libro e che vengono da Amazon KDP.
 `printing_costs.json` e il codice li aggiorna la fabbrica, con i test: Cowork
 riporta i numeri, non li modifica.

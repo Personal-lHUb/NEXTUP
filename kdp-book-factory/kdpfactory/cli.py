@@ -18,6 +18,7 @@ from . import (
     backup,
     coverbrief,
     coverdesign,
+    cowork,
     diagnostica,
     imagebrief,
     kdpspecs,
@@ -949,6 +950,21 @@ def cmd_list(args) -> int:
     return 0
 
 
+def cmd_cowork(args) -> int:
+    """Il canale con Cowork: stato delle richieste di ricerca web, e l'avviso da mandargli."""
+    radice = Path(__file__).resolve().parent.parent
+    elenco = cowork.richieste(radice)
+    if args.azione == "avviso":
+        casella = cowork.configurazione(radice).get("cartella", "NEXTUP — libri/cowork")
+        print(cowork.avviso(elenco, casella), end="")
+    elif args.json:
+        dati = {"casella": cowork.configurazione(radice), "richieste": [r.to_dict() for r in elenco]}
+        print(json.dumps(dati, ensure_ascii=False, indent=2))
+    else:
+        print(cowork.rapporto(elenco), end="")
+    return 0
+
+
 def cmd_diagnostica(args) -> int:
     """I fatti su cui lavora il team di miglioramento. Nessuna chiamata API."""
     root = books_dir(args)
@@ -1222,6 +1238,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="misura anche i banchi di prova (collaudo): normalmente restano fuori",
     )
     p.set_defaults(func=cmd_diagnostica)
+
+    p = sub.add_parser(
+        "cowork",
+        help="richieste di ricerca web a Cowork: stato, e l'avviso da mandargli",
+    )
+    p.add_argument("azione", nargs="?", default="stato", choices=["stato", "avviso"])
+    p.add_argument("--json", action="store_true", help="stato completo in JSON, con i nomi su Drive")
+    p.set_defaults(func=cmd_cowork)
 
     p = sub.add_parser("specs", help="specifiche KDP per formato e pagine")
     p.add_argument("--pages", type=int, default=140)

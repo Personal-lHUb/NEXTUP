@@ -1,8 +1,8 @@
 # Cowork · fonti ufficiali — Bills in Order (household-bills)
 
 Richiesta della fabbrica per Cowork, con le regole di `CLAUDE.md` («Regola
-permanente: collaborazione con Cowork via GitHub»). La risposta va in
-`cowork-fonti-risposta.md`, in questa stessa cartella, con la stessa
+permanente: collaborazione con Cowork via GitHub»). La risposta va in `cowork-fonti-risposta.md` accanto a questo file — nella casella
+Drive «NEXTUP — libri/cowork» si chiama `household-bills--cowork-fonti-risposta.md` — con la stessa
 numerazione.
 
 Il fact-checker della fabbrica lavora senza accesso al web: queste affermazioni
