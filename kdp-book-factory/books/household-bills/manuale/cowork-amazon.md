@@ -1,8 +1,8 @@
 # Cowork · Amazon e KDP — Bills in Order (household-bills)
 
-Richiesta della fabbrica per Cowork, con le regole di `CLAUDE.md` («Regola
-permanente: collaborazione con Cowork via GitHub»). La risposta va in `cowork-amazon-risposta.md` accanto a questo file — nella casella
-Drive «NEXTUP — libri/cowork» si chiama `household-bills--cowork-amazon-risposta.md` — con la stessa
+Richiesta della fabbrica per Cowork, con le regole di
+`kdp-book-factory/config/leggimi-cowork.md`. La risposta va in `cowork-amazon-risposta.md`,
+accanto a questo file, sul ramo `claude/dreamy-archimedes-hf8w45`, con la stessa
 numerazione. Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
 Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
 scrivilo invece di stimare.

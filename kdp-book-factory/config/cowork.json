@@ -1,9 +1,13 @@
 {
-  "_nota": "La casella su Google Drive dove la fabbrica mette le richieste a Cowork e Cowork scrive le risposte. I nomi dei file li calcola `python3 -m kdpfactory cowork stato --json`.",
-  "cartella": "NEXTUP — libri/cowork",
-  "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N",
-  "cartella_url": "https://drive.google.com/drive/folders/1yprHuxzFDGj12k8clTp0othzTXjiyn5N",
-  "leggimi": "LEGGIMI — regole della casella.md",
-  "leggimi_id": "1IcRrdzpcppu26cCHcUCMPAGN8B9jJOgs",
-  "leggimi_versione": 1
+  "_nota": "Il canale con Cowork: il repository GitHub, sul ramo qui sotto. La fabbrica fa commit e push delle richieste cowork-<argomento>.md, Cowork fa il commit delle risposte cowork-<argomento>-risposta.md accanto. Lo stato lo dà `python3 -m kdpfactory cowork stato`.",
+  "canale": "github",
+  "repository": "Personal-lHUb/NEXTUP",
+  "ramo": "claude/dreamy-archimedes-hf8w45",
+  "leggimi": "kdp-book-factory/config/leggimi-cowork.md",
+  "leggimi_versione": 2,
+  "drive_dismessa": {
+    "_nota": "La casella su Google Drive usata fino al 30 settembre 2026. Resta solo un avviso che rimanda qui.",
+    "cartella": "NEXTUP — libri/cowork",
+    "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N"
+  }
 }

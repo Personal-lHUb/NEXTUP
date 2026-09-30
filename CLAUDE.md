@@ -98,47 +98,43 @@ non si modifica a mano un file in `.claude/agents/`.
 
 Questo container non raggiunge amazon.com, kdp.amazon.com né il computer
 dell'autore. Quello che serve da lì lo fa una sessione **Cowork** (app Claude
-Desktop). Lo scambio passa da file, non dalla chat, e gira da solo
-(`kdp-book-factory/docs/cowork.md`):
+Desktop). Lo scambio passa da file nel repository GitHub, non dalla chat
+(`kdp-book-factory/docs/cowork.md`).
 
-- **Richiesta a Cowork**: un file `cowork-<argomento>.md` nella cartella a cui
-  serve (es. `books/<slug>/manuale/cowork-amazon.md`), con le istruzioni
-  complete e il formato di risposta. Commit e push.
-- **Casella su Google Drive** «NEXTUP — libri/cowork» (`config/cowork.json`):
-  la fabbrica ci porta le richieste come `<slug>--cowork-<argomento>.md`
-  (`sistema--…` per `config/`), Cowork risponde accanto con
-  `…-risposta.md`. I nomi e lo stato li dà
-  `python3 -m kdpfactory cowork stato --json`; l'avviso da mandare a Cowork
-  `python3 -m kdpfactory cowork avviso`.
+- **Canale**: repository `Personal-lHUb/NEXTUP`, ramo
+  `claude/dreamy-archimedes-hf8w45` (`config/cowork.json`). La casella su
+  Google Drive è chiusa dal 30 settembre 2026.
+- **Richiesta a Cowork**: `cowork-<argomento>.md` nella cartella a cui serve
+  (es. `books/<slug>/manuale/cowork-amazon.md`), con le istruzioni complete e
+  il formato di risposta. Commit e push nello stesso giro in cui nasce.
+- **Risposta di Cowork**: accanto, `cowork-<argomento>-risposta.md`. La prima
+  riga è `Esito: completa` o `Esito: parziale — punti …`. Cowork ne fa il
+  commit sul ramo del canale; il push lo fa lui se ha accesso diretto a
+  GitHub, altrimenti l'autore da GitHub Desktop.
+- **Stato**: `python3 -m kdpfactory cowork stato`. Dice se una richiesta è
+  inviata, e se è aperta, con risposta arrivata, con risposta superata o
+  applicata. L'avviso da mandare a Cowork: `python3 -m kdpfactory cowork avviso`.
 - **Giro automatico**: l'attività pianificata di Cowork «Cowork — casella
   NEXTUP» (7:52 e 13:52, sul portatile dell'autore: se un giro salta, la
   risposta arriva al giro dopo) risponde alle richieste aperte; la routine
-  «Controllo Cowork» di questa sessione (9:59 e 15:59) carica le richieste
-  nuove, scarica le risposte nel repo (`cowork-<argomento>-risposta.md`,
-  accanto alla richiesta), le applica e segna la richiesta con
-  `Stato: applicata il <data>`.
-- **Regole di ingaggio** (`docs/cowork.md`):
-  - una richiesta nuova si carica nella casella nello stesso giro in cui nasce,
-    non solo nel repo, e si registra con `cowork registra`;
-  - un file «-risposta.md» nella casella è di Cowork: non si modifica mai. Se
-    una risposta è incompleta o bloccata (captcha, accesso), si apre
+  «Controllo Cowork» di questa sessione (9:59 e 15:59) pubblica le richieste
+  da inviare, applica le risposte arrivate e segna la richiesta con
+  `Stato: applicata il <data>`. A inizio sessione: `git pull` e `cowork stato`.
+- **Regole di ingaggio**:
+  - un file `-risposta.md` è di Cowork: non si modifica mai. Se una risposta è
+    incompleta o bloccata (captcha, accesso), si apre
     `cowork-<argomento>-2.md` con i soli punti mancanti;
-  - una richiesta modificata dopo l'invio: la copia vecchia va nel cestino di
-    Drive prima di caricare la nuova, e una risposta già scritta alla vecchia è
-    superata (se c'è, la nuova si carica come `-2`);
+  - una richiesta corretta dopo la risposta rende la risposta superata: la
+    versione corretta va in `-2`;
   - ci si ferma dall'autore solo per le sue decisioni (categoria, titolo,
     promessa, voce narrante, prezzo, pubblicazione) e per l'immagine di
     copertina.
-- **Le regole per Cowork stanno nella casella**, nel file «LEGGIMI — regole
-  della casella.md» (fonte `config/leggimi-casella.md`), che Cowork legge a ogni
-  giro. Per cambiarle si aggiorna il LEGGIMI (nuova versione, copia vecchia nel
-  cestino, id in `config/cowork.json`), non il prompt dell'attività di Cowork.
+- **Le regole per Cowork** stanno in `config/leggimi-cowork.md`, che Cowork
+  legge a ogni giro. Per cambiarle si aggiorna il LEGGIMI (nuova versione,
+  anche in `config/cowork.json`) e si pubblica, senza toccare il prompt di
+  Cowork.
 - **Resoconto**: per ogni risposta applicata, una riga all'autore:
   «<richiesta>: applicata, <cosa è cambiato>, <decisioni che ti servono>».
-- **Riserva manuale**: Cowork può scrivere la risposta nella copia locale del
-  repo, e l'autore la pubblica con un push da GitHub Desktop sul ramo
-  `claude/dreamy-archimedes-hf8w45`. A inizio sessione: `git pull` e
-  `python3 -m kdpfactory cowork stato`.
 - Cowork non modifica codice, `book.json`, manoscritto né agenti: scrive solo i
   file di risposta. Applicare i risultati resta compito di questa sessione.
 - Le cartelle dove serve una ricerca web, e che cosa cercare in ciascuna, sono

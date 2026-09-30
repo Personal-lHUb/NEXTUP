@@ -951,25 +951,19 @@ def cmd_list(args) -> int:
 
 
 def cmd_cowork(args) -> int:
-    """Il canale con Cowork: stato delle richieste di ricerca web, e l'avviso da mandargli."""
+    """Il canale con Cowork su GitHub: stato delle richieste, e l'avviso da mandargli."""
     radice = Path(__file__).resolve().parent.parent
-    if args.azione == "registra":
-        if len(args.argomenti) != 2:
-            print("Uso: cowork registra <percorso della richiesta> <id del file su Drive>")
-            return 2
-        fatta = cowork.registra(radice, args.argomenti[0], args.argomenti[1], date.today().isoformat())
-        print(f"{fatta.nome_drive}: {fatta.casella}")
-        return 0
-    elenco = cowork.richieste(radice)
+    canale = cowork.configurazione(radice)
+    git = cowork.Git(radice, canale.get("ramo", "claude/dreamy-archimedes-hf8w45"))
+    elenco = cowork.richieste(radice, git.remoto, git.ultimo_commit)
     if args.azione == "avviso":
-        casella = cowork.configurazione(radice).get("cartella", "NEXTUP — libri/cowork")
-        fuori = [r.percorso for r in elenco if r.stato == cowork.APERTA and r.casella != cowork.CARICATA]
-        if fuori:
-            # Cowork lavora sulla casella: una richiesta che lì non c'è, o è vecchia, va caricata prima.
-            print("Da caricare nella casella prima dell'avviso: " + ", ".join(fuori), file=sys.stderr)
-        print(cowork.avviso(elenco, casella), end="")
+        da_inviare = [r.percorso for r in elenco if r.stato == cowork.APERTA and r.invio != cowork.INVIATA]
+        if da_inviare:
+            # Cowork legge il ramo remoto: una richiesta non pubblicata lì non c'è, o è vecchia.
+            print("Da inviare prima dell'avviso (commit e push): " + ", ".join(da_inviare), file=sys.stderr)
+        print(cowork.avviso(elenco, canale, git.percorso_repo), end="")
     elif args.json:
-        dati = {"casella": cowork.configurazione(radice), "richieste": [r.to_dict() for r in elenco]}
+        dati = {"canale": canale, "richieste": [r.to_dict() for r in elenco]}
         print(json.dumps(dati, ensure_ascii=False, indent=2))
     else:
         print(cowork.rapporto(elenco), end="")
@@ -1252,14 +1246,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     p = sub.add_parser(
         "cowork",
-        help="richieste di ricerca web a Cowork: stato, e l'avviso da mandargli",
+        help="richieste di ricerca web a Cowork, su GitHub: stato, e l'avviso da mandargli",
     )
-    p.add_argument("azione", nargs="?", default="stato", choices=["stato", "avviso", "registra"])
-    p.add_argument(
-        "argomenti", nargs="*",
-        help="per «registra»: il percorso della richiesta e l'id del file caricato su Drive",
-    )
-    p.add_argument("--json", action="store_true", help="stato completo in JSON, con i nomi su Drive")
+    p.add_argument("azione", nargs="?", default="stato", choices=["stato", "avviso"])
+    p.add_argument("--json", action="store_true", help="stato completo in JSON")
     p.set_defaults(func=cmd_cowork)
 
     p = sub.add_parser("specs", help="specifiche KDP per formato e pagine")
