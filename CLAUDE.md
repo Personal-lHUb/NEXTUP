@@ -94,6 +94,16 @@ Per spostare un confine si cambia la tabella delle competenze e si rigenerano
 i file degli agenti (`python3 -m kdpfactory agents --install ../.claude/agents`),
 non si modifica a mano un file in `.claude/agents/`.
 
+## Regola permanente: la ricerca web passa da Cowork
+
+Il container non raggiunge Amazon né KDP, e gli agenti lavorano senza web.
+Quello che va cercato fuori — dati del concorrente, selettore delle categorie,
+costi di stampa KDP, affermazioni del libro da verificare sulla fonte ufficiale
+prima della stampa — si scrive come richiesta in una cartella `ricerca/`
+(`kdp-book-factory/ricerca/` per il sistema, `books/<slug>/ricerca/` per un
+libro). Cowork risponde in `risposte.md` accanto, e i dati entrano nei file del
+libro solo passando dalla fabbrica. Le regole sono in `RICERCA-WEB.md`.
+
 ## Le due categorie di prodotto
 
 Ogni libro di questo progetto è **medium-content** oppure **full-content**. La
