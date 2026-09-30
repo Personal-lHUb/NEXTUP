@@ -129,6 +129,10 @@ Desktop). Lo scambio passa da file, non dalla chat, e gira da solo
   - ci si ferma dall'autore solo per le sue decisioni (categoria, titolo,
     promessa, voce narrante, prezzo, pubblicazione) e per l'immagine di
     copertina.
+- **Le regole per Cowork stanno nella casella**, nel file «LEGGIMI — regole
+  della casella.md» (fonte `config/leggimi-casella.md`), che Cowork legge a ogni
+  giro. Per cambiarle si aggiorna il LEGGIMI (nuova versione, copia vecchia nel
+  cestino, id in `config/cowork.json`), non il prompt dell'attività di Cowork.
 - **Resoconto**: per ogni risposta applicata, una riga all'autore:
   «<richiesta>: applicata, <cosa è cambiato>, <decisioni che ti servono>».
 - **Riserva manuale**: Cowork può scrivere la risposta nella copia locale del

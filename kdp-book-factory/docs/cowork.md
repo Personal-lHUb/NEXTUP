@@ -42,26 +42,20 @@ errore. Prompt:
 Apri la cartella Google Drive «NEXTUP — libri/cowork»
 (https://drive.google.com/drive/folders/1yprHuxzFDGj12k8clTp0othzTXjiyn5N).
 
-Cerca i file che finiscono in .md e contengono «--cowork-», esclusi quelli che
-finiscono in «-risposta.md». Per ciascuno controlla se nella cartella esiste già
-il file con lo stesso nome e «-risposta» prima di «.md». Se esiste, salta la
-richiesta: è già stata fatta.
+Prima di tutto leggi per intero il file «LEGGIMI — regole della casella.md» in
+quella cartella. Sono le regole della fabbrica, e le tiene aggiornate lei: se
+dicono una cosa diversa da questo prompt, vale il LEGGIMI.
 
-Per ogni richiesta senza risposta:
-1. leggila per intero ed esegui quello che chiede;
-2. scrivi la risposta nella stessa cartella, come file Markdown (.md, non Google
-   Doc), con il nome della richiesta più «-risposta» prima di «.md»
-   (esempio: household-bills--cowork-amazon.md → household-bills--cowork-amazon-risposta.md);
-3. non modificare e non cancellare il file della richiesta.
+Poi cerca le richieste: i file che finiscono in .md e contengono «--cowork-»,
+esclusi quelli che finiscono in «-risposta.md». Salta quelle che hanno già
+accanto il file con lo stesso nome e «-risposta» prima di «.md». Esegui le
+altre e scrivi le risposte come dicono il LEGGIMI e la richiesta stessa: file
+Markdown nella stessa cartella, con la prima riga «Esito: completa» oppure
+«Esito: parziale — punti …: <motivo>».
 
-Regole valide per tutte le richieste:
-- per ogni punto riporta il fatto che hai visto sulla pagina, non una stima, con
-  l'URL e la data e l'ora della verifica;
-- se una pagina chiede un captcha o l'accesso e non riesci ad andare avanti,
-  scrivilo nel punto invece di stimare;
-- su KDP (kdp.amazon.com) leggi e basta: non creare titoli, non salvare bozze,
-  non pubblicare, non cambiare impostazioni;
-- nessuna password, codice o cookie nei file.
+Anche se non riesci a leggere il LEGGIMI, due regole valgono sempre: su KDP
+leggi e basta (niente titoli, bozze, pubblicazioni), e nessuna password,
+codice o cookie nei file.
 
 Se non ci sono richieste senza risposta, fermati senza scrivere niente.
 ```
@@ -84,6 +78,21 @@ riprende la sessione della fabbrica ed esegue:
    richiesta, e scrive all'autore una riga per ogni risposta applicata:
    «<richiesta>: applicata, <cosa è cambiato>, <decisioni che ti servono>»;
 6. se non c'è niente di nuovo, non scrive niente.
+
+## Le regole di Cowork stanno nella casella
+
+Le regole per il lato Cowork sono nel file «LEGGIMI — regole della casella.md»
+della casella. La fonte è `config/leggimi-casella.md`, e l'id su Drive è in
+`config/cowork.json`. Il prompt dell'attività pianificata dice a Cowork di
+leggerlo a ogni giro. Per cambiare una regola di Cowork, quindi, non si tocca
+il prompt:
+
+1. si modifica `config/leggimi-casella.md` e si alza il numero di versione;
+2. la copia vecchia va nel cestino di Drive e si carica quella nuova;
+3. si aggiorna `leggimi_id` in `config/cowork.json`.
+
+Da quel giro Cowork segue la versione nuova. Per sapere quale versione ha
+letto, basta chiederglielo.
 
 ## Regole di ingaggio
 
