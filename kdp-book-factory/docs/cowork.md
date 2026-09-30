@@ -33,8 +33,10 @@ applicata lo stesso giorno.
 
 ### 1. Cowork — attività pianificata (la imposta l'autore, una volta)
 
-In Claude Desktop apri Cowork e crea un'attività pianificata. Orari: ogni giorno
-alle 8:00 e alle 14:00. Prompt:
+In Claude Desktop, in Cowork, c'è l'attività pianificata «Cowork — casella NEXTUP».
+Gira ogni giorno alle 7:52 e alle 13:52, ora di Roma, sul portatile dell'autore, che
+deve essere acceso. Se un giro salta, la risposta arriva al giro dopo: non è un
+errore. Prompt:
 
 ```
 Apri la cartella Google Drive «NEXTUP — libri/cowork»
@@ -71,18 +73,37 @@ riprende la sessione della fabbrica ed esegue:
 
 1. aggiorna il repository dal ramo di lavoro;
 2. `python3 -m kdpfactory cowork stato --json`;
-3. porta nella casella ogni richiesta del repo che lì non c'è ancora;
+3. porta nella casella ogni richiesta che il registro segna «da caricare» e
+   registra il caricamento con `cowork registra <percorso> <id su Drive>`;
+   per quelle «cambiata dopo l'invio» vale la regola qui sotto;
 4. scarica ogni risposta nuova della casella nel percorso indicato da `risposta`,
    con la copia di backup; poi commit e push;
 5. applica le risposte secondo `CLAUDE.md` e le linee guida: i dati nei file
    del libro, le affermazioni smentite all'editor, e ci si ferma per le
    decisioni dell'autore. Poi aggiunge `Stato: applicata il <data>` alla
-   richiesta;
+   richiesta, e scrive all'autore una riga per ogni risposta applicata:
+   «<richiesta>: applicata, <cosa è cambiato>, <decisioni che ti servono>»;
 6. se non c'è niente di nuovo, non scrive niente.
 
-Quando una richiesta cambia dopo essere entrata nella casella, la copia vecchia
-va nel cestino di Drive e si carica quella nuova: una risposta a una domanda
-superata non serve.
+## Regole di ingaggio
+
+- **Una richiesta nuova entra nella casella nello stesso giro in cui nasce**,
+  non solo nel repo, e il caricamento si registra subito
+  (`cowork registra`). `cowork stato` segna «da caricare» quelle che mancano, e
+  `cowork avviso` lo ricorda prima di mandare l'avviso.
+- **Un file «-risposta.md» nella casella è di Cowork**: la fabbrica lo legge e
+  lo scarica, non lo modifica mai. Se una risposta è incompleta o bloccata
+  (captcha, accesso), si apre una richiesta nuova `cowork-<argomento>-2.md`
+  con i soli punti mancanti.
+- **Una richiesta modificata dopo l'invio** (`cowork stato` la segna «cambiata
+  dopo l'invio»): la copia vecchia va nel cestino di Drive prima di caricare la
+  nuova, e una risposta già scritta a quella vecchia è superata. Se la risposta
+  c'è già, la richiesta corretta si carica come `cowork-<argomento>-2.md`: con
+  lo stesso nome, Cowork troverebbe la risposta vecchia e salterebbe quella
+  nuova.
+- **Ci si ferma dall'autore** solo per le sue decisioni (categoria, titolo,
+  promessa, voce narrante, prezzo, pubblicazione) e per l'immagine di
+  copertina.
 
 ## Per aprire una richiesta nuova
 

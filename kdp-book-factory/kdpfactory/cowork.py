@@ -14,6 +14,7 @@ diventano un prefisso (`household-bills--cowork-amazon.md`). A spostare i file
 
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -25,10 +26,13 @@ SISTEMA = "sistema"
 #: riga che la fabbrica aggiunge alla richiesta quando ne ha applicato la risposta
 APPLICATA = "Stato: applicata"
 CONFIG = Path("config") / "cowork.json"
+#: che cosa la fabbrica ha portato nella casella: id su Drive e impronta del testo inviato
+REGISTRO = Path("config") / "cowork-casella.json"
 #: cartelle dove una richiesta non è mai quella vera: copie di sicurezza e impaginati
 ESCLUSE = frozenset({"backup", "build", "__pycache__", ".git"})
 
 APERTA, ARRIVATA, CHIUSA = "aperta", "risposta arrivata", "applicata"
+DA_CARICARE, CARICATA, CAMBIATA = "da caricare", "caricata", "cambiata dopo l'invio"
 
 
 @dataclass(frozen=True)
@@ -40,6 +44,7 @@ class Richiesta:
     risposta: str         # percorso relativo della risposta
     risposta_drive: str
     stato: str            # aperta | risposta arrivata | applicata
+    casella: str = DA_CARICARE  # da caricare | caricata | cambiata dopo l'invio
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -58,8 +63,43 @@ def _chiave(relativo: Path) -> str:
     return parti[1] if len(parti) > 2 and parti[0] == "books" else SISTEMA
 
 
+def impronta(testo: str) -> str:
+    return hashlib.sha256(testo.encode("utf-8")).hexdigest()
+
+
+def registro(radice: Path) -> dict:
+    """Le richieste già nella casella: nome su Drive → id, impronta, data."""
+    percorso = radice / REGISTRO
+    if not percorso.exists():
+        return {}
+    return json.loads(percorso.read_text(encoding="utf-8"))
+
+
+def registra(radice: Path, relativo: str, drive_id: str, quando: str) -> Richiesta:
+    """Annota che la richiesta è stata caricata nella casella, con l'impronta del testo inviato.
+
+    L'impronta serve a vedere dopo se la richiesta è cambiata: una richiesta
+    corretta nel repo e rimasta vecchia su Drive fa rispondere Cowork alla
+    domanda superata.
+    """
+    trovata = next((r for r in richieste(radice) if r.percorso == relativo), None)
+    if trovata is None:
+        raise ValueError(f"nessuna richiesta a Cowork in {relativo}")
+    dati = registro(radice)
+    dati[trovata.nome_drive] = {
+        "id": drive_id,
+        "impronta": impronta((radice / relativo).read_text(encoding="utf-8")),
+        "caricata_il": quando,
+    }
+    percorso = radice / REGISTRO
+    percorso.parent.mkdir(parents=True, exist_ok=True)
+    percorso.write_text(json.dumps(dati, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return next(r for r in richieste(radice) if r.percorso == relativo)
+
+
 def richieste(radice: Path) -> list[Richiesta]:
     """Tutte le richieste a Cowork sotto la radice della fabbrica, in ordine."""
+    caricate = registro(radice)
     trovate: list[Richiesta] = []
     for percorso in sorted(radice.rglob(f"{PREFISSO}*.md")):
         relativo = percorso.relative_to(radice)
@@ -67,7 +107,16 @@ def richieste(radice: Path) -> list[Richiesta]:
             continue
         chiave = _chiave(relativo)
         risposta = percorso.with_name(percorso.stem + SUFFISSO_RISPOSTA + percorso.suffix)
-        if APPLICATA in percorso.read_text(encoding="utf-8"):
+        testo = percorso.read_text(encoding="utf-8")
+        nome_drive = f"{chiave}{SEPARATORE}{percorso.name}"
+        voce = caricate.get(nome_drive)
+        if voce is None:
+            casella = DA_CARICARE
+        elif voce.get("impronta") == impronta(testo):
+            casella = CARICATA
+        else:
+            casella = CAMBIATA
+        if APPLICATA in testo:
             stato = CHIUSA
         elif risposta.exists():
             stato = ARRIVATA
@@ -78,10 +127,11 @@ def richieste(radice: Path) -> list[Richiesta]:
                 percorso=relativo.as_posix(),
                 chiave=chiave,
                 argomento=percorso.stem[len(PREFISSO):],
-                nome_drive=f"{chiave}{SEPARATORE}{percorso.name}",
+                nome_drive=nome_drive,
                 risposta=risposta.relative_to(radice).as_posix(),
                 risposta_drive=f"{chiave}{SEPARATORE}{risposta.name}",
                 stato=stato,
+                casella=casella,
             )
         )
     return trovate
@@ -152,7 +202,10 @@ def rapporto(elenco: list[Richiesta]) -> str:
     if not elenco:
         return "Nessuna richiesta a Cowork.\n"
     larghezza = max(len(r.percorso) for r in elenco)
-    righe = [f"  {r.stato:<17} {r.percorso:<{larghezza}}  ({r.nome_drive})" for r in elenco]
+    righe = [
+        f"  {r.stato:<17} {r.casella:<22} {r.percorso:<{larghezza}}  ({r.nome_drive})"
+        for r in elenco
+    ]
     conteggio = {s: sum(r.stato == s for r in elenco) for s in (APERTA, ARRIVATA, CHIUSA)}
     righe.append(
         f"\n{conteggio[APERTA]} aperte · {conteggio[ARRIVATA]} con risposta da applicare · "

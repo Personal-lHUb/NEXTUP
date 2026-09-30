@@ -71,6 +71,31 @@ class TestCanaleCowork(unittest.TestCase):
         self.assertNotIn("cowork-kdp", testo)
         self.assertIn("non pubblicare", testo)
 
+    def test_il_registro_dice_che_cosa_manca_nella_casella(self):
+        """Una richiesta vive nel repo e nella casella: il registro dice se le due copie coincidono."""
+        self.assertEqual({r.casella for r in self.elenco()}, {"da caricare"})
+        fatta = cowork.registra(
+            self.radice, "books/bollette/manuale/cowork-amazon.md", "id-drive-1", "2026-09-30"
+        )
+        self.assertEqual(fatta.casella, "caricata")
+        voce = cowork.registro(self.radice)["bollette--cowork-amazon.md"]
+        self.assertEqual(voce["id"], "id-drive-1")
+
+    def test_una_richiesta_corretta_dopo_l_invio_si_vede(self):
+        """Corretta nel repo e rimasta vecchia su Drive: Cowork risponderebbe alla domanda superata."""
+        relativo = "books/bollette/manuale/cowork-amazon.md"
+        cowork.registra(self.radice, relativo, "id-drive-1", "2026-09-30")
+        (self.radice / relativo).write_text("# richiesta corretta\n", encoding="utf-8")
+        amazon = next(r for r in self.elenco() if r.percorso == relativo)
+        self.assertEqual(amazon.casella, "cambiata dopo l'invio")
+
+    def test_la_richiesta_di_seguito_e_una_richiesta_a_se(self):
+        """Se una risposta è incompleta, i punti mancanti vanno in cowork-<argomento>-2.md."""
+        scrivi(self.radice, "books/bollette/manuale/cowork-amazon-2.md")
+        seguito = next(r for r in self.elenco() if r.argomento == "amazon-2")
+        self.assertEqual(seguito.risposta_drive, "bollette--cowork-amazon-2-risposta.md")
+        self.assertEqual(seguito.stato, "aperta")
+
     def test_senza_richieste_aperte_l_avviso_lo_dice(self):
         chiuse = [r for r in self.elenco() if r.stato != "aperta"]
         self.assertIn("non ci sono richieste aperte", cowork.avviso(chiuse, "casella"))

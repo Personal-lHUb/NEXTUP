@@ -110,11 +110,27 @@ Desktop). Lo scambio passa da file, non dalla chat, e gira da solo
   `…-risposta.md`. I nomi e lo stato li dà
   `python3 -m kdpfactory cowork stato --json`; l'avviso da mandare a Cowork
   `python3 -m kdpfactory cowork avviso`.
-- **Giro automatico**: un'attività pianificata di Cowork (8:00 e 14:00) risponde
-  alle richieste aperte; la routine «Controllo Cowork» di questa sessione
-  (9:59 e 15:59) carica le richieste nuove, scarica le risposte nel repo
-  (`cowork-<argomento>-risposta.md`, accanto alla richiesta), le applica e
-  segna la richiesta con `Stato: applicata il <data>`.
+- **Giro automatico**: l'attività pianificata di Cowork «Cowork — casella
+  NEXTUP» (7:52 e 13:52, sul portatile dell'autore: se un giro salta, la
+  risposta arriva al giro dopo) risponde alle richieste aperte; la routine
+  «Controllo Cowork» di questa sessione (9:59 e 15:59) carica le richieste
+  nuove, scarica le risposte nel repo (`cowork-<argomento>-risposta.md`,
+  accanto alla richiesta), le applica e segna la richiesta con
+  `Stato: applicata il <data>`.
+- **Regole di ingaggio** (`docs/cowork.md`):
+  - una richiesta nuova si carica nella casella nello stesso giro in cui nasce,
+    non solo nel repo, e si registra con `cowork registra`;
+  - un file «-risposta.md» nella casella è di Cowork: non si modifica mai. Se
+    una risposta è incompleta o bloccata (captcha, accesso), si apre
+    `cowork-<argomento>-2.md` con i soli punti mancanti;
+  - una richiesta modificata dopo l'invio: la copia vecchia va nel cestino di
+    Drive prima di caricare la nuova, e una risposta già scritta alla vecchia è
+    superata (se c'è, la nuova si carica come `-2`);
+  - ci si ferma dall'autore solo per le sue decisioni (categoria, titolo,
+    promessa, voce narrante, prezzo, pubblicazione) e per l'immagine di
+    copertina.
+- **Resoconto**: per ogni risposta applicata, una riga all'autore:
+  «<richiesta>: applicata, <cosa è cambiato>, <decisioni che ti servono>».
 - **Riserva manuale**: Cowork può scrivere la risposta nella copia locale del
   repo, e l'autore la pubblica con un push da GitHub Desktop sul ramo
   `claude/dreamy-archimedes-hf8w45`. A inizio sessione: `git pull` e
