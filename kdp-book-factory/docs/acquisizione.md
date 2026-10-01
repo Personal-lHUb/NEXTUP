@@ -54,16 +54,36 @@ confidenza invece di costruirci sopra un posizionamento.
 ## Come si usa
 
 Amazon non è raggiungibile dall'ambiente di lavoro (il proxy di rete risponde
-`403` alla connessione), quindi la pagina si incolla a mano.
+`403` alla connessione): la pagina la porta Cowork, oppure la incolla l'autore.
+
+Si comincia sempre dalle **domande d'avvio**: concorrente, mercato, categoria,
+dove batterlo, pseudonimo, chi porta la pagina. Sono le stesse per ogni libro
+e le descrive [`linee-guida.md`](linee-guida.md), fase A.
 
 ```bash
 cd kdp-book-factory
 
-# 1. crea il modulo da riempire
+# 1. le domande d'avvio: finite, preparano il modulo e la richiesta a Cowork
+python3 -m kdpfactory avvio <slug> --json
+python3 -m kdpfactory avvio <slug> --concorrente B0ABCD1234 --predefinite
+
+# senza domande, solo il modulo da riempire:
 python3 -m kdpfactory concorrente new <slug> --asin B0ABCD1234
 ```
 
-Apri `books/<slug>/concorrente/pagina.md` e incolla la scheda Amazon così com'è
+Le risposte stanno in `concorrente/avvio.json` e arrivano da sole dove
+servono: al posizionamento come vincolo, in coda a `indicazione.md`; a
+`concorrente build`, che impone lingua del mercato, categoria scelta e
+pseudonimo anche se il piano dicesse altro; al brief di copertina, con la
+descrizione della copertina da battere.
+
+Se la pagina la porta Cowork, `avvio` scrive `concorrente/cowork-concorrente.md`
+(o `cowork-nicchia.md`, se il concorrente è da trovare): scheda, classifica,
+descrizione, indice, recensioni alla lettera, copertina in miniatura, vicini di
+scaffale. Quando arriva `cowork-concorrente-risposta.md` non serve copiarla: se
+`pagina.md` è vuoto, il reparto legge la risposta di Cowork.
+
+Altrimenti apri `books/<slug>/concorrente/pagina.md` e incolla la scheda Amazon così com'è
 — menu, banner e suggerimenti vengono scartati da soli. Conta che ci siano, in
 ordine di importanza: le recensioni (tutte, non solo le prime), la descrizione
 completa, il riquadro «Dettagli prodotto», la riga della classifica con tutte le
@@ -88,6 +108,15 @@ approfondito» e «volevo capire il perché» verso il full-content.
 **Rileggi la scheda e il brief prima di andare avanti.** Il posizionamento è la
 decisione più costosa da sbagliare: correggerla adesso costa un file, dopo costa
 un manoscritto.
+
+Senza chiave API il reparto lo fa lavorare la sessione: i quattro subagent in
+fila, ognuno con le istruzioni su dove leggere (anche `avvio.json`). Le risposte
+JSON vanno in `concorrente/scheda.json`, `lacune.json`, `piano.json` e
+`originalita.json`, poi:
+
+```bash
+python3 -m kdpfactory concorrente importa <slug>   # stessi controlli di build, nessuna chiamata
+```
 
 ```bash
 # 3. da qui è la pipeline di sempre

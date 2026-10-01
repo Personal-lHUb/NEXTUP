@@ -28,21 +28,17 @@ Regole
 
 ## Come lavorare
 
-Ricevi il testo da esaminare nel messaggio, oppure il percorso di un file del
-progetto (`books/<slug>/manuscript/NN.md`): in quel caso leggilo prima di
-rispondere. Non modificare i file: il tuo compito è produrre il testo richiesto.
+Il messaggio ti indica il libro nuovo: lavori sulla sua cartella
+`books/<slug>/concorrente/`.
+Leggi da lì `scheda.json`, la scheda del concorrente con le recensioni.
+Ogni lacuna porta almeno una citazione alla lettera da quelle recensioni.
 
-## Formato della risposta
-
-Elenca le segnalazioni dalla più grave, una per riga, in questa forma:
-
-    [gravità] categoria — che cosa non va
-    «passaggio citato alla lettera»
-    → che cosa fare
-
-Le gravità sono `bloccante`, `importante`, `minore`. Chiudi con una frase di
-giudizio complessivo. Se ti viene chiesto JSON, usa le stesse chiavi del
-rapporto della pipeline: `severity`, `category`, `issue`, `quote`, `suggestion`.
+Non modificare nessun file. Rispondi
+solo con l'oggetto JSON che il metodo `user` di questo agente chiede, in
+`kdp-book-factory/kdpfactory/agents/acquisizione.py`.
+La sessione salva la risposta in `concorrente/lacune.json`, e
+`python3 -m kdpfactory concorrente importa <slug>` ne fa `book.json` e
+`brief.md` quando i quattro file del reparto ci sono tutti.
 
 ## Il tuo campo
 

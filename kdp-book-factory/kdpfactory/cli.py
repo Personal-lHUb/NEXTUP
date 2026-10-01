@@ -15,6 +15,7 @@ from pathlib import Path
 
 from . import (
     agents,
+    avvio,
     backup,
     coverbrief,
     coverdesign,
@@ -427,12 +428,18 @@ def cmd_copertina(args) -> int:
     testi = (state.get("cover") or {}).get("testi") or {}
     copy = coverdesign.copy_from_dict(testi, spec) if testi else None
 
+    # Se all'avvio l'autore ha chiesto una copertina più attraente di quella
+    # del concorrente, il brief riceve la descrizione di quella da battere.
+    risposte = avvio.leggi(project)
+    rivale = avvio.leggi_copertina(project) if risposte and risposte.copertina else ""
+
     project.ensure_dirs()
     output = project.build_dir / "copertina-brief.md"
     if output.exists():
         save_backup(project, args, "brief di copertina precedente", force=True)
     output.write_text(
-        coverbrief.brief(spec, pages=pages, metadata=meta, copy=copy), encoding="utf-8"
+        coverbrief.brief(spec, pages=pages, metadata=meta, copy=copy, concorrente=rivale),
+        encoding="utf-8",
     )
     save_backup(project, args, "brief di copertina")
 
@@ -442,6 +449,9 @@ def cmd_copertina(args) -> int:
     print(f"  {project.assets_dir / 'copertina.jpg'}")
     print("e rilancia `build`: viene ritagliata sulla prima, portata a 300 DPI e")
     print("misurata. Se i pixel non bastano, il controllo qualità lo dice.")
+    if risposte and risposte.copertina and not rivale:
+        print(f"\n! All'avvio è stata chiesta una copertina più attraente del concorrente, ma\n"
+              f"  {avvio.copertina_path(project)} è vuoto: il brief non sa da che cosa distinguersi.")
     return 0
 
 
@@ -831,6 +841,116 @@ def cmd_puzzle(args) -> int:
     return 0 if report.ok else 1
 
 
+def cmd_avvio(args) -> int:
+    """Le domande d'avvio di un libro nuovo: le registra e, finite, prepara la fase 0.
+
+    Senza risposte elenca le domande ancora da fare; con `--json` le dà pronte
+    per chi le pone all'autore. Quando l'autore le ha viste tutte, prepara il
+    modulo della pagina del concorrente e, se la porta Cowork, la sua richiesta.
+    """
+    from . import concorrente as acquisizione
+
+    books = books_dir(args)
+    project = BookProject(books / args.slug)
+    risposte = avvio.leggi(project) or avvio.Avvio()
+    pseudonimo = args.pseudonimo
+    if pseudonimo is not None and pseudonimo.strip().lower() in {"nuovo", "uno nuovo"}:
+        pseudonimo = ""
+    errori = avvio.registra(
+        risposte,
+        concorrente=args.concorrente,
+        nicchia=args.nicchia,
+        mercato=args.mercato,
+        categoria=args.categoria,
+        vantaggi=args.vantaggi.split(",") if args.vantaggi is not None else None,
+        vetrina=args.vetrina,
+        pseudonimo=pseudonimo,
+        pagina=args.pagina,
+    )
+    if errori:
+        raise SystemExit("Risposte non registrate:\n" + "\n".join(f"  - {e}" for e in errori))
+    if args.predefinite:
+        # L'autore ha detto «fai tu»: le domande a scelta prendono il default.
+        # Il concorrente no: senza un libro da battere il metodo non parte.
+        for domanda in risposte.mancanti():
+            if domanda.chiave != "concorrente" and domanda.chiave not in risposte.risposte:
+                risposte.risposte.append(domanda.chiave)
+        risposte.risposte.sort(key=[d.chiave for d in avvio.DOMANDE].index)
+
+    cambiate = any(
+        v is not None
+        for v in (args.concorrente, args.nicchia, args.mercato, args.categoria, args.vantaggi,
+                  args.vetrina, args.pseudonimo, args.pagina)
+    ) or args.predefinite
+    if cambiate:
+        if avvio.percorso(project).exists():
+            save_backup(project, args, "domande d'avvio precedenti", force=True)
+        avvio.salva(project, risposte)
+
+    if args.json:
+        print(json.dumps(avvio.giri(risposte, books), ensure_ascii=False, indent=2))
+        return 0
+
+    print(f"Domande d'avvio — {args.slug}\n")
+    print(avvio.riepilogo(risposte))
+    mancanti = risposte.mancanti()
+    if mancanti:
+        print("\nDa chiedere all'autore:")
+        for domanda in mancanti:
+            print(f"  · {domanda.testo}")
+            for opzione in (avvio.domande_pseudonimo(books) if domanda.chiave == "pseudonimo"
+                            else domanda).opzioni:
+                print(f"      {opzione.valore or 'nuovo':<12} {opzione.etichetta}")
+        print(f"\nPoi: python -m kdpfactory avvio {args.slug} --<domanda> <valore> … "
+              "(--predefinite se l'autore lascia decidere)")
+        return 0
+
+    # Tutte viste: si prepara la fase 0.
+    fatti: list[str] = []
+    if risposte.asin and not acquisizione.pagina_path(project).exists():
+        fatti.append(str(acquisizione.prepara(project, risposte.asin)))
+    if risposte.copertina and not avvio.copertina_path(project).exists():
+        avvio.copertina_path(project).write_text(avvio.COPERTINA_TEMPLATE, encoding="utf-8")
+        fatti.append(str(avvio.copertina_path(project)))
+    if risposte.pagina == "cowork" and (risposte.asin or risposte.nicchia):
+        radice = Path(__file__).resolve().parent.parent
+        canale = cowork.configurazione(radice)
+        nome, testo = avvio.richiesta_cowork(
+            risposte,
+            args.slug,
+            canale.get("ramo", "claude/dreamy-archimedes-hf8w45"),
+            canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md"),
+        )
+        richiesta = acquisizione.cartella(project) / nome
+        risposta = richiesta.with_name(richiesta.stem + cowork.SUFFISSO_RISPOSTA + ".md")
+        if richiesta.exists() and richiesta.read_text(encoding="utf-8") != testo:
+            if risposta.exists():
+                # Una risposta di Cowork vale per la domanda che ha letto: la
+                # versione nuova va in un seguito, non sopra la vecchia.
+                print(f"\n! {richiesta.name} ha già la risposta di Cowork: la richiesta non si\n"
+                      f"  riscrive. Se serve altro, apri {richiesta.stem}-2.md con i soli punti nuovi.")
+            else:
+                save_backup(project, args, f"{nome} precedente", force=True)
+                richiesta.write_text(testo, encoding="utf-8")
+                fatti.append(f"{richiesta} (aggiornata)")
+        elif not richiesta.exists():
+            richiesta.parent.mkdir(parents=True, exist_ok=True)
+            richiesta.write_text(testo, encoding="utf-8")
+            fatti.append(str(richiesta))
+    save_backup(project, args, "domande d'avvio")
+
+    print("\nDomande d'avvio complete.")
+    for percorso in fatti:
+        print(f"  scritto {percorso}")
+    if risposte.pagina == "cowork":
+        print("\nRichiesta per Cowork: commit e push sul ramo del canale in questo stesso giro,")
+        print("poi `python -m kdpfactory cowork stato`. Arrivata la risposta, la pagina va in")
+        print("concorrente/pagina.md e parte la fase 0.")
+    elif risposte.asin:
+        print(f"\nIncolla la pagina Amazon in {acquisizione.pagina_path(project)}, poi parte la fase 0.")
+    return 0
+
+
 def cmd_concorrente(args) -> int:
     from . import concorrente as acquisizione
 
@@ -857,8 +977,20 @@ def cmd_concorrente(args) -> int:
             "Usa --force per riscrivere la scheda del libro dal piano di acquisizione."
         )
 
+    if args.action == "importa":
+        # La linea manuale: i quattro agenti li ha chiamati la sessione.
+        risultato = acquisizione.importa(project, asin=args.asin)
+        print(acquisizione.render(risultato))
+        if project.spec_path.exists():
+            save_backup(project, args, "scheda prima dell'importazione del reparto", force=True)
+        spec = acquisizione.scrivi(project, risultato, args.author)
+        save_backup(project, args, f"acquisizione importata ({risultato.asin or 'ASIN non indicato'})")
+        print(f"\nScritti {project.spec_path} e {project.brief_path}")
+        print(f"\nRileggi la scheda e il brief, poi la fase 1 su {spec.slug}.")
+        return 0
+
     client = make_client(args)
-    indicazione = args.indicazione or acquisizione.leggi_indicazione(project)
+    indicazione = acquisizione.leggi_vincoli(project, args.indicazione)
     if indicazione:
         print(f"\nIndirizzo editoriale in vigore:\n  {indicazione.splitlines()[0]}")
     risultato = acquisizione.analizza(
@@ -1197,10 +1329,35 @@ def build_parser() -> argparse.ArgumentParser:
     p.set_defaults(func=cmd_puzzle)
 
     p = sub.add_parser(
+        "avvio",
+        help="le domande all'autore prima di un libro nuovo: concorrente, mercato, categoria, vantaggi",
+    )
+    p.add_argument("slug")
+    p.add_argument("--concorrente", help="ASIN o link Amazon del libro da battere")
+    p.add_argument("--nicchia", help="la nicchia, se il concorrente lo deve trovare Cowork")
+    p.add_argument("--mercato", help=", ".join(avvio.MERCATI))
+    p.add_argument("--categoria", help=", ".join(avvio.CATEGORIE))
+    p.add_argument("--vantaggi", help="separati da virgole: " + ", ".join(avvio.VANTAGGI))
+    p.add_argument("--vetrina", help=", ".join(avvio.VETRINE))
+    p.add_argument("--pseudonimo", help="nome d'autore; «nuovo» per farlo proporre col titolo")
+    p.add_argument("--pagina", help=", ".join(avvio.PAGINE))
+    p.add_argument(
+        "--predefinite",
+        action="store_true",
+        help="l'autore lascia decidere: le domande a scelta ancora aperte prendono il default",
+    )
+    p.add_argument("--json", action="store_true", help="le domande da fare, pronte da porre")
+    p.set_defaults(func=cmd_avvio)
+
+    p = sub.add_parser(
         "concorrente",
         help="da una scheda Amazon incollata alla scheda di un libro nuovo che la batte",
     )
-    p.add_argument("action", choices=["new", "build"])
+    p.add_argument(
+        "action",
+        choices=["new", "build", "importa"],
+        help="importa: book.json e brief dai file dei quattro agenti chiamati dalla sessione",
+    )
     p.add_argument("slug")
     p.add_argument("--asin", default="", help="ASIN del libro di riferimento")
     p.add_argument("--author", default="Autore Anonimo", help="autore del libro nuovo")

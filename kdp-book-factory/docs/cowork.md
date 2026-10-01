@@ -191,3 +191,8 @@ Si scrive `cowork-<argomento>.md` nella cartella a cui serve, con le istruzioni
 complete e il formato della risposta. Poi, nello stesso giro, commit e push sul
 ramo del canale. Le cartelle dove serve il web sono elencate in
 `RICERCA-WEB.md`, alla radice del repository.
+
+La richiesta per la pagina del concorrente non si scrive a mano: la produce
+`python3 -m kdpfactory avvio <slug>` quando l'autore ha risposto alle domande
+d'avvio, uguale per ogni libro (`concorrente/cowork-concorrente.md`, o
+`cowork-nicchia.md` se il concorrente è da trovare).

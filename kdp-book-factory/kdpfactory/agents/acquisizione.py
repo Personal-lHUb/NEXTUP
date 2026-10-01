@@ -35,6 +35,25 @@ Regole
 Se il testo non è una scheda prodotto di un libro — è un'altra pagina, o è vuoto — dillo in `problemi` e lascia vuoto il resto invece di inventare."""
 
 
+def _istruzioni(legge: str, salva: str, formato: str) -> str:
+    """Come lavora l'agente quando lo chiama la sessione (linea manuale), senza API."""
+    return f"""Il messaggio ti indica il libro nuovo: lavori sulla sua cartella
+`books/<slug>/concorrente/`.
+Leggi da lì {legge}
+
+Non modificare nessun file. Rispondi
+{formato}.
+La sessione salva la risposta in `concorrente/{salva}`, e
+`python3 -m kdpfactory concorrente importa <slug>` ne fa `book.json` e
+`brief.md` quando i quattro file del reparto ci sono tutti."""
+
+
+_FORMATO_JSON = (
+    "solo con l'oggetto JSON che il metodo `user` di questo agente chiede, in\n"
+    "`kdp-book-factory/kdpfactory/agents/acquisizione.py`"
+)
+
+
 @register
 class SchedaConcorrente(JsonAgent):
     name = "scheda-concorrente"
@@ -44,6 +63,13 @@ class SchedaConcorrente(JsonAgent):
         "strutturati: prezzo, pagine, categorie con la classifica, descrizione, recensioni."
     )
     max_tokens = 16000
+    istruzioni = _istruzioni(
+        "la pagina del concorrente: `pagina.md`, dopo il commento d'istruzioni;\n"
+        "se lì è vuota, `cowork-concorrente-risposta.md`, la pagina come l'ha riportata\n"
+        "Cowork. Un dato che nella pagina non c'è resta vuoto e va in `problemi`.",
+        "scheda.json",
+        _FORMATO_JSON,
+    )
 
     def system(self, ctx: AgentContext) -> list[str]:
         return [EXTRACTION_RULES]
@@ -104,6 +130,12 @@ class AnalistaRecensioni(JsonAgent):
         "che cosa i lettori che hanno già pagato dicono di non aver trovato."
     )
     max_tokens = 12000
+    istruzioni = _istruzioni(
+        "`scheda.json`, la scheda del concorrente con le recensioni.\n"
+        "Ogni lacuna porta almeno una citazione alla lettera da quelle recensioni.",
+        "lacune.json",
+        _FORMATO_JSON,
+    )
 
     def system(self, ctx: AgentContext) -> list[str]:
         return [REVIEW_MINING_RULES]
@@ -190,6 +222,17 @@ class Posizionamento(JsonAgent):
         "libro scrivere: promessa, lettore, titolo, pagine, prezzo e parole chiave."
     )
     max_tokens = 16000
+    istruzioni = _istruzioni(
+        "`scheda.json` e `lacune.json`, poi i vincoli dell'editore:\n"
+        "`indicazione.md`, se c'è, e `avvio.json`, le risposte dell'autore alle domande\n"
+        "d'avvio. Sono decisioni sue e valgono come l'indicazione: il mercato fissa\n"
+        "lingua e valuta del prezzo; la categoria, se è `full` o `medium`, è quella,\n"
+        "e se è `concorrente` la proponi tu guardando il libro di partenza; `vantaggi`\n"
+        "e `vetrina` dicono dove il libro nuovo deve batterlo; `pseudonimo`, se c'è, è\n"
+        "l'autore. Non scavalcano i divieti qui sopra.",
+        "piano.json",
+        _FORMATO_JSON,
+    )
 
     def system(self, ctx: AgentContext) -> list[str]:
         return [POSITIONING_RULES]
@@ -278,6 +321,12 @@ class Originalita(ReviewAgent):
         "indipendente: titolo distinguibile, nessun marchio altrui, struttura propria."
     )
     max_tokens = 8000
+    istruzioni = _istruzioni(
+        "`scheda.json` (il libro di partenza), `piano.json` (il libro\n"
+        "nuovo, da verificare) e `lacune.json` (per il punto 5).",
+        "originalita.json",
+        "solo con l'oggetto JSON del contratto qui sopra (`notes` e `findings`)",
+    )
 
     def system(self, ctx: AgentContext) -> list[str]:
         return [ORIGINALITY_RULES]

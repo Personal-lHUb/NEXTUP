@@ -19,6 +19,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
+from . import avvio as avvio_module
 from . import coverdesign, kdpspecs
 from .agents.base import AgentContext, AgentFinding, get_agent
 from .llm import LLMClient
@@ -111,20 +112,33 @@ def prepara(project: BookProject, asin: str) -> Path:
     return percorso
 
 
+def risposta_cowork_path(project: BookProject) -> Path:
+    return cartella(project) / "cowork-concorrente-risposta.md"
+
+
 def leggi_pagina(project: BookProject) -> str:
-    """Il testo incollato, senza le istruzioni del modulo."""
+    """Il testo incollato, senza le istruzioni del modulo.
+
+    Se il modulo è vuoto e la pagina l'ha portata Cowork, vale la sua risposta:
+    si legge lì dov'è, senza copiarla, e il file di Cowork non si tocca.
+    """
     percorso = pagina_path(project)
-    if not percorso.exists():
+    risposta = risposta_cowork_path(project)
+    if not percorso.exists() and not risposta.exists():
         raise SystemExit(
             f"Manca {percorso}.\n"
-            f"Crealo con: python -m kdpfactory concorrente new {project.root.name} --asin <ASIN>"
+            f"Si crea con le domande d'avvio: python -m kdpfactory avvio {project.root.name}\n"
+            f"(o, senza domande: python -m kdpfactory concorrente new {project.root.name} --asin <ASIN>)"
         )
-    testo = percorso.read_text(encoding="utf-8")
+    testo = percorso.read_text(encoding="utf-8") if percorso.exists() else ""
     # Il commento di istruzioni si toglie per intero: contiene parole come
     # «recensioni» e «prezzo» che confonderebbero l'estrazione.
     if "-->" in testo:
         testo = testo.split("-->", 1)[1]
-    return testo.strip()
+    testo = testo.strip()
+    if len(testo.split()) < 40 and risposta.exists():
+        return risposta.read_text(encoding="utf-8").strip()
+    return testo
 
 
 # --------------------------------------------------------------------------
@@ -161,6 +175,21 @@ def leggi_indicazione(project: BookProject) -> str:
     return "\n".join(tenute).strip()
 
 
+def leggi_vincoli(project: BookProject, indicazione: str = "") -> str:
+    """L'indirizzo editoriale con in coda le risposte alle domande d'avvio.
+
+    Le domande d'avvio (`avvio.json`) sono le scelte dell'autore che valgono per
+    ogni libro — mercato, categoria, dove battere il concorrente —, l'indicazione
+    è quello che aggiunge per questo. Al posizionamento arrivano insieme; una
+    `indicazione` data a riga di comando prende il posto del file, non dell'avvio.
+    """
+    parti = [indicazione or leggi_indicazione(project)]
+    risposte = avvio_module.leggi(project)
+    if risposte:
+        parti.append(avvio_module.vincoli(risposte))
+    return "\n\n".join(p for p in parti if p)
+
+
 def analizza(
     project: BookProject, client: LLMClient, asin: str = "", indicazione: str = ""
 ) -> Acquisizione:
@@ -172,7 +201,7 @@ def analizza(
             "Incolla la pagina Amazon del libro, recensioni comprese, e rilancia."
         )
 
-    risultato = Acquisizione(asin=asin, indicazione=indicazione or leggi_indicazione(project))
+    risultato = Acquisizione(asin=asin, indicazione=indicazione or leggi_vincoli(project))
     spec_finta = BookSpec(slug=project.root.name, title="(da decidere)")
 
     scheda = get_agent("scheda-concorrente").run(
@@ -217,6 +246,46 @@ def analizza(
     )
     risultato.segnalazioni = controllo.findings
     risultato.note["originalita"] = controllo.notes
+    return risultato
+
+
+#: I file del reparto quando lo fa lavorare la sessione, un agente alla volta,
+#: senza chiave API: ognuno è la risposta JSON di un agente, nell'ordine.
+FILE_DEL_REPARTO = (
+    ("scheda.json", "scheda-concorrente"),
+    ("lacune.json", "analista-recensioni"),
+    ("piano.json", "posizionamento"),
+    ("originalita.json", "originalita"),
+)
+
+
+def importa(project: BookProject, asin: str = "") -> Acquisizione:
+    """L'analisi fatta dai subagent, raccolta dai file come se l'avesse fatta `analizza`.
+
+    Nella linea manuale i quattro agenti li chiama la sessione e le risposte
+    finiscono in `concorrente/`; da qui in poi il percorso è lo stesso della
+    linea API, controlli e risposte d'avvio compresi.
+    """
+    mancanti = [f"{nome} ({agente})" for nome, agente in FILE_DEL_REPARTO
+                if not (cartella(project) / nome).exists()]
+    if mancanti:
+        raise SystemExit(
+            "Mancano le risposte di questi agenti, in "
+            f"{cartella(project)}:\n" + "\n".join(f"  - {m}" for m in mancanti)
+        )
+    dati = {nome: json.loads((cartella(project) / nome).read_text(encoding="utf-8"))
+            for nome, _ in FILE_DEL_REPARTO}
+    risposte = avvio_module.leggi(project)
+    controllo = dati["originalita.json"]
+    risultato = Acquisizione(
+        asin=asin or (risposte.asin if risposte else ""),
+        indicazione=leggi_vincoli(project),
+        scheda=dati["scheda.json"],
+        lacune=dati["lacune.json"],
+        piano=dati["piano.json"],
+        segnalazioni=[AgentFinding.from_dict(f, "originalita") for f in controllo.get("findings") or []],
+    )
+    risultato.note["originalita"] = str(controllo.get("notes") or "")
     return risultato
 
 
@@ -346,6 +415,7 @@ def scrivi(project: BookProject, risultato: Acquisizione, autore: str) -> BookSp
     )
 
     spec = spec_dal_piano(project.root.name, risultato.piano, autore)
+    _applica_avvio(project, spec)
     # Il titolo lo inventa `posizionamento`, e nessuno finora controllava che
     # stesse in copertina: il primo ad accorgersene era l'agente `copertina`,
     # alla fine di `all`, cioè dopo aver pagato il libro intero.
@@ -385,6 +455,27 @@ def scrivi(project: BookProject, risultato: Acquisizione, autore: str) -> BookSp
             f"in {project.spec_path}."
         )
     return spec
+
+
+def _applica_avvio(project: BookProject, spec: BookSpec) -> None:
+    """Le risposte dell'autore battono il piano: lingua, categoria imposta, autore.
+
+    Il posizionamento le riceve come vincolo, ma un vincolo in un prompt si può
+    disattendere; qui no. Quando il piano diceva altro, lo si dice a schermo.
+    """
+    risposte = avvio_module.leggi(project)
+    if not risposte:
+        return
+    if spec.language != risposte.lingua:
+        print(f"  ! Il piano diceva lingua «{spec.language}»: vale «{risposte.lingua}» "
+              f"del mercato {risposte.mercato}, scelto all'avvio.")
+        spec.language = risposte.lingua
+    if risposte.categoria in {"full", "medium"} and spec.content_type != risposte.categoria:
+        print(f"  ! Il piano proponeva {spec.content_type}-content: vale {risposte.categoria}-content, "
+              "scelto all'avvio.")
+        spec.content_type = risposte.categoria
+    if risposte.pseudonimo and spec.author in {"", "Autore Anonimo"}:
+        spec.author = risposte.pseudonimo
 
 
 # --------------------------------------------------------------------------

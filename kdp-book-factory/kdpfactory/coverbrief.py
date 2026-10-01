@@ -187,8 +187,14 @@ def brief(
     metadata: dict | None = None,
     copy: coverdesign.CoverCopy | None = None,
     genre: str = "",
+    concorrente: str = "",
 ) -> str:
-    """Il brief compilato coi dati di questo libro, pronto da incollare."""
+    """Il brief compilato coi dati di questo libro, pronto da incollare.
+
+    `concorrente` è la descrizione della copertina da battere, quando l'autore
+    l'ha chiesto all'avvio: senza titolo né autore, solo come appare in
+    miniatura. Il brief chiede un'immagine che se ne distingua a colpo d'occhio.
+    """
     metadata = metadata or {}
     genre = genre or ("enigmi" if spec.genre == "puzzle" else spec.genre)
     copy = copy or coverdesign.derive_copy(spec, metadata, genre, pages=pages)
@@ -268,6 +274,20 @@ def brief(
         f'Badge: "{copy.badge}"' if copy.badge else "",
         f'Author line: "{spec.author}"',
     ]
+
+    rivale = (
+        "\n## Stand out from the cover it competes with\n\n"
+        "In search results this cover sits next to the best-selling cover in its niche,\n"
+        "described here as it looks at thumbnail size:\n\n"
+        + "\n".join(f"> {r}" if r.strip() else ">" for r in concorrente.strip().splitlines())
+        + "\n\nThe buyer must notice this one first and tell them apart at a glance:\n"
+        "- a different dominant colour, chosen for contrast against that one;\n"
+        "- a different kind of image: not the same object, scene or layout;\n"
+        "- a calmer upper third, so the title set over it reads larger than theirs.\n"
+        "Do not copy, parody or answer that cover: it is a reference to move away from.\n"
+        if concorrente.strip()
+        else ""
+    )
 
     return f"""# Cover brief — {spec.title}
 
@@ -436,7 +456,7 @@ target under 40 MB (hard limit 650 MB).
   and nothing important may sit near the hinge.
 - EBOOK: front cover only, 2560 x 1600 px (2560 tall, 1600 wide: ratio 1.6:1 or
   taller), RGB, JPEG or TIFF. Designed on its own, not cropped out of the wrap.
-
+{rivale}
 ## Originality and compliance
 
 - Original design. Do not imitate, reference or evoke any existing book cover,

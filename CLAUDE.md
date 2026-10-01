@@ -8,7 +8,7 @@ la pipeline e per qualsiasi file generato a mano in una sessione.
 - **Pipeline `kdp-book-factory`**: lo fa da sé (`kdpfactory/backup.py`). Ogni
   comando che scrive file lascia uno snapshot datato in
   `kdp-book-factory/backup/<slug>/<AAAAMMGG-hhmmss>/` con scheda del libro,
-  scaletta, manoscritto e tutto `build/`. Non passare `--no-backup` se non è
+  scaletta, manoscritto, `concorrente/` e tutto `build/`. Non passare `--no-backup` se non è
   l'utente a chiederlo.
 - **File generati fuori dalla pipeline** (script, export, documenti, immagini,
   configurazioni, risultati di analisi): copiarli subito in
@@ -93,6 +93,34 @@ ricordare:
 Per spostare un confine si cambia la tabella delle competenze e si rigenerano
 i file degli agenti (`python3 -m kdpfactory agents --install ../.claude/agents`),
 non si modifica a mano un file in `.claude/agents/`.
+
+## Regola permanente: ogni libro nuovo parte dalle domande d'avvio
+
+**Un libro nuovo nasce contro un concorrente preciso** — un libro che vende già
+nella nicchia — e deve batterlo dove i suoi lettori restano scontenti. Prima di
+qualunque agente si fanno all'autore le sette domande d'avvio, sempre le
+stesse, e le risposte le registra il sistema:
+
+```
+python3 -m kdpfactory avvio <slug> --json     # le domande ancora da fare
+python3 -m kdpfactory avvio <slug> --<domanda> <valore> …
+```
+
+- **Il concorrente** (ASIN o link; o la nicchia, e lo cerca Cowork) si chiede
+  nel messaggio, perché è un dato da scrivere. Le altre — mercato, categoria,
+  dove batterlo nel libro e in vetrina, pseudonimo, chi porta la pagina — con
+  le domande a scelta, come le dà `--json`.
+- Se l'autore lascia decidere, `--predefinite`: valgono le risposte del primo
+  libro fatto così (amazon.com in inglese, categoria come il concorrente,
+  lacune + più pratico + contenuto migliore, copertina più attraente,
+  pseudonimo nuovo, pagina da Cowork). Il concorrente non ha default.
+- Finite le domande, `avvio` prepara la fase 0: il modulo della pagina, la
+  richiesta `concorrente/cowork-concorrente.md` da pubblicare nello stesso giro
+  e, se serve, `concorrente/copertina.md`. Poi la fase 0 parte da sola quando
+  arriva la pagina.
+- Le risposte non si ripetono a mano agli agenti: il posizionamento le riceve
+  come vincolo, `concorrente build` impone lingua, categoria scelta e
+  pseudonimo, il brief di copertina riceve la copertina da battere.
 
 ## Regola permanente: collaborazione con Cowork
 

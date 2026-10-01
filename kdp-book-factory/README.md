@@ -114,8 +114,8 @@ mai caricato.
 
 ```bash
 # 1. crea il progetto
-#    (oppure fallo nascere da un'analisi di mercato:
-#     concorrente new <slug> --asin B0… , incolli la pagina, poi concorrente build)
+#    (un libro nuovo nasce da un concorrente: avvio <slug> fa le domande
+#     all'autore e prepara la pagina da portare, poi concorrente build)
 python3 -m kdpfactory init "Il Metodo delle Tre Ore" \
     --subtitle "Come chiudere il lavoro che conta prima delle 15" \
     --author "Nome Cognome" \
@@ -150,7 +150,8 @@ esempi usare, quale taglio dare).
 | `agents` | elenco del collegio (`--install` li installa in Claude Code) |
 | `backup <slug>` | elenco delle copie, `--now`, `--restore <id>`, `--prune N` |
 | `puzzle new/build <slug>` | libri di enigmi di deduzione, senza chiamate API |
-| `concorrente new/build <slug>` | da una scheda Amazon incollata alla scheda di un libro nuovo che copre quello che i suoi lettori non hanno trovato ([`docs/acquisizione.md`](docs/acquisizione.md)) |
+| `avvio <slug>` | le domande all'autore prima di ogni libro nuovo — concorrente, mercato, categoria, dove batterlo, pseudonimo, pagina — e, finite, il modulo e la richiesta a Cowork per la pagina del concorrente ([`docs/linee-guida.md`](docs/linee-guida.md), fase A) |
+| `concorrente new/build/importa <slug>` | da una scheda Amazon incollata alla scheda di un libro nuovo che copre quello che i suoi lettori non hanno trovato ([`docs/acquisizione.md`](docs/acquisizione.md)) |
 | `review <slug>` | fa leggere il libro agli agenti di controllo |
 | `revise <slug>` | l'editor applica le segnalazioni raccolte |
 | `qa <slug>` | controlli di qualità e conformità |

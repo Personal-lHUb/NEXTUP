@@ -63,6 +63,8 @@ quando la sua fase lo richiede**.
 
 | quando | chi scatta | come |
 |---|---|---|
+| l'autore chiede un libro nuovo | nessun agente: le **domande d'avvio** | `avvio <slug> --json`, poi le domande all'autore |
+| arriva la pagina del concorrente (`pagina.md` o la risposta di Cowork) | `scheda-concorrente` → `analista-recensioni` → `posizionamento` → `originalita` | subagent in fila: ognuno legge il lavoro del precedente |
 | la scaletta è scritta o cambia | `indice`, poi `revisore-scaletta` | subagent, poi `manuale <slug> scaletta --esamina` |
 | un capitolo è importato | nessuno: si continua a scrivere | — |
 | il libro è impaginato (ogni `build`) | `impaginazione` | `review <slug> --agents impaginazione` |
@@ -133,7 +135,8 @@ produzione di un libro: lavorano sul sistema, e sono documentati in
 ## Le fasi
 
 ```
-0  acquisizione (facoltativa)   scheda-concorrente → analista-recensioni → posizionamento → originalita
+A  avvio                        domande all'autore → pagina del concorrente     cancello: tutte le domande viste
+0  acquisizione                 scheda-concorrente → analista-recensioni → posizionamento → originalita
 1  progetto                     architetto → indice → revisore-scaletta          cancello: 0 bloccanti
 2  stesura                      ghostwriter  (+ voce al livello alta)            cancello: il capitolo 1 ti convince
 3  prima impaginazione          build → impaginazione                            cancello: pagine nell'intervallo
@@ -147,12 +150,55 @@ produzione di un libro: lavorano sul sistema, e sono documentati in
 In ogni fase qui sotto: chi lavora, che cosa entra, che cosa esce, come lo si
 chiama nelle due linee, quando il cancello è chiuso.
 
+### A · Avvio — le domande all'autore
+
+Ogni libro nuovo nasce **contro un concorrente preciso**: un libro che vende
+già nella nicchia, da battere dove i suoi lettori restano scontenti. Prima di
+qualunque agente l'autore risponde a sette domande, sempre le stesse:
+
+| domanda | risposte | se l'autore lascia decidere |
+|---|---|---|
+| il concorrente | l'ASIN o il link; oppure la nicchia, e il concorrente lo cerca Cowork fra i primi 20 | nessun default: senza concorrente non si parte |
+| il mercato | amazon.com (inglese, USD), amazon.co.uk (inglese, GBP), amazon.it (italiano, EUR) | amazon.com |
+| la categoria | come il concorrente, full-content, medium-content | come il concorrente: la propone il posizionamento, l'autore la conferma prima della scaletta |
+| dove batterlo, nel libro | lacune delle recensioni, più pratico, contenuto migliore, lettore più preciso (anche più d'una) | lacune, più pratico, contenuto migliore |
+| dove batterlo, in vetrina | copertina più attraente, prezzo più conveniente, tutte e due, nessuna | copertina più attraente |
+| lo pseudonimo | uno nuovo, o uno già in uso su un libro della stessa area | uno nuovo, proposto col titolo |
+| la pagina del concorrente | la scarica Cowork, la incolla l'autore | la scarica Cowork |
+
+```bash
+python3 -m kdpfactory avvio <slug> --json        # le domande ancora da fare
+python3 -m kdpfactory avvio <slug> --concorrente B0… --mercato amazon.com \
+    --categoria concorrente --vantaggi lacune,pratico --vetrina copertina \
+    --pseudonimo nuovo --pagina cowork            # le risposte
+python3 -m kdpfactory avvio <slug> --predefinite  # «fai tu»: il resto prende il default
+```
+
+- **Il concorrente si chiede nel messaggio**, non fra le opzioni: è un dato da
+  scrivere, e un'opzione «ti do l'ASIN» viene scelta senza che l'ASIN arrivi.
+  Le altre domande sono a scelta, a gruppi di quattro: `--json` le dà già
+  pronte da porre.
+- Le risposte stanno in `concorrente/avvio.json`. Una domanda non posta vale
+  il suo default ma resta segnata come da chiedere, e il comando la ripropone.
+- **Finite le domande**, il comando prepara la fase 0 da solo: il modulo
+  `concorrente/pagina.md`, il file `concorrente/copertina.md` se l'autore vuole
+  una copertina più attraente, e, se la pagina la porta Cowork, la richiesta
+  `concorrente/cowork-concorrente.md` (o `cowork-nicchia.md`), sempre la stessa
+  per ogni libro. La richiesta si pubblica nello stesso giro.
+- Da lì le risposte lavorano senza che nessuno le ripeta: il posizionamento le
+  riceve come vincolo insieme a `indicazione.md`; `concorrente build` impone
+  lingua, categoria scelta e pseudonimo anche se il piano dicesse altro; il
+  brief di copertina riceve la descrizione della copertina da battere.
+
+**Cancello:** tutte le domande viste e la pagina del concorrente arrivata.
+
 ### Prima di tutto: la categoria
 
 Ogni libro è **full-content** (testo pieno, da leggere) oppure
 **medium-content** (interattivo, ogni pagina diversa), e la categoria si
 decide **prima della scaletta**: vincola impaginazione, indice, copertina,
-scheda e prezzo. Si dichiara con `init --content-type full|medium` e resta in
+scheda e prezzo. All'avvio l'autore la sceglie o la lascia al concorrente; in
+quel caso la propone il posizionamento e l'autore la conferma. Si dichiara con `init --content-type full|medium` e resta in
 `book.json` come `content_type`. La linea prosa produce full-content, la linea
 enigmistica medium-content. Le definizioni sono in `CLAUDE.md`, e il sistema le
 fa rispettare: un full-content con righe da compilare è un errore del
@@ -175,14 +221,15 @@ consulenza il libro non è e che le regole cambiano. Vuoto, vale quella generica
 uguale per tutti i libri. Lo chiede la conformità, e lo si scrive prima della
 fase 8.
 
-### 0 · Acquisizione — solo se il libro nasce da una scheda Amazon
+### 0 · Acquisizione — dalla pagina del concorrente al libro nuovo
 
 | | |
 |---|---|
 | **Chi** | `scheda-concorrente` → `analista-recensioni` → `posizionamento` → `originalita` |
-| **Entra** | la pagina del concorrente, copiata e incollata |
+| **Entra** | la pagina del concorrente (`concorrente/pagina.md`, o la risposta di Cowork se il modulo è vuoto) e i vincoli dell'avvio |
 | **Esce** | `book.json` e `brief.md` del libro nuovo |
-| **Comando** | `python3 -m kdpfactory concorrente …` ([`acquisizione.md`](acquisizione.md)) |
+| **Comando** | con la chiave API `python3 -m kdpfactory concorrente build <slug>` ([`acquisizione.md`](acquisizione.md)) |
+| **Linea manuale** | i quattro subagent in fila, ognuno legge i file del precedente; la sessione salva le risposte in `concorrente/scheda.json`, `lacune.json`, `piano.json`, `originalita.json`, poi `concorrente importa <slug>` |
 | **Cancello** | nessun bloccante di `originalita`: un libro troppo vicino all'altro non si scrive |
 
 ### 1 · Progetto — scaletta e indice
@@ -348,7 +395,7 @@ Un solo agente, dall'inizio alla fine: `copertina`. Le regole sono in
 | | |
 |---|---|
 | **Chi** | `copertina` scrive il prompt e misura; **l'autore** genera l'immagine |
-| **Entra** | i dati del libro: categoria, categorie KDP, promessa, pubblico, palette, occhiello e gancio della scheda, pagine vere |
+| **Entra** | i dati del libro: categoria, categorie KDP, promessa, pubblico, palette, occhiello e gancio della scheda, pagine vere; se all'avvio l'autore ha chiesto una copertina più attraente, la descrizione di quella del concorrente (`concorrente/copertina.md`) |
 | **Esce** | `build/copertina-brief.md` (il prompt), poi `build/<slug>-copertina.pdf` |
 | **Come si chiama** | «usa copertina su <slug>» |
 | **Cancello** | zero bloccanti delle misure; la miniatura supera le cinque domande |
@@ -444,6 +491,8 @@ copertina sono solo quelle contate sul libro (medium-content) o nessuna
 
 Nessun agente decide queste cose, e nessun cancello le sostituisce:
 
+- **il concorrente** da battere, il **mercato** e dove batterlo: le domande
+  d'avvio;
 - **la categoria** (full o medium) e il **tipo di libro**;
 - **il titolo** e il sottotitolo, e se tenerli quando un agente li contesta;
 - **la promessa** e la **linea editoriale** (`notes` di `book.json`);
@@ -484,3 +533,5 @@ Ogni regola qui sopra viene da un difetto trovato su un libro vero.
 | il brief di copertina chiedeva 1800 x 2700 px, il motore ritaglia la prima con l'abbondanza: l'immagine usciva a 291 DPI | 7, `copertina` | i pixel si chiedono sull'area che il motore ritaglia davvero |
 | un libro sulle bollette di casa riceveva la rappresentazione «business»: il mondo professionale, cioè un ufficio | 7, `copertina` | la finanza di casa ha la sua voce: una cucina la sera, non un ufficio |
 | la diagnostica chiedeva la terza categoria come rilievo alto; due volte se n'è cercata una di riempimento, e due volte la conformità l'ha tolta | 6, `conformita` | una categoria sola è un buco; con due, la terza entra solo se descrive l'argomento del libro |
+| fra le opzioni l'autore ha scelto «ti do l'ASIN», e l'ASIN non è arrivato | A, avvio | il concorrente si chiede nel messaggio; a scelta solo le domande che hanno risposte fisse |
+| le domande d'avvio esistevano solo nella chat di un libro: il successivo sarebbe partito senza | A, avvio | le sette domande stanno nel sistema (`avvio`), e le risposte arrivano da sole a posizionamento, scheda e copertina |
