@@ -146,7 +146,7 @@ class TestVincoli(Base):
 
 class TestCowork(Base):
     def test_con_l_asin_chiede_la_pagina(self):
-        nome, testo = avvio.richiesta_cowork(self.tutte(), "libro", "ramo-x", "config/leggimi.md")
+        nome, testo = avvio.richiesta_cowork(self.tutte(), "libro", {"ramo": "ramo-x"})
         self.assertEqual(nome, "cowork-concorrente.md")
         self.assertIn("https://www.amazon.com/dp/B0CSSJMQP1", testo)
         self.assertIn("cowork-concorrente-risposta.md", testo)
@@ -157,14 +157,14 @@ class TestCowork(Base):
         self.assertIn("Audible o Kindle", testo)
 
     def test_senza_copertina_non_la_chiede(self):
-        _, testo = avvio.richiesta_cowork(self.tutte(vetrina="prezzo"), "libro", "r", "l")
+        _, testo = avvio.richiesta_cowork(self.tutte(vetrina="prezzo"), "libro", {})
         self.assertNotIn("**Copertina.**", testo)
         self.assertIn("6. **Vicini di scaffale.**", testo)
 
     def test_con_la_nicchia_chiede_i_primi_venti(self):
         risposte = avvio.Avvio()
         avvio.registra(risposte, nicchia="household budgeting", mercato="amazon.co.uk")
-        nome, testo = avvio.richiesta_cowork(risposte, "libro", "r", "l")
+        nome, testo = avvio.richiesta_cowork(risposte, "libro", {})
         self.assertEqual(nome, "cowork-nicchia.md")
         self.assertIn("household budgeting", testo)
         self.assertIn("GBP", testo)
@@ -282,6 +282,47 @@ class TestImporta(Base):
         self.assertIn("cowork-concorrente-risposta.md",
                       render_agent_markdown(get_agent("scheda-concorrente")))
         self.assertIn("originalita.json", render_agent_markdown(get_agent("originalita")))
+
+
+class TestParoleChiave(Base):
+    def test_l_avvio_chiede_anche_le_parole_chiave_della_nicchia(self):
+        from kdpfactory import cli
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            cli.main(["--no-backup", "--books-dir", str(self.books), "avvio", "libro",
+                      "--concorrente", "B0B6NY89RB", "--pagina", "incolla", "--predefinite"])
+        cartella = concorrente.cartella(self.project)
+        self.assertFalse((cartella / "cowork-concorrente.md").exists())
+        testo = (cartella / "cowork-parole-chiave.md").read_text(encoding="utf-8")
+        self.assertIn("Ruolo: parole-chiave", testo)
+        for strumento in ("Helium 10", "Publisher Rocket", "Google Trends", "i=stripbooks"):
+            self.assertIn(strumento, testo)
+        self.assertIn("/dp/B0B6NY89RB", testo)
+
+    def test_la_verifica_elenca_le_frasi_e_le_categorie_della_scheda(self):
+        from kdpfactory import parolechiave
+
+        nome, testo = parolechiave.verifica(
+            "Titolo — Sottotitolo", ["frase uno", "frase due"], ["Books > A > B"],
+            "amazon.co.uk", "libro", {},
+        )
+        self.assertEqual(nome, "cowork-verifica-parole-chiave.md")
+        self.assertIn("   - frase uno", testo)
+        self.assertIn("   - Books > A > B", testo)
+        self.assertIn("GBP", testo)
+        self.assertIn("Ruolo: parole-chiave", testo)
+
+    def test_il_posizionamento_riceve_le_parole_chiave_di_cowork(self):
+        from kdpfactory.agents.base import AgentContext, get_agent
+
+        concorrente.cartella(self.project).mkdir(parents=True)
+        (concorrente.cartella(self.project) / "cowork-parole-chiave-risposta.md").write_text(
+            "Esito: completa\n| frase | sì |\n", encoding="utf-8")
+        trovate = concorrente.leggi_parole_chiave(self.project)
+        prompt = get_agent("posizionamento").user(AgentContext(
+            spec=BookSpec(slug="libro", title="T"), metadata={"parole_chiave": trovate}))
+        self.assertIn("PAROLE CHIAVE CERCATE SU AMAZON", prompt)
+        self.assertIn("| frase | sì |", prompt)
 
 
 class TestCopertina(Base):

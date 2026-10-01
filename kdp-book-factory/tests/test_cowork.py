@@ -96,6 +96,57 @@ class TestCanaleCowork(unittest.TestCase):
         self.assertIn("non ci sono richieste aperte", cowork.avviso(chiuse, {}))
 
 
+class TestRuoli(unittest.TestCase):
+    """Ogni chat di Cowork prende solo le richieste del suo ruolo."""
+
+    CANALE = {
+        "ramo": "ramo-x",
+        "ruoli": {
+            "concorrente": {"chat": "Concorrente", "attivita": "NEXTUP — Concorrente",
+                            "orari": ["7:52", "13:52"], "compito": "la pagina del concorrente"},
+            "parole-chiave": {"chat": "Parole chiave", "attivita": "NEXTUP — Parole chiave",
+                              "orari": ["8:07"], "compito": "le parole chiave"},
+        },
+        "progetto": {"nome": "NEXTUP — Cowork", "attivita_dismessa": "Cowork — casella NEXTUP"},
+    }
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self._tmp.cleanup)
+        self.radice = Path(self._tmp.name)
+        for relativo, ruolo in (
+            ("books/a/concorrente/cowork-concorrente.md", "concorrente"),
+            ("books/a/concorrente/cowork-parole-chiave.md", "parole-chiave"),
+        ):
+            scrivi(self.radice, relativo,
+                   cowork.intestazione("Titolo", "x-risposta.md", ruolo, self.CANALE))
+        scrivi(self.radice, "books/a/manuale/cowork-vecchia.md", "# senza ruolo\n")
+
+    def test_il_ruolo_si_legge_dalla_richiesta(self):
+        ruoli = {r.argomento: r.ruolo for r in cowork.richieste(self.radice)}
+        self.assertEqual(ruoli, {"concorrente": "concorrente", "parole-chiave": "parole-chiave",
+                                 "vecchia": ""})
+
+    def test_l_avviso_di_un_ruolo_elenca_solo_le_sue(self):
+        testo = cowork.avviso(cowork.richieste(self.radice), self.CANALE, ruolo="parole-chiave")
+        self.assertIn("cowork-parole-chiave.md", testo)
+        self.assertNotIn("cowork-concorrente.md", testo)
+        self.assertIn("«parole-chiave»", testo)
+
+    def test_lo_stato_segnala_le_richieste_che_nessuno_prende(self):
+        testo = cowork.rapporto(cowork.richieste(self.radice), set(self.CANALE["ruoli"]))
+        self.assertIn("nessun giro di Cowork le prende: books/a/manuale/cowork-vecchia.md", testo)
+
+    def test_il_progetto_ha_una_attivita_per_ruolo(self):
+        testo = cowork.progetto(self.CANALE)
+        for ruolo, dati in self.CANALE["ruoli"].items():
+            self.assertIn(f"### {dati['attivita']}", testo)
+            self.assertIn(f"«Ruolo: {ruolo}»", testo)
+        self.assertIn("alle 7:52 e alle 13:52", testo)
+        self.assertIn("Disattiva l'attività «Cowork — casella NEXTUP»", testo)
+        self.assertIn("non inserisci\n     credenziali", testo)
+
+
 class TestGitVero(unittest.TestCase):
     """L'adattatore a git, su un repository vero con un remoto locale: niente rete."""
 

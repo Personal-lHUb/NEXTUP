@@ -1,5 +1,7 @@
 # Cowork · pagina del concorrente — psychic-intuition
 
+Ruolo: concorrente
+
 Richiesta della fabbrica per Cowork, con le regole di
 `kdp-book-factory/config/leggimi-cowork.md`.
 La risposta va in `cowork-concorrente-risposta.md`, accanto a questo file,

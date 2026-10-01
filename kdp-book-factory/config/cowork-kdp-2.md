@@ -1,15 +1,22 @@
 # Cowork · regole KDP, seguito — il sistema
 
+Ruolo: regole-kdp
+
 Richiesta della fabbrica per Cowork, con le regole di
-`kdp-book-factory/config/leggimi-cowork.md`. La risposta va in `cowork-kdp-2-risposta.md`,
-accanto a questo file, sul ramo `claude/dreamy-archimedes-hf8w45`, con la stessa
-numerazione.
+`kdp-book-factory/config/leggimi-cowork.md`.
+La risposta va in `cowork-kdp-2-risposta.md`, accanto a questo file,
+sul ramo `claude/dreamy-archimedes-hf8w45`, con la stessa numerazione.
+Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
+Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
+scrivilo invece di stimare: l'accesso non lo fai tu.
 
 È il seguito di `cowork-kdp.md`, che hai già fatto (risposta parziale). Restano i
-due punti che le pagine di aiuto non dicevano. Tutti e due si leggono solo dentro
-KDP: servono l'accesso dell'autore a kdp.amazon.com nel browser di Cowork e la
-sola lettura. Non salvare niente: niente titoli, bozze o impostazioni cambiate.
-Se l'accesso non c'è, rispondi «Esito: parziale» con il motivo, senza stimare.
+punti che le pagine di aiuto non dicevano, più il selettore delle categorie che
+era in `books/household-bills/manuale/cowork-amazon-2.md` (ritirata: i suoi punti
+sono passati ai ruoli che li fanno). Tutti si leggono solo dentro KDP: servono
+l'accesso dell'autore a kdp.amazon.com nel browser di Cowork e la sola lettura.
+Non salvare niente: niente titoli, bozze o impostazioni cambiate. Se l'accesso
+non c'è, rispondi «Esito: parziale» con il motivo, senza stimare.
 
 1. **Pagine massime, carta crema, cartaceo 6x9.** Le pagine di aiuto danno 776
    per la crema solo nella riga 5x8. Controlla il massimo per il 6x9 con il
@@ -19,3 +26,11 @@ Se l'accesso non c'è, rispondi «Esito: parziale» con il motivo, senza stimare
 2. **Lunghezza delle parole chiave.** Nel flusso di un cartaceo nuovo, alla
    voce Keywords, riporta quanti caratteri accetta ciascuno dei sette campi, o
    l'avviso che compare quando si supera il limite. Poi esci senza salvare.
+3. **Selettore delle categorie (cartaceo, amazon.com).** Nello stesso flusso,
+   alla voce Categories, controlla se esistono queste due e con quale percorso
+   esatto, poi esci senza salvare:
+   - Business & Money > Personal Finance > Budgeting & Money Management
+   - Reference > Consumer Guides
+
+   Servono a «Bills in Order» (`books/household-bills/book.json`). Se una manca,
+   riporta la più vicina che c'è.

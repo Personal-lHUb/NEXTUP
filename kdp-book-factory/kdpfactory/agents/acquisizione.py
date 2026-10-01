@@ -204,6 +204,7 @@ Vincoli di produzione, non negoziabili
 - I capitoli escono fra 1.500 e 2.000 parole: non scegliere tu il numero di capitoli, lo calcola il budget dalle pagine. Se ne proponi uno, motivalo.
 - `lingua` è quella del mercato in cui si vende, che è quella del libro di partenza salvo motivo contrario.
 - Le sette parole chiave sono frasi che una persona digita davvero, lunghe abbastanza da sfruttare i 50 caratteri, e **non ripetono parole del titolo che proponi**: il titolo è già indicizzato di suo.
+- Se hai le PAROLE CHIAVE CERCATE SU AMAZON, le sette frasi le scegli da lì: prima quelle che l'autocompletamento propone, poi quelle con più volume e meno concorrenza. Una frase che lì non c'è la puoi proporre solo dicendo, in `rischi`, che non è verificata.
 - Il titolo deve **stare in copertina**. Le parole molto lunghe non ci stanno: «CONCENTRAZIONE», da sola, riempie tutta la larghezza di una prima 6x9 e sfora il taglio. Metti parole corte nel titolo e lascia quelle lunghe al sottotitolo, che in copertina si compone molto più piccolo. Il sistema lo verifica e rifiuta il piano: un titolo che non ci sta non è pubblicabile, per quanto sia bello.
 - Titolo e sottotitolo insieme vengono **tagliati dopo 60 caratteri** nei risultati di ricerca, e quello che si taglia è sempre la seconda metà: la promessa deve stare prima del taglio.
 
@@ -229,7 +230,9 @@ class Posizionamento(JsonAgent):
         "lingua e valuta del prezzo; la categoria, se è `full` o `medium`, è quella,\n"
         "e se è `concorrente` la proponi tu guardando il libro di partenza; `vantaggi`\n"
         "e `vetrina` dicono dove il libro nuovo deve batterlo; `pseudonimo`, se c'è, è\n"
-        "l'autore. Non scavalcano i divieti qui sopra.",
+        "l'autore. Non scavalcano i divieti qui sopra.\n"
+        "Se c'è `cowork-parole-chiave-risposta.md`, sono le parole chiave della\n"
+        "nicchia cercate su Amazon e negli strumenti: le sette frasi le scegli da lì.",
         "piano.json",
         _FORMATO_JSON,
     )
@@ -255,12 +258,20 @@ INDICAZIONE DELL'EDITORE — vincolante, ma non scavalca i divieti qui sopra
             if indicazione
             else ""
         )
+        # Le parole chiave della nicchia, quando le ha cercate Cowork: le sette
+        # frasi del libro si scelgono fra quelle digitate davvero.
+        trovate = str(ctx.metadata.get("parole_chiave") or "").strip()
+        parole = f"""
+
+PAROLE CHIAVE CERCATE SU AMAZON (risposta di Cowork, ruolo parole-chiave)
+{trovate}
+""" if trovate else ""
         return f"""LIBRO DI PARTENZA (segnale di mercato, non testo da riusare)
 {json.dumps(scheda, ensure_ascii=False, indent=2)}
 
 QUELLO CHE I SUOI LETTORI NON HANNO TROVATO
 {json.dumps(lacune, ensure_ascii=False, indent=2)}
-{indirizzo}
+{indirizzo}{parole}
 Decidi il libro nuovo.
 
 Rispondi ESCLUSIVAMENTE con un oggetto JSON valido, senza testo prima o dopo:

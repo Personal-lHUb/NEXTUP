@@ -175,6 +175,12 @@ def leggi_indicazione(project: BookProject) -> str:
     return "\n".join(tenute).strip()
 
 
+def leggi_parole_chiave(project: BookProject) -> str:
+    """Le parole chiave della nicchia, come le ha riportate Cowork; vuoto se non sono arrivate."""
+    risposta = cartella(project) / "cowork-parole-chiave-risposta.md"
+    return risposta.read_text(encoding="utf-8").strip() if risposta.exists() else ""
+
+
 def leggi_vincoli(project: BookProject, indicazione: str = "") -> str:
     """L'indirizzo editoriale con in coda le risposte alle domande d'avvio.
 
@@ -227,6 +233,7 @@ def analizza(
                 "scheda": risultato.scheda,
                 "lacune": risultato.lacune,
                 "indicazione": risultato.indicazione,
+                "parole_chiave": leggi_parole_chiave(project),
             },
         ),
         client,

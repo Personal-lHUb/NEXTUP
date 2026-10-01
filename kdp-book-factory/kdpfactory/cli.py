@@ -24,6 +24,7 @@ from . import (
     imagebrief,
     kdpspecs,
     manuale,
+    parolechiave,
     pipeline,
     planner,
     writer,
@@ -841,6 +842,48 @@ def cmd_puzzle(args) -> int:
     return 0 if report.ok else 1
 
 
+def _scrivi_richiesta(project: BookProject, args, richiesta: Path, testo: str, fatti: list[str]) -> None:
+    """Scrive una richiesta a Cowork, senza mai passare sopra una domanda che ha già risposta."""
+    risposta = richiesta.with_name(richiesta.stem + cowork.SUFFISSO_RISPOSTA + ".md")
+    if not richiesta.exists():
+        richiesta.parent.mkdir(parents=True, exist_ok=True)
+        richiesta.write_text(testo, encoding="utf-8")
+        fatti.append(str(richiesta))
+    elif richiesta.read_text(encoding="utf-8") != testo:
+        if risposta.exists():
+            # Una risposta di Cowork vale per la domanda che ha letto: la
+            # versione nuova va in un seguito, non sopra la vecchia.
+            print(f"\n! {richiesta.name} ha già la risposta di Cowork: la richiesta non si\n"
+                  f"  riscrive. Se serve altro, apri {richiesta.stem}-2.md con i soli punti nuovi.")
+        else:
+            save_backup(project, args, f"{richiesta.name} precedente", force=True)
+            richiesta.write_text(testo, encoding="utf-8")
+            fatti.append(f"{richiesta} (aggiornata)")
+
+
+def cmd_parole_chiave(args) -> int:
+    """La verifica delle parole chiave della scheda: la richiesta per Cowork, ruolo «parole-chiave»."""
+    project, spec = open_project(args)
+    risposte = avvio.leggi(project)
+    mercato = risposte.mercato if risposte else ("amazon.it" if spec.language == "it" else "amazon.com")
+    if len(spec.keywords) < 7:
+        print(f"! La scheda ha {len(spec.keywords)} parole chiave su 7: si verificano quelle che ci sono.")
+    canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
+    titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
+    nome, testo = parolechiave.verifica(
+        titolo, spec.keywords, spec.categories, mercato, spec.slug, canale
+    )
+    fatti: list[str] = []
+    _scrivi_richiesta(project, args, project.root / "manuale" / nome, testo, fatti)
+    for percorso in fatti:
+        print(f"Scritto {percorso}")
+    if not fatti:
+        print(f"La richiesta {nome} è già aggiornata.")
+    else:
+        print("\nCommit e push sul ramo del canale in questo stesso giro, poi `cowork stato`.")
+    return 0
+
+
 def cmd_avvio(args) -> int:
     """Le domande d'avvio di un libro nuovo: le registra e, finite, prepara la fase 0.
 
@@ -922,41 +965,26 @@ def cmd_avvio(args) -> int:
     if risposte.copertina and not avvio.copertina_path(project).exists():
         avvio.copertina_path(project).write_text(avvio.COPERTINA_TEMPLATE, encoding="utf-8")
         fatti.append(str(avvio.copertina_path(project)))
+    radice = Path(__file__).resolve().parent.parent
+    canale = cowork.configurazione(radice)
     if risposte.pagina == "cowork" and (risposte.asin or risposte.nicchia):
-        radice = Path(__file__).resolve().parent.parent
-        canale = cowork.configurazione(radice)
-        nome, testo = avvio.richiesta_cowork(
-            risposte,
-            args.slug,
-            canale.get("ramo", "claude/dreamy-archimedes-hf8w45"),
-            canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md"),
-        )
-        richiesta = acquisizione.cartella(project) / nome
-        risposta = richiesta.with_name(richiesta.stem + cowork.SUFFISSO_RISPOSTA + ".md")
-        if richiesta.exists() and richiesta.read_text(encoding="utf-8") != testo:
-            if risposta.exists():
-                # Una risposta di Cowork vale per la domanda che ha letto: la
-                # versione nuova va in un seguito, non sopra la vecchia.
-                print(f"\n! {richiesta.name} ha già la risposta di Cowork: la richiesta non si\n"
-                      f"  riscrive. Se serve altro, apri {richiesta.stem}-2.md con i soli punti nuovi.")
-            else:
-                save_backup(project, args, f"{nome} precedente", force=True)
-                richiesta.write_text(testo, encoding="utf-8")
-                fatti.append(f"{richiesta} (aggiornata)")
-        elif not richiesta.exists():
-            richiesta.parent.mkdir(parents=True, exist_ok=True)
-            richiesta.write_text(testo, encoding="utf-8")
-            fatti.append(str(richiesta))
+        nome, testo = avvio.richiesta_cowork(risposte, args.slug, canale)
+        _scrivi_richiesta(project, args, acquisizione.cartella(project) / nome, testo, fatti)
+    if risposte.asin:
+        # Le parole chiave della nicchia si cercano comunque, chiunque porti la
+        # pagina: il posizionamento sceglie le sette frasi da quella tabella.
+        nome, testo = parolechiave.esplorazione(risposte.asin, risposte.mercato, args.slug, canale)
+        _scrivi_richiesta(project, args, acquisizione.cartella(project) / nome, testo, fatti)
     save_backup(project, args, "domande d'avvio")
 
     print("\nDomande d'avvio complete.")
     for percorso in fatti:
         print(f"  scritto {percorso}")
-    if risposte.pagina == "cowork":
-        print("\nRichiesta per Cowork: commit e push sul ramo del canale in questo stesso giro,")
-        print("poi `python -m kdpfactory cowork stato`. Arrivata la risposta, la fase 0 la")
-        print("legge dov'è: non serve copiarla in concorrente/pagina.md.")
-    elif risposte.asin:
+    if risposte.asin or risposte.pagina == "cowork":
+        print("\nRichieste per Cowork: commit e push sul ramo del canale in questo stesso giro,")
+        print("poi `python -m kdpfactory cowork stato`. Arrivate le risposte, la fase 0 le")
+        print("legge dove sono: non serve copiarle in concorrente/pagina.md.")
+    if risposte.pagina == "incolla" and risposte.asin:
         print(f"\nIncolla la pagina Amazon in {acquisizione.pagina_path(project)}, poi parte la fase 0.")
     return 0
 
@@ -1096,19 +1124,33 @@ def cmd_cowork(args) -> int:
     """Il canale con Cowork su GitHub: stato delle richieste, e l'avviso da mandargli."""
     radice = Path(__file__).resolve().parent.parent
     canale = cowork.configurazione(radice)
+    ruoli = cowork.ruoli(canale)
+    if args.ruolo and args.ruolo not in ruoli:
+        raise SystemExit(f"Ruolo sconosciuto: {args.ruolo}. Ruoli: {', '.join(ruoli)}.")
+    if args.azione == "progetto":
+        # Il testo per Claude Desktop nasce dalla configurazione: cambiato un
+        # ruolo o un orario, si rigenera invece di correggerlo a mano.
+        uscita = radice / "config" / "progetto-cowork.md"
+        uscita.write_text(cowork.progetto(canale), encoding="utf-8")
+        print(f"Scritto {uscita}: istruzioni del progetto, una chat e un'attività per ruolo.")
+        return 0
     git = cowork.Git(radice, canale.get("ramo", "claude/dreamy-archimedes-hf8w45"))
     elenco = cowork.richieste(radice, git.remoto, git.ultimo_commit)
     if args.azione == "avviso":
-        da_inviare = [r.percorso for r in elenco if r.stato == cowork.APERTA and r.invio != cowork.INVIATA]
+        da_inviare = [
+            r.percorso for r in elenco
+            if r.stato == cowork.APERTA and r.invio != cowork.INVIATA
+            and (not args.ruolo or r.ruolo == args.ruolo)
+        ]
         if da_inviare:
             # Cowork legge il ramo remoto: una richiesta non pubblicata lì non c'è, o è vecchia.
             print("Da inviare prima dell'avviso (commit e push): " + ", ".join(da_inviare), file=sys.stderr)
-        print(cowork.avviso(elenco, canale, git.percorso_repo), end="")
+        print(cowork.avviso(elenco, canale, git.percorso_repo, ruolo=args.ruolo or ""), end="")
     elif args.json:
         dati = {"canale": canale, "richieste": [r.to_dict() for r in elenco]}
         print(json.dumps(dati, ensure_ascii=False, indent=2))
     else:
-        print(cowork.rapporto(elenco), end="")
+        print(cowork.rapporto(elenco, set(ruoli)), end="")
     return 0
 
 
@@ -1415,9 +1457,23 @@ def build_parser() -> argparse.ArgumentParser:
         "cowork",
         help="richieste di ricerca web a Cowork, su GitHub: stato, e l'avviso da mandargli",
     )
-    p.add_argument("azione", nargs="?", default="stato", choices=["stato", "avviso"])
+    p.add_argument(
+        "azione",
+        nargs="?",
+        default="stato",
+        choices=["stato", "avviso", "progetto"],
+        help="progetto: scrive config/progetto-cowork.md, il testo per le chat e le attività dei ruoli",
+    )
+    p.add_argument("--ruolo", default="", help="l'avviso per la chat di un solo ruolo")
     p.add_argument("--json", action="store_true", help="stato completo in JSON")
     p.set_defaults(func=cmd_cowork)
+
+    p = sub.add_parser(
+        "parole-chiave",
+        help="la verifica delle sette parole chiave della scheda: la richiesta per Cowork",
+    )
+    p.add_argument("slug")
+    p.set_defaults(func=cmd_parole_chiave)
 
     p = sub.add_parser("specs", help="specifiche KDP per formato e pagine")
     p.add_argument("--pages", type=int, default=140)

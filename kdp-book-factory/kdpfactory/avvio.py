@@ -24,6 +24,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import date
 from pathlib import Path
 
+from . import cowork
 from .models import BookProject
 
 #: Mercati in cui la pipeline sa fare un libro: una lingua che i controlli
@@ -464,27 +465,24 @@ def leggi_copertina(project: BookProject) -> str:
     return "\n".join(r for r in testo.splitlines() if not r.lstrip().startswith("#")).strip()
 
 
-def richiesta_cowork(avvio: Avvio, slug: str, ramo: str, leggimi: str) -> tuple[str, str]:
-    """Il nome e il testo della richiesta a Cowork per questo libro.
+def consegna(mercato: str) -> str:
+    """Il paragrafo che mette il browser di Cowork nel mercato giusto, valuta compresa."""
+    dati = MERCATI[mercato]
+    return (
+        f"Prima di cominciare: dal pulsante «Deliver to» di {mercato} imposta un\n"
+        f"indirizzo {dati['paese']} (per esempio {dati['cap']}), così prezzi e\n"
+        f"disponibilità sono quelli del mercato, in {dati['valuta']}. Alla fine rimetti\n"
+        "l'indirizzo com'era. Non serve l'accesso a nessun account.\n"
+    )
+
+
+def richiesta_cowork(avvio: Avvio, slug: str, canale: dict) -> tuple[str, str]:
+    """Il nome e il testo della richiesta a Cowork per questo libro, ruolo «concorrente».
 
     Con l'ASIN chiede la pagina del concorrente; con la sola nicchia chiede i
     primi 20 della categoria, da cui la fabbrica sceglie il concorrente.
     """
-    mercato = MERCATI[avvio.mercato]
-    testa = (
-        f"Richiesta della fabbrica per Cowork, con le regole di\n`{leggimi}`.\n"
-        "La risposta va in `{risposta}`, accanto a questo file,\n"
-        f"sul ramo `{ramo}`, con la stessa numerazione.\n"
-        "Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.\n"
-        "Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,\n"
-        "scrivilo invece di stimare: l'accesso non lo fai tu.\n"
-    )
-    consegna = (
-        f"Prima di cominciare: dal pulsante «Deliver to» di {avvio.mercato} imposta un\n"
-        f"indirizzo {mercato['paese']} (per esempio {mercato['cap']}), così prezzi e\n"
-        f"disponibilità sono quelli del mercato, in {avvio.valuta}. Alla fine rimetti\n"
-        "l'indirizzo com'era. Non serve l'accesso a nessun account.\n"
-    )
+    consegna_ = consegna(avvio.mercato)
     if avvio.asin:
         nome = "cowork-concorrente.md"
         punti = [
@@ -528,11 +526,11 @@ def richiesta_cowork(avvio: Avvio, slug: str, ramo: str, leggimi: str) -> tuple[
             uso.append("- il 6 va in `concorrente/copertina.md`, per il brief di copertina;")
         uso.append("- i vicini di scaffale vanno al `posizionamento`, per prezzo e pagine.")
         corpo = (
-            f"# Cowork · pagina del concorrente — {slug}\n\n"
-            + testa.replace("{risposta}", "cowork-concorrente-risposta.md")
+            cowork.intestazione(f"Cowork · pagina del concorrente — {slug}",
+                                "cowork-concorrente-risposta.md", "concorrente", canale)
             + f"\nUn libro nuovo nasce contro questo: ASIN {avvio.asin}, su {avvio.mercato}. Serve\n"
             "la sua pagina Amazon, che dal container della fabbrica non si raggiunge.\n\n"
-            + consegna
+            + consegna_
             + "\n"
             + "\n".join(punti)
             + "\n\nChi usa i risultati:\n"
@@ -556,12 +554,12 @@ def richiesta_cowork(avvio: Avvio, slug: str, ramo: str, leggimi: str) -> tuple[
         "   più utili.",
     ]
     corpo = (
-        f"# Cowork · la nicchia del concorrente — {slug}\n\n"
-        + testa.replace("{risposta}", "cowork-nicchia-risposta.md")
+        cowork.intestazione(f"Cowork · la nicchia del concorrente — {slug}",
+                            "cowork-nicchia-risposta.md", "concorrente", canale)
         + f"\nUn libro nuovo deve sfidare un libro che vende già nella nicchia «{avvio.nicchia}».\n"
         "Il concorrente lo sceglie la fabbrica, fra quelli che riporti: quello che\n"
         "vende di più con le recensioni più scontente.\n\n"
-        + consegna
+        + consegna_
         + "\n"
         + "\n".join(punti)
         + "\n\nChi usa i risultati: la fabbrica sceglie il concorrente e apre\n"
