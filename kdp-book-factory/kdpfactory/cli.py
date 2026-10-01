@@ -907,8 +907,18 @@ def cmd_avvio(args) -> int:
 
     # Tutte viste: si prepara la fase 0.
     fatti: list[str] = []
-    if risposte.asin and not acquisizione.pagina_path(project).exists():
+    pagina = acquisizione.pagina_path(project)
+    if risposte.asin and not pagina.exists():
         fatti.append(str(acquisizione.prepara(project, risposte.asin)))
+    elif risposte.asin and risposte.asin not in pagina.read_text(encoding="utf-8"):
+        # Il concorrente è cambiato: il modulo si rifà solo se è ancora vuoto,
+        # una pagina già incollata non si butta.
+        incollato = pagina.read_text(encoding="utf-8").split("-->", 1)[-1].strip()
+        if not incollato:
+            fatti.append(f"{acquisizione.prepara(project, risposte.asin)} (nuovo ASIN)")
+        else:
+            print(f"\n! {pagina.name} contiene già una pagina incollata, di un altro ASIN: "
+                  "controlla che sia quella del concorrente giusto.")
     if risposte.copertina and not avvio.copertina_path(project).exists():
         avvio.copertina_path(project).write_text(avvio.COPERTINA_TEMPLATE, encoding="utf-8")
         fatti.append(str(avvio.copertina_path(project)))

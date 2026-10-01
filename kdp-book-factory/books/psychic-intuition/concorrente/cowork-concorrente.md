@@ -8,7 +8,7 @@ Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
 Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
 scrivilo invece di stimare: l'accesso non lo fai tu.
 
-Un libro nuovo nasce contro questo: ASIN B0C9VYK1T3, su amazon.com. Serve
+Un libro nuovo nasce contro questo: ASIN B0B6NY89RB, su amazon.com. Serve
 la sua pagina Amazon, che dal container della fabbrica non si raggiunge.
 
 Prima di cominciare: dal pulsante «Deliver to» di amazon.com imposta un
@@ -16,7 +16,7 @@ indirizzo degli Stati Uniti (per esempio 10001), così prezzi e
 disponibilità sono quelli del mercato, in USD. Alla fine rimetti
 l'indirizzo com'era. Non serve l'accesso a nessun account.
 
-1. **Scheda.** Apri https://www.amazon.com/dp/B0C9VYK1T3 e riporta,
+1. **Scheda.** Apri https://www.amazon.com/dp/B0B6NY89RB e riporta,
    copiandoli dalla pagina: titolo e sottotitolo, autore, formato, prezzo del
    cartaceo e dell'eBook in USD, e dal riquadro «Product details»
    pagine, editore, data di pubblicazione e dimensioni.

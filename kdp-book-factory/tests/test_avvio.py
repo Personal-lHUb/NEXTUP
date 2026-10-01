@@ -211,6 +211,24 @@ class TestComando(Base):
         self.assertIn("-2.md", testo)
         self.assertEqual(richiesta.read_text(encoding="utf-8"), prima)
 
+    def test_un_concorrente_cambiato_rifa_richiesta_e_modulo_vuoto(self):
+        self.main("--concorrente", "B0C9VYK1T3", "--predefinite")
+        testo = self.main("--concorrente", "B0B6NY89RB")
+        self.assertIn("(nuovo ASIN)", testo)
+        cartella = concorrente.cartella(self.project)
+        self.assertIn("B0B6NY89RB", (cartella / "pagina.md").read_text(encoding="utf-8"))
+        richiesta = (cartella / "cowork-concorrente.md").read_text(encoding="utf-8")
+        self.assertIn("/dp/B0B6NY89RB", richiesta)
+        self.assertNotIn("B0C9VYK1T3", richiesta)
+
+    def test_una_pagina_incollata_non_si_butta(self):
+        self.main("--concorrente", "B0C9VYK1T3", "--predefinite")
+        pagina = concorrente.pagina_path(self.project)
+        pagina.write_text(pagina.read_text(encoding="utf-8") + "Titolo incollato\n", encoding="utf-8")
+        testo = self.main("--concorrente", "B0B6NY89RB")
+        self.assertIn("contiene già una pagina incollata", testo)
+        self.assertIn("Titolo incollato", pagina.read_text(encoding="utf-8"))
+
     def test_il_concorrente_non_ha_default(self):
         testo = self.main("--predefinite")
         self.assertIn("Quale libro deve sfidare", testo)
