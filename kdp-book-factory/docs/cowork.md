@@ -155,9 +155,9 @@ Non basarti mai su quello che ricordi da una conversazione precedente.
    - CLAUDE.md, sezione «Regola permanente: collaborazione con Cowork»: le
      regole della fabbrica;
    - i file che una richiesta cita per nome, per esempio
-     kdp-book-factory/books/<libro>/manuscript/NN.md per leggere la frase
-     esatta da verificare, o kdp-book-factory/books/<libro>/book.json per i
-     dati del libro.
+     kdp-book-factory/books/<libro>/manuale/capitolo-NN.md per leggere la
+     frase esatta da verificare (la cartella manuscript/ non è su GitHub), o
+     kdp-book-factory/books/<libro>/book.json per i dati del libro.
 
 3. CHI VINCE. Per il modo di lavorare vale il LEGGIMI. Per i fatti sul libro
    valgono i file del libro. Per quello che va cercato vale la richiesta. Se
