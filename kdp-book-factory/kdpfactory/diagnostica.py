@@ -238,6 +238,11 @@ def _scheda(state: dict, spec: BookSpec, report: BookReport) -> None:
     titolo_esteso = f"{title}: {subtitle}" if subtitle else title
     paragraphs = meta.get("description_paragraphs") or []
     description = "\n\n".join(paragraphs)
+    # Nei 4000 caratteri di KDP contano anche i tag HTML («<b>test</b>» vale 11):
+    # il limite si misura sulla descrizione come viene caricata, non sul testo.
+    description_html = (
+        metadata_module.build_description_html(meta, spec.language) if paragraphs else ""
+    )
 
     title_words = _words(f"{title} {subtitle}")
     ripetute = [k for k in keywords if _words(k) & title_words]
@@ -265,6 +270,7 @@ def _scheda(state: dict, spec: BookSpec, report: BookReport) -> None:
         "categorie_usate": len(categories),
         "categorie_slot": CATEGORY_SLOTS,
         "descrizione_caratteri": len(description),
+        "descrizione_caratteri_html": len(description_html),
         "descrizione_paragrafi": len(paragraphs),
         "prima_dello_stacco": description[:DESCRIPTION_FOLD_CHARS],
     }
@@ -325,6 +331,13 @@ def _scheda(state: dict, spec: BookSpec, report: BookReport) -> None:
         report.rilievi.append(Finding(
             "scheda", "alto", "Nessuna descrizione nella scheda prodotto.")
         )
+    if len(description_html) > DESCRIPTION_MAX_CHARS:
+        report.rilievi.append(Finding(
+            "scheda", "alto",
+            f"Descrizione di {len(description_html)} caratteri con i tag HTML, oltre i "
+            f"{DESCRIPTION_MAX_CHARS} di KDP: i tag contano nel limite.",
+            "Accorciare un paragrafo o un punto dell'elenco.",
+        ))
 
 
 def _copertina(state: dict, report: BookReport) -> None:

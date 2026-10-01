@@ -130,6 +130,15 @@ class TestScheda(unittest.TestCase):
         self.assertEqual(due.impatto, "medio")
         self.assertIn("riempimento", due.leva)
 
+    def test_nei_4000_caratteri_contano_anche_i_tag(self):
+        """KDP conta i tag HTML nel limite della descrizione (verificato da Cowork)."""
+        quasi = ["x" * 1990, "y" * 1990]           # 3982 caratteri di testo
+        report = self.scheda({"description_paragraphs": quasi})
+        self.assertGreater(report.scheda["descrizione_caratteri_html"], 4000)
+        self.assertTrue(any("tag HTML" in f.fatto for f in report.rilievi))
+        report = self.scheda({"description_paragraphs": ["x" * 1500]})
+        self.assertFalse(any("tag HTML" in f.fatto for f in report.rilievi))
+
     def test_i_primi_caratteri_della_descrizione_sono_estratti(self):
         testo = "A" * 400
         report = self.scheda({"description_paragraphs": [testo]})

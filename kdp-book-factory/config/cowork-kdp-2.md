@@ -1,0 +1,21 @@
+# Cowork · regole KDP, seguito — il sistema
+
+Richiesta della fabbrica per Cowork, con le regole di
+`kdp-book-factory/config/leggimi-cowork.md`. La risposta va in `cowork-kdp-2-risposta.md`,
+accanto a questo file, sul ramo `claude/dreamy-archimedes-hf8w45`, con la stessa
+numerazione.
+
+È il seguito di `cowork-kdp.md`, che hai già fatto (risposta parziale). Restano i
+due punti che le pagine di aiuto non dicevano. Tutti e due si leggono solo dentro
+KDP: servono l'accesso dell'autore a kdp.amazon.com nel browser di Cowork e la
+sola lettura. Non salvare niente: niente titoli, bozze o impostazioni cambiate.
+Se l'accesso non c'è, rispondi «Esito: parziale» con il motivo, senza stimare.
+
+1. **Pagine massime, carta crema, cartaceo 6x9.** Le pagine di aiuto danno 776
+   per la crema solo nella riga 5x8. Controlla il massimo per il 6x9 con il
+   calcolatore delle copertine di KDP (Cover Calculator) o con il campo del
+   numero di pagine nel flusso di un cartaceo nuovo. Riporta il numero e dove
+   l'hai letto.
+2. **Lunghezza delle parole chiave.** Nel flusso di un cartaceo nuovo, alla
+   voce Keywords, riporta quanti caratteri accetta ciascuno dei sette campi, o
+   l'avviso che compare quando si supera il limite. Poi esci senza salvare.

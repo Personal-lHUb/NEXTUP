@@ -18,9 +18,9 @@ passa dal repository GitHub `Personal-lHUb/NEXTUP`, ramo
 
 | cartella | che cosa si cerca | richiesta | stato |
 |---|---|---|---|
-| `kdp-book-factory/config/` | Le regole KDP che valgono per ogni libro: costi di stampa (`printing_costs.json` non è mai stato verificato), dorso, abbondanze, pagine minime e massime, limiti di parole chiave e descrizione. | `cowork-kdp.md` | aperta, 6 punti |
-| `kdp-book-factory/books/household-bills/manuale/` | Amazon e KDP per «Bills in Order»: selettore delle categorie, affollamento, titolo, parole chiave, dati di oggi del concorrente. | `cowork-amazon.md` | aperta, 5 punti |
-| `kdp-book-factory/books/household-bills/manuale/` | Le affermazioni del libro sul mondo (enti, siti, numeri di telefono, regole federali), da controllare sulla fonte ufficiale prima della stampa. | `cowork-fonti.md` | aperta, 13 punti |
+| `kdp-book-factory/config/` | Le regole KDP che valgono per ogni libro: costi di stampa (`printing_costs.json` non è mai stato verificato), dorso, abbondanze, pagine minime e massime, limiti di parole chiave e descrizione. | `cowork-kdp.md`, `cowork-kdp-2.md` | applicata il 1° ottobre; aperto il seguito `-2` (pagine massime crema 6x9, lunghezza delle parole chiave: serve l'accesso a KDP) |
+| `kdp-book-factory/books/household-bills/manuale/` | Amazon e KDP per «Bills in Order»: selettore delle categorie, affollamento, titolo, parole chiave, dati di oggi del concorrente. | `cowork-amazon.md`, `cowork-amazon-2.md` | risposta arrivata, in applicazione (parole chiave e titolo agli agenti); aperto il seguito `-2` (selettore KDP, ranghi del cartaceo, prezzo del concorrente in USD) |
+| `kdp-book-factory/books/household-bills/manuale/` | Le affermazioni del libro sul mondo (enti, siti, numeri di telefono, regole federali), da controllare sulla fonte ufficiale prima della stampa. | `cowork-fonti.md` | applicata il 1° ottobre: 11 affermazioni confermate, 2 riformulate (capitoli 22 e 27) |
 | `kdp-book-factory/books/<slug>/concorrente/` | Per ogni libro nuovo: la pagina Amazon del concorrente, recensioni comprese (fase 0). Cowork la riporta in `cowork-concorrente-risposta.md`, poi la fabbrica la mette in `pagina.md`. | `cowork-concorrente.md`, alla fase 0 | — |
 | `kdp-book-factory/books/skill-acquisition/concorrente/` | La pagina del concorrente ASIN 1797031856. `pagina.md` ha solo il commento. | ancora nessuna | in attesa: si apre se il libro parte |
 

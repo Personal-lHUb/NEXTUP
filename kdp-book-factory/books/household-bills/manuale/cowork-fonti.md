@@ -45,3 +45,5 @@ correzioni le fa la fabbrica.
     finché il ritardo non supera i 60 giorni. È ancora così?
 13. **Militari in servizio** (23). Il Military Lending Act protegge ancora chi è
     in servizio attivo, e i coniugi, sui prestiti rapidi?
+
+Stato: applicata il 2026-10-01 — undici affermazioni confermate. Capitolo 22: il 211 è «a confidential referral line run by local agencies across the United States» (non «free», non «in most of the country»). Capitolo 27: l'Eldercare Locator è «a public service of the federal Administration for Community Living» (non «free»). Il capitolo 19 non dava la frequenza dei rapporti gratuiti: nessuna modifica.

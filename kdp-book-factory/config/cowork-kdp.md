@@ -34,3 +34,5 @@ verifica. Se la pagina non c'è più o dice un'altra cosa, riportalo.
    titoli di altri libri, programmi Amazon).
 6. **Descrizione.** Il limite di 4000 caratteri e i tag HTML che KDP accetta
    nella descrizione.
+
+Stato: applicata il 2026-10-01 — costi di stampa e royalty in config/printing_costs.json (soglia 110 pagine, fisso 1,00 USD / 0,85 GBP / 0,75 EUR, royalty 50% sotto 9,99 USD-EUR e 7,99 GBP) e in kdpfactory/metadata.py; nella diagnostica i tag HTML contano nei 4000 caratteri. Dorso, abbondanze, margini e codice a barre coincidevano. Punti 4 e 5 in cowork-kdp-2.md.

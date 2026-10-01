@@ -150,8 +150,9 @@ finale.
 
 ## Costi e prezzo
 
-Un libro da ~80 pagine 6x9 in bianco e nero sta sotto la soglia delle 108
-pagine, dove il costo di stampa è fisso. Con un prezzo di 8,99 la royalty è
-intorno ai 3 euro/dollari a copia — ma i costi in
-`config/printing_costs.json` sono ancora marcati `DA VERIFICARE`: controllali
-sul calcolatore KDP prima di fissare il prezzo.
+Un libro da ~80 pagine 6x9 in bianco e nero sta sotto la soglia delle 110
+pagine, dove il costo di stampa è fisso (2,30 USD, 2,05 EUR). Attenzione al
+prezzo: sotto 9,99 USD o EUR (7,99 GBP) KDP paga il 50% invece del 60%. A 8,99
+la royalty è di circa 2,20 USD o 2,45 EUR a copia; a 9,99 sale a circa 3,70 USD.
+I costi in `config/printing_costs.json` sono verificati al 30 settembre 2026:
+riverificali prima di fissare il prezzo.

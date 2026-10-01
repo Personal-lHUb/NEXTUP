@@ -107,10 +107,43 @@ def load_printing_config(path: Path | None = None) -> dict:
 
 
 def printing_cost(pages: int, market: dict) -> float:
+    """Costo di stampa KDP: fisso fino alla soglia di pagine, fisso più costo a pagina oltre."""
     rates = market["bianco_e_nero"]
-    if pages <= 108:
-        return float(rates["fino_a_108_pagine"])
-    return float(rates["oltre_108_costo_fisso"]) + pages * float(rates["oltre_108_costo_per_pagina"])
+    if pages <= int(rates["soglia_pagine"]):
+        return float(rates["fino_alla_soglia"])
+    return float(rates["oltre_soglia_costo_fisso"]) + pages * float(rates["oltre_soglia_costo_per_pagina"])
+
+
+def royalty_rate(price: float, market: dict, config: dict | None = None) -> float:
+    """La percentuale di royalty del cartaceo, che su KDP dipende dal prezzo di listino.
+
+    Il 60% vale solo da una soglia di prezzo in su (9,99 USD ed EUR, 7,99 GBP):
+    sotto è il 50%. Il file la applicava sempre al 60%, e un libro a 8,99
+    risultava pagare una royalty che non avrebbe mai visto.
+    """
+    fasce = market.get("royalty")
+    if not fasce:
+        return float((config or {}).get("royalty_rate", 0.6))
+    return float(fasce["alta"]) if price >= float(fasce["alta_da_prezzo"]) - 1e-9 else float(fasce["bassa"])
+
+
+def _royalty(price: float, cost: float, market: dict, config: dict) -> float:
+    return royalty_rate(price, market, config) * price - cost
+
+
+def _first_99(minimum: float, cost: float, market: dict, config: dict, target: float) -> float:
+    """Il primo prezzo in forma x,99, non sotto `minimum`, che rende almeno `target` a copia.
+
+    Si prova un prezzo alla volta perché la percentuale cambia con il prezzo:
+    una formula chiusa sbaglia proprio vicino alla soglia del 60%.
+    """
+    base = max(0, math.floor(minimum))
+    for _ in range(1000):
+        candidate = base + 0.99
+        if candidate >= minimum - 1e-9 and _royalty(candidate, cost, market, config) >= target - 1e-9:
+            return candidate
+        base += 1
+    raise ValueError("nessun prezzo ragionevole rende la royalty richiesta")
 
 
 def _round_to_99(value: float) -> float:
@@ -135,12 +168,13 @@ def price_table(
     Il minimo resta un pavimento: sotto, la royalty va in negativo.
     """
     config = config or load_printing_config()
-    rate = float(config.get("royalty_rate", 0.6))
     rows: list[PriceRow] = []
     for market in config["marketplaces"]:
         cost = printing_cost(pages, market)
-        min_price = max(_round_to_99(cost / rate), float(market["prezzo_minimo_consigliato"]))
-        calcolato = max(_round_to_99((cost + target_royalty) / rate), min_price)
+        min_price = max(
+            _first_99(0.0, cost, market, config, 0.0), float(market["prezzo_minimo_consigliato"])
+        )
+        calcolato = _first_99(min_price, cost, market, config, target_royalty)
         listino = max(price, min_price) if price > 0 else calcolato
         rows.append(
             PriceRow(
@@ -150,7 +184,7 @@ def price_table(
                 printing_cost=cost,
                 min_price=min_price,
                 suggested_price=listino,
-                royalty=listino * rate - cost,
+                royalty=_royalty(listino, cost, market, config),
                 deciso=price > 0 and listino == price,
             )
         )

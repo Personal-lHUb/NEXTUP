@@ -426,6 +426,44 @@ class TestPrezzoDeciso(unittest.TestCase):
             self.assertGreaterEqual(riga.royalty, 0)
 
 
+class TestCostiKDP(unittest.TestCase):
+    """Costi e royalty come li dà KDP (verificati da Cowork il 30 settembre 2026).
+
+    Il file usava la soglia di 108 pagine, costi fissi più bassi e il 60% a
+    qualunque prezzo: su un libro a 8,99 la royalty dichiarata non arrivava mai.
+    """
+
+    def mercato(self, codice):
+        return next(m for m in metadata.load_printing_config()["marketplaces"] if m["codice"] == codice)
+
+    def test_la_soglia_e_110_pagine(self):
+        com = self.mercato("amazon.com")
+        self.assertAlmostEqual(metadata.printing_cost(110, com), 2.30)
+        self.assertAlmostEqual(metadata.printing_cost(111, com), 1.00 + 111 * 0.012)
+        self.assertAlmostEqual(metadata.printing_cost(192, com), 1.00 + 192 * 0.012)
+
+    def test_sotto_9_99_la_royalty_e_del_50(self):
+        com, uk = self.mercato("amazon.com"), self.mercato("amazon.co.uk")
+        self.assertEqual(metadata.royalty_rate(9.98, com), 0.5)
+        self.assertEqual(metadata.royalty_rate(9.99, com), 0.6)
+        self.assertEqual(metadata.royalty_rate(7.99, uk), 0.6)
+        (riga,) = [r for r in metadata.price_table(80, price=8.99) if r.marketplace == "amazon.com"]
+        self.assertAlmostEqual(riga.royalty, 8.99 * 0.5 - 2.30, places=2)
+
+    def test_il_minimo_tiene_conto_del_50(self):
+        """A 50% un prezzo basso può non coprire la stampa anche se al 60% la coprirebbe."""
+        for riga in metadata.price_table(400):
+            self.assertGreaterEqual(riga.royalty, 0)
+            prima = riga.min_price - 1
+            if prima > 0:
+                mercato = self.mercato(riga.marketplace)
+                rate = metadata.royalty_rate(prima, mercato)
+                self.assertTrue(
+                    prima < float(mercato["prezzo_minimo_consigliato"])
+                    or rate * prima - riga.printing_cost < 0
+                )
+
+
 class TestProfonditaIndice(unittest.TestCase):
     """L'indice di un full-content mostra i capitoli, non i titoletti.
 

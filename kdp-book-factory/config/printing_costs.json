@@ -1,6 +1,10 @@
 {
-  "_nota": "Costi di stampa KDP usati per stimare la royalty. Amazon li aggiorna periodicamente: prima di fissare il prezzo verifica su https://kdp.amazon.com/help/topic/G201834340 e aggiorna questo file. Il campo `verificato_il` serve a ricordarti quando l'hai fatto.",
-  "verificato_il": "DA VERIFICARE",
+  "_nota": "Costi di stampa e royalty del cartaceo KDP, bianco e nero, carta crema o bianca, misure regolari (il 6x9 lo è). Verificati da Cowork sulle pagine di aiuto KDP (cowork-kdp-risposta.md). Amazon li aggiorna: prima di fissare un prezzo riverifica e aggiorna `verificato_il`.",
+  "verificato_il": "2026-09-30",
+  "fonti": [
+    "https://kdp.amazon.com/en_US/help/topic/G201834340",
+    "https://kdp.amazon.com/en_US/help/topic/G201834330"
+  ],
   "royalty_rate": 0.6,
   "marketplaces": [
     {
@@ -8,9 +12,15 @@
       "valuta": "EUR",
       "simbolo": "€",
       "bianco_e_nero": {
-        "fino_a_108_pagine": 2.05,
-        "oltre_108_costo_fisso": 0.6,
-        "oltre_108_costo_per_pagina": 0.012
+        "soglia_pagine": 110,
+        "fino_alla_soglia": 2.05,
+        "oltre_soglia_costo_fisso": 0.75,
+        "oltre_soglia_costo_per_pagina": 0.012
+      },
+      "royalty": {
+        "alta": 0.6,
+        "alta_da_prezzo": 9.99,
+        "bassa": 0.5
       },
       "prezzo_minimo_consigliato": 6.99
     },
@@ -19,9 +29,15 @@
       "valuta": "USD",
       "simbolo": "$",
       "bianco_e_nero": {
-        "fino_a_108_pagine": 2.3,
-        "oltre_108_costo_fisso": 0.85,
-        "oltre_108_costo_per_pagina": 0.012
+        "soglia_pagine": 110,
+        "fino_alla_soglia": 2.3,
+        "oltre_soglia_costo_fisso": 1.0,
+        "oltre_soglia_costo_per_pagina": 0.012
+      },
+      "royalty": {
+        "alta": 0.6,
+        "alta_da_prezzo": 9.99,
+        "bassa": 0.5
       },
       "prezzo_minimo_consigliato": 7.99
     },
@@ -30,9 +46,15 @@
       "valuta": "GBP",
       "simbolo": "£",
       "bianco_e_nero": {
-        "fino_a_108_pagine": 1.93,
-        "oltre_108_costo_fisso": 0.7,
-        "oltre_108_costo_per_pagina": 0.01
+        "soglia_pagine": 110,
+        "fino_alla_soglia": 1.93,
+        "oltre_soglia_costo_fisso": 0.85,
+        "oltre_soglia_costo_per_pagina": 0.01
+      },
+      "royalty": {
+        "alta": 0.6,
+        "alta_da_prezzo": 7.99,
+        "bassa": 0.5
       },
       "prezzo_minimo_consigliato": 6.99
     }
