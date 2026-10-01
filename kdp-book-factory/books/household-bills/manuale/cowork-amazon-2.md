@@ -35,9 +35,9 @@ pubblicazioni o impostazioni cambiate. Nessuna credenziale nei file.
    - financial literacy for adults and beginners («financial literacy for adults»)
    - living paycheck to paycheck late fees overdraft («living paycheck to paycheck»)
    - how to get financially organized as a family («get financially organized»)
-   - caring for aging parents and their accounts («caring for aging parents»)
+   - taking over accounts for an aging parent («taking over accounts»)
    - how credit cards work minimum payment grace period («how credit cards work»)
-   - hardship assistance for rent mortgage utilities («hardship assistance»)
+   - hardship programs and utility assistance («hardship programs»)
    - home paperwork filing system for financial records (già verificata: basta il
      numero di risultati di oggi)
 
