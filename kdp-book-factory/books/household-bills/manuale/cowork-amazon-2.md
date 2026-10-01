@@ -27,3 +27,17 @@ pubblicazioni o impostazioni cambiate. Nessuna credenziale nei file.
    to», imposta un CAP degli Stati Uniti, per esempio 10001; non serve
    l'accesso. Poi apri https://www.amazon.com/dp/B0CSSJMQP1 e riporta il prezzo
    del cartaceo in USD. Alla fine rimetti l'indirizzo di consegna com'era.
+4. **Parole chiave nuove.** Sono state rifatte sui tuoi dati della risposta di
+   prima. Per ciascuna, nella barra di ricerca di amazon.com, reparto Books,
+   riporta se l'autocompletamento propone la frase o una molto vicina (sì,
+   simile o no; basta il prefisso indicato fra parentesi) e quanti risultati dà
+   la ricerca con `i=stripbooks`:
+   - financial literacy for adults and beginners («financial literacy for adults»)
+   - living paycheck to paycheck late fees overdraft («living paycheck to paycheck»)
+   - how to get financially organized as a family («get financially organized»)
+   - caring for aging parents and their accounts («caring for aging parents»)
+   - how credit cards work minimum payment grace period («how credit cards work»)
+   - hardship assistance for rent mortgage utilities («hardship assistance»)
+   - home paperwork filing system for financial records (già verificata: basta il
+     numero di risultati di oggi)
+

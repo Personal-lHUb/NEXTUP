@@ -51,3 +51,6 @@ Chi usa i risultati:
 - il titolo all'agente originalità.
 
 Li applica la sessione della fabbrica.
+
+Stato: applicata il 2026-10-01 — categorie: tutte e due esistono nell'albero del negozio; il selettore KDP è nel seguito. Affollamento: in Budgeting & Money Management solo guide di grandi nomi, in Consumer Guides almanacchi e cataloghi fuori tema; il libro si troverà soprattutto per ricerca. Titolo: nessun libro uguale; l'agente originalità lo giudica distinguibile (due rilievi minori). Parole chiave: rifatte dal posizionamento sui tuoi dati, sei su sette sostituite (book.json e scheda), da verificare nel seguito. Concorrente: 128 pagine, n. 2.814 in Books, 4,4 su 3.090 valutazioni; il prezzo in USD è nel seguito. Punti aperti in cowork-amazon-2.md.
+
