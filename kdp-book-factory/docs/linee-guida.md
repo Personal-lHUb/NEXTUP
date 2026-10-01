@@ -64,14 +64,14 @@ quando la sua fase lo richiede**.
 | quando | chi scatta | come |
 |---|---|---|
 | l'autore chiede un libro nuovo | nessun agente: le **domande d'avvio** | `avvio <slug> --json`, poi le domande all'autore |
-| arriva la pagina del concorrente (`pagina.md` o la risposta di Cowork) | `scheda-concorrente` → `analista-recensioni` → `posizionamento` → `originalita` | subagent in fila: ognuno legge il lavoro del precedente |
+| arrivano la pagina del concorrente (`pagina.md` o la risposta di Cowork) e le parole chiave della nicchia | `scheda-concorrente` → `analista-recensioni` → `posizionamento` → `originalita` | subagent in fila: ognuno legge il lavoro del precedente |
 | la scaletta è scritta o cambia | `indice`, poi `revisore-scaletta` | subagent, poi `manuale <slug> scaletta --esamina` |
 | un capitolo è importato | nessuno: si continua a scrivere | — |
 | il libro è impaginato (ogni `build`) | `impaginazione` | `review <slug> --agents impaginazione` |
 | tutti i capitoli sono scritti e impaginati | `lettore-cieco` (libro), `editor-sviluppo`, `fact-checker` a blocchi di otto capitoli, `conformita` sul testo — **in parallelo**, perché i campi non si toccano | subagent in background |
 | il livello è `alta` | in più `correttore`, capitolo per capitolo | subagent |
 | le correzioni sono applicate | di nuovo `impaginazione`; e l'agente che aveva dato un bloccante, solo sui capitoli corretti, per verificare che sia chiuso | comando e subagent |
-| la scheda è importata | `conformita` sulla scheda | subagent su `build/kdp-listing.md` |
+| la scheda è importata | `conformita` sulla scheda; Cowork, ruolo `parole-chiave`, verifica le sette frasi | subagent su `build/kdp-listing.md`; `parole-chiave <slug>` |
 | l'impaginazione è definitiva | `copertina`, primo tempo: il prompt | `copertina <slug>` (e `immagini <slug>` se ci sono figure) |
 | arriva `assets/copertina.jpg` | `copertina`, secondo tempo: le misure | `build`, poi `review <slug> --agents copertina` |
 | prima di consegnare | `qa` e `diagnostica` | comandi |
@@ -184,13 +184,17 @@ python3 -m kdpfactory avvio <slug> --predefinite  # «fai tu»: il resto prende 
   `concorrente/pagina.md`, il file `concorrente/copertina.md` se l'autore vuole
   una copertina più attraente, e, se la pagina la porta Cowork, la richiesta
   `concorrente/cowork-concorrente.md` (o `cowork-nicchia.md`), sempre la stessa
-  per ogni libro. La richiesta si pubblica nello stesso giro.
+  per ogni libro. Con l'ASIN scrive anche `concorrente/cowork-parole-chiave.md`:
+  le parole chiave della nicchia, che Cowork cerca su Amazon, Helium 10,
+  Publisher Rocket e Google Trends. Le richieste si pubblicano nello stesso giro.
 - Da lì le risposte lavorano senza che nessuno le ripeta: il posizionamento le
   riceve come vincolo insieme a `indicazione.md`; `concorrente build` impone
   lingua, categoria scelta e pseudonimo anche se il piano dicesse altro; il
   brief di copertina riceve la descrizione della copertina da battere.
 
-**Cancello:** tutte le domande viste e la pagina del concorrente arrivata.
+**Cancello:** tutte le domande viste, la pagina del concorrente arrivata e le
+parole chiave della nicchia esplorate (una risposta parziale basta, se dice che
+cosa manca).
 
 ### Prima di tutto: la categoria
 
@@ -226,7 +230,7 @@ fase 8.
 | | |
 |---|---|
 | **Chi** | `scheda-concorrente` → `analista-recensioni` → `posizionamento` → `originalita` |
-| **Entra** | la pagina del concorrente (`concorrente/pagina.md`, o la risposta di Cowork se il modulo è vuoto) e i vincoli dell'avvio |
+| **Entra** | la pagina del concorrente (`concorrente/pagina.md`, o la risposta di Cowork se il modulo è vuoto), i vincoli dell'avvio e le parole chiave della nicchia (`concorrente/cowork-parole-chiave-risposta.md`), da cui il posizionamento sceglie le sette frasi |
 | **Esce** | `book.json` e `brief.md` del libro nuovo |
 | **Comando** | con la chiave API `python3 -m kdpfactory concorrente build <slug>` ([`acquisizione.md`](acquisizione.md)) |
 | **Linea manuale** | i quattro subagent in fila, ognuno legge i file del precedente; la sessione salva le risposte in `concorrente/scheda.json`, `lacune.json`, `piano.json`, `originalita.json`, poi `concorrente importa <slug>` |
@@ -379,7 +383,13 @@ Come si applica:
 | **Esce** | `build/kdp-listing.md`, `build/metadata.json`, la vetrina aggiornata |
 | **Linea API** | `python3 -m kdpfactory metadata <slug>`; la conformità la legge dentro `review` |
 | **Linea manuale** | `manuale <slug> scheda` → scrivi `manuale/scheda.json` → `--importa` → «usa conformita su books/<slug>/build/kdp-listing.md» |
-| **Cancello** | nessun bloccante della conformità |
+| **Parole chiave** | `python3 -m kdpfactory parole-chiave <slug>` → richiesta a Cowork, ruolo `parole-chiave`: per ognuna delle sette frasi autocompletamento, risultati, Helium 10, Publisher Rocket; per ogni categoria il 1° e il 20° in classifica |
+| **Cancello** | nessun bloccante della conformità; le sette frasi verificate |
+
+Le sette frasi nascono dalla tabella che Cowork ha portato all'avvio, e prima
+di caricare il libro si verificano di nuovo: una frase che l'autocompletamento
+non propone più, o senza volume, si sostituisce con una della tabella, e la
+sostituta passa dalla conformità.
 
 Le parole chiave non contengono **nomi di altri autori, titoli di altri libri,
 marchi o metodi registrati da terzi**, né parole che descrivono il libro in
@@ -535,3 +545,5 @@ Ogni regola qui sopra viene da un difetto trovato su un libro vero.
 | la diagnostica chiedeva la terza categoria come rilievo alto; due volte se n'è cercata una di riempimento, e due volte la conformità l'ha tolta | 6, `conformita` | una categoria sola è un buco; con due, la terza entra solo se descrive l'argomento del libro |
 | fra le opzioni l'autore ha scelto «ti do l'ASIN», e l'ASIN non è arrivato | A, avvio | il concorrente si chiede nel messaggio; a scelta solo le domande che hanno risposte fisse |
 | le domande d'avvio esistevano solo nella chat di un libro: il successivo sarebbe partito senza | A, avvio | le sette domande stanno nel sistema (`avvio`), e le risposte arrivano da sole a posizionamento, scheda e copertina |
+| le parole chiave di Bills in Order le aveva inventate il posizionamento, e Cowork ne ha trovate sei su sette da rifare | A e 6, `parole-chiave` | all'avvio Cowork cerca le parole chiave della nicchia e il posizionamento sceglie da lì; alla scheda le sette scelte si verificano |
+| una richiesta a Cowork mescolava pagina del concorrente, KDP e parole chiave: un solo accesso mancante la lasciava parziale tutta | canale Cowork | un ruolo per richiesta; le richieste che mescolano si dividono |

@@ -114,10 +114,14 @@ python3 -m kdpfactory avvio <slug> --<domanda> <valore> …
   libro fatto così (amazon.com in inglese, categoria come il concorrente,
   lacune + più pratico + contenuto migliore, copertina più attraente,
   pseudonimo nuovo, pagina da Cowork). Il concorrente non ha default.
-- Finite le domande, `avvio` prepara la fase 0: il modulo della pagina, la
-  richiesta `concorrente/cowork-concorrente.md` da pubblicare nello stesso giro
-  e, se serve, `concorrente/copertina.md`. Poi la fase 0 parte da sola quando
-  arriva la pagina.
+- Finite le domande, `avvio` prepara la fase 0: il modulo della pagina, le
+  richieste `concorrente/cowork-concorrente.md` e `concorrente/cowork-parole-chiave.md`
+  da pubblicare nello stesso giro e, se serve, `concorrente/copertina.md`. Poi la
+  fase 0 parte da sola quando arrivano la pagina e le parole chiave.
+- **Le parole chiave si cercano in due tempi**, da Cowork, con Amazon, Helium 10,
+  Publisher Rocket e Google Trends: all'avvio quelle della nicchia, da cui il
+  posizionamento sceglie le sette frasi; alla scheda la verifica delle sette
+  scelte, con `python3 -m kdpfactory parole-chiave <slug>`.
 - Le risposte non si ripetono a mano agli agenti: il posizionamento le riceve
   come vincolo, `concorrente build` impone lingua, categoria scelta e
   pseudonimo, il brief di copertina riceve la copertina da battere.
@@ -132,9 +136,15 @@ Desktop). Lo scambio passa da file nel repository GitHub, non dalla chat
 - **Canale**: repository `Personal-lHUb/NEXTUP`, ramo
   `claude/dreamy-archimedes-hf8w45` (`config/cowork.json`). La casella su
   Google Drive è chiusa dal 30 settembre 2026.
+- **Ruoli**: Cowork lavora in un progetto di Claude Desktop con una chat e
+  un'attività pianificata per ruolo — `concorrente`, `parole-chiave`, `fonti`,
+  `regole-kdp` (`config/cowork.json`). Il testo per crearli lo genera
+  `python3 -m kdpfactory cowork progetto` in `config/progetto-cowork.md`.
 - **Richiesta a Cowork**: `cowork-<argomento>.md` nella cartella a cui serve
-  (es. `books/<slug>/manuale/cowork-amazon.md`), con le istruzioni complete e
-  il formato di risposta. Commit e push nello stesso giro in cui nasce.
+  (es. `books/<slug>/manuale/cowork-fonti.md`), con le istruzioni complete e
+  il formato di risposta, e **un ruolo solo** nella riga `Ruolo:` sotto il
+  titolo (l'intestazione la dà `cowork.intestazione()`). Senza ruolo nessuna
+  chat la prende. Commit e push nello stesso giro in cui nasce.
 - **Risposta di Cowork**: accanto, `cowork-<argomento>-risposta.md`. La prima
   riga è `Esito: completa` o `Esito: parziale — punti …`. Cowork ne fa il
   commit sul ramo del canale; il push lo fa lui se ha accesso diretto a
@@ -142,9 +152,9 @@ Desktop). Lo scambio passa da file nel repository GitHub, non dalla chat
 - **Stato**: `python3 -m kdpfactory cowork stato`. Dice se una richiesta è
   inviata, e se è aperta, con risposta arrivata, con risposta superata o
   applicata. L'avviso da mandare a Cowork: `python3 -m kdpfactory cowork avviso`.
-- **Giro automatico**: l'attività pianificata di Cowork «Cowork — casella
-  NEXTUP» (7:52 e 13:52, sul portatile dell'autore: se un giro salta, la
-  risposta arriva al giro dopo) risponde alle richieste aperte; la routine
+- **Giro automatico**: le quattro attività di Cowork, una per ruolo (fra le
+  7:52 e le 14:37, sul portatile dell'autore: se un giro salta, la risposta
+  arriva al giro dopo), rispondono alle richieste aperte del loro ruolo; la routine
   «Controllo Cowork» di questa sessione (9:59 e 15:59) pubblica le richieste
   da inviare, applica le risposte arrivate e segna la richiesta con
   `Stato: applicata il <data>`. A inizio sessione: `git pull` e `cowork stato`.

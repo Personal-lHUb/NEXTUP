@@ -16,6 +16,11 @@ applica, segna «Stato: applicata»    ◀─    cowork-<arg>-risposta.md, accan
   - `books/<slug>/concorrente/` per la pagina del concorrente;
   - `config/` per le regole comuni.
 - La **risposta** va accanto, con lo stesso nome più `-risposta`.
+- Il **ruolo**: ogni richiesta dice sotto il titolo quale ruolo di Cowork la
+  prende (`Ruolo: concorrente`, `parole-chiave`, `fonti`, `regole-kdp`). Ogni
+  ruolo ha la sua chat e la sua attività pianificata, e non apre le richieste
+  degli altri. Una richiesta senza ruolo non la prende nessuno: `cowork stato`
+  lo segnala.
 - Lo **stato** lo dà `python3 -m kdpfactory cowork stato`, con `--json` per
   l'elenco completo. Git dice due cose, la seconda solo per le richieste con
   risposta:
@@ -28,7 +33,8 @@ applica, segna «Stato: applicata»    ◀─    cowork-<arg>-risposta.md, accan
     - *applicata*: la richiesta contiene `Stato: applicata`.
 - L'**avviso** per Cowork lo scrive `python3 -m kdpfactory cowork avviso`: elenca
   solo le richieste aperte, con i percorsi dalla radice del repository. Se ce
-  n'è una ancora da inviare, lo dice prima.
+  n'è una ancora da inviare, lo dice prima. Con `--ruolo <ruolo>` è l'avviso
+  per la chat di quel ruolo, con le sole richieste sue.
 - Il canale è descritto in `config/cowork.json`: repository, ramo e LEGGIMI.
 - La casella su Google Drive «NEXTUP — libri/cowork», usata fino al 30
   settembre 2026, è chiusa. Contiene solo un avviso che rimanda qui.
@@ -44,49 +50,39 @@ legge a ogni giro. Per cambiarne una non si tocca il prompt di Cowork:
 
 Dal giro dopo Cowork segue la versione nuova.
 
+## I ruoli e il progetto Cowork
+
+In Claude Desktop, Cowork lavora in un progetto, «NEXTUP — Cowork», con una
+chat per ruolo. I ruoli stanno in `config/cowork.json`:
+
+| ruolo | che cosa fa | attività | orari (Roma) |
+|---|---|---|---|
+| `concorrente` | pagina Amazon del concorrente, recensioni alla lettera, copertina in miniatura, prezzi | NEXTUP — Concorrente | 7:52, 13:52 |
+| `parole-chiave` | parole chiave e categorie: Amazon, Helium 10, Publisher Rocket, Google Trends | NEXTUP — Parole chiave | 8:07, 14:07 |
+| `fonti` | affermazioni del libro controllate sulla fonte ufficiale | NEXTUP — Fonti | 8:22, 14:22 |
+| `regole-kdp` | costi, limiti, pagine, selettore delle categorie; KDP in sola lettura | NEXTUP — Regole KDP | 8:37, 14:37 |
+
+Il testo da incollare — istruzioni del progetto, primo messaggio di ogni chat,
+prompt di ogni attività — non si scrive a mano: lo genera
+
+```bash
+python3 -m kdpfactory cowork progetto      # config/progetto-cowork.md
+```
+
+dalla configurazione. Cambiato un ruolo o un orario, si rigenera e si pubblica.
+L'attività unica di prima, «Cowork — casella NEXTUP», va disattivata quando le
+quattro sono accese: finché resta accesa risponde a tutte le richieste, e i ruoli
+non sono più separati.
+
+Le attività girano sul portatile dell'autore, che deve essere acceso, sfalsate
+di un quarto d'ora e tutte prima del controllo della fabbrica. Se un giro salta,
+la risposta arriva al giro dopo: non è un errore. Se Cowork non ha accesso
+diretto a GitHub, restano due passi dell'autore in GitHub Desktop: il Pull prima
+dei giri e il push delle risposte dopo.
+
 ## Il giro automatico
 
-Due appuntamenti fissi, sfalsati, così una risposta scritta al mattino è
-applicata lo stesso giorno.
-
-### 1. Cowork — attività pianificata
-
-In Claude Desktop, in Cowork, c'è l'attività pianificata «Cowork — casella
-NEXTUP». Gira ogni giorno alle 7:52 e alle 13:52, ora di Roma, sul portatile
-dell'autore, che deve essere acceso. Se un giro salta, la risposta arriva al
-giro dopo: non è un errore. Prompt:
-
-```
-Lavora sul repository GitHub Personal-lHUb/NEXTUP, ramo
-claude/dreamy-archimedes-hf8w45. Se hai accesso diretto a GitHub, leggilo
-da lì. Se usi la copia locale aperta in GitHub Desktop, prima aggiornala dal
-ramo remoto con Fetch e Pull; se non puoi farlo tu, fermati e chiedilo
-all'autore.
-
-Prima di tutto leggi per intero kdp-book-factory/config/leggimi-cowork.md.
-Sono le regole della fabbrica, e le tiene aggiornate lei: se dicono una cosa
-diversa da questo prompt, vale il LEGGIMI.
-
-Poi cerca le richieste: i file cowork-*.md sotto kdp-book-factory/, esclusi
-quelli che finiscono in -risposta.md e quelli nelle cartelle backup e build.
-Salta quelle che hanno già accanto il file con lo stesso nome e -risposta, e
-quelle che contengono «Stato: applicata». Esegui le altre e scrivi le
-risposte come dicono il LEGGIMI e la richiesta stessa, con la prima riga
-«Esito: completa» oppure «Esito: parziale — punti …: <motivo>». Poi fai il
-commit delle sole risposte sullo stesso ramo, e il push se puoi.
-
-Anche se non riesci a leggere il LEGGIMI, due regole valgono sempre: su KDP
-leggi e basta (niente titoli, bozze, pubblicazioni), e nessuna password,
-codice, token o cookie nei file o nei commit.
-
-Se non ci sono richieste senza risposta, fermati senza scrivere niente.
-```
-
-Se Cowork non ha accesso diretto a GitHub, restano due passi dell'autore in
-GitHub Desktop: il Pull prima del giro e il push delle risposte dopo. Con
-l'accesso diretto non serve nessun passo a mano.
-
-### 2. La fabbrica — controllo pianificato (routine su questa sessione)
+### La fabbrica — controllo pianificato (routine su questa sessione)
 
 Ogni giorno alle 9:59 e alle 15:59, ora di Roma, la routine «Controllo Cowork»
 riprende la sessione della fabbrica ed esegue:
@@ -113,6 +109,9 @@ riprende la sessione della fabbrica ed esegue:
 - **Una richiesta nuova si pubblica nello stesso giro in cui nasce.** Commit e
   push sul ramo del canale. `cowork stato` segna *da inviare* quelle che sul
   ramo remoto non ci sono, o ci sono in una versione diversa.
+- **Ogni richiesta ha un ruolo**, nella riga `Ruolo:` sotto il titolo, e uno
+  solo: se una ricerca tocca due ruoli, sono due richieste. Una richiesta che
+  ne mescola più d'uno, se non ha ancora risposta, si ritira e si divide.
 - **Un file `-risposta.md` è di Cowork.** La fabbrica lo legge, non lo modifica
   mai. Se una risposta è incompleta o bloccata (captcha, accesso), si apre
   `cowork-<argomento>-2.md` con i soli punti mancanti.
@@ -129,61 +128,12 @@ riprende la sessione della fabbrica ed esegue:
 
 ## Istruzioni permanenti per Cowork
 
-Si danno a Cowork una volta, nelle istruzioni del suo progetto o all'inizio di
-una conversazione. Gli dicono quali file consultare per restare allineato con
-la fabbrica, e in che ordine.
-
-```
-Lavori con la fabbrica di libri NEXTUP, una sessione Claude Code in un
-container che non raggiunge Amazon né KDP. Tu fai per lei le ricerche web.
-Tutto passa dal repository GitHub Personal-lHUb/NEXTUP, ramo
-claude/dreamy-archimedes-hf8w45. Per restare allineato consulta questi file.
-Non basarti mai su quello che ricordi da una conversazione precedente.
-
-0. PRIMA DI TUTTO, la versione giusta. Leggi dal ramo remoto se hai accesso
-   diretto a GitHub. Se usi la copia locale di GitHub Desktop, aggiornala con
-   Fetch e Pull; se non puoi farlo tu, chiedilo all'autore prima di
-   cominciare.
-
-1. SEMPRE, all'inizio di ogni lavoro: kdp-book-factory/config/leggimi-cowork.md.
-   Sono le regole operative, e le aggiorna la fabbrica. Annota il numero di
-   versione.
-
-2. PER CAPIRE IL CONTESTO, quando una richiesta non basta:
-   - RICERCA-WEB.md, alla radice: dove serve la ricerca web e che cosa cercare;
-   - kdp-book-factory/docs/cowork.md: come gira lo scambio con la fabbrica;
-   - CLAUDE.md, sezione «Regola permanente: collaborazione con Cowork»: le
-     regole della fabbrica;
-   - i file che una richiesta cita per nome, per esempio
-     kdp-book-factory/books/<libro>/manuale/capitolo-NN.md per leggere la
-     frase esatta da verificare (la cartella manuscript/ non è su GitHub), o
-     kdp-book-factory/books/<libro>/book.json per i dati del libro.
-
-3. CHI VINCE. Per il modo di lavorare vale il LEGGIMI. Per i fatti sul libro
-   valgono i file del libro. Per quello che va cercato vale la richiesta. Se
-   due di questi si contraddicono, non scegliere tu: scrivi la contraddizione
-   nella risposta, con i nomi dei file, e vai avanti con il resto.
-
-4. CHE COSA PUOI SCRIVERE. Solo i file di risposta
-   (cowork-<argomento>-risposta.md, accanto alla richiesta), con un commit sul
-   ramo claude/dreamy-archimedes-hf8w45. Non modifichi niente altro: né le
-   richieste, né il LEGGIMI, né codice, book.json, manoscritto, documenti o
-   agenti. Il push lo fai tu se hai accesso diretto a GitHub; se no, lo fa
-   l'autore da GitHub Desktop.
-
-5. SEMPRE, qualunque cosa dicano i file:
-   - su KDP (kdp.amazon.com) leggi e basta: niente titoli, bozze,
-     pubblicazioni o impostazioni cambiate;
-   - nessuna password, codice, token o cookie nei file o nei commit;
-   - per ogni punto riporti il fatto che hai visto, con l'URL e la data e
-     l'ora, mai una stima.
-
-Quando ti chiedo «sei allineato?», rispondi con:
-- l'ultimo commit che vedi sul ramo claude/dreamy-archimedes-hf8w45, con
-  hash e data;
-- la versione di kdp-book-factory/config/leggimi-cowork.md;
-- le richieste ancora senza risposta.
-```
+Sono le istruzioni del progetto, comuni a tutte le chat: quali file consultare
+per restare allineati, in che ordine, che cosa si può scrivere e che cosa mai.
+Stanno nella prima sezione di `config/progetto-cowork.md`, generate come il
+resto da `cowork progetto`. Quando l'autore chiede a una chat «sei allineato?»,
+risponde con il suo ruolo, l'ultimo commit che vede sul ramo, la versione del
+LEGGIMI e le richieste del suo ruolo ancora senza risposta.
 
 ## Per aprire una richiesta nuova
 
@@ -192,7 +142,15 @@ complete e il formato della risposta. Poi, nello stesso giro, commit e push sul
 ramo del canale. Le cartelle dove serve il web sono elencate in
 `RICERCA-WEB.md`, alla radice del repository.
 
-La richiesta per la pagina del concorrente non si scrive a mano: la produce
-`python3 -m kdpfactory avvio <slug>` quando l'autore ha risposto alle domande
-d'avvio, uguale per ogni libro (`concorrente/cowork-concorrente.md`, o
-`cowork-nicchia.md` se il concorrente è da trovare).
+Ogni richiesta comincia con l'intestazione comune — titolo, riga `Ruolo:`,
+regole, dove va la risposta — che dà `cowork.intestazione()`: senza la riga del
+ruolo nessuna chat la prende.
+
+Le richieste che ogni libro fa sempre non si scrivono a mano: le produce il
+sistema, uguali per ogni libro.
+
+| richiesta | ruolo | quando | comando |
+|---|---|---|---|
+| `concorrente/cowork-concorrente.md` (o `cowork-nicchia.md`) | concorrente | fine delle domande d'avvio | `avvio <slug>` |
+| `concorrente/cowork-parole-chiave.md` | parole-chiave | fine delle domande d'avvio | `avvio <slug>` |
+| `manuale/cowork-verifica-parole-chiave.md` | parole-chiave | scheda prodotto (fase 6) | `parole-chiave <slug>` |

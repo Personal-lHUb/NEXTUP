@@ -151,6 +151,8 @@ esempi usare, quale taglio dare).
 | `backup <slug>` | elenco delle copie, `--now`, `--restore <id>`, `--prune N` |
 | `puzzle new/build <slug>` | libri di enigmi di deduzione, senza chiamate API |
 | `avvio <slug>` | le domande all'autore prima di ogni libro nuovo — concorrente, mercato, categoria, dove batterlo, pseudonimo, pagina — e, finite, il modulo e la richiesta a Cowork per la pagina del concorrente ([`docs/linee-guida.md`](docs/linee-guida.md), fase A) |
+| `parole-chiave <slug>` | la richiesta a Cowork per verificare le sette parole chiave e le categorie della scheda ([`docs/cowork.md`](docs/cowork.md)) |
+| `cowork stato/avviso/progetto` | il canale con Cowork: stato delle richieste per ruolo, l'avviso per una chat (`--ruolo`), il testo del progetto con una chat e un'attività per ruolo |
 | `concorrente new/build/importa <slug>` | da una scheda Amazon incollata alla scheda di un libro nuovo che copre quello che i suoi lettori non hanno trovato ([`docs/acquisizione.md`](docs/acquisizione.md)) |
 | `review <slug>` | fa leggere il libro agli agenti di controllo |
 | `revise <slug>` | l'editor applica le segnalazioni raccolte |
