@@ -944,8 +944,8 @@ def cmd_avvio(args) -> int:
         print(f"  scritto {percorso}")
     if risposte.pagina == "cowork":
         print("\nRichiesta per Cowork: commit e push sul ramo del canale in questo stesso giro,")
-        print("poi `python -m kdpfactory cowork stato`. Arrivata la risposta, la pagina va in")
-        print("concorrente/pagina.md e parte la fase 0.")
+        print("poi `python -m kdpfactory cowork stato`. Arrivata la risposta, la fase 0 la")
+        print("legge dov'è: non serve copiarla in concorrente/pagina.md.")
     elif risposte.asin:
         print(f"\nIncolla la pagina Amazon in {acquisizione.pagina_path(project)}, poi parte la fase 0.")
     return 0

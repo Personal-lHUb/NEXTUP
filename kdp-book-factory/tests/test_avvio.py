@@ -153,6 +153,8 @@ class TestCowork(Base):
         self.assertIn("ramo-x", testo)
         self.assertIn("**Copertina.**", testo)
         self.assertIn("alla lettera", testo)
+        # un ASIN Audible non ha pagine né classifica in Books: si passa al cartaceo
+        self.assertIn("Audible o Kindle", testo)
 
     def test_senza_copertina_non_la_chiede(self):
         _, testo = avvio.richiesta_cowork(self.tutte(vetrina="prezzo"), "libro", "r", "l")

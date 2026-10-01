@@ -491,7 +491,12 @@ def richiesta_cowork(avvio: Avvio, slug: str, ramo: str, leggimi: str) -> tuple[
             f"1. **Scheda.** Apri https://www.{avvio.mercato}/dp/{avvio.asin} e riporta,\n"
             "   copiandoli dalla pagina: titolo e sottotitolo, autore, formato, prezzo del\n"
             f"   cartaceo e dell'eBook in {avvio.valuta}, e dal riquadro «Product details»\n"
-            "   pagine, editore, data di pubblicazione e dimensioni.",
+            "   pagine, editore, data di pubblicazione e dimensioni.\n"
+            "   Se l'ASIN apre l'edizione Audible o Kindle, passa dal selettore dei formati\n"
+            "   al cartaceo («Paperback», o «Hardcover» se manca) e da lì in poi riporta i\n"
+            "   dati di quello, con il suo ASIN o ISBN-10: è il formato con cui il libro\n"
+            "   nuovo compete. Se il cartaceo non esiste, scrivilo e resta sull'edizione\n"
+            "   aperta.",
             "2. **Classifica.** La riga «Best Sellers Rank» intera: la posizione in Books e\n"
             "   quella in ciascuna categoria, con il percorso della categoria.",
             "3. **Descrizione.** Il testo completo, alla lettera (apri «Read more»).",
