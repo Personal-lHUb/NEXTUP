@@ -220,10 +220,28 @@ def avviso(
         + (f", e la sezione del ruolo «{ruolo}» vale per te." if ruolo else "."),
         "",
     ]
+    if ruolo:
+        righe += [
+            f"- `{dal_repo(r.percorso)}` → rispondi in `{dal_repo(r.risposta)}`" for r in aperte
+        ]
+    else:
+        # Un avviso per tutte le richieste va in una chat che non ha un ruolo
+        # suo: deve sapere che le fa tutte, ciascuna con le regole del suo ruolo,
+        # altrimenti con il LEGGIMI a ruoli non ne prende nessuna.
+        righe += [
+            "In questa chat fai le richieste di tutti i ruoli. Ognuna dice il suo nella riga "
+            "«Ruolo: …» sotto il titolo: per ciascuna segui la sezione di quel ruolo nel LEGGIMI.",
+        ]
+        for nome in dict.fromkeys(r.ruolo for r in aperte):
+            righe += ["", f"Ruolo «{nome}»:" if nome else "Senza ruolo:"]
+            righe += [
+                f"- `{dal_repo(r.percorso)}` → rispondi in `{dal_repo(r.risposta)}`"
+                for r in aperte if r.ruolo == nome
+            ]
     righe += [
-        f"- `{dal_repo(r.percorso)}` → rispondi in `{dal_repo(r.risposta)}`" for r in aperte
-    ]
-    righe += [
+        "",
+        "Se lavori sulla copia locale di GitHub Desktop, prima di cominciare aggiornala dal "
+        "ramo remoto con Fetch e Pull: su una copia vecchia queste richieste non ci sono.",
         "",
         "Per ciascuna: leggila per intero ed esegui quello che chiede. Scrivi la "
         "risposta nel file indicato e fanne il commit sullo stesso ramo, con la "
@@ -236,7 +254,12 @@ def avviso(
         "- se una pagina chiede un captcha o l'accesso e non riesci ad andare avanti, "
         "scrivilo invece di stimare;",
         "- su KDP leggi e basta: non creare titoli, non salvare bozze, non pubblicare;",
+        "- in Helium 10 e Publisher Rocket usa solo l'accesso già aperto nel browser: non "
+        "inserire credenziali, non comprare, non cambiare niente;",
         "- nessuna password, codice o cookie nei file.",
+        "",
+        "Alla fine fai il push delle risposte sul ramo. Se non puoi farlo tu, dimmelo: lo "
+        "faccio io da GitHub Desktop. Finché non c'è il push, la fabbrica non le vede.",
         "",
         "Quando hai finito, dimmi quali risposte hai scritto e quali punti sono rimasti "
         "senza risposta.",

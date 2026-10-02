@@ -133,6 +133,15 @@ class TestRuoli(unittest.TestCase):
         self.assertNotIn("cowork-concorrente.md", testo)
         self.assertIn("«parole-chiave»", testo)
 
+    def test_l_avviso_generale_raggruppa_per_ruolo(self):
+        """Incollato in una chat senza ruolo, deve dire che le fa tutte."""
+        testo = cowork.avviso(cowork.richieste(self.radice), self.CANALE)
+        self.assertIn("fai le richieste di tutti i ruoli", testo)
+        self.assertLess(testo.index("Ruolo «concorrente»:"), testo.index("Ruolo «parole-chiave»:"))
+        self.assertIn("Senza ruolo:", testo)
+        self.assertIn("Fetch e Pull", testo)
+        self.assertIn("push", testo)
+
     def test_lo_stato_segnala_le_richieste_che_nessuno_prende(self):
         testo = cowork.rapporto(cowork.richieste(self.radice), set(self.CANALE["ruoli"]))
         self.assertIn("nessun giro di Cowork le prende: books/a/manuale/cowork-vecchia.md", testo)
