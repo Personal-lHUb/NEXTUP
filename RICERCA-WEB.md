@@ -28,6 +28,7 @@ Ogni richiesta ha un ruolo, e ogni ruolo una chat nel progetto Cowork
 | `kdp-book-factory/books/<slug>/manuale/` | fonti | Le affermazioni del libro sul mondo (enti, siti, numeri di telefono, regole), da controllare sulla fonte ufficiale prima della stampa. | `cowork-fonti.md` | — |
 | `kdp-book-factory/books/household-bills/` | — | «Bills in Order»: `manuale/cowork-amazon.md` e `cowork-fonti.md` applicate il 1° ottobre; `cowork-amazon-2.md` ritirata e divisa fra i ruoli. Aperte: `concorrente/cowork-prezzo.md` (concorrente: prezzo in USD) e `manuale/cowork-verifica-parole-chiave.md` (parole-chiave). | | in attesa |
 | `kdp-book-factory/books/psychic-intuition/concorrente/` | — | Il libro contro «Awakening Your Psychic Ability» (ASIN B0B6NY89RB): pagina del concorrente e parole chiave della nicchia. | `cowork-concorrente.md`, `cowork-parole-chiave.md` | in attesa |
+| `kdp-book-factory/books/dementia-family/concorrente/` | — | Il libro contro «The Vanishing Family» (ASIN B0GN73RYMF): pagina del concorrente e parole chiave della nicchia. | `cowork-concorrente.md`, `cowork-parole-chiave.md` | in attesa |
 | `kdp-book-factory/books/skill-acquisition/concorrente/` | — | La pagina del concorrente ASIN 1797031856. `pagina.md` ha solo il commento. | ancora nessuna | in attesa: si apre con `avvio` se il libro parte |
 
 Nelle altre cartelle il web non serve:
