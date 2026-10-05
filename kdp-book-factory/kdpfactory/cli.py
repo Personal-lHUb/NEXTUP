@@ -1293,6 +1293,11 @@ def cmd_cowork(args) -> int:
         uscita = radice / "config" / "progetto-cowork.md"
         uscita.write_text(cowork.progetto(canale), encoding="utf-8")
         print(f"Scritto {uscita}: istruzioni del progetto, una chat e un'attività per ruolo.")
+        voci = cowork.attivita(canale)
+        if voci:
+            file = radice / "config" / "attivita-cowork.json"
+            file.write_text(json.dumps(voci, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            print(f"Scritto {file}: {len(voci)} attività da applicare con update_trigger.")
         return 0
     git = cowork.Git(radice, canale.get("ramo", "claude/dreamy-archimedes-hf8w45"))
     remoto = git.remoto

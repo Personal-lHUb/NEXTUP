@@ -142,6 +142,15 @@ class TestRuoli(unittest.TestCase):
         self.assertIn("Fetch e Pull", testo)
         self.assertIn("push", testo)
 
+    def test_le_attivita_si_applicano_con_il_loro_trigger(self):
+        canale = {**self.CANALE, "ruoli": {"fonti": {"trigger": "trig_x", "attivita": "NEXTUP — Fonti",
+                                                       "ogni": "ora", "minuto": 25, "note": ["una nota"]}}}
+        [voce] = cowork.attivita(canale)
+        self.assertEqual(voce["trigger_id"], "trig_x")
+        self.assertEqual(voce["cron_expression"], "CRON_TZ=Europe/Rome 25 * * * *")
+        self.assertIn("«Ruolo: fonti»", voce["prompt"])
+        self.assertIn("- una nota", voce["prompt"])
+
     def test_lo_stato_segnala_le_richieste_che_nessuno_prende(self):
         testo = cowork.rapporto(cowork.richieste(self.radice), set(self.CANALE["ruoli"]))
         self.assertIn("nessun giro di Cowork le prende: books/a/manuale/cowork-vecchia.md", testo)

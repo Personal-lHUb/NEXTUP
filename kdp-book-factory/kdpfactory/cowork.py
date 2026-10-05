@@ -383,11 +383,26 @@ Esegui le tue. Ogni risposta è un file nuovo nella stessa cartella, con il nome
 che la richiesta indica e la prima riga «Esito: completa» oppure «Esito: parziale
 — punti …: <motivo>». Non modificare, rinominare o cancellare nessun altro file.
 
+La cartella si usa con il connettore Google Drive: search_files con
+parentId = '{ident}' per trovare i file, read_file_content o
+download_file_content per leggerli; create_file con parentId '{ident}', il
+titolo indicato, contentMimeType text/markdown e disableConversionToGoogleType
+true per scrivere una risposta (per un'immagine: base64Content e contentMimeType
+image/png).
+
 Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
 {_sempre(canale)}.
 
 Se non ci sono richieste del tuo ruolo senza risposta, fermati senza scrivere
-niente."""
+niente.{_note(dati)}"""
+
+
+def _note(dati: dict) -> str:
+    """Le note pratiche del ruolo, imparate nei giri precedenti: stanno in config/cowork.json."""
+    righe = dati.get("note") or []
+    if not righe:
+        return ""
+    return "\n\nNote pratiche, dai giri precedenti:\n" + "\n".join(f"- {r}" for r in righe)
 
 
 def istruzioni_progetto(canale: dict) -> str:
@@ -507,3 +522,27 @@ def progetto(canale: dict) -> str:
     righe += ["", "## 4. Il passaggio", ""]
     righe += [f"{i}. {testo}" for i, testo in enumerate(passi, 1)]
     return "\n".join(righe) + "\n"
+
+
+def attivita(canale: dict) -> list[dict]:
+    """Le attività dei ruoli come le applica Cowork: trigger, nome, orario, prompt.
+
+    Il prompt di un'attività legata al portatile dell'autore cambia solo con la
+    sua approvazione, in una conversazione Cowork su quel computer: questo è il
+    file che quella conversazione applica, voce per voce, senza riscrivere niente.
+    """
+    voci = []
+    for ruolo, dati in ruoli(canale).items():
+        if not dati.get("trigger"):
+            continue
+        cron = (f"CRON_TZ=Europe/Rome {int(dati.get('minuto', 0))} * * * *" if dati.get("ogni") == "ora"
+                else "")
+        voci.append({
+            "ruolo": ruolo,
+            "trigger_id": dati["trigger"],
+            "nome": dati.get("attivita", ruolo),
+            "cron_expression": cron,
+            "prompt": prompt_attivita(ruolo, dati, canale),
+        })
+    return voci
+

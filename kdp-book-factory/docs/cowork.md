@@ -62,6 +62,14 @@ Il testo da incollare — istruzioni del progetto, primo messaggio di ogni chat,
 prompt di ogni attività — lo genera `python3 -m kdpfactory cowork progetto` in
 `config/progetto-cowork.md`. Cambiato un ruolo o un orario, si rigenera.
 
+Lo stesso comando scrive `config/attivita-cowork.json`: per ogni attività l'id,
+il nome, l'orario e il prompt esatto. Viaggia sul corriere, così una chat di
+Cowork sul portatile può applicarlo da sé alle attività. Le attività di Cowork
+sono legate al portatile: orario, nome e accensione la fabbrica li cambia da
+qui, il **prompt** cambia solo con l'approvazione dell'autore in una
+conversazione di Cowork su quel computer. Un'attività legata al portatile non
+si cancella e si ricrea per aggirarlo: perderebbe la storia dei giri.
+
 ## Il corriere su Drive
 
 La sessione porta i file fra repository e Drive con il connettore Google Drive;

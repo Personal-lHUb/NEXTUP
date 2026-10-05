@@ -104,11 +104,23 @@ Esegui le tue. Ogni risposta è un file nuovo nella stessa cartella, con il nome
 che la richiesta indica e la prima riga «Esito: completa» oppure «Esito: parziale
 — punti …: <motivo>». Non modificare, rinominare o cancellare nessun altro file.
 
+La cartella si usa con il connettore Google Drive: search_files con
+parentId = '1yprHuxzFDGj12k8clTp0othzTXjiyn5N' per trovare i file, read_file_content o
+download_file_content per leggerli; create_file con parentId '1yprHuxzFDGj12k8clTp0othzTXjiyn5N', il
+titolo indicato, contentMimeType text/markdown e disableConversionToGoogleType
+true per scrivere una risposta (per un'immagine: base64Content e contentMimeType
+image/png).
+
 Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
 su KDP leggi e basta; nessuna password, codice, token o cookie nei file; negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) usi solo l'accesso che l'autore ha già aperto, non compri e non cambi niente.
 
 Se non ci sono richieste del tuo ruolo senza risposta, fermati senza scrivere
 niente.
+
+Note pratiche, dai giri precedenti:
+- il browser dell'app può essere nascosto: leggi le pagine con get_page_text o con fetch dentro la pagina, non con i clic;
+- il mercato di riferimento è amazon.com (Stati Uniti): l'indirizzo di consegna nel browser resta New York 10001; se lo trovi diverso, rimettilo su 10001 prima di leggere prezzi e risultati;
+- recensioni filtrate per stelle e pagine di KDP chiedono l'accesso: se non c'è, la risposta è parziale.
 ```
 
 ### NEXTUP — Parole chiave — ogni ora, al minuto 15
@@ -133,11 +145,24 @@ Esegui le tue. Ogni risposta è un file nuovo nella stessa cartella, con il nome
 che la richiesta indica e la prima riga «Esito: completa» oppure «Esito: parziale
 — punti …: <motivo>». Non modificare, rinominare o cancellare nessun altro file.
 
+La cartella si usa con il connettore Google Drive: search_files con
+parentId = '1yprHuxzFDGj12k8clTp0othzTXjiyn5N' per trovare i file, read_file_content o
+download_file_content per leggerli; create_file con parentId '1yprHuxzFDGj12k8clTp0othzTXjiyn5N', il
+titolo indicato, contentMimeType text/markdown e disableConversionToGoogleType
+true per scrivere una risposta (per un'immagine: base64Content e contentMimeType
+image/png).
+
 Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
 su KDP leggi e basta; nessuna password, codice, token o cookie nei file; negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) usi solo l'accesso che l'autore ha già aperto, non compri e non cambi niente.
 
 Se non ci sono richieste del tuo ruolo senza risposta, fermati senza scrivere
 niente.
+
+Note pratiche, dai giri precedenti:
+- il browser dell'app può essere nascosto: leggi le pagine con get_page_text o con fetch dentro la pagina, non con i clic;
+- l'autocompletamento del reparto Books si legge dal servizio della barra di ricerca (completion.amazon.com/api/2017/suggestions, alias=stripbooks, mid=ATVPDKIKX0DER), chiamato dalla pagina di amazon.com;
+- il mercato di riferimento è amazon.com (Stati Uniti): l'indirizzo di consegna nel browser resta New York 10001; se lo trovi diverso, rimettilo su 10001 prima di leggere prezzi e risultati;
+- Helium 10 serve l'accesso dell'autore nel browser; Publisher Rocket è un programma da computer che il browser non raggiunge: se mancano, le loro colonne restano vuote e la risposta è parziale.
 ```
 
 ### NEXTUP — Fonti — ogni ora, al minuto 25
@@ -162,11 +187,22 @@ Esegui le tue. Ogni risposta è un file nuovo nella stessa cartella, con il nome
 che la richiesta indica e la prima riga «Esito: completa» oppure «Esito: parziale
 — punti …: <motivo>». Non modificare, rinominare o cancellare nessun altro file.
 
+La cartella si usa con il connettore Google Drive: search_files con
+parentId = '1yprHuxzFDGj12k8clTp0othzTXjiyn5N' per trovare i file, read_file_content o
+download_file_content per leggerli; create_file con parentId '1yprHuxzFDGj12k8clTp0othzTXjiyn5N', il
+titolo indicato, contentMimeType text/markdown e disableConversionToGoogleType
+true per scrivere una risposta (per un'immagine: base64Content e contentMimeType
+image/png).
+
 Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
 su KDP leggi e basta; nessuna password, codice, token o cookie nei file; negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) usi solo l'accesso che l'autore ha già aperto, non compri e non cambi niente.
 
 Se non ci sono richieste del tuo ruolo senza risposta, fermati senza scrivere
 niente.
+
+Note pratiche, dai giri precedenti:
+- le fonti ufficiali (siti .gov, KDP) si leggono bene con la ricerca e la lettura web; per ogni punto riporta la frase esatta della fonte, l'URL e la data;
+- se la fonte non dice in modo esplicito quello che il libro afferma, il punto è «non trovato», non «vero».
 ```
 
 ### NEXTUP — Regole KDP — ogni ora, al minuto 35
@@ -191,11 +227,22 @@ Esegui le tue. Ogni risposta è un file nuovo nella stessa cartella, con il nome
 che la richiesta indica e la prima riga «Esito: completa» oppure «Esito: parziale
 — punti …: <motivo>». Non modificare, rinominare o cancellare nessun altro file.
 
+La cartella si usa con il connettore Google Drive: search_files con
+parentId = '1yprHuxzFDGj12k8clTp0othzTXjiyn5N' per trovare i file, read_file_content o
+download_file_content per leggerli; create_file con parentId '1yprHuxzFDGj12k8clTp0othzTXjiyn5N', il
+titolo indicato, contentMimeType text/markdown e disableConversionToGoogleType
+true per scrivere una risposta (per un'immagine: base64Content e contentMimeType
+image/png).
+
 Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
 su KDP leggi e basta; nessuna password, codice, token o cookie nei file; negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) usi solo l'accesso che l'autore ha già aperto, non compri e non cambi niente.
 
 Se non ci sono richieste del tuo ruolo senza risposta, fermati senza scrivere
 niente.
+
+Note pratiche, dai giri precedenti:
+- le pagine di aiuto di KDP si leggono senza accesso; il flusso di un cartaceo nuovo (parole chiave, categorie, numero di pagine) richiede che l'autore abbia già fatto l'accesso a kdp.amazon.com nel browser dell'app: se rimanda a «KDP Sign in», la risposta è parziale e l'accesso non lo fai tu;
+- dentro KDP esci sempre senza salvare.
 ```
 
 ### NEXTUP — Immagini — ogni ora, al minuto 45
@@ -220,11 +267,22 @@ Esegui le tue. Ogni risposta è un file nuovo nella stessa cartella, con il nome
 che la richiesta indica e la prima riga «Esito: completa» oppure «Esito: parziale
 — punti …: <motivo>». Non modificare, rinominare o cancellare nessun altro file.
 
+La cartella si usa con il connettore Google Drive: search_files con
+parentId = '1yprHuxzFDGj12k8clTp0othzTXjiyn5N' per trovare i file, read_file_content o
+download_file_content per leggerli; create_file con parentId '1yprHuxzFDGj12k8clTp0othzTXjiyn5N', il
+titolo indicato, contentMimeType text/markdown e disableConversionToGoogleType
+true per scrivere una risposta (per un'immagine: base64Content e contentMimeType
+image/png).
+
 Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
 su KDP leggi e basta; nessuna password, codice, token o cookie nei file; negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) usi solo l'accesso che l'autore ha già aperto, non compri e non cambi niente.
 
 Se non ci sono richieste del tuo ruolo senza risposta, fermati senza scrivere
 niente.
+
+Note pratiche, dai giri precedenti:
+- ChatGPT si usa nel browser dell'app, con l'account dell'autore già aperto: se chiede l'accesso, la risposta è parziale e l'accesso non lo fai tu;
+- scarica ogni immagine alla risoluzione piena (non la miniatura dell'anteprima) e caricala nella cartella con create_file, base64Content e contentMimeType image/png, con il nome che la richiesta indica.
 ```
 
 ## 4. Il passaggio

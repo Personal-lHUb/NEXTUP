@@ -38,8 +38,12 @@
       "sha": "c979822ef80333eb15b40e0b0916ed8b84558197a4a52552145cdbfd1e9df00c"
     },
     "config/progetto-cowork.md": {
-      "id": "1JjTXSNGEUHnK-WUybTeLwJdto0ucVKdH",
-      "sha": "61a86effdad49f7e833a554aaa3dfbac81a9e05ef2dcf20a33b3fd97b27c1040"
+      "id": "174LSwJxrrryK5mtXpXmCwZoGp9ghqzRL",
+      "sha": "0e7a487f0425627c1dea9de0a2983fad3469229640dd52431b042884bb21b4ec"
+    },
+    "config/attivita-cowork.json": {
+      "id": "1mJILUs77Na_Vl5_qXexzwtP7mqpgbKMm",
+      "sha": "c768073b2ad1f6a236902157ad351d33f9e0b9233453781dd0b9309fd27e93ab"
     }
   },
   "scaricati": {}

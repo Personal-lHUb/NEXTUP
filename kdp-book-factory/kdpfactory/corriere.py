@@ -32,7 +32,7 @@ SEPARATORE = "__"
 #: Le immagini che Cowork può consegnare: solo nella cartella del libro, sotto assets/.
 IMMAGINI = (".jpg", ".jpeg", ".png", ".webp")
 #: File che Cowork legge a ogni giro e che quindi viaggiano sempre: le regole e il progetto.
-SEMPRE = ("config/leggimi-cowork.md", "config/progetto-cowork.md")
+SEMPRE = ("config/leggimi-cowork.md", "config/progetto-cowork.md", "config/attivita-cowork.json")
 _SICURO = re.compile(r"^[A-Za-z0-9._-]+$")
 
 
