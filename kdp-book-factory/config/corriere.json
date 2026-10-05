@@ -46,5 +46,30 @@
       "sha": "c768073b2ad1f6a236902157ad351d33f9e0b9233453781dd0b9309fd27e93ab"
     }
   },
-  "scaricati": {}
+  "scaricati": {
+    "books__household-bills__concorrente__cowork-prezzo-risposta.md": {
+      "id": "1qw8CTEva49DY-f0ozzi3375h9BWZTGL1",
+      "sha": "03e74be69229921bea6eda7623bf54e1ef6292f86a93531312b697fb235a86de"
+    },
+    "books__household-bills__manuale__cowork-copertina-risposta.md": {
+      "id": "1crUWqjs0TATr0pbaRaZqA1tugx5YTOJK",
+      "sha": "6a09dc05cd464694e0934cac792acd77a64c1f4a29d387a15f564fab853d083e"
+    },
+    "config__cowork-kdp-2-risposta.md": {
+      "id": "1dIy873NMkqsoSbDV7OCGTHPvN_8tsgI0",
+      "sha": "e1332c00d139bddcb993fb716af3c5612e515c651ba062ef88bb9dfeb18ca929"
+    },
+    "books__household-bills__manuale__cowork-verifica-parole-chiave-risposta.md": {
+      "id": "13n7BVxX0GL4hHmHITIDdz_l6rF8TXiUJ",
+      "sha": "6912378d2f7d4b5f4b8558cbad90f04533d5ae864ec1ed293c73b2ba2f273ed6"
+    },
+    "books__psychic-intuition__concorrente__cowork-concorrente-risposta.md": {
+      "id": "10SQH8lH0NObBtONBQG0dm_11sUZSZ-H7",
+      "sha": "8785ed7e495056973e281a88cc16871cc4c92dc8c03df920aa970784f4861cb0"
+    },
+    "books__dementia-family__concorrente__cowork-concorrente-risposta.md": {
+      "id": "1nXAw3mE4jLT568XbpOw4GDR5nPBtlSoX",
+      "sha": "da3fd34b2061c1dbab22d40538dd01e208b917a107995d1ccda8909bd6fb098e"
+    }
+  }
 }
