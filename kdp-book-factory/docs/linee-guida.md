@@ -57,9 +57,13 @@ quando la sua fase lo richiede**.
   impaginazione e copertina — prompt compreso — nell'ordine delle fasi.
 - **Nella linea manuale** li chiama la sessione di Claude Code che sta
   lavorando al libro, **senza chiedere il permesso**: è un'istruzione
-  permanente di `CLAUDE.md`. La sessione si ferma e chiede solo per le
-  decisioni dell'autore (elencate più avanti) e quando serve l'immagine di
-  copertina, che l'autore genera.
+  permanente di `CLAUDE.md`. Le decisioni dell'autore (elencate più avanti)
+  non la fermano: le propone con il silenzio-assenso, e l'immagine di
+  copertina la genera Cowork.
+- **Il giro orario** la sveglia da solo: la routine «Produzione NEXTUP» porta
+  i file fra Drive e il repository, applica le risposte di Cowork, chiude le
+  decisioni scadute e fa il prossimo passo di ogni libro attivo, quello che
+  dice `python3 -m kdpfactory produzione` ([`cowork.md`](cowork.md)).
 
 | quando | chi scatta | come |
 |---|---|---|
@@ -73,7 +77,7 @@ quando la sua fase lo richiede**.
 | le correzioni sono applicate | di nuovo `impaginazione`; e l'agente che aveva dato un bloccante, solo sui capitoli corretti, per verificare che sia chiuso | comando e subagent |
 | la scheda è importata | `conformita` sulla scheda; Cowork, ruolo `parole-chiave`, verifica le sette frasi | subagent su `build/kdp-listing.md`; `parole-chiave <slug>` |
 | l'impaginazione è definitiva | `copertina`, primo tempo: il prompt | `copertina <slug>` (e `immagini <slug>` se ci sono figure) |
-| arriva `assets/copertina.jpg` | `copertina`, secondo tempo: le misure | `build`, poi `review <slug> --agents copertina` |
+| arrivano le varianti `assets/copertina-N.png` da Cowork | `copertina`, secondo tempo: misura le varianti e propone la scelta all'autore | `copertina <slug> --scegli N` dopo il silenzio-assenso, poi `build` e `review <slug> --agents copertina` |
 | prima di consegnare | `qa` e `diagnostica` | comandi |
 
 Tre regole per la sessione che li chiama:
@@ -404,7 +408,7 @@ Un solo agente, dall'inizio alla fine: `copertina`. Le regole sono in
 
 | | |
 |---|---|
-| **Chi** | `copertina` scrive il prompt e misura; **l'autore** genera l'immagine |
+| **Chi** | `copertina` scrive il prompt e misura; **Cowork**, ruolo `immagini`, genera tre varianti con ChatGPT; l'autore sceglie, con il silenzio-assenso |
 | **Entra** | i dati del libro: categoria, categorie KDP, promessa, pubblico, palette, occhiello e gancio della scheda, pagine vere; se all'avvio l'autore ha chiesto una copertina più attraente, la descrizione di quella del concorrente (`concorrente/copertina.md`) |
 | **Esce** | `build/copertina-brief.md` (il prompt), poi `build/<slug>-copertina.pdf` |
 | **Come si chiama** | «usa copertina su <slug>» |
@@ -509,11 +513,16 @@ Nessun agente decide queste cose, e nessun cancello le sostituisce:
 - **chi racconta**: se il libro presenta casi reali, composti o inventati, e
   come lo dichiara al lettore;
 - **il prezzo**;
-- **l'immagine di copertina**: il sistema scrive il prompt, l'autore la genera
-  e la sceglie;
+- **l'immagine di copertina**: il sistema scrive il prompt, Cowork genera le
+  varianti, l'autore sceglie;
 - **la pubblicazione**, dopo aver letto il libro.
 
 Quando un agente tocca una di queste, la segnala come domanda, non la risolve.
+La sessione la registra con la proposta degli agenti e le alternative
+(`decisioni <slug> --proponi …`) e manda la notifica all'autore: se entro 24
+ore non risponde, vale la proposta (**silenzio-assenso**). La sua risposta,
+quando arriva, vince sempre. La pubblicazione è la sola che non passa dal
+silenzio-assenso.
 
 ---
 
@@ -547,3 +556,5 @@ Ogni regola qui sopra viene da un difetto trovato su un libro vero.
 | le domande d'avvio esistevano solo nella chat di un libro: il successivo sarebbe partito senza | A, avvio | le sette domande stanno nel sistema (`avvio`), e le risposte arrivano da sole a posizionamento, scheda e copertina |
 | le parole chiave di Bills in Order le aveva inventate il posizionamento, e Cowork ne ha trovate sei su sette da rifare | A e 6, `parole-chiave` | all'avvio Cowork cerca le parole chiave della nicchia e il posizionamento sceglie da lì; alla scheda le sette scelte si verificano |
 | una richiesta a Cowork mescolava pagina del concorrente, KDP e parole chiave: un solo accesso mancante la lasciava parziale tutta | canale Cowork | un ruolo per richiesta; le richieste che mescolano si dividono |
+| da quattro giorni nessuna risposta di Cowork: il push da GitHub Desktop lo faceva l'autore, e quando non c'era il canale restava fermo | canale Cowork | il corriere su Drive, che Cowork e la fabbrica raggiungono da soli; GitHub resta l'archivio |
+| un libro in automatico si sarebbe fermato sei volte ad aspettare l'autore | tutte | silenzio-assenso a 24 ore per le decisioni dell'autore; la pubblicazione resta fuori |

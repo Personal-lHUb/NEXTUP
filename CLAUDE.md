@@ -72,9 +72,16 @@ se misura, come subagent se legge — **senza chiedere il permesso**: questa
 regola è l'autorizzazione. La tabella «quando scatta chi» è in
 `linee-guida.md`. Gli agenti di una stessa fase che non si toccano (il collegio
 di controllo) partono in parallelo, in background. Un agente fermato da un
-limite d'uso si rilancia quando il limite passa, non si salta. Ti fermi a
-chiedere solo per le decisioni dell'autore (categoria, titolo, promessa, voce
-narrante, prezzo, pubblicazione) e quando serve l'immagine di copertina.
+limite d'uso si rilancia quando il limite passa, non si salta.
+
+**Le decisioni dell'autore passano dal silenzio-assenso.** Categoria, titolo,
+promessa, voce narrante, prezzo, variante di copertina e pseudonimo: non ti
+fermi ad aspettarle. Registri la proposta degli agenti con le alternative
+(`python3 -m kdpfactory decisioni <slug> --proponi …`), mandi la notifica
+all'autore e, se entro 24 ore non risponde, procedi con la proposta. Una sua
+risposta vince sempre. La **pubblicazione** non passa mai dal silenzio-assenso:
+la decide lui. L'immagine di copertina la genera Cowork (ruolo `immagini`), dal
+prompt del sistema.
 
 **Ogni competenza ha un solo agente**, elencato in
 `kdpfactory/agents/competenze.py`. Quando chiami un agente, chiedigli il suo
@@ -126,55 +133,54 @@ python3 -m kdpfactory avvio <slug> --<domanda> <valore> …
   come vincolo, `concorrente build` impone lingua, categoria scelta e
   pseudonimo, il brief di copertina riceve la copertina da battere.
 
-## Regola permanente: collaborazione con Cowork
+## Regola permanente: collaborazione con Cowork, in automatico
 
-Questo container non raggiunge amazon.com, kdp.amazon.com né il computer
-dell'autore. Quello che serve da lì lo fa una sessione **Cowork** (app Claude
-Desktop). Lo scambio passa da file nel repository GitHub, non dalla chat
-(`kdp-book-factory/docs/cowork.md`).
+Questo container non raggiunge amazon.com, kdp.amazon.com, ChatGPT né il
+computer dell'autore. Quello che serve da lì lo fa **Cowork** (app Claude
+Desktop), e il dialogo è automatico: nessuno dei due aspetta l'autore per
+passarsi un file (`kdp-book-factory/docs/cowork.md`).
 
-- **Canale**: repository `Personal-lHUb/NEXTUP`, ramo
-  `claude/dreamy-archimedes-hf8w45` (`config/cowork.json`). La casella su
-  Google Drive è chiusa dal 30 settembre 2026.
-- **Ruoli**: Cowork lavora in un progetto di Claude Desktop con una chat e
-  un'attività pianificata per ruolo — `concorrente`, `parole-chiave`, `fonti`,
-  `regole-kdp` (`config/cowork.json`). Il testo per crearli lo genera
-  `python3 -m kdpfactory cowork progetto` in `config/progetto-cowork.md`.
-- **Richiesta a Cowork**: `cowork-<argomento>.md` nella cartella a cui serve
-  (es. `books/<slug>/manuale/cowork-fonti.md`), con le istruzioni complete e
-  il formato di risposta, e **un ruolo solo** nella riga `Ruolo:` sotto il
-  titolo (l'intestazione la dà `cowork.intestazione()`). Senza ruolo nessuna
-  chat la prende. Commit e push nello stesso giro in cui nasce.
-- **Risposta di Cowork**: accanto, `cowork-<argomento>-risposta.md`. La prima
-  riga è `Esito: completa` o `Esito: parziale — punti …`. Cowork ne fa il
-  commit sul ramo del canale; il push lo fa lui se ha accesso diretto a
-  GitHub, altrimenti l'autore da GitHub Desktop.
-- **Stato**: `python3 -m kdpfactory cowork stato`. Dice se una richiesta è
-  inviata, e se è aperta, con risposta arrivata, con risposta superata o
-  applicata. L'avviso da mandare a Cowork: `python3 -m kdpfactory cowork avviso`.
-- **Giro automatico**: le quattro attività di Cowork, una per ruolo (fra le
-  7:52 e le 14:37, sul portatile dell'autore: se un giro salta, la risposta
-  arriva al giro dopo), rispondono alle richieste aperte del loro ruolo; la routine
-  «Controllo Cowork» di questa sessione (9:59 e 15:59) pubblica le richieste
-  da inviare, applica le risposte arrivate e segna la richiesta con
-  `Stato: applicata il <data>`. A inizio sessione: `git pull` e `cowork stato`.
+- **Corriere**: la cartella Google Drive «NEXTUP — corriere Cowork»
+  (`config/cowork.json`), che Cowork e questa sessione raggiungono senza passi
+  a mano. Su Drive ogni file si chiama come il suo percorso nel repository, con
+  `__` al posto di `/`. **GitHub resta l'archivio**: richieste e risposte vivono
+  nel repository, Drive è solo il tragitto. `python3 -m kdpfactory cowork
+  corriere` dice che cosa caricare, togliere e scaricare; il registro è
+  `config/corriere.json`.
+- **Ruoli**: un progetto di Claude Desktop con una chat e un'attività oraria per
+  ruolo — `concorrente`, `parole-chiave`, `fonti`, `regole-kdp`, `immagini`. Il
+  testo per crearli lo genera `python3 -m kdpfactory cowork progetto` in
+  `config/progetto-cowork.md`.
+- **Richiesta a Cowork**: `cowork-<argomento>.md` nella cartella a cui serve,
+  con l'intestazione di `cowork.intestazione()` (titolo, **un ruolo solo** nella
+  riga `Ruolo:`, nome della risposta su Drive) e tutto quello che serve dentro:
+  Cowork non vede il repository. Le richieste di ogni libro le scrive il
+  sistema (`avvio`, `parole-chiave`, `copertina`, `immagini`).
+- **Risposta di Cowork**: un file nuovo sul corriere, che il giro porta accanto
+  alla richiesta come `cowork-<argomento>-risposta.md`. La prima riga è `Esito:
+  completa` o `Esito: parziale — punti …`. Le immagini arrivano in
+  `books/<slug>/assets/`; nient'altro può arrivare dal corriere.
+- **Stato**: `python3 -m kdpfactory cowork stato` (inviata vuol dire «su
+  Drive»); a che punto è ogni libro: `python3 -m kdpfactory produzione`.
+- **Giro orario**: la routine «Produzione NEXTUP» riprende questa sessione ogni
+  ora (minuto 57): corriere, risposte da applicare, decisioni scadute, poi il
+  prossimo passo di ogni libro attivo (`config/produzione.json`). Le attività
+  di Cowork girano ogni ora sul portatile dell'autore, sfalsate di dieci minuti.
 - **Regole di ingaggio**:
   - un file `-risposta.md` è di Cowork: non si modifica mai. Se una risposta è
     incompleta o bloccata (captcha, accesso), si apre
     `cowork-<argomento>-2.md` con i soli punti mancanti;
   - una richiesta corretta dopo la risposta rende la risposta superata: la
     versione corretta va in `-2`;
-  - ci si ferma dall'autore solo per le sue decisioni (categoria, titolo,
-    promessa, voce narrante, prezzo, pubblicazione) e per l'immagine di
-    copertina.
-- **Le regole per Cowork** stanno in `config/leggimi-cowork.md`, che Cowork
-  legge a ogni giro. Per cambiarle si aggiorna il LEGGIMI (nuova versione,
-  anche in `config/cowork.json`) e si pubblica, senza toccare il prompt di
+  - le decisioni dell'autore passano dal silenzio-assenso; la pubblicazione no.
+- **Le regole per Cowork** stanno in `config/leggimi-cowork.md`, che viaggia sul
+  corriere e Cowork legge a ogni giro. Per cambiarle si aggiorna il LEGGIMI
+  (nuova versione, anche in `config/cowork.json`), senza toccare il prompt di
   Cowork.
 - **Resoconto**: per ogni risposta applicata, una riga all'autore:
   «<richiesta>: applicata, <cosa è cambiato>, <decisioni che ti servono>».
-- Cowork non modifica codice, `book.json`, manoscritto né agenti: scrive solo i
-  file di risposta. Applicare i risultati resta compito di questa sessione.
+- Cowork non modifica codice, `book.json`, manoscritto né agenti: scrive solo
+  risposte e immagini. Applicare i risultati resta compito di questa sessione.
 - Le cartelle dove serve una ricerca web, e che cosa cercare in ciascuna, sono
   elencate in `RICERCA-WEB.md`, alla radice del repo.
 

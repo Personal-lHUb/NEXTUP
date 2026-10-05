@@ -32,5 +32,4 @@ non c'è, rispondi «Esito: parziale» con il motivo, senza stimare.
    - Business & Money > Personal Finance > Budgeting & Money Management
    - Reference > Consumer Guides
 
-   Servono a «Bills in Order» (il libro di «Bills in Order»). Se una manca,
-   riporta la più vicina che c'è.
+   Servono a «Bills in Order». Se una manca, riporta la più vicina che c'è.
