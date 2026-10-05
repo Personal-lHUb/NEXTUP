@@ -452,13 +452,24 @@ def cmd_copertina(args) -> int:
     )
     save_backup(project, args, "brief di copertina")
 
+    panel_w, panel_h = coverimage.front_panel_size_in(spec.trim)
+    minimo = (math.ceil(panel_w * coverbrief.FRONT_DPI), math.ceil(panel_h * coverbrief.FRONT_DPI))
+    titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
+
+    # Lo stesso brief, pronto da allegare a una chat del progetto ChatGPT.
+    allegato = project.build_dir / richiesteimmagini.CHATGPT_COPERTINA
+    if allegato.exists():
+        save_backup(project, args, "file per ChatGPT precedente", force=True)
+    allegato.write_text(
+        richiesteimmagini.chatgpt_copertina(spec.slug, titolo, output.read_text(encoding="utf-8"), minimo),
+        encoding="utf-8",
+    )
+    save_backup(project, args, "file per ChatGPT")
+
     # Con il corriere l'illustrazione la genera Cowork, ruolo «immagini»: la
     # richiesta porta dentro il brief appena scritto, e nient'altro.
     canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
     if canale.get("canale") == "drive" and "immagini" in cowork.ruoli(canale):
-        panel_w, panel_h = coverimage.front_panel_size_in(spec.trim)
-        minimo = (math.ceil(panel_w * coverbrief.FRONT_DPI), math.ceil(panel_h * coverbrief.FRONT_DPI))
-        titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
         nome, testo = richiesteimmagini.copertina(
             spec.slug, titolo, output.read_text(encoding="utf-8"), minimo, canale
         )
@@ -469,6 +480,7 @@ def cmd_copertina(args) -> int:
 
     categoria = "medium-content" if spec.is_medium_content else "full-content"
     print(f"Brief di copertina [{categoria}, {pages} pagine]: {output}")
+    print(f"Da allegare in ChatGPT (progetto «{richiesteimmagini.PROGETTO_CHATGPT}»): {allegato}")
     print("\nIncollalo nello strumento grafico, poi salva l'immagine che torna in")
     print(f"  {project.assets_dir / 'copertina.jpg'}")
     print("e rilancia `build`: viene ritagliata sulla prima, portata a 300 DPI e")
@@ -527,9 +539,19 @@ def cmd_immagini(args) -> int:
     if mancanti:
         print(f"\nSalva le immagini in {figure_module.cartella(project.assets_dir)}")
         print("poi rilancia `build` e `qa`.")
+        titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
+        allegato = project.build_dir / richiesteimmagini.CHATGPT_FIGURE
+        if allegato.exists():
+            save_backup(project, args, "file per ChatGPT delle figure precedente", force=True)
+        allegato.write_text(
+            richiesteimmagini.chatgpt_figure(spec.slug, titolo, output.read_text(encoding="utf-8"),
+                                             [f.percorso for f in mancanti]),
+            encoding="utf-8",
+        )
+        save_backup(project, args, "file per ChatGPT delle figure")
+        print(f"Da allegare in ChatGPT (progetto «{richiesteimmagini.PROGETTO_CHATGPT}»): {allegato}")
         canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
         if canale.get("canale") == "drive" and "immagini" in cowork.ruoli(canale):
-            titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
             nome, testo = richiesteimmagini.figure(
                 spec.slug, titolo, output.read_text(encoding="utf-8"),
                 [f.percorso for f in mancanti], canale,
@@ -1293,6 +1315,9 @@ def cmd_cowork(args) -> int:
         uscita = radice / "config" / "progetto-cowork.md"
         uscita.write_text(cowork.progetto(canale), encoding="utf-8")
         print(f"Scritto {uscita}: istruzioni del progetto, una chat e un'attività per ruolo.")
+        chatgpt = radice / "config" / "progetto-chatgpt.md"
+        chatgpt.write_text(richiesteimmagini.progetto_chatgpt(canale), encoding="utf-8")
+        print(f"Scritto {chatgpt}: il progetto ChatGPT delle immagini.")
         voci = cowork.attivita(canale)
         if voci:
             file = radice / "config" / "attivita-cowork.json"

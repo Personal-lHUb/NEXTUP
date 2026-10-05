@@ -1,12 +1,16 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 5 · 5 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 6 · 5 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
-**Novità della versione 5: la riga `Serve:`.** Una richiesta che sotto il ruolo
+**Novità della versione 6: il progetto ChatGPT «NEXTUP — Immagini».** Il ruolo
+`immagini` lavora lì, se l'autore l'ha creato: una chat nuova per ogni
+richiesta (sezione «Ruolo immagini»).
+
+Versione 5: la riga `Serve:`. Una richiesta che sotto il ruolo
 ha `Serve: l'accesso a …` si fa solo quando quell'accesso è già aperto nel
 browser. Se non lo è, non si scrive nessuna risposta, nemmeno parziale: la
 richiesta resta aperta e si riprende al giro dopo. L'accesso lo apre l'autore.
@@ -141,6 +145,10 @@ selettore delle categorie.
 
 Le illustrazioni di copertina e le figure dell'interno, con **ChatGPT**.
 
+- Se in ChatGPT c'è il progetto **«NEXTUP — Immagini»**, si lavora lì: una
+  chat nuova del progetto per ogni richiesta, chiamata `<slug> — copertina` o
+  `<slug> — figure`. Le istruzioni del progetto contengono già le regole fisse.
+  Se il progetto non c'è, si usa una chat normale.
 - Il prompt è nella richiesta, scritto dalla fabbrica: si incolla **così com'è**,
   senza aggiungere né togliere. Non si scrive un prompt proprio.
 - **Nessun testo nell'immagine**: niente titoli, lettere, numeri, firme. Il

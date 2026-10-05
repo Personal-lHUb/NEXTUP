@@ -193,6 +193,29 @@ class TestImmagini(unittest.TestCase):
         self.assertIn("1838 x 2775", testo)
         self.assertIn("`books__libro__manuale__cowork-copertina-risposta.md`", testo)
 
+    def test_il_file_per_chatgpt_porta_il_brief_senza_commenti(self):
+        brief = "<!-- per la sessione -->\nCreate a professional cover. No text in the image."
+        testo = richiesteimmagini.chatgpt_copertina("libro", "Titolo", brief, (1838, 2775))
+        self.assertIn("Create a professional cover.", testo)
+        self.assertNotIn("per la sessione", testo)
+        self.assertIn("1838 x\n   2775 px", testo)
+        self.assertIn("Make 3 variants", testo)
+        self.assertIn("No text anywhere in the image.", testo)
+        self.assertIn("`books__libro__assets__copertina-3.png`", testo)
+
+    def test_il_progetto_chatgpt_tiene_le_regole_fisse(self):
+        testo = richiesteimmagini.progetto_chatgpt(CANALE)
+        self.assertIn(richiesteimmagini.ISTRUZIONI_CHATGPT, testo)
+        self.assertIn("NEXTUP — corriere Cowork", testo)
+        self.assertIn(f"build/{richiesteimmagini.CHATGPT_COPERTINA}", testo)
+        for regola in ("No text of any kind", "grayscale only", "portrait 2:3", "real person"):
+            self.assertIn(regola, richiesteimmagini.ISTRUZIONI_CHATGPT)
+
+    def test_le_figure_per_chatgpt_sono_in_scala_di_grigi(self):
+        testo = richiesteimmagini.chatgpt_figure("libro", "Titolo", "prompt", ["immagini/03-mappa.jpg"])
+        self.assertIn("Grayscale only", testo)
+        self.assertIn("`books__libro__assets__immagini__03-mappa.jpg`", testo)
+
     def test_le_figure_hanno_il_nome_del_loro_posto(self):
         _, testo = richiesteimmagini.figure("libro", "Titolo", "prompt", ["immagini/03-mappa.jpg"], CANALE)
         self.assertIn("`books__libro__assets__immagini__03-mappa.jpg`", testo)

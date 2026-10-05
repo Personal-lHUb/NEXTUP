@@ -32,7 +32,9 @@ Nessuno dei due chiama il modello: leggono i dati che il libro ha già —
 categoria, promessa, pubblico, palette, misure di stampa calcolate sulle pagine
 vere — e ne fanno un prompt. I file restano in `build/`, entrano nel backup e si
 rigenerano quando il libro cambia: sono la traccia di come quell'immagine è
-stata chiesta.
+stata chiesta. Gli stessi comandi scrivono `build/copertina-chatgpt.md` e
+`build/immagini-chatgpt.md`, il file da allegare a una chat del progetto
+ChatGPT «NEXTUP — Immagini» (istruzioni in `config/progetto-chatgpt.md`).
 
 Tre cose che questi prompt non negoziano:
 

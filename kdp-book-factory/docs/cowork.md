@@ -178,6 +178,17 @@ sistema, uguali per ogni libro.
 | `manuale/cowork-copertina.md` | immagini | copertina (fase 7) | `copertina <slug>` |
 | `manuale/cowork-figure.md` | immagini | figure dichiarate e mancanti | `immagini <slug>` |
 
+## Il progetto ChatGPT delle immagini
+
+Le immagini nascono in un progetto di ChatGPT, «NEXTUP — Immagini»: le regole
+fisse (niente testo, 2:3, scala di grigi per l'interno, originalità, misure
+dichiarate) stanno nelle sue istruzioni, che `cowork progetto` scrive in
+`config/progetto-chatgpt.md`. Il brief di ogni lavoro si allega alla sua chat:
+`copertina <slug>` scrive `build/copertina-chatgpt.md`, `immagini <slug>`
+scrive `build/immagini-chatgpt.md`. Il brief dentro è lo stesso della richiesta
+a Cowork, quindi le immagini le può generare l'autore o Cowork, e vale la prima
+serie che arriva sul corriere.
+
 Le varianti di copertina arrivano in `assets/copertina-N.png`; l'agente
 `copertina` le misura, la scelta passa dal silenzio-assenso, e
 `copertina <slug> --scegli N` porta quella scelta in `assets/copertina.jpg`.
