@@ -1,14 +1,20 @@
-# Cowork · illustrazione di copertina — household-bills
+# Cowork · illustrazione di copertina, seguito — household-bills
 
 Ruolo: immagini
+Serve: l'accesso a ChatGPT (chatgpt.com, account dell'autore)
 
 Richiesta della fabbrica per Cowork, con le regole del LEGGIMI
 (`config__leggimi-cowork.md`, nella stessa cartella).
 Scrivi la risposta come file nuovo nella cartella Drive «NEXTUP — corriere Cowork»,
-con il nome `books__household-bills__manuale__cowork-copertina-risposta.md` e la stessa numerazione.
+con il nome `books__household-bills__manuale__cowork-copertina-2-risposta.md` e la stessa numerazione.
 Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
 Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
 scrivilo invece di stimare: l'accesso non lo fai tu.
+Prima di cominciare controlla l'accesso a ChatGPT (chatgpt.com, account dell'autore) nel browser. Se non è aperto, non
+scrivere nessuna risposta: la richiesta resta aperta e la riprendi al giro dopo.
+
+È il seguito di `cowork-copertina.md`: la risposta era parziale perché nel
+browser ChatGPT non aveva l'accesso aperto. I punti sono gli stessi.
 
 Il libro: «Bills in Order — A Household Guide to Paying on Time and Catching Up When You Fall Behind». Serve l'illustrazione della prima di copertina: solo
 l'immagine, senza nessun testo. Titolo, sottotitolo e autore li compone la
@@ -230,5 +236,3 @@ target under 40 MB (hard limit 650 MB).
 
 Chi usa i risultati: l'agente `copertina`, che misura le varianti e propone
 all'autore quella da usare. La applica la sessione della fabbrica.
-
-Stato: applicata il 2026-10-05 — nessuna immagine: nel browser di Cowork ChatGPT non aveva l'accesso. Gli stessi punti in cowork-copertina-2.md, che aspetta l'accesso a ChatGPT (riga Serve).

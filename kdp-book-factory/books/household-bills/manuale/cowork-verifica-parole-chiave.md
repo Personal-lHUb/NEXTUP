@@ -56,3 +56,5 @@ strumento.
 Chi usa i risultati: la scheda del libro (`book.json` e `manuale/scheda.json`);
 una frase che non regge si sostituisce, e la sostituta passa dalla conformità.
 Li applica la sessione della fabbrica.
+
+Stato: applicata il 2026-10-05 — reggono le frasi 1, 2 e 7 (autocompletamento simile); la 3, 4, 5 e 6 non hanno autocompletamento e si sostituiscono con i dati di cowork-verifica-parole-chiave-2.md, poi conformità. Categorie: Budgeting & Money Management va dal n. 427 al n. 6.278 in Books (1° e 20° cartaceo), quasi tutti libri da leggere; Consumer Guides dal n. 2.968 al n. 59.410, scaffale eterogeneo e poco affollato sul tema. Le due categorie restano.

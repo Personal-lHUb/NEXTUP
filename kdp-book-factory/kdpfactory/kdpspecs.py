@@ -42,10 +42,13 @@ PAPER_SPINE_FACTOR: dict[str, float] = {
     "color-premium": 0.002347,
 }
 
-# Numero di pagine ammesso per tipo di carta/stampa.
+# Numero di pagine ammesso per tipo di carta/stampa. La crema si ferma prima
+# della bianca: 776 nella guida «Print Options» di KDP (riga 5x8, letta da
+# Cowork il 5 ottobre 2026). Il Cover Calculator accetta fino a 830 qualunque
+# carta, quindi non fa testo; il massimo di progetto (240) resta comunque sotto.
 PAPER_PAGE_LIMITS: dict[str, tuple[int, int]] = {
     "white": (24, 828),
-    "cream": (24, 828),
+    "cream": (24, 776),
     "color-standard": (72, 600),
     "color-premium": (24, 600),
 }

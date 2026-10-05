@@ -145,6 +145,35 @@ class TestProduzione(Base):
         self.assertTrue(stato.fermo)
         self.assertIn("cowork-concorrente.md", stato.blocca[0])
 
+    def test_un_seguito_con_serve_aspetta_l_autore_non_cowork(self):
+        from kdpfactory import avvio
+
+        project = BookProject(self.radice / "books" / "libro")
+        risposte = avvio.Avvio()
+        avvio.registra(risposte, concorrente="B0CSSJMQP1")
+        risposte.risposte = [d.chiave for d in avvio.DOMANDE]
+        avvio.salva(project, risposte)
+        scrivi(self.radice, "books/libro/concorrente/cowork-concorrente-risposta.md",
+               "Esito: parziale — punto 5: accesso\n\n" + "scheda prezzo pagine recensioni " * 15)
+        with (self.radice / self.richiesta).open("a", encoding="utf-8") as fh:
+            fh.write("\nStato: applicata il 2026-10-05\n")
+        seguito = cowork.intestazione("T", "cowork-concorrente-2-risposta.md", "concorrente", CANALE,
+                                      "books/libro/concorrente", serve="l'accesso ad Amazon")
+        self.assertIn("Serve: l'accesso ad Amazon", seguito)
+        self.assertIn("non\nscrivere nessuna risposta", seguito)
+        scrivi(self.radice, "books/libro/concorrente/cowork-concorrente-2.md", seguito)
+        elenco = self.elenco()
+        self.assertEqual([r.serve for r in elenco if r.stato == cowork.APERTA], ["l'accesso ad Amazon"])
+        stato = produzione.stato_libro(project, elenco)
+        self.assertEqual(stato.blocca, [], "la pagina c'è già: il seguito non ferma il libro")
+        self.assertTrue(any(v.startswith("autore: aprire l'accesso ad Amazon") for v in stato.in_corso))
+
+    def test_il_seguito_conta_come_la_richiesta(self):
+        base = produzione._nome_base
+        self.assertEqual(base("books/x/manuale/cowork-copertina-2.md"), "cowork-copertina.md")
+        self.assertEqual(base("config/cowork-kdp-12.md"), "cowork-kdp.md")
+        self.assertEqual(base("books/x/cowork-parole-chiave.md"), "cowork-parole-chiave.md")
+
     def test_solo_i_libri_attivi(self):
         (self.radice / "books" / "altro" / "concorrente").mkdir(parents=True)
         stati = produzione.tutti(self.radice / "books", self.elenco(), attivi=["altro"])

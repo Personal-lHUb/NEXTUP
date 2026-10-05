@@ -26,3 +26,5 @@ l'indirizzo com'era. Non serve l'accesso a nessun account.
 Chi usa il risultato: il prezzo di «Bills in Order» (decisione dell'autore,
 oggi 12,99 USD), che si confronta con quello del concorrente. Lo applica la
 sessione della fabbrica.
+
+Stato: applicata il 2026-10-05 — $9,99 confermato con l'indirizzo degli Stati Uniti: nessuno sconto, nessun prezzo di listino, altri due venditori da $9,99. Bills in Order resta a $12,99, scelta dell'autore: nessuna proposta nuova.

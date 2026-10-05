@@ -35,6 +35,10 @@ ESCLUSE = frozenset({"backup", "build", "__pycache__", ".git"})
 #: la riga che dice quale ruolo di Cowork prende la richiesta, sotto il titolo
 RUOLO = "Ruolo:"
 _RUOLO = re.compile(r"^Ruolo:\s*([a-z][a-z-]*)\s*$", re.M)
+#: la riga che dice quale accesso dell'autore serve prima di cominciare: finché
+#: non è aperto, Cowork non risponde e la richiesta aspetta l'autore, non Cowork
+SERVE = "Serve:"
+_SERVE = re.compile(r"^Serve:\s*(.+?)\s*$", re.M)
 
 APERTA, ARRIVATA, SUPERATA, CHIUSA = "aperta", "risposta arrivata", "risposta superata", "applicata"
 DA_INVIARE, INVIATA, NON_CONTROLLATA = "da inviare", "inviata", "non controllata"
@@ -54,6 +58,7 @@ class Richiesta:
     stato: str            # aperta | risposta arrivata | risposta superata | applicata
     invio: str            # da inviare | inviata | non controllata
     ruolo: str = ""       # il ruolo di Cowork che la prende; vuoto se la richiesta non lo dice
+    serve: str = ""       # l'accesso che l'autore deve aprire prima; vuoto se non serve
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -119,6 +124,7 @@ def richieste(
                 stato=stato,
                 invio=invio,
                 ruolo=ruolo_di(testo),
+                serve=serve_di(testo),
             )
         )
     return trovate
@@ -127,6 +133,12 @@ def richieste(
 def ruolo_di(testo: str) -> str:
     """Il ruolo dichiarato dalla richiesta, nella riga `Ruolo: …`; vuoto se manca."""
     trovato = _RUOLO.search(testo)
+    return trovato.group(1) if trovato else ""
+
+
+def serve_di(testo: str) -> str:
+    """L'accesso che la richiesta chiede aperto prima di cominciare, nella riga `Serve: …`."""
+    trovato = _SERVE.search(testo)
     return trovato.group(1) if trovato else ""
 
 
@@ -141,25 +153,38 @@ def corriere(canale: dict) -> tuple[str, str]:
     return dati.get("cartella", "NEXTUP — corriere Cowork"), dati.get("cartella_id", "")
 
 
-def intestazione(titolo: str, risposta: str, ruolo: str, canale: dict, cartella: str = "") -> str:
+def intestazione(
+    titolo: str, risposta: str, ruolo: str, canale: dict, cartella: str = "", serve: str = ""
+) -> str:
     """La testa uguale per ogni richiesta: ruolo, regole, dove va la risposta.
 
     La riga `Ruolo:` è quella che l'attività di ciascun ruolo cerca: una
     richiesta senza ruolo non la prende nessuno. `cartella` è dove sta la
     richiesta nel repository (per esempio `books/x/concorrente`): sul corriere
     la risposta si chiama come il suo percorso, con `__` al posto di `/`.
+
+    `serve` è l'accesso che l'autore deve aprire nel browser di Cowork perché la
+    richiesta si possa fare (per esempio «l'accesso a KDP»). Con la riga `Serve:`
+    Cowork, se l'accesso non c'è, non risponde e riprova al giro dopo: senza, una
+    richiesta bloccata dall'accesso tornerebbe parziale a ogni giro.
     """
     regole = (
         "Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.\n"
         "Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,\n"
         "scrivilo invece di stimare: l'accesso non lo fai tu.\n"
     )
+    if serve:
+        regole += (
+            f"Prima di cominciare controlla {serve} nel browser. Se non è aperto, non\n"
+            "scrivere nessuna risposta: la richiesta resta aperta e la riprendi al giro dopo.\n"
+        )
+    righe = f"{RUOLO} {ruolo}\n" + (f"{SERVE} {serve}\n" if serve else "")
     if canale.get("canale") == "drive":
         nome, _ = corriere(canale)
         percorso = f"{cartella.strip('/')}/{risposta}" if cartella else risposta
         return (
             f"# {titolo}\n\n"
-            f"{RUOLO} {ruolo}\n\n"
+            f"{righe}\n"
             "Richiesta della fabbrica per Cowork, con le regole del LEGGIMI\n"
             "(`config__leggimi-cowork.md`, nella stessa cartella).\n"
             f"Scrivi la risposta come file nuovo nella cartella Drive «{nome}»,\n"
@@ -170,7 +195,7 @@ def intestazione(titolo: str, risposta: str, ruolo: str, canale: dict, cartella:
     leggimi = canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md")
     return (
         f"# {titolo}\n\n"
-        f"{RUOLO} {ruolo}\n\n"
+        f"{righe}\n"
         f"Richiesta della fabbrica per Cowork, con le regole di\n`{leggimi}`.\n"
         f"La risposta va in `{risposta}`, accanto a questo file,\n"
         f"sul ramo `{ramo}`, con la stessa numerazione.\n"

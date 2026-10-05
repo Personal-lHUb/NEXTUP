@@ -52,3 +52,5 @@ Chi usa i risultati:
 - i vicini di scaffale vanno al `posizionamento`, per prezzo e pagine.
 
 Li applica la sessione della fabbrica.
+
+Stato: applicata il 2026-10-05 — la pagina si legge dalla risposta di Cowork (pagina.md resta vuoto), la copertina è in concorrente/copertina.md. Dati del cartaceo, 208 pagine, $16,59. Le recensioni da 1 a 3 stelle in cowork-concorrente-2.md, che aspetta l'accesso ad Amazon.

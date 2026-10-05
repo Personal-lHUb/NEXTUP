@@ -15,6 +15,7 @@ passo lo dice e lo lascia alla sessione.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
@@ -34,6 +35,18 @@ COLLEGIO = ("lettore-cieco", "editor-sviluppo", "fact-checker", "conformita")
 
 
 CONFIG = Path("config") / "produzione.json"
+_SEGUITO = re.compile(r"-\d+(?=\.md$)")
+
+
+def _nome_base(percorso: str) -> str:
+    """Il nome della richiesta senza il numero del seguito.
+
+    `cowork-copertina-2.md` è ancora la richiesta di copertina: il passo che la
+    aspettava aspetta anche il suo seguito.
+    """
+    return _SEGUITO.sub("", Path(percorso).name)
+
+
 #: Le decisioni che la fase successiva aspetta, per fase.
 SERVONO = {
     "1": ("categoria", "titolo", "promessa", "voce", "pseudonimo"),
@@ -107,6 +120,9 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
     ]
 
     def richiesta(r: cowork.Richiesta) -> str:
+        if r.serve:
+            # Cowork non la prende finché l'accesso non c'è: chi la sblocca è l'autore.
+            return f"autore: aprire {r.serve} nel browser di Cowork ({Path(r.percorso).name})"
         return f"Cowork, ruolo {r.ruolo or '—'}: {Path(r.percorso).name}"
 
     def proposta(d: dict) -> str:
@@ -115,7 +131,7 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
     def stato(fase: str, passo: str, ruoli: tuple[str, ...] = (), nomi: tuple[str, ...] = (),
               *altro: str) -> Stato:
         """Blocca solo quello che il passo aspetta: i ruoli o le richieste nominate, le sue decisioni."""
-        bloccanti = [r for r in mie if r.ruolo in ruoli or Path(r.percorso).name in nomi]
+        bloccanti = [r for r in mie if r.ruolo in ruoli or _nome_base(r.percorso) in nomi]
         servono = SERVONO.get(fase, ())
         blocca = [richiesta(r) for r in bloccanti] + [proposta(d) for d in attese if d["chiave"] in servono]
         in_corso = [richiesta(r) for r in mie if r not in bloccanti]
@@ -168,7 +184,7 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
         if varianti:
             return stato("7", f"{len(varianti)} varianti arrivate: `copertina` le misura, proposta "
                               "«copertina» all'autore, poi `copertina <slug> --scegli N`")
-        if any(Path(r.percorso).name == "cowork-copertina.md" for r in mie):
+        if any(_nome_base(r.percorso) == "cowork-copertina.md" for r in mie):
             return stato("7", "aspettare le varianti di copertina", (), ("cowork-copertina.md",))
         return stato("7", "`copertina <slug>`: il brief e la richiesta a Cowork, ruolo immagini")
     qa = build / "qa-report.json"

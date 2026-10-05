@@ -1,15 +1,19 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 4 · 5 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 5 · 5 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
-**Novità della versione 4: il corriere su Drive.** Si lavora solo nella
-cartella di Google Drive «NEXTUP — corriere Cowork». Niente più GitHub, niente
-GitHub Desktop, niente Pull né push: i file fra la cartella e il repository li
-porta la fabbrica, ogni ora. C'è un ruolo nuovo, `immagini`.
+**Novità della versione 5: la riga `Serve:`.** Una richiesta che sotto il ruolo
+ha `Serve: l'accesso a …` si fa solo quando quell'accesso è già aperto nel
+browser. Se non lo è, non si scrive nessuna risposta, nemmeno parziale: la
+richiesta resta aperta e si riprende al giro dopo. L'accesso lo apre l'autore.
+
+Versione 4: il corriere su Drive. Si lavora solo nella cartella di Google Drive
+«NEXTUP — corriere Cowork», senza GitHub; i file fra la cartella e il
+repository li porta la fabbrica, ogni ora.
 
 ## Dove si lavora
 
@@ -33,6 +37,10 @@ porta la fabbrica, ogni ora. C'è un ruolo nuovo, `immagini`.
   dillo all'autore e lasciala lì.
 - Una richiesta che ha già accanto il file con lo stesso nome e `-risposta` è
   fatta: saltala.
+- Una richiesta con la riga `Serve: …` sotto il ruolo chiede un accesso che
+  apre l'autore (KDP, ChatGPT, Helium 10, Amazon). Prima di tutto guarda se nel
+  browser è aperto. Se non lo è, salta la richiesta senza scrivere niente: al
+  giro dopo la ritrovi aperta. Se è aperto, la fai come tutte le altre.
 
 ## Come si risponde
 
@@ -123,8 +131,9 @@ selettore delle categorie.
 
 - Su KDP **si legge e basta**. Nel flusso di un titolo nuovo si guarda e si
   esce senza salvare: niente bozze.
-- Se serve l'accesso a KDP e nel browser non è aperto, la risposta è parziale
-  con quel motivo: l'accesso lo apre l'autore, non tu.
+- Se serve l'accesso a KDP e nel browser non è aperto: con la riga `Serve:`
+  non rispondi e aspetti il giro dopo; senza, la risposta è parziale con quel
+  motivo. L'accesso lo apre l'autore, non tu.
 - La fonte preferita è la guida ufficiale di KDP (kdp.amazon.com/help); il
   calcolatore dei costi va citato con le cifre che mostra.
 

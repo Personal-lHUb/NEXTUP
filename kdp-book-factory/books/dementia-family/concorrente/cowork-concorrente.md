@@ -52,3 +52,5 @@ Chi usa i risultati:
 - i vicini di scaffale vanno al `posizionamento`, per prezzo e pagine.
 
 Li applica la sessione della fabbrica.
+
+Stato: applicata il 2026-10-05 — la pagina si legge dalla risposta di Cowork (pagina.md resta vuoto), la copertina è in concorrente/copertina.md. L'ASIN è il Large Print in pre-ordine; Cowork riporta anche l'Hardcover in vendita (368 pagine, $32,00). Le recensioni da 3 stelle in cowork-concorrente-2.md, che aspetta l'accesso ad Amazon.

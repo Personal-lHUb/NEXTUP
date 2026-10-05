@@ -33,3 +33,5 @@ non c'è, rispondi «Esito: parziale» con il motivo, senza stimare.
    - Reference > Consumer Guides
 
    Servono a «Bills in Order». Se una manca, riporta la più vicina che c'è.
+
+Stato: applicata il 2026-10-05 — punto 1: carta crema a 776 pagine in kdpfactory/kdpspecs.py, dalla guida «Print Options»; il Cover Calculator accetta 830 con qualunque carta e non fa testo. Punti 2 e 3 in cowork-kdp-3.md, che aspetta l'accesso a KDP (riga Serve).
