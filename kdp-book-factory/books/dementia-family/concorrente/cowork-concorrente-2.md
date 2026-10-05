@@ -13,7 +13,7 @@ scrivilo invece di stimare: l'accesso non lo fai tu.
 Prima di cominciare controlla l'accesso ad Amazon (amazon.com, account dell'autore) nel browser. Se non è aperto, non
 scrivere nessuna risposta: la richiesta resta aperta e la riprendi al giro dopo.
 
-È il seguito di `cowork-concorrente.md` (ASIN B0GN73RYMF). Della pagina manca solo
+È il seguito di `cowork-concorrente.md` (ASIN B0GN73RYMF). Della pagina mancano solo
 le recensioni da 3 stelle (6% delle valutazioni) e altre da 4 e 5 stelle oltre alle otto già riportate: il filtro per stelle chiedeva il login. Tutto il resto è già arrivato.
 
 Con l'accesso dell'autore si legge e basta: niente acquisti, carrello, liste,

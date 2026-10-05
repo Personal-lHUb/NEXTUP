@@ -1,22 +1,6 @@
 {
   "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N",
   "caricati": {
-    "config/cowork-kdp-2.md": {
-      "id": "10TS6j8883UqtsRAKpQEt70FUFUSXFZJ3",
-      "sha": "5c048da19717f964111941ad8ec761dcad83046dde6e8ff67714d7ce66ec5841"
-    },
-    "books/household-bills/concorrente/cowork-prezzo.md": {
-      "id": "1Ti_rRBHjbkPlIZF8D7hmjRJEbRaqMJqk",
-      "sha": "e4cf6b0a4fcd5c92c69636be2975d052ec772795638bea1d653ae821148565d3"
-    },
-    "books/psychic-intuition/concorrente/cowork-concorrente.md": {
-      "id": "1OAaodxQi21vibrO1_NQeC37Eb0JUQa0k",
-      "sha": "86d8cdd22b6bf757a4b7b68ca0aec7cce01eaa7e7dd51be3c0c0b72402fe896d"
-    },
-    "books/dementia-family/concorrente/cowork-concorrente.md": {
-      "id": "1SpDEK2ELIsacRotMl6fQSL7gMDhIq6Rk",
-      "sha": "4ecaa939f5e396b2147275789f5de61755a7deaeab576c6e90c6b369c801b349"
-    },
     "books/psychic-intuition/concorrente/cowork-parole-chiave.md": {
       "id": "1l43I6dcxZMJbp3oo7_a-wtvsjs0cHbuF",
       "sha": "0570152b1c266535394b7d9c7546c7d81a220648993437bd69abbc1d93ce2844"
@@ -25,17 +9,9 @@
       "id": "1DsJJHvrj7gxyatoBlpbpsurAq9XAPUOX",
       "sha": "77a7496650ed3175c44f7d659081ce75c18f92e5cd6ebdde29ee2531828118e2"
     },
-    "books/household-bills/manuale/cowork-verifica-parole-chiave.md": {
-      "id": "1WcHsSoNd3hfaVdRWR31cz3VKtCxy3Ob1",
-      "sha": "4a9fe69ee793627d58029f43aaec45357283e3829e96f0078f66586efd0882d1"
-    },
-    "books/household-bills/manuale/cowork-copertina.md": {
-      "id": "1oywBEblkTZxHTwi3p-CopxWiOI7ee5c9",
-      "sha": "e486e932613be24e5791192c7572abf4116fb7ebba603646efb5de076e7b00ef"
-    },
     "config/leggimi-cowork.md": {
-      "id": "11eiZ2mRC-kp8AVez2IR4qz6SrK0vQyed",
-      "sha": "c979822ef80333eb15b40e0b0916ed8b84558197a4a52552145cdbfd1e9df00c"
+      "id": "16DsJfaFuyXT9fdvAS84rTjCogjarF2xD",
+      "sha": "17942f67b770707c7c916689876656b5eeec19e7751e06df882fe81d29c5ea24"
     },
     "config/progetto-cowork.md": {
       "id": "174LSwJxrrryK5mtXpXmCwZoGp9ghqzRL",
@@ -44,6 +20,26 @@
     "config/attivita-cowork.json": {
       "id": "1mJILUs77Na_Vl5_qXexzwtP7mqpgbKMm",
       "sha": "c768073b2ad1f6a236902157ad351d33f9e0b9233453781dd0b9309fd27e93ab"
+    },
+    "config/cowork-kdp-3.md": {
+      "id": "1j_1oOhCKLV-7tYbx0-Dv49FXfsCFWm0n",
+      "sha": "b9fa0081598e99dbd51ea00f2c7c08c9ea725430a4ea261a948a3a0176385a49"
+    },
+    "books/psychic-intuition/concorrente/cowork-concorrente-2.md": {
+      "id": "1J9UboxziV7YpNud_xc3eFxtgtbdwrrbA",
+      "sha": "3bfb39734a28a24c33949a201ee7d56f3c83377691a311888161f0af440e3c11"
+    },
+    "books/dementia-family/concorrente/cowork-concorrente-2.md": {
+      "id": "1_WKbORnXN28AJGCGWkXhV2WPULdgG-Tt",
+      "sha": "39c64bb8777f846dbca9621969b0c159de84aa53495ee10ea1676b0d1888b14b"
+    },
+    "books/household-bills/manuale/cowork-verifica-parole-chiave-2.md": {
+      "id": "1vC5CXh5qJhfYKLJzDsAIKWIcacf7UZe8",
+      "sha": "d2faa1f33268a84905f616a6e7588a617fb37a701d431cb3c027bcee0db6c783"
+    },
+    "books/household-bills/manuale/cowork-copertina-2.md": {
+      "id": "1zCIuxHyS__K6gwgkEjvjwHvnbcJ2O0_c",
+      "sha": "0b51e059bd586c56827cbb5af970009b7d6c10dce98b14cd7722f99699fab7d3"
     }
   },
   "scaricati": {

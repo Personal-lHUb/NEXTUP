@@ -170,6 +170,9 @@ passarsi un file (`kdp-book-factory/docs/cowork.md`).
   - un file `-risposta.md` è di Cowork: non si modifica mai. Se una risposta è
     incompleta o bloccata (captcha, accesso), si apre
     `cowork-<argomento>-2.md` con i soli punti mancanti;
+  - se il seguito dipende da un accesso che apre l'autore (KDP, ChatGPT,
+    Helium 10, Amazon), la richiesta porta la riga `Serve:`: Cowork non
+    risponde finché l'accesso manca, e `produzione` la dà in attesa dell'autore;
   - una richiesta corretta dopo la risposta rende la risposta superata: la
     versione corretta va in `-2`;
   - le decisioni dell'autore passano dal silenzio-assenso; la pubblicazione no.

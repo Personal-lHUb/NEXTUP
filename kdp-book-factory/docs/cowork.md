@@ -140,6 +140,13 @@ silenzio-assenso: la decide l'autore.
 - **Un file `-risposta.md` è di Cowork.** La fabbrica lo legge, non lo modifica
   mai. Se una risposta è incompleta o bloccata (captcha, accesso), si apre
   `cowork-<argomento>-2.md` con i soli punti mancanti.
+- **Un accesso che apre l'autore va nella riga `Serve:`.** Se il seguito
+  dipende da un accesso dell'autore (KDP, ChatGPT, Helium 10, Amazon), la
+  richiesta lo dice sotto il ruolo, con `cowork.intestazione(…, serve=…)`.
+  Finché l'accesso non è aperto Cowork non risponde, invece di tornare
+  parziale a ogni giro, e `produzione` mostra che la richiesta aspetta
+  l'autore. Un seguito `-2`, `-3` conta per il passo come la richiesta da cui
+  nasce.
 - **Una richiesta corretta dopo la risposta** rende la risposta *superata*: la
   versione corretta va in `cowork-<argomento>-2.md`. Se la risposta non c'è
   ancora, basta correggere la richiesta: il giro la ricarica.
