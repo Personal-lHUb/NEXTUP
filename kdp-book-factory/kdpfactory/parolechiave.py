@@ -72,6 +72,7 @@ def esplorazione(asin: str, mercato: str, slug: str, canale: dict) -> tuple[str,
             ESPLORAZIONE.replace(".md", "-risposta.md"),
             RUOLO,
             canale,
+            f"books/{slug}/concorrente",
         )
         + f"\nUn libro nuovo nasce contro l'ASIN {asin}, su {mercato}. Prima che la fabbrica\n"
         "decida titolo e parole chiave, servono le frasi che i lettori di questa nicchia\n"
@@ -120,6 +121,7 @@ def verifica(
             VERIFICA.replace(".md", "-risposta.md"),
             RUOLO,
             canale,
+            f"books/{slug}/manuale",
         )
         + f"\nIl libro: «{titolo}», su {mercato}. Le sette parole chiave e le categorie\n"
         "qui sotto sono quelle della scheda che sta per essere caricata: si controlla\n"

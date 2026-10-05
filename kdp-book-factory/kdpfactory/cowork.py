@@ -135,12 +135,37 @@ def ruoli(canale: dict) -> dict[str, dict]:
     return canale.get("ruoli") or {}
 
 
-def intestazione(titolo: str, risposta: str, ruolo: str, canale: dict) -> str:
+def corriere(canale: dict) -> tuple[str, str]:
+    """La cartella Drive del corriere: nome e id (vuoti se il canale non la usa)."""
+    dati = canale.get("corriere") or {}
+    return dati.get("cartella", "NEXTUP — corriere Cowork"), dati.get("cartella_id", "")
+
+
+def intestazione(titolo: str, risposta: str, ruolo: str, canale: dict, cartella: str = "") -> str:
     """La testa uguale per ogni richiesta: ruolo, regole, dove va la risposta.
 
     La riga `Ruolo:` è quella che l'attività di ciascun ruolo cerca: una
-    richiesta senza ruolo non la prende nessuno.
+    richiesta senza ruolo non la prende nessuno. `cartella` è dove sta la
+    richiesta nel repository (per esempio `books/x/concorrente`): sul corriere
+    la risposta si chiama come il suo percorso, con `__` al posto di `/`.
     """
+    regole = (
+        "Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.\n"
+        "Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,\n"
+        "scrivilo invece di stimare: l'accesso non lo fai tu.\n"
+    )
+    if canale.get("canale") == "drive":
+        nome, _ = corriere(canale)
+        percorso = f"{cartella.strip('/')}/{risposta}" if cartella else risposta
+        return (
+            f"# {titolo}\n\n"
+            f"{RUOLO} {ruolo}\n\n"
+            "Richiesta della fabbrica per Cowork, con le regole del LEGGIMI\n"
+            "(`config__leggimi-cowork.md`, nella stessa cartella).\n"
+            f"Scrivi la risposta come file nuovo nella cartella Drive «{nome}»,\n"
+            f"con il nome `{percorso.replace('/', '__')}` e la stessa numerazione.\n"
+            + regole
+        )
     ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
     leggimi = canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md")
     return (
@@ -149,9 +174,7 @@ def intestazione(titolo: str, risposta: str, ruolo: str, canale: dict) -> str:
         f"Richiesta della fabbrica per Cowork, con le regole di\n`{leggimi}`.\n"
         f"La risposta va in `{risposta}`, accanto a questo file,\n"
         f"sul ramo `{ramo}`, con la stessa numerazione.\n"
-        "Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.\n"
-        "Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,\n"
-        "scrivilo invece di stimare: l'accesso non lo fai tu.\n"
+        + regole
     )
 
 
@@ -208,13 +231,24 @@ def avviso(
     repo = canale.get("repository", "Personal-lHUb/NEXTUP")
     ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
     leggimi = canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md")
+    drive = canale.get("canale") == "drive"
+    if drive:
+        # Sul corriere i file si chiamano come il loro percorso, con «__» al posto di «/».
+        cartella, _ = corriere(canale)
+        leggimi = "config__leggimi-cowork.md, nella stessa cartella,"
+
+        def dal_repo(relativo: str) -> str:
+            return relativo.replace("/", "__")
     aperte = [r for r in elenco if r.stato == APERTA and (not ruolo or r.ruolo == ruolo)]
     per = f" per il ruolo «{ruolo}»" if ruolo else ""
+    dove = (
+        f"Nella cartella Google Drive «{cartella}»" if drive
+        else f"Sul repository GitHub {repo}, ramo {ramo},"
+    )
     if not aperte:
-        return f"Sul ramo {ramo} di {repo} non ci sono richieste aperte{per}.\n"
+        return f"{dove} non ci sono richieste aperte{per}.\n"
     righe = [
-        f"Sul repository GitHub {repo}, ramo {ramo}, ci sono richieste nuove della "
-        f"fabbrica di libri{per}, da elaborare.",
+        f"{dove} ci sono richieste nuove della fabbrica di libri{per}, da elaborare.",
         "",
         f"Prima leggi per intero {leggimi}: sono le regole del canale"
         + (f", e la sezione del ruolo «{ruolo}» vale per te." if ruolo else "."),
@@ -238,15 +272,26 @@ def avviso(
                 f"- `{dal_repo(r.percorso)}` → rispondi in `{dal_repo(r.risposta)}`"
                 for r in aperte if r.ruolo == nome
             ]
+    if drive:
+        righe += [
+            "",
+            "Per ciascuna: leggila per intero ed esegui quello che chiede. Scrivi la risposta "
+            "come file nuovo nella stessa cartella, con il nome indicato, e la prima riga "
+            "«Esito: completa» oppure «Esito: parziale — punti …: <motivo>». Non modificare, "
+            "rinominare o cancellare altri file: al repository li porta la fabbrica.",
+        ]
+    else:
+        righe += [
+            "",
+            "Se lavori sulla copia locale di GitHub Desktop, prima di cominciare aggiornala dal "
+            "ramo remoto con Fetch e Pull: su una copia vecchia queste richieste non ci sono.",
+            "",
+            "Per ciascuna: leggila per intero ed esegui quello che chiede. Scrivi la "
+            "risposta nel file indicato e fanne il commit sullo stesso ramo, con la "
+            "prima riga «Esito: completa» oppure «Esito: parziale — punti …: <motivo>». "
+            "Non modificare altri file.",
+        ]
     righe += [
-        "",
-        "Se lavori sulla copia locale di GitHub Desktop, prima di cominciare aggiornala dal "
-        "ramo remoto con Fetch e Pull: su una copia vecchia queste richieste non ci sono.",
-        "",
-        "Per ciascuna: leggila per intero ed esegui quello che chiede. Scrivi la "
-        "risposta nel file indicato e fanne il commit sullo stesso ramo, con la "
-        "prima riga «Esito: completa» oppure «Esito: parziale — punti …: <motivo>». "
-        "Non modificare altri file.",
         "",
         "Regole valide per tutte:",
         "- per ogni punto, il fatto che hai visto sulla pagina, non una stima, con "
@@ -254,13 +299,15 @@ def avviso(
         "- se una pagina chiede un captcha o l'accesso e non riesci ad andare avanti, "
         "scrivilo invece di stimare;",
         "- su KDP leggi e basta: non creare titoli, non salvare bozze, non pubblicare;",
-        "- in Helium 10 e Publisher Rocket usa solo l'accesso già aperto nel browser: non "
+        "- in Helium 10, Publisher Rocket e ChatGPT usa solo l'accesso già aperto nel browser: non "
         "inserire credenziali, non comprare, non cambiare niente;",
         "- nessuna password, codice o cookie nei file.",
         "",
-        "Alla fine fai il push delle risposte sul ramo. Se non puoi farlo tu, dimmelo: lo "
-        "faccio io da GitHub Desktop. Finché non c'è il push, la fabbrica non le vede.",
-        "",
+        *([] if drive else [
+            "Alla fine fai il push delle risposte sul ramo. Se non puoi farlo tu, dimmelo: lo "
+            "faccio io da GitHub Desktop. Finché non c'è il push, la fabbrica non le vede.",
+            "",
+        ]),
         "Quando hai finito, dimmi quali risposte hai scritto e quali punti sono rimasti "
         "senza risposta.",
     ]
@@ -271,15 +318,19 @@ def rapporto(elenco: list[Richiesta], noti: frozenset[str] | set[str] = frozense
     """Lo stato del canale, una riga per richiesta, con il ruolo che la prende."""
     if not elenco:
         return "Nessuna richiesta a Cowork.\n"
-    righe = [f"  {r.stato:<17} {r.invio:<15} {r.ruolo or '—':<14} {r.percorso}" for r in elenco]
+    # Una richiesta applicata non va più da nessuna parte: l'invio conta solo per le altre.
+    righe = [
+        f"  {r.stato:<17} {'—' if r.stato == CHIUSA else r.invio:<15} {r.ruolo or '—':<14} {r.percorso}"
+        for r in elenco
+    ]
     conteggio = {s: sum(r.stato == s for r in elenco) for s in (APERTA, ARRIVATA, SUPERATA, CHIUSA)}
     righe.append(
         f"\n{conteggio[APERTA]} aperte · {conteggio[ARRIVATA]} con risposta da applicare · "
         f"{conteggio[SUPERATA]} con risposta superata · {conteggio[CHIUSA]} applicate"
     )
-    da_inviare = [r.percorso for r in elenco if r.invio == DA_INVIARE]
+    da_inviare = [r.percorso for r in elenco if r.invio == DA_INVIARE and r.stato != CHIUSA]
     if da_inviare:
-        righe.append("Da inviare (commit e push sul ramo del canale): " + ", ".join(da_inviare))
+        righe.append("Da inviare (sul corriere, `cowork corriere`): " + ", ".join(da_inviare))
     # Ogni attività di Cowork prende solo le richieste del suo ruolo: una
     # richiesta aperta senza ruolo, o con un ruolo che non esiste, resta lì.
     orfane = [
@@ -294,40 +345,46 @@ def rapporto(elenco: list[Richiesta], noti: frozenset[str] | set[str] = frozense
 # --------------------------------------------------------------------------
 # Il progetto Cowork: una chat e un'attività pianificata per ruolo
 # --------------------------------------------------------------------------
-def _orari(orari: list[str]) -> str:
-    return " e alle ".join(orari) if orari else "a mano"
+def _quando(dati: dict) -> str:
+    """Quando gira l'attività di un ruolo, in parole."""
+    if dati.get("ogni") == "ora":
+        return f"ogni ora, al minuto {int(dati.get('minuto', 0)):02d}"
+    orari = dati.get("orari") or []
+    return "ogni giorno alle " + " e alle ".join(orari) if orari else "a mano"
+
+
+def _sempre(canale: dict) -> str:
+    return (
+        "su KDP leggi e basta; nessuna password, codice, token o cookie nei file; "
+        "negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) usi solo "
+        "l'accesso che l'autore ha già aperto, non compri e non cambi niente"
+    )
 
 
 def prompt_attivita(ruolo: str, dati: dict, canale: dict) -> str:
     """Il prompt dell'attività pianificata di un ruolo: prende solo le sue richieste."""
-    repo = canale.get("repository", "Personal-lHUb/NEXTUP")
-    ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
-    leggimi = canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md")
+    nome, ident = corriere(canale)
     return f"""Sei il ruolo «{ruolo}» della fabbrica di libri NEXTUP: {dati.get('compito', '')}.
 
-Lavora sul repository GitHub {repo}, ramo {ramo}. Se hai accesso diretto a
-GitHub, leggilo da lì. Se usi la copia locale aperta in GitHub Desktop, prima
-aggiornala dal ramo remoto con Fetch e Pull; se non puoi farlo tu, fermati e
-chiedilo all'autore.
+Lavori nella cartella di Google Drive «{nome}» (id {ident}). Non serve
+GitHub: la fabbrica porta da sola i file fra quella cartella e il repository.
 
-Prima di tutto leggi per intero {leggimi}: le regole comuni
-e la sezione «Ruolo {ruolo}». Se dicono una cosa diversa da questo prompt, vale
-il LEGGIMI.
+Prima di tutto leggi per intero il file config__leggimi-cowork.md di quella
+cartella: le regole comuni e la sezione «Ruolo {ruolo}». Se dicono una cosa
+diversa da questo prompt, vale il LEGGIMI.
 
-Poi cerca le richieste del tuo ruolo: i file cowork-*.md sotto kdp-book-factory/
-che contengono la riga «Ruolo: {ruolo}», esclusi quelli che finiscono in
--risposta.md e quelli nelle cartelle backup e build. Salta quelle che hanno già
-accanto il file con lo stesso nome e -risposta, e quelle che contengono «Stato:
-applicata». Le richieste di un altro ruolo non le apri: sono di un'altra chat.
+Poi cerca le richieste del tuo ruolo: i file della cartella il cui nome contiene
+«cowork-» e finisce in «.md», esclusi quelli che finiscono in «-risposta.md», che
+contengono la riga «Ruolo: {ruolo}». Salta quelle che hanno già nella cartella il
+file con lo stesso nome e «-risposta». Le richieste di un altro ruolo non le apri:
+sono di un'altra chat.
 
-Esegui le tue e scrivi le risposte come dicono il LEGGIMI e la richiesta, con la
-prima riga «Esito: completa» oppure «Esito: parziale — punti …: <motivo>». Poi fai
-il commit delle sole risposte sullo stesso ramo, e il push se puoi.
+Esegui le tue. Ogni risposta è un file nuovo nella stessa cartella, con il nome
+che la richiesta indica e la prima riga «Esito: completa» oppure «Esito: parziale
+— punti …: <motivo>». Non modificare, rinominare o cancellare nessun altro file.
 
-Anche se non riesci a leggere il LEGGIMI, tre regole valgono sempre: su KDP leggi
-e basta; nessuna password, codice, token o cookie nei file o nei commit; negli
-strumenti a pagamento usi solo l'accesso che l'autore ha già aperto, non compri
-e non cambi niente.
+Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
+{_sempre(canale)}.
 
 Se non ci sono richieste del tuo ruolo senza risposta, fermati senza scrivere
 niente."""
@@ -335,16 +392,16 @@ niente."""
 
 def istruzioni_progetto(canale: dict) -> str:
     """Le istruzioni comuni a tutte le chat del progetto: che cosa leggere per restare allineati."""
-    repo = canale.get("repository", "Personal-lHUb/NEXTUP")
-    ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
-    leggimi = canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md")
+    nome, ident = corriere(canale)
     elenco = "\n".join(
         f"- «{dati.get('chat', r)}» (Ruolo: {r}): {dati.get('compito', '')}."
         for r, dati in ruoli(canale).items()
     )
     return f"""Lavori con la fabbrica di libri NEXTUP, una sessione Claude Code in un
-container che non raggiunge Amazon né KDP. Tu fai per lei le ricerche web.
-Tutto passa dal repository GitHub {repo}, ramo {ramo}.
+container che non raggiunge Amazon, KDP né il tuo browser. Tu fai per lei le
+ricerche web e le immagini. Tutto passa dalla cartella di Google Drive «{nome}»
+(id {ident}): la fabbrica ci mette le richieste e porta nel suo archivio
+quello che ci lasci. Non serve GitHub.
 Non basarti mai su quello che ricordi da una conversazione precedente: leggi i file.
 
 Questo progetto ha una chat per ruolo, e ogni chat fa solo il suo lavoro:
@@ -352,44 +409,31 @@ Questo progetto ha una chat per ruolo, e ogni chat fa solo il suo lavoro:
 Ogni richiesta dice il suo ruolo nella riga «Ruolo: …» sotto il titolo. Una
 richiesta di un altro ruolo non la apri: è di un'altra chat.
 
-0. PRIMA DI TUTTO, la versione giusta. Leggi dal ramo remoto se hai accesso
-   diretto a GitHub. Se usi la copia locale di GitHub Desktop, aggiornala con
-   Fetch e Pull; se non puoi farlo tu, chiedilo all'autore prima di cominciare.
+1. SEMPRE, all'inizio di ogni lavoro: config__leggimi-cowork.md, nella cartella.
+   Sono le regole comuni e quelle di ogni ruolo, e le aggiorna la fabbrica.
+   Annota il numero di versione.
 
-1. SEMPRE, all'inizio di ogni lavoro: {leggimi}. Sono le
-   regole comuni e quelle di ogni ruolo, e le aggiorna la fabbrica. Annota il
-   numero di versione.
+2. I NOMI DEI FILE. Ogni file della cartella si chiama come il suo posto
+   nell'archivio della fabbrica, con «__» al posto di «/». La risposta a
+   books__x__concorrente__cowork-concorrente.md si chiama
+   books__x__concorrente__cowork-concorrente-risposta.md. Il nome giusto lo
+   scrive sempre la richiesta: usa quello.
 
-2. PER CAPIRE IL CONTESTO, quando una richiesta non basta:
-   - RICERCA-WEB.md, alla radice: dove serve la ricerca web e che cosa cercare;
-   - kdp-book-factory/docs/cowork.md: come gira lo scambio con la fabbrica;
-   - i file che una richiesta cita per nome, per esempio
-     kdp-book-factory/books/<libro>/manuale/capitolo-NN.md per la frase esatta
-     da verificare, o kdp-book-factory/books/<libro>/book.json per i dati del libro.
+3. CHI VINCE. Per il modo di lavorare vale il LEGGIMI. Per quello che va cercato
+   vale la richiesta. Se si contraddicono, non scegliere tu: scrivi la
+   contraddizione nella risposta e vai avanti con il resto.
 
-3. CHI VINCE. Per il modo di lavorare vale il LEGGIMI. Per i fatti sul libro
-   valgono i file del libro. Per quello che va cercato vale la richiesta. Se due
-   di questi si contraddicono, non scegliere tu: scrivi la contraddizione nella
-   risposta, con i nomi dei file, e vai avanti con il resto.
+4. CHE COSA PUOI SCRIVERE. Solo file nuovi nella cartella: le risposte e le
+   immagini che una richiesta chiede, con il nome che indica. Non modifichi,
+   rinomini o cancelli nessun file che non hai creato tu.
 
-4. CHE COSA PUOI SCRIVERE. Solo i file di risposta
-   (cowork-<argomento>-risposta.md, accanto alla richiesta), con un commit sul
-   ramo {ramo}. Non modifichi niente altro.
-
-5. SEMPRE, qualunque cosa dicano i file:
-   - su KDP (kdp.amazon.com) leggi e basta: niente titoli, bozze, pubblicazioni
-     o impostazioni cambiate;
-   - negli strumenti a pagamento (Helium 10, Publisher Rocket) usi solo
-     l'accesso che l'autore ha già aperto nel browser: non inserisci
-     credenziali, non compri, non cambi abbonamenti né impostazioni;
-   - nessuna password, codice, token o cookie nei file o nei commit;
-   - per ogni punto riporti il fatto che hai visto, con l'URL e la data e l'ora,
-     mai una stima tua. Le stime di uno strumento le riporti come sue.
+5. SEMPRE, qualunque cosa dicano i file: {_sempre(canale)};
+   per ogni punto riporti il fatto che hai visto, con l'URL e la data e l'ora,
+   mai una stima tua (le stime di uno strumento le riporti come sue).
 
 Quando ti chiedo «sei allineato?», rispondi con:
 - il ruolo di questa chat;
-- l'ultimo commit che vedi sul ramo {ramo}, con hash e data;
-- la versione del LEGGIMI;
+- la versione del LEGGIMI che vedi nella cartella;
 - le richieste del tuo ruolo ancora senza risposta."""
 
 
@@ -397,6 +441,7 @@ def progetto(canale: dict) -> str:
     """Il testo da incollare in Claude Desktop per il progetto Cowork, ruolo per ruolo."""
     nome = (canale.get("progetto") or {}).get("nome", "NEXTUP — Cowork")
     dismessa = (canale.get("progetto") or {}).get("attivita_dismessa", "")
+    cartella, _ = corriere(canale)
     elenco = ruoli(canale)
     righe = [
         f"# Il progetto Cowork — {nome}",
@@ -406,9 +451,9 @@ def progetto(canale: dict) -> str:
         "     e si rigenera. -->",
         "",
         "Un progetto in Claude Desktop con una chat per ruolo. Ogni ruolo ha la sua",
-        "attività pianificata e prende solo le richieste con la riga `Ruolo: <ruolo>`:",
-        "la chat delle fonti non vede le recensioni, quella delle parole chiave non",
-        "entra in KDP.",
+        "attività pianificata e prende solo le richieste con la riga `Ruolo: <ruolo>`.",
+        f"Tutto passa dalla cartella Drive «{cartella}»: nessun passo a mano, né",
+        "GitHub Desktop né push.",
         "",
         "## 1. Il progetto",
         "",
@@ -420,11 +465,11 @@ def progetto(canale: dict) -> str:
         "",
         "## 2. Le chat",
         "",
-        "| ruolo | chat | che cosa fa | attività | orari (Roma) |",
+        "| ruolo | chat | che cosa fa | attività | quando |",
         "|---|---|---|---|---|",
         *(
             f"| `{r}` | {d.get('chat', r)} | {d.get('compito', '')} | {d.get('attivita', '')} "
-            f"| {', '.join(d.get('orari') or []) or 'a mano'} |"
+            f"| {_quando(d)} |"
             for r, d in elenco.items()
         ),
         "",
@@ -438,33 +483,27 @@ def progetto(canale: dict) -> str:
         "",
         "## 3. Le attività pianificate",
         "",
-        "Sfalsate di un quarto d'ora, così non girano insieme sul portatile, e tutte",
-        "prima del controllo della fabbrica (9:59 e 15:59). Se un giro salta, la",
-        "risposta arriva al giro dopo.",
+        "Una per ruolo, ogni ora, sfalsate di dieci minuti così non girano insieme sul",
+        "portatile. Il portatile deve essere acceso: se un giro salta, la risposta",
+        "arriva al giro dopo.",
     ]
     for ruolo, dati in elenco.items():
         righe += [
             "",
-            f"### {dati.get('attivita', ruolo)} — ogni giorno alle {_orari(dati.get('orari') or [])}",
+            f"### {dati.get('attivita', ruolo)} — {_quando(dati)}",
             "",
             "```",
             prompt_attivita(ruolo, dati, canale),
             "```",
         ]
-    righe += [
-        "",
-        "## 4. Il passaggio",
-        "",
-        "1. Crea il progetto, le chat e le attività qui sopra.",
-    ]
+    passi = ["Crea il progetto, le chat e le attività qui sopra."]
     if dismessa:
-        righe.append(
-            f"2. Disattiva l'attività «{dismessa}»: finché resta accesa risponde a tutte "
-            "le richieste, anche a quelle di un ruolo, e i ruoli non sono più separati."
+        passi.append(
+            f"Disattiva l'attività «{dismessa}» e le attività dei ruoli create prima con "
+            "GitHub: lavorano sul canale vecchio."
         )
-    righe += [
-        f"{len(righe) - righe.index('## 4. Il passaggio') - 1}. In ogni chat chiedi "
-        "«sei allineato?»: deve rispondere con il suo ruolo e la versione del LEGGIMI.",
-        "",
-    ]
-    return "\n".join(righe)
+    passi.append("In ogni chat chiedi «sei allineato?»: deve rispondere con il suo ruolo e la "
+                 "versione del LEGGIMI.")
+    righe += ["", "## 4. Il passaggio", ""]
+    righe += [f"{i}. {testo}" for i, testo in enumerate(passi, 1)]
+    return "\n".join(righe) + "\n"

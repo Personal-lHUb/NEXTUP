@@ -2,16 +2,16 @@
 
 Ruolo: concorrente
 
-Richiesta della fabbrica per Cowork, con le regole di
-`kdp-book-factory/config/leggimi-cowork.md`.
-La risposta va in `cowork-prezzo-risposta.md`, accanto a questo file,
-sul ramo `claude/dreamy-archimedes-hf8w45`, con la stessa numerazione.
+Richiesta della fabbrica per Cowork, con le regole del LEGGIMI
+(`config__leggimi-cowork.md`, nella stessa cartella).
+Scrivi la risposta come file nuovo nella cartella Drive «NEXTUP — corriere Cowork»,
+con il nome `books__household-bills__concorrente__cowork-prezzo-risposta.md` e la stessa numerazione.
 Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
 Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
 scrivilo invece di stimare: l'accesso non lo fai tu.
 
 Il libro «Bills in Order» compete con l'ASIN B0CSSJMQP1, la cui pagina è già in
-`pagina.md`, accanto a questo file. Manca solo il prezzo in dollari: la pagina
+`books/household-bills/concorrente/pagina.md`. Manca solo il prezzo in dollari: la pagina
 era stata letta da un indirizzo fuori dagli Stati Uniti. Era il punto 3 di
 `books/household-bills/manuale/cowork-amazon-2.md`, ritirata.
 

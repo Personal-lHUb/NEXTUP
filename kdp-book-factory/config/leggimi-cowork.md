@@ -1,91 +1,82 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 3 · 1° ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 4 · 5 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
-**Novità della versione 3: i ruoli.** Cowork lavora in un progetto con una chat
-e un'attività pianificata per ruolo: `concorrente`, `parole-chiave`, `fonti`,
-`regole-kdp`. Ogni richiesta dice il suo ruolo nella riga `Ruolo: …` sotto il
-titolo, e ogni ruolo prende solo le sue. Le regole comuni sono qui sotto; quelle
-di ciascun ruolo sono nella sua sezione, in fondo.
-
-Versione 2: il canale è GitHub. La casella su Google Drive «NEXTUP —
-libri/cowork» è chiusa; lì non si risponde più.
+**Novità della versione 4: il corriere su Drive.** Si lavora solo nella
+cartella di Google Drive «NEXTUP — corriere Cowork». Niente più GitHub, niente
+GitHub Desktop, niente Pull né push: i file fra la cartella e il repository li
+porta la fabbrica, ogni ora. C'è un ruolo nuovo, `immagini`.
 
 ## Dove si lavora
 
-- Repository `Personal-lHUb/NEXTUP`, ramo `claude/dreamy-archimedes-hf8w45`.
-  Su un altro ramo le richieste non ci sono o sono vecchie.
-- Se lavori sulla copia locale, prima di ogni giro aggiornala dal ramo remoto
-  (Fetch e Pull in GitHub Desktop). Se non puoi farlo tu, chiedilo all'autore.
-  Una copia vecchia fa rispondere a domande superate.
+- Cartella Google Drive **«NEXTUP — corriere Cowork»**, id
+  `1yprHuxzFDGj12k8clTp0othzTXjiyn5N`. Le richieste, questo LEGGIMI
+  (`config__leggimi-cowork.md`) e il testo del progetto
+  (`config__progetto-cowork.md`) li trovi lì.
+- Ogni file si chiama come il suo posto nell'archivio della fabbrica, con `__`
+  al posto di `/`. La risposta a
+  `books__x__concorrente__cowork-concorrente.md` si chiama
+  `books__x__concorrente__cowork-concorrente-risposta.md`. Il nome giusto lo
+  scrive sempre la richiesta: usa quello, lettera per lettera.
 
 ## Che cosa c'è da fare
 
-- **Richieste**: file `cowork-<argomento>.md`, nella cartella del libro a cui
-  servono o in `kdp-book-factory/config/` per le regole comuni. L'elenco delle
-  cartelle è in `RICERCA-WEB.md`, alla radice del repository.
-- **Risposte**: accanto alla richiesta, stesso nome con `-risposta` prima di
-  `.md`. Per esempio la risposta a
-  `kdp-book-factory/books/household-bills/manuale/cowork-amazon.md` è
-  `kdp-book-factory/books/household-bills/manuale/cowork-amazon-risposta.md`.
-- Una richiesta con accanto la sua risposta è fatta: saltala.
-- Una richiesta che contiene la riga `Stato: applicata` è chiusa: saltala.
-- Una richiesta con un ruolo diverso dal tuo è di un'altra chat: non aprirla.
-  Una richiesta senza la riga `Ruolo:` non la prende nessun ruolo: se la
-  trovi, dillo all'autore e lasciala lì.
+- **Richieste**: i file della cartella che contengono `cowork-` nel nome,
+  finiscono in `.md` e non finiscono in `-risposta.md`.
+- Ogni richiesta dice il suo ruolo nella riga `Ruolo: …` sotto il titolo. Una
+  richiesta di un ruolo diverso dal tuo è di un'altra chat: non aprirla. Una
+  richiesta senza la riga `Ruolo:` non la prende nessun ruolo: se la trovi,
+  dillo all'autore e lasciala lì.
+- Una richiesta che ha già accanto il file con lo stesso nome e `-risposta` è
+  fatta: saltala.
 
 ## Come si risponde
 
 1. Leggi la richiesta per intero ed esegui quello che chiede, punto per punto,
-   con la sua numerazione.
-2. Scrivi la risposta in Markdown, nel file indicato.
+   con la sua numerazione. Tutto quello che ti serve è nella richiesta: se
+   manca qualcosa, scrivilo nella risposta invece di cercarlo altrove.
+2. Scrivi la risposta in Markdown, come **file nuovo** nella cartella, con il
+   nome che la richiesta indica.
 3. La **prima riga** della risposta dice com'è andata:
    - `Esito: completa`
    - `Esito: parziale — punti 2, 4: <motivo>` (captcha, accesso, pagina che non
-     c'è più, dato che non si trova)
+     c'è più, dato che non si trova, strumento non accessibile)
 4. Per ogni punto: il fatto che hai visto sulla pagina, non una stima, con
    l'URL e la data e l'ora della verifica.
-5. Fai il commit della sola risposta sul ramo `claude/dreamy-archimedes-hf8w45`,
-   con un messaggio come «Cowork: risposta a cowork-amazon». Poi il push:
-   - se hai accesso diretto a GitHub, lo fai tu;
-   - se no, lo fa l'autore da GitHub Desktop.
+5. Le immagini che una richiesta chiede vanno nella cartella, ognuna con il nome
+   che la richiesta indica.
 
 ## Che cosa non si fa
 
-- Nel repository si scrivono solo i file di risposta. Non si modificano le
-  richieste, questo LEGGIMI, codice, `book.json`, manoscritto, documenti o
-  agenti.
+- Nella cartella si creano solo file nuovi: le risposte e le immagini chieste.
+  Non si modificano, rinominano o cancellano file che non hai creato tu, né le
+  richieste, né questo LEGGIMI.
 - Una risposta già scritta non si riscrive. Se alla fabbrica serve altro, apre
   una richiesta nuova.
 - Su KDP (kdp.amazon.com) si legge e basta: niente titoli nuovi, bozze,
   pubblicazioni o impostazioni cambiate.
-- Negli strumenti a pagamento (Helium 10, Publisher Rocket) si usa solo
-  l'accesso che l'autore ha già aperto nel browser: non si inseriscono
+- Negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) si usa
+  solo l'accesso che l'autore ha già aperto nel browser: non si inseriscono
   credenziali, non si compra, non si cambiano abbonamenti né impostazioni.
-- Nessuna password, codice, token o cookie nei file o nei commit.
+- Nessuna password, codice, token o cookie nei file.
 
-## Richieste di seguito
+## Richieste di seguito e ritirate
 
-`cowork-<argomento>-2.md`, `-3.md` sono seguiti di una richiesta già fatta.
-Contengono solo i punti rimasti aperti, oppure la versione corretta di una
-domanda. Rispondi solo a quello che chiedono, nel loro file di risposta
-(`…-2-risposta.md`).
+`…-2.md`, `…-3.md` sono seguiti di una richiesta già fatta: contengono solo i
+punti rimasti aperti, o la versione corretta di una domanda. Una richiesta che
+sparisce dalla cartella è ritirata: non si risponde a una copia vecchia.
 
-## Richieste ritirate
-
-Una richiesta cancellata dal ramo è ritirata: non si risponde a una copia
-vecchia.
-
-Se non ci sono richieste senza risposta, il giro finisce senza scrivere niente.
+Se non ci sono richieste del tuo ruolo senza risposta, il giro finisce senza
+scrivere niente.
 
 ## I ruoli
 
-Ogni ruolo ha la sua chat nel progetto e la sua attività pianificata. Il testo
-per crearle è in `kdp-book-factory/config/progetto-cowork.md`.
+Ogni ruolo ha la sua chat nel progetto e la sua attività pianificata, ogni ora.
+Il testo per crearle è in `config__progetto-cowork.md`.
 
 ### Ruolo concorrente
 
@@ -119,11 +110,11 @@ affollati gli scaffali.
 
 Le affermazioni del libro sul mondo, prima della stampa.
 
+- La richiesta cita la frase esatta del libro: si verifica quella.
 - Solo **fonti ufficiali**: il sito dell'ente, della legge, del programma.
   Un articolo di giornale o un blog non bastano: si scrive «non trovato».
 - Per ogni punto: **vero**, **cambiato** o **non trovato**, con l'URL e la
   frase esatta che lo conferma o lo smentisce.
-- Il manoscritto non si tocca: le correzioni le fa la fabbrica.
 
 ### Ruolo regole-kdp
 
@@ -137,3 +128,24 @@ selettore delle categorie.
 - La fonte preferita è la guida ufficiale di KDP (kdp.amazon.com/help); il
   calcolatore dei costi va citato con le cifre che mostra.
 
+### Ruolo immagini
+
+Le illustrazioni di copertina e le figure dell'interno, con **ChatGPT**.
+
+- Il prompt è nella richiesta, scritto dalla fabbrica: si incolla **così com'è**,
+  senza aggiungere né togliere. Non si scrive un prompt proprio.
+- **Nessun testo nell'immagine**: niente titoli, lettere, numeri, firme. Il
+  titolo lo compone la fabbrica, in vettoriale, dopo.
+- Formato verticale, nella proporzione che la richiesta indica, alla
+  risoluzione più alta che lo strumento consente. Si riportano le misure in
+  pixel di ogni immagine consegnata. Se la richiesta indica un minimo e
+  l'immagine è più piccola, si consegna lo stesso e lo si scrive: decide la
+  fabbrica.
+- Si generano tante varianti quante la richiesta ne chiede, ognuna salvata nella
+  cartella con il nome indicato.
+- Le figure dell'interno sono in **scala di grigi**: due elementi non si
+  distinguono solo per il colore.
+- Solo immagini generate nella sessione: mai prese dal web, mai persone reali
+  riconoscibili, mai marchi, loghi o personaggi di altri.
+- Nella risposta si scrive con quale strumento e modello sono state generate:
+  KDP chiede di dichiarare i contenuti generati con l'IA.

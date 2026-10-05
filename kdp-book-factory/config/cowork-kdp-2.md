@@ -2,10 +2,10 @@
 
 Ruolo: regole-kdp
 
-Richiesta della fabbrica per Cowork, con le regole di
-`kdp-book-factory/config/leggimi-cowork.md`.
-La risposta va in `cowork-kdp-2-risposta.md`, accanto a questo file,
-sul ramo `claude/dreamy-archimedes-hf8w45`, con la stessa numerazione.
+Richiesta della fabbrica per Cowork, con le regole del LEGGIMI
+(`config__leggimi-cowork.md`, nella stessa cartella).
+Scrivi la risposta come file nuovo nella cartella Drive «NEXTUP — corriere Cowork»,
+con il nome `config__cowork-kdp-2-risposta.md` e la stessa numerazione.
 Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
 Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
 scrivilo invece di stimare: l'accesso non lo fai tu.
@@ -32,5 +32,5 @@ non c'è, rispondi «Esito: parziale» con il motivo, senza stimare.
    - Business & Money > Personal Finance > Budgeting & Money Management
    - Reference > Consumer Guides
 
-   Servono a «Bills in Order» (`books/household-bills/book.json`). Se una manca,
+   Servono a «Bills in Order» (il libro di «Bills in Order»). Se una manca,
    riporta la più vicina che c'è.

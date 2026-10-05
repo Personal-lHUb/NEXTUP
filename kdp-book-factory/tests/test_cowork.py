@@ -153,7 +153,10 @@ class TestRuoli(unittest.TestCase):
             self.assertIn(f"«Ruolo: {ruolo}»", testo)
         self.assertIn("alle 7:52 e alle 13:52", testo)
         self.assertIn("Disattiva l'attività «Cowork — casella NEXTUP»", testo)
-        self.assertIn("non inserisci\n     credenziali", testo)
+        self.assertIn("non compri e non cambi niente", testo)
+        self.assertIn("NEXTUP — corriere Cowork", testo)
+        orario = cowork.progetto({**self.CANALE, "ruoli": {"fonti": {"ogni": "ora", "minuto": 5}}})
+        self.assertIn("ogni ora, al minuto 05", orario)
 
 
 class TestGitVero(unittest.TestCase):

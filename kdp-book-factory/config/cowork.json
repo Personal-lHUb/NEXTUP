@@ -1,15 +1,10 @@
 {
-  "_nota": "Il canale con Cowork: il repository GitHub, sul ramo qui sotto. La fabbrica fa commit e push delle richieste cowork-<argomento>.md, Cowork fa il commit delle risposte cowork-<argomento>-risposta.md accanto. Lo stato lo dà `python3 -m kdpfactory cowork stato`.",
-  "canale": "github",
+  "_nota": "Il canale con Cowork. Il tragitto passa dalla cartella Drive del corriere, che Cowork e la fabbrica raggiungono senza passi a mano; GitHub resta l'archivio di richieste e risposte. Lo stato lo dà `python3 -m kdpfactory cowork stato`, il tragitto `cowork corriere`.",
+  "canale": "drive",
   "repository": "Personal-lHUb/NEXTUP",
   "ramo": "claude/dreamy-archimedes-hf8w45",
   "leggimi": "kdp-book-factory/config/leggimi-cowork.md",
-  "leggimi_versione": 3,
-  "drive_dismessa": {
-    "_nota": "La casella su Google Drive usata fino al 30 settembre 2026. Resta solo un avviso che rimanda qui.",
-    "cartella": "NEXTUP — libri/cowork",
-    "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N"
-  },
+  "leggimi_versione": 4,
   "progetto": {
     "_nota": "Il progetto di Cowork in Claude Desktop: una chat e un'attività pianificata per ruolo. Il testo da incollare lo scrive `python3 -m kdpfactory cowork progetto` in config/progetto-cowork.md.",
     "nome": "NEXTUP — Cowork",
@@ -19,38 +14,43 @@
     "concorrente": {
       "chat": "Concorrente",
       "attivita": "NEXTUP — Concorrente",
-      "orari": [
-        "7:52",
-        "13:52"
-      ],
-      "compito": "la pagina Amazon del libro concorrente: scheda, classifica, descrizione, indice, recensioni alla lettera, copertina in miniatura, vicini di scaffale, prezzi"
+      "compito": "la pagina Amazon del libro concorrente: scheda, classifica, descrizione, indice, recensioni alla lettera, copertina in miniatura, vicini di scaffale, prezzi",
+      "ogni": "ora",
+      "minuto": 5
     },
     "parole-chiave": {
       "chat": "Parole chiave",
       "attivita": "NEXTUP — Parole chiave",
-      "orari": [
-        "8:07",
-        "14:07"
-      ],
-      "compito": "le parole chiave e le categorie: autocompletamento e risultati di Amazon, Helium 10, Publisher Rocket, Google Trends, affollamento delle categorie"
+      "compito": "le parole chiave e le categorie: autocompletamento e risultati di Amazon, Helium 10, Publisher Rocket, Google Trends, affollamento delle categorie",
+      "ogni": "ora",
+      "minuto": 15
     },
     "fonti": {
       "chat": "Fonti",
       "attivita": "NEXTUP — Fonti",
-      "orari": [
-        "8:22",
-        "14:22"
-      ],
-      "compito": "le affermazioni del libro sul mondo, controllate sulla fonte ufficiale prima della stampa"
+      "compito": "le affermazioni del libro sul mondo, controllate sulla fonte ufficiale prima della stampa",
+      "ogni": "ora",
+      "minuto": 25
     },
     "regole-kdp": {
       "chat": "Regole KDP",
       "attivita": "NEXTUP — Regole KDP",
-      "orari": [
-        "8:37",
-        "14:37"
-      ],
-      "compito": "le regole di KDP che valgono per ogni libro: costi di stampa, limiti, pagine, selettore delle categorie; su KDP in sola lettura"
+      "compito": "le regole di KDP che valgono per ogni libro: costi di stampa, limiti, pagine, selettore delle categorie; su KDP in sola lettura",
+      "ogni": "ora",
+      "minuto": 35
+    },
+    "immagini": {
+      "chat": "Immagini",
+      "attivita": "NEXTUP — Immagini",
+      "ogni": "ora",
+      "minuto": 45,
+      "compito": "le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema, alla risoluzione richiesta",
+      "strumento": "ChatGPT"
     }
+  },
+  "corriere": {
+    "_nota": "La cartella Drive dove viaggiano richieste, risposte e immagini. Era la casella «NEXTUP — libri/cowork», chiusa il 30 settembre e riaperta come corriere il 5 ottobre 2026. I file si chiamano come il loro percorso nel repository, con __ al posto di /.",
+    "cartella": "NEXTUP — corriere Cowork",
+    "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N"
   }
 }

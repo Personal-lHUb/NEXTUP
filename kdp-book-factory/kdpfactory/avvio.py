@@ -527,7 +527,8 @@ def richiesta_cowork(avvio: Avvio, slug: str, canale: dict) -> tuple[str, str]:
         uso.append("- i vicini di scaffale vanno al `posizionamento`, per prezzo e pagine.")
         corpo = (
             cowork.intestazione(f"Cowork · pagina del concorrente — {slug}",
-                                "cowork-concorrente-risposta.md", "concorrente", canale)
+                                "cowork-concorrente-risposta.md", "concorrente", canale,
+                                f"books/{slug}/concorrente")
             + f"\nUn libro nuovo nasce contro questo: ASIN {avvio.asin}, su {avvio.mercato}. Serve\n"
             "la sua pagina Amazon, che dal container della fabbrica non si raggiunge.\n\n"
             + consegna_
@@ -555,7 +556,8 @@ def richiesta_cowork(avvio: Avvio, slug: str, canale: dict) -> tuple[str, str]:
     ]
     corpo = (
         cowork.intestazione(f"Cowork · la nicchia del concorrente — {slug}",
-                            "cowork-nicchia-risposta.md", "concorrente", canale)
+                            "cowork-nicchia-risposta.md", "concorrente", canale,
+                            f"books/{slug}/concorrente")
         + f"\nUn libro nuovo deve sfidare un libro che vende già nella nicchia «{avvio.nicchia}».\n"
         "Il concorrente lo sceglie la fabbrica, fra quelli che riporti: quello che\n"
         "vende di più con le recensioni più scontente.\n\n"

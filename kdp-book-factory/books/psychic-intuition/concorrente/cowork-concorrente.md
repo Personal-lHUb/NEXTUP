@@ -2,10 +2,10 @@
 
 Ruolo: concorrente
 
-Richiesta della fabbrica per Cowork, con le regole di
-`kdp-book-factory/config/leggimi-cowork.md`.
-La risposta va in `cowork-concorrente-risposta.md`, accanto a questo file,
-sul ramo `claude/dreamy-archimedes-hf8w45`, con la stessa numerazione.
+Richiesta della fabbrica per Cowork, con le regole del LEGGIMI
+(`config__leggimi-cowork.md`, nella stessa cartella).
+Scrivi la risposta come file nuovo nella cartella Drive «NEXTUP — corriere Cowork»,
+con il nome `books__psychic-intuition__concorrente__cowork-concorrente-risposta.md` e la stessa numerazione.
 Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
 Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
 scrivilo invece di stimare: l'accesso non lo fai tu.

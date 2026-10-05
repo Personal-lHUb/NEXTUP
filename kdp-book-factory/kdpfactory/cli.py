@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import sys
 from datetime import date
@@ -17,9 +18,12 @@ from . import (
     agents,
     avvio,
     backup,
+    corriere,
     coverbrief,
     coverdesign,
+    coverimage,
     cowork,
+    decisioni,
     diagnostica,
     imagebrief,
     kdpspecs,
@@ -27,6 +31,8 @@ from . import (
     parolechiave,
     pipeline,
     planner,
+    produzione,
+    richiesteimmagini,
     writer,
 )
 from . import figure as figure_module
@@ -422,6 +428,8 @@ def cmd_copertina(args) -> int:
     da uno strumento grafico: il sistema scrive il brief, tu porti l'immagine.
     """
     project, spec = open_project(args)
+    if args.scegli:
+        return _scegli_copertina(project, args)
     state = project.load_state()
     pages = (state.get("build") or {}).get("pagine") or spec.target_pages
     meta_path = project.build_dir / "metadata.json"
@@ -443,6 +451,21 @@ def cmd_copertina(args) -> int:
         encoding="utf-8",
     )
     save_backup(project, args, "brief di copertina")
+
+    # Con il corriere l'illustrazione la genera Cowork, ruolo «immagini»: la
+    # richiesta porta dentro il brief appena scritto, e nient'altro.
+    canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
+    if canale.get("canale") == "drive" and "immagini" in cowork.ruoli(canale):
+        panel_w, panel_h = coverimage.front_panel_size_in(spec.trim)
+        minimo = (math.ceil(panel_w * coverbrief.FRONT_DPI), math.ceil(panel_h * coverbrief.FRONT_DPI))
+        titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
+        nome, testo = richiesteimmagini.copertina(
+            spec.slug, titolo, output.read_text(encoding="utf-8"), minimo, canale
+        )
+        fatti: list[str] = []
+        _scrivi_richiesta(project, args, project.root / "manuale" / nome, testo, fatti)
+        for percorso in fatti:
+            print(f"Richiesta a Cowork (ruolo immagini): {percorso}")
 
     categoria = "medium-content" if spec.is_medium_content else "full-content"
     print(f"Brief di copertina [{categoria}, {pages} pagine]: {output}")
@@ -504,6 +527,34 @@ def cmd_immagini(args) -> int:
     if mancanti:
         print(f"\nSalva le immagini in {figure_module.cartella(project.assets_dir)}")
         print("poi rilancia `build` e `qa`.")
+        canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
+        if canale.get("canale") == "drive" and "immagini" in cowork.ruoli(canale):
+            titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
+            nome, testo = richiesteimmagini.figure(
+                spec.slug, titolo, output.read_text(encoding="utf-8"),
+                [f.percorso for f in mancanti], canale,
+            )
+            fatti: list[str] = []
+            _scrivi_richiesta(project, args, project.root / "manuale" / nome, testo, fatti)
+            for percorso in fatti:
+                print(f"Richiesta a Cowork (ruolo immagini): {percorso}")
+    return 0
+
+
+def _scegli_copertina(project: BookProject, args) -> int:
+    """La variante scelta diventa `assets/copertina.jpg`, quella che `build` usa."""
+    from PIL import Image
+
+    candidati = sorted(project.assets_dir.glob(f"copertina-{args.scegli}.*"))
+    if not candidati:
+        raise SystemExit(f"Nessuna variante copertina-{args.scegli} in {project.assets_dir}.")
+    destinazione = project.assets_dir / "copertina.jpg"
+    if destinazione.exists():
+        save_backup(project, args, "copertina prima della variante scelta", force=True)
+    with Image.open(candidati[0]) as immagine:
+        immagine.convert("RGB").save(destinazione, "JPEG", quality=95)
+    save_backup(project, args, f"copertina: variante {args.scegli}")
+    print(f"{candidati[0].name} → {destinazione}. Poi: build e review --agents copertina.")
     return 0
 
 
@@ -880,7 +931,7 @@ def cmd_parole_chiave(args) -> int:
     if not fatti:
         print(f"La richiesta {nome} è già aggiornata.")
     else:
-        print("\nCommit e push sul ramo del canale in questo stesso giro, poi `cowork stato`.")
+        print("\nCommit e push in questo stesso giro; la porta sul corriere `cowork corriere`.")
     return 0
 
 
@@ -976,14 +1027,16 @@ def cmd_avvio(args) -> int:
         nome, testo = parolechiave.esplorazione(risposte.asin, risposte.mercato, args.slug, canale)
         _scrivi_richiesta(project, args, acquisizione.cartella(project) / nome, testo, fatti)
     save_backup(project, args, "domande d'avvio")
+    if produzione.attiva(Path(__file__).resolve().parent.parent, args.slug):
+        fatti.append("config/produzione.json (il libro entra nel giro orario)")
 
     print("\nDomande d'avvio complete.")
     for percorso in fatti:
         print(f"  scritto {percorso}")
     if risposte.asin or risposte.pagina == "cowork":
-        print("\nRichieste per Cowork: commit e push sul ramo del canale in questo stesso giro,")
-        print("poi `python -m kdpfactory cowork stato`. Arrivate le risposte, la fase 0 le")
-        print("legge dove sono: non serve copiarle in concorrente/pagina.md.")
+        print("\nRichieste per Cowork: commit e push in questo stesso giro; le porta sul")
+        print("corriere `cowork corriere`. Arrivate le risposte, la fase 0 le legge dove sono:")
+        print("non serve copiarle in concorrente/pagina.md.")
     if risposte.pagina == "incolla" and risposte.asin:
         print(f"\nIncolla la pagina Amazon in {acquisizione.pagina_path(project)}, poi parte la fase 0.")
     return 0
@@ -1120,6 +1173,113 @@ def cmd_list(args) -> int:
     return 0
 
 
+def _cmd_corriere(args, radice: Path, canale: dict, elenco: list) -> int:
+    """Il tragitto su Drive: il piano del giro, e la registrazione di quello che si è fatto.
+
+    Le chiamate a Drive le fa la sessione con il connettore; qui si decide che
+    cosa caricare, che cosa togliere e dove va ogni file che Cowork ha lasciato.
+    """
+    registro = corriere.leggi_registro(radice)
+    if not registro.get("cartella_id"):
+        registro["cartella_id"] = cowork.corriere(canale)[1]
+        corriere.salva_registro(radice, registro)
+    if args.caricato:
+        corriere.registra_caricato(radice, args.caricato, args.id)
+        print(f"Registrato su Drive: {args.caricato} ({args.id})")
+        return 0
+    if args.tolto:
+        corriere.registra_tolto(radice, args.tolto)
+        print(f"Tolto dal registro: {args.tolto}")
+        return 0
+    if args.scarica:
+        destinazione = corriere.destinazione_ammessa(radice, args.scarica, elenco)
+        if not destinazione:
+            raise SystemExit(
+                f"«{args.scarica}» non è una risposta a una richiesta aperta né un'immagine in "
+                "books/<slug>/assets/: resta su Drive."
+            )
+        if corriere.gia_scaricato(radice, args.scarica, args.id):
+            print(f"Già nel repository: {destinazione}")
+            return 0
+        bersaglio = radice / destinazione
+        contenuto = Path(args.file).read_bytes()
+        if bersaglio.exists() and destinazione.endswith(cowork.SUFFISSO_RISPOSTA + ".md"):
+            # Una risposta di Cowork non si riscrive: una seconda versione su Drive
+            # si segnala, e se serve altro si apre un seguito.
+            raise SystemExit(
+                f"{destinazione} c'è già: la seconda versione su Drive ({args.id}) non la "
+                "sovrascrive. Se serve, apri una richiesta di seguito."
+            )
+        if bersaglio.exists():
+            parti = Path(destinazione).parts
+            save_backup(BookProject(radice / parti[0] / parti[1]), args,
+                        f"{bersaglio.name} prima della versione di Cowork", force=True)
+        bersaglio.parent.mkdir(parents=True, exist_ok=True)
+        bersaglio.write_bytes(contenuto)
+        corriere.registra_scaricato(radice, args.scarica, args.id, contenuto)
+        print(f"Scritto {destinazione}")
+        return 0
+    print(json.dumps(corriere.piano(radice, elenco), ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_decisioni(args) -> int:
+    """Le decisioni dell'autore con il silenzio-assenso: proposte, risposte, scadute."""
+    books = books_dir(args)
+    if args.scadute:
+        # Il giro orario: le proposte senza risposta oltre la scadenza si chiudono.
+        chiuse = []
+        for cartella in sorted(p for p in books.iterdir() if (p / "decisioni.json").exists()):
+            chiuse += [(cartella.name, v) for v in decisioni.chiudi_scadute(BookProject(cartella))]
+        for slug, voce in chiuse:
+            print(f"{slug} · {voce['chiave']}: silenzio-assenso, vale «{voce['valore']}»")
+        if not chiuse:
+            print("Nessuna proposta scaduta.")
+        return 0
+    if not args.slug:
+        raise SystemExit("Indica il libro, oppure --scadute per tutti.")
+    project = BookProject(books / args.slug)
+    try:
+        if args.proponi:
+            voce = decisioni.proponi(project, args.proponi, args.valore, args.alternativa,
+                                     args.perche, args.ore)
+            print(decisioni.messaggio(args.slug, voce))
+            return 0
+        if args.scegli:
+            voce = decisioni.scegli(project, args.scegli, args.valore)
+            print(f"{args.slug} · {voce['chiave']}: scelta dell'autore, «{voce['valore']}»")
+            return 0
+        if args.applicata:
+            decisioni.segna_applicata(project, args.applicata)
+            print(f"{args.slug} · {args.applicata}: applicata")
+            return 0
+    except ValueError as errore:
+        raise SystemExit(str(errore)) from errore
+    elenco = decisioni.leggi(project)
+    if args.json:
+        print(json.dumps(elenco, ensure_ascii=False, indent=2))
+        return 0
+    for voce in elenco:
+        fatto = " · applicata" if voce.get("applicata") else ""
+        print(f"  {voce['chiave']:<12} {voce['stato']:<20} «{voce['valore'] or voce['proposta']}»{fatto}")
+    if not elenco:
+        print("Nessuna decisione registrata.")
+    return 0
+
+
+def cmd_produzione(args) -> int:
+    """A che punto è ogni libro e qual è il prossimo passo: la bussola del giro orario."""
+    radice = Path(__file__).resolve().parent.parent
+    aperte = cowork.richieste(radice)
+    attivi = None if args.tutti else produzione.configurazione(radice).get("attivi", [])
+    stati = produzione.tutti(books_dir(args), aperte, attivi)
+    if args.json:
+        print(json.dumps([s.to_dict() for s in stati], ensure_ascii=False, indent=2))
+    else:
+        print(produzione.rapporto(stati), end="")
+    return 0
+
+
 def cmd_cowork(args) -> int:
     """Il canale con Cowork su GitHub: stato delle richieste, e l'avviso da mandargli."""
     radice = Path(__file__).resolve().parent.parent
@@ -1135,7 +1295,21 @@ def cmd_cowork(args) -> int:
         print(f"Scritto {uscita}: istruzioni del progetto, una chat e un'attività per ruolo.")
         return 0
     git = cowork.Git(radice, canale.get("ramo", "claude/dreamy-archimedes-hf8w45"))
-    elenco = cowork.richieste(radice, git.remoto, git.ultimo_commit)
+    remoto = git.remoto
+    if canale.get("canale") == "drive":
+        # Sul corriere «inviata» vuol dire che su Drive c'è questa stessa versione.
+        registro = corriere.leggi_registro(radice)
+
+        def remoto(relativo: str) -> str | None:
+            percorso = radice / relativo
+            if not percorso.exists():
+                return None
+            testo = percorso.read_text(encoding="utf-8")
+            dati = registro["caricati"].get(relativo) or {}
+            return testo if dati.get("sha") == corriere.sha(testo) else None
+    elenco = cowork.richieste(radice, remoto, git.ultimo_commit)
+    if args.azione == "corriere":
+        return _cmd_corriere(args, radice, canale, elenco)
     if args.azione == "avviso":
         da_inviare = [
             r.percorso for r in elenco
@@ -1316,6 +1490,8 @@ def build_parser() -> argparse.ArgumentParser:
         help="brief di copertina da dare a uno strumento grafico (nessuna chiamata API)",
     )
     p.add_argument("slug")
+    p.add_argument("--scegli", type=int, default=0,
+                   help="la variante N consegnata da Cowork diventa assets/copertina.jpg")
     p.set_defaults(func=cmd_copertina)
 
     p = sub.add_parser(
@@ -1461,12 +1637,37 @@ def build_parser() -> argparse.ArgumentParser:
         "azione",
         nargs="?",
         default="stato",
-        choices=["stato", "avviso", "progetto"],
-        help="progetto: scrive config/progetto-cowork.md, il testo per le chat e le attività dei ruoli",
+        choices=["stato", "avviso", "progetto", "corriere"],
+        help="progetto: scrive config/progetto-cowork.md, il testo per le chat e le attività dei ruoli; "
+        "corriere: il tragitto su Drive",
     )
     p.add_argument("--ruolo", default="", help="l'avviso per la chat di un solo ruolo")
+    p.add_argument("--caricato", default="", help="corriere: il percorso appena caricato su Drive")
+    p.add_argument("--tolto", default="", help="corriere: il percorso appena tolto da Drive")
+    p.add_argument("--scarica", default="", help="corriere: il nome del file di Cowork su Drive")
+    p.add_argument("--id", default="", help="corriere: l'id del file su Drive")
+    p.add_argument("--file", default="", help="corriere: dove la sessione ha salvato il file scaricato")
     p.add_argument("--json", action="store_true", help="stato completo in JSON")
     p.set_defaults(func=cmd_cowork)
+
+    p = sub.add_parser("decisioni", help="le decisioni dell'autore, con il silenzio-assenso")
+    p.add_argument("slug", nargs="?", default="")
+    p.add_argument("--proponi", default="", help="la decisione da proporre: " + ", ".join(decisioni.CHIAVI))
+    p.add_argument("--scegli", default="", help="la decisione su cui l'autore ha risposto")
+    p.add_argument("--valore", default="", help="la proposta, o la scelta dell'autore")
+    p.add_argument("--alternativa", action="append", default=[], help="un'alternativa (ripetibile)")
+    p.add_argument("--perche", default="", help="perché gli agenti propongono questo")
+    p.add_argument("--ore", type=int, default=decisioni.ORE_PREDEFINITE,
+                   help="dopo quante ore vale il silenzio")
+    p.add_argument("--applicata", default="", help="la decisione appena applicata ai file del libro")
+    p.add_argument("--scadute", action="store_true", help="chiude le proposte scadute, in tutti i libri")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_decisioni)
+
+    p = sub.add_parser("produzione", help="a che punto è ogni libro, e il prossimo passo")
+    p.add_argument("--json", action="store_true")
+    p.add_argument("--tutti", action="store_true", help="anche i libri fuori dalla produzione")
+    p.set_defaults(func=cmd_produzione)
 
     p = sub.add_parser(
         "parole-chiave",
