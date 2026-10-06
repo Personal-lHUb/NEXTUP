@@ -378,6 +378,10 @@ def _quando(dati: dict) -> str:
     return "ogni giorno alle " + " e alle ".join(orari) if orari else "a mano"
 
 
+#: Il ramo di GitHub dove Cowork carica le immagini (lo legge `corriere.preleva_dal_ramo`).
+RAMO_IMMAGINI = "cowork-immagini"
+
+
 def _sempre(canale: dict) -> str:
     return (
         "su KDP leggi e basta; nessuna password, codice, token o cookie nei file; "
@@ -391,8 +395,10 @@ def prompt_attivita(ruolo: str, dati: dict, canale: dict) -> str:
     nome, ident = corriere(canale)
     return f"""Sei il ruolo «{ruolo}» della fabbrica di libri NEXTUP: {dati.get('compito', '')}.
 
-Lavori nella cartella di Google Drive «{nome}» (id {ident}). Non serve
-GitHub: la fabbrica porta da sola i file fra quella cartella e il repository.
+Lavori nella cartella di Google Drive «{nome}» (id {ident}). Per richieste e
+risposte non serve GitHub: la fabbrica porta da sola i file fra quella cartella
+e il repository. Le immagini invece vanno su GitHub, nel ramo
+{RAMO_IMMAGINI}: il connettore Drive non porta file così pesanti.
 
 Prima di tutto leggi per intero il file config__leggimi-cowork.md di quella
 cartella: le regole comuni e la sezione «Ruolo {ruolo}». Se dicono una cosa
@@ -412,8 +418,7 @@ La cartella si usa con il connettore Google Drive: search_files con
 parentId = '{ident}' per trovare i file, read_file_content o
 download_file_content per leggerli; create_file con parentId '{ident}', il
 titolo indicato, contentMimeType text/markdown e disableConversionToGoogleType
-true per scrivere una risposta (per un'immagine: base64Content e contentMimeType
-image/png).
+true per scrivere una risposta.
 
 Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
 {_sempre(canale)}.
@@ -441,7 +446,8 @@ def istruzioni_progetto(canale: dict) -> str:
 container che non raggiunge Amazon, KDP né il tuo browser. Tu fai per lei le
 ricerche web e le immagini. Tutto passa dalla cartella di Google Drive «{nome}»
 (id {ident}): la fabbrica ci mette le richieste e porta nel suo archivio
-quello che ci lasci. Non serve GitHub.
+quello che ci lasci. GitHub serve solo per le immagini, nel ramo
+{RAMO_IMMAGINI}, perché il connettore Drive non porta file così pesanti.
 Non basarti mai su quello che ricordi da una conversazione precedente: leggi i file.
 
 Questo progetto ha una chat per ruolo, e ogni chat fa solo il suo lavoro:

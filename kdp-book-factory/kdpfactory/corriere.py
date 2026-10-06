@@ -41,7 +41,7 @@ SEPARATORE = "__"
 IMMAGINI = (".jpg", ".jpeg", ".png", ".webp")
 #: Il ramo di GitHub dove Cowork consegna le immagini, e dove sta la fabbrica nel
 #: repository: sul ramo i percorsi partono dalla radice, non da kdp-book-factory/.
-RAMO_IMMAGINI = "cowork-immagini"
+RAMO_IMMAGINI = cowork.RAMO_IMMAGINI
 CARTELLA_FABBRICA = "kdp-book-factory"
 #: Le prime righe di un PNG, di un JPEG e di un WebP: il nome non basta a dire
 #: che un file è un'immagine.

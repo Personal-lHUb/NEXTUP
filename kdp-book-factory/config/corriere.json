@@ -2,8 +2,8 @@
   "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N",
   "caricati": {
     "config/leggimi-cowork.md": {
-      "id": "14wcKoT8YCMbWQKVVluFo7jdic9XZWHvj",
-      "sha": "262e20f77d6d2806ed975c756ce974d9ccb54c8ea2f01a84b65eee922cc4af68"
+      "id": "17A4oyTYFi-CBicDV0FJM8POBXuNtJFxR",
+      "sha": "3f43562b2b7e46078b036033e5c2a6724e93c6986b7b6bd1794a173364c4c19c"
     },
     "config/progetto-cowork.md": {
       "id": "174LSwJxrrryK5mtXpXmCwZoGp9ghqzRL",
@@ -20,6 +20,10 @@
     "config/cowork-copertine-video.md": {
       "id": "1p5Xlk2pILAOavrxMoSIf8Zvr8qk2_V2W",
       "sha": "37061c6a28313f3152908e3532f87f48479fd18746081064000be855c7313f0a"
+    },
+    "books/household-bills/manuale/cowork-immagini-scarica-2.md": {
+      "id": "1hiEhAySt1sXOlLl4E7XbALNTIpC9dl15",
+      "sha": "c53322f2d22627b0e1a06fc31adb450fce6de6a28879473e51d1a164f1ea1f4a"
     }
   },
   "scaricati": {
