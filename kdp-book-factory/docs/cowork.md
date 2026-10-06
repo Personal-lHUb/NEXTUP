@@ -15,7 +15,7 @@ applica, segna «Stato: applicata»      ◀─     ramo cowork-immagini        
 assets/ del libro                      ◀─       …-risposta.md, immagini                risposte e immagini
 riparte subito                         ◀─     (fire_trigger della routine)       ◀─   avvisa la fabbrica
 
-Google Drive «NEXTUP — corriere Cowork»: solo il LEGGIMI
+Google Drive «NEXTUP — corriere Cowork»: il LEGGIMI, e gli esiti dei giri non riusciti
 ```
 
 - La **richiesta** sta nel repository, nella cartella a cui serve:
@@ -99,6 +99,13 @@ Tre cose tolgono le attese fra un giro e l'altro:
   57 dell'ora dopo.
 
 Ogni giro di Cowork costa: si lancia solo quello che c'è da fare.
+
+Un giro che fallisce in silenzio — accesso negato, push rifiutato, un indirizzo
+che non si scarica — costa come uno riuscito. Per questo il LEGGIMI chiede a
+Cowork di scrivere su Drive `cowork-esito-<ruolo>-<AAAAMMGG-hhmm>.md` con
+l'errore esatto, e il giro della fabbrica li cerca (`title contains
+'cowork-esito'`), li legge e li riporta all'autore. Un giro senza richieste, o
+riuscito, non scrive esiti.
 
 ## Il corriere: che cosa passa e da dove
 

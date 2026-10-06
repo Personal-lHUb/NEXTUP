@@ -1,13 +1,19 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 8 · 6 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 9 · 6 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
-**Novità della versione 8: tutto passa da GitHub.** Le richieste non si cercano
-più nella cartella Drive: stanno nel repository `Personal-lHUb/NEXTUP`, ramo
+**Novità della versione 9: se un giro non riesce, lo dice.** Quando un passo
+tecnico fallisce — `add_repo`, clone, fetch o push, un indirizzo che non si
+scarica — scrivi l'esito su Drive, in un file di testo, con il messaggio
+d'errore esatto (sezione «Se qualcosa non va»). Un giro che fallisce in
+silenzio costa come uno riuscito e non insegna niente a nessuno.
+
+**Versione 8: tutto passa da GitHub.** Le richieste non si cercano più nella
+cartella Drive: stanno nel repository `Personal-lHUb/NEXTUP`, ramo
 `claude/dreamy-archimedes-hf8w45`, elencate nell'indice
 `kdp-book-factory/config/cowork-aperte.md`. Risposte e immagini si consegnano
 sul ramo `cowork-immagini`, con git (sezione «Git, passo per passo»). Su Drive
@@ -43,8 +49,9 @@ progetto ChatGPT «NEXTUP — Immagini». Versione 5: la riga `Serve:`.
   `kdp-book-factory/books/x/concorrente/cowork-concorrente.md` è
   `kdp-book-factory/books/x/concorrente/cowork-concorrente-risposta.md`.
 - **Drive** («NEXTUP — corriere Cowork», id `1yprHuxzFDGj12k8clTp0othzTXjiyn5N`)
-  porta solo questo LEGGIMI. Non ci si scrive niente. Il testo del progetto e le
-  attività stanno sul ramo della fabbrica, in `kdp-book-factory/config/`.
+  porta questo LEGGIMI e, se un giro non riesce, il suo esito (sezione «Se
+  qualcosa non va»): nient'altro. Il testo del progetto e le attività stanno sul
+  ramo della fabbrica, in `kdp-book-factory/config/`.
 
 ## Che cosa c'è da fare
 
@@ -107,8 +114,9 @@ Se la shell non c'è o `add_repo` non dà l'accesso, e hai il browser con GitHub
 già aperto dall'autore: «Add file → Upload files» (o «Create new file» per una
 risposta) nella cartella giusta del ramo `cowork-immagini`, commit
 direttamente sul ramo. Se GitHub propone una pull request, non aprirla. Se non
-riesci a consegnare in nessuno dei due modi, nel giro dopo riprovi: non si
-passa da Drive.
+riesci a consegnare in nessuno dei due modi, scrivi l'esito su Drive (sezione
+«Se qualcosa non va») e al giro dopo riprovi. Risposte e immagini non passano
+da Drive.
 
 ## Giri nel cloud
 
@@ -122,6 +130,25 @@ portatile non risponde, è un giro nel cloud.
 - Se un sito risponde con un blocco (HTTP 403, 429, captcha) a una richiesta
   che si poteva fare nel cloud, la risposta è parziale con il motivo, come
   sempre.
+
+## Se qualcosa non va
+
+Se in questo giro c'era una richiesta del tuo ruolo da fare e un passo tecnico
+non è riuscito — `add_repo` che rifiuta, clone, fetch o push che falliscono,
+un indirizzo che non si scarica, il browser che non risponde, un passo di
+questo LEGGIMI che non torna — scrivi su Drive, nella cartella, un file di
+testo nuovo:
+
+- nome `cowork-esito-<ruolo>-<AAAAMMGG-hhmm>.md`, con l'ora UTC (per esempio
+  `cowork-esito-immagini-20261006-1845.md`);
+- prima riga `Esito: non riuscito`;
+- poi, per ogni passo che non è andato: che cosa volevi fare, il comando o lo
+  strumento usato, il messaggio d'errore **esatto**, copiato;
+- infine che cosa sei riuscito a consegnare, se qualcosa, e dove.
+
+Con `create_file`, contentMimeType text/markdown,
+disableConversionToGoogleType true. Niente immagini su Drive. Un giro senza
+richieste da fare, o in cui tutto è andato, non scrive nessun esito.
 
 ## Alla fine del giro
 
@@ -141,7 +168,7 @@ Se non hai consegnato niente, non lanciare niente.
 - Le richieste, l'indice e questo LEGGIMI non si modificano.
 - Una risposta già scritta non si riscrive. Se alla fabbrica serve altro, apre
   una richiesta nuova.
-- Su Drive non si scrive niente.
+- Su Drive si scrive solo l'esito di un giro non riuscito.
 - Su KDP (kdp.amazon.com) si legge e basta: niente titoli nuovi, bozze,
   pubblicazioni o impostazioni cambiate.
 - Negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) si usa

@@ -1,10 +1,10 @@
 {
-  "_nota": "Il canale con Cowork, su GitHub. Le richieste stanno sul ramo della fabbrica, con l'indice config/cowork-aperte.md; Cowork consegna risposte e immagini sul ramo `ramo_consegna` con git, e `cowork corriere --dal-ramo` le porta nei libri. Su Drive resta solo il LEGGIMI, che le attività di Cowork leggono per primo. La fabbrica lancia subito i ruoli che possono lavorare nel cloud (`cloud`: true); gli altri lavorano ai loro orari, col browser del portatile, e alla fine lanciano la routine della fabbrica (`routine_fabbrica`).",
+  "_nota": "Il canale con Cowork, su GitHub. Le richieste stanno sul ramo della fabbrica, con l'indice config/cowork-aperte.md; Cowork consegna risposte e immagini sul ramo `ramo_consegna` con git, e `cowork corriere --dal-ramo` le porta nei libri. Su Drive resta solo il LEGGIMI, che le attività di Cowork leggono per primo, e ci arrivano gli esiti dei giri non riusciti (cowork-esito-<ruolo>-<data>.md). La fabbrica lancia subito i ruoli che possono lavorare nel cloud (`cloud`: true); gli altri lavorano ai loro orari, col browser del portatile, e alla fine lanciano la routine della fabbrica (`routine_fabbrica`).",
   "canale": "github",
   "repository": "Personal-lHUb/NEXTUP",
   "ramo": "claude/dreamy-archimedes-hf8w45",
   "leggimi": "kdp-book-factory/config/leggimi-cowork.md",
-  "leggimi_versione": 8,
+  "leggimi_versione": 9,
   "progetto": {
     "_nota": "Il progetto di Cowork in Claude Desktop: una chat e un'attività pianificata per ruolo. Il testo da incollare lo scrive `python3 -m kdpfactory cowork progetto` in config/progetto-cowork.md.",
     "nome": "NEXTUP — Cowork",
