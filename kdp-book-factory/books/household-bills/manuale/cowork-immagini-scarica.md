@@ -24,4 +24,4 @@ fabbrica): non c'è niente da generare né da incollare in ChatGPT.
 Chi usa i risultati: l'agente `copertina`, che misura le varianti e propone
 all'autore quella da usare. La applica la sessione della fabbrica.
 
-Stato: applicata il 2026-10-06 — misure: tre PNG da 2336 × 3504 pixel (2:3), da 7,3 a 8,5 MiB. I file non sono arrivati: il connettore Drive di Cowork non porta file di questo peso. Le tre varianti seguono la direzione vecchia e si rifanno dopo le regole dei video (config/cowork-copertine-video.md): per queste nessun seguito. Per le nuove serve un'altra strada: la CDN di Higgsfield fra i domini ammessi del container, o una cartella del corriere sincronizzata sul computer dell'autore.
+Stato: applicata il 2026-10-06 — misure: tre PNG da 2336 × 3504 pixel (2:3), da 7,3 a 8,5 MiB. I file non sono arrivati: il connettore Drive di Cowork non porta file di questo peso. Le tre varianti seguono la direzione vecchia e si rifanno dopo le regole dei video (config/cowork-copertine-video.md): le porta il seguito cowork-immagini-scarica-2.md, su GitHub nel ramo cowork-immagini, come prova del canale nuovo per le immagini (LEGGIMI 7).

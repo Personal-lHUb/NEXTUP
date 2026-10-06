@@ -66,14 +66,16 @@ Lo stesso testo lo stampa il comando nel terminale, pronto da copiare.
 
 ## 3. Dove vanno le immagini
 
-Ogni immagine si scarica alla risoluzione piena (non l'anteprima) e si salva
-nella cartella Drive «NEXTUP — corriere Cowork», con il nome che il file indica, per
-esempio `books__<slug>__assets__copertina-1.png`. Il giro orario la
-porta nel libro da sola; l'agente `copertina` misura le varianti e propone
-quella da usare, con il silenzio-assenso.
+Ogni immagine si scarica alla risoluzione piena (non l'anteprima) e si carica
+su GitHub, nel ramo `cowork-immagini`, al percorso che il file indica, per
+esempio `kdp-book-factory/books/<slug>/assets/copertina-1.png`. Non nella
+cartella Drive «NEXTUP — corriere Cowork»: lì viaggiano solo richieste e risposte, perché il
+connettore non porta file così pesanti. Il giro orario porta l'immagine nel
+libro da sola; l'agente `copertina` misura le varianti e propone quella da
+usare, con il silenzio-assenso.
 
 ## 4. Cowork
 
 Il ruolo `immagini` di Cowork lavora nello stesso progetto, se c'è: lo dice il
 LEGGIMI. Che la copertina la generi l'autore o Cowork, il prompt è lo stesso,
-parola per parola, e vale la prima serie di varianti che arriva sul corriere.
+parola per parola, e vale la prima serie di varianti che arriva sul ramo.

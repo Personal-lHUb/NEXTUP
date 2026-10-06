@@ -1,12 +1,18 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 6 · 5 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 7 · 6 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
-**Novità della versione 6: il progetto ChatGPT «NEXTUP — Immagini».** Il ruolo
+**Novità della versione 7: le immagini si caricano su GitHub, non su Drive.**
+Il connettore Drive non porta file di qualche megabyte, e una copertina a piena
+risoluzione ne pesa otto. Le immagini vanno nel repository `Personal-lHUb/NEXTUP`,
+ramo `cowork-immagini`, al percorso che la richiesta indica (sezione «Le
+immagini su GitHub»). Richieste e risposte restano su Drive, come prima.
+
+Versione 6: il progetto ChatGPT «NEXTUP — Immagini». Il ruolo
 `immagini` lavora lì, se l'autore l'ha creato: una chat nuova per ogni
 richiesta (sezione «Ruolo immagini»).
 
@@ -15,9 +21,9 @@ ha `Serve: l'accesso a …` si fa solo quando quell'accesso è già aperto nel
 browser. Se non lo è, non si scrive nessuna risposta, nemmeno parziale: la
 richiesta resta aperta e si riprende al giro dopo. L'accesso lo apre l'autore.
 
-Versione 4: il corriere su Drive. Si lavora solo nella cartella di Google Drive
-«NEXTUP — corriere Cowork», senza GitHub; i file fra la cartella e il
-repository li porta la fabbrica, ogni ora.
+Versione 4: il corriere su Drive. Si lavora nella cartella di Google Drive
+«NEXTUP — corriere Cowork»; i file fra la cartella e il repository li porta la
+fabbrica, ogni ora. GitHub, dalla versione 7, solo per caricare le immagini.
 
 ## Dove si lavora
 
@@ -30,6 +36,8 @@ repository li porta la fabbrica, ogni ora.
   `books__x__concorrente__cowork-concorrente.md` si chiama
   `books__x__concorrente__cowork-concorrente-risposta.md`. Il nome giusto lo
   scrive sempre la richiesta: usa quello, lettera per lettera.
+- **Le immagini** no: vanno su GitHub, nel ramo `cowork-immagini` del
+  repository `Personal-lHUb/NEXTUP` (sezione «Le immagini su GitHub»).
 
 ## Che cosa c'è da fare
 
@@ -59,8 +67,10 @@ repository li porta la fabbrica, ogni ora.
      c'è più, dato che non si trova, strumento non accessibile)
 4. Per ogni punto: il fatto che hai visto sulla pagina, non una stima, con
    l'URL e la data e l'ora della verifica.
-5. Le immagini che una richiesta chiede vanno nella cartella, ognuna con il nome
-   che la richiesta indica.
+5. Le immagini che una richiesta chiede vanno su GitHub, nel ramo
+   `cowork-immagini`, ognuna al percorso che la richiesta indica. La risposta,
+   che resta su Drive, riporta per ogni immagine le misure, il peso e il link
+   del commit.
 
 ## Che cosa non si fa
 
@@ -74,7 +84,31 @@ repository li porta la fabbrica, ogni ora.
 - Negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) si usa
   solo l'accesso che l'autore ha già aperto nel browser: non si inseriscono
   credenziali, non si compra, non si cambiano abbonamenti né impostazioni.
+- Su GitHub si caricano solo le immagini chieste, nel ramo `cowork-immagini`:
+  nessun altro file, nessun altro ramo, nessuna pull request, niente da unire,
+  rinominare o cancellare, nessuna impostazione del repository.
 - Nessuna password, codice, token o cookie nei file.
+
+## Le immagini su GitHub
+
+Le richieste del ruolo `immagini` hanno la riga `Serve: l'accesso a GitHub …`:
+servono il GitHub dell'autore già aperto nel browser (e, se la richiesta lo
+dice, ChatGPT). L'accesso non lo fai tu.
+
+1. Scarica l'immagine a piena risoluzione, così com'è: niente ritagli,
+   compressione o conversione.
+2. Apri `https://github.com/Personal-lHUb/NEXTUP/tree/cowork-immagini` e
+   vai nella cartella del percorso indicato (per esempio
+   `kdp-book-factory/books/<slug>/assets/`). Se il ramo non c'è, crealo dal
+   selettore dei rami partendo dal ramo che la pagina mostra.
+3. «Add file → Upload files», trascina o scegli il file con il nome del
+   percorso, e fai il commit **direttamente sul ramo `cowork-immagini`**, con
+   il messaggio «Cowork: <nome della richiesta>». Se GitHub propone di aprire
+   una pull request, non aprirla.
+4. Controlla che il file sul ramo abbia il peso di quello scaricato.
+
+Se il browser non riesce a caricare il file, la risposta è parziale con il
+motivo: non si passa da Drive.
 
 ## Richieste di seguito e ritirate
 
@@ -158,8 +192,8 @@ Le illustrazioni di copertina e le figure dell'interno, con **ChatGPT**.
   pixel di ogni immagine consegnata. Se la richiesta indica un minimo e
   l'immagine è più piccola, si consegna lo stesso e lo si scrive: decide la
   fabbrica.
-- Si generano tante varianti quante la richiesta ne chiede, ognuna salvata nella
-  cartella con il nome indicato.
+- Si generano tante varianti quante la richiesta ne chiede, ognuna caricata sul
+  ramo `cowork-immagini` al percorso indicato.
 - Le figure dell'interno sono in **scala di grigi**: due elementi non si
   distinguono solo per il colore.
 - Solo immagini generate nella sessione: mai prese dal web, mai persone reali

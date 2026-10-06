@@ -3,8 +3,14 @@
 La regola resta quella di sempre: ogni immagine nasce da un prompt scritto da
 un comando (`copertina`, `immagini`), non in chat. Cambia chi la genera: non più
 l'autore a mano, ma Cowork con ChatGPT, dal portatile. Qui il prompt diventa una
-richiesta completa: che cosa incollare, quante varianti, quanto grande, e con
-che nome lasciare ogni file sul corriere perché arrivi da solo in `assets/`.
+richiesta completa: che cosa incollare, quante varianti, quanto grande, e dove
+caricare ogni file perché arrivi da solo in `assets/`.
+
+Le immagini non viaggiano sul corriere di Drive: il connettore porta testo, non
+file da qualche megabyte. Cowork le carica su GitHub, nel ramo
+`cowork-immagini`, al percorso che la richiesta indica, e `cowork corriere
+--dal-ramo` le porta nel libro. Per caricarle serve il GitHub dell'autore aperto
+nel browser: le richieste lo dicono nella riga `Serve:`.
 
 La scelta fra le varianti della copertina resta una decisione dell'autore: la
 propone l'agente copertina dopo averle misurate, e vale il silenzio-assenso.
@@ -12,9 +18,11 @@ propone l'agente copertina dopo averle misurate, e vale il silenzio-assenso.
 
 from __future__ import annotations
 
-from . import cowork
+from . import corriere, cowork
 
 RUOLO = "immagini"
+#: L'accesso che Cowork usa per consegnare: il GitHub dell'autore, nel browser.
+SERVE_GITHUB = "l'accesso a GitHub (github.com, account dell'autore)"
 COPERTINA = "cowork-copertina.md"
 FIGURE = "cowork-figure.md"
 VARIANTI = 3
@@ -64,9 +72,21 @@ Rules for every image:
    smaller than the minimum in the brief, deliver it anyway and say so."""
 
 
-def nome_variante(slug: str, numero: int) -> str:
-    """Il nome su Drive della variante `numero` della copertina: arriva in assets/."""
-    return f"books__{slug}__assets__copertina-{numero}.png"
+def percorso_variante(slug: str, numero: int) -> str:
+    """Dove si carica la variante `numero` della copertina, sul ramo delle immagini."""
+    return corriere.percorso_sul_ramo(f"books/{slug}/assets/copertina-{numero}.png")
+
+
+def consegna(canale: dict) -> str:
+    """Il punto di ogni richiesta d'immagini che dice dove caricarle: il ramo di GitHub."""
+    repository = canale.get("repository", "Personal-lHUb/NEXTUP")
+    return (
+        "   Non nella cartella Drive: il connettore non porta file così pesanti. Caricale\n"
+        f"   su GitHub, repository `{repository}`, ramo `{corriere.RAMO_IMMAGINI}`, ognuna al\n"
+        "   percorso indicato, con «Add file → Upload files». Se il ramo non c'è, crealo\n"
+        "   dalla stessa pagina con «Create a new branch». Solo quei file: nessun altro\n"
+        "   ramo, nessuna pull request, niente da unire o da cancellare.\n"
+    )
 
 
 def copertina(
@@ -78,7 +98,7 @@ def copertina(
     Cowork, ChatGPT riceve le stesse parole.
     """
     larghezza, altezza = minimo_px
-    nomi = "\n".join(f"   - `{nome_variante(slug, i)}`" for i in range(1, varianti + 1))
+    nomi = "\n".join(f"   - `{percorso_variante(slug, i)}`" for i in range(1, varianti + 1))
     corpo = (
         cowork.intestazione(
             f"Cowork · illustrazione di copertina — {slug}",
@@ -86,6 +106,7 @@ def copertina(
             RUOLO,
             canale,
             f"books/{slug}/manuale",
+            serve="l'accesso a ChatGPT e a GitHub (account dell'autore)",
         )
         + f"\nIl libro: «{titolo}». Serve l'illustrazione della prima di copertina: solo\n"
         "l'immagine, senza nessun testo. Titolo, sottotitolo e autore li compone la\n"
@@ -94,8 +115,10 @@ def copertina(
         "   così com'è. Formato verticale 2:3, alla risoluzione più alta che consente.\n"
         f"2. **Varianti.** Generane {varianti}, una per messaggio. Dopo la prima, nella\n"
         f"   stessa chat scrivi: «{PROSSIMA_VARIANTE}»\n"
-        "   Salvale nella cartella del corriere, a piena risoluzione, con questi nomi:\n"
+        "   Scaricale a piena risoluzione e caricale con questi percorsi:\n"
         f"{nomi}\n"
+        + consegna(canale)
+        +
         f"3. **Misure.** Per ogni variante, le misure in pixel. Il minimo per la stampa\n"
         f"   è {larghezza} x {altezza}: se l'immagine è più piccola, consegnala lo stesso\n"
         "   e scrivilo.\n"
@@ -114,40 +137,48 @@ def copertina(
 SCARICA = "cowork-immagini-scarica.md"
 
 
-def scaricamento(slug: str, titolo: str, immagini: list[tuple[str, str]], canale: dict) -> tuple[str, str]:
-    """La richiesta a Cowork di portare sul corriere immagini già generate.
+def scaricamento(
+    slug: str, titolo: str, immagini: list[tuple[str, str]], canale: dict, seguito: int = 0
+) -> tuple[str, str]:
+    """La richiesta a Cowork di portare nel libro immagini già generate.
 
     Higgsfield genera dal suo connettore, ma la rete del container non raggiunge
     la CDN dove mette i file: le immagini esistono a un indirizzo pubblico, e
-    serve solo che qualcuno le scarichi e le lasci nella cartella del corriere
-    col nome giusto. Nessun accesso da aprire: gli indirizzi sono pubblici.
-    `immagini` è l'elenco (nome su Drive, indirizzo).
+    serve solo che qualcuno le scarichi e le carichi sul ramo delle immagini al
+    percorso giusto. `immagini` è l'elenco (nome del file in assets/, indirizzo);
+    `seguito` dà il nome di un seguito (`-2`, `-3`) della stessa richiesta.
     """
-    righe = "\n".join(f"   - `{nome}` ← {url}" for nome, url in immagini)
+    nome = SCARICA if not seguito else SCARICA.replace(".md", f"-{seguito}.md")
+    righe = "\n".join(
+        f"   - `{corriere.percorso_sul_ramo(f'books/{slug}/assets/{file}')}` ← {url}"
+        for file, url in immagini
+    )
     corpo = (
         cowork.intestazione(
             f"Cowork · immagini da scaricare — {slug}",
-            SCARICA.replace(".md", "-risposta.md"),
+            nome.replace(".md", "-risposta.md"),
             RUOLO,
             canale,
             f"books/{slug}/manuale",
+            serve=SERVE_GITHUB,
         )
         + f"\nIl libro: «{titolo}». Le immagini sono già generate (Higgsfield, dal prompt della\n"
         "fabbrica): non c'è niente da generare né da incollare in ChatGPT.\n\n"
-        "1. **Scarica e salva.** Apri ogni indirizzo, scarica il file così com'è e salvalo\n"
-        "   nella cartella del corriere con il nome indicato:\n"
+        "1. **Scarica e carica.** Apri ogni indirizzo, scarica il file così com'è e\n"
+        "   caricalo al percorso indicato:\n"
         f"{righe}\n"
-        "   Non ritagliarlo, non comprimerlo, non convertirlo: la fabbrica misura i pixel veri.\n"
-        "2. **Misure.** Per ogni file, le misure in pixel e il peso.\n\n"
+        + consegna(canale)
+        + "   Non ritagliarlo, non comprimerlo, non convertirlo: la fabbrica misura i pixel veri.\n"
+        "2. **Misure.** Per ogni file, le misure in pixel e il peso, e il link del commit.\n\n"
         "Chi usa i risultati: l'agente `copertina`, che misura le varianti e propone\n"
         "all'autore quella da usare. La applica la sessione della fabbrica.\n"
     )
-    return SCARICA, corpo
+    return nome, corpo
 
 
-def nome_figura(slug: str, percorso: str) -> str:
-    """Il nome su Drive di una figura dell'interno: arriva in assets/ al suo percorso."""
-    return f"books/{slug}/assets/{percorso}".replace("/", "__")
+def percorso_figura(slug: str, percorso: str) -> str:
+    """Dove si carica una figura dell'interno, sul ramo delle immagini: il suo posto in assets/."""
+    return corriere.percorso_sul_ramo(f"books/{slug}/assets/{percorso}")
 
 
 def figure(
@@ -159,7 +190,7 @@ def figure(
     `build/immagini-prompt.txt`.
     """
     sezioni = "\n\n".join(
-        f"**Figura {i}** — salvala come `{nome_figura(slug, percorso)}`\n\n"
+        f"**Figura {i}** — caricala come `{percorso_figura(slug, percorso)}`\n\n"
         f"---\n{prompt.strip()}\n---"
         for i, (percorso, prompt) in enumerate(prompts, start=1)
     )
@@ -170,13 +201,16 @@ def figure(
             RUOLO,
             canale,
             f"books/{slug}/manuale",
+            serve="l'accesso a ChatGPT e a GitHub (account dell'autore)",
         )
         + f"\nIl libro: «{titolo}». L'interno si stampa in bianco e nero: le figure si\n"
         "generano già in scala di grigi, e nessuna contiene testo.\n\n"
         "1. **Genera.** In ChatGPT, una figura per messaggio, incolla il prompt di quella\n"
         "   figura, fra le sue due righe `---`, così com'è, alla risoluzione più alta.\n"
-        "2. **Salva.** Ogni figura nella cartella del corriere, a piena risoluzione, con\n"
-        "   il nome indicato sopra il suo prompt.\n"
+        "2. **Carica.** Ogni figura a piena risoluzione, al percorso indicato sopra il suo\n"
+        "   prompt.\n"
+        + consegna(canale)
+        +
         "3. **Misure e strumento.** Per ogni figura le misure in pixel; per tutte, lo\n"
         "   strumento e il modello usati.\n\n"
         f"{sezioni}\n\n"
@@ -199,15 +233,15 @@ def testo_copertina(slug: str, prompt: str, varianti: int = VARIANTI) -> str:
     Le righe `===` sono per chi copia e non vanno incollate: dicono che cosa
     incollare e dove. Fra una riga e l'altra c'è solo testo per ChatGPT.
     """
-    nomi = "\n".join(f"variante {i}: {nome_variante(slug, i)}" for i in range(1, varianti + 1))
+    nomi = "\n".join(f"variante {i}: {percorso_variante(slug, i)}" for i in range(1, varianti + 1))
     return (
         _riga(f"1 · Incolla questo in una chat nuova del progetto ChatGPT «{PROGETTO_CHATGPT}», "
               f"chiamata «{slug} — copertina»")
         + f"\n\n{prompt.strip()}\n\n"
         + _riga(f"2 · Per ognuna delle altre {varianti - 1} varianti, incolla questo nella stessa chat")
         + f"\n\n{PROSSIMA_VARIANTE}\n\n"
-        + _riga("3 · Scarica ogni immagine a piena risoluzione e salvala nella cartella Drive "
-                "del corriere con questi nomi")
+        + _riga(f"3 · Scarica ogni immagine a piena risoluzione e caricala su GitHub, ramo "
+                f"{corriere.RAMO_IMMAGINI}, con questi percorsi")
         + f"\n\n{nomi}\n"
     )
 
@@ -220,8 +254,8 @@ def testo_figure(slug: str, prompts: list[tuple[str, str]]) -> str:
     ]
     for i, (percorso, prompt) in enumerate(prompts, start=1):
         pezzi.append(
-            _riga(f"Figura {i} · incolla questo, poi salva l'immagine come "
-                  f"{nome_figura(slug, percorso)}")
+            _riga(f"Figura {i} · incolla questo, poi carica l'immagine su GitHub, ramo "
+                  f"{corriere.RAMO_IMMAGINI}, come {percorso_figura(slug, percorso)}")
             + f"\n\n{prompt.strip()}"
         )
     return "\n\n".join(pezzi) + "\n"
@@ -277,16 +311,18 @@ def progetto_chatgpt(canale: dict) -> str:
         "",
         "## 3. Dove vanno le immagini",
         "",
-        "Ogni immagine si scarica alla risoluzione piena (non l'anteprima) e si salva",
-        f"nella cartella Drive «{cartella}», con il nome che il file indica, per",
-        "esempio `books__<slug>__assets__copertina-1.png`. Il giro orario la",
-        "porta nel libro da sola; l'agente `copertina` misura le varianti e propone",
-        "quella da usare, con il silenzio-assenso.",
+        "Ogni immagine si scarica alla risoluzione piena (non l'anteprima) e si carica",
+        f"su GitHub, nel ramo `{corriere.RAMO_IMMAGINI}`, al percorso che il file indica, per",
+        "esempio `kdp-book-factory/books/<slug>/assets/copertina-1.png`. Non nella",
+        f"cartella Drive «{cartella}»: lì viaggiano solo richieste e risposte, perché il",
+        "connettore non porta file così pesanti. Il giro orario porta l'immagine nel",
+        "libro da sola; l'agente `copertina` misura le varianti e propone quella da",
+        "usare, con il silenzio-assenso.",
         "",
         "## 4. Cowork",
         "",
         "Il ruolo `immagini` di Cowork lavora nello stesso progetto, se c'è: lo dice il",
         "LEGGIMI. Che la copertina la generi l'autore o Cowork, il prompt è lo stesso,",
-        "parola per parola, e vale la prima serie di varianti che arriva sul corriere.",
+        "parola per parola, e vale la prima serie di varianti che arriva sul ramo.",
         "",
     ])

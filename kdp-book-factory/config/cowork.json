@@ -1,10 +1,10 @@
 {
-  "_nota": "Il canale con Cowork. Il tragitto passa dalla cartella Drive del corriere, che Cowork e la fabbrica raggiungono senza passi a mano; GitHub resta l'archivio di richieste e risposte. Lo stato lo dà `python3 -m kdpfactory cowork stato`, il tragitto `cowork corriere`.",
+  "_nota": "Il canale con Cowork. Il tragitto passa dalla cartella Drive del corriere, che Cowork e la fabbrica raggiungono senza passi a mano; GitHub resta l'archivio di richieste e risposte. Le immagini, troppo pesanti per il connettore Drive, Cowork le carica sul ramo `cowork-immagini` di GitHub, e `cowork corriere --dal-ramo` le porta nei libri. Lo stato lo dà `python3 -m kdpfactory cowork stato`, il tragitto `cowork corriere`.",
   "canale": "drive",
   "repository": "Personal-lHUb/NEXTUP",
   "ramo": "claude/dreamy-archimedes-hf8w45",
   "leggimi": "kdp-book-factory/config/leggimi-cowork.md",
-  "leggimi_versione": 6,
+  "leggimi_versione": 7,
   "progetto": {
     "_nota": "Il progetto di Cowork in Claude Desktop: una chat e un'attività pianificata per ruolo. Il testo da incollare lo scrive `python3 -m kdpfactory cowork progetto` in config/progetto-cowork.md.",
     "nome": "NEXTUP — Cowork",
@@ -68,11 +68,11 @@
       "attivita": "NEXTUP — Immagini",
       "ogni": "ora",
       "minuto": 45,
-      "compito": "le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema, alla risoluzione richiesta",
+      "compito": "le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema o già generate da scaricare, caricate sul ramo cowork-immagini di GitHub",
       "strumento": "ChatGPT",
       "note": [
         "ChatGPT si usa nel browser dell'app, con l'account dell'autore già aperto: se chiede l'accesso, la risposta è parziale e l'accesso non lo fai tu;",
-        "scarica ogni immagine alla risoluzione piena (non la miniatura dell'anteprima) e caricala nella cartella con create_file, base64Content e contentMimeType image/png, con il nome che la richiesta indica."
+        "scarica ogni immagine alla risoluzione piena (non la miniatura dell'anteprima) e caricala su GitHub, repository Personal-lHUb/NEXTUP, ramo cowork-immagini, al percorso che la richiesta indica, con «Add file → Upload files» e il commit direttamente sul ramo: non su Drive, che non porta file così pesanti; serve il GitHub dell'autore già aperto nel browser."
       ],
       "trigger": "trig_01S5VYkF4ziuGsQBZX2pjWnK"
     }
@@ -81,5 +81,6 @@
     "_nota": "La cartella Drive dove viaggiano richieste, risposte e immagini. Era la casella «NEXTUP — libri/cowork», chiusa il 30 settembre e riaperta come corriere il 5 ottobre 2026. I file si chiamano come il loro percorso nel repository, con __ al posto di /.",
     "cartella": "NEXTUP — corriere Cowork",
     "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N"
-  }
+  },
+  "ramo_immagini": "cowork-immagini"
 }

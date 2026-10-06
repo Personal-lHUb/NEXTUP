@@ -1320,6 +1320,25 @@ def _cmd_corriere(args, radice: Path, canale: dict, elenco: list) -> int:
         corriere.registra_scaricato(radice, args.scarica, args.id, contenuto)
         print(f"Scritto {destinazione}")
         return 0
+    if getattr(args, "dal_ramo", False):
+        # Le immagini non passano da Drive: Cowork le carica sul ramo di GitHub,
+        # e da lì arrivano nel libro solo quelle in books/<slug>/assets/.
+        immagini, avvisi = corriere.preleva_dal_ramo(radice, elenco)
+        for avviso in avvisi:
+            print(f"Avviso: {avviso}")
+        for immagine in immagini:
+            bersaglio = radice / immagine.percorso
+            parti = Path(immagine.percorso).parts
+            if bersaglio.exists():
+                save_backup(BookProject(radice / parti[0] / parti[1]), args,
+                            f"{bersaglio.name} prima della versione di Cowork", force=True)
+            bersaglio.parent.mkdir(parents=True, exist_ok=True)
+            bersaglio.write_bytes(immagine.contenuto)
+            corriere.registra_dal_ramo(radice, immagine.percorso, immagine.blob)
+            print(f"Scritto {immagine.percorso} ({len(immagine.contenuto):,} byte)")
+        if not immagini:
+            print(f"Nessuna immagine nuova sul ramo {corriere.RAMO_IMMAGINI}.")
+        return 0
     print(json.dumps(corriere.piano(radice, elenco), ensure_ascii=False, indent=2))
     return 0
 
@@ -1766,6 +1785,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--scarica", default="", help="corriere: il nome del file di Cowork su Drive")
     p.add_argument("--id", default="", help="corriere: l'id del file su Drive")
     p.add_argument("--file", default="", help="corriere: dove la sessione ha salvato il file scaricato")
+    p.add_argument("--dal-ramo", action="store_true",
+                   help=f"corriere: porta nei libri le immagini che Cowork ha caricato sul ramo "
+                   f"{corriere.RAMO_IMMAGINI}")
     p.add_argument("--json", action="store_true", help="stato completo in JSON")
     p.set_defaults(func=cmd_cowork)
 

@@ -120,6 +120,69 @@ class TestCorriere(Base):
             cli._cmd_corriere(args, self.radice, CANALE, self.elenco())
 
 
+PNG = b"\x89PNG\r\n\x1a\n" + b"\0" * 32
+
+
+class FintoGit:
+    """Fa le veci di git: il ramo con i suoi file, senza rete."""
+
+    def __init__(self, file: dict[str, bytes] | None):
+        self.file = file          # None: il ramo non c'è
+        self.blob = {f"b{i}": dati for i, dati in enumerate((file or {}).values())}
+
+    def __call__(self, comando, capture_output=True):
+        import subprocess
+
+        azione = comando[3]
+        if azione == "fetch":
+            return subprocess.CompletedProcess(comando, 0 if self.file is not None else 128, b"", b"")
+        if azione == "ls-tree":
+            righe = "".join(f"100644 blob b{i}\t{p}\n" for i, p in enumerate(self.file))
+            return subprocess.CompletedProcess(comando, 0, righe.encode(), b"")
+        return subprocess.CompletedProcess(comando, 0, self.blob[comando[-1]], b"")
+
+
+class TestRamoImmagini(Base):
+    def setUp(self):
+        super().setUp()
+        _, testo = richiesteimmagini.scaricamento(
+            "libro", "Titolo",
+            [("copertina-1.png", "https://cdn.example/a.png"), ("copertina-2.png", "https://cdn.example/b.png")],
+            CANALE,
+        )
+        scrivi(self.radice, "books/libro/manuale/cowork-immagini-scarica.md", testo)
+
+    def test_dal_ramo_arrivano_solo_le_immagini_chieste(self):
+        finto = FintoGit({
+            "kdp-book-factory/books/libro/assets/copertina-1.png": PNG,
+            "kdp-book-factory/books/libro/assets/copertina-2.png": b"<html>non un'immagine</html>",
+            "kdp-book-factory/books/libro/assets/vecchia.png": PNG,      # non chiesta
+            "kdp-book-factory/books/altro/assets/copertina-1.png": PNG,  # libro che non c'è
+            "kdp-book-factory/kdpfactory/cli.py": b"print('no')",
+            "README.md": b"#",
+        })
+        immagini, avvisi = corriere.preleva_dal_ramo(self.radice, self.elenco(), esegui=finto)
+        self.assertEqual([i.percorso for i in immagini], ["books/libro/assets/copertina-1.png"])
+        self.assertEqual(len(avvisi), 1)
+        self.assertIn("copertina-2.png", avvisi[0])
+        # una volta presa, la stessa immagine non torna a ogni giro
+        corriere.registra_dal_ramo(self.radice, immagini[0].percorso, immagini[0].blob)
+        immagini, _ = corriere.preleva_dal_ramo(self.radice, self.elenco(), esegui=finto)
+        self.assertEqual(immagini, [])
+
+    def test_senza_ramo_si_dice_e_non_si_scrive_niente(self):
+        immagini, avvisi = corriere.preleva_dal_ramo(self.radice, self.elenco(), esegui=FintoGit(None))
+        self.assertEqual(immagini, [])
+        self.assertIn("non c'è ancora", avvisi[0])
+
+    def test_le_firme_delle_immagini(self):
+        self.assertTrue(corriere.e_un_immagine(PNG))
+        self.assertTrue(corriere.e_un_immagine(b"\xff\xd8\xff\xe0" + b"\0" * 8))
+        self.assertTrue(corriere.e_un_immagine(b"RIFF\0\0\0\0WEBPVP8 "))
+        self.assertFalse(corriere.e_un_immagine(b"GIF89a"))
+        self.assertFalse(corriere.e_un_immagine(b"RIFF\0\0\0\0WAVE"))
+
+
 class TestDecisioni(unittest.TestCase):
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
@@ -217,20 +280,29 @@ class TestImmagini(unittest.TestCase):
         self.assertIn("---\nFront cover illustration. No text.\n---", testo)
         self.assertIn(richiesteimmagini.PROSSIMA_VARIANTE, testo)
         for i in (1, 2, 3):
-            self.assertIn(f"`books__libro__assets__copertina-{i}.png`", testo)
+            self.assertIn(f"`kdp-book-factory/books/libro/assets/copertina-{i}.png`", testo)
+        self.assertIn("ramo `cowork-immagini`", testo)
+        self.assertIn("Serve: l'accesso a ChatGPT e a GitHub", testo)
         self.assertIn("1838 x 2775", testo)
         self.assertIn("`books__libro__manuale__cowork-copertina-risposta.md`", testo)
 
     def test_le_immagini_gia_generate_si_chiedono_da_scaricare(self):
         nome, testo = richiesteimmagini.scaricamento(
-            "libro", "Titolo",
-            [("books__libro__assets__copertina-1.png", "https://cdn.example/a.png")], CANALE,
+            "libro", "Titolo", [("copertina-1.png", "https://cdn.example/a.png")], CANALE,
         )
         self.assertEqual(nome, "cowork-immagini-scarica.md")
         self.assertIn("Ruolo: immagini", testo)
-        self.assertNotIn("Serve:", testo, "gli indirizzi sono pubblici: nessun accesso da aprire")
-        self.assertIn("`books__libro__assets__copertina-1.png` ← https://cdn.example/a.png", testo)
+        # le immagini viaggiano sul ramo di GitHub: serve il suo accesso, non Drive
+        self.assertIn("Serve: l'accesso a GitHub", testo)
+        self.assertIn("`kdp-book-factory/books/libro/assets/copertina-1.png` ← https://cdn.example/a.png",
+                      testo)
+        self.assertIn("ramo `cowork-immagini`", testo)
         self.assertIn("`books__libro__manuale__cowork-immagini-scarica-risposta.md`", testo)
+        nome, testo = richiesteimmagini.scaricamento(
+            "libro", "Titolo", [("copertina-1.png", "https://cdn.example/a.png")], CANALE, seguito=2,
+        )
+        self.assertEqual(nome, "cowork-immagini-scarica-2.md")
+        self.assertIn("`books__libro__manuale__cowork-immagini-scarica-2-risposta.md`", testo)
 
     def test_il_prompt_da_incollare_ha_solo_quello_che_decide_l_immagine(self):
         prompt = coverbrief.prompt_da_incollare(self.spec(), pages=192)
@@ -295,7 +367,7 @@ class TestImmagini(unittest.TestCase):
         self.assertEqual(len(blocchi), 3)
         self.assertIn("\n\nPROMPT\n\n", testo)
         self.assertIn(richiesteimmagini.PROSSIMA_VARIANTE, testo)
-        self.assertIn("books__libro__assets__copertina-3.png", testo)
+        self.assertIn("kdp-book-factory/books/libro/assets/copertina-3.png", testo)
         self.assertIn("«libro — copertina»", testo)
 
     def test_il_progetto_chatgpt_tiene_le_regole_fisse(self):
@@ -318,10 +390,10 @@ class TestImmagini(unittest.TestCase):
         self.assertIn("Greyscale illustration", prompt)
         self.assertIn("«Where the due date sits.»", prompt)
         testo = richiesteimmagini.testo_figure("libro", [(figura.percorso, prompt)])
-        self.assertIn("books__libro__assets__immagini__03-bolletta.jpg", testo)
+        self.assertIn("kdp-book-factory/books/libro/assets/immagini/03-bolletta.jpg", testo)
         self.assertIn(prompt, testo)
         _, richiesta = richiesteimmagini.figure("libro", "Titolo", [(figura.percorso, prompt)], CANALE)
-        self.assertIn("`books__libro__assets__immagini__03-bolletta.jpg`", richiesta)
+        self.assertIn("`kdp-book-factory/books/libro/assets/immagini/03-bolletta.jpg`", richiesta)
         self.assertIn(f"---\n{prompt}\n---", richiesta)
         self.assertIn("scala di grigi", richiesta)
 

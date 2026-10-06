@@ -110,7 +110,7 @@ quando la sessione si chiude: se manca, il passo lo dice e aspetta lui. Se la
 rete del container blocca Higgsfield, si genera dal **connettore Higgsfield**
 (`generate_image_batch`) con gli stessi prompt del sistema
 (`coverbrief.prompt_da_incollare(..., per_chat=False)`), e se blocca anche la
-sua CDN le immagini le scarica Cowork sul corriere
+sua CDN le immagini le scarica Cowork e le carica sul ramo `cowork-immagini`
 (`richiesteimmagini.scaricamento`): non si rigenerano.
 
 **Ogni competenza ha un solo agente**, elencato in
@@ -188,8 +188,11 @@ passarsi un file (`kdp-book-factory/docs/cowork.md`).
   sistema (`avvio`, `parole-chiave`, `copertina`, `immagini`).
 - **Risposta di Cowork**: un file nuovo sul corriere, che il giro porta accanto
   alla richiesta come `cowork-<argomento>-risposta.md`. La prima riga è `Esito:
-  completa` o `Esito: parziale — punti …`. Le immagini arrivano in
-  `books/<slug>/assets/`; nient'altro può arrivare dal corriere.
+  completa` o `Esito: parziale — punti …`. Le immagini non passano da Drive,
+  che non porta file così pesanti: Cowork le carica su GitHub, ramo
+  `cowork-immagini`, e `cowork corriere --dal-ramo` porta in
+  `books/<slug>/assets/` solo quelle che una richiesta ha chiesto; nient'altro
+  può arrivare dal corriere né dal ramo.
 - **Stato**: `python3 -m kdpfactory cowork stato` (inviata vuol dire «su
   Drive»); a che punto è ogni libro: `python3 -m kdpfactory produzione`.
 - **Giro orario**: la routine «Produzione NEXTUP» riprende questa sessione ogni

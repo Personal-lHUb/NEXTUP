@@ -87,6 +87,27 @@ rete:
   repository: `cowork corriere --scarica <nome> --id <id> --file <scaricato>`
   rifiuta ogni altro nome, e una risposta che c'è già non si riscrive.
 
+### Le immagini: il ramo `cowork-immagini`
+
+Il connettore Drive porta testo, non file da qualche megabyte: una copertina a
+piena risoluzione pesa 8 MB, troppo per Cowork che la carica e per la sessione
+che la scarica. Le immagini fanno quindi un'altra strada. Cowork le carica su
+GitHub, dal browser con l'accesso dell'autore, nel ramo `cowork-immagini`, al
+percorso che la richiesta indica (`kdp-book-factory/books/<slug>/assets/…`);
+la richiesta lo scrive con la riga `Serve: l'accesso a GitHub …`. A ogni giro
+
+```bash
+python3 -m kdpfactory cowork corriere --dal-ramo
+```
+
+scarica il ramo e porta nel libro le immagini che una richiesta ha nominato,
+in `books/<slug>/assets/` di un libro che c'è, se il file è davvero
+un'immagine (PNG, JPEG, WebP, dalle prime righe). Tutto il resto del ramo
+resta lì: il ramo non si unisce mai al lavoro, e non può portare codice,
+`book.json` o testo. Un'immagine già presa (registro `dal_ramo` in
+`config/corriere.json`) non si riscrive; una versione nuova sì, con la copia
+di sicurezza della vecchia.
+
 ## Il giro orario
 
 La routine «Produzione NEXTUP» riprende questa sessione ogni ora, al minuto 57,
@@ -192,9 +213,10 @@ connettore Higgsfield di claude.ai, che passa dal proxy di Anthropic, con gli
 stessi prompt del sistema. Le immagini restano sulla CDN di Higgsfield, che la
 rete può bloccare a sua volta: allora la sessione scrive
 `manuale/cowork-immagini-scarica.md` (`richiesteimmagini.scaricamento`, ruolo
-`immagini`, nessun accesso da aprire) e Cowork le scarica sul corriere con i
-nomi `books__<slug>__assets__…`. Finché la richiesta è aperta `produzione` dà
-la copertina in attesa: le varianti già pagate non si rigenerano.
+`immagini`, `Serve:` GitHub) e Cowork le scarica e le carica sul ramo
+`cowork-immagini`, da cui `cowork corriere --dal-ramo` le porta in `assets/`.
+Finché la richiesta è aperta `produzione` dà la copertina in attesa: le
+varianti già pagate non si rigenerano.
 
 ## Il progetto ChatGPT delle immagini
 
@@ -214,7 +236,7 @@ completo, `build/copertina-brief.md`, che è il riferimento dell'agente
 `copertina`: dette al generatore, rischiano di fargli disegnare l'intera
 copertina col dorso invece della prima. La richiesta a Cowork porta lo stesso prompt, parola per parola, quindi
 le immagini le può generare l'autore o Cowork, e vale la prima serie che arriva
-sul corriere.
+sul ramo `cowork-immagini`.
 
 Le varianti di copertina arrivano in `assets/copertina-N.png`; l'agente
 `copertina` le misura, la scelta passa dal silenzio-assenso, e

@@ -12,9 +12,16 @@ percorso nel repository, con `__` al posto di `/`.
     books/x/concorrente/cowork-concorrente.md  ⇄  books__x__concorrente__cowork-concorrente.md
 
 Così una risposta (`…-risposta.md`) o un'immagine che Cowork lascia nella
-cartella dice da sola dove va. Questo modulo non va in rete: dice che cosa
+cartella dice da sola dove va. Questo modulo non va su Drive: dice che cosa
 caricare, che cosa togliere e che cosa scaricare, e tiene il registro in
 `config/corriere.json`. Le chiamate a Drive le fa la sessione, con il connettore.
+
+Le immagini fanno un'altra strada. Il connettore Drive porta testo, non file da
+qualche megabyte, né all'andata né al ritorno: una copertina a piena
+risoluzione pesa 8 MB. Cowork le carica allora su GitHub, nel ramo
+`cowork-immagini`, che il container raggiunge con git; `preleva_dal_ramo` ne
+prende solo le immagini in `books/<slug>/assets/`, con la stessa regola del
+corriere: nient'altro arriva da lì.
 """
 
 from __future__ import annotations
@@ -22,6 +29,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -31,6 +39,13 @@ REGISTRO = Path("config") / "corriere.json"
 SEPARATORE = "__"
 #: Le immagini che Cowork può consegnare: solo nella cartella del libro, sotto assets/.
 IMMAGINI = (".jpg", ".jpeg", ".png", ".webp")
+#: Il ramo di GitHub dove Cowork consegna le immagini, e dove sta la fabbrica nel
+#: repository: sul ramo i percorsi partono dalla radice, non da kdp-book-factory/.
+RAMO_IMMAGINI = "cowork-immagini"
+CARTELLA_FABBRICA = "kdp-book-factory"
+#: Le prime righe di un PNG, di un JPEG e di un WebP: il nome non basta a dire
+#: che un file è un'immagine.
+_FIRME = (b"\x89PNG\r\n\x1a\n", b"\xff\xd8\xff")
 #: File che Cowork legge a ogni giro e che quindi viaggiano sempre: le regole e il progetto.
 SEMPRE = ("config/leggimi-cowork.md", "config/progetto-cowork.md", "config/attivita-cowork.json")
 _SICURO = re.compile(r"^[A-Za-z0-9._-]+$")
@@ -75,21 +90,33 @@ def destinazione_ammessa(radice: Path, nome: str, elenco: list[cowork.Richiesta]
     un nome che punta al codice o a `book.json` non arriva mai nel repository.
     """
     relativo = percorso_da_nome(nome)
-    parti = relativo.split("/")
-    if not all(p and p not in {".", ".."} and _SICURO.match(p) for p in parti):
+    if not _percorso_sicuro(relativo):
         return ""
     risposte = {r.risposta for r in elenco}
-    if relativo in risposte:
+    if relativo in risposte or immagine_ammessa(radice, relativo):
         return relativo
-    if (
-        len(parti) >= 4
+    return ""
+
+
+def _percorso_sicuro(relativo: str) -> bool:
+    return all(p and p not in {".", ".."} and _SICURO.match(p) for p in relativo.split("/"))
+
+
+def immagine_ammessa(radice: Path, relativo: str) -> bool:
+    """Un'immagine in `books/<slug>/assets/` di un libro che esiste: l'unica cosa che Cowork consegna."""
+    parti = relativo.split("/")
+    return (
+        _percorso_sicuro(relativo)
+        and len(parti) >= 4
         and parti[0] == "books"
         and parti[2] == "assets"
         and Path(parti[-1]).suffix.lower() in IMMAGINI
         and (radice / "books" / parti[1]).is_dir()
-    ):
-        return relativo
-    return ""
+    )
+
+
+def e_un_immagine(contenuto: bytes) -> bool:
+    return contenuto.startswith(_FIRME) or (contenuto[:4] == b"RIFF" and contenuto[8:12] == b"WEBP")
 
 
 @dataclass(frozen=True)
@@ -141,6 +168,7 @@ def piano(radice: Path, elenco: list[cowork.Richiesta]) -> dict:
         "togli": togli,
         "attesi": attesi,
         "immagini": "books__<slug>__assets__<nome>.(jpg|png|webp)",
+        "ramo_immagini": RAMO_IMMAGINI,
         "gia_scaricati": registro["scaricati"],
     }
 
@@ -167,3 +195,96 @@ def registra_scaricato(radice: Path, nome: str, drive_id: str, contenuto: bytes)
 def gia_scaricato(radice: Path, nome: str, drive_id: str) -> bool:
     """Un file di Cowork già portato nel repository: stesso nome e stesso file su Drive."""
     return (leggi_registro(radice)["scaricati"].get(nome) or {}).get("id") == drive_id
+
+
+# --------------------------------------------------------------------------
+# Il ramo delle immagini
+# --------------------------------------------------------------------------
+def percorso_sul_ramo(relativo: str) -> str:
+    """Dove Cowork carica un file sul ramo: il percorso dalla radice del repository."""
+    return f"{CARTELLA_FABBRICA}/{relativo.strip('/')}"
+
+
+@dataclass(frozen=True)
+class DalRamo:
+    percorso: str      # relativo a kdp-book-factory/
+    blob: str          # l'oggetto git sul ramo
+    contenuto: bytes
+
+
+_SUL_RAMO = re.compile(r"`" + re.escape(CARTELLA_FABBRICA) + r"/(books/[^`\s]+)`")
+
+
+def richiesti(radice: Path, elenco: list[cowork.Richiesta]) -> set[str]:
+    """Le immagini che le richieste hanno chiesto di caricare sul ramo, relative a kdp-book-factory/.
+
+    Il ramo nasce da un ramo qualsiasi del repository e porta con sé tutti i
+    suoi file, anche vecchie immagini di un libro: dal ramo si prende solo
+    quello che una richiesta ha nominato.
+    """
+    nomi: set[str] = set()
+    for richiesta in elenco:
+        file = radice / richiesta.percorso
+        if file.exists():
+            nomi.update(_SUL_RAMO.findall(file.read_text(encoding="utf-8")))
+    return nomi
+
+
+def da_prendere(
+    radice: Path, voci: list[tuple[str, str]], chiesti: set[str]
+) -> list[tuple[str, str]]:
+    """Fra le voci del ramo (percorso dalla radice, blob), quelle da portare nel libro.
+
+    Passano solo le immagini che una richiesta ha chiesto (`chiesti`), in
+    `books/<slug>/assets/` di un libro che c'è, e solo se quel blob non è già
+    stato preso: un file rimasto uguale sul ramo non si riscrive a ogni giro.
+    """
+    presi = leggi_registro(radice).get("dal_ramo", {})
+    prefisso = CARTELLA_FABBRICA + "/"
+    scelte = []
+    for percorso, blob in voci:
+        if not percorso.startswith(prefisso):
+            continue
+        relativo = percorso[len(prefisso):]
+        if relativo in chiesti and immagine_ammessa(radice, relativo) and presi.get(relativo) != blob:
+            scelte.append((relativo, blob))
+    return scelte
+
+
+def preleva_dal_ramo(
+    radice: Path, elenco: list[cowork.Richiesta], esegui=subprocess.run
+) -> tuple[list[DalRamo], list[str]]:
+    """Scarica il ramo delle immagini e ne legge quelle nuove. Non scrive nel libro.
+
+    Restituisce le immagini da portare e gli avvisi (ramo che non c'è ancora,
+    file con un nome da immagine che immagine non è). Il ramo non si unisce
+    mai al lavoro: se ne leggono solo i blob scelti da `da_prendere`.
+    """
+    def git(*argomenti: str) -> subprocess.CompletedProcess:
+        return esegui(["git", "-C", str(radice), *argomenti], capture_output=True)
+
+    rif = f"refs/remotes/origin/{RAMO_IMMAGINI}"
+    scaricato = git("fetch", "-q", "origin", f"+refs/heads/{RAMO_IMMAGINI}:{rif}")
+    if scaricato.returncode != 0:
+        return [], [f"il ramo {RAMO_IMMAGINI} non c'è ancora: Cowork non ha caricato immagini"]
+    albero = git("ls-tree", "-r", "--full-tree", rif)
+    voci = []
+    for riga in albero.stdout.decode("utf-8", "replace").splitlines():
+        testa, _, percorso = riga.partition("\t")
+        campi = testa.split()
+        if len(campi) == 3 and campi[1] == "blob":
+            voci.append((percorso, campi[2]))
+    immagini, avvisi = [], []
+    for relativo, blob in da_prendere(radice, voci, richiesti(radice, elenco)):
+        contenuto = git("cat-file", "blob", blob).stdout
+        if not e_un_immagine(contenuto):
+            avvisi.append(f"{relativo}: sul ramo non è un'immagine, resta lì")
+            continue
+        immagini.append(DalRamo(relativo, blob, contenuto))
+    return immagini, avvisi
+
+
+def registra_dal_ramo(radice: Path, relativo: str, blob: str) -> None:
+    registro = leggi_registro(radice)
+    registro.setdefault("dal_ramo", {})[relativo] = blob
+    salva_registro(radice, registro)

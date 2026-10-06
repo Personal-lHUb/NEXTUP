@@ -26,7 +26,7 @@ Questo progetto ha una chat per ruolo, e ogni chat fa solo il suo lavoro:
 - «Parole chiave» (Ruolo: parole-chiave): le parole chiave e le categorie: autocompletamento e risultati di Amazon, Helium 10, Publisher Rocket, Google Trends, affollamento delle categorie.
 - «Fonti» (Ruolo: fonti): le affermazioni del libro sul mondo, controllate sulla fonte ufficiale prima della stampa.
 - «Regole KDP» (Ruolo: regole-kdp): le regole di KDP che valgono per ogni libro: costi di stampa, limiti, pagine, selettore delle categorie; su KDP in sola lettura.
-- «Immagini» (Ruolo: immagini): le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema, alla risoluzione richiesta.
+- «Immagini» (Ruolo: immagini): le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema o già generate da scaricare, caricate sul ramo cowork-immagini di GitHub.
 Ogni richiesta dice il suo ruolo nella riga «Ruolo: …» sotto il titolo. Una
 richiesta di un altro ruolo non la apri: è di un'altra chat.
 
@@ -66,7 +66,7 @@ Quando ti chiedo «sei allineato?», rispondi con:
 | `parole-chiave` | Parole chiave | le parole chiave e le categorie: autocompletamento e risultati di Amazon, Helium 10, Publisher Rocket, Google Trends, affollamento delle categorie | NEXTUP — Parole chiave | ogni ora, al minuto 15 |
 | `fonti` | Fonti | le affermazioni del libro sul mondo, controllate sulla fonte ufficiale prima della stampa | NEXTUP — Fonti | ogni ora, al minuto 25 |
 | `regole-kdp` | Regole KDP | le regole di KDP che valgono per ogni libro: costi di stampa, limiti, pagine, selettore delle categorie; su KDP in sola lettura | NEXTUP — Regole KDP | ogni ora, al minuto 35 |
-| `immagini` | Immagini | le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema, alla risoluzione richiesta | NEXTUP — Immagini | ogni ora, al minuto 45 |
+| `immagini` | Immagini | le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema o già generate da scaricare, caricate sul ramo cowork-immagini di GitHub | NEXTUP — Immagini | ogni ora, al minuto 45 |
 
 Il primo messaggio in ogni chat, con il ruolo al posto di `<ruolo>`:
 
@@ -248,7 +248,7 @@ Note pratiche, dai giri precedenti:
 ### NEXTUP — Immagini — ogni ora, al minuto 45
 
 ```
-Sei il ruolo «immagini» della fabbrica di libri NEXTUP: le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema, alla risoluzione richiesta.
+Sei il ruolo «immagini» della fabbrica di libri NEXTUP: le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema o già generate da scaricare, caricate sul ramo cowork-immagini di GitHub.
 
 Lavori nella cartella di Google Drive «NEXTUP — corriere Cowork» (id 1yprHuxzFDGj12k8clTp0othzTXjiyn5N). Non serve
 GitHub: la fabbrica porta da sola i file fra quella cartella e il repository.
@@ -282,7 +282,7 @@ niente.
 
 Note pratiche, dai giri precedenti:
 - ChatGPT si usa nel browser dell'app, con l'account dell'autore già aperto: se chiede l'accesso, la risposta è parziale e l'accesso non lo fai tu;
-- scarica ogni immagine alla risoluzione piena (non la miniatura dell'anteprima) e caricala nella cartella con create_file, base64Content e contentMimeType image/png, con il nome che la richiesta indica.
+- scarica ogni immagine alla risoluzione piena (non la miniatura dell'anteprima) e caricala su GitHub, repository Personal-lHUb/NEXTUP, ramo cowork-immagini, al percorso che la richiesta indica, con «Add file → Upload files» e il commit direttamente sul ramo: non su Drive, che non porta file così pesanti; serve il GitHub dell'autore già aperto nel browser.
 ```
 
 ## 4. Il passaggio
