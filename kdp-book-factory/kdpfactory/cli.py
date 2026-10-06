@@ -1337,9 +1337,17 @@ def _cmd_corriere(args, radice: Path, canale: dict, elenco: list) -> int:
             corriere.registra_dal_ramo(radice, immagine.percorso, immagine.blob)
             print(f"Scritto {immagine.percorso} ({len(immagine.contenuto):,} byte)")
         if not immagini:
-            print(f"Nessuna immagine nuova sul ramo {corriere.RAMO_IMMAGINI}.")
+            print(f"Niente di nuovo sul ramo {corriere.RAMO_IMMAGINI}.")
         return 0
-    print(json.dumps(corriere.piano(radice, elenco), ensure_ascii=False, indent=2))
+    if getattr(args, "avviato", ""):
+        fatte = corriere.registra_avviato(radice, args.avviato, elenco, canale)
+        print(f"Lanciato il ruolo {args.avviato}: " + (", ".join(fatte) or "nessuna richiesta"))
+        return 0
+    if corriere.su_github(canale):
+        # Cowork legge le richieste aperte dall'indice sul ramo della fabbrica: va
+        # riscritto a ogni giro, e pubblicato prima di lanciare i ruoli.
+        (radice / corriere.INDICE).write_text(corriere.indice(elenco, canale), encoding="utf-8")
+    print(json.dumps(corriere.piano(radice, elenco, canale), ensure_ascii=False, indent=2))
     return 0
 
 
@@ -1785,6 +1793,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--scarica", default="", help="corriere: il nome del file di Cowork su Drive")
     p.add_argument("--id", default="", help="corriere: l'id del file su Drive")
     p.add_argument("--file", default="", help="corriere: dove la sessione ha salvato il file scaricato")
+    p.add_argument("--avviato", default="",
+                   help="corriere: il ruolo appena lanciato con fire_trigger (le sue richieste nel cloud)")
     p.add_argument("--dal-ramo", action="store_true",
                    help=f"corriere: porta nei libri le immagini che Cowork ha caricato sul ramo "
                    f"{corriere.RAMO_IMMAGINI}")

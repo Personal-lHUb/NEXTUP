@@ -170,6 +170,21 @@ class TestRamoImmagini(Base):
         immagini, _ = corriere.preleva_dal_ramo(self.radice, self.elenco(), esegui=finto)
         self.assertEqual(immagini, [])
 
+    def test_dal_ramo_arriva_la_risposta_e_non_si_riscrive(self):
+        risposta = "kdp-book-factory/books/libro/concorrente/cowork-concorrente-risposta.md"
+        finto = FintoGit({
+            risposta: b"Esito: completa\n",
+            "kdp-book-factory/books/libro/concorrente/cowork-altro-risposta.md": b"Esito: completa\n",
+            "kdp-book-factory/books/libro/book.json": b"{}",
+        })
+        presi, _ = corriere.preleva_dal_ramo(self.radice, self.elenco(), esegui=finto)
+        self.assertEqual([p.percorso for p in presi],
+                         ["books/libro/concorrente/cowork-concorrente-risposta.md"])
+        # una risposta che c'è già nel repository non arriva una seconda volta
+        scrivi(self.radice, "books/libro/concorrente/cowork-concorrente-risposta.md", "Esito: parziale\n")
+        presi, _ = corriere.preleva_dal_ramo(self.radice, self.elenco(), esegui=finto)
+        self.assertEqual(presi, [])
+
     def test_senza_ramo_si_dice_e_non_si_scrive_niente(self):
         immagini, avvisi = corriere.preleva_dal_ramo(self.radice, self.elenco(), esegui=FintoGit(None))
         self.assertEqual(immagini, [])
@@ -181,6 +196,73 @@ class TestRamoImmagini(Base):
         self.assertTrue(corriere.e_un_immagine(b"RIFF\0\0\0\0WEBPVP8 "))
         self.assertFalse(corriere.e_un_immagine(b"GIF89a"))
         self.assertFalse(corriere.e_un_immagine(b"RIFF\0\0\0\0WAVE"))
+
+
+CANALE_GITHUB = {
+    "canale": "github",
+    "repository": "o/r",
+    "ramo": "fabbrica",
+    "ramo_consegna": corriere.RAMO_IMMAGINI,
+    "ruoli": {
+        "concorrente": {"trigger": "trig_c", "cloud": False},
+        "fonti": {"trigger": "trig_f", "cloud": True},
+    },
+}
+
+
+class TestCanaleGithub(Base):
+    def setUp(self):
+        super().setUp()
+        self.fonti = "books/libro/manuale/cowork-fonti.md"
+        self.kdp = "books/libro/manuale/cowork-fonti-kdp.md"
+        scrivi(self.radice, self.fonti,
+               cowork.intestazione("F", "cowork-fonti-risposta.md", "fonti", CANALE_GITHUB,
+                                   "books/libro/manuale"))
+        scrivi(self.radice, self.kdp,
+               cowork.intestazione("K", "cowork-fonti-kdp-risposta.md", "fonti", CANALE_GITHUB,
+                                   "books/libro/manuale", serve="l'accesso a KDP"))
+
+    def test_l_intestazione_dice_dove_consegnare_sul_ramo(self):
+        testo = (self.radice / self.fonti).read_text(encoding="utf-8")
+        self.assertIn("`kdp-book-factory/books/libro/manuale/cowork-fonti-risposta.md`", testo)
+        self.assertIn(f"sul ramo `{corriere.RAMO_IMMAGINI}`", testo)
+        self.assertNotIn("Drive", testo)
+
+    def test_su_drive_resta_solo_il_leggimi(self):
+        corriere.registra_caricato(self.radice, self.richiesta, "id-1")
+        piano = corriere.piano(self.radice, self.elenco(), CANALE_GITHUB)
+        self.assertEqual([c["percorso"] for c in piano["carica"]], ["config/leggimi-cowork.md"])
+        # la copia di una richiesta ancora aperta, caricata quando il canale era Drive, si toglie
+        self.assertEqual(piano["togli"], [{"percorso": self.richiesta, "id": "id-1"}])
+
+    def test_si_lancia_solo_quello_che_si_fa_nel_cloud_e_una_volta_sola(self):
+        avvia = corriere.da_avviare(self.radice, self.elenco(), CANALE_GITHUB)
+        # concorrente lavora col browser del portatile; la richiesta con Serve aspetta l'autore
+        self.assertEqual(avvia, [{"ruolo": "fonti", "trigger": "trig_f", "richieste": [self.fonti]}])
+        self.assertEqual(corriere.registra_avviato(self.radice, "fonti", self.elenco(), CANALE_GITHUB),
+                         [self.fonti])
+        self.assertEqual(corriere.da_avviare(self.radice, self.elenco(), CANALE_GITHUB), [])
+        # una richiesta corretta è una richiesta nuova: si lancia di nuovo
+        with (self.radice / self.fonti).open("a", encoding="utf-8") as fh:
+            fh.write("\n3. Un punto in più.\n")
+        self.assertEqual(len(corriere.da_avviare(self.radice, self.elenco(), CANALE_GITHUB)), 1)
+
+    def test_l_indice_dice_dove_leggere_e_dove_consegnare(self):
+        testo = corriere.indice(self.elenco(), CANALE_GITHUB)
+        self.assertIn("## Ruolo fonti", testo)
+        self.assertIn("- `kdp-book-factory/books/libro/manuale/cowork-fonti.md`", testo)
+        self.assertIn("risposta: `kdp-book-factory/books/libro/manuale/cowork-fonti-risposta.md`"
+                      f" sul ramo `{corriere.RAMO_IMMAGINI}`", testo)
+        self.assertIn("si fa: solo col browser del portatile — serve l'accesso a KDP", testo)
+        self.assertIn("https://github.com/o/r/blob/fabbrica/kdp-book-factory/books/libro/manuale/cowork-fonti.md",
+                      testo)
+        # l'indice si chiama come una richiesta, ma non lo è
+        scrivi(self.radice, "config/cowork-aperte.md", testo)
+        self.assertNotIn("config/cowork-aperte.md", [r.percorso for r in self.elenco()])
+        # una richiesta applicata esce dall'indice
+        with (self.radice / self.fonti).open("a", encoding="utf-8") as fh:
+            fh.write("\nStato: applicata il 2026-10-06\n")
+        self.assertNotIn("cowork-fonti.md`", corriere.indice(self.elenco(), CANALE_GITHUB))
 
 
 class TestDecisioni(unittest.TestCase):
@@ -402,7 +484,8 @@ class TestConfigurazioneVera(unittest.TestCase):
     def test_il_canale_vero_e_il_corriere_con_cinque_ruoli(self):
         radice = Path(__file__).resolve().parent.parent
         canale = json.loads((radice / "config" / "cowork.json").read_text(encoding="utf-8"))
-        self.assertEqual(canale["canale"], "drive")
+        self.assertEqual(canale["canale"], "github")
+        self.assertEqual(canale["ramo_consegna"], corriere.RAMO_IMMAGINI)
         self.assertTrue(canale["corriere"]["cartella_id"])
         self.assertEqual(set(canale["ruoli"]),
                          {"concorrente", "parole-chiave", "fonti", "regole-kdp", "immagini"})

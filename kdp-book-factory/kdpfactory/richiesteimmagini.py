@@ -72,6 +72,12 @@ Rules for every image:
    smaller than the minimum in the brief, deliver it anyway and say so."""
 
 
+def _serve_chatgpt(canale: dict) -> str:
+    if corriere.su_github(canale):
+        return "l'accesso a ChatGPT (account dell'autore)"
+    return "l'accesso a ChatGPT e a GitHub (account dell'autore)"
+
+
 def percorso_variante(slug: str, numero: int) -> str:
     """Dove si carica la variante `numero` della copertina, sul ramo delle immagini."""
     return corriere.percorso_sul_ramo(f"books/{slug}/assets/copertina-{numero}.png")
@@ -80,6 +86,14 @@ def percorso_variante(slug: str, numero: int) -> str:
 def consegna(canale: dict) -> str:
     """Il punto di ogni richiesta d'immagini che dice dove caricarle: il ramo di GitHub."""
     repository = canale.get("repository", "Personal-lHUb/NEXTUP")
+    if corriere.su_github(canale):
+        return (
+            f"   Caricale su GitHub, repository `{repository}`, ramo `{corriere.RAMO_IMMAGINI}`,\n"
+            "   ognuna al percorso indicato. Con git (add_repo con accesso push, poi commit e\n"
+            f"   push del solo ramo `{corriere.RAMO_IMMAGINI}`) o, se lavori col browser, con\n"
+            "   «Add file → Upload files». Solo quei file: nessun altro ramo, nessuna pull\n"
+            "   request, niente da unire o da cancellare.\n"
+        )
     return (
         "   Non nella cartella Drive: il connettore non porta file così pesanti. Caricale\n"
         f"   su GitHub, repository `{repository}`, ramo `{corriere.RAMO_IMMAGINI}`, ognuna al\n"
@@ -106,7 +120,7 @@ def copertina(
             RUOLO,
             canale,
             f"books/{slug}/manuale",
-            serve="l'accesso a ChatGPT e a GitHub (account dell'autore)",
+            serve=_serve_chatgpt(canale),
         )
         + f"\nIl libro: «{titolo}». Serve l'illustrazione della prima di copertina: solo\n"
         "l'immagine, senza nessun testo. Titolo, sottotitolo e autore li compone la\n"
@@ -160,7 +174,9 @@ def scaricamento(
             RUOLO,
             canale,
             f"books/{slug}/manuale",
-            serve=SERVE_GITHUB,
+            # Sul canale GitHub Cowork consegna con git dal suo container: nessun
+            # accesso da aprire nel browser.
+            serve="" if corriere.su_github(canale) else SERVE_GITHUB,
         )
         + f"\nIl libro: «{titolo}». Le immagini sono già generate (Higgsfield, dal prompt della\n"
         "fabbrica): non c'è niente da generare né da incollare in ChatGPT.\n\n"
@@ -201,7 +217,7 @@ def figure(
             RUOLO,
             canale,
             f"books/{slug}/manuale",
-            serve="l'accesso a ChatGPT e a GitHub (account dell'autore)",
+            serve=_serve_chatgpt(canale),
         )
         + f"\nIl libro: «{titolo}». L'interno si stampa in bianco e nero: le figure si\n"
         "generano già in scala di grigi, e nessuna contiene testo.\n\n"

@@ -151,6 +151,21 @@ class TestRuoli(unittest.TestCase):
         self.assertIn("«Ruolo: fonti»", voce["prompt"])
         self.assertIn("- una nota", voce["prompt"])
 
+    def test_sul_canale_github_l_attivita_legge_l_indice_e_consegna_con_git(self):
+        canale = {**self.CANALE, "canale": "github", "repository": "o/r", "ramo_consegna": "consegne",
+                  "routine_fabbrica": "trig_fab",
+                  "ruoli": {"fonti": {"trigger": "trig_x", "ogni": "ora", "minuto": 25}}}
+        [voce] = cowork.attivita(canale)
+        prompt = voce["prompt"]
+        self.assertIn("kdp-book-factory/config/cowork-aperte.md` dal ramo ramo-x", prompt)
+        self.assertIn("add_repo con owner o, repo r e accesso push", prompt)
+        self.assertIn("git push origin consegne", prompt)
+        self.assertIn("mai\n   --force", prompt)
+        self.assertIn("fire_trigger con trigger_id trig_fab", prompt)
+        self.assertNotIn("search_files", prompt)
+        self.assertIn("ramo consegne", cowork.istruzioni_progetto(canale))
+        self.assertIn("approva i prompt nuovi delle attività", cowork.progetto(canale))
+
     def test_lo_stato_segnala_le_richieste_che_nessuno_prende(self):
         testo = cowork.rapporto(cowork.richieste(self.radice), set(self.CANALE["ruoli"]))
         self.assertIn("nessun giro di Cowork le prende: books/a/manuale/cowork-vecchia.md", testo)

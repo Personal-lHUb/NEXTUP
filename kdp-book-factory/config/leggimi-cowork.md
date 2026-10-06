@@ -1,133 +1,174 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 7 · 6 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 8 · 6 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
-**Novità della versione 7: le immagini si caricano su GitHub, non su Drive.**
-Il connettore Drive non porta file di qualche megabyte, e una copertina a piena
-risoluzione ne pesa otto. Le immagini vanno nel repository `Personal-lHUb/NEXTUP`,
-ramo `cowork-immagini`, al percorso che la richiesta indica (sezione «Le
-immagini su GitHub»). Richieste e risposte restano su Drive, come prima.
+**Novità della versione 8: tutto passa da GitHub.** Le richieste non si cercano
+più nella cartella Drive: stanno nel repository `Personal-lHUb/NEXTUP`, ramo
+`claude/dreamy-archimedes-hf8w45`, elencate nell'indice
+`kdp-book-factory/config/cowork-aperte.md`. Risposte e immagini si consegnano
+sul ramo `cowork-immagini`, con git (sezione «Git, passo per passo»). Su Drive
+resta solo questo LEGGIMI, perché il prompt delle attività dice di leggerlo
+per primo. Se il prompt della tua attività parla ancora di file da cercare su
+Drive, di base64 o di caricamenti sulla cartella, vale questo file.
 
-Versione 6: il progetto ChatGPT «NEXTUP — Immagini». Il ruolo
-`immagini` lavora lì, se l'autore l'ha creato: una chat nuova per ogni
-richiesta (sezione «Ruolo immagini»).
+Due cose nuove insieme:
 
-Versione 5: la riga `Serve:`. Una richiesta che sotto il ruolo
-ha `Serve: l'accesso a …` si fa solo quando quell'accesso è già aperto nel
-browser. Se non lo è, non si scrive nessuna risposta, nemmeno parziale: la
-richiesta resta aperta e si riprende al giro dopo. L'accesso lo apre l'autore.
+- **Giri lanciati dalla fabbrica.** Quando apre una richiesta che si può fare
+  senza il browser del portatile, la fabbrica lancia subito l'attività del
+  ruolo, senza aspettare l'orario. Quel giro parte nel cloud: niente Chrome
+  dell'autore (sezione «Giri nel cloud»).
+- **Alla fine del giro avvisi la fabbrica**, se hai consegnato qualcosa: così
+  la risposta viene applicata subito, non al giro orario dopo (sezione «Alla
+  fine del giro»).
 
-Versione 4: il corriere su Drive. Si lavora nella cartella di Google Drive
-«NEXTUP — corriere Cowork»; i file fra la cartella e il repository li porta la
-fabbrica, ogni ora. GitHub, dalla versione 7, solo per caricare le immagini.
+Versione 7: le immagini su GitHub, ramo `cowork-immagini`. Versione 6: il
+progetto ChatGPT «NEXTUP — Immagini». Versione 5: la riga `Serve:`.
 
 ## Dove si lavora
 
-- Cartella Google Drive **«NEXTUP — corriere Cowork»**, id
-  `1yprHuxzFDGj12k8clTp0othzTXjiyn5N`. Le richieste, questo LEGGIMI
-  (`config__leggimi-cowork.md`) e il testo del progetto
-  (`config__progetto-cowork.md`) li trovi lì.
-- Ogni file si chiama come il suo posto nell'archivio della fabbrica, con `__`
-  al posto di `/`. La risposta a
-  `books__x__concorrente__cowork-concorrente.md` si chiama
-  `books__x__concorrente__cowork-concorrente-risposta.md`. Il nome giusto lo
-  scrive sempre la richiesta: usa quello, lettera per lettera.
-- **Le immagini** no: vanno su GitHub, nel ramo `cowork-immagini` del
-  repository `Personal-lHUb/NEXTUP` (sezione «Le immagini su GitHub»).
+- **Repository** `Personal-lHUb/NEXTUP` su GitHub.
+- **Le richieste** stanno sul ramo `claude/dreamy-archimedes-hf8w45`.
+  L'elenco di quelle aperte, con il ruolo, il percorso della risposta e se si
+  possono fare nel cloud, è
+  `kdp-book-factory/config/cowork-aperte.md`, che la fabbrica riscrive a ogni
+  giro. Questo LEGGIMI è lì accanto: `kdp-book-factory/config/leggimi-cowork.md`.
+- **Le consegne** — risposte e immagini — vanno sul ramo `cowork-immagini`,
+  ognuna al percorso che la richiesta indica, a partire dalla cartella
+  `kdp-book-factory/`. La risposta a
+  `kdp-book-factory/books/x/concorrente/cowork-concorrente.md` è
+  `kdp-book-factory/books/x/concorrente/cowork-concorrente-risposta.md`.
+- **Drive** («NEXTUP — corriere Cowork», id `1yprHuxzFDGj12k8clTp0othzTXjiyn5N`)
+  porta solo questo LEGGIMI e il testo del progetto. Non ci si scrive niente.
 
 ## Che cosa c'è da fare
 
-- **Richieste**: i file della cartella che contengono `cowork-` nel nome,
-  finiscono in `.md` e non finiscono in `-risposta.md`.
-- Ogni richiesta dice il suo ruolo nella riga `Ruolo: …` sotto il titolo. Una
-  richiesta di un ruolo diverso dal tuo è di un'altra chat: non aprirla. Una
-  richiesta senza la riga `Ruolo:` non la prende nessun ruolo: se la trovi,
+- Le richieste del tuo ruolo che l'indice `cowork-aperte.md` elenca sotto
+  «Ruolo <il tuo ruolo>». Una richiesta di un altro ruolo è di un'altra chat:
+  non aprirla. Una richiesta senza ruolo non la prende nessuno: se la trovi,
   dillo all'autore e lasciala lì.
-- Una richiesta che ha già accanto il file con lo stesso nome e `-risposta` è
-  fatta: saltala.
+- Una richiesta che ha già la risposta sul ramo `cowork-immagini` è fatta:
+  saltala (la fabbrica la porta via entro l'ora e la toglie dall'indice).
 - Una richiesta con la riga `Serve: …` sotto il ruolo chiede un accesso che
-  apre l'autore (KDP, ChatGPT, Helium 10, Amazon). Prima di tutto guarda se nel
-  browser è aperto. Se non lo è, salta la richiesta senza scrivere niente: al
-  giro dopo la ritrovi aperta. Se è aperto, la fai come tutte le altre.
+  apre l'autore (KDP, ChatGPT, Helium 10, Amazon, il browser del portatile).
+  Prima di tutto guarda se c'è. Se manca, salta la richiesta senza scrivere
+  niente: al giro dopo la ritrovi aperta. Se c'è, la fai come le altre.
+- Una richiesta scritta prima di questa versione dice ancora di scrivere la
+  risposta nella cartella Drive, con un nome come
+  `books__x__manuale__cowork-y-risposta.md`. Consegnala lo stesso sul ramo
+  `cowork-immagini`, al percorso con `/` al posto di `__` e davanti
+  `kdp-book-factory/`: `kdp-book-factory/books/x/manuale/cowork-y-risposta.md`.
 
 ## Come si risponde
 
 1. Leggi la richiesta per intero ed esegui quello che chiede, punto per punto,
    con la sua numerazione. Tutto quello che ti serve è nella richiesta: se
    manca qualcosa, scrivilo nella risposta invece di cercarlo altrove.
-2. Scrivi la risposta in Markdown, come **file nuovo** nella cartella, con il
-   nome che la richiesta indica.
+2. Scrivi la risposta in Markdown, come **file nuovo** sul ramo
+   `cowork-immagini`, al percorso che la richiesta indica.
 3. La **prima riga** della risposta dice com'è andata:
    - `Esito: completa`
    - `Esito: parziale — punti 2, 4: <motivo>` (captcha, accesso, pagina che non
      c'è più, dato che non si trova, strumento non accessibile)
 4. Per ogni punto: il fatto che hai visto sulla pagina, non una stima, con
    l'URL e la data e l'ora della verifica.
-5. Le immagini che una richiesta chiede vanno su GitHub, nel ramo
-   `cowork-immagini`, ognuna al percorso che la richiesta indica. La risposta,
-   che resta su Drive, riporta per ogni immagine le misure, il peso e il link
-   del commit.
+5. Le immagini che una richiesta chiede vanno sullo stesso ramo, ognuna al
+   percorso indicato, nello stesso commit della risposta se puoi. La risposta
+   riporta per ogni immagine le misure in pixel e il peso.
+
+## Git, passo per passo
+
+Nel giro hai la shell e lo strumento `add_repo`. È la strada normale, sia nel
+cloud sia sul portatile.
+
+1. `add_repo` con owner `Personal-lHUb`, repo `NEXTUP`, accesso `push`, poi il
+   clone che ti indica.
+2. Leggi le richieste dal ramo della fabbrica:
+   `git fetch origin claude/dreamy-archimedes-hf8w45 cowork-immagini`, poi
+   `git show origin/claude/dreamy-archimedes-hf8w45:kdp-book-factory/config/cowork-aperte.md`
+   e, per ogni richiesta del tuo ruolo, `git show origin/claude/dreamy-archimedes-hf8w45:<percorso>`.
+3. Per consegnare: `git checkout -B cowork-immagini origin/cowork-immagini`,
+   scrivi i file ai loro percorsi, `git add` solo quei file,
+   `git commit -m "Cowork: <nome della richiesta>"`,
+   `git push origin cowork-immagini`.
+4. Se il push è rifiutato perché il ramo è andato avanti:
+   `git pull --rebase origin cowork-immagini` e di nuovo il push. Mai
+   `--force`.
+5. Controlla con `git ls-remote origin cowork-immagini` che il commit sia
+   arrivato, e per le immagini che il peso sul ramo sia quello del file
+   scaricato.
+
+Se la shell non c'è o `add_repo` non dà l'accesso, e hai il browser con GitHub
+già aperto dall'autore: «Add file → Upload files» (o «Create new file» per una
+risposta) nella cartella giusta del ramo `cowork-immagini`, commit
+direttamente sul ramo. Se GitHub propone una pull request, non aprirla. Se non
+riesci a consegnare in nessuno dei due modi, nel giro dopo riprovi: non si
+passa da Drive.
+
+## Giri nel cloud
+
+Un giro lanciato dalla fabbrica, o qualsiasi giro in cui il browser del
+portatile non risponde, è un giro nel cloud.
+
+- Fai solo le richieste che l'indice segna «si fa: nel cloud o col browser».
+- Quelle segnate «solo col browser del portatile», e ogni richiesta con la riga
+  `Serve:`, le salti senza scrivere niente: le riprende l'attività oraria, col
+  portatile collegato.
+- Se un sito risponde con un blocco (HTTP 403, 429, captcha) a una richiesta
+  che si poteva fare nel cloud, la risposta è parziale con il motivo, come
+  sempre.
+
+## Alla fine del giro
+
+Se in questo giro hai consegnato almeno un file sul ramo `cowork-immagini`,
+lancia la routine della fabbrica: `fire_trigger` con trigger_id
+`trig_014uG5o2CZ22kwnBS5FDxty7` e come testo
+`Cowork, ruolo <ruolo>: consegnato <percorsi> sul ramo cowork-immagini.`
+Se non hai consegnato niente, non lanciare niente.
 
 ## Che cosa non si fa
 
-- Nella cartella si creano solo file nuovi: le risposte e le immagini chieste.
-  Non si modificano, rinominano o cancellano file che non hai creato tu, né le
-  richieste, né questo LEGGIMI.
+- Su GitHub si scrivono solo file nuovi, solo sul ramo `cowork-immagini`, solo
+  quelli che una richiesta chiede: le risposte e le immagini. Nessun altro
+  ramo, nessuna pull request, niente da unire, rinominare o cancellare, nessun
+  `--force`, nessuna impostazione del repository. Il codice, i `book.json`, i
+  manoscritti e gli agenti non si toccano.
+- Le richieste, l'indice e questo LEGGIMI non si modificano.
 - Una risposta già scritta non si riscrive. Se alla fabbrica serve altro, apre
   una richiesta nuova.
+- Su Drive non si scrive niente.
 - Su KDP (kdp.amazon.com) si legge e basta: niente titoli nuovi, bozze,
   pubblicazioni o impostazioni cambiate.
 - Negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) si usa
   solo l'accesso che l'autore ha già aperto nel browser: non si inseriscono
   credenziali, non si compra, non si cambiano abbonamenti né impostazioni.
-- Su GitHub si caricano solo le immagini chieste, nel ramo `cowork-immagini`:
-  nessun altro file, nessun altro ramo, nessuna pull request, niente da unire,
-  rinominare o cancellare, nessuna impostazione del repository.
-- Nessuna password, codice, token o cookie nei file.
-
-## Le immagini su GitHub
-
-Le richieste del ruolo `immagini` hanno la riga `Serve: l'accesso a GitHub …`:
-servono il GitHub dell'autore già aperto nel browser (e, se la richiesta lo
-dice, ChatGPT). L'accesso non lo fai tu.
-
-1. Scarica l'immagine a piena risoluzione, così com'è: niente ritagli,
-   compressione o conversione.
-2. Apri `https://github.com/Personal-lHUb/NEXTUP/tree/cowork-immagini` e
-   vai nella cartella del percorso indicato (per esempio
-   `kdp-book-factory/books/<slug>/assets/`). Se il ramo non c'è, crealo dal
-   selettore dei rami partendo dal ramo che la pagina mostra.
-3. «Add file → Upload files», trascina o scegli il file con il nome del
-   percorso, e fai il commit **direttamente sul ramo `cowork-immagini`**, con
-   il messaggio «Cowork: <nome della richiesta>». Se GitHub propone di aprire
-   una pull request, non aprirla.
-4. Controlla che il file sul ramo abbia il peso di quello scaricato.
-
-Se il browser non riesce a caricare il file, la risposta è parziale con il
-motivo: non si passa da Drive.
+- Nessuna password, codice, token o cookie nei file o nei commit.
+- `fire_trigger` si usa solo per la routine della fabbrica, alla fine del
+  giro. Nessun'altra attività si lancia, si crea, si cambia o si cancella.
 
 ## Richieste di seguito e ritirate
 
 `…-2.md`, `…-3.md` sono seguiti di una richiesta già fatta: contengono solo i
 punti rimasti aperti, o la versione corretta di una domanda. Una richiesta che
-sparisce dalla cartella è ritirata: non si risponde a una copia vecchia.
+sparisce dall'indice è applicata o ritirata: non si risponde a una copia
+vecchia.
 
-Se non ci sono richieste del tuo ruolo senza risposta, il giro finisce senza
-scrivere niente.
+Se non ci sono richieste del tuo ruolo da fare, il giro finisce senza scrivere
+niente.
 
 ## I ruoli
 
 Ogni ruolo ha la sua chat nel progetto e la sua attività pianificata, ogni ora.
-Il testo per crearle è in `config__progetto-cowork.md`.
+Il testo per crearle è in `kdp-book-factory/config/progetto-cowork.md`.
 
 ### Ruolo concorrente
 
 Le pagine Amazon dei libri concorrenti: scheda, classifica, descrizione,
-indice, recensioni, copertina in miniatura, vicini di scaffale, prezzi.
+indice, recensioni, copertina in miniatura, vicini di scaffale, prezzi. Lavora
+col browser del portatile.
 
 - Le **recensioni si copiano alla lettera**, con stelle, titolo e data. Non si
   riassumono: la fabbrica cita le parole esatte, e un riassunto non si cita.
@@ -139,7 +180,7 @@ indice, recensioni, copertina in miniatura, vicini di scaffale, prezzi.
 ### Ruolo parole-chiave
 
 Le parole chiave e le categorie: che cosa digitano i lettori e quanto sono
-affollati gli scaffali.
+affollati gli scaffali. Lavora col browser del portatile.
 
 - **Amazon**: l'autocompletamento si legge nella barra di ricerca, reparto
   Books, e si riporta alla lettera; il numero di risultati è quello della
@@ -154,7 +195,8 @@ affollati gli scaffali.
 
 ### Ruolo fonti
 
-Le affermazioni del libro sul mondo, prima della stampa.
+Le affermazioni del libro sul mondo, prima della stampa. Si fa anche nel
+cloud.
 
 - La richiesta cita la frase esatta del libro: si verifica quella.
 - Solo **fonti ufficiali**: il sito dell'ente, della legge, del programma.
@@ -165,7 +207,8 @@ Le affermazioni del libro sul mondo, prima della stampa.
 ### Ruolo regole-kdp
 
 Le regole di KDP che valgono per ogni libro: costi di stampa, limiti, pagine,
-selettore delle categorie.
+selettore delle categorie. Le pagine di aiuto si leggono anche nel cloud; il
+flusso di un titolo nuovo solo col browser del portatile.
 
 - Su KDP **si legge e basta**. Nel flusso di un titolo nuovo si guarda e si
   esce senza salvare: niente bozze.
@@ -177,7 +220,9 @@ selettore delle categorie.
 
 ### Ruolo immagini
 
-Le illustrazioni di copertina e le figure dell'interno, con **ChatGPT**.
+Le illustrazioni di copertina e le figure dell'interno: generate con
+**ChatGPT** (col browser del portatile, richieste con la riga `Serve:`) o già
+generate, da scaricare e consegnare (anche nel cloud).
 
 - Se in ChatGPT c'è il progetto **«NEXTUP — Immagini»**, si lavora lì: una
   chat nuova del progetto per ogni richiesta, chiamata `<slug> — copertina` o
@@ -192,11 +237,15 @@ Le illustrazioni di copertina e le figure dell'interno, con **ChatGPT**.
   pixel di ogni immagine consegnata. Se la richiesta indica un minimo e
   l'immagine è più piccola, si consegna lo stesso e lo si scrive: decide la
   fabbrica.
-- Si generano tante varianti quante la richiesta ne chiede, ognuna caricata sul
-  ramo `cowork-immagini` al percorso indicato.
+- Le immagini si scaricano a piena risoluzione, così come sono: niente
+  ritagli, compressione o conversione. Nel cloud si scaricano con `curl -fL`
+  dall'indirizzo che la richiesta dà.
+- Si generano tante varianti quante la richiesta ne chiede, ognuna consegnata
+  sul ramo `cowork-immagini` al percorso indicato.
 - Le figure dell'interno sono in **scala di grigi**: due elementi non si
   distinguono solo per il colore.
-- Solo immagini generate nella sessione: mai prese dal web, mai persone reali
-  riconoscibili, mai marchi, loghi o personaggi di altri.
+- Solo immagini generate nella sessione o già generate dalla fabbrica: mai
+  prese dal web, mai persone reali riconoscibili, mai marchi, loghi o
+  personaggi di altri.
 - Nella risposta si scrive con quale strumento e modello sono state generate:
   KDP chiede di dichiarare i contenuti generati con l'IA.

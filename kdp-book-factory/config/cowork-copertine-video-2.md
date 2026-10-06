@@ -1,14 +1,20 @@
-# Cowork · regole di copertina da due video
+# Cowork · regole di copertina da due video, seguito
 
 Ruolo: immagini
+Serve: il browser del computer dell'autore (giro di Cowork col portatile collegato, per aprire YouTube)
 
-Richiesta della fabbrica per Cowork, con le regole del LEGGIMI
-(`config__leggimi-cowork.md`, nella stessa cartella).
-Scrivi la risposta come file nuovo nella cartella Drive «NEXTUP — corriere Cowork»,
-con il nome `config__cowork-copertine-video-risposta.md` e la stessa numerazione.
+Richiesta della fabbrica per Cowork, con le regole di `kdp-book-factory/config/leggimi-cowork.md`
+(ramo `claude/dreamy-archimedes-hf8w45` del repository `Personal-lHUb/NEXTUP`).
+Scrivi la risposta come file nuovo `kdp-book-factory/config/cowork-copertine-video-2-risposta.md`
+sul ramo `cowork-immagini`, con la stessa numerazione, poi fai il push.
 Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
 Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
 scrivilo invece di stimare: l'accesso non lo fai tu.
+Prima di cominciare controlla che ci sia il browser del computer dell'autore (giro di Cowork col portatile collegato, per aprire YouTube). Se manca, non
+scrivere nessuna risposta: la richiesta resta aperta e la riprendi al giro dopo.
+
+È il seguito di `cowork-copertine-video.md`: il giro precedente era nel cloud, senza
+browser, e YouTube ha risposto HTTP 429. Le domande sono le stesse, tutte.
 
 Due video spiegano come si fa una copertina di libro che vende. Alla fabbrica
 servono le loro regole, per scriverle nel sistema che genera le copertine di
@@ -58,5 +64,3 @@ Chi usa i risultati: la sessione della fabbrica, che le scrive nelle regole di
 copertina (coverbrief, docs/copertine.md) per tutti i libri, e poi rifà i
 bozzetti di Bills in Order. Dove contraddicono la direzione attuale (semplice,
 pulita, pochi elementi, forte contrasto), l'autore ha deciso che vincono i video.
-
-Stato: applicata il 2026-10-06 — nessuna regola: il giro era nel cloud, senza browser, e YouTube ha risposto HTTP 429. Tutte le domande in cowork-copertine-video-2.md, che si fa solo col browser del portatile (riga Serve).

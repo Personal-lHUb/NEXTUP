@@ -1,10 +1,10 @@
 {
-  "_nota": "Il canale con Cowork. Il tragitto passa dalla cartella Drive del corriere, che Cowork e la fabbrica raggiungono senza passi a mano; GitHub resta l'archivio di richieste e risposte. Le immagini, troppo pesanti per il connettore Drive, Cowork le carica sul ramo `cowork-immagini` di GitHub, e `cowork corriere --dal-ramo` le porta nei libri. Lo stato lo dà `python3 -m kdpfactory cowork stato`, il tragitto `cowork corriere`.",
-  "canale": "drive",
+  "_nota": "Il canale con Cowork, su GitHub. Le richieste stanno sul ramo della fabbrica, con l'indice config/cowork-aperte.md; Cowork consegna risposte e immagini sul ramo `ramo_consegna` con git, e `cowork corriere --dal-ramo` le porta nei libri. Su Drive resta solo il LEGGIMI, che le attività di Cowork leggono per primo. La fabbrica lancia subito i ruoli che possono lavorare nel cloud (`cloud`: true); gli altri lavorano ai loro orari, col browser del portatile, e alla fine lanciano la routine della fabbrica (`routine_fabbrica`).",
+  "canale": "github",
   "repository": "Personal-lHUb/NEXTUP",
   "ramo": "claude/dreamy-archimedes-hf8w45",
   "leggimi": "kdp-book-factory/config/leggimi-cowork.md",
-  "leggimi_versione": 7,
+  "leggimi_versione": 8,
   "progetto": {
     "_nota": "Il progetto di Cowork in Claude Desktop: una chat e un'attività pianificata per ruolo. Il testo da incollare lo scrive `python3 -m kdpfactory cowork progetto` in config/progetto-cowork.md.",
     "nome": "NEXTUP — Cowork",
@@ -23,7 +23,8 @@
         "il mercato di riferimento è amazon.com (Stati Uniti): l'indirizzo di consegna nel browser resta New York 10001; se lo trovi diverso, rimettilo su 10001 prima di leggere prezzi e risultati;",
         "recensioni filtrate per stelle e pagine di KDP chiedono l'accesso: se non c'è, la risposta è parziale."
       ],
-      "trigger": "trig_014b3hSG6mk3HhUAdvoGzvru"
+      "trigger": "trig_014b3hSG6mk3HhUAdvoGzvru",
+      "cloud": false
     },
     "parole-chiave": {
       "chat": "Parole chiave",
@@ -37,7 +38,8 @@
         "il mercato di riferimento è amazon.com (Stati Uniti): l'indirizzo di consegna nel browser resta New York 10001; se lo trovi diverso, rimettilo su 10001 prima di leggere prezzi e risultati;",
         "Helium 10 serve l'accesso dell'autore nel browser; Publisher Rocket è un programma da computer che il browser non raggiunge: se mancano, le loro colonne restano vuote e la risposta è parziale."
       ],
-      "trigger": "trig_01P79QbhLrSsAbTHWj7VEWaV"
+      "trigger": "trig_01P79QbhLrSsAbTHWj7VEWaV",
+      "cloud": false
     },
     "fonti": {
       "chat": "Fonti",
@@ -49,7 +51,8 @@
         "le fonti ufficiali (siti .gov, KDP) si leggono bene con la ricerca e la lettura web; per ogni punto riporta la frase esatta della fonte, l'URL e la data;",
         "se la fonte non dice in modo esplicito quello che il libro afferma, il punto è «non trovato», non «vero»."
       ],
-      "trigger": "trig_012ee8nWVur6uwNRq16Pq63S"
+      "trigger": "trig_012ee8nWVur6uwNRq16Pq63S",
+      "cloud": true
     },
     "regole-kdp": {
       "chat": "Regole KDP",
@@ -61,20 +64,22 @@
         "le pagine di aiuto di KDP si leggono senza accesso; il flusso di un cartaceo nuovo (parole chiave, categorie, numero di pagine) richiede che l'autore abbia già fatto l'accesso a kdp.amazon.com nel browser dell'app: se rimanda a «KDP Sign in», la risposta è parziale e l'accesso non lo fai tu;",
         "dentro KDP esci sempre senza salvare."
       ],
-      "trigger": "trig_01X9WV7QncHa6Ye6uiUNr3Jr"
+      "trigger": "trig_01X9WV7QncHa6Ye6uiUNr3Jr",
+      "cloud": true
     },
     "immagini": {
       "chat": "Immagini",
       "attivita": "NEXTUP — Immagini",
       "ogni": "ora",
       "minuto": 45,
-      "compito": "le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema o già generate da scaricare, caricate sul ramo cowork-immagini di GitHub",
+      "compito": "le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema o già generate da scaricare, consegnate sul ramo cowork-immagini di GitHub",
       "strumento": "ChatGPT",
       "note": [
-        "ChatGPT si usa nel browser dell'app, con l'account dell'autore già aperto: se chiede l'accesso, la risposta è parziale e l'accesso non lo fai tu;",
-        "scarica ogni immagine alla risoluzione piena (non la miniatura dell'anteprima) e caricala su GitHub, repository Personal-lHUb/NEXTUP, ramo cowork-immagini, al percorso che la richiesta indica, con «Add file → Upload files» e il commit direttamente sul ramo: non su Drive, che non porta file così pesanti; serve il GitHub dell'autore già aperto nel browser."
+        "ChatGPT si usa nel browser del portatile, con l'account dell'autore già aperto (richieste con la riga «Serve:»): se chiede l'accesso, la risposta è parziale e l'accesso non lo fai tu;",
+        "scarica ogni immagine alla risoluzione piena (non la miniatura dell'anteprima): nel cloud con curl -fL dall'indirizzo che la richiesta dà; poi consegnala con git sul ramo cowork-immagini, al percorso indicato, nello stesso commit della risposta: non su Drive, che non porta file così pesanti."
       ],
-      "trigger": "trig_01S5VYkF4ziuGsQBZX2pjWnK"
+      "trigger": "trig_01S5VYkF4ziuGsQBZX2pjWnK",
+      "cloud": true
     }
   },
   "corriere": {
@@ -82,5 +87,6 @@
     "cartella": "NEXTUP — corriere Cowork",
     "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N"
   },
-  "ramo_immagini": "cowork-immagini"
+  "ramo_consegna": "cowork-immagini",
+  "routine_fabbrica": "trig_014uG5o2CZ22kwnBS5FDxty7"
 }

@@ -42,7 +42,7 @@ IMMAGINI = (".jpg", ".jpeg", ".png", ".webp")
 #: Il ramo di GitHub dove Cowork consegna le immagini, e dove sta la fabbrica nel
 #: repository: sul ramo i percorsi partono dalla radice, non da kdp-book-factory/.
 RAMO_IMMAGINI = cowork.RAMO_IMMAGINI
-CARTELLA_FABBRICA = "kdp-book-factory"
+CARTELLA_FABBRICA = cowork.CARTELLA_FABBRICA
 #: Le prime righe di un PNG, di un JPEG e di un WebP: il nome non basta a dire
 #: che un file è un'immagine.
 _FIRME = (b"\x89PNG\r\n\x1a\n", b"\xff\xd8\xff")
@@ -130,7 +130,12 @@ class Carico:
         return {"percorso": self.percorso, "nome": self.nome, "sha": self.sha, "vecchio_id": self.vecchio_id}
 
 
-def piano(radice: Path, elenco: list[cowork.Richiesta]) -> dict:
+def su_github(canale: dict | None) -> bool:
+    """Il canale su GitHub: richieste sul ramo della fabbrica, consegne sul ramo di Cowork."""
+    return bool(cowork.ramo_consegna(canale))
+
+
+def piano(radice: Path, elenco: list[cowork.Richiesta], canale: dict | None = None) -> dict:
     """Che cosa fare su Drive in questo giro.
 
     - `carica`: le richieste aperte, il LEGGIMI e il progetto che su Drive non ci
@@ -144,9 +149,11 @@ def piano(radice: Path, elenco: list[cowork.Richiesta]) -> dict:
     registro = leggi_registro(radice)
     caricati = registro["caricati"]
     carica: list[Carico] = []
-    da_mandare = [r.percorso for r in elenco if r.stato == cowork.APERTA] + [
-        p for p in SEMPRE if (radice / p).exists()
-    ]
+    github = su_github(canale)
+    # Sul canale GitHub Cowork legge le richieste dal ramo della fabbrica: su Drive
+    # resta solo quello che le sue attività leggono per primo, il LEGGIMI e il progetto.
+    aperte = [] if github else [r.percorso for r in elenco if r.stato == cowork.APERTA]
+    da_mandare = aperte + [p for p in SEMPRE if (radice / p).exists()]
     for relativo in da_mandare:
         firma = sha((radice / relativo).read_text(encoding="utf-8"))
         prima = caricati.get(relativo) or {}
@@ -159,7 +166,7 @@ def piano(radice: Path, elenco: list[cowork.Richiesta]) -> dict:
     togli = [
         {"percorso": p, "id": dati["id"]}
         for p, dati in caricati.items()
-        if (p in chiuse or p in ritirate) and dati.get("id")
+        if (p in chiuse or p in ritirate or (github and p not in SEMPRE)) and dati.get("id")
     ]
     attesi = [nome_drive(r.risposta) for r in elenco if r.stato == cowork.APERTA]
     return {
@@ -170,7 +177,95 @@ def piano(radice: Path, elenco: list[cowork.Richiesta]) -> dict:
         "immagini": "books__<slug>__assets__<nome>.(jpg|png|webp)",
         "ramo_immagini": RAMO_IMMAGINI,
         "gia_scaricati": registro["scaricati"],
+        "avvia": da_avviare(radice, elenco, canale) if github else [],
     }
+
+
+# --------------------------------------------------------------------------
+# Il canale su GitHub: l'indice delle richieste e l'avvio dei ruoli
+# --------------------------------------------------------------------------
+INDICE = Path(cowork.INDICE)
+
+
+def nel_cloud(richiesta: cowork.Richiesta, canale: dict) -> bool:
+    """Una richiesta che un giro di Cowork nel cloud, senza il browser del portatile, può fare.
+
+    Un giro lanciato dalla fabbrica parte nel cloud: niente Chrome dell'autore.
+    Lo può fare solo un ruolo che lavora su fonti pubbliche (`"cloud": true` in
+    config/cowork.json) e una richiesta che non chiede un accesso (`Serve:`).
+    """
+    dati = (canale.get("ruoli") or {}).get(richiesta.ruolo) or {}
+    return bool(dati.get("cloud")) and not richiesta.serve
+
+
+def da_avviare(radice: Path, elenco: list[cowork.Richiesta], canale: dict) -> list[dict]:
+    """I ruoli da lanciare subito: una richiesta aperta fattibile nel cloud, non ancora lanciata.
+
+    Una richiesta si lancia una volta sola per versione: se resta aperta, la
+    riprende l'attività oraria del ruolo, sul portatile.
+    """
+    lanciate = leggi_registro(radice).get("avviate", {})
+    ruoli = canale.get("ruoli") or {}
+    avvia: dict[str, dict] = {}
+    for r in elenco:
+        if r.stato != cowork.APERTA or not nel_cloud(r, canale):
+            continue
+        firma = sha((radice / r.percorso).read_text(encoding="utf-8"))
+        trigger = (ruoli.get(r.ruolo) or {}).get("trigger", "")
+        if lanciate.get(r.percorso) != firma and trigger:
+            voce = avvia.setdefault(r.ruolo, {"ruolo": r.ruolo, "trigger": trigger, "richieste": []})
+            voce["richieste"].append(r.percorso)
+    return list(avvia.values())
+
+
+def registra_avviato(radice: Path, ruolo: str, elenco: list[cowork.Richiesta], canale: dict) -> list[str]:
+    """Segna come lanciate le richieste aperte di un ruolo, alla versione di adesso."""
+    registro = leggi_registro(radice)
+    lanciate = registro.setdefault("avviate", {})
+    fatte = []
+    for r in elenco:
+        if r.ruolo == ruolo and r.stato == cowork.APERTA and nel_cloud(r, canale):
+            lanciate[r.percorso] = sha((radice / r.percorso).read_text(encoding="utf-8"))
+            fatte.append(r.percorso)
+    salva_registro(radice, registro)
+    return fatte
+
+
+def indice(elenco: list[cowork.Richiesta], canale: dict) -> str:
+    """L'indice delle richieste aperte, che Cowork legge dal ramo della fabbrica.
+
+    Per ogni richiesta: dove leggerla, dove consegnare la risposta, e se si può
+    fare in un giro nel cloud o serve il browser del portatile.
+    """
+    repository = canale.get("repository", "Personal-lHUb/NEXTUP")
+    ramo = canale.get("ramo", "")
+    consegna = canale.get("ramo_consegna", RAMO_IMMAGINI)
+    righe = [
+        "# Richieste aperte per Cowork",
+        "",
+        "<!-- Scritto da `python3 -m kdpfactory cowork corriere` a ogni giro. Non si",
+        "     modifica a mano. -->",
+        "",
+        f"Repository `{repository}`. Le richieste stanno sul ramo `{ramo}`; risposte e",
+        f"immagini si consegnano sul ramo `{consegna}`, al percorso indicato. Le regole",
+        f"sono in `{CARTELLA_FABBRICA}/config/leggimi-cowork.md`.",
+        "",
+    ]
+    aperte = [r for r in elenco if r.stato == cowork.APERTA]
+    if not aperte:
+        righe.append("Nessuna richiesta aperta.")
+    for ruolo in sorted({r.ruolo or "—" for r in aperte}):
+        righe += [f"## Ruolo {ruolo}", ""]
+        for r in (x for x in aperte if (x.ruolo or "—") == ruolo):
+            dove = "nel cloud o col browser" if nel_cloud(r, canale) else "solo col browser del portatile"
+            righe += [
+                f"- `{percorso_sul_ramo(r.percorso)}`",
+                f"  - risposta: `{percorso_sul_ramo(r.risposta)}` sul ramo `{consegna}`",
+                f"  - si fa: {dove}" + (f" — serve {r.serve}" if r.serve else ""),
+                f"  - https://github.com/{repository}/blob/{ramo}/{percorso_sul_ramo(r.percorso)}",
+            ]
+        righe.append("")
+    return "\n".join(righe).rstrip() + "\n"
 
 
 def registra_caricato(radice: Path, relativo: str, drive_id: str) -> None:
@@ -231,13 +326,16 @@ def richiesti(radice: Path, elenco: list[cowork.Richiesta]) -> set[str]:
 
 
 def da_prendere(
-    radice: Path, voci: list[tuple[str, str]], chiesti: set[str]
+    radice: Path, voci: list[tuple[str, str]], chiesti: set[str], risposte: frozenset[str] = frozenset()
 ) -> list[tuple[str, str]]:
     """Fra le voci del ramo (percorso dalla radice, blob), quelle da portare nel libro.
 
-    Passano solo le immagini che una richiesta ha chiesto (`chiesti`), in
-    `books/<slug>/assets/` di un libro che c'è, e solo se quel blob non è già
-    stato preso: un file rimasto uguale sul ramo non si riscrive a ogni giro.
+    Passano due cose sole, come dal corriere:
+    - le immagini che una richiesta ha chiesto (`chiesti`), in
+      `books/<slug>/assets/` di un libro che c'è, se quel blob non è già stato
+      preso: un file rimasto uguale sul ramo non si riscrive a ogni giro;
+    - le risposte alle richieste che esistono (`risposte`), se nel repository
+      non ci sono ancora: una risposta di Cowork non si riscrive mai.
     """
     presi = leggi_registro(radice).get("dal_ramo", {})
     prefisso = CARTELLA_FABBRICA + "/"
@@ -246,7 +344,11 @@ def da_prendere(
         if not percorso.startswith(prefisso):
             continue
         relativo = percorso[len(prefisso):]
-        if relativo in chiesti and immagine_ammessa(radice, relativo) and presi.get(relativo) != blob:
+        if presi.get(relativo) == blob or not _percorso_sicuro(relativo):
+            continue
+        immagine = relativo in chiesti and immagine_ammessa(radice, relativo)
+        risposta = relativo in risposte and not (radice / relativo).exists()
+        if immagine or risposta:
             scelte.append((relativo, blob))
     return scelte
 
@@ -254,11 +356,12 @@ def da_prendere(
 def preleva_dal_ramo(
     radice: Path, elenco: list[cowork.Richiesta], esegui=subprocess.run
 ) -> tuple[list[DalRamo], list[str]]:
-    """Scarica il ramo delle immagini e ne legge quelle nuove. Non scrive nel libro.
+    """Scarica il ramo di Cowork e ne legge immagini e risposte nuove. Non scrive nel libro.
 
-    Restituisce le immagini da portare e gli avvisi (ramo che non c'è ancora,
-    file con un nome da immagine che immagine non è). Il ramo non si unisce
-    mai al lavoro: se ne leggono solo i blob scelti da `da_prendere`.
+    Restituisce i file da portare e gli avvisi (ramo che non c'è ancora, file
+    con un nome da immagine che immagine non è, risposta che non è testo). Il
+    ramo non si unisce mai al lavoro: se ne leggono solo i blob scelti da
+    `da_prendere`.
     """
     def git(*argomenti: str) -> subprocess.CompletedProcess:
         return esegui(["git", "-C", str(radice), *argomenti], capture_output=True)
@@ -266,7 +369,7 @@ def preleva_dal_ramo(
     rif = f"refs/remotes/origin/{RAMO_IMMAGINI}"
     scaricato = git("fetch", "-q", "origin", f"+refs/heads/{RAMO_IMMAGINI}:{rif}")
     if scaricato.returncode != 0:
-        return [], [f"il ramo {RAMO_IMMAGINI} non c'è ancora: Cowork non ha caricato immagini"]
+        return [], [f"il ramo {RAMO_IMMAGINI} non c'è ancora: Cowork non ha consegnato niente"]
     albero = git("ls-tree", "-r", "--full-tree", rif)
     voci = []
     for riga in albero.stdout.decode("utf-8", "replace").splitlines():
@@ -274,14 +377,21 @@ def preleva_dal_ramo(
         campi = testa.split()
         if len(campi) == 3 and campi[1] == "blob":
             voci.append((percorso, campi[2]))
-    immagini, avvisi = [], []
-    for relativo, blob in da_prendere(radice, voci, richiesti(radice, elenco)):
+    risposte = frozenset(r.risposta for r in elenco)
+    presi, avvisi = [], []
+    for relativo, blob in da_prendere(radice, voci, richiesti(radice, elenco), risposte):
         contenuto = git("cat-file", "blob", blob).stdout
-        if not e_un_immagine(contenuto):
+        if relativo in risposte:
+            try:
+                contenuto.decode("utf-8")
+            except UnicodeDecodeError:
+                avvisi.append(f"{relativo}: sul ramo non è testo, resta lì")
+                continue
+        elif not e_un_immagine(contenuto):
             avvisi.append(f"{relativo}: sul ramo non è un'immagine, resta lì")
             continue
-        immagini.append(DalRamo(relativo, blob, contenuto))
-    return immagini, avvisi
+        presi.append(DalRamo(relativo, blob, contenuto))
+    return presi, avvisi
 
 
 def registra_dal_ramo(radice: Path, relativo: str, blob: str) -> None:

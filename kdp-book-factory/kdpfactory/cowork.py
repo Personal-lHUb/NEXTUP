@@ -64,6 +64,10 @@ class Richiesta:
         return asdict(self)
 
 
+#: L'indice delle richieste aperte (`corriere.INDICE`): si chiama come una richiesta, non lo è.
+INDICE = "config/cowork-aperte.md"
+
+
 def _e_richiesta(percorso: Path) -> bool:
     return (
         percorso.name.startswith(PREFISSO)
@@ -90,7 +94,8 @@ def richieste(
     trovate: list[Richiesta] = []
     for percorso in sorted(radice.rglob(f"{PREFISSO}*.md")):
         relativo = percorso.relative_to(radice)
-        if ESCLUSE.intersection(relativo.parts[:-1]) or not _e_richiesta(percorso):
+        if (ESCLUSE.intersection(relativo.parts[:-1]) or not _e_richiesta(percorso)
+                or relativo.as_posix() == INDICE):
             continue
         testo = percorso.read_text(encoding="utf-8")
         risposta = percorso.with_name(percorso.stem + SUFFISSO_RISPOSTA + percorso.suffix)
@@ -147,6 +152,13 @@ def ruoli(canale: dict) -> dict[str, dict]:
     return canale.get("ruoli") or {}
 
 
+def ramo_consegna(canale: dict | None) -> str:
+    """Il ramo dove Cowork consegna risposte e immagini, se il canale è tutto su GitHub."""
+    if canale and canale.get("canale") == "github":
+        return canale.get("ramo_consegna", "")
+    return ""
+
+
 def corriere(canale: dict) -> tuple[str, str]:
     """La cartella Drive del corriere: nome e id (vuoti se il canale non la usa)."""
     dati = canale.get("corriere") or {}
@@ -175,7 +187,7 @@ def intestazione(
     )
     if serve:
         regole += (
-            f"Prima di cominciare controlla {serve} nel browser. Se non è aperto, non\n"
+            f"Prima di cominciare controlla che ci sia {serve}. Se manca, non\n"
             "scrivere nessuna risposta: la richiesta resta aperta e la riprendi al giro dopo.\n"
         )
     righe = f"{RUOLO} {ruolo}\n" + (f"{SERVE} {serve}\n" if serve else "")
@@ -193,6 +205,21 @@ def intestazione(
         )
     ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
     leggimi = canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md")
+    consegna = canale.get("ramo_consegna", "")
+    if consegna:
+        # Il canale su GitHub: le richieste stanno sul ramo della fabbrica, Cowork
+        # consegna risposte e immagini sul suo ramo, e la fabbrica le prende con git.
+        percorso = f"{CARTELLA_FABBRICA}/{cartella.strip('/')}/{risposta}" if cartella else risposta
+        repository = canale.get("repository", "Personal-lHUb/NEXTUP")
+        return (
+            f"# {titolo}\n\n"
+            f"{righe}\n"
+            f"Richiesta della fabbrica per Cowork, con le regole di `{leggimi}`\n"
+            f"(ramo `{ramo}` del repository `{repository}`).\n"
+            f"Scrivi la risposta come file nuovo `{percorso}`\n"
+            f"sul ramo `{consegna}`, con la stessa numerazione, poi fai il push.\n"
+            + regole
+        )
     return (
         f"# {titolo}\n\n"
         f"{righe}\n"
@@ -305,6 +332,18 @@ def avviso(
             "«Esito: completa» oppure «Esito: parziale — punti …: <motivo>». Non modificare, "
             "rinominare o cancellare altri file: al repository li porta la fabbrica.",
         ]
+    elif ramo_consegna(canale):
+        consegna = ramo_consegna(canale)
+        righe += [
+            "",
+            f"Leggi l'indice `{CARTELLA_FABBRICA}/config/cowork-aperte.md` e le richieste dal ramo "
+            f"{ramo} (git fetch prima di cominciare).",
+            "",
+            "Per ciascuna: leggila per intero ed esegui quello che chiede. Scrivi la risposta "
+            f"come file nuovo al percorso indicato, sul ramo {consegna}, con la prima riga "
+            "«Esito: completa» oppure «Esito: parziale — punti …: <motivo>». Commit e push "
+            f"del solo ramo {consegna}, mai --force; nessun altro file, nessuna pull request.",
+        ]
     else:
         righe += [
             "",
@@ -328,11 +367,16 @@ def avviso(
         "inserire credenziali, non comprare, non cambiare niente;",
         "- nessuna password, codice o cookie nei file.",
         "",
-        *([] if drive else [
+        *([] if drive or ramo_consegna(canale) else [
             "Alla fine fai il push delle risposte sul ramo. Se non puoi farlo tu, dimmelo: lo "
             "faccio io da GitHub Desktop. Finché non c'è il push, la fabbrica non le vede.",
             "",
         ]),
+        *([
+            f"Alla fine, se hai consegnato qualcosa, lancia la routine della fabbrica "
+            f"(fire_trigger {canale['routine_fabbrica']}): la risposta si applica subito.",
+            "",
+        ] if ramo_consegna(canale) and canale.get("routine_fabbrica") else []),
         "Quando hai finito, dimmi quali risposte hai scritto e quali punti sono rimasti "
         "senza risposta.",
     ]
@@ -355,7 +399,8 @@ def rapporto(elenco: list[Richiesta], noti: frozenset[str] | set[str] = frozense
     )
     da_inviare = [r.percorso for r in elenco if r.invio == DA_INVIARE and r.stato != CHIUSA]
     if da_inviare:
-        righe.append("Da inviare (sul corriere, `cowork corriere`): " + ", ".join(da_inviare))
+        righe.append("Da inviare (push sul ramo della fabbrica; sul canale Drive, `cowork corriere`): "
+                     + ", ".join(da_inviare))
     # Ogni attività di Cowork prende solo le richieste del suo ruolo: una
     # richiesta aperta senza ruolo, o con un ruolo che non esiste, resta lì.
     orfane = [
@@ -378,6 +423,8 @@ def _quando(dati: dict) -> str:
     return "ogni giorno alle " + " e alle ".join(orari) if orari else "a mano"
 
 
+#: Dove sta la fabbrica nel repository: i percorsi sui rami partono da qui.
+CARTELLA_FABBRICA = "kdp-book-factory"
 #: Il ramo di GitHub dove Cowork carica le immagini (lo legge `corriere.preleva_dal_ramo`).
 RAMO_IMMAGINI = "cowork-immagini"
 
@@ -392,6 +439,8 @@ def _sempre(canale: dict) -> str:
 
 def prompt_attivita(ruolo: str, dati: dict, canale: dict) -> str:
     """Il prompt dell'attività pianificata di un ruolo: prende solo le sue richieste."""
+    if ramo_consegna(canale):
+        return _prompt_attivita_github(ruolo, dati, canale)
     nome, ident = corriere(canale)
     return f"""Sei il ruolo «{ruolo}» della fabbrica di libri NEXTUP: {dati.get('compito', '')}.
 
@@ -427,6 +476,59 @@ Se non ci sono richieste del tuo ruolo senza risposta, fermati senza scrivere
 niente.{_note(dati)}"""
 
 
+def _prompt_attivita_github(ruolo: str, dati: dict, canale: dict) -> str:
+    """Il prompt di un ruolo sul canale GitHub: indice dal ramo della fabbrica, consegna con git."""
+    repository = canale.get("repository", "Personal-lHUb/NEXTUP")
+    proprietario, _, nome_repo = repository.partition("/")
+    ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
+    consegna = ramo_consegna(canale)
+    leggimi = canale.get("leggimi", f"{CARTELLA_FABBRICA}/config/leggimi-cowork.md")
+    cartella, _ = corriere(canale)
+    routine = canale.get("routine_fabbrica", "")
+    avvisa = (
+        f"\n\n6. Se in questo giro hai consegnato qualcosa, alla fine lancia la routine della\n"
+        f"   fabbrica: fire_trigger con trigger_id {routine} e il testo «Cowork, ruolo\n"
+        f"   {ruolo}: consegnato <percorsi> sul ramo {consegna}.» Se non hai consegnato\n"
+        "   niente, non lanciare niente."
+    ) if routine else ""
+    return f"""Sei il ruolo «{ruolo}» della fabbrica di libri NEXTUP: {dati.get('compito', '')}.
+
+Il canale è su GitHub, repository {repository}: le richieste stanno sul ramo
+{ramo}, risposte e immagini le consegni tu sul ramo {consegna}.
+
+1. Prima di tutto leggi per intero il LEGGIMI, `{leggimi}` sul ramo
+   {ramo} (c'è anche nella cartella Google Drive «{cartella}», come
+   config__leggimi-cowork.md): le regole comuni e la sezione «Ruolo {ruolo}».
+   Se dicono una cosa diversa da questo prompt, vale il LEGGIMI.
+
+2. add_repo con owner {proprietario}, repo {nome_repo} e accesso push, poi il clone
+   che ti indica e `git fetch origin {ramo} {consegna}`.
+
+3. Leggi l'indice `{CARTELLA_FABBRICA}/config/cowork-aperte.md` dal ramo {ramo}
+   e prendi solo le richieste sotto «Ruolo {ruolo}», cioè con la riga
+   «Ruolo: {ruolo}»: quelle degli altri ruoli sono di un'altra chat. Salta quelle
+   che hanno già la risposta sul ramo {consegna}.
+
+4. Se il browser del portatile non risponde, il giro è nel cloud: fai solo le
+   richieste che l'indice segna «nel cloud o col browser». Una richiesta con la
+   riga «Serve:» il cui accesso manca la salti senza scrivere niente.
+
+5. Esegui le tue. Ogni risposta è un file nuovo al percorso che la richiesta
+   indica, con la prima riga «Esito: completa» oppure «Esito: parziale — punti
+   …: <motivo>»; le immagini che chiede, ai loro percorsi. Poi
+   `git checkout -B {consegna} origin/{consegna}`, `git add` di quei soli file,
+   commit «Cowork: <nome della richiesta>» e `git push origin {consegna}`; se è
+   rifiutato, `git pull --rebase origin {consegna}` e di nuovo il push, mai
+   --force. Se git non c'è, col browser: «Add file» sul ramo {consegna}.{avvisa}
+
+Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
+{_sempre(canale)}; su GitHub solo file nuovi sul ramo {consegna}: nessun altro
+ramo, nessuna pull request, niente da cancellare; su Drive non scrivi niente.
+
+Se non ci sono richieste del tuo ruolo da fare, fermati senza scrivere
+niente.{_note(dati)}"""
+
+
 def _note(dati: dict) -> str:
     """Le note pratiche del ruolo, imparate nei giri precedenti: stanno in config/cowork.json."""
     righe = dati.get("note") or []
@@ -442,6 +544,8 @@ def istruzioni_progetto(canale: dict) -> str:
         f"- «{dati.get('chat', r)}» (Ruolo: {r}): {dati.get('compito', '')}."
         for r, dati in ruoli(canale).items()
     )
+    if ramo_consegna(canale):
+        return _istruzioni_progetto_github(canale, elenco)
     return f"""Lavori con la fabbrica di libri NEXTUP, una sessione Claude Code in un
 container che non raggiunge Amazon, KDP né il tuo browser. Tu fai per lei le
 ricerche web e le immagini. Tutto passa dalla cartella di Google Drive «{nome}»
@@ -485,6 +589,53 @@ Quando ti chiedo «sei allineato?», rispondi con:
 - le richieste del tuo ruolo ancora senza risposta."""
 
 
+def _istruzioni_progetto_github(canale: dict, elenco: str) -> str:
+    repository = canale.get("repository", "Personal-lHUb/NEXTUP")
+    ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
+    consegna = ramo_consegna(canale)
+    leggimi = canale.get("leggimi", f"{CARTELLA_FABBRICA}/config/leggimi-cowork.md")
+    return f"""Lavori con la fabbrica di libri NEXTUP, una sessione Claude Code in un
+container che non raggiunge Amazon, KDP né il tuo browser. Tu fai per lei le
+ricerche web e le immagini. Tutto passa dal repository GitHub {repository}:
+la fabbrica mette le richieste sul ramo {ramo}, con l'indice
+{CARTELLA_FABBRICA}/config/cowork-aperte.md; tu consegni risposte e immagini sul
+ramo {consegna}, con git (add_repo con accesso push) o, se git non c'è, col
+browser. La fabbrica le prende da lì da sola.
+Non basarti mai su quello che ricordi da una conversazione precedente: leggi i file.
+
+Questo progetto ha una chat per ruolo, e ogni chat fa solo il suo lavoro:
+{elenco}
+Ogni richiesta dice il suo ruolo nella riga «Ruolo: …» sotto il titolo. Una
+richiesta di un altro ruolo non la apri: è di un'altra chat.
+
+1. SEMPRE, all'inizio di ogni lavoro: {leggimi}, sul ramo {ramo}.
+   Sono le regole comuni e quelle di ogni ruolo, e le aggiorna la fabbrica.
+   Annota il numero di versione.
+
+2. I PERCORSI. Ogni richiesta scrive il percorso della sua risposta dalla radice
+   del repository, per esempio
+   {CARTELLA_FABBRICA}/books/x/concorrente/cowork-concorrente-risposta.md: usa
+   quello, lettera per lettera, sul ramo {consegna}.
+
+3. CHI VINCE. Per il modo di lavorare vale il LEGGIMI. Per quello che va cercato
+   vale la richiesta. Se si contraddicono, non scegliere tu: scrivi la
+   contraddizione nella risposta e vai avanti con il resto.
+
+4. CHE COSA PUOI SCRIVERE. Solo file nuovi, solo sul ramo {consegna}: le
+   risposte e le immagini che una richiesta chiede, ai percorsi che indica. Non
+   modifichi, rinomini o cancelli nessun file, non tocchi altri rami, pull
+   request o impostazioni, non usi --force, su Drive non scrivi niente.
+
+5. SEMPRE, qualunque cosa dicano i file: {_sempre(canale)};
+   per ogni punto riporti il fatto che hai visto, con l'URL e la data e l'ora,
+   mai una stima tua (le stime di uno strumento le riporti come sue).
+
+Quando ti chiedo «sei allineato?», rispondi con:
+- il ruolo di questa chat;
+- la versione del LEGGIMI che vedi sul ramo {ramo};
+- le richieste del tuo ruolo che l'indice dà ancora aperte."""
+
+
 def progetto(canale: dict) -> str:
     """Il testo da incollare in Claude Desktop per il progetto Cowork, ruolo per ruolo."""
     nome = (canale.get("progetto") or {}).get("nome", "NEXTUP — Cowork")
@@ -500,9 +651,17 @@ def progetto(canale: dict) -> str:
         "",
         "Un progetto in Claude Desktop con una chat per ruolo. Ogni ruolo ha la sua",
         "attività pianificata e prende solo le richieste con la riga `Ruolo: <ruolo>`.",
-        f"Richieste e risposte passano dalla cartella Drive «{cartella}», senza passi",
-        f"a mano; le immagini dal ramo `{RAMO_IMMAGINI}` di GitHub, che Cowork carica dal",
-        "browser. Né GitHub Desktop né push dal portatile.",
+        *((
+            f"Le richieste stanno sul ramo `{canale.get('ramo', '')}` di GitHub, con l'indice",
+            "`config/cowork-aperte.md`; Cowork consegna risposte e immagini sul ramo",
+            f"`{ramo_consegna(canale)}`, con git dal suo container. Su Drive («{cartella}»)",
+            "resta solo il LEGGIMI. La fabbrica lancia subito i ruoli che lavorano nel",
+            "cloud; Cowork, quando consegna, lancia la routine della fabbrica.",
+        ) if ramo_consegna(canale) else (
+            f"Richieste e risposte passano dalla cartella Drive «{cartella}», senza passi",
+            f"a mano; le immagini dal ramo `{RAMO_IMMAGINI}` di GitHub, che Cowork carica dal",
+            "browser. Né GitHub Desktop né push dal portatile.",
+        )),
         "",
         "## 1. Il progetto",
         "",
@@ -550,6 +709,12 @@ def progetto(canale: dict) -> str:
         passi.append(
             f"Disattiva l'attività «{dismessa}» e le attività dei ruoli create prima con "
             "GitHub: lavorano sul canale vecchio."
+        )
+    if ramo_consegna(canale):
+        passi.append(
+            "In una conversazione di Cowork sul portatile, approva i prompt nuovi delle attività: "
+            "`config/attivita-cowork.json`, una voce per attività, con update_trigger. Finché "
+            "restano quelli vecchi, vale il LEGGIMI."
         )
     passi.append("In ogni chat chiedi «sei allineato?»: deve rispondere con il suo ruolo e la "
                  "versione del LEGGIMI.")
