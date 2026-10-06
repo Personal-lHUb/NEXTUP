@@ -48,6 +48,9 @@ CARTELLA_FABBRICA = cowork.CARTELLA_FABBRICA
 _FIRME = (b"\x89PNG\r\n\x1a\n", b"\xff\xd8\xff")
 #: File che Cowork legge a ogni giro e che quindi viaggiano sempre: le regole e il progetto.
 SEMPRE = ("config/leggimi-cowork.md", "config/progetto-cowork.md", "config/attivita-cowork.json")
+#: Sul canale GitHub su Drive va solo il LEGGIMI: il prompt delle attività dice di
+#: leggerlo per primo, e lui manda al ramo, dove stanno anche progetto e attività.
+SEMPRE_GITHUB = ("config/leggimi-cowork.md",)
 _SICURO = re.compile(r"^[A-Za-z0-9._-]+$")
 
 
@@ -151,9 +154,10 @@ def piano(radice: Path, elenco: list[cowork.Richiesta], canale: dict | None = No
     carica: list[Carico] = []
     github = su_github(canale)
     # Sul canale GitHub Cowork legge le richieste dal ramo della fabbrica: su Drive
-    # resta solo quello che le sue attività leggono per primo, il LEGGIMI e il progetto.
+    # resta solo quello che le sue attività leggono per primo, il LEGGIMI.
     aperte = [] if github else [r.percorso for r in elenco if r.stato == cowork.APERTA]
-    da_mandare = aperte + [p for p in SEMPRE if (radice / p).exists()]
+    sempre = SEMPRE_GITHUB if github else SEMPRE
+    da_mandare = aperte + [p for p in sempre if (radice / p).exists()]
     for relativo in da_mandare:
         firma = sha((radice / relativo).read_text(encoding="utf-8"))
         prima = caricati.get(relativo) or {}
@@ -166,7 +170,7 @@ def piano(radice: Path, elenco: list[cowork.Richiesta], canale: dict | None = No
     togli = [
         {"percorso": p, "id": dati["id"]}
         for p, dati in caricati.items()
-        if (p in chiuse or p in ritirate or (github and p not in SEMPRE)) and dati.get("id")
+        if (p in chiuse or p in ritirate or (github and p not in sempre)) and dati.get("id")
     ]
     attesi = [nome_drive(r.risposta) for r in elenco if r.stato == cowork.APERTA]
     return {

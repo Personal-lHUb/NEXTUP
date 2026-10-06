@@ -12,8 +12,9 @@ più nella cartella Drive: stanno nel repository `Personal-lHUb/NEXTUP`, ramo
 `kdp-book-factory/config/cowork-aperte.md`. Risposte e immagini si consegnano
 sul ramo `cowork-immagini`, con git (sezione «Git, passo per passo»). Su Drive
 resta solo questo LEGGIMI, perché il prompt delle attività dice di leggerlo
-per primo. Se il prompt della tua attività parla ancora di file da cercare su
-Drive, di base64 o di caricamenti sulla cartella, vale questo file.
+per primo: gli altri file della cartella sono vecchi, non aprirli. Se il
+prompt della tua attività parla ancora di file da cercare su Drive, di base64
+o di caricamenti sulla cartella, vale questo file.
 
 Due cose nuove insieme:
 
@@ -42,7 +43,8 @@ progetto ChatGPT «NEXTUP — Immagini». Versione 5: la riga `Serve:`.
   `kdp-book-factory/books/x/concorrente/cowork-concorrente.md` è
   `kdp-book-factory/books/x/concorrente/cowork-concorrente-risposta.md`.
 - **Drive** («NEXTUP — corriere Cowork», id `1yprHuxzFDGj12k8clTp0othzTXjiyn5N`)
-  porta solo questo LEGGIMI e il testo del progetto. Non ci si scrive niente.
+  porta solo questo LEGGIMI. Non ci si scrive niente. Il testo del progetto e le
+  attività stanno sul ramo della fabbrica, in `kdp-book-factory/config/`.
 
 ## Che cosa c'è da fare
 

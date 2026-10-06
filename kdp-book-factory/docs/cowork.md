@@ -15,7 +15,7 @@ applica, segna «Stato: applicata»      ◀─     ramo cowork-immagini        
 assets/ del libro                      ◀─       …-risposta.md, immagini                risposte e immagini
 riparte subito                         ◀─     (fire_trigger della routine)       ◀─   avvisa la fabbrica
 
-Google Drive «NEXTUP — corriere Cowork»: solo il LEGGIMI e il testo del progetto
+Google Drive «NEXTUP — corriere Cowork»: solo il LEGGIMI
 ```
 
 - La **richiesta** sta nel repository, nella cartella a cui serve:
@@ -105,11 +105,11 @@ Ogni giro di Cowork costa: si lancia solo quello che c'è da fare.
 `python3 -m kdpfactory cowork corriere` dice che cosa fare in questo giro,
 senza andare in rete, e scrive l'indice `config/cowork-aperte.md`:
 
-- **carica** e **togli**: su Drive resta solo il LEGGIMI, con il testo del
-  progetto. Drive non riscrive il contenuto di un file: se ne crea uno nuovo e
-  il vecchio (`vecchio_id`) va nel cestino, poi
-  `cowork corriere --caricato <percorso> --id <id>`. Le copie delle richieste
-  caricate quando il canale era Drive si cestinano e si registra
+- **carica** e **togli**: su Drive resta solo il LEGGIMI; progetto e attività
+  Cowork li legge dal ramo. Drive non riscrive il contenuto di un file: se ne
+  crea uno nuovo e il vecchio (`vecchio_id`) va nel cestino, poi
+  `cowork corriere --caricato <percorso> --id <id>`. Le copie caricate quando il
+  canale era Drive — richieste, progetto, attività — si cestinano e si registra
   `--tolto <percorso>`.
 - **avvia**: i ruoli da lanciare subito, qui sopra.
 

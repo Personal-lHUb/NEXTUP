@@ -229,11 +229,14 @@ class TestCanaleGithub(Base):
         self.assertNotIn("Drive", testo)
 
     def test_su_drive_resta_solo_il_leggimi(self):
+        scrivi(self.radice, "config/progetto-cowork.md", "# progetto\n")
         corriere.registra_caricato(self.radice, self.richiesta, "id-1")
+        corriere.registra_caricato(self.radice, "config/progetto-cowork.md", "id-3")
         piano = corriere.piano(self.radice, self.elenco(), CANALE_GITHUB)
         self.assertEqual([c["percorso"] for c in piano["carica"]], ["config/leggimi-cowork.md"])
-        # la copia di una richiesta ancora aperta, caricata quando il canale era Drive, si toglie
-        self.assertEqual(piano["togli"], [{"percorso": self.richiesta, "id": "id-1"}])
+        # le copie caricate quando il canale era Drive — richieste ancora aperte, progetto — si tolgono
+        self.assertEqual(piano["togli"], [{"percorso": self.richiesta, "id": "id-1"},
+                                          {"percorso": "config/progetto-cowork.md", "id": "id-3"}])
 
     def test_si_lancia_solo_quello_che_si_fa_nel_cloud_e_una_volta_sola(self):
         avvia = corriere.da_avviare(self.radice, self.elenco(), CANALE_GITHUB)
