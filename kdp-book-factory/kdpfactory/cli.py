@@ -11,7 +11,7 @@ import json
 import math
 import os
 import sys
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from . import (
@@ -431,6 +431,21 @@ def cmd_copertina(args) -> int:
     project, spec = open_project(args)
     if args.scegli:
         return _scegli_copertina(project, args)
+    if args.preferisci or args.scarta:
+        dividi = lambda testo: [k.strip() for k in testo.split(",") if k.strip()]  # noqa: E731
+        try:
+            direzione = coverbrief.registra_direzione(
+                dividi(args.preferisci), dividi(args.scarta), args.perche,
+                quando=datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            )
+        except ValueError as errore:
+            raise SystemExit(str(errore)) from errore
+        print("Direzione delle copertine: preferiti "
+              + (", ".join(p["trattamento"] for p in direzione["preferiti"]) or "nessuno")
+              + " · scartati "
+              + (", ".join(s["trattamento"] for s in direzione["scartati"]) or "nessuno"))
+        print(f"Registrata in {coverbrief.DIREZIONE_APPRESA}: vale per i prompt da qui in poi.")
+        return 0
     state = project.load_state()
     pages = (state.get("build") or {}).get("pagine") or spec.target_pages
     meta_path = project.build_dir / "metadata.json"
@@ -1590,6 +1605,10 @@ def build_parser() -> argparse.ArgumentParser:
                    help="genera le varianti con Higgsfield dal prompt del sistema")
     p.add_argument("--varianti", type=int, default=richiesteimmagini.VARIANTI,
                    help="quante varianti generare con --genera")
+    p.add_argument("--preferisci", default="",
+                   help="trattamenti scelti fra i bozzetti, separati da virgola (luce,serigrafia…)")
+    p.add_argument("--scarta", default="", help="trattamenti scartati fra i bozzetti")
+    p.add_argument("--perche", default="", help="il motivo della scelta, con le parole dell'autore")
     p.set_defaults(func=cmd_copertina)
 
     p = sub.add_parser(

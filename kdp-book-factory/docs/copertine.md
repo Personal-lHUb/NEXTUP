@@ -104,6 +104,35 @@ Per scriverli a mano basta metterli in `metadata.json`:
 La linea enigmistica li costruisce da sé, dai numeri veri del libro
 (`cover_copy()` in `kdpfactory/puzzle/book.py`).
 
+## La direzione visiva, e come la impara il sistema
+
+L'autore vuole copertine **semplici, pulite, poco articolate, con un forte
+impatto visivo dato da un forte contrasto** (6 ottobre 2026). Il sistema lo
+mette in ogni prompt (`coverbrief.DIREZIONE_VISIVA`): un soggetto solo, al
+massimo tre elementi, forme grandi che reggono in miniatura, niente dettagli
+minuti né scene piene di oggetti; un soggetto chiaro su un fondo scuro, campi
+di colore quasi piatti, molto spazio vuoto.
+
+Come rendere quel soggetto lo decide l'autore guardando dei **bozzetti**:
+
+1. `coverbrief.prompt_bozza(spec, trattamento, …)` scrive un prompt corto per
+   ogni trattamento di `coverbrief.TRATTAMENTI` (luce, silhouette, serigrafia,
+   campo diviso, carta, dettaglio, linea, fotografia). Cambia solo il
+   trattamento: oggetto, palette e direzione restano fermi, così le differenze
+   si vedono.
+2. I bozzetti si generano con Higgsfield a 1K, qualità media (0,5 crediti
+   l'uno), e la traccia resta in `build/copertina-bozze.json`.
+3. L'autore dice quali gli piacciono e quali no, e la sessione lo registra:
+
+   ```bash
+   python3 -m kdpfactory copertina <slug> --preferisci luce,serigrafia --scarta linea --perche "…"
+   ```
+
+   Le scelte vanno in `config/copertine-direzione.json`, che vale per tutta la
+   fabbrica. Da lì in poi le varianti delle copertine vere prendono i
+   trattamenti preferiti, uno per variante, e i bozzetti dei libri successivi
+   non ripropongono quelli scartati.
+
 ## L'illustrazione
 
 L'immagine di copertina è **disegnata dalla pipeline**, non cercata. Sta in

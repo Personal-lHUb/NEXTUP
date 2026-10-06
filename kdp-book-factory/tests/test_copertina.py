@@ -725,7 +725,7 @@ class TestBriefDiCopertina(unittest.TestCase):
         """
         casa = self.brief(metadata={"categories": [
             "Books > Business & Money > Personal Finance > Budgeting & Money Management"]})
-        self.assertIn("Show the household situation", casa)
+        self.assertIn("Show the one object that stands for a household's bills", casa)
         self.assertNotIn("professional world", casa)
         impresa = self.brief(metadata={"categories": ["Books > Business & Money > Marketing"]})
         self.assertIn("professional world", impresa)

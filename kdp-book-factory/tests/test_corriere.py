@@ -237,7 +237,8 @@ class TestImmagini(unittest.TestCase):
         self.assertTrue(prompt.startswith("Front cover illustration for a paperback book: "
                                           "«Bills in Order — A Household Guide»"))
         self.assertIn("variant 1 of 3", prompt)
-        self.assertIn("kitchen table", prompt)          # la rappresentazione della categoria
+        self.assertIn("paper envelope", prompt)         # la rappresentazione della categoria
+        self.assertIn("Direction: Keep it simple and visually clean", prompt)
         self.assertIn("portrait, 2:3", prompt)
         self.assertIn("Absolutely no text", prompt)
         self.assertIn("1838 x 2775 px", prompt)
@@ -247,6 +248,32 @@ class TestImmagini(unittest.TestCase):
         for parola in ("spine", "barcode", "bleed", "wrap", "CMYK"):
             self.assertNotIn(parola, prompt)
         self.assertNotIn("#", prompt.splitlines()[0])  # testo semplice, nessun titolo markdown
+
+    def test_le_scelte_fra_i_bozzetti_entrano_nei_prompt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            percorso = Path(tmp) / "direzione.json"
+            coverbrief.registra_direzione(["luce", "serigrafia"], ["linea"], "più semplice",
+                                          percorso=percorso)
+            direzione = coverbrief.direzione_appresa(percorso)
+            self.assertEqual(coverbrief.trattamenti_preferiti(direzione), ["luce", "serigrafia"])
+            self.assertNotIn("linea", coverbrief.trattamenti_da_provare(direzione))
+            # cambiare idea: una scartata torna fra le preferite, e viceversa
+            coverbrief.registra_direzione(["linea"], ["luce"], percorso=percorso)
+            direzione = coverbrief.direzione_appresa(percorso)
+            self.assertEqual(coverbrief.trattamenti_preferiti(direzione), ["linea", "serigrafia"])
+            self.assertEqual([s["trattamento"] for s in direzione["scartati"]], ["luce"])
+            with self.assertRaises(ValueError):
+                coverbrief.registra_direzione(["acquerello"], [], percorso=percorso)
+
+    def test_il_bozzetto_cambia_solo_il_trattamento(self):
+        luce = coverbrief.prompt_bozza(self.spec(), "luce", pages=192)
+        carta = coverbrief.prompt_bozza(self.spec(), "carta", pages=192)
+        self.assertIn("Subject: a single sealed paper envelope.", luce)
+        self.assertIn(coverbrief.DIREZIONE_VISIVA, luce)
+        self.assertIn("No text, letters or numbers anywhere", luce)
+        diverse = [a for a, b in zip(luce.splitlines(), carta.splitlines(), strict=True) if a != b]
+        self.assertEqual(len(diverse), 1)
+        self.assertTrue(diverse[0].startswith("Treatment:"))
 
     def test_i_colori_si_dicono_a_parole(self):
         self.assertEqual(coverbrief.nome_colore("#0E1320"), "deep navy (#0E1320)")

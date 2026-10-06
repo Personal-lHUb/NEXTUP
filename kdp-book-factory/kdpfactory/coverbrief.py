@@ -25,7 +25,9 @@ rimossa da KDP, e il libro con lei.
 
 from __future__ import annotations
 
+import json
 import math
+from pathlib import Path
 
 from . import coverart, coverdesign, coverimage, kdpspecs
 from .models import BookSpec
@@ -74,10 +76,10 @@ RAPPRESENTAZIONE: dict[str, str] = {
         "change. Not an abstract sunrise: the concrete thing the reader is stuck on."
     ),
     "casa-finanze": (
-        "Show the household situation the book is about: a real home and the "
-        "moment of dealing with the bills — a kitchen table in the evening, a few "
-        "envelopes, a lamp — not an office, a chart or a pile of coins. Paper stays "
-        "blank: a calendar or a bill with readable dates and amounts is text."
+        "Show the one object that stands for a household's bills — a paper envelope, "
+        "or a small neat stack of them — as a single, clearly drawn subject: not a "
+        "whole room, not a busy kitchen table, not an office, a chart or a pile of "
+        "coins. Paper stays blank: a bill with readable dates and amounts is text."
     ),
     "business": (
         "Show the professional world of the book: the setting, the person, the "
@@ -109,6 +111,104 @@ RAPPRESENTAZIONE: dict[str, str] = {
     ),
 }
 
+#: La direzione visiva di ogni copertina, chiesta dall'autore il 6 ottobre 2026:
+#: semplice, pulita, poco articolata, con un impatto che viene dal contrasto. Vale
+#: per ogni categoria e sta in ogni prompt, prima dello stile.
+DIREZIONE_VISIVA = (
+    "Keep it simple and visually clean: one subject, at most three elements in the "
+    "whole image, bold simple shapes that still read at thumbnail size, no small "
+    "details, no busy textures, no scene full of objects. The impact comes from strong "
+    "contrast: a bright subject on a deep, dark field, large calm areas of nearly flat "
+    "colour, generous empty space."
+)
+
+#: Che cosa disegnare nei bozzetti, quando la rappresentazione della categoria è
+#: una scena: l'oggetto solo, che il trattamento poi riduce all'essenziale.
+OGGETTO: dict[str, str] = {
+    "casa-finanze": "a single sealed paper envelope",
+}
+
+#: I modi di ridurre l'oggetto all'essenziale, da provare nei bozzetti. Quelli che
+#: l'autore sceglie finiscono in `config/copertine-direzione.json` e da lì nei
+#: prompt delle copertine vere: è così che il sistema impara il gusto dell'autore.
+TRATTAMENTI: dict[str, str] = {
+    "luce": "the subject caught in one hard pool of light on an almost black field; "
+            "everything else falls into shadow",
+    "silhouette": "the subject as a bold flat silhouette in the accent colour on the dark "
+                  "field, no inner detail",
+    "serigrafia": "a flat graphic poster look, like a screen print: two or three solid "
+                  "colours, crisp edges, no gradients",
+    "campo-diviso": "the field split into two solid colour blocks, dark and accent, with the "
+                    "subject sitting across the split",
+    "carta": "cut-paper style: a few layered paper shapes with soft shadows, very few pieces",
+    "dettaglio": "a tight close-up of one part of the subject filling the lower half; the "
+                 "rest of the frame is a calm dark field",
+    "linea": "a single continuous line drawing in the accent colour on the dark field",
+    "fotografia": "a still-life photograph of the subject alone, studio-lit, on a seamless "
+                  "dark backdrop",
+}
+
+#: Dove sta quello che l'autore ha scelto fra i bozzetti.
+DIREZIONE_APPRESA = Path(__file__).resolve().parent.parent / "config" / "copertine-direzione.json"
+
+
+def direzione_appresa(percorso: Path | None = None) -> dict:
+    """I trattamenti preferiti e scartati dall'autore, se ha già scelto dei bozzetti."""
+    percorso = percorso or DIREZIONE_APPRESA
+    try:
+        return json.loads(percorso.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def registra_direzione(
+    preferiti: list[str], scartati: list[str], perche: str = "", percorso: Path | None = None,
+    quando: str = "",
+) -> dict:
+    """Le scelte dell'autore fra i bozzetti: entrano nei prompt delle copertine vere.
+
+    Un trattamento scelto passa in testa ai preferiti; uno scartato esce dai
+    preferiti ed entra fra gli scartati. Le scelte più recenti vincono.
+    """
+    sconosciuti = [k for k in [*preferiti, *scartati] if k not in TRATTAMENTI]
+    if sconosciuti:
+        raise ValueError(f"Trattamenti sconosciuti: {', '.join(sconosciuti)} "
+                         f"(validi: {', '.join(TRATTAMENTI)})")
+    percorso = percorso or DIREZIONE_APPRESA
+    direzione = direzione_appresa(percorso) or {
+        "_nota": "Le scelte dell'autore fra i bozzetti di copertina (coverbrief.TRATTAMENTI). "
+                 "I preferiti, in quest'ordine, diventano il trattamento delle varianti; "
+                 "gli scartati non si propongono più nei bozzetti.",
+        "principio": DIREZIONE_VISIVA,
+        "preferiti": [],
+        "scartati": [],
+    }
+    tenuti = [p for p in direzione.get("preferiti", [])
+              if p.get("trattamento") not in preferiti and p.get("trattamento") not in scartati]
+    direzione["preferiti"] = [{"trattamento": k, "perche": perche, "quando": quando}
+                              for k in preferiti] + tenuti
+    via = [s for s in direzione.get("scartati", [])
+           if s.get("trattamento") not in scartati and s.get("trattamento") not in preferiti]
+    direzione["scartati"] = [{"trattamento": k, "perche": perche, "quando": quando}
+                             for k in scartati] + via
+    percorso.parent.mkdir(parents=True, exist_ok=True)
+    percorso.write_text(json.dumps(direzione, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return direzione
+
+
+def trattamenti_da_provare(direzione: dict | None = None) -> list[str]:
+    """I trattamenti per i bozzetti: tutti, tranne quelli che l'autore ha scartato."""
+    direzione = direzione_appresa() if direzione is None else direzione
+    scartati = {s.get("trattamento") for s in direzione.get("scartati", [])}
+    return [k for k in TRATTAMENTI if k not in scartati]
+
+
+def trattamenti_preferiti(direzione: dict | None = None) -> list[str]:
+    direzione = direzione_appresa() if direzione is None else direzione
+    return [p["trattamento"] for p in direzione.get("preferiti", [])
+            if p.get("trattamento") in TRATTAMENTI]
+
+
 #: lo stile contemporaneo che regge meglio in quella categoria
 STILE: dict[str, str] = {
     "enigmi": "Clean, high-contrast retail design: the grid is the hero.",
@@ -117,7 +217,8 @@ STILE: dict[str, str] = {
     "planner": "Premium graphic design or clean minimalist.",
     "journal": "Premium editorial or sophisticated photography.",
     "self-help": "Premium editorial or bold typography with one strong object.",
-    "casa-finanze": "Warm editorial illustration or natural-light photography of a real home.",
+    "casa-finanze": "Clean minimalist or premium graphic design: one everyday object, calm flat "
+                    "colour, strong contrast — warm, never corporate.",
     "business": "Premium graphic design or sophisticated photography.",
     "cucina": "Sophisticated photography — food sells on appetite.",
     "viaggi": "Cinematic or sophisticated photography.",
@@ -299,10 +400,18 @@ def prompt_da_incollare(
         righe.append(f"What the book does: {_prima_frase(spec.promise or spec.topic)}")
     if copy.hook:
         righe.append(f"The question it answers, for the mood only (never write it): «{copy.hook}»")
+    # Il trattamento: quello che l'autore ha scelto fra i bozzetti, uno per
+    # variante a giro; senza scelte resta lo stile della categoria.
+    preferiti = trattamenti_preferiti()
+    trattamento = (
+        f" Treatment: {TRATTAMENTI[preferiti[(variante - 1) % len(preferiti)]]}."
+        if preferiti else ""
+    )
     righe += [
         "",
-        f"Style: {STILE[chiave]} Art-directed and current, like a cover a major publisher "
-        "would release this year: not a stock template, not a generic AI image.",
+        f"Direction: {DIREZIONE_VISIVA}",
+        f"Style: {STILE[chiave]}{trattamento} Art-directed and current, like a cover a major "
+        "publisher would release this year: not a stock template, not a generic AI image.",
         f"Include {distintivo}",
         f"Colour: a {nome_colore(palette.background)} background, {nome_colore(palette.deep)} "
         f"for depth and a single accent of {nome_colore(palette.accent)}. Strong contrast, so "
@@ -336,6 +445,42 @@ def prompt_da_incollare(
     else:
         righe += ["", "Portrait 2:3, at the highest resolution available, full bleed."]
     return "\n".join(righe)
+
+
+def prompt_bozza(
+    spec: BookSpec,
+    trattamento: str,
+    *,
+    pages: int,
+    metadata: dict | None = None,
+    copy: coverdesign.CoverCopy | None = None,
+    genre: str = "",
+) -> str:
+    """Il prompt di un bozzetto: l'oggetto del libro ridotto all'essenziale in un trattamento.
+
+    I bozzetti servono a scegliere una direzione, non a stampare: costano poco,
+    sono corti, e cambiano una cosa sola — il trattamento — tenendo fermi
+    oggetto, palette e direzione visiva. Quelli che l'autore sceglie diventano
+    il trattamento delle copertine vere (`config/copertine-direzione.json`).
+    """
+    metadata = metadata or {}
+    genre = genre or ("enigmi" if spec.genre == "puzzle" else spec.genre)
+    copy = copy or coverdesign.derive_copy(spec, metadata, genre, pages=pages)
+    palette = coverdesign.pick_palette(spec, genre)
+    nicchia = ", ".join(metadata.get("categories") or spec.categories) or spec.topic
+    chiave = _chiave(spec, genre, nicchia)
+    oggetto = OGGETTO.get(chiave, "the one object that best stands for the book's subject")
+    return "\n".join([
+        f"Rough cover sketch for a paperback book: «{spec.title}», about "
+        f"{_prima_frase(spec.promise or spec.topic).rstrip('.').lower()}.",
+        f"Subject: {oggetto}.",
+        f"Treatment: {TRATTAMENTI[trattamento]}.",
+        f"Direction: {DIREZIONE_VISIVA}",
+        f"Colours: a {nome_colore(palette.background)} field and {nome_colore(palette.accent)} "
+        "for the subject; nothing else.",
+        "Leave the upper third empty: the title goes there. No text, letters or numbers "
+        "anywhere. Portrait 2:3.",
+    ])
 
 
 def brief(
@@ -492,6 +637,8 @@ image generated without direction. The visual should explain the book, not
 decorate it.
 
 ## Visual style
+
+{DIREZIONE_VISIVA}
 
 Pick the ONE contemporary approach that fits this niche and commit to it:
 premium editorial · modern illustrated · cinematic · clean minimalist · bold
