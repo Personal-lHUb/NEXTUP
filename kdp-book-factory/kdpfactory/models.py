@@ -52,7 +52,9 @@ class BookSpec:
     #: illustrazione della prima: auto = scelta dal contenuto, nessuna = solo testo
     cover_art: str = "auto"              # auto | nessuna | treno | lente | elenco | orologio | scala | porta
     body_font: str = "serif"             # serif | sans
-    body_font_size: float = 11.0
+    #: 11,5 su 15,5: il Garamond ha l'occhio piccolo, e a 11 punti si legge come
+    #: un Times a 10. È il corpo dei libri di saggistica in 6x9 degli editori.
+    body_font_size: float = 11.5
     leading: float = 15.5                # interlinea in punti
     chapters: int = 0                    # 0 = calcolato dal planner
     #: 1 = solo capitoli nell'indice, 2 = anche le sezioni; `None` = lo decide

@@ -31,7 +31,11 @@ python3 -m kdpfactory specs --trim 6x9 --pages 160 --paper cream
 ## Font
 
 La pipeline cerca i file `.ttf` in quest'ordine: `fonts/` del progetto,
-`$KDPFACTORY_FONTS_DIR`, font di sistema (Liberation, DejaVu, FreeFont).
+`fonts/ofl/` (i font che il progetto porta con sé: EB Garamond per l'interno,
+Barlow Condensed per i titoli di copertina), `$KDPFACTORY_FONTS_DIR`, font di
+sistema (Liberation, DejaVu, FreeFont). Nell'opera a testo pieno titoli e
+testo stanno nella stessa famiglia; il medium-content usa per i titoli la
+famiglia opposta ([`standard-editoriale.md`](standard-editoriale.md)).
 
 Per usare un font tuo, copia in `fonts/` i quattro file con questi nomi:
 

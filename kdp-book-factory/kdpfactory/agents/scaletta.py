@@ -28,6 +28,7 @@ import re
 import unicodedata
 
 from .. import coverdesign, kdpspecs
+from ..i18n import part_label
 from ..models import BookSpec, Outline
 from .base import Agent, AgentContext, AgentFinding, AgentResult, register
 
@@ -791,14 +792,31 @@ def _controlla_righe_indice(outline: Outline, spec: BookSpec) -> list[AgentFindi
 
     from ..typography import register_family
 
+    # Le voci si misurano come le stampa `typeset`: il capitolo con il suo numero
+    # davanti, la parte con la sua etichetta, e nell'opera a testo pieno tutto
+    # nella famiglia del testo.
     corpo_testo = register_family(spec.body_font)
-    corpo_parti = register_family("sans" if spec.body_font == "serif" else "serif")
+    corpo_parti = (
+        register_family("sans" if spec.body_font == "serif" else "serif")
+        if spec.is_medium_content
+        else corpo_testo
+    )
     giustezza = kdpspecs.page_geometry(spec.trim, spec.target_pages).text_width - RISERVA_NUMERO_PT
-    voci = [(c.number, c.title, corpo_testo) for c in outline.chapters]
-    voci += [(p.first_chapter, p.title, corpo_parti) for p in outline.parts]
+    voci = []
+    numero_stampato = 0
+    for c in outline.chapters:
+        if c.role == "chapter":
+            numero_stampato += 1
+            voci.append((c.number, c.title, f"{numero_stampato}\u2002{c.title}", corpo_testo))
+        else:
+            voci.append((c.number, c.title, c.title, corpo_testo))
+    parti = sorted(outline.parts, key=lambda p: p.first_chapter)
+    for indice_parte, parte in enumerate(parti, start=1):
+        voce = f"{part_label(spec.language, indice_parte)} — {parte.title}"
+        voci.append((parte.first_chapter, parte.title, voce, corpo_parti))
     rilievi = []
-    for numero, titolo, font in voci:
-        larghezza = pdfmetrics.stringWidth(titolo, font, spec.body_font_size)
+    for numero, titolo, voce, font in voci:
+        larghezza = pdfmetrics.stringWidth(voce, font, spec.body_font_size)
         if larghezza <= giustezza:
             continue
         rilievi.append(

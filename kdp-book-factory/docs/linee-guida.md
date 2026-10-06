@@ -289,6 +289,11 @@ capitolo sul suo titolo.
 - **Non tocca** l'ordine, il numero dei capitoli, i confini delle parti, il
   contenuto. Consegna un blocco JSON con gli stessi numeri; chi lo applica
   rilancia il revisore.
+- **Ogni titolo stampato passa da lui.** Un capitolo aggiunto o rinominato dopo
+  l'indice torna all'agente prima della stampa: `qa` confronta
+  `manuale/indice.json` con i titoli stampati e lo dà come errore (`INDICE`),
+  insieme ai rimandi interni che citano un titolo vecchio
+  ([`standard-editoriale.md`](standard-editoriale.md), «L'indice, nei due sensi»).
 
 Profondità del sommario: nei full-content solo parti e capitoli; nei
 medium-content anche le sezioni, perché lì le sezioni sono le schede che si
@@ -319,6 +324,7 @@ che il conteggio pagine comincia a sbagliare.
 | **Chi** | il motore di impaginazione; `impaginazione` misura il PDF |
 | **Esce** | `build/<slug>-interno.pdf`, la copertina del motore, l'EPUB, `build/vetrina.md` |
 | **Comando** | `python3 -m kdpfactory build <slug>` poi `review <slug> --agents impaginazione` |
+| **Standard** | quello di un editore di saggistica: [`standard-editoriale.md`](standard-editoriale.md) |
 | **Cancello** | pagine dentro l'intervallo dell'obiettivo (±5%) |
 
 Si impagina **prima** della revisione per due ragioni: l'impaginazione dice se
@@ -431,8 +437,12 @@ rappresentazione riconoscibile, un solo fattore distintivo, niente testo
 nell'immagine, misure dell'ultima impaginazione, formula della categoria,
 nessuna rivendicazione vietata, nessun nome altrui.
 
-**2. L'immagine.** Il brief si incolla così com'è nel generatore (ChatGPT,
-Gemini) o si passa a un grafico. Torna **solo l'illustrazione della prima**,
+**2. L'immagine.** In ChatGPT si incolla il testo di `build/copertina-prompt.txt`,
+che lo stesso comando stampa nel terminale: il prompt della prima variante, poi
+il messaggio per le altre, poi i nomi con cui salvarle. È il brief ridotto a
+quello che decide l'immagine; il brief completo, con dorso e specifiche di
+stampa, resta il riferimento dell'agente e di un grafico. Torna **solo
+l'illustrazione della prima**,
 senza testo, almeno 1800 × 2700 px per un 6x9: si salva in
 `books/<slug>/assets/copertina.jpg`. Il testo lo compone il motore, sempre, in
 vettoriale: è l'unico modo di misurarlo.
@@ -459,7 +469,8 @@ python3 -m kdpfactory review <slug> --agents impaginazione,copertina
 python3 -m kdpfactory diagnostica
 ```
 
-Il cancello è **zero errori** del controllo qualità. Poi
+Il cancello è **zero errori** del controllo qualità, che comprende la
+corrispondenza fra indice e capitoli nei due sensi (`INDICE`). Poi
 [`checklist-kdp.md`](checklist-kdp.md): caricare l'interno, la copertina
 generata **dopo** l'impaginazione finale, compilare la scheda da
 `kdp-listing.md`, dichiarare l'uso dell'IA, controllare l'anteprima di stampa,
@@ -559,3 +570,7 @@ Ogni regola qui sopra viene da un difetto trovato su un libro vero.
 | da quattro giorni nessuna risposta di Cowork: il push da GitHub Desktop lo faceva l'autore, e quando non c'era il canale restava fermo | canale Cowork | il corriere su Drive, che Cowork e la fabbrica raggiungono da soli; GitHub resta l'archivio |
 | un libro in automatico si sarebbe fermato sei volte ad aspettare l'autore | tutte | silenzio-assenso a 24 ore per le decisioni dell'autore; la pubblicazione resta fuori |
 | quattro risposte su sei parziali per accessi non aperti nel browser di Cowork (ChatGPT, KDP, Helium 10, Amazon): un seguito uguale sarebbe tornato parziale a ogni giro | canale Cowork | la riga `Serve:` nel seguito: Cowork aspetta l'accesso senza rispondere, `produzione` dice che lo deve aprire l'autore |
+| il testo in un clone del Times, i titoli in un clone dell'Arial, la pagina 1 sull'occhiello: il libro sembrava fatto in casa | 3, motore | una famiglia da libro sola (EB Garamond) nel testo pieno, numerazione dalla prima pagina del testo ([`standard-editoriale.md`](standard-editoriale.md)) |
+| 32 pagine su 192 finivano a metà gabbia: un titoletto si portava dietro il capoverso intero | 3, `impaginazione` | il titoletto chiede due righe sotto di sé, non il capoverso; le pagine corte si contano a ogni build |
+| un capitolo aggiunto dopo l'indice non era mai passato dall'agente `indice`, e introduzione e conclusione lo citavano per nome | 1 e 8, `indice` e `qa` | `qa` confronta i titoli decisi con quelli stampati e i rimandi interni con l'indice |
+| il prompt di copertina da incollare era il brief intero, con dorso, codice a barre e specifiche di stampa | 7, `copertina` | per ChatGPT un testo da incollare con solo quello che decide l'immagine; il brief completo resta il riferimento |

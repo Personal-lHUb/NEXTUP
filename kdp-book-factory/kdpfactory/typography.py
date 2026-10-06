@@ -177,7 +177,9 @@ def enable_hyphenation(language: str) -> bool:
         return False
     from reportlab import rl_config
 
-    lang_map = {"it": "it_IT", "en": "en_GB"}
+    # Inglese americano: i libri vanno su amazon.com, e la divisione delle parole
+    # americana è diversa da quella britannica (knowl-edge contro know-ledge).
+    lang_map = {"it": "it_IT", "en": "en_US"}
     rl_config.hyphenationLang = lang_map.get(language, "it_IT")
     rl_config.hyphenationMinWordLength = 6
     return True

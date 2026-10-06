@@ -1,39 +1,139 @@
 {
   "chapters": [
-    {"number": 1, "title": "Why Careful People Still Pay Bills Late"},
-    {"number": 2, "title": "Paid, Due or Missing Without Relying on Memory"},
-    {"number": 3, "title": "Tracking Down Every Bill Your Household Pays"},
-    {"number": 4, "title": "Reading a Household Bill Without Guessing"},
-    {"number": 5, "title": "What a Credit Card Statement Is Telling You"},
-    {"number": 6, "title": "Recording the Details That Matter for Each Bill"},
-    {"number": 7, "title": "Picking a Notebook, Spreadsheet or Your Bank's Tools"},
-    {"number": 8, "title": "A Safe Spot for Notices, Statements and Logins"},
-    {"number": 9, "title": "Lining Up Due Dates With Your Paydays"},
-    {"number": 10, "title": "Biweekly Paychecks and Income That Won't Sit Still"},
-    {"number": 11, "title": "Choosing What Goes on Autopay and What Doesn't"},
-    {"number": 12, "title": "Staying in Control of the Account Behind Autopay"},
-    {"number": 13, "title": "The Bills You Forget Until They Arrive"},
-    {"number": 14, "title": "Setting a Little Aside for the Irregular Bills"},
-    {"number": 15, "title": "A Short Weekly Check of What Cleared and What's Due"},
-    {"number": 16, "title": "A Monthly Review of Statements and What's Left Over"},
-    {"number": 17, "title": "The First Days After a Missed Payment"},
-    {"number": 18, "title": "Fee Waivers and What Reaches Your Credit Report"},
-    {"number": 19, "title": "What Each Bill Puts at Stake When Money Runs Short"},
-    {"number": 20, "title": "Asking for More Time Before the Due Date"},
-    {"number": 21, "title": "Finding Utility Assistance, Counselors and Legal Aid"},
-    {"number": 22, "title": "Comparing What Payday and Other Quick Loans Cost"},
-    {"number": 23, "title": "Spotting a Fake Bill Before You Pay It"},
-    {"number": 24, "title": "Sharing the Bills With a Partner or a Teenager"},
-    {"number": 25, "title": "Taking Over the Bills for an Aging Parent"},
-    {"number": 26, "title": "A Yearly Review to Get Ready for Next Year's Bills"}
+    {
+      "number": 1,
+      "title": "Why Careful People Still Pay Bills Late"
+    },
+    {
+      "number": 2,
+      "title": "Paid, Due or Missing Without Relying on Memory"
+    },
+    {
+      "number": 3,
+      "title": "Tracking Down Every Bill Your Household Pays"
+    },
+    {
+      "number": 4,
+      "title": "Reading a Household Bill Without Guessing"
+    },
+    {
+      "number": 5,
+      "title": "What a Credit Card Statement Is Telling You"
+    },
+    {
+      "number": 6,
+      "title": "Recording the Details That Matter for Each Bill"
+    },
+    {
+      "number": 7,
+      "title": "Picking a Notebook, Spreadsheet or Your Bank's Tools"
+    },
+    {
+      "number": 8,
+      "title": "A Safe Spot for Notices, Statements and Logins"
+    },
+    {
+      "number": 9,
+      "title": "Lining Up Due Dates With Your Paydays"
+    },
+    {
+      "number": 10,
+      "title": "Biweekly Paychecks and Income That Won't Sit Still"
+    },
+    {
+      "number": 11,
+      "title": "Choosing What Goes on Autopay and What Doesn't"
+    },
+    {
+      "number": 12,
+      "title": "Staying in Control of the Account Behind Autopay"
+    },
+    {
+      "number": 13,
+      "title": "The Bills You Forget Until They Arrive"
+    },
+    {
+      "number": 14,
+      "title": "Setting a Little Aside for the Irregular Bills"
+    },
+    {
+      "number": 15,
+      "title": "A Short Weekly Check of What Cleared and What's Due"
+    },
+    {
+      "number": 16,
+      "title": "A Monthly Review of Statements and What's Left Over"
+    },
+    {
+      "number": 17,
+      "title": "The First Days After a Missed Payment"
+    },
+    {
+      "number": 18,
+      "title": "Fee Waivers and What Reaches Your Credit Report"
+    },
+    {
+      "number": 19,
+      "title": "What Each Bill Puts at Stake When Money Runs Short"
+    },
+    {
+      "number": 20,
+      "title": "Asking for More Time Before the Due Date"
+    },
+    {
+      "number": 21,
+      "title": "Finding Utility Assistance, Counselors and Legal Aid"
+    },
+    {
+      "number": 22,
+      "title": "Comparing What Payday and Other Quick Loans Cost"
+    },
+    {
+      "number": 23,
+      "title": "Catching Up on Several Past-Due Bills"
+    },
+    {
+      "number": 24,
+      "title": "Spotting a Fake Bill Before You Pay It"
+    },
+    {
+      "number": 25,
+      "title": "Sharing the Bills With a Partner or a Teenager"
+    },
+    {
+      "number": 26,
+      "title": "Taking Over the Bills for an Aging Parent"
+    },
+    {
+      "number": 27,
+      "title": "A Yearly Review to Get Ready for Next Year's Bills"
+    }
   ],
   "parts": [
-    {"first_chapter": 1, "title": "Why Bills Slip Through"},
-    {"first_chapter": 3, "title": "Every Bill in One Place"},
-    {"first_chapter": 9, "title": "Paydays, Due Dates and Autopay"},
-    {"first_chapter": 13, "title": "Irregular Bills and Regular Checks"},
-    {"first_chapter": 17, "title": "Falling Behind and Catching Up"},
-    {"first_chapter": 23, "title": "Safe, Shared and Carried Forward"}
+    {
+      "first_chapter": 1,
+      "title": "Why Bills Slip Through"
+    },
+    {
+      "first_chapter": 3,
+      "title": "Every Bill in One Place"
+    },
+    {
+      "first_chapter": 9,
+      "title": "Paydays, Due Dates and Autopay"
+    },
+    {
+      "first_chapter": 13,
+      "title": "Irregular Bills and Regular Checks"
+    },
+    {
+      "first_chapter": 17,
+      "title": "Falling Behind and Catching Up"
+    },
+    {
+      "first_chapter": 24,
+      "title": "Safe, Shared and Carried Forward"
+    }
   ],
-  "notes": "Titoli che dicono che cosa il lettore fa o ottiene, fra 37 e 52 caratteri, senza due punti né seconde metà; 12 capitoli e 3 parti invariati."
+  "notes": "Titoli che dicono che cosa il lettore fa o ottiene, fra 37 e 52 caratteri, senza due punti né seconde metà; il capitolo 23, arrivato dopo, diventa «Catching Up on Several Past-Due Bills» e chiude la Parte V realizzandone la seconda metà del titolo, senza toccare i vicini (il 17 è un solo pagamento mancato, il 20 una sola telefonata prima della scadenza); le sei parti restano, l'ultima ora si apre al 24."
 }

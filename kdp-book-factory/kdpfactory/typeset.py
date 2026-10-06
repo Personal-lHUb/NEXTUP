@@ -5,7 +5,11 @@ Scelte tipografiche:
 - ogni capitolo si apre su pagina dispari, con eventuale pagina bianca prima;
 - testatine: titolo del libro sulle pari, titolo del capitolo sulle dispari,
   soppresse sulle pagine di apertura e sulle bianche;
-- numerazione araba assoluta, assente nelle pagine preliminari;
+- numerazione araba che parte da 1 sulla prima pagina del testo, come nei libri
+  di un editore (Chicago Manual of Style, 1.5): le pagine preliminari contano
+  ma non portano il numero, e l'indice stampa i numeri che il lettore vede;
+- nell'opera a testo pieno titoli e testo nella stessa famiglia, aperture di
+  capitolo calate di un quinto della gabbia e prime parole in maiuscoletto;
 - font TrueType incorporati (requisito KDP).
 """
 
@@ -20,6 +24,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import (
     ActionFlowable,
     BaseDocTemplate,
+    CondPageBreak,
     Flowable,
     Frame,
     HRFlowable,
@@ -204,6 +209,19 @@ class InteriorDoc(BaseDocTemplate):
         # Con le parti, i capitoli scendono di un livello nell'indice.
         self.in_parts = False
         self.current_part_label = ""
+        # La prima pagina del testo: da lì parte la numerazione stampata.
+        self.first_body_page: int | None = None
+
+    def folio(self, page: int) -> int:
+        """Il numero stampato di una pagina fisica: 1 sulla prima pagina del testo."""
+        if self.first_body_page is None:
+            return page
+        return page - self.first_body_page + 1
+
+    @property
+    def folio_offset(self) -> int:
+        """Quante pagine fisiche precedono la pagina 1 stampata."""
+        return (self.first_body_page or 1) - 1
 
     def handle_documentBegin(self):  # noqa: D102
         self._reset_state()
@@ -220,16 +238,24 @@ class InteriorDoc(BaseDocTemplate):
         if isinstance(flowable, Paragraph):
             style_name = getattr(flowable.style, "name", "")
             livello = 1 if self.in_parts else 0
+            if style_name in ("PartTitle", "ChapterTitle") and self.first_body_page is None:
+                self.first_body_page = self.page
             if style_name == "PartTitle":
                 voce = f"{self.current_part_label} — {flowable.getPlainText()}"
-                self.notify("TOCEntry", (0, voce, self.page))
+                self.notify("TOCEntry", (0, voce, self.folio(self.page)))
                 self.part_pages[voce] = self.page
             elif style_name == "ChapterTitle":
                 text = flowable.getPlainText()
-                self.notify("TOCEntry", (livello, text, self.page))
+                # Nell'indice il capitolo porta il suo numero, come sulla pagina
+                # d'apertura: è così che il lettore lo cerca.
+                numero = getattr(flowable, "numero_capitolo", None)
+                voce = f"{numero}\u2002{text}" if numero else text
+                self.notify("TOCEntry", (livello, voce, self.folio(self.page)))
                 self.chapter_pages[text] = self.page
             elif style_name == "Heading2" and self.spec.profondita_indice >= 2:
-                self.notify("TOCEntry", (livello + 1, flowable.getPlainText(), self.page))
+                self.notify(
+                    "TOCEntry", (livello + 1, flowable.getPlainText(), self.folio(self.page))
+                )
 
     # -- testatine e folio ------------------------------------------------
     def _decorate(self, canvas, doc):
@@ -271,7 +297,7 @@ class InteriorDoc(BaseDocTemplate):
         canvas.setFont(style.fontName, style.fontSize)
         canvas.setFillColor(style.textColor)
         canvas.drawCentredString(
-            geo.page_width / 2.0, geo.bottom_margin - 0.36 * INCH, str(self.page)
+            geo.page_width / 2.0, geo.bottom_margin - 0.36 * INCH, str(self.folio(self.page))
         )
         canvas.restoreState()
 
@@ -281,7 +307,20 @@ class InteriorDoc(BaseDocTemplate):
 # --------------------------------------------------------------------------
 def build_styles(spec: BookSpec) -> dict[str, ParagraphStyle]:
     body_font = register_family(spec.body_font)
-    display_font = register_family("sans" if spec.body_font == "serif" else "serif")
+    if spec.is_medium_content:
+        # Le schede di un medium-content vivono di contrasto: i titoli stanno in
+        # un'altra famiglia, e si vedono da lontano.
+        display_font = register_family("sans" if spec.body_font == "serif" else "serif")
+        heading_font = display_font
+        heading_size = spec.body_font_size + 1.5
+    else:
+        # Un'opera a testo pieno ha una famiglia sola, come i libri di un editore:
+        # i titoli si distinguono per corpo e peso, non per un secondo carattere.
+        # Il bastone sotto il testo graziato era il segno più visibile del libro
+        # fatto in casa (rodaggio household-bills).
+        display_font = body_font
+        heading_font = f"{body_font}-Bold"
+        heading_size = spec.body_font_size + 1
     size = spec.body_font_size
     lead = spec.leading
     ink = colors.HexColor("#111111")
@@ -337,8 +376,8 @@ def build_styles(spec: BookSpec) -> dict[str, ParagraphStyle]:
         ),
         "h2": style(
             "Heading2",
-            fontName=display_font,
-            fontSize=size + 1.5,
+            fontName=heading_font,
+            fontSize=heading_size,
             leading=lead + 2,
             spaceBefore=lead * 1.2,
             spaceAfter=lead * 0.45,
@@ -493,6 +532,106 @@ def _figura_flowables(
     return [KeepTogether(pezzi)]
 
 
+#: Quanto scende l'apertura di capitolo, in frazione della gabbia. Nei libri di
+#: un editore il testo del capitolo comincia intorno a un terzo della pagina: il
+#: bianco sopra il titolo dice «qui comincia una cosa nuova» prima di ogni parola.
+CALATA_TESTO_PIENO = 0.2
+CALATA_MEDIUM_IN = 0.55
+
+#: Le prime parole del capitolo in maiuscoletto: al massimo tante, e mai oltre
+#: la prima pausa della frase.
+PAROLE_MAIUSCOLETTO = 3
+_PAUSA = (",", ".", ";", ":", "!", "?", "—")
+#: caratteri che `mdlite.inline_to_markup` trasforma: se cadono nell'attacco, il
+#: capoverso resta senza maiuscoletto (le virgolette diritte si accoppiano sul
+#: capoverso intero, e tagliarlo a metà le girerebbe al contrario)
+_MARKUP_INLINE = set('*_`[]<>&"\\')
+
+
+def _calata(spec: BookSpec, geo: kdpspecs.PageGeometry) -> float:
+    """Il bianco sopra il numero del capitolo.
+
+    Il medium-content resta compatto: le sue pagine sono schede, e una scheda
+    che comincia a metà pagina ne perde metà.
+    """
+    if spec.is_medium_content:
+        return CALATA_MEDIUM_IN * INCH
+    return geo.text_height * CALATA_TESTO_PIENO
+
+
+def _maiuscoletto(testo: str, corpo: float) -> str | None:
+    """Il primo capoverso con le prime parole in maiuscoletto, come markup.
+
+    ReportLab non ha il maiuscoletto vero: lo si imita con il maiuscolo a corpo
+    ridotto, che sulle tre parole d'attacco è quello che fa anche la tipografia
+    editoriale senza font dedicati. Se le prime parole contengono markup
+    (corsivo, codice, link) il capoverso resta com'è: spezzarlo a metà di un tag
+    darebbe un PDF sbagliato, e un attacco senza maiuscoletto non è un difetto.
+    """
+    parole = testo.split(" ")
+    attacco: list[str] = []
+    for parola in parole:
+        if not parola:
+            break
+        attacco.append(parola)
+        if len(attacco) >= PAROLE_MAIUSCOLETTO or parola.endswith(_PAUSA):
+            break
+    if not attacco or len(attacco) == len(parole):
+        return None
+    testa = " ".join(attacco)
+    if any(c in _MARKUP_INLINE for c in testa):
+        return None
+    resto = testo[len(testa):]
+    return f'<font size="{corpo * 0.84:.1f}">{testa.upper()}</font>' + mdlite.inline_to_markup(resto)
+
+
+#: La coda di un capoverso legata con spazi unificatori: almeno tanti caratteri,
+#: al massimo tante parole. Un'ultima riga di una parola sola («it.») è il buco
+#: che il compositore di un editore toglie per primo.
+CODA_MIN_CARATTERI = 10
+CODA_MAX_PAROLE = 3
+
+
+def _lega_coda(testo: str) -> str:
+    """Le ultime parole del capoverso unite da spazi unificatori, così l'ultima
+    riga non resta mai con una parola corta da sola.
+
+    ReportLab tratta lo spazio unificatore come parte della parola: le parole
+    legate vanno a capo insieme. Un capoverso di poche parole resta com'è.
+    """
+    parole = testo.rstrip().split(" ")
+    if len(parole) <= CODA_MAX_PAROLE * 2:
+        return testo
+    coda = [parole.pop()]
+    while len(coda) < CODA_MAX_PAROLE and len(" ".join(coda)) < CODA_MIN_CARATTERI:
+        coda.insert(0, parole.pop())
+    return " ".join(parole) + " " + "\u00a0".join(coda)
+
+
+#: Le righe di testo che un titoletto deve avere sotto di sé sulla stessa pagina:
+#: due, la regola dei libri di un editore (un titoletto con una riga sola sotto
+#: sembra un errore, con tre si allungano le pagine corte).
+RIGHE_SOTTO_TITOLO = 2
+
+
+def _riserva_titolo(titolo: Paragraph, seguito, measure: float) -> float:
+    """Lo spazio da chiedere prima di un titoletto seguito da un capoverso lungo.
+
+    Zero vuol dire «tienili insieme per intero»: succede quando il seguito non è
+    un capoverso o è così corto che spostarlo non costa niente, e quando la
+    giustezza non è nota (le pagine finali), perché senza non si misura niente.
+    """
+    if not measure or not isinstance(seguito, Paragraph):
+        return 0.0
+    interlinea = seguito.style.leading
+    _, altezza_seguito = seguito.wrap(measure, 10_000)
+    if altezza_seguito <= interlinea * (RIGHE_SOTTO_TITOLO + 0.5):
+        return 0.0
+    _, altezza_titolo = titolo.wrap(measure, 10_000)
+    stile = titolo.style
+    return stile.spaceBefore + altezza_titolo + stile.spaceAfter + interlinea * RIGHE_SOTTO_TITOLO
+
+
 def markdown_to_flowables(
     markdown: str,
     styles: dict,
@@ -502,25 +641,43 @@ def markdown_to_flowables(
     measure: float = 0.0,
     frame_height: float = 0.0,
     prepared_dir: Path | None = None,
+    lead_in: bool = False,
 ) -> list:
     flowables: list = []
     first_para_done = not first_paragraph_flush
     pending_heading: Paragraph | None = None
+    # Il maiuscoletto d'attacco va sul primo capoverso del capitolo, se il
+    # capitolo comincia con un capoverso: dopo un titoletto non serve.
+    attacco_da_fare = lead_in
 
     def emit(flowable) -> None:
-        """Un titolo non resta mai da solo in fondo alla pagina: viene tenuto
-        insieme al primo capoverso che lo segue."""
+        """Un titolo non resta mai da solo in fondo alla pagina.
+
+        Gli basta avere sotto qualche riga del capoverso che segue, non il
+        capoverso intero: tenerli insieme in blocco spostava alla pagina dopo
+        anche un capoverso di quindici righe, e lasciava un quarto di pagina
+        bianco sopra un titoletto (rodaggio household-bills, 11 pagine corte su
+        192). Con un capoverso lungo si chiede solo lo spazio per il titolo e
+        `RIGHE_SOTTO_TITOLO` righe; il resto lo spezza il capoverso stesso,
+        senza orfane. Un capoverso breve, un elenco o una citazione restano
+        attaccati al titolo per intero: sono poche righe.
+        """
         nonlocal pending_heading
-        if pending_heading is not None:
-            flowables.append(KeepTogether([pending_heading, flowable]))
-            pending_heading = None
-        else:
+        if pending_heading is None:
             flowables.append(flowable)
+            return
+        riserva = _riserva_titolo(pending_heading, flowable, measure)
+        if riserva:
+            flowables.extend([CondPageBreak(riserva), pending_heading, flowable])
+        else:
+            flowables.append(KeepTogether([pending_heading, flowable]))
+        pending_heading = None
 
     for block in mdlite.parse(markdown):
+        if isinstance(block, mdlite.Heading) and block.level <= 1:
+            continue  # il titolo del capitolo è gestito a parte
+        attacco, attacco_da_fare = attacco_da_fare, False
         if isinstance(block, mdlite.Heading):
-            if block.level <= 1:
-                continue  # il titolo del capitolo è gestito a parte
             style = styles["h2"] if block.level == 2 else styles["h3"]
             if pending_heading is not None:
                 flowables.append(pending_heading)
@@ -528,12 +685,14 @@ def markdown_to_flowables(
             first_para_done = False
         elif isinstance(block, mdlite.Paragraph):
             style = styles["body"] if first_para_done else styles["body_first"]
-            emit(Paragraph(mdlite.inline_to_markup(block.text), style))
+            testo = _lega_coda(block.text)
+            markup = _maiuscoletto(testo, style.fontSize) if attacco else None
+            emit(Paragraph(markup or mdlite.inline_to_markup(testo), style))
             first_para_done = True
         elif isinstance(block, mdlite.BulletList):
             items = [
                 Paragraph(
-                    mdlite.inline_to_markup(item),
+                    mdlite.inline_to_markup(_lega_coda(item)),
                     styles["bullet"],
                     bulletText=f"{index}." if block.ordered else "\u2022",
                 )
@@ -697,6 +856,9 @@ class TypesetResult:
     chapter_pages: dict[str, int] = field(default_factory=dict)
     words_by_chapter: dict[int, int] = field(default_factory=dict)
     part_pages: dict[str, int] = field(default_factory=dict)
+    #: pagine fisiche prima della pagina 1 stampata: `chapter_pages` è fisico,
+    #: il numero che legge il cliente è `pagina - folio_offset`
+    folio_offset: int = 0
 
     def to_dict(self) -> dict:
         return {
@@ -705,6 +867,7 @@ class TypesetResult:
             "words": self.words,
             "chapter_pages": self.chapter_pages,
             "part_pages": self.part_pages,
+            "folio_offset": self.folio_offset,
             "words_by_chapter": {str(k): v for k, v in self.words_by_chapter.items()},
         }
 
@@ -784,7 +947,8 @@ def _run_typeset(
         chapter_index += 1
 
         story.append(DocAction("chapter_open", title))
-        story.append(Spacer(1, 0.55 * INCH))
+        story.append(Spacer(1, _calata(spec, geo)))
+        titolo = Paragraph(mdlite.inline_to_markup(title), styles["chapter_title"])
         if role == "chapter":
             display_number += 1
             label = f"{L(lang, 'chapter')} {display_number}"
@@ -796,7 +960,8 @@ def _run_typeset(
                     colors.HexColor("#777777"),
                 )
             )
-        story.append(Paragraph(mdlite.inline_to_markup(title), styles["chapter_title"]))
+            titolo.numero_capitolo = display_number
+        story.append(titolo)
         story.append(
             HRFlowable(
                 width="22%", thickness=0.7, color=colors.HexColor("#999999"),
@@ -811,6 +976,7 @@ def _run_typeset(
                 measure=geo.text_width,
                 frame_height=geo.text_height,
                 prepared_dir=output.parent / "immagini",
+                lead_in=not spec.is_medium_content,
             )
         )
         words_by_chapter[number] = mdlite.count_words(markdown)
@@ -829,4 +995,5 @@ def _run_typeset(
         chapter_pages=dict(doc.chapter_pages),
         words_by_chapter=words_by_chapter,
         part_pages=dict(doc.part_pages),
+        folio_offset=doc.folio_offset,
     )

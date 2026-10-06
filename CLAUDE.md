@@ -32,9 +32,10 @@ Nessuno dei due chiama il modello: leggono i dati che il libro ha già —
 categoria, promessa, pubblico, palette, misure di stampa calcolate sulle pagine
 vere — e ne fanno un prompt. I file restano in `build/`, entrano nel backup e si
 rigenerano quando il libro cambia: sono la traccia di come quell'immagine è
-stata chiesta. Gli stessi comandi scrivono `build/copertina-chatgpt.md` e
-`build/immagini-chatgpt.md`, il file da allegare a una chat del progetto
-ChatGPT «NEXTUP — Immagini» (istruzioni in `config/progetto-chatgpt.md`).
+stata chiesta. Gli stessi comandi scrivono `build/copertina-prompt.txt` e
+`build/immagini-prompt.txt`: il testo da copiare e incollare in una chat del
+progetto ChatGPT «NEXTUP — Immagini» (istruzioni in `config/progetto-chatgpt.md`),
+con il messaggio per le varianti e i nomi con cui salvare le immagini.
 
 Tre cose che questi prompt non negoziano:
 
@@ -60,6 +61,22 @@ Finché il file manca, l'impaginazione mette un segnaposto della misura esatta:
 il conteggio pagine è già quello definitivo e non cambia quando le immagini
 arrivano. `qa` segnala come errore quelle mancanti e quelle sotto i 300 DPI
 sulla misura stampata, e come avviso quelle ancora a colori.
+
+## Regola permanente: lo standard è quello di un editore di saggistica
+
+**Ogni libro esce come lo farebbe un grande editore di saggistica**
+(`kdp-book-factory/docs/standard-editoriale.md`): un carattere da libro in una
+famiglia sola (EB Garamond, in `fonts/ofl/`), pagina 1 sulla prima pagina del
+testo, capitoli che si aprono a destra calati e col maiuscoletto, titoletti mai
+soli in fondo alla pagina, nessuna vedova né orfana. Lo fa il motore, non la
+chat: se un libro ne ha bisogno, si cambia il motore per tutti.
+
+**L'indice corrisponde al libro nei due sensi**, e `qa` lo misura
+(`kdpfactory/coerenza.py`): il titolo deciso dall'agente `indice` è quello
+stampato, ogni voce porta alla pagina dove il capitolo si apre, le parole del
+titolo ci sono nel capitolo e lo distinguono dagli altri, i rimandi interni
+usano il titolo vero. Un capitolo aggiunto o rinominato torna all'agente
+`indice` prima della stampa.
 
 ## Regola permanente: un libro si fa con le linee guida, un agente per competenza
 

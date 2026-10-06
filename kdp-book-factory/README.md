@@ -93,9 +93,11 @@ python3 -m pip install -r requirements.txt      # oppure: make install
 export ANTHROPIC_API_KEY=sk-ant-...             # oppure: ant auth login
 ```
 
-Serve Python 3.11+. I font: la pipeline cerca font TrueType di sistema
-(Liberation, DejaVu, EB Garamond…). Per usarne uno tuo, copia i quattro file
-(regular, bold, italic, bold-italic) nella cartella `fonts/`.
+Serve Python 3.11+. I font: l'interno usa **EB Garamond**, che il progetto
+porta con sé in `fonts/ofl/` (licenza OFL); in mancanza ripiega sui font di
+sistema (Liberation, DejaVu). Per usarne uno tuo, copia i quattro file
+(regular, bold, italic, bold-italic) nella cartella `fonts/`. Lo standard di
+impaginazione e di indice è in [`docs/standard-editoriale.md`](docs/standard-editoriale.md).
 
 ### Prova senza spendere token
 
@@ -146,7 +148,7 @@ esempi usare, quale taglio dare).
 | `build <slug>` | impagina, converge sulle pagine, genera copertina ed EPUB |
 | `metadata <slug>` | scheda prodotto, keyword, categorie, prezzi |
 | `manuale <slug> <passo>` | **la fabbrica senza chiave API**: il sistema scrive il brief di scaletta, capitolo o scheda, tu porti la risposta e lui la valida ([`docs/linea-manuale.md`](docs/linea-manuale.md)) |
-| `copertina <slug>` | brief di copertina per uno strumento grafico, compilato coi dati del libro ([`docs/copertine.md`](docs/copertine.md)); nessuna chiamata API |
+| `copertina <slug>` | brief di copertina compilato coi dati del libro ([`docs/copertine.md`](docs/copertine.md)) e il prompt da incollare in ChatGPT, `build/copertina-prompt.txt`; nessuna chiamata API |
 | `agents` | elenco del collegio (`--install` li installa in Claude Code) |
 | `backup <slug>` | elenco delle copie, `--now`, `--restore <id>`, `--prune N` |
 | `puzzle new/build <slug>` | libri di enigmi di deduzione, senza chiamate API |

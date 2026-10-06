@@ -1,4 +1,4 @@
-# Catching Up When Several Bills Are Behind
+# Catching Up on Several Past-Due Bills
 
 The bills you sorted by what they put at stake tell you what could be lost. They don't tell you which call to make first. Catching up uses what the last few chapters covered, how to ask for more time, where outside help sits and what a quick loan costs, in one order, week by week, aiming for a list that shows every bill as paid or due again. If you came here straight from the introduction, with no master list or payday calendar yet, one sheet of paper will do for now: your paydays for the next two months and, for each bill that is behind, the date that matters and the amount needed by it. The rest of the system can wait until the calls are made.
 

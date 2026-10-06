@@ -20,9 +20,15 @@ I file di font messi qui non vengono versionati (`.gitignore`).
 
 La sottocartella `ofl/` è diversa: contiene font a licenza SIL OFL che **sono**
 versionati, perché il contenitore in cui gira la fabbrica si ricrea da zero a
-ogni sessione e un font che non sta nel repository sparisce. Oggi c'è solo
-**Barlow Condensed Bold**, il condensato dei titoli di copertina
-(`docs/copertine.md`), con la sua licenza accanto (`OFL-BarlowCondensed.txt`).
+ogni sessione e un font che non sta nel repository sparisce. Oggi ci sono:
+
+- **EB Garamond** (Regular, Bold, Italic, BoldItalic, dal progetto EBGaramond12
+  di Octavio Pardo), il carattere dell'interno: un Garamond, la famiglia dei
+  libri di saggistica dei grandi editori. È il primo della famiglia `serif`, e
+  nell'opera a testo pieno compone anche i titoli. Licenza in
+  `OFL-EBGaramond.txt`.
+- **Barlow Condensed Bold**, il condensato dei titoli di copertina
+  (`docs/copertine.md`), con la sua licenza accanto (`OFL-BarlowCondensed.txt`).
 La licenza OFL consente l'incorporamento nei PDF e la redistribuzione, purché la
 licenza viaggi con il file.
 

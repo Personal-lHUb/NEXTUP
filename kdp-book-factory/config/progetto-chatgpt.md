@@ -5,8 +5,8 @@
 
 Un progetto in ChatGPT per tutte le immagini dei libri NEXTUP. Le regole che
 valgono per ogni libro stanno nelle istruzioni del progetto, scritte una volta.
-Il brief di ogni lavoro arriva come file allegato alla sua chat, e lo scrive il
-sistema: il prompt di un'immagine non si scrive a mano.
+Il prompt di ogni lavoro si incolla nella sua chat, e lo scrive il sistema: il
+prompt di un'immagine non si scrive a mano.
 
 ## 1. Il progetto
 
@@ -17,8 +17,8 @@ You make the illustrations for books produced by the NEXTUP book factory: front
 cover art and interior figures for paperback books sold on Amazon KDP.
 
 Every chat in this project is one job for one book. The brief for that job is
-the file attached to the first message. Follow that brief, and do not carry over
-the style, palette or subject of another chat unless the brief asks for it.
+the first message of the chat. Follow that brief, and do not carry over the
+style, palette or subject of another chat unless the brief asks for it.
 
 Rules for every image:
 1. Illustration only. No text of any kind in the image: no title, letters,
@@ -42,30 +42,38 @@ Rules for every image:
 
 - **Memoria**: se ChatGPT chiede quale usare, quella limitata al progetto. Un
   libro non deve prendere lo stile di un altro.
-- **File del progetto**: nessuno. Il brief va allegato alla chat del suo libro:
-  caricato nei file del progetto lo vedrebbero tutte le chat, e due libri si
-  mescolerebbero.
+- **File del progetto**: nessuno. Il prompt va nella chat del suo libro: caricato
+  nei file del progetto lo vedrebbero tutte le chat, e due libri si mescolerebbero.
 
 ## 2. Una chat per lavoro
 
-| lavoro | nome della chat | file da allegare | lo scrive |
+| lavoro | nome della chat | testo da incollare | lo scrive |
 |---|---|---|---|
-| copertina | `<slug> — copertina` | `books/<slug>/build/copertina-chatgpt.md` | `kdpfactory copertina <slug>` |
-| figure dell'interno | `<slug> — figure` | `books/<slug>/build/immagini-chatgpt.md` | `kdpfactory immagini <slug>` |
+| copertina | `<slug> — copertina` | `books/<slug>/build/copertina-prompt.txt` | `kdpfactory copertina <slug>` |
+| figure dell'interno | `<slug> — figure` | `books/<slug>/build/immagini-prompt.txt` | `kdpfactory immagini <slug>` |
 
-Primo messaggio, con il file allegato: «Follow the attached brief. First variant.»
-Poi, per ogni variante: «Next variant.» Per le figure: «Next figure.»
+Il file è testo semplice, diviso da righe `===` che dicono che cosa incollare e
+dove; le righe `===` non si incollano. Per la copertina:
+
+1. in una chat nuova si incolla il prompt della prima variante;
+2. per ogni altra variante, nella stessa chat: «Next variant. Same brief and same rules, but a clearly different composition: change the viewpoint, the framing or the arrangement of the scene, not just the colours. Then tell me its exact size in pixels and the model that made it.»
+
+Per le figure, una chat sola e un messaggio per figura, ognuno col suo prompt.
+Ogni prompt di figura ripete il grigio e il divieto di testo: si possono
+incollare anche a giorni di distanza.
+
+Lo stesso testo lo stampa il comando nel terminale, pronto da copiare.
 
 ## 3. Dove vanno le immagini
 
 Ogni immagine si scarica alla risoluzione piena (non l'anteprima) e si salva
-nella cartella Drive «NEXTUP — corriere Cowork», con il nome che il file allegato indica in
-fondo, per esempio `books__<slug>__assets__copertina-1.png`. Il giro orario la
+nella cartella Drive «NEXTUP — corriere Cowork», con il nome che il file indica, per
+esempio `books__<slug>__assets__copertina-1.png`. Il giro orario la
 porta nel libro da sola; l'agente `copertina` misura le varianti e propone
 quella da usare, con il silenzio-assenso.
 
 ## 4. Cowork
 
 Il ruolo `immagini` di Cowork lavora nello stesso progetto, se c'è: lo dice il
-LEGGIMI. Che la copertina la generi l'autore o Cowork, il file allegato è lo
-stesso, e vale la prima serie di varianti che arriva sul corriere.
+LEGGIMI. Che la copertina la generi l'autore o Cowork, il prompt è lo stesso,
+parola per parola, e vale la prima serie di varianti che arriva sul corriere.

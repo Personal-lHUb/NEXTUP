@@ -12,10 +12,23 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
-from . import agents, backup, coverdesign, coverimage, kdpspecs, planner, qa, typeset, vetrina, writer
+from . import (
+    agents,
+    backup,
+    coerenza,
+    coverdesign,
+    coverimage,
+    kdpspecs,
+    planner,
+    qa,
+    typeset,
+    vetrina,
+    writer,
+)
 from . import cover as cover_module
 from . import epub as epub_module
 from . import metadata as metadata_module
+from .i18n import L
 from .llm import LLMClient
 from .mdlite import count_words
 from .models import BookProject, BookSpec, Outline
@@ -33,6 +46,8 @@ class BuildResult:
     history: list[dict] = field(default_factory=list)
     chapter_pages: dict[str, int] = field(default_factory=dict)
     part_pages: dict[str, int] = field(default_factory=dict)
+    #: pagine fisiche prima della pagina 1 stampata (vedi `typeset.TypesetResult`)
+    folio_offset: int = 0
 
     def to_dict(self) -> dict:
         return {
@@ -45,6 +60,7 @@ class BuildResult:
             "epub": str(self.epub_path) if self.epub_path else None,
             "chapter_pages": self.chapter_pages,
             "part_pages": self.part_pages,
+            "folio_offset": self.folio_offset,
             "storico": self.history,
         }
 
@@ -95,6 +111,7 @@ def build_until_in_range(
         result.interior_pdf = typeset_result.pdf_path
         result.chapter_pages = typeset_result.chapter_pages
         result.part_pages = typeset_result.part_pages
+        result.folio_offset = typeset_result.folio_offset
         result.in_range = low <= typeset_result.pages <= high
         result.history.append(
             {
@@ -288,6 +305,49 @@ def editorial_pass(
     return result, report
 
 
+def controlla_indice(
+    project: BookProject,
+    spec: BookSpec,
+    outline: Outline,
+    chapters: list[tuple[int, str, str]],
+    result: BuildResult,
+    state: dict,
+    report: qa.Report,
+) -> None:
+    """Indice e capitoli nei due sensi (`coerenza`): titoli decisi, pagine, argomenti."""
+    if not chapters:
+        return
+    indice_path = project.root / "manuale" / "indice.json"
+    decisi: list[str] = []
+    if indice_path.exists():
+        try:
+            dati = json.loads(indice_path.read_text(encoding="utf-8"))
+            decisi = [c["title"] for c in dati.get("chapters", []) if c.get("title")]
+        except (ValueError, KeyError, TypeError):
+            report.add("avviso", "INDICE", f"{indice_path} non si legge: titoli decisi non controllati.")
+    esito = coerenza.controlla(
+        chapters,
+        spec.language,
+        outline_titoli={c.number: c.title for c in outline.chapters},
+        indice_titoli=decisi,
+        numerati=[c.number for c in outline.chapters if c.role == "chapter"],
+        generici={c.number for c in outline.chapters if c.role != "chapter"},
+        titoli_parti=[parte.title for parte in outline.parts],
+        pdf=result.interior_pdf,
+        folio_offset=(state.get("build") or {}).get("folio_offset", 0),
+        titolo_indice=L(spec.language, "toc"),
+    )
+    for messaggio in esito.errori:
+        report.add("errore", "INDICE", messaggio)
+    for messaggio in esito.avvisi:
+        report.add("avviso", "INDICE", messaggio)
+    if not esito.errori and not esito.avvisi:
+        report.add("info", "INDICE", "Indice e capitoli corrispondono nei due sensi.")
+    report.stats["indice_parole_distintive"] = {
+        str(n): ", ".join(p) for n, p in esito.distintive.items()
+    }
+
+
 def run_qa(
     project: BookProject, spec: BookSpec, outline: Outline, result: BuildResult
 ) -> qa.Report:
@@ -296,6 +356,7 @@ def run_qa(
     if result.interior_pdf:
         qa.check_print_pdf(spec, result.interior_pdf, result.pages, report)
     state = project.load_state()
+    controlla_indice(project, spec, outline, chapters, result, state, report)
     if state.get("metadata"):
         qa.check_metadata(state["metadata"], spec, report)
     if state.get("cover"):

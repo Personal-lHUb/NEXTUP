@@ -149,6 +149,28 @@ quando le immagini arrivano: il segnaposto occupava già il loro spazio.
     return testa + "\n" + "\n".join(corpo) + coda
 
 
+def prompt_incollabile(spec: BookSpec, figura: figure_module.Figura) -> str:
+    """Il prompt di una figura così com'è da incollare: descrizione, regole, misure.
+
+    Basta a sé stesso, perché in ChatGPT si incolla una figura per messaggio e
+    la regola dimenticata al terzo messaggio è quella del grigio.
+    """
+    larghezza_in, altezza_in, px_w, px_h = _dimensioni(spec)
+    didascalia = (
+        f"\nThe book prints this caption underneath, so the image must not repeat it: "
+        f"«{figura.didascalia}»"
+        if figura.didascalia
+        else ""
+    )
+    return f"""{figura.descrizione}
+
+Greyscale illustration for the interior of a printed book. One subject, plenty
+of white space, no text or lettering anywhere in the image, no border or frame.
+{_stile(spec)}
+Composition sized for {larghezza_in:.2f} x {altezza_in:.2f} inches at
+{figure_module.MIN_DPI} DPI, so at least {px_w} x {px_h} pixels.{didascalia}"""
+
+
 def _prompt_figura(
     spec: BookSpec,
     indice: int,
@@ -160,12 +182,6 @@ def _prompt_figura(
 ) -> str:
     stato = "già prodotta" if figura.esiste else "da produrre"
     dove = f"capitolo {figura.capitolo}" if figura.capitolo else "libro"
-    didascalia = (
-        f"\nThe book prints this caption underneath, so the image must not "
-        f"repeat it: «{figura.didascalia}»"
-        if figura.didascalia
-        else ""
-    )
     return f"""
 ---
 
@@ -174,13 +190,6 @@ def _prompt_figura(
 **Salvala in:** `books/{spec.slug}/assets/{figura.percorso}`
 
 ```
-{figura.descrizione}
-
-Greyscale illustration for the interior of a printed book. One subject, plenty
-of white space, no text or lettering anywhere in the image, no border or frame.
-{_stile(spec)}
-Composition sized for {larghezza_in:.2f} x {altezza_in:.2f} inches at
-{figure_module.MIN_DPI} DPI, so at least {px_w} x {px_h} pixels.
+{prompt_incollabile(spec, figura)}
 ```
-{didascalia}
 """

@@ -456,23 +456,22 @@ def cmd_copertina(args) -> int:
     minimo = (math.ceil(panel_w * coverbrief.FRONT_DPI), math.ceil(panel_h * coverbrief.FRONT_DPI))
     titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
 
-    # Lo stesso brief, pronto da allegare a una chat del progetto ChatGPT.
-    allegato = project.build_dir / richiesteimmagini.CHATGPT_COPERTINA
-    if allegato.exists():
-        save_backup(project, args, "file per ChatGPT precedente", force=True)
-    allegato.write_text(
-        richiesteimmagini.chatgpt_copertina(spec.slug, titolo, output.read_text(encoding="utf-8"), minimo),
-        encoding="utf-8",
+    # Il prompt da incollare in ChatGPT: gli stessi dati del brief, senza le
+    # specifiche di stampa che a un generatore d'immagini fanno disegnare un wrap.
+    prompt = coverbrief.prompt_da_incollare(
+        spec, pages=pages, metadata=meta, copy=copy, concorrente=rivale
     )
-    save_backup(project, args, "file per ChatGPT")
+    incollare = project.build_dir / richiesteimmagini.CHATGPT_COPERTINA
+    if incollare.exists():
+        save_backup(project, args, "prompt da incollare precedente", force=True)
+    incollare.write_text(richiesteimmagini.testo_copertina(spec.slug, prompt), encoding="utf-8")
+    save_backup(project, args, "prompt da incollare")
 
     # Con il corriere l'illustrazione la genera Cowork, ruolo «immagini»: la
-    # richiesta porta dentro il brief appena scritto, e nient'altro.
+    # richiesta porta dentro lo stesso prompt, parola per parola.
     canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
     if canale.get("canale") == "drive" and "immagini" in cowork.ruoli(canale):
-        nome, testo = richiesteimmagini.copertina(
-            spec.slug, titolo, output.read_text(encoding="utf-8"), minimo, canale
-        )
+        nome, testo = richiesteimmagini.copertina(spec.slug, titolo, prompt, minimo, canale)
         fatti: list[str] = []
         _scrivi_richiesta(project, args, project.root / "manuale" / nome, testo, fatti)
         for percorso in fatti:
@@ -480,7 +479,8 @@ def cmd_copertina(args) -> int:
 
     categoria = "medium-content" if spec.is_medium_content else "full-content"
     print(f"Brief di copertina [{categoria}, {pages} pagine]: {output}")
-    print(f"Da allegare in ChatGPT (progetto «{richiesteimmagini.PROGETTO_CHATGPT}»): {allegato}")
+    print(f"Da incollare in ChatGPT (progetto «{richiesteimmagini.PROGETTO_CHATGPT}»): {incollare}")
+    print("\n" + "-" * 72 + "\n" + prompt + "\n" + "-" * 72)
     print("\nIncollalo nello strumento grafico, poi salva l'immagine che torna in")
     print(f"  {project.assets_dir / 'copertina.jpg'}")
     print("e rilancia `build`: viene ritagliata sulla prima, portata a 300 DPI e")
@@ -540,22 +540,16 @@ def cmd_immagini(args) -> int:
         print(f"\nSalva le immagini in {figure_module.cartella(project.assets_dir)}")
         print("poi rilancia `build` e `qa`.")
         titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
-        allegato = project.build_dir / richiesteimmagini.CHATGPT_FIGURE
-        if allegato.exists():
-            save_backup(project, args, "file per ChatGPT delle figure precedente", force=True)
-        allegato.write_text(
-            richiesteimmagini.chatgpt_figure(spec.slug, titolo, output.read_text(encoding="utf-8"),
-                                             [f.percorso for f in mancanti]),
-            encoding="utf-8",
-        )
-        save_backup(project, args, "file per ChatGPT delle figure")
-        print(f"Da allegare in ChatGPT (progetto «{richiesteimmagini.PROGETTO_CHATGPT}»): {allegato}")
+        prompts = [(f.percorso, imagebrief.prompt_incollabile(spec, f)) for f in mancanti]
+        incollare = project.build_dir / richiesteimmagini.CHATGPT_FIGURE
+        if incollare.exists():
+            save_backup(project, args, "prompt delle figure da incollare precedenti", force=True)
+        incollare.write_text(richiesteimmagini.testo_figure(spec.slug, prompts), encoding="utf-8")
+        save_backup(project, args, "prompt delle figure da incollare")
+        print(f"Da incollare in ChatGPT (progetto «{richiesteimmagini.PROGETTO_CHATGPT}»): {incollare}")
         canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
         if canale.get("canale") == "drive" and "immagini" in cowork.ruoli(canale):
-            nome, testo = richiesteimmagini.figure(
-                spec.slug, titolo, output.read_text(encoding="utf-8"),
-                [f.percorso for f in mancanti], canale,
-            )
+            nome, testo = richiesteimmagini.figure(spec.slug, titolo, prompts, canale)
             fatti: list[str] = []
             _scrivi_richiesta(project, args, project.root / "manuale" / nome, testo, fatti)
             for percorso in fatti:

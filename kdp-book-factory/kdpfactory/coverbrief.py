@@ -180,6 +180,140 @@ def _unique_factor(spec: BookSpec, copy: coverdesign.CoverCopy, genre: str) -> s
     )
 
 
+def _prima_frase(testo: str) -> str:
+    """La prima frase di un campo lungo: in un prompt d'immagine il resto è rumore."""
+    testo = " ".join((testo or "").split())
+    for fine in (". ", "? ", "! "):
+        if fine in testo:
+            return testo.split(fine, 1)[0] + fine.strip()
+    return testo
+
+
+def nome_colore(esadecimale: str) -> str:
+    """Un colore detto a parole, col suo codice: «deep navy (#0E1320)».
+
+    Un generatore d'immagini segue un nome meglio di un codice esadecimale, che
+    da solo legge come un numero qualunque. Il nome è approssimato, il codice resta
+    accanto per chi vuole stare dentro la serie.
+    """
+    import colorsys
+
+    codice = esadecimale.strip().lstrip("#")
+    r, g, b = (int(codice[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    tinta, luce, saturazione = colorsys.rgb_to_hls(r, g, b)
+    gradi = tinta * 360
+    if saturazione < 0.12 or luce < 0.06 or luce > 0.96:
+        nome = "near-black" if luce < 0.2 else "white" if luce > 0.9 else "grey"
+    else:
+        nomi = ((15, "red"), (40, "orange"), (55, "golden amber"), (70, "yellow"),
+                (160, "green"), (195, "teal"), (250, "blue"), (290, "purple"),
+                (345, "magenta"), (361, "red"))
+        nome = next(n for limite, n in nomi if gradi < limite)
+        if nome == "blue" and luce < 0.25:
+            nome = "navy"
+        if luce > 0.85 and 30 <= gradi < 60:
+            nome = "cream"
+        elif luce < 0.25:
+            nome = f"deep {nome}"
+        elif luce < 0.35:
+            nome = f"dark {nome}"
+        elif saturazione < 0.3:
+            nome = f"muted {nome}"
+        elif luce > 0.8:
+            nome = f"pale {nome}"
+    return f"{nome} (#{codice.upper()})"
+
+
+def prompt_da_incollare(
+    spec: BookSpec,
+    *,
+    pages: int,
+    metadata: dict | None = None,
+    copy: coverdesign.CoverCopy | None = None,
+    genre: str = "",
+    concorrente: str = "",
+    varianti: int = 3,
+) -> str:
+    """Il prompt della copertina in un blocco solo, da incollare in una chat di ChatGPT.
+
+    `brief` resta il riferimento di chi progetta la copertina: porta dorso,
+    codice a barre e specifiche di stampa, che a un generatore d'immagini non
+    servono e rischiano di sviarlo: «full wrap» e «spine» invitano a disegnare
+    l'intera copertina col dorso invece della prima. Qui restano solo le cose che decidono
+    l'immagine, prese dagli stessi dati: che cosa mostrare, lo stile, il
+    fattore distintivo, la palette, la composizione, i divieti. In inglese, la
+    lingua in cui i generatori sbagliano meno.
+    """
+    metadata = metadata or {}
+    genre = genre or ("enigmi" if spec.genre == "puzzle" else spec.genre)
+    copy = copy or coverdesign.derive_copy(spec, metadata, genre, pages=pages)
+    palette = coverdesign.pick_palette(spec, genre)
+    panel_w, panel_h = coverimage.front_panel_size_in(spec.trim)
+    px_w, px_h = math.ceil(panel_w * FRONT_DPI), math.ceil(panel_h * FRONT_DPI)
+    nicchia = ", ".join(metadata.get("categories") or spec.categories) or spec.topic
+    chiave = _chiave(spec, genre, nicchia)
+    titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
+
+    try:
+        art = coverart.pick(copy.subject or spec.topic, genre, wanted=spec.cover_art)
+        distintivo = (
+            "exactly one distinctive element that makes the cover memorable, built on the "
+            f"idea of {', '.join(art.keywords[:3])}; nothing else may compete with it."
+        )
+    except KeyError:
+        distintivo = (
+            "exactly one distinctive element that makes the cover memorable: one visual "
+            "metaphor for the book's central idea; nothing else may compete with it."
+        )
+
+    righe = [
+        f"Front cover illustration for a paperback book: «{titolo}». "
+        f"This is variant 1 of {varianti}.",
+        "",
+        RAPPRESENTAZIONE[chiave],
+    ]
+    if spec.audience:
+        righe.append(f"Who it is for: {_prima_frase(spec.audience)}")
+    if spec.promise or spec.topic:
+        righe.append(f"What the book does: {_prima_frase(spec.promise or spec.topic)}")
+    if copy.hook:
+        righe.append(f"The question it answers, for the mood only (never write it): «{copy.hook}»")
+    righe += [
+        "",
+        f"Style: {STILE[chiave]} Art-directed and current, like a cover a major publisher "
+        "would release this year: not a stock template, not a generic AI image.",
+        f"Include {distintivo}",
+        f"Colour: a {nome_colore(palette.background)} background, {nome_colore(palette.deep)} "
+        f"for depth and a single accent of {nome_colore(palette.accent)}. Strong contrast, so "
+        "the cover stands out on Amazon's white search page.",
+        "",
+        "Composition: portrait, 2:3. One dominant focal point. Keep the upper third calm and "
+        "simple, because the title will be set there afterwards in large type. Keep anything "
+        "important at least 4% of the width inside every edge: the print is trimmed. It must "
+        "still read as a 160-pixel-wide thumbnail.",
+        "",
+        "Absolutely no text: no letters, numbers, title, author name, logo, signature or "
+        "watermark anywhere. Any paper, screen or calendar in the scene stays blank.",
+        "Original work: do not imitate any existing book cover, artist, brand or character, "
+        "and do not show a recognisable real person. No border, no frame, no 3D book mock-up.",
+    ]
+    if concorrente.strip():
+        rivale = " ".join(concorrente.split())
+        righe += [
+            "",
+            "It must stand apart at a glance from the best-selling cover it sits next to, "
+            f"which looks like this: {rivale} Use a different dominant colour and a different "
+            "kind of image. Do not copy, parody or answer that cover.",
+        ]
+    righe += [
+        "",
+        "Make the image at the largest size you can. The print needs at least "
+        f"{px_w} x {px_h} px: if yours is smaller, deliver it anyway and say so. After the "
+        "image, tell me its exact size in pixels and the model that made it.",
+    ]
+    return "\n".join(righe)
+
+
 def brief(
     spec: BookSpec,
     *,

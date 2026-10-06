@@ -24,13 +24,18 @@ def indice(
     language: str,
     chapter_pages: dict[str, int] | None = None,
     part_pages: dict[str, int] | None = None,
+    folio_offset: int = 0,
 ) -> str:
-    """L'indice come lo stampa il libro: parti, capitoli e, se ci sono, le pagine."""
+    """L'indice come lo stampa il libro: parti, capitoli e, se ci sono, le pagine.
+
+    Le pagine sono quelle stampate, che partono da 1 sulla prima pagina del
+    testo: `chapter_pages` è contato sul PDF, e `folio_offset` dice di quanto.
+    """
     chapter_pages = chapter_pages or {}
     part_pages = part_pages or {}
 
     def pagina(numero: int | None) -> str:
-        return f" · p. {numero}" if numero else ""
+        return f" · p. {numero - folio_offset}" if numero else ""
 
     righe: list[str] = []
     for chapter in outline.chapters:
@@ -50,6 +55,7 @@ def testo(
     cover_copy: dict | None = None,
     chapter_pages: dict[str, int] | None = None,
     part_pages: dict[str, int] | None = None,
+    folio_offset: int = 0,
 ) -> str:
     cover_copy = cover_copy or {}
     gancio = cover_copy.get("hook") or meta.get("cover_hook") or ""
@@ -67,7 +73,8 @@ def testo(
         righe += [f"- {voce}" for voce in elenco]
         if meta.get("closing"):
             righe += ["", meta["closing"]]
-    righe += ["", "## L'indice", "", indice(outline, spec.language, chapter_pages, part_pages)]
+    righe += ["", "## L'indice", "",
+              indice(outline, spec.language, chapter_pages, part_pages, folio_offset)]
     return "\n".join(righe).rstrip() + "\n"
 
 
@@ -84,6 +91,7 @@ def da_progetto(project: BookProject, spec: BookSpec, outline: Outline) -> str:
         cover_copy=(state.get("cover") or {}).get("testi") or {},
         chapter_pages=build.get("chapter_pages") or {},
         part_pages=build.get("part_pages") or {},
+        folio_offset=build.get("folio_offset") or 0,
     )
 
 

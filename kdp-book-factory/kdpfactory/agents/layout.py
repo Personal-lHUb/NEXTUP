@@ -24,6 +24,7 @@ SHORT_LINE_RATIO = 0.55    # riga "corta": meno del 55% della giustezza
 TINY_LINE_RATIO = 0.12     # riga finale di paragrafo molto corta
 FRAME_TOLERANCE = 2.0      # punti di tolleranza sul bordo della gabbia
 CHAPTER_TAIL_RATIO = 0.12  # coda di capitolo: pagina riempita per meno del 12%
+SHORT_PAGE_LINES = 2.5     # pagina corta: il testo finisce più di 2,5 righe sopra il fondo
 
 
 @dataclass
@@ -194,6 +195,7 @@ def inspect_layout(ctx: AgentContext) -> list[AgentFinding]:
     findings += _check_hyphen_ladders(by_page)
     findings += _check_short_last_lines(lines, measure, body_size, flush_left, indent)
     findings += _check_chapter_tails(by_page, ctx, geo)
+    findings += _check_short_pages(by_page, ctx, geo, body_start, body_size)
     findings += _check_page_variety(by_page, ctx, body_start)
     findings += chapter_title_pages
     return findings
@@ -598,6 +600,50 @@ def _check_chapter_tails(
             f"pagine {_pages_label(tails)}.",
             suggestion="Accorcia il capitolo di qualche riga per farlo chiudere sulla pagina "
             "precedente, oppure allungalo fino a riempire almeno mezza pagina.",
+        )
+    ]
+
+
+def _check_short_pages(
+    by_page: dict[int, list[Line]],
+    ctx: AgentContext,
+    geo: kdpspecs.PageGeometry,
+    body_start: int,
+    body_size: float,
+) -> list[AgentFinding]:
+    """Pagine corte: il testo si ferma sopra il fondo della gabbia a metà capitolo.
+
+    In un libro di un editore le pagine di testo finiscono tutte alla stessa
+    altezza, salvo l'ultima di ogni capitolo: una pagina che chiude quattro
+    righe prima, con il capitolo che continua dietro, si vede aprendo il libro.
+    Succede quando un titoletto, una figura o un capoverso indivisibile non ci
+    stanno e passano alla pagina dopo.
+    """
+    openings = set(ctx.chapter_pages.values())
+    fondo = geo.page_height - geo.bottom_margin
+    soglia = ctx.spec.leading * SHORT_PAGE_LINES
+    corte: list[int] = []
+    for page, page_lines in sorted(by_page.items()):
+        if page < body_start or not page_lines:
+            continue
+        dopo = by_page.get(page + 1, [])
+        # l'ultima pagina di un capitolo, prima di una bianca, di un'apertura di
+        # capitolo o di una pagina di parte (che non ha righe di testo corrente)
+        if (page + 1) in openings or not any(round(riga.size, 1) == body_size for riga in dopo):
+            continue
+        if fondo - max(line.y1 for line in page_lines) > soglia:
+            corte.append(page)
+    if not corte:
+        return []
+    return [
+        AgentFinding(
+            agent=Impaginazione.name,
+            severity="minore",
+            category="pagina corta",
+            issue=f"{len(corte)} pagine finiscono più di {SHORT_PAGE_LINES:g} righe sopra il "
+            f"fondo della gabbia a capitolo aperto: pagine del PDF {_pages_label(corte)}.",
+            suggestion="Di solito è un titoletto o una figura passati alla pagina dopo: "
+            "allunga o accorcia di due righe il capoverso che precede.",
         )
     ]
 
