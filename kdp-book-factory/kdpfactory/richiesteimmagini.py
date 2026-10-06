@@ -73,8 +73,6 @@ Rules for every image:
 
 
 def _serve_chatgpt(canale: dict) -> str:
-    if corriere.su_github(canale):
-        return "l'accesso a ChatGPT (account dell'autore)"
     return "l'accesso a ChatGPT e a GitHub (account dell'autore)"
 
 
@@ -89,10 +87,10 @@ def consegna(canale: dict) -> str:
     if corriere.su_github(canale):
         return (
             f"   Caricale su GitHub, repository `{repository}`, ramo `{corriere.RAMO_IMMAGINI}`,\n"
-            "   ognuna al percorso indicato. Con git (add_repo con accesso push, poi commit e\n"
-            f"   push del solo ramo `{corriere.RAMO_IMMAGINI}`) o, se lavori col browser, con\n"
-            "   «Add file → Upload files». Solo quei file: nessun altro ramo, nessuna pull\n"
-            "   request, niente da unire o da cancellare.\n"
+            "   ognuna al percorso indicato, col GitHub dell'autore aperto nel browser:\n"
+            "   «Add file → Upload files» nella cartella giusta, commit direttamente sul\n"
+            "   ramo. Solo quei file: nessun altro ramo, nessuna pull request, niente da\n"
+            "   unire o da cancellare. Su Drive no: non porta file così pesanti.\n"
         )
     return (
         "   Non nella cartella Drive: il connettore non porta file così pesanti. Caricale\n"
@@ -174,9 +172,10 @@ def scaricamento(
             RUOLO,
             canale,
             f"books/{slug}/manuale",
-            # Sul canale GitHub Cowork consegna con git dal suo container: nessun
-            # accesso da aprire nel browser.
-            serve="" if corriere.su_github(canale) else SERVE_GITHUB,
+            # Le immagini si caricano col GitHub dell'autore aperto nel browser: le
+            # sessioni di Cowork non hanno credenziali GitHub, e nel cloud la CDN di
+            # Higgsfield è bloccata (esito del 6 ottobre 2026).
+            serve=SERVE_GITHUB,
         )
         + f"\nIl libro: «{titolo}». Le immagini sono già generate (Higgsfield, dal prompt della\n"
         "fabbrica): non c'è niente da generare né da incollare in ChatGPT.\n\n"

@@ -222,11 +222,17 @@ class TestCanaleGithub(Base):
                cowork.intestazione("K", "cowork-fonti-kdp-risposta.md", "fonti", CANALE_GITHUB,
                                    "books/libro/manuale", serve="l'accesso a KDP"))
 
-    def test_l_intestazione_dice_dove_consegnare_sul_ramo(self):
+    def test_l_intestazione_dice_dove_consegnare_sul_ramo_e_il_ripiego(self):
         testo = (self.radice / self.fonti).read_text(encoding="utf-8")
         self.assertIn("`kdp-book-factory/books/libro/manuale/cowork-fonti-risposta.md`", testo)
         self.assertIn(f"sul ramo `{corriere.RAMO_IMMAGINI}`", testo)
-        self.assertNotIn("Drive", testo)
+        self.assertIn("https://github.com/o/r/new/cowork-immagini/kdp-book-factory/books/libro/manuale"
+                      "?filename=cowork-fonti-risposta.md", testo)
+        # senza browser la risposta va su Drive col nome che la fabbrica sa riportare
+        self.assertIn("`books__libro__manuale__cowork-fonti-risposta.md`", testo)
+        self.assertEqual(corriere.destinazione_ammessa(
+            self.radice, "books__libro__manuale__cowork-fonti-risposta.md", self.elenco()),
+            "books/libro/manuale/cowork-fonti-risposta.md")
 
     def test_su_drive_resta_solo_il_leggimi(self):
         scrivi(self.radice, "config/progetto-cowork.md", "# progetto\n")
@@ -257,8 +263,9 @@ class TestCanaleGithub(Base):
         self.assertIn("risposta: `kdp-book-factory/books/libro/manuale/cowork-fonti-risposta.md`"
                       f" sul ramo `{corriere.RAMO_IMMAGINI}`", testo)
         self.assertIn("si fa: solo col browser del portatile — serve l'accesso a KDP", testo)
-        self.assertIn("https://github.com/o/r/blob/fabbrica/kdp-book-factory/books/libro/manuale/cowork-fonti.md",
-                      testo)
+        self.assertIn("leggi: https://raw.githubusercontent.com/o/r/fabbrica/kdp-book-factory/books/libro/"
+                      "manuale/cowork-fonti.md", testo)
+        self.assertIn("senza browser, su Drive: `books__libro__manuale__cowork-fonti-risposta.md`", testo)
         # l'indice si chiama come una richiesta, ma non lo è
         scrivi(self.radice, "config/cowork-aperte.md", testo)
         self.assertNotIn("config/cowork-aperte.md", [r.percorso for r in self.elenco()])

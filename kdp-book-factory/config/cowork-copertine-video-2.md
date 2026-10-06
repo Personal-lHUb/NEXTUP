@@ -5,8 +5,12 @@ Serve: il browser del computer dell'autore (giro di Cowork col portatile collega
 
 Richiesta della fabbrica per Cowork, con le regole di `kdp-book-factory/config/leggimi-cowork.md`
 (ramo `claude/dreamy-archimedes-hf8w45` del repository `Personal-lHUb/NEXTUP`).
-Scrivi la risposta come file nuovo `kdp-book-factory/config/cowork-copertine-video-2-risposta.md`
-sul ramo `cowork-immagini`, con la stessa numerazione, poi fai il push.
+Consegna la risposta come file nuovo `kdp-book-factory/config/cowork-copertine-video-2-risposta.md`
+sul ramo `cowork-immagini`, con la stessa numerazione: col browser, da
+https://github.com/Personal-lHUb/NEXTUP/new/cowork-immagini/kdp-book-factory/config?filename=cowork-copertine-video-2-risposta.md
+e commit direttamente sul ramo. Senza browser, o se il commit non riesce,
+scrivi lo stesso testo su Drive, nella cartella «NEXTUP — corriere Cowork», come
+`config__cowork-copertine-video-2-risposta.md`: la fabbrica lo porta su GitHub.
 Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
 Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
 scrivilo invece di stimare: l'accesso non lo fai tu.

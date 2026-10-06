@@ -11,11 +11,12 @@ fabbrica (questa sessione)                    GitHub, Personal-lHUb/NEXTUP      
 ──────────────────────────                    ────────────────────────────            ──────
 richiesta + indice, commit e push      ─▶     ramo della fabbrica                ─▶   il ruolo legge l'indice
 lancia subito i ruoli che vanno nel cloud ─▶  (fire_trigger)                          e le sue richieste
-applica, segna «Stato: applicata»      ◀─     ramo cowork-immagini               ◀─   consegna con git:
-assets/ del libro                      ◀─       …-risposta.md, immagini                risposte e immagini
+applica, segna «Stato: applicata»      ◀─     ramo cowork-immagini               ◀─   consegna col browser:
+assets/ del libro                      ◀─       …-risposta.md, immagini                GitHub dell'autore
+porta su GitHub (--scarica)            ◀─     Drive: risposte di ripiego         ◀─   senza browser: testo
 riparte subito                         ◀─     (fire_trigger della routine)       ◀─   avvisa la fabbrica
 
-Google Drive «NEXTUP — corriere Cowork»: il LEGGIMI, e gli esiti dei giri non riusciti
+Google Drive «NEXTUP — corriere Cowork»: il LEGGIMI, le risposte di ripiego, gli esiti dei giri non riusciti
 ```
 
 - La **richiesta** sta nel repository, nella cartella a cui serve:
@@ -24,11 +25,21 @@ Google Drive «NEXTUP — corriere Cowork»: il LEGGIMI, e gli esiti dei giri no
 - L'**indice** `config/cowork-aperte.md` elenca le richieste aperte per ruolo:
   dove leggerle, dove consegnare la risposta, e se si possono fare nel cloud o
   solo col browser del portatile. Lo riscrive `cowork corriere` a ogni giro;
-  Cowork lo legge dal ramo della fabbrica e non apre altro.
-- Cowork **consegna** sul ramo `cowork-immagini`, al percorso della risposta
-  dalla radice del repository (`kdp-book-factory/books/<slug>/…`): con git, dal
-  suo container, o col browser se git non c'è. La fabbrica prende dal ramo solo
-  le risposte alle sue richieste e le immagini che una richiesta ha nominato.
+  Cowork lo legge dall'indirizzo pubblico (`raw.githubusercontent.com`) e non
+  apre altro.
+- Le sessioni di Cowork **non hanno credenziali GitHub**: niente `add_repo`, e
+  il proxy rifiuta il push (esiti del 6 ottobre 2026). Leggono il repository
+  pubblico e **consegnano** col GitHub dell'autore aperto nel browser del
+  portatile: la pagina «consegna» dell'indice crea il file sul ramo
+  `cowork-immagini`, commit direttamente sul ramo. Senza browser (giro nel
+  cloud) la risposta di testo va su Drive col **nome di ripiego**
+  (`books__x__…-risposta.md`), e la fabbrica la porta accanto alla richiesta
+  con `cowork corriere --scarica`. Le immagini solo col browser.
+- La fabbrica prende dal ramo solo le risposte alle sue richieste e le immagini
+  che una richiesta ha nominato.
+- Se il repository diventa privato, Cowork non legge più gli indirizzi
+  pubblici: l'indice e le richieste si aprono solo col GitHub dell'autore nel
+  browser, quindi tutti i ruoli diventano «solo col browser del portatile».
 - Il **ruolo**: ogni richiesta dice sotto il titolo quale ruolo di Cowork la
   prende (`Ruolo: concorrente`, `parole-chiave`, `fonti`, `regole-kdp`,
   `immagini`), e uno solo. Ogni ruolo ha la sua chat e la sua attività
@@ -249,8 +260,11 @@ connettore Higgsfield di claude.ai, che passa dal proxy di Anthropic, con gli
 stessi prompt del sistema. Le immagini restano sulla CDN di Higgsfield, che la
 rete può bloccare a sua volta: allora la sessione scrive
 `manuale/cowork-immagini-scarica.md` (`richiesteimmagini.scaricamento`, ruolo
-`immagini`, si fa nel cloud) e Cowork le scarica e le consegna con git sul ramo
-`cowork-immagini`, da cui `cowork corriere --dal-ramo` le porta in `assets/`.
+`immagini`, col browser del portatile: nel cloud la CDN è bloccata anche per
+Cowork) e Cowork le scarica e le carica col browser sul ramo `cowork-immagini`,
+da cui `cowork corriere --dal-ramo` le porta in `assets/`. Se l'autore apre i
+domini di Higgsfield nella rete dell'ambiente, la sessione le scarica da sé e
+la richiesta si ritira.
 Finché la richiesta è aperta `produzione` dà la copertina in attesa: le
 varianti già pagate non si rigenerano.
 

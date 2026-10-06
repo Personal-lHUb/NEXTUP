@@ -251,8 +251,9 @@ def indice(elenco: list[cowork.Richiesta], canale: dict) -> str:
         "     modifica a mano. -->",
         "",
         f"Repository `{repository}`. Le richieste stanno sul ramo `{ramo}`; risposte e",
-        f"immagini si consegnano sul ramo `{consegna}`, al percorso indicato. Le regole",
-        f"sono in `{CARTELLA_FABBRICA}/config/leggimi-cowork.md`.",
+        f"immagini si consegnano sul ramo `{consegna}`, al percorso indicato, col GitHub",
+        "aperto nel browser. Senza browser la risposta di testo va su Drive, col nome di",
+        f"ripiego. Le regole: {cowork.link_lettura(canale, 'config/leggimi-cowork.md', ramo)}",
         "",
     ]
     aperte = [r for r in elenco if r.stato == cowork.APERTA]
@@ -264,9 +265,11 @@ def indice(elenco: list[cowork.Richiesta], canale: dict) -> str:
             dove = "nel cloud o col browser" if nel_cloud(r, canale) else "solo col browser del portatile"
             righe += [
                 f"- `{percorso_sul_ramo(r.percorso)}`",
+                f"  - leggi: {cowork.link_lettura(canale, r.percorso, ramo)}",
                 f"  - risposta: `{percorso_sul_ramo(r.risposta)}` sul ramo `{consegna}`",
+                f"  - consegna: {cowork.link_consegna(canale, r.risposta)}",
+                f"  - senza browser, su Drive: `{nome_drive(r.risposta)}`",
                 f"  - si fa: {dove}" + (f" — serve {r.serve}" if r.serve else ""),
-                f"  - https://github.com/{repository}/blob/{ramo}/{percorso_sul_ramo(r.percorso)}",
             ]
         righe.append("")
     return "\n".join(righe).rstrip() + "\n"

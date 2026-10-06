@@ -173,10 +173,14 @@ passarsi un file (`kdp-book-factory/docs/cowork.md`).
 - **Canale: tutto su GitHub** (`config/cowork.json`, `canale: "github"`). Le
   richieste stanno sul ramo della fabbrica, elencate nell'indice
   `config/cowork-aperte.md` che `python3 -m kdpfactory cowork corriere` riscrive
-  a ogni giro; Cowork consegna risposte e immagini sul ramo `cowork-immagini`,
-  con git, e `cowork corriere --dal-ramo` le porta nel repository. Su Drive
-  («NEXTUP — corriere Cowork») resta solo il LEGGIMI, che il prompt delle
-  attività legge per primo. Il registro è `config/corriere.json`.
+  a ogni giro, e Cowork le legge dagli indirizzi pubblici del ramo. Le sessioni
+  di Cowork non hanno credenziali GitHub: consegnano risposte e immagini sul
+  ramo `cowork-immagini` col GitHub dell'autore aperto nel browser del
+  portatile, e `cowork corriere --dal-ramo` le porta nel repository. Senza
+  browser la risposta di testo arriva su Drive («NEXTUP — corriere Cowork») col
+  nome di ripiego e la sessione la porta su GitHub (`--scarica`); su Drive ci
+  sono anche il LEGGIMI e gli esiti dei giri non riusciti. Il registro è
+  `config/corriere.json`.
 - **Ruoli**: un progetto di Claude Desktop con una chat e un'attività oraria per
   ruolo — `concorrente`, `parole-chiave`, `fonti`, `regole-kdp`, `immagini`. Il
   testo per crearli lo genera `python3 -m kdpfactory cowork progetto` in
