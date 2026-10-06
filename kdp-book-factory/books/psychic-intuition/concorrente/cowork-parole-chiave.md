@@ -52,3 +52,5 @@ strumento.
 Chi usa i risultati: il `posizionamento`, che sceglie da questa tabella le
 sette parole chiave del libro e le parole del titolo. Li applica la sessione
 della fabbrica.
+
+Stato: applicata il 2026-10-06 — autocompletamento e risultati Amazon per 24 frasi, Google Trends su tre termini (crescono «divination» e «psychic abilities»). Helium 10 (nessuna sessione aperta) e Publisher Rocket (programma da computer) restano vuoti: per il cancello della fase 0 basta, i volumi si riprovano alla verifica della scheda. La tabella va al posizionamento.

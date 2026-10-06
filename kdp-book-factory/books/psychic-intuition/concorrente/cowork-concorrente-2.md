@@ -27,3 +27,5 @@ New York 10001.
 Chi usa i risultati: `analista-recensioni`, che cerca nelle recensioni basse
 quello che i lettori non hanno trovato nel libro. Li applica la sessione della
 fabbrica.
+
+Stato: applicata il 2026-10-06 — nessuna recensione nuova: con l'account dell'autore Amazon limita l'accesso alle recensioni («We limit review access when we detect unusual activity on an account»), il filtro per stelle non si applica e si vedono le stesse 8 già riportate; la recensione da 1 stella resta illeggibile. Le lacune restano quelle di lacune.json. Nessun seguito: per sbloccarlo l'autore dovrebbe far verificare l'account, e altre letture automatiche su quell'account sono un rischio.
