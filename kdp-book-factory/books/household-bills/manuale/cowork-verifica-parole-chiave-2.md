@@ -55,3 +55,5 @@ vuota non rende la risposta parziale. Publisher Rocket non serve.
 Chi usa i risultati: la sessione della fabbrica sceglie le quattro sostitute,
 una per tema, e le fa controllare alla conformità prima che entrino nella
 scheda del libro.
+
+Stato: applicata il 2026-10-06 — quattro sostitute, una per tema, approvate dalla conformità: 3 «organize bill payments by month» (da «organize bills by month»), 4 «caring for aging parents finances» (da «caring for aging parents», oltre 4.000 risultati), 5 «understanding credit card statements and debt» (copre anche «credit card debt»), 6 «payday loans and utility bill assistance» («payday loans», 56 risultati). Nessuna ripete una parola del titolo. Helium 10 non aperto: volumi vuoti.
