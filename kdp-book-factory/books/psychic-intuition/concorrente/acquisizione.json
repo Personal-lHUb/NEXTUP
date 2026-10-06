@@ -1,0 +1,408 @@
+{
+  "asin": "B0B6NY89RB",
+  "indicazione": "Dalle domande d'avvio (`concorrente/avvio.json`), decise dall'autore:\n\n- Mercato: amazon.com. Il libro è in lingua «en» e il prezzo si propone in USD.\n- Categoria: La stessa del libro di partenza: full-content se è un testo da leggere, medium-content se è un libro da compilare. Il posizionamento la propone, l'autore la conferma prima della scaletta.\n- Dove il libro nuovo deve battere quello di partenza:\n  - Le lacune delle recensioni: quello che chi ha già comprato l'altro libro dice di non aver trovato, soprattutto nelle recensioni da 2 e 3 stelle.\n  - Più pratico: struttura chiara, esempi concreti, passi da seguire, un indice che si consulta.\n  - Contenuto migliore: più completo e più preciso, senza allungare e senza ripetere quello che l'altro libro fa già bene.\n  - Una copertina più attraente: nei risultati di ricerca, accanto all'altra, si nota prima e il titolo si legge meglio. Per questo il titolo dev'essere corto e forte in miniatura: le parole lunghe vanno nel sottotitolo.",
+  "scheda": {
+    "asin": "B0B6NY89RB",
+    "isbn_10": "1648480748",
+    "isbn_13": "978-1648480744",
+    "titolo": "Awakening Your Psychic Ability",
+    "sottotitolo": "A Practical Guide to Develop Your Intuition, Demystify the Spiritual World, and Open Your Psychic Senses",
+    "autore": "Lisa Campion (Author), MaryAnn DiMarco (Foreword)",
+    "editore": "Reveal Press",
+    "lingua": "en",
+    "prezzo": 16.59,
+    "valuta": "USD",
+    "prezzo_listino": 19.95,
+    "prezzo_ebook": 10.99,
+    "pagine": 208,
+    "formato": "7 x 0.46 x 10 inches (Paperback)",
+    "pubblicato_il": "May 1, 2023",
+    "voto_medio": 4.8,
+    "numero_recensioni": 120,
+    "distribuzione_stelle_percento": {
+      "5": 87,
+      "4": 6,
+      "3": 6,
+      "2": 0,
+      "1": 1
+    },
+    "rango_generale": 92515,
+    "categorie": [
+      {
+        "nome": "ESP (Books)",
+        "rango": 6
+      },
+      {
+        "nome": "Angels & Spirit Guides (Books)",
+        "rango": 7
+      },
+      {
+        "nome": "Divination (Books)",
+        "rango": 29
+      }
+    ],
+    "descrizione": [
+      "A go-to guide for understanding and strengthening your psychic abilities.",
+      "Have you ever wondered if you are psychic? Have you been told you are deeply intuitive? Do you ever have a sense that something will happen—and then it does? Have you ever had a strong feeling or dream that someone you care about needed your help and it turned out to be true? If so, you may be psychically gifted. Psychic experiences are nothing to be afraid of. In fact, they can greatly enrich your life! So, how can you further deepen your intuition and open your psychic senses?",
+      "From Reiki master Lisa Campion—author of The Art of Psychic Reiki and Energy Healing for Empaths—this transformative and practical guide will help you understand, develop, and harness your own psychic ability, so you can live your life with a greater sense of meaning and purpose. You’ll learn how to “turn up the volume” on your abilities when you choose, as well as discover essential strategies for setting boundaries.",
+      "Includes powerful guidance to help you:",
+      "Interpret dreams and omens",
+      "Connect with ancestors and soulmates",
+      "Understand who and what “spirit guides” are—and how to work with them",
+      "Create a map of your psychic “realms,” so you can successfully navigate your abilities",
+      "Identify which areas of your life need healing",
+      "Cultivate psychic “self-defense” skills to keep you safe on your journey",
+      "Our intuition is constantly guiding us toward our life’s purpose—we just need to know how to listen to this inner voice. Let this profound book guide you as you connect with and strengthen your psychic abilities and experience a deeper, more spiritual life."
+    ],
+    "indice": [
+      "Foreword",
+      "Introduction: Heighten Your Natural Psychic Abilities",
+      "Chapter 1. Build Foundational Awareness Skills",
+      "Chapter 2. Defend Your Psychic Self",
+      "Chapter 3. Open Your Psychic Senses",
+      "Chapter 4. Mine Dreams, Signs, and Omens for Information",
+      "Chapter 5. Work with Your Guides",
+      "Chapter 6. Explore a Map of the Lower, Middle, and Upper Realms",
+      "Chapter 7. Heal with Shaman Guides and Power Animals",
+      "Chapter 8. Commune with Spirits of the Natural World",
+      "Chapter 9. Deal with and Assist the Dead",
+      "Chapter 10. Receive Support from Ancestor and Soul Family Guides",
+      "Chapter 11. Feel the Guidance of Ascended Masters and Angels",
+      "Conclusion: Establish Your Daily Psychic Routine",
+      "Acknowledgments",
+      "Endnotes"
+    ],
+    "recensioni": [
+      {
+        "stelle": 3,
+        "titolo": "A lot of typos",
+        "testo": "Good info in the book and easy flow to content. However, the amount of typos and grammatical errors in the book are startling and distracting. I suggest finding a new editor.",
+        "nazione": "United States",
+        "data": "February 28, 2024",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 3,
+        "titolo": "Not much substance",
+        "testo": "It's a well written, albeit very general, basic overview of psychic abilities with some tips for developing them. Although the book doesn't go into much depth or detail, it makes for a reasonably good introduction to the subject if you have no knowledge or experience. As for practical guidance, the information offered is quite minimalistic and might leave a complete beginner with more questions than answers in terms of the what and how to go about psychic development.\nTruth be said, I was expecting a bit more substance.",
+        "nazione": "Spain",
+        "data": "July 4, 2026",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 5,
+        "titolo": "Interesting and Easy to Connect With",
+        "testo": "This book is very interesting and easy to read. I like how it explains intuition and psychic ability in a way that feels approachable. It’s a good book if you are interested in spiritual growth, energy, and learning how to trust your inner guidance.",
+        "nazione": "United States",
+        "data": "May 16, 2026",
+        "formato": "Audiobook"
+      },
+      {
+        "stelle": 5,
+        "titolo": "A Psychic Themed Book Of Deep Pondering",
+        "testo": "Awakening Your Psychic Ability by Lisa Campion has a treasure trove of intuition development interest concepts to include: why a person must refrain from comparing their psychic/intuition development journey with others, teacher spirit guides, why the author encourages a reader to be aware of the power of their words regardless of their level of psychic ability, why the author has reservations about refraining to give psychic hit and run messages and what psychic hits and runs are,mine dreams, signs and omens for information, event or project specific guides, muses,healers, spiritual director spirit guides, protector and guardian spirit guides, meet your guide meditation, ancestor guides, meet your angels meditation, acknowledgements, and more.",
+        "nazione": "United States",
+        "data": "June 5, 2024",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 5,
+        "titolo": "A Must read for anyone interested in enhancing their psychic abilities",
+        "testo": "I've been in tune with my psychic abilities for many years but after reading Lisa'a book, Awaken Your Psychic Ability, I learned so much more. Lisa provides you with digestible nuggets of information from her many years of experience as an intuit. The book isn't overwhelming and she speaks to you as if you're sitting in her living room. I absolutely loved it. I highly recommend it. She also offers various meditations to connect with your guides and offers much more.",
+        "nazione": "United States",
+        "data": "December 6, 2024",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 5,
+        "titolo": "So far , so good.",
+        "testo": "I’m really enjoying this book so far. Has very interesting and informative content, and I really enjoy how Lisa makes sure she teaches us to be respectful, and to not live up to expectations of others. Lisa makes sure to have us understand we need to learn and use our own gift or gifts , and not try to live up to people we see on TV or read about. Very helpful so far.",
+        "nazione": "United States",
+        "data": "January 17, 2025",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 5,
+        "titolo": "More detailed information than elsewhere",
+        "testo": "More detailed information presented in an orderly manner. Common sense, down-to-earth, as opposed to abstract, hard-to-bend-your-mind-around ideas. Puts things you may have encountered but didn't understand into perspective and into a framework you can begin to work with. I am surprised more people haven't bought this.",
+        "nazione": "United States",
+        "data": "September 25, 2025",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 5,
+        "titolo": "Enjoyable read",
+        "testo": "I really appreciate Lisa's writing style. It is relatable and easy to digest. In each of her books, I felt like I was listening to a friend's story, rather than feeling like I had to do, or be, something more in order to understand the writing.\nI highly recommend this book, no matter if you have read the 2 previous books by Lisa or not.",
+        "nazione": "United States",
+        "data": "June 16, 2023",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 5,
+        "titolo": "Outstanding!",
+        "testo": "This is such a GREAT book. It is very informative. I loved everything about it. I couldn't put it down!",
+        "nazione": "United States",
+        "data": "May 26, 2023",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 5,
+        "titolo": "Truly written with so much detail and passion",
+        "testo": "Truly amazing , well written so much depth and so easy to read. A massive amount of love has been put into this book and all the information shared. so pleased I come across this book. Highly recommend",
+        "nazione": "United Kingdom",
+        "data": "February 20, 2026",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 5,
+        "titolo": "Good book",
+        "testo": "I enjoyed this book. I have been doing healing and readings for many years and still got a lot out of this book. It is so well written and organised which is such a plus when dealing with spiritual information.",
+        "nazione": "Australia",
+        "data": "May 27, 2023",
+        "formato": "Kindle"
+      },
+      {
+        "stelle": 5,
+        "titolo": "Lovely book",
+        "testo": "It was a pleasant read, I think is more for beginners. If you want to get started on the subject don’t hesitate to buy it. It’s a great book with very good advice and a few techniques to keep you grounded and protect your energy field.",
+        "nazione": "Canada",
+        "data": "February 9, 2025",
+        "formato": "Paperback"
+      },
+      {
+        "stelle": 5,
+        "titolo": "A must read",
+        "testo": "Lisa Campion is amazing. She is so generous sharing her wealth of knowledge in her latest book. Whether you are just starting out or are more experienced Lisa's latest book is a must read.",
+        "nazione": "Australia",
+        "data": "June 17, 2023",
+        "formato": "Paperback"
+      }
+    ],
+    "problemi": [
+      "Manca la recensione da 1 stella (1% delle valutazioni). Il filtro delle recensioni per stelle rimanda al login di Amazon (ap/signin) e Cowork non ha l'accesso: la sua risposta è «parziale».",
+      "Le recensioni sono incomplete: sulla scheda se ne vedono 13 con il testo, su 120 valutazioni (2 da 3 stelle, 11 da 5). Nessuna recensione da 2 stelle (0%). Nessuna da 4 stelle visibile, anche se la distribuzione le dà al 6%. Da 3 stelle ce ne sono solo 2, a fronte del 6%.",
+      "numero_recensioni conta le valutazioni, non le recensioni scritte.",
+      "I dati sono dell'edizione Paperback, ISBN-10 1648480748 (https://www.amazon.com/dp/1648480748), non dell'edizione Kindle che si apre con l'ASIN B0B6NY89RB. Prezzo, pagine, formato, data ed editore sono quelli del cartaceo.",
+      "prezzo è il prezzo di vendita del cartaceo, $16.59 («with 17 percent savings»). Il prezzo di listino è $19.95. L'eBook Kindle (B0B6NY89RB) costa $10.99.",
+      "La pagina mostra le categorie solo con il nome foglia, senza il percorso completo.",
+      "Il campo «Language» dei Product details non è stato riportato: «en» è la lingua del titolo, della descrizione e delle recensioni su amazon.com.",
+      "L'indice viene dall'anteprima dell'edizione Kindle (https://read.amazon.com/sample/B0B6NY89RB), non da quella del cartaceo, che fuori dalla pagina non si caricava."
+    ]
+  },
+  "lacune": {
+    "lettore_reale": "Chi compra questo libro crede già nella dimensione spirituale («interested in spiritual growth, energy, and learning how to trust your inner guidance») e cerca una guida calda e ordinata per imparare a fidarsi della propria intuizione. Molti praticano già da anni («I have been doing healing and readings for many years»). Due recensioni nominano i libri precedenti dell'autrice, quindi una parte delle vendite viene da lettori che la seguono già. Accanto a loro ci sono i principianti: una recensione a cinque stelle lo giudica «more for beginners». Il principiante assoluto ci trova un'introduzione ma non un metodo, ed è qui che il mercato resta scoperto. Lo dice però una voce sola.",
+    "confidenza": "bassa",
+    "perche_questa_confidenza": "Le recensioni con testo sono 13, su 120 valutazioni: 11 da 5 stelle e 2 da 3 stelle. Non se ne vede nessuna da 4, da 2 o da 1. Le voci critiche sono solo due e parlano di cose diverse: una dei refusi, l'altra della poca pratica e della poca profondità. Per questo nessuna lacuna supera una ricorrenza, e le prime due lacune vengono dalla stessa recensione. Le cinque stelle invece concordano molto fra loro: voce vicina, facilità di lettura, ordine, rispetto. La parte «da non toccare» è quindi solida, mentre le lacune restano indizi. Formati: 11 cartacei, 1 Kindle, 1 audiolibro. Provenienza: 8 Stati Uniti, 2 Australia, 1 Regno Unito, 1 Canada, 1 Spagna. Quanto pesa la recensione da 1 stella che manca è spiegato in «limiti».",
+    "lacune": [
+      {
+        "tema": "Pratica guidata: che cosa fare e come, partendo da zero",
+        "ricorrenze": 1,
+        "che_cosa_manca": "Il sottotitolo promette «A Practical Guide to Develop Your Intuition … and Open Your Psychic Senses». L'unica lettrice che entra nel merito della pratica la trova «quite minimalistic»: chi parte da zero non sa ancora che cosa fare, né come, per sviluppare l'intuizione. Manca un percorso di esercizi in sequenza. È la promessa non mantenuta. La segno come lacuna che vale un libro perché coincide con la promessa del sottotitolo, non perché sia una tendenza: la voce è una sola. Una conferma indiretta viene da una recensione a cinque stelle, che lodando il libro parla di «a few techniques». L'indice della scheda va nella stessa direzione: sette capitoli su undici, dal 5 all'11, riguardano guide, regni e spiriti, e uno solo, il 3, è dedicato ad aprire i sensi. L'indice però è un dato della scheda, non delle recensioni: spiega la lacuna ma non conta come ricorrenza.",
+        "citazioni": [
+          "As for practical guidance, the information offered is quite minimalistic and might leave a complete beginner with more questions than answers in terms of the what and how to go about psychic development."
+        ],
+        "vale_un_libro": true
+      },
+      {
+        "tema": "Profondità e sostanza",
+        "ricorrenze": 1,
+        "che_cosa_manca": "La stessa lettrice trova il libro «very general» e senza «much depth or detail». Su questo punto però le recensioni non sono d'accordo. Tre cinque stelle dicono il contrario: una si intitola «More detailed information than elsewhere», un'altra scrive «so much depth», e chi fa letture da anni dice di averne ricavato molto. Letta insieme alla lacuna precedente, la sostanza che manca sembra quella del «come», non altra teoria. Un libro più carico di concetti rischierebbe di perdere ciò che le cinque stelle lodano: le informazioni in piccole dosi («digestible») e il fatto che non travolga («isn't overwhelming»).",
+        "citazioni": [
+          "It's a well written, albeit very general, basic overview of psychic abilities with some tips for developing them.",
+          "Although the book doesn't go into much depth or detail, it makes for a reasonably good introduction to the subject if you have no knowledge or experience.",
+          "Truth be said, I was expecting a bit more substance."
+        ],
+        "vale_un_libro": false
+      },
+      {
+        "tema": "Cura redazionale: refusi ed errori grammaticali",
+        "ricorrenze": 1,
+        "che_cosa_manca": "Un testo pulito. Non lo tratto come un difetto della copia ricevuta, come lo sarebbero rilegatura, stampa o consegna: i refusi stanno nel testo dell'edizione e li trova chiunque la compri, quindi la segnalazione resta. Non è però una lacuna di contenuto, perché la stessa recensione loda «Good info» e «easy flow». Non vale un libro: è una soglia minima di qualità che il libro nuovo deve superare, non la sua ragione d'essere. La recensione è del febbraio 2024: una ristampa potrebbe aver corretto i refusi, ma dalla scheda non si può verificare.",
+        "citazioni": [
+          "However, the amount of typos and grammatical errors in the book are startling and distracting. I suggest finding a new editor."
+        ],
+        "vale_un_libro": false
+      }
+    ],
+    "da_non_toccare": [
+      {
+        "punto": "Una voce calda e vicina. L'autrice parla come un'amica in salotto, non dall'alto, e il lettore non si sente inadeguato. È il motivo d'acquisto che torna più spesso.",
+        "citazioni": [
+          "The book isn't overwhelming and she speaks to you as if you're sitting in her living room.",
+          "In each of her books, I felt like I was listening to a friend's story, rather than feeling like I had to do, or be, something more in order to understand the writing.",
+          "I like how it explains intuition and psychic ability in a way that feels approachable."
+        ]
+      },
+      {
+        "punto": "Si legge facilmente e dà le informazioni a piccole dosi, presentate come esperienza vissuta da chi pratica. Lo riconosce anche una delle due recensioni da tre stelle, che critica altro.",
+        "citazioni": [
+          "Lisa provides you with digestible nuggets of information from her many years of experience as an intuit.",
+          "Good info in the book and easy flow to content.",
+          "This book is very interesting and easy to read."
+        ]
+      },
+      {
+        "punto": "È concreto e di buon senso, non astratto. Dà un nome e una cornice a esperienze che il lettore ha già vissuto senza capirle, e una cornice su cui si può lavorare.",
+        "citazioni": [
+          "Common sense, down-to-earth, as opposed to abstract, hard-to-bend-your-mind-around ideas.",
+          "Puts things you may have encountered but didn't understand into perspective and into a framework you can begin to work with."
+        ]
+      },
+      {
+        "punto": "È ordinato: la materia spirituale arriva con una struttura chiara, e i lettori lo notano proprio perché è materia che di solito non ce l'ha.",
+        "citazioni": [
+          "More detailed information presented in an orderly manner.",
+          "It is so well written and organised which is such a plus when dealing with spiritual information."
+        ]
+      },
+      {
+        "punto": "Insegna l'etica e il rispetto. Ognuno sviluppa il proprio dono senza confrontarsi con gli altri né con i sensitivi della televisione, e fa attenzione al peso delle proprie parole.",
+        "citazioni": [
+          "I really enjoy how Lisa makes sure she teaches us to be respectful, and to not live up to expectations of others.",
+          "Lisa makes sure to have us understand we need to learn and use our own gift or gifts , and not try to live up to people we see on TV or read about.",
+          "why a person must refrain from comparing their psychic/intuition development journey with others"
+        ]
+      },
+      {
+        "punto": "La cornice spirituale: chi compra cerca crescita spirituale, energia e guide, e pratica anche con meditazioni guidate. È la premessa della nicchia, visto che le categorie della scheda sono ESP e Angels & Spirit Guides. Un libro scettico, o uno che liquidasse le guide, la rinnegherebbe.",
+        "citazioni": [
+          "It’s a good book if you are interested in spiritual growth, energy, and learning how to trust your inner guidance.",
+          "She also offers various meditations to connect with your guides and offers much more."
+        ]
+      },
+      {
+        "punto": "Radicamento e protezione dell'energia. La sicurezza fa parte di quello che si compra ed è anche nella promessa della scheda («psychic self-defense»). Lo dice una voce sola, e parla di «a few techniques».",
+        "citazioni": [
+          "It’s a great book with very good advice and a few techniques to keep you grounded and protect your energy field."
+        ]
+      },
+      {
+        "punto": "Funziona anche per chi pratica da anni. Due lettori con lunga esperienza scrivono di aver imparato ancora, e un terzo lo consiglia a ogni livello.",
+        "citazioni": [
+          "I have been doing healing and readings for many years and still got a lot out of this book.",
+          "I've been in tune with my psychic abilities for many years but after reading Lisa'a book, Awaken Your Psychic Ability, I learned so much more.",
+          "Whether you are just starting out or are more experienced Lisa's latest book is a must read."
+        ]
+      }
+    ],
+    "prezzo": "Nessuna delle 13 recensioni visibili parla del prezzo o del rapporto qualità-prezzo: non ci sono né lamentele né elogi. Il dato di posizionamento qui manca. Non è un via libera.",
+    "scartate": [
+      "Lamentele sulla copia fisica (stampa, rilegatura, pagine, consegna): fra le 13 recensioni non ce n'è nessuna. I refusi di «A lot of typos» non sono un difetto della copia ma del testo, e restano fra le lacune.",
+      "«Outstanding!» (5 stelle), «This is such a GREAT book. It is very informative. I loved everything about it. I couldn't put it down!»: un elogio senza contenuto da analizzare.",
+      "«I am surprised more people haven't bought this.», da «More detailed information than elsewhere» (5 stelle): è un'opinione sulle vendite, non sul contenuto. Il resto della recensione l'ho usato.",
+      "«A Psychic Themed Book Of Deep Pondering» (5 stelle): è quasi tutta un elenco dei contenuti del libro, senza giudizi né richieste. Ne uso soltanto il tema del non confrontarsi con gli altri.",
+      "«So far, so good.» (5 stelle): la lettrice non ha finito il libro («I’m really enjoying this book so far»), quindi il giudizio è provvisorio. La uso solo per il tema dell'etica.",
+      "«Truly written with so much detail and passion» (5 stelle): a parte «so much depth», che uso come prova contraria nella lacuna sulla profondità, è un elogio generico («A massive amount of love has been put into this book»).",
+      "«Interesting and Easy to Connect With» (5 stelle) riguarda l'audiolibro: vale per il contenuto e per la voce, non dice nulla di impaginazione o stampa."
+    ],
+    "limiti": [
+      "Manca la recensione da 1 stella: è dietro il login di Amazon e la sta recuperando Cowork. Sui numeri pesa poco, sulle lacune parecchio. L'1% di 120 valutazioni è circa una valutazione, e potrebbe non avere testo. Ma accanto alle due da 3 stelle sarebbe la terza voce critica. Se confermasse la poca pratica, la lacuna principale passerebbe da una voce a due: più solida, ma ancora sotto le tre che fanno una tendenza, e la confidenza salirebbe al massimo a media. Se portasse un tema nuovo, sarebbe un indizio isolato da aggiungere, non una correzione delle conclusioni. In nessun caso cambia la parte «da non toccare», che poggia su undici cinque stelle concordi. Quando la recensione arriva, questa analisi va rifatta includendola.",
+      "Il buco più grande non è la recensione da 1 stella. Le 3 stelle sono il 6% delle valutazioni, circa 7, e se ne vedono 2. Le 4 stelle sono un altro 6%, circa 7, e non se ne vede nessuna. Sono le fasce in cui il lettore scrive più spesso che cosa avrebbe voluto in più. Quante di quelle circa 14 valutazioni abbiano un testo non si sa, perché le 120 sono valutazioni e non recensioni scritte. Per alzare la confidenza servono anche le recensioni filtrate a 3 e 4 stelle, non solo quella da 1. Il filtro per stelle passa dallo stesso login.",
+      "Nessuna recensione chiede esplicitamente esercizi da fare, un quaderno, un diario o un programma a giorni. La richiesta di pratica è formulata come «the what and how», non come un tipo di prodotto. Le recensioni da sole non dicono se il buco si copre meglio con un libro a testo pieno o con un libro da compilare.",
+      "La lettura dell'indice nella prima lacuna viene dall'anteprima Kindle riportata nella scheda, non dalle recensioni: spiega la lacuna ma non la conta.",
+      "La lamentela sulla pratica è la recensione più recente delle tredici (4 luglio 2026), quindi riguarda il libro come si vende oggi. Quella sui refusi è del febbraio 2024."
+    ]
+  },
+  "piano": {
+    "titolo": "Psychic Practice, Step by Step",
+    "sottotitolo": "A Workbook for Beginners, from First Hunch to Trusted Insight",
+    "lingua": "en",
+    "argomento": "A step-by-step practice workbook for developing intuition and psychic perception from zero, set inside a spiritual frame. Each section opens with a few warm paragraphs on why and how. The rest of the section is work on the page: guided exercises, scored test sheets, logs, self-profiles and reflection prompts.",
+    "lettore": "Adults who are open to intuition and to the spiritual side of life, and who have already had experiences they can't explain: a hunch that turned out right, a dream that came true, knowing who was calling before the phone rang. Most are complete beginners. They may have read an introduction or two, but they still don't know what to do, in what order, or how to tell whether it's working. They want a calm, safe, structured practice they can do alone at home in short sessions, pen in hand. Some have more experience: they already meditate, work with energy or give readings, and they want a disciplined routine and an honest record of their practice. None of them is looking for proof that psychic ability exists, or for a skeptical debate.",
+    "promessa": "A practice the reader does, not one they only read about. Section by section the book takes them from noticing their first hunches to working with impressions they have learned to check. Along the way they get: a short opening and closing routine to stay grounded and protected; ways to tell intuition from anxiety or wishful thinking; a profile of their strongest intuitive sense, with exercises for each sense; low-stakes experiments scored on the page; a symbol dictionary built from their own impressions; logs for signs and dreams; partner exercises with an ethical framework; a guided meditation to meet a guide; and, at the end, a routine they design themselves. Every page asks for something different. The book promises a method and a record of the reader's own progress. It does not promise psychic powers, accuracy or results.",
+    "tono": "Warm, close and plain-spoken, like an experienced friend coaching at the kitchen table. Explanations are short, steps are numbered and clear, and encouragement comes without hype. The book takes the spiritual frame seriously (energy, guides, meditation) and respects the reader's pace. It never suggests the reader has to be or do more than they are. It is honest about misses, never frightening about spirits or energy, and makes no guarantees.",
+    "genere": "non-fiction",
+    "categoria": "medium",
+    "perche_questa_categoria": "Il libro di partenza è un full-content: 208 pagine di testo con qualche meditazione. La lacuna che vale un libro è la pratica. L'unica lettrice che ne parla trova la guida pratica «quite minimalistic» e dice che il principiante resta senza «the what and how». Anche una recensione a cinque stelle, lodandolo, parla di «a few techniques». All'avvio l'autore ha scelto il vantaggio «più pratico». Il mercato va nella stessa direzione: nell'autocompletamento di Amazon ci sono «psychic development workbook», «intuition workbook», «psychic journaling» e «clairvoyance journal», e «psychic development workbook» dà solo 844 risultati. Inoltre due workbook della nicchia stanno in classifica meglio del concorrente: BSR #65,433 e #43,237, contro #92,515. È un medium vero, non un low-content: ogni pagina ha un compito suo (profilo, test con punteggio, mappa del corpo, dizionario dei simboli, registro con domande che cambiano, copione di meditazione, piano). Non è nemmeno un full-content con esercizi in coda. Ogni sezione ha un testo breve, nella voce calda che le cinque stelle lodano, e porta subito a qualcosa da fare.",
+    "pagine_obiettivo": 160,
+    "prezzo": 13.99,
+    "valuta": "USD",
+    "perche_questo_prezzo": "Il prezzo nasce dalle pagine: circa 160, formato 6x9, interno in bianco e nero. Con la tariffa di stampa KDP per amazon.com (circa 1,00 USD fissi più 0,012 USD a pagina, da verificare su quella in vigore) una copia costa circa 2,92 USD. A 13,99 USD la royalty del 60% lascia circa 5,47 USD a copia. Un libro da compilare si vende quasi solo in cartaceo, quindi è il cartaceo che deve portare il margine. A 12,99 resterebbero circa 4,87 USD, a 11,99 circa 4,27. Sopra 14,99 si chiede troppo a un principiante per 160 pagine. Le recensioni non parlano di prezzo, né a favore né contro: qui non c'è nessun segnale. Il controllo prezzi della pipeline lo ricalcola sulle pagine finali.",
+    "parole_chiave": [
+      "develop your intuition and intuition development",
+      "clairvoyance journal and clairvoyance tools",
+      "spirit guides and guided meditation",
+      "esp book extrasensory perception",
+      "clairaudience clairsentience claircognizance",
+      "energy protection and grounding techniques",
+      "dream journaling and synchronicity signs"
+    ],
+    "categorie": [
+      "Books > Religion & Spirituality > Occult & Paranormal > Parapsychology > ESP",
+      "Books > Religion & Spirituality > Occult & Paranormal > Parapsychology > Clairvoyance & Precognition",
+      "Books > Religion & Spirituality > New Age & Spirituality > Angels & Spirit Guides"
+    ],
+    "la_lacuna_che_copre": "La prima: pratica guidata, che cosa fare e come, partendo da zero. Ha una ricorrenza ed è l'unica segnata come vale_un_libro: true. È anche l'unica che coincide con quello che il libro di partenza promette, e una cinque stelle la conferma in modo indiretto quando loda «a few techniques». Il libro nuovo ne fa la sua ragione d'essere: ogni sezione finisce sulla pagina, con qualcosa da fare, provare e registrare. Copre anche la seconda lacuna, nel senso in cui la legge l'analisi: la sostanza che manca è il «come», non altra teoria. Per questo il libro non carica concetti. La terza lacuna, i refusi, non è una ragione d'essere ma una soglia minima: il testo deve essere pulito, e lo garantisce il controllo redazionale della pipeline. La confidenza è bassa, perché la lacuna poggia su una voce sola.",
+    "che_cosa_tiene": [
+      "A warm, close voice that never makes the reader feel inadequate or behind.",
+      "Information in small, digestible doses, always tied to lived practice rather than abstract theory.",
+      "Down-to-earth common sense: it names experiences the reader has already had and gives them a framework they can work with.",
+      "Order: a clear sequence where each section builds on the previous one, which readers value most in spiritual material.",
+      "Ethics and respect: develop your own gift without comparing yourself to others or to psychics on TV, choose words carefully, and never read for anyone without consent.",
+      "The spiritual frame taken seriously: energy, guides and meditation are part of the practice. This is not a skeptic's book.",
+      "Grounding and energy protection, here built into a full opening and closing routine used at every session rather than a few scattered techniques.",
+      "Value for experienced practitioners too: every section ends with 'going further' variations.",
+      "A clean, carefully edited text."
+    ],
+    "che_cosa_non_fa": [
+      "No map of spiritual realms, no shamanic journeying or power animals, no nature spirits, no mediumship or contact with the dead, no ancestors, angels or ascended masters. Guides appear only as one practice, with discernment.",
+      "No tarot, oracle cards, runes, pendulums, astrology or other divination tools: the practice relies on the reader's own perception.",
+      "No health, legal or financial predictions and no healing. It never suggests reading someone's medical condition, and it never replaces a doctor or a therapist.",
+      "No guarantees: no promise of becoming psychic, no accuracy rates, no results in a set number of days.",
+      "No scientific case for or against ESP and no parapsychology debate. The experiments in the book are personal feedback, not proof.",
+      "No advice on reading professionally: nothing on pricing, marketing or setting up a practice.",
+      "No blank journal pages and no repeated lined pages: every page has its own prompt, layout or task.",
+      "No long theory chapters: explanations stay short and always lead to something to do."
+    ],
+    "argomenti": [
+      "Where you are starting from: an inventory of the experiences the reader has already had (hunches, dreams that came true, knowing who is calling, sensing the mood of a room), a simple framework to name each one, and a page to set personal intentions and honest expectations.",
+      "The session frame: a short opening and closing routine used before and after every exercise in the book (grounding, centering, setting energetic boundaries, closing down). It is taught step by step and turned into a checklist the reader can follow from memory.",
+      "Hunch or noise: how an intuitive impression differs from fear, wishful thinking, memory and imagination. Includes a body-signal map and a comparison log to start telling them apart in daily life.",
+      "Your strongest channel: a self-profile of the intuitive senses (seeing, hearing, feeling, knowing, plus smell and taste), followed by distinct exercises for each sense, so the reader knows where to start and what to strengthen.",
+      "Low-stakes testing: simple experiments the reader can run alone (who is calling, sealed envelopes, colors, objects held in the hand), each with its own score sheet. How to read hits, near misses and misses honestly, without self-deception and without discouragement.",
+      "Clear questions and personal symbols: how to phrase a question that can be answered, how impressions arrive as images, words or sensations, and how to build a symbol dictionary from the reader's own experiences rather than a borrowed list.",
+      "Signs, synchronicities and dreams: recall techniques, a dream log and a sign log whose prompts change from page to page, and a way to review them weeks later to see what held up.",
+      "Practicing with another person: consent, partner exercises, giving and receiving feedback, and the ethics of sharing impressions. No predictions about health, death or legal matters, care with words, and no comparing one's progress with anyone else's.",
+      "Meeting a guide: a guided meditation, questions for discernment (does it feel safe, kind and consistent), and pages to record each contact. The spiritual frame is taken seriously, without a hierarchy of beings.",
+      "When practice stalls or overwhelms: doubt, plateaus, feeling too open, effects on sleep and mood. Quick resets, when to pause, and when to talk to a doctor or a therapist.",
+      "Your own practice: a four-week starter plan that recombines the exercises, then a routine the reader designs for themselves, with a monthly review page and 'going further' variations for those who already practice."
+    ],
+    "rischi": [
+      "La lacuna che giustifica il libro poggia su una sola recensione. La confidenza è bassa: 13 recensioni con testo su 120 valutazioni, e mancano quelle da 1, 2 e 4 stelle. Se le recensioni filtrate portano una lacuna diversa, il posizionamento va rivisto.",
+      "Il medium-content è un'inferenza, non una richiesta: nessuna recensione chiede esercizi da compilare o un quaderno, e le cinque stelle lodano qualità del testo (voce, ordine, piccole dosi). La scelta si regge sulla lacuna del «what and how», sul vantaggio «più pratico» scelto all'avvio e sui segnali di mercato raccolti da Cowork. Se il pubblico volesse soprattutto un libro da leggere, il posizionamento sbaglia formato.",
+      "Un libro da compilare si vende male in Kindle. La parte della nicchia che compra eBook e audiolibri (il concorrente li ha tutti e due) questo libro non la raggiunge.",
+      "Rischio low-content: i registri di sogni, segni e test tendono a ripetere la stessa griglia. Ogni pagina deve avere un prompt, un layout o un compito suo. L'agente di impaginazione conta le pagine uguali: se superano la metà, il libro esce dalla categoria.",
+      "Nella nicchia ci sono già workbook affermati, con titoli simili fra loro. Prima di impegnarsi bisogna cercare nello store «Psychic Practice, Step by Step», per escludere omonimie o titoli confondibili.",
+      "Parole chiave. Le frasi verificate senza parole del titolo erano poche: «psychic», «beginners» e «workbook» stanno in titolo e sottotitolo e sono già indicizzate. Insieme alle parole delle caselle coprono «psychic development workbook», «psychic abilities for beginners» e «psychic development for beginners». Caselle 1 e 2: due frasi verificate in autocompletamento, messe una accanto all'altra; la stringa intera non è verificata, e «clairvoyance journal» e «clairvoyance tools» non hanno il numero di risultati. Casella 3: «spirit guides» è verificata, «guided meditation» no. Casella 4: «esp book» è verificata, «extrasensory perception» no. Le caselle 5, 6 e 7 NON sono verificate; la 6 e la 7, insieme al titolo, ricostruiscono le frasi verificate «psychic energy» e «psychic journaling». Helium 10 e Publisher Rocket non hanno dato volumi, quindi nessuna frase ha un volume misurato. Vanno verificate alla scheda con `python3 -m kdpfactory parole-chiave psychic-intuition`.",
+      "Categorie: la scheda riporta solo i nomi foglia (ESP, Angels & Spirit Guides, Divination), quindi i percorsi proposti vanno controllati sull'elenco KDP vivo. Clairvoyance & Precognition è una mia deduzione. Divination è esclusa apposta: attira chi cerca tarocchi e rune, che il libro non tratta.",
+      "Prezzo: il costo di stampa è stimato su 6x9, bianco e nero, con la tariffa KDP da verificare. Se l'impaginazione sceglie un formato più largo per dare spazio alla scrittura, o se le pagine cambiano, margine e prezzo vanno ricalcolati.",
+      "Chi cerca reami spirituali, sciamanesimo, medianità o angeli resterà deluso. La descrizione deve dire subito che cosa il libro non copre, per non raccogliere recensioni basse nate da aspettative sbagliate.",
+      "Promesse: «Trusted Insight» non deve suonare come garanzia di accuratezza. Descrizione e testo non promettono poteri, percentuali o tempi, e gli esperimenti con punteggio si presentano come riscontro personale, non come prova.",
+      "Salute mentale: la sezione su sovraccarico e blocchi deve dire quando fermarsi e rivolgersi a un professionista, senza fare diagnosi e senza presentare un sintomo come un dono. Va passata a fact-checker e conformità.",
+      "Pseudonimo nuovo, senza seguito: almeno due recensioni del concorrente vengono da lettori che seguono già l'autrice. Il libro nuovo può vincere solo con contenuto, copertina e parole chiave."
+    ]
+  },
+  "originalita": {
+    "note": "Il piano descrive un libro indipendente. Titolo e sottotitolo si distinguono subito da quelli del concorrente: hanno in comune solo «Psychic», che è la parola della nicchia. In titolo, sottotitolo, argomenti e parole chiave non c'è nessun nome, titolo o marchio del libro di partenza; «develop your intuition» è una frase di ricerca generica, non un titolo. La lacuna dichiarata è la prima di lacune.json, segnata vale_un_libro: true. Restano due attenzioni minori, da tenere presenti quando si scrive la scaletta.",
+    "segnalazioni": [
+      {
+        "agent": "originalita",
+        "severity": "minore",
+        "category": "struttura parallela",
+        "issue": "Cinque temi in comune con il concorrente compaiono nello stesso ordine del suo indice. La cornice di radicamento e protezione (arg. 2) corrisponde ai cap. 1-2, il profilo dei sensi (arg. 4) al cap. 3, sogni e segni (arg. 7) al cap. 4, la guida (arg. 9) al cap. 5 e la routine finale (arg. 11) alla «Conclusion: Establish Your Daily Psychic Routine». Fra questi stanno sei argomenti propri e i capitoli 6-11 sono esclusi, quindi non è una copia. È però lo scheletro dei primi cinque capitoli più la conclusione, e i titoli della scaletta potrebbero avvicinarlo ancora di più.",
+        "chapter": null,
+        "quote": "Signs, synchronicities and dreams: recall techniques, a dream log and a sign log whose prompts change from page to page",
+        "suggestion": "Nella scaletta e nell'indice, i titoli dei capitoli non devono riprendere le formule del concorrente («Defend Your Psychic Self», «Open Your Psychic Senses», «Mine Dreams, Signs, and Omens», «Work with Your Guides», «Daily Psychic Routine»). Conviene anche far partire il registro di sogni e segni subito dopo la cornice di sessione. Il piano stesso prevede di rileggerlo «weeks later», quindi aprirlo prima ha senso, e così si interrompe la sequenza parallela."
+      },
+      {
+        "agent": "originalita",
+        "severity": "minore",
+        "category": "formulazione del concorrente",
+        "issue": "«Meet your guide meditation» è il nome di una sezione del libro di partenza. Lo cita la recensione «A Psychic Themed Book Of Deep Pondering», insieme a «meet your angels meditation». La pratica è comune nella nicchia e può restare, ma il nome è quello del concorrente.",
+        "chapter": null,
+        "quote": "Meeting a guide: a guided meditation, questions for discernment (does it feel safe, kind and consistent), and pages to record each contact.",
+        "suggestion": "Dare all'esercizio un nome proprio, legato al discernimento, che è la parte originale di questa sezione. Non usare «Meet Your Guide» come titolo di capitolo o di esercizio, né nella descrizione."
+      }
+    ]
+  }
+}

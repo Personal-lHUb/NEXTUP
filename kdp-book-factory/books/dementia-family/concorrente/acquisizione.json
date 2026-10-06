@@ -1,0 +1,483 @@
+{
+  "asin": "B0GN73RYMF",
+  "indicazione": "Dalle domande d'avvio (`concorrente/avvio.json`), decise dall'autore:\n\n- Mercato: amazon.com. Il libro è in lingua «en» e il prezzo si propone in USD.\n- Categoria: La stessa del libro di partenza: full-content se è un testo da leggere, medium-content se è un libro da compilare. Il posizionamento la propone, l'autore la conferma prima della scaletta.\n- Dove il libro nuovo deve battere quello di partenza:\n  - Le lacune delle recensioni: quello che chi ha già comprato l'altro libro dice di non aver trovato, soprattutto nelle recensioni da 2 e 3 stelle.\n  - Più pratico: struttura chiara, esempi concreti, passi da seguire, un indice che si consulta.\n  - Contenuto migliore: più completo e più preciso, senza allungare e senza ripetere quello che l'altro libro fa già bene.\n  - Un lettore più preciso: una situazione, un'età o un mestiere che l'altro libro serve male.\n  - Una copertina più attraente: nei risultati di ricerca, accanto all'altra, si nota prima e il titolo si legge meglio. Per questo il titolo dev'essere corto e forte in miniatura: le parole lunghe vanno nel sottotitolo.",
+  "scheda": {
+    "asin": "B0GN73RYMF",
+    "titolo": "The Vanishing Family",
+    "sottotitolo": "Love, Fate, and the Quest to End Dementia",
+    "autore": "Robert Kolker",
+    "editore": "Random House Large Print",
+    "lingua": "en",
+    "prezzo": 37.0,
+    "valuta": "USD",
+    "pagine": 544,
+    "formato": "Paperback, Large Print (Edition: Large type / Large print) — 6.13 x 1.09 x 9.25 inches",
+    "pubblicato_il": "November 3, 2026",
+    "voto_medio": 4.8,
+    "numero_recensioni": 28,
+    "rango_generale": 30043,
+    "categorie": [
+      {
+        "nome": "Genetics (Books)",
+        "rango": 1
+      },
+      {
+        "nome": "Dementia",
+        "rango": 1
+      },
+      {
+        "nome": "Alzheimer's",
+        "rango": 1
+      }
+    ],
+    "ripartizione_stelle_percento": {
+      "5": 86,
+      "4": 8,
+      "3": 6,
+      "2": 0,
+      "1": 0
+    },
+    "edizioni": [
+      {
+        "edizione": "Paperback, Large Print",
+        "usata_per": "campi principali di questa scheda",
+        "asin": "B0GN73RYMF",
+        "isbn_10": null,
+        "isbn_13": "979-8217413270",
+        "editore": "Random House Large Print",
+        "disponibilita": "pre-ordine: «This title will be released on November 3, 2026», «Pre-order now», venduto e spedito da Amazon.com",
+        "prezzo": 37.0,
+        "prezzo_di_listino": null,
+        "valuta": "USD",
+        "pagine": 544,
+        "formato": "6.13 x 1.09 x 9.25 inches",
+        "peso": "1.21 pounds",
+        "pubblicato_il": "November 3, 2026",
+        "lingua": "English",
+        "rango_generale": 30043,
+        "categorie": [
+          {
+            "nome": "Genetics (Books)",
+            "rango": 1
+          },
+          {
+            "nome": "Dementia",
+            "rango": 1
+          },
+          {
+            "nome": "Alzheimer's",
+            "rango": 1
+          }
+        ],
+        "url": "https://www.amazon.com/dp/B0GN73RYMF"
+      },
+      {
+        "edizione": "Hardcover",
+        "usata_per": "solo qui, a confronto: è l'edizione in vendita e quella che compare nei risultati di ricerca",
+        "asin": null,
+        "isbn_10": "0385551037",
+        "isbn_13": "978-0385551038",
+        "editore": "Doubleday",
+        "disponibilita": "in vendita",
+        "prezzo": 32.0,
+        "prezzo_di_listino": 35.0,
+        "sconto_come_appare": "with 9 percent savings",
+        "valuta": "USD",
+        "pagine": 368,
+        "formato": "6.41 x 1.17 x 9.53 inches",
+        "peso": "1.27 pounds",
+        "pubblicato_il": "September 29, 2026",
+        "lingua": null,
+        "rango_generale": 1182,
+        "categorie": [
+          {
+            "nome": "Genetics (Books)",
+            "rango": 1
+          },
+          {
+            "nome": "Dementia",
+            "rango": 1
+          },
+          {
+            "nome": "Alzheimer's",
+            "rango": 1
+          }
+        ],
+        "url": "https://www.amazon.com/dp/0385551037"
+      },
+      {
+        "edizione": "Kindle",
+        "usata_per": "solo qui, e per l'indice (anteprima Kindle)",
+        "asin": "B0GFCRKJDH",
+        "prezzo": 15.99,
+        "valuta": "USD",
+        "pagine": null,
+        "editore": null,
+        "pubblicato_il": null,
+        "rango_generale": null
+      },
+      {
+        "edizione": "Audiobook",
+        "usata_per": "solo qui",
+        "prezzo": null,
+        "prezzo_come_appare": "$0.99 with membership",
+        "valuta": "USD"
+      }
+    ],
+    "indice": [
+      "Cover",
+      "Also by Robert Kolker",
+      "Title Page",
+      "Copyright",
+      "Contents",
+      "Dedication",
+      "Prologue",
+      "Family Tree",
+      "Part I — Chapter 1 … Chapter 10",
+      "Part II — Chapter 11 … Chapter 15",
+      "Part III — Chapter 16 … Chapter 29",
+      "Part IV — Chapter 30 … Chapter 39",
+      "Epilogue",
+      "Acknowledgments",
+      "A Note on Sources",
+      "Notes",
+      "Bibliography",
+      "Index",
+      "About the Author"
+    ],
+    "descrizione": [
+      "From the #1 New York Times bestselling author of Hidden Valley Road comes the heart-wrenching journey of a family facing an unthinkable destiny, whose flawed genetic code might hold the long-sought key to a cure for dementia.",
+      "In the idyllic American town of Pleasant Hills, Pennsylvania, there lived a family with nine siblings, the youngest a girl named Barb. As the older children headed off to college and started their lives, only Barb was home to see their beautiful, still-young mother fall under a gothic spell, changing into someone she didn’t recognize: withdrawn, neglectful, uncaring. Thus begins The Vanishing Family, journalist Robert Kolker’s superb follow-up to Hidden Valley Road (“Deeply compassionate and chilling,” wrote The Washington Post). This family, we learn, has a genetic mutation that causes dementia, but with an especially cruel twist. As early as their forties, formerly loving parents and hard-driving executives will lose their jobs, have affairs, take up drinking—shed all inhibitions and sense of responsibility—and become people their families hardly know. Their former personalities seem to vanish—and there is a fifty-fifty chance that it will happen to their children, too.",
+      "The Vanishing Family unfolds like a heartbreaking thriller as the siblings begin to realize that what happened to their mother is happening to them: first one, then two, three, four, and more begin to change. Sue, in search of a calling, finds her place in caring for the others. Barb sets out to find a cure. Alongside their story, Kolker weaves in the dramatic scientific fight against dementia; after decades of blind alleys, this this family’s rare form of FTD (frontotemporal dementia) might lead to a breakthrough in the prevention and treatment of all dementia—including the scourge of Alzheimer’s disease. Moving, intimate, unexpectedly hopeful and redemptive, The Vanishing Family is an enthralling narrative about one family’s fate, and a medical detective story that speaks to all of us who fear losing ourselves at the end."
+    ],
+    "recensioni": [
+      {
+        "stelle": 5,
+        "titolo": "Heartbreaking book about a rare disease. Worth every second of your time.",
+        "data": "Reviewed in the United States on September 30, 2026",
+        "formato": "Hardcover",
+        "acquisto_verificato": true,
+        "testo": "Just this morning, a friend of mine that I have worked with for over fifteen years as a cofacilitator of a caregiver support group for mental illness asked me \"Really? FTD? Like the florists?\" Yeah. I told her I would send her a copy, since I consumed it in less than a day.\n\nThree years ago, at age 71, my wife was diagnosed with FTD. After years of (accurate) mental health diagnoses, it appears that FTD was lurking in the background and steadily working its way past the MDD diagnosis that has remarkably similar symptoms, maybe for decades. It was not until a routine MRI ordered by a neurologist, that we caught the FTD. The only reason we had the MRI was because she had a major seizure (one time only) six years earlier. I had never heard of FTD, my focus was on behavioral health. We got the diagnosis by reading the MRI results on the medical portal before we were contacted by her doctor (not his fault, federal law now demands immediate release of results, not matter how dire). I actually had to look up what it meant.\n\nI joked with people that I thought the doctor got the diagnosis mixed up with a flower order. I was that uninformed. We are now, thanks to advise from a support group at MGH, having hospice managing her condition. Most people don't know hospice will cover FTD treatment.\n\nI knew this book was coming, and I prepared myself for it mentally. It arrived yesterday. I am finished. There are arrows in this book that will pierce your heart.\n\nWe have decided to do a full genetic workup so the children and grandchildren can also be tested if necessary. The big difference: with mental health issues, recovery is often possible. For FTD, no cure, no treatment, no hope of recovery.\n\nFew books I have read have had the impact of this one. The first that comes to mind is \"Mountains Beyond Mountains\" by Tracy Kidder. Like this book, it changed my way of looking at the world, at illness, and what our job truly is in this world."
+      },
+      {
+        "stelle": 5,
+        "titolo": "Very memorable book.",
+        "data": "Reviewed in the United States on October 4, 2026",
+        "formato": "Kindle",
+        "acquisto_verificato": true,
+        "testo": "Loved this book. I gave up trying to keep all the characters straight, but I was ok with just barreling through. I loved the balance of humanity and science. My only criticism--and it's minor-- is that my Kindle edition ended at 67%, in the 270-page realm. The rest of the book was acknowledgments, thanks, notes etc. That was kind of annoying to me."
+      },
+      {
+        "stelle": 5,
+        "titolo": "Heartbreaking and hopeful at the same time",
+        "data": "Reviewed in the United States on October 2, 2026",
+        "formato": "Hardcover",
+        "acquisto_verificato": true,
+        "testo": "I just finished reading this book in 2 days. Be ready to cry and yet smile while reading. The love this family has for one another jumps off the page. I am curious to see how the story ends with the younger generation. Only time will tell."
+      },
+      {
+        "stelle": 5,
+        "titolo": "Kolker’s writing is stunningly beautiful",
+        "data": "Reviewed in the United States on October 4, 2026",
+        "formato": "Kindle",
+        "acquisto_verificato": true,
+        "testo": "I tore through this book in two days. Robert Kolker is an amazing story teller, bringing each family member to life with compassion and depth. The chapters on the medical research are equally as engaging and thought provoking. An amazing read."
+      },
+      {
+        "stelle": 5,
+        "titolo": "very highly recommended intimate family drama",
+        "data": "Reviewed in the United States on September 29, 2026",
+        "formato": "Kindle",
+        "acquisto_verificato": false,
+        "testo": "The Vanishing Family by Robert Kolker is a very highly recommended intimate family drama as it presents an account of a family's experiences with a hereditary illness alternating with a medical detective/research story. This represents exceptional nonfiction.\n\nJournalist Robert Kolker follows a family with nine siblings in Pleasant Hills, Pennsylvania. When their mother, Jean, began to change into a different person while in her forties, the youngest child, Barb, was the only one still at home to witness the change in her mother as she began drinking, her personality changed, and she became withdrawn, neglectful, and uncaring. This begins the realization that something is wrong. Then some of their siblings begin to fall into the same pattern while still young, in their middle age, while another sibling, Sue, devotes her life to caring for the inflicted. The support among family members is admirable.\n\nThis is a very intimate and heartbreaking story following a real family as they learn there is a fifty percent chance they will also succumb to the genetic disorder. Koler follows the journey of the family while five of the nine siblings are eventually diagnosed, as well as, later, some of their children. Alongside the very personal story, Kolker also follows the scientific research into dementia. There is a family tree at the opening of the novel (no last names and some first names are changed) to help you follow their story. Additionally, Notes and a Bibliography are included at the end of the text.\n\nIt is determined that the family has a rare inherited form of FTD, frontotemporal dementia, a devastating neurodegenerative disorder that \"attacks the part of the brain responsible for planning, organizing, expressing language, understanding social cues, and exercising judgment.” The genetic mutation, V337M, has a fifty percent chance of being passed on to progeny. Those inflicted gradually have their personality, judgment, and language erode. It is thought that this family’s flawed genetic code and rare form of FTD might lead to a breakthrough in the prevention and treatment of all dementia, including Alzheimer’s disease. There is a discussion how gene-editing (CRISPR) and IVF genetic screening that may offer hope, but this also brings up ethical questions.\n\nOne of the big questions family members face as others succumb to FTD, is \"Do I get tested? Do I want to know?\" This is an age of genetic prognostication, of noting and discovering future biomarkers of illness, but do you want to know? FTD is emotionally devastating for those around you, as you become someone they don't know. For many people, as you are giving your family's medical history, you are listing off a series of symptoms and illnesses without much thought, but with some diseases, like dementia, it is different, as it is for anything with serious repercussions that can be passed on genetically to your children. Kolker handles both the deeply emotional and personal account and the scientific research background equally well.\n\nThe Vanishing Family is an excellent choice for everyone who appreciates a well written and considered account of a family and a devastating genetic disorder. as well as those who read Kolker's book Hidden Valley Road. Thanks to Knopf Doubleday for providing me with an advance reader's copy via NetGalley. My review is voluntary and expresses my honest opinion."
+      },
+      {
+        "stelle": 4,
+        "titolo": "Fascinating account of family with dementia",
+        "data": "Reviewed in the United States on September 29, 2026",
+        "formato": "Hardcover",
+        "acquisto_verificato": false,
+        "testo": "The Vanishing Family offers an incredible lesson on the current state dementia by focusing on one large family with the genetic predisposition to a very certain type of dementia. Almost every member of this large family has the gene, and Kolker takes us through their lives before and after the cognitive decline. Interspersed between family stories are \"lessons\" in the history of dementia studies, which I found fascinating. We read how some of the members were \"broadsided\" by the disease, and then others were expecting it when they learned about their diagnosed family members. The book is emotional and educational. I have so much more appreciation for the intricacies of these brain disorders, the research behind it all, and the potential treatments after reading this book.\n\nThanks to NetGalley for allowing me to read and review The Vanishing Family."
+      },
+      {
+        "stelle": 5,
+        "titolo": "VANISHING HOPE",
+        "data": "Reviewed in the United States on September 29, 2026",
+        "formato": "Hardcover",
+        "acquisto_verificato": false,
+        "testo": "This book is frightening. I knew a man with frontotemporal dementia who developed the disease in his late sixties and died before turning eighty, after years of suffering for both him and his family. Once bright, quiet, and gentle, he began showing changes that made his wife realize he was no longer the same person.\n\nHe seemed to follow many of the same paths of the family depicted in this book. However, there were many differences. The onset of this insufferable disease reared its ugly head with the mother of this large family. Instead of the positive, involved mother and wife, she took to her bed and became someone else. Everything was opposite: instead of a loving mother and wife, she became a solitary woman who no longer cooked, cleaned or showed affection to her needy family. She died of breast cancer and might have been saved if she had visited a doctor. Her tumor was visibly apparent, but before her husband would have noted the large tumor on her breast, he had left her for another woman.\n\nWhen some of the children became fearful of this dementia, they seemed to become the total opposites when they were afflicted. This was a family who were intelligent, hard-working and had important jobs in various industries until their symptoms began to be apparent at their jobs and to others. This family suffered unbearable agonies and yet, they tried to care for those who became afflicted despite the fact that as caretakers,, their siblings’ symptoms altered their own lives. They tried to retain their jobs for much-needed income but needed to care for their beloved siblings at the same time.\n\nThe medical community lacked up-to-date knowledge of this deadly form of dementia. Although the family generously opened their lives to scientists and physicians and contributed information to research, these efforts did little to slow the disease’s rapid progression. Scientific advances came too slowly, leaving the family with scant medical or financial support and little sympathy from the healthy world around them. They lived in fear that the disease would strike them too, even as some hoped to escape its devastating physical and emotional decline.\n\nIt is a brilliant book, Kolker is a courteous and intelligent author telling us a story that made me so sad, and frightened that science is no closer to helping these poor souls and their families.\n\nMy gratitude to NetGalley and Doubleday for this pre-published book. All opinions expressed are mine alone."
+      },
+      {
+        "stelle": 5,
+        "titolo": "A heartbreaking but necessary look at dementia",
+        "data": "Reviewed in the United States on September 29, 2026",
+        "formato": "Kindle",
+        "acquisto_verificato": false,
+        "testo": "I think this book honestly wrecked me in a really quiet, lingering way.\n\nAs someone who has had multiple family members go through dementia and Alzheimer’s, this didn’t feel like just a book I was reading, but it felt way too familiar. Almost uncomfortably so. The way Kolker describes the slow loss of self, the personality changes, the confusion… I’ve seen that up close. And reading it laid out like this brought all of that back in a way I wasn’t fully prepared for.\n\nWhat really got me was the love in this family. It’s devastating, but it’s also what drives everything. They’re not just dealing with illness; they’re actively searching for answers, for a cure, for anything that could stop what they’re watching happen over and over again. That kind of devotion, that refusal to just accept it, is honestly what makes the book so hard and so meaningful at the same time.\n\nAnd then there’s that horrifying realization that what happened to their mother starts showing up in the siblings too. That part is genuinely terrifying. Because I don’t have to imagine that fear... I already carry it. That constant wondering in the back of your mind, like is this going to be me someday? Is there anything I can do? Or is it just waiting?\n\nThat’s what makes this book so heavy. It’s not distant or clinical but it feels immediate. Like I am watching something unfold in real time that I already know too well.\n\nBut even with how devastating it is, there’s something really important underneath all of it. The science, the research, the decades of trying to understand this disease are what REALLY matters. And this family’s story shows exactly why it matters so much. If there’s even a chance that studying something like this can lead to answers for dementia or Alzheimer’s in general, then it has to be pursued. There’s a fragile kind of hope in that, even when everything else feels really bleak.\n\nThis book is heartbreaking, but it also feels necessary. It is definitely going to stay with me. And for anyone who has lived even a small version of this kind of loss, it hits even deeper than you expect it to."
+      }
+    ],
+    "fonte": {
+      "file": "cowork-concorrente-risposta.md",
+      "esito": "parziale",
+      "verifica": "5 ottobre 2026, 11:12–11:14 UTC",
+      "indirizzo_di_consegna": "New York 10001",
+      "url": [
+        "https://www.amazon.com/dp/B0GN73RYMF",
+        "https://www.amazon.com/dp/0385551037",
+        "https://read.amazon.com/sample/B0GFCRKJDH"
+      ]
+    },
+    "problemi": [
+      "Mancano le recensioni da 3 stelle. Cowork ha risposto «parziale»: il filtro per stelle e la pagina con tutte le recensioni chiedevano il login di Amazon e non sono stati aperti. Le recensioni da 3 stelle (6% delle valutazioni) quindi non ci sono, e nessuna di queste è stata letta. Le stelle 2 e 1 sono allo 0%.",
+      "Recensioni lette: 8, cioè 7 da 5 stelle e 1 da 4, contro le almeno dieci da 4-5 stelle chieste. Secondo Cowork sono le stesse 8 sulle schede paperback, hardcover e Kindle.",
+      "pagina.md contiene solo il commento d'istruzioni. La pagina è presa da cowork-concorrente-risposta.md, cioè dalla pagina come l'ha riportata Cowork, e non da un copia-incolla di Amazon.",
+      "Edizioni. L'ASIN B0GN73RYMF apre la Paperback Large Print (Random House Large Print), in pre-ordine, che esce il November 3, 2026. L'edizione in vendita, e quella che compare nei risultati di ricerca, è l'Hardcover (ISBN-10 0385551037, Doubleday, September 29, 2026). Le edizioni sono tenute distinte in `edizioni`. I campi principali della scheda sono tutti della Large Print, l'edizione dell'ASIN.",
+      "Da quale edizione viene ciascun campo, la Large Print (B0GN73RYMF): titolo, sottotitolo, autore, editore, lingua, prezzo e valuta, pagine, formato, pubblicato_il, rango_generale e rango nelle categorie.",
+      "Da quale edizione viene ciascun campo, nessuna in particolare: voto_medio, numero_recensioni e ripartizione_stelle_percento sono, secondo Cowork, gli stessi su paperback, hardcover e Kindle. Le recensioni sono comuni alle schede e ognuna porta il formato con cui è stata scritta: 4 Hardcover e 4 Kindle, nessuna sulla Large Print.",
+      "Da quale edizione viene ciascun campo, la descrizione: è quella che Cowork riporta per la scheda B0GN73RYMF. Cowork non dice se è identica sull'Hardcover.",
+      "Da quale edizione viene ciascun campo, l'indice: viene dall'anteprima Kindle (B0GFCRKJDH), non dal cartaceo, e i capitoli non hanno titolo, solo il numero.",
+      "Prezzo: i 37.00 USD della Large Print sono un prezzo di pre-ordine. L'Hardcover in vendita costa 32.00 USD, con List Price 35.00 USD («with 9 percent savings»).",
+      "Pagine: 544 della Large Print (Edition: Large type / Large print) e 368 dell'Hardcover. Sono due impaginazioni diverse dello stesso testo e i numeri non si possono confrontare.",
+      "Rango generale: #30,043 in Books per la Large Print, #1,182 in Books per l'Hardcover. Tutte e due le edizioni sono #1 in Genetics (Books), Dementia e Alzheimer's.",
+      "Categorie: la pagina mostra solo il nome dell'ultima categoria, senza il percorso completo.",
+      "numero_recensioni (28) conta le valutazioni, non le recensioni scritte: sulla scheda se ne vedono 8 scritte.",
+      "Le quattro recensioni senza «Verified Purchase» sono «very highly recommended intimate family drama», «Fascinating account of family with dementia», «VANISHING HOPE» e «A heartbreaking but necessary look at dementia». Cowork scrive che tutte dichiarano una copia omaggio NetGalley, ma nel testo lo dicono solo le prime tre. La quarta non ne parla.",
+      "Lingua: viene dai Product details della Large Print («English»). Per l'Hardcover Cowork non riporta la lingua.",
+      "Kindle (B0GFCRKJDH): Cowork riporta solo il prezzo. Pagine, editore, data e classifica non ci sono. Audiobook: c'è solo «$0.99 with membership», senza prezzo pieno.",
+      "Refusi lasciati come sono sulla pagina: «this this» nella descrizione; «advise», «not matter how dire», «Koler», «inflicted», «caretakers,,», «current state dementia» e «disorder. as well as» nelle recensioni."
+    ]
+  },
+  "lacune": {
+    "lettore_reale": "Chi compra questo libro è prima di tutto un lettore di saggistica narrativa, che cerca «the balance of humanity and science» e lo finisce in uno o due giorni. Fra chi scrive, però, c'è una parte che la demenza ce l'ha in casa: il coniuge caregiver di una donna con FTD, l'unico di loro con acquisto verificato, che lo passa alla collega con cui conduce un gruppo di sostegno per caregiver, e chi ha avuto più familiari con demenza e Alzheimer e si chiede se toccherà a lui. Questi lo leggono come la propria storia e ci cercano risposte che un racconto non dà.",
+    "confidenza": "bassa",
+    "perche_questa_confidenza": "Le recensioni scritte sono 8 su 28 valutazioni: sette da 5 stelle e una da 4. Non c'è nessuna da 3 stelle (il 6%, circa due valutazioni su 28 se la percentuale è sul conteggio semplice, stanno dietro il login) e nessuna da 1 o 2 stelle (0%). Gli acquisti verificati sono solo quattro. Tre recensioni dichiarano una copia omaggio NetGalley, e la quarta non verificata non dice da dove venga la sua. Sono tutte scritte fra il 29 settembre e il 4 ottobre 2026, cioè nei primi sei giorni dall'uscita dell'Hardcover: sono lettori della prima ora. Nessuna chiede in modo esplicito qualcosa che manca, a parte un appunto dichiarato «minor» sull'edizione Kindle. La 4 stelle non dice perché toglie una stella. Le lacune 1-3 le ho lette fra le righe di tre lettori che la malattia l'hanno vista da vicino. La parte pratica (lacune 2 e 3) si regge in sostanza su due di loro, e uno solo ha l'acquisto verificato. Sui punti di forza le recensioni sono molto concordi: cinque su otto lodano l'equilibrio fra storia e scienza. Sulle lacune la concordanza riguarda i temi, non le lamentele.",
+    "lacune": [
+      {
+        "tema": "Toccherà a me? Il rischio ereditario e il test per chi resta",
+        "ricorrenze": 5,
+        "che_cosa_manca": "Secondo una recensione, il libro mette la domanda del test al centro della storia della famiglia. Chi la paura se la porta da casa resta però con le domande aperte: che cosa vuol dire la mia storia familiare, se fare il test, che cosa posso fare nel frattempo. Il libro racconta una forma rara, con «a fifty percent chance» di trasmissione. Chi scrive di sé porta invece «dementia and Alzheimer’s» in generale, oppure una diagnosi arrivata a 71 anni. Cinque recensioni toccano il tema, e due sono lettori che se lo chiedono per sé: il coniuge caregiver, che prepara il test genetico per figli e nipoti, e chi ha più familiari malati, che chiude la recensione con tre domande senza risposta. Nessuno scrive che il libro gliel'abbia negato: la lacuna l'ho letta fra le righe.",
+        "citazioni": [
+          "That constant wondering in the back of your mind, like is this going to be me someday? Is there anything I can do? Or is it just waiting?",
+          "As someone who has had multiple family members go through dementia and Alzheimer’s, this didn’t feel like just a book I was reading, but it felt way too familiar.",
+          "We have decided to do a full genetic workup so the children and grandchildren can also be tested if necessary.",
+          "One of the big questions family members face as others succumb to FTD, is \"Do I get tested? Do I want to know?\"",
+          "I am curious to see how the story ends with the younger generation. Only time will tell.",
+          "They lived in fear that the disease would strike them too, even as some hoped to escape its devastating physical and emotional decline."
+        ],
+        "vale_un_libro": true
+      },
+      {
+        "tema": "Accorgersene: quando il cambiamento sembra altro e nessuno sa che cos'è la FTD",
+        "ricorrenze": 3,
+        "che_cosa_manca": "Manca la strada fino alla diagnosi: riconoscere come malattia un cambiamento di personalità, distinguerlo da un disturbo psichiatrico, capire che cos'è la FTD quando arriva il referto. Il coniuge caregiver racconta anni di diagnosi di depressione, un referto letto da solo sul portale e una sigla che ha dovuto cercare. Chi conosceva un malato parla di medici senza conoscenze aggiornate. È l'esperienza dei lettori, non una critica al libro.",
+        "citazioni": [
+          "After years of (accurate) mental health diagnoses, it appears that FTD was lurking in the background and steadily working its way past the MDD diagnosis that has remarkably similar symptoms, maybe for decades.",
+          "I had never heard of FTD, my focus was on behavioral health.",
+          "We got the diagnosis by reading the MRI results on the medical portal before we were contacted by her doctor",
+          "I actually had to look up what it meant.",
+          "Really? FTD? Like the florists?",
+          "The medical community lacked up-to-date knowledge of this deadly form of dementia.",
+          "Once bright, quiet, and gentle, he began showing changes that made his wife realize he was no longer the same person.",
+          "We read how some of the members were \"broadsided\" by the disease, and then others were expecting it when they learned about their diagnosed family members."
+        ],
+        "vale_un_libro": true
+      },
+      {
+        "tema": "Dopo la diagnosi: chi cura, con quali aiuti, quale lavoro e quali soldi",
+        "ricorrenze": 2,
+        "che_cosa_manca": "Manca la parte pratica del prendersi cura: i servizi (hospice, gruppi di sostegno), il lavoro da tenere, i soldi, la vita di chi assiste che cambia. Il coniuge caregiver è l'unico acquisto verificato che vive la FTD in casa. Le informazioni pratiche le ha avute da un gruppo di sostegno, e nella recensione le passa agli altri come cose che «most people» non sanno, senza attribuirle al libro. Chi conosceva un malato riassume la famiglia del libro come lasciata senza aiuto medico né economico. Le fonti sono le stesse due della lacuna 2.",
+        "citazioni": [
+          "We are now, thanks to advise from a support group at MGH, having hospice managing her condition. Most people don't know hospice will cover FTD treatment.",
+          "They tried to retain their jobs for much-needed income but needed to care for their beloved siblings at the same time.",
+          "Scientific advances came too slowly, leaving the family with scant medical or financial support and little sympathy from the healthy world around them.",
+          "This family suffered unbearable agonies and yet, they tried to care for those who became afflicted despite the fact that as caretakers,, their siblings’ symptoms altered their own lives."
+        ],
+        "vale_un_libro": true
+      },
+      {
+        "tema": "La speranza promessa e quella trovata",
+        "ricorrenze": 3,
+        "che_cosa_manca": "Questa è la promessa non mantenuta. La scheda vende il libro come «unexpectedly hopeful and redemptive» e promette una possibile «breakthrough». La speranza che i lettori trovano sta nella ricerca futura, e per chi vive la malattia oggi è poca. Un lettore intitola la recensione «VANISHING HOPE». Il coniuge caregiver scrive «no hope of recovery». Chi ha familiari malati la chiama «fragile». Un altro lettore invece la speranza la trova («Heartbreaking and hopeful at the same time»). Quindi la promessa regge per chi legge da fuori, molto meno per chi è dentro. Da sola non fa un libro, ma dà il tono alle lacune 1-3: una speranza che sta in quello che si può fare adesso.",
+        "citazioni": [
+          "VANISHING HOPE",
+          "It is a brilliant book, Kolker is a courteous and intelligent author telling us a story that made me so sad, and frightened that science is no closer to helping these poor souls and their families.",
+          "For FTD, no cure, no treatment, no hope of recovery.",
+          "There’s a fragile kind of hope in that, even when everything else feels really bleak.",
+          "Although the family generously opened their lives to scientists and physicians and contributed information to research, these efforts did little to slow the disease’s rapid progression."
+        ],
+        "vale_un_libro": false
+      },
+      {
+        "tema": "Per chi la vive, il libro riapre la ferita e non accompagna",
+        "ricorrenze": 3,
+        "che_cosa_manca": "Chi ha la demenza in casa legge il libro come la propria storia e ne esce scosso, e lo scrive come una lode, non come una critica. Nessuno però dice di averne avuto un aiuto per reggere la perdita di una persona ancora viva, che diventa «someone they don't know». Per un libro rivolto ai familiari è un requisito di tono più che un libro a sé.",
+        "citazioni": [
+          "And reading it laid out like this brought all of that back in a way I wasn’t fully prepared for.",
+          "I knew this book was coming, and I prepared myself for it mentally.",
+          "This book is frightening.",
+          "FTD is emotionally devastating for those around you, as you become someone they don't know."
+        ],
+        "vale_un_libro": false
+      },
+      {
+        "tema": "Troppi familiari da tenere a mente",
+        "ricorrenze": 2,
+        "che_cosa_manca": "Nove fratelli, poi i loro figli. Una lettrice con acquisto verificato ha smesso di distinguere i personaggi, ma non ne fa una critica («I was ok with just barreling through»). Un'altra recensione segnala l'albero genealogico in apertura come aiuto per seguire la storia, con i nomi cambiati e senza cognomi. È un'indicazione di scrittura per chi racconta casi veri: pochi personaggi, ben riconoscibili.",
+        "citazioni": [
+          "I gave up trying to keep all the characters straight, but I was ok with just barreling through.",
+          "There is a family tree at the opening of the novel (no last names and some first names are changed) to help you follow their story."
+        ],
+        "vale_un_libro": false
+      },
+      {
+        "tema": "Il racconto finisce a due terzi",
+        "ricorrenze": 1,
+        "che_cosa_manca": "È l'unica critica presentata come tale in tutte e otto le recensioni: nell'edizione Kindle il testo finisce al 67%, e il resto sono ringraziamenti, note e apparati. Non è un difetto della copia ricevuta, perché vale per ogni copia di quell'edizione, e per questo non la scarto. Dice che il lettore misura il libro sulle pagine di racconto, non sulle pagine totali. Riguarda la lunghezza percepita più che un contenuto mancante.",
+        "citazioni": [
+          "My only criticism--and it's minor-- is that my Kindle edition ended at 67%, in the 270-page realm. The rest of the book was acknowledgments, thanks, notes etc. That was kind of annoying to me."
+        ],
+        "vale_un_libro": false
+      }
+    ],
+    "da_non_toccare": [
+      {
+        "punto": "L'equilibrio fra la storia umana e la scienza spiegata in modo chiaro: i capitoli sulla ricerca piacciono quanto quelli sulla famiglia. Lo lodano cinque recensioni su otto.",
+        "citazioni": [
+          "I loved the balance of humanity and science.",
+          "The chapters on the medical research are equally as engaging and thought provoking.",
+          "Kolker handles both the deeply emotional and personal account and the scientific research background equally well.",
+          "The book is emotional and educational.",
+          "I have so much more appreciation for the intricacies of these brain disorders, the research behind it all, and the potential treatments after reading this book.",
+          "The science, the research, the decades of trying to understand this disease are what REALLY matters."
+        ]
+      },
+      {
+        "punto": "Persone vere raccontate con compassione, con l'amore della famiglia al centro.",
+        "citazioni": [
+          "Robert Kolker is an amazing story teller, bringing each family member to life with compassion and depth.",
+          "The love this family has for one another jumps off the page.",
+          "What really got me was the love in this family.",
+          "The support among family members is admirable."
+        ]
+      },
+      {
+        "punto": "Si legge come un romanzo: i tre lettori che lo dicono, tutti con acquisto verificato, l'hanno finito in uno o due giorni.",
+        "citazioni": [
+          "I told her I would send her a copy, since I consumed it in less than a day.",
+          "I just finished reading this book in 2 days.",
+          "I tore through this book in two days."
+        ]
+      },
+      {
+        "punto": "Una verità emotiva che chi l'ha vissuta riconosce, senza distanza clinica.",
+        "citazioni": [
+          "It’s not distant or clinical but it feels immediate.",
+          "The way Kolker describes the slow loss of self, the personality changes, the confusion… I’ve seen that up close.",
+          "And for anyone who has lived even a small version of this kind of loss, it hits even deeper than you expect it to.",
+          "Few books I have read have had the impact of this one.",
+          "There are arrows in this book that will pierce your heart."
+        ]
+      },
+      {
+        "punto": "Una speranza accanto al dolore, anche se fragile: chi entra nella nicchia non può essere solo cupo.",
+        "citazioni": [
+          "Heartbreaking and hopeful at the same time",
+          "Be ready to cry and yet smile while reading.",
+          "This book is heartbreaking, but it also feels necessary."
+        ]
+      }
+    ],
+    "prezzo": "Nessuna delle otto recensioni parla del prezzo. L'unico appunto vicino al valore percepito riguarda quanto è lungo davvero il racconto nell'edizione Kindle (lacuna 7): il lettore misura il libro sulle pagine di storia, non sugli apparati.",
+    "scartate": [
+      "Non c'è nessuna lamentela sulla copia fisica, sulla stampa o sulla consegna, quindi niente da scartare per questo motivo. L'appunto sul Kindle che finisce al 67% non è un difetto della copia (vale per tutta l'edizione) e resta fra le lacune, come lacuna minore.",
+      "La recensione da 4 stelle («Fascinating account of family with dementia») non dice perché toglie una stella: non ne ricavo nessuna lacuna.",
+      "Ci sono riassunti di trama: tutta «very highly recommended intimate family drama» e la parte centrale di «VANISHING HOPE» (la madre, il tumore, il marito che se ne va). Dicono che cosa c'è nel libro, non che cosa manca. Li uso solo per sapere quali temi il libro tratta già: la domanda del test, CRISPR e lo screening genetico con la fecondazione in vitro, l'albero genealogico, note e bibliografia.",
+      "Nella recensione del coniuge caregiver ci sono due cose fuori tema: il paragone con «Mountains Beyond Mountains» e l'inciso sulla legge federale che impone di rendere subito visibili i referti. Riguardano un altro libro e il sistema sanitario americano, e non li uso come dati.",
+      "Nelle tre copie omaggio ci sono i ringraziamenti a NetGalley e all'editore. Non sono giudizi. Ne tengo conto solo per pesare quelle recensioni, che vengono da lettori che non hanno pagato."
+    ],
+    "limiti": [
+      "Mancano del tutto le recensioni basse, che sono la parte su cui il metodo conta di più: chi dà 2 o 3 stelle scrive che cosa non ha trovato. Qui nessuna lacuna è confermata da un lettore scontento. Le ho ricavate tutte da lettori soddisfatti, da quello che raccontano di sé e dalle domande che lasciano aperte. Vanno prese come ipotesi da verificare, non come richieste dei clienti.",
+      "Il peso numerico di quelle che mancano è piccolo: le 3 stelle sono il 6% delle valutazioni, circa due su 28, e potrebbero essere voti senza testo. Quando arrivano, due recensioni da sole non fanno una tendenza. Se confermano una delle lacune 1-3, la confidenza sale a media. Se ne aprono una diversa (lunghezza, troppi personaggi, troppa scienza, tono troppo cupo), quella va in testa alla lista, perché sarebbe l'unica lacuna dichiarata da un lettore scontento.",
+      "Solo quattro recensioni su otto vengono da chi ha pagato; tre sono copie omaggio dichiarate. Fra chi ha pagato, uno solo vive la FTD in casa: il caregiver come «lettore vero» è un segnale, non una misura.",
+      "Le recensioni sono dei primi sei giorni dopo l'uscita, quindi di lettori della prima ora e di lettori dell'autore, che tendono a premiare. Le recensioni scritte cresceranno, visto che l'Hardcover è al #1,182 in Books. La prova vera di queste lacune sarà una seconda lettura fra qualche settimana, insieme alle 3 stelle che Cowork sta recuperando (cowork-concorrente-2.md).",
+      "Ho letto le recensioni, non il libro. Le lacune dicono che cosa i lettori portano e chiedono, non provano che il libro non lo contenga. Una recensione dice anzi che il libro affronta la domanda del test («Do I get tested? Do I want to know?»): la lacuna 1 sta nella risposta per il caso del lettore, non nella domanda.",
+      "Nessuna recensione riguarda l'edizione Large Print, che è quella dell'ASIN della scheda: quattro sono sull'Hardcover e quattro sul Kindle."
+    ]
+  },
+  "piano": {
+    "titolo": "Will It Be Me?",
+    "sottotitolo": "Dementia Risk, Genetic Testing, and Planning Ahead for Your Family",
+    "lingua": "en",
+    "argomento": "What it means for you when a parent, sibling or grandparent has dementia (Alzheimer's, frontotemporal dementia or another form). The book covers how to read your family history and what it says about your own risk and your children's, whether and when to take a genetic test and what to arrange first, how to recognize early changes and get a diagnosis taken seriously, and how to build a family plan for care, work, money and the years ahead.",
+    "lettore": "Adults in the United States, roughly 30 to 65, who have watched dementia reach someone in their family. Often it is a parent diagnosed young, a sibling, or several relatives across generations, and the reader now carries the question of whether it will happen to them and to their children. Many are already helping to care for the person who is ill while holding down a job. Some first heard the name of the disease on a scan report and had to look it up. Others lived with years of other diagnoses before anyone said dementia. A second group is the spouse of a person with dementia who is arranging genetic tests for the children and grandchildren. Neither group is made of science readers. They have the disease at home, they have read the stories, and they want the answers a story can't give for their own case.",
+    "promessa": "The reader comes away with four things. First, a clear picture of what a relative's dementia means for their own risk and their children's: which forms are inherited and which are not, the difference between a gene that causes the disease and a gene that only raises the odds, and what each number really says. Second, what they need to decide, with a genetic counselor, whether and when to be tested, and what to put in place before the result and after it. Third, the signs that call for a medical evaluation and the questions that get a diagnosis taken seriously. Fourth, a practical plan for the family: who cares for whom, the help that exists, work, money and legal papers, and their own future. The goal is to turn waiting into a set of decisions. The book explains and helps the reader decide. It does not promise anything. No test, habit or program in these pages can guarantee that a person will not develop dementia, and the book says so.",
+    "tono": "Warm, honest and steady, like a genetic counselor who is also a friend. It speaks to the reader as 'you' and takes the fear seriously, without feeding it and without false reassurance. Every percentage is explained in plain words the first time it appears, and every medical term is defined. Chapters open with a scene from one of a few recurring families and then move into the science and the practical steps, so that human story and explanation alternate. It is prose to be read, not bullet lists. Where rules, benefits or protections vary by state, insurer or year, it says so and tells the reader where to check. It never tells the reader whether to be tested. It lays out what each choice involves.",
+    "genere": "non-fiction",
+    "categoria": "full",
+    "perche_questa_categoria": "All'avvio l'autore ha scelto «concorrente», e il libro di partenza è un full-content (saggistica narrativa). Il libro nuovo resta full-content perché le lacune sono domande che chiedono spiegazioni e decisioni ragionate, non pagine da compilare. «Is there anything I can do? Or is it just waiting?», «I actually had to look up what it meant», «Do I get tested? Do I want to know?»: chi scrive vuole capire che cosa vuol dire la propria storia familiare e che cosa scegliere. Nessuna recensione chiede esercizi, schede o qualcosa da scrivere. Il vantaggio «pratico» scelto all'avvio si ottiene con la divulgazione manualistica: passi concreti, le domande da portare al consulente genetico e al neurologo, elenchi di che cosa sistemare prima del test, tutto in prosa e senza righe vuote. Il medium-content avrebbe senso per un diario del caregiver: l'autocompletamento propone «dementia caregiver journal», «workbook», «planner» e «log». Quello però è un altro lettore con un altro bisogno: la cura quotidiana, non la domanda «toccherà a me?».",
+    "pagine_obiettivo": 180,
+    "prezzo": 15.99,
+    "valuta": "USD",
+    "perche_questo_prezzo": "Il prezzo parte dalle pagine. A 180 pagine in bianco e nero su amazon.com la stampa KDP costa 1,00 + 0,012 × 180 = 3,16 USD (tariffe in config/printing_costs.json). A 15,99 USD la royalty del 60% dà 9,59 − 3,16 = circa 6,43 USD a copia. Basta a ripagare un libro che richiede scrittura e una verifica dei fatti seria, perché è un tema di salute con norme e benefici americani. Per chi compra resta un prezzo accessibile: spesso è chi assiste un familiare e scrive di lavoro e soldi sotto pressione. A 14,99 la royalty scende a circa 5,83 e il guadagno sul prezzo percepito è minimo. Sopra 16,99 si chiede molto per 180 pagine in una fascia dove le guide indipendenti sul tema stanno di solito sotto i 18 USD (osservazione generale, da verificare). Se si fa l'edizione Kindle, va nella fascia al 70%, per esempio 6,99 USD. Il controllo prezzi della pipeline ricalcola tutto sulle pagine finali.",
+    "parole_chiave": [
+      "early onset alzheimers books",
+      "frontotemporal dementia books",
+      "alzheimers books for families",
+      "dementia caregiver book",
+      "caring for aging parents guide",
+      "alzheimer disease",
+      "genetics of alzheimer's"
+    ],
+    "categorie": [
+      "Books > Health, Fitness & Dieting > Diseases & Physical Ailments > Alzheimer's Disease",
+      "Books > Health, Fitness & Dieting > Mental Health > Dementia",
+      "Books > Parenting & Relationships > Aging Parents"
+    ],
+    "la_lacuna_che_copre": "La lacuna 1, la più ricorrente (5 recensioni): «Toccherà a me? Il rischio ereditario e il test per chi resta». I lettori che la demenza ce l'hanno in casa escono dal libro con le domande aperte: che cosa vuol dire la mia storia familiare, se fare il test, che cosa posso fare nel frattempo. È la ragione d'essere del libro, e ne occupa più di metà. Accanto ci sono, come parti di servizio, la lacuna 2 (accorgersene: il cambiamento che sembra un'altra cosa, la sigla da cercare, la diagnosi da ottenere; 3 ricorrenze) e la lacuna 3 (dopo la diagnosi: chi cura, con quali aiuti, lavoro e soldi; 2 ricorrenze). Riguardano lo stesso lettore, che ha un familiare malato e si chiede che cosa succederà a sé e ai figli. La lacuna 4 (la speranza promessa e quella trovata) dà il tono: una speranza che sta in quello che si può decidere e organizzare adesso, non in una cura annunciata. La lacuna 5 impone di accompagnare il lettore e non solo di riaprire la ferita. La 6 chiede pochi personaggi, ben riconoscibili. La 7 chiede un apparato snello, con le pagine spese sul contenuto. La confidenza dell'analisi è bassa: 8 recensioni, nessuna sotto le 4 stelle, lacune lette fra le righe.",
+    "che_cosa_tiene": [
+      "The balance of human story and clear science. Every chapter pairs a family's situation with the science behind it, explained plainly: how inheritance works, what a gene does, what a test can and cannot see. Readers of this niche praise exactly this balance.",
+      "People at the center, told with compassion. A small cast of composite families, declared as composites in the opening pages, three at most, followed through the book and easy to tell apart, so the reader never needs a family tree to keep up.",
+      "It reads like a story, not a manual. Each chapter opens with a scene and continues in prose. Practical steps come out of the narrative, not as checklists.",
+      "Emotional truth without clinical distance. It names the fear, the anticipatory grief and the loss of someone who is still alive, the way people who have lived it recognize.",
+      "Hope beside the pain, kept honest. It is the hope of decisions that can be made now, help that exists and research families can take part in, never the promise of a cure."
+    ],
+    "che_cosa_non_fa": [
+      "It does not tell the story of one family, and it is not a history of dementia research or of the race for a cure.",
+      "It promises no prevention, reversal or slowing of dementia. There is no program, diet, supplement or brain exercise. Where it reports the evidence on modifiable risk factors, it says what that evidence can and cannot claim, and why it applies differently to a gene that causes the disease.",
+      "It gives no medical or genetic advice for the individual reader and does not replace a genetic counselor or a neurologist. It does not tell anyone whether to be tested: it prepares the decision and the conversation.",
+      "It does not recommend or evaluate drugs or treatments. Clinical trials appear only as something families can choose to look into, with the questions to ask.",
+      "It is not a day-to-day caregiving manual: no hands-on care routines, no handling of challenging behaviors, no activities. Those books exist. This one covers the family's plan, not the daily care.",
+      "It has no pages to fill in: no worksheets, logs or blank charts. Questions and lists stay in the text.",
+      "Its practical information on insurance, work leave, disability benefits and end-of-life care is for the United States. Other countries' systems are not covered, and figures and rules are dated with a pointer to where to check."
+    ],
+    "argomenti": [
+      "Reading your family tree. Which dementias run in families and which simply happen in them. Early onset versus late onset. A gene that causes the disease versus a gene that raises the odds (APOE e4). Why a grandparent diagnosed at 85 is a different story from a parent diagnosed at 50.",
+      "Numbers that frighten and numbers that inform. What 'fifty-fifty', 'twice the risk' and 'increased risk' actually mean. Absolute versus relative risk. Age as the largest factor. How to turn a percentage into something you can decide with.",
+      "The genetic tests. Why the person who is ill is usually tested first. Predictive testing for relatives at risk. Consumer DNA tests that report an APOE result nobody asked for. What a positive, a negative and a 'variant of uncertain significance' say, and what they don't.",
+      "To know or not to know. How genetic counseling works before and after a test. The reasons people choose to test and the reasons they choose not to. Timing, the right not to know, and siblings who decide differently.",
+      "What to arrange before the test. Federal genetic nondiscrimination protections and their limits: health insurance and most employment are covered, life, disability and long-term-care insurance are not. Who sees the result, and what to put in place first.",
+      "Living with a result. A positive one, a negative one, an uncertain one. Survivor's guilt among siblings. How and when to tell a partner and children. Not turning every lost word or misplaced key into a symptom.",
+      "When the change looks like something else. Early signs of frontotemporal dementia (personality, behavior, judgment, language) and of Alzheimer's (memory). Why the first changes are often taken for depression, another psychiatric illness or a midlife crisis. When and how to insist on a neurological evaluation.",
+      "Understanding the diagnosis. Reading a scan report or a test result you got before the doctor called. The main types of dementia in plain words. The questions to bring to the appointment. Specialist centers and second opinions.",
+      "The family plan. Who does what, and sharing care among siblings and a spouse. Work and leave, including who federal family leave covers and who it doesn't. Money: disability benefits and fast-track programs for early-onset conditions, and Medicaid. Legal documents to sign while capacity remains.",
+      "Help many families don't know exists. Support groups and specialist associations, respite care, palliative care, and hospice eligibility for dementia. How to ask for each, and when.",
+      "Your own future under uncertainty. Money, career and advance directives for yourself. The decision about having children and the options people consider, presented without judgment. What the evidence says about general brain health, and what it cannot promise.",
+      "Hope you can use. Family registries, observational studies and prevention trials open to people at risk: what they ask, what they give back, how to judge one. Carrying anticipatory grief and fear without letting them run your life."
+    ],
+    "rischi": [
+      "Low confidence in the demand signal. Only 8 written reviews, none below 4 stars, and only four verified purchases. The gaps were read between the lines of a few readers with dementia at home, not stated as complaints. The positioning is a reasoned bet on the subset of the competitor's buyers who live with the disease, plus the people who search caregiver, early-onset and frontotemporal phrases.",
+      "Buyer mismatch. Most buyers of the source book want narrative nonfiction and finish it in a day or two. A practical guide can disappoint a reader who expects a story. The description must say in its first lines that this is a guide for families, with stories inside it.",
+      "Health content. The book can read as medical advice, or be accused of fear-mongering or of false reassurance. Every number, rule and protection needs the fact-checker and the compliance review. The book must keep pointing to genetic counselors and doctors. Any line about lowering risk has to stay within what the evidence says, with no prevention claim.",
+      "US-specific facts date fast and vary by state or plan: genetic nondiscrimination law, family leave, disability benefits, Medicare hospice criteria, Medicaid. The science moves fast too: new blood tests for diagnosis, new drugs, gene-specific trials. Claims must be dated and kept general where they may change.",
+      "The title on its own doesn't say 'dementia': in a thumbnail, the subtitle has to stay legible for the book to be understood. Existing books on amazon.com with the same or a very similar title have not been checked. Check before committing.",
+      "Keywords: all seven come from Cowork's 5 October list. Six are autocomplete suggestions. 'genetics of alzheimer's' is not (439 results): it is kept because it names the core topic, but its search volume is probably low. Helium 10 and Publisher Rocket returned nothing, so there are no volume or competition figures. The verified phrases are shorter than 50 characters, and lengthening them would mean adding words nobody has verified. 'dementia' also appears in the subtitle, which Amazon already indexes. 'dementia caregiver book' and 'alzheimer disease' face strong established titles.",
+      "Categories: the paths are rebuilt from the leaf names on the competitor's page (Cowork reported only the last node). Check them against the live KDP category list. 'Aging Parents' is a secondary fit for readers whose parent became ill young.",
+      "Composite families have to be clearly declared and must not resemble any real or public family. A cast that is too large brings back the 'too many relatives to keep straight' problem.",
+      "Emotional weight. A book written for frightened readers can turn too heavy or too soothing. Each chapter has to end on something the reader can do or decide."
+    ]
+  },
+  "originalita": {
+    "note": "Il libro nuovo è indipendente da quello di partenza. Titolo e sottotitolo («Will It Be Me?» / «Dementia Risk, Genetic Testing, and Planning Ahead for Your Family») non riprendono la formula di «The Vanishing Family: Love, Fate, and the Quest to End Dementia»: hanno in comune solo le parole della nicchia, dementia e family, in posizioni diverse e con un registro diverso. Né Kolker, né The Vanishing Family, né Hidden Valley Road compaiono nel titolo, nel sottotitolo, negli argomenti, nelle parole chiave o nelle categorie. L'indice del concorrente ha soltanto parti e capitoli numerati, senza titoli, quindi non c'è una sequenza da ricalcare: i 12 argomenti seguono un percorso proprio (storia familiare, rischio, test, diagnosi, piano, futuro). Il piano poi rifiuta in modo esplicito il racconto di una sola famiglia, la storia della ricerca e l'albero genealogico. Nessuna formulazione caratteristica della descrizione è stata ripresa: gothic spell, medical detective story, quest to end dementia, unexpectedly hopeful and redemptive, V337M. La lacuna dichiarata (la 1, «Toccherà a me?») è in lacune.json, con 5 ricorrenze.",
+    "segnalazioni": []
+  }
+}
