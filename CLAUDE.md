@@ -106,7 +106,12 @@ la decide lui. Le immagini — copertina e figure — le genera **questa session
 con Higgsfield**, dal prompt del sistema (`copertina <slug> --genera`,
 `immagini <slug> --genera`; `config/immagini.json`). Serve l'accesso
 dell'autore al CLI (`higgsfield auth login`), che nel container si perde
-quando la sessione si chiude: se manca, il passo lo dice e aspetta lui.
+quando la sessione si chiude: se manca, il passo lo dice e aspetta lui. Se la
+rete del container blocca Higgsfield, si genera dal **connettore Higgsfield**
+(`generate_image_batch`) con gli stessi prompt del sistema
+(`coverbrief.prompt_da_incollare(..., per_chat=False)`), e se blocca anche la
+sua CDN le immagini le scarica Cowork sul corriere
+(`richiesteimmagini.scaricamento`): non si rigenerano.
 
 **Ogni competenza ha un solo agente**, elencato in
 `kdpfactory/agents/competenze.py`. Quando chiami un agente, chiedigli il suo

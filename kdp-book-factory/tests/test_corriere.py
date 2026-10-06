@@ -221,6 +221,17 @@ class TestImmagini(unittest.TestCase):
         self.assertIn("1838 x 2775", testo)
         self.assertIn("`books__libro__manuale__cowork-copertina-risposta.md`", testo)
 
+    def test_le_immagini_gia_generate_si_chiedono_da_scaricare(self):
+        nome, testo = richiesteimmagini.scaricamento(
+            "libro", "Titolo",
+            [("books__libro__assets__copertina-1.png", "https://cdn.example/a.png")], CANALE,
+        )
+        self.assertEqual(nome, "cowork-immagini-scarica.md")
+        self.assertIn("Ruolo: immagini", testo)
+        self.assertNotIn("Serve:", testo, "gli indirizzi sono pubblici: nessun accesso da aprire")
+        self.assertIn("`books__libro__assets__copertina-1.png` ← https://cdn.example/a.png", testo)
+        self.assertIn("`books__libro__manuale__cowork-immagini-scarica-risposta.md`", testo)
+
     def test_il_prompt_da_incollare_ha_solo_quello_che_decide_l_immagine(self):
         prompt = coverbrief.prompt_da_incollare(self.spec(), pages=192)
         self.assertTrue(prompt.startswith("Front cover illustration for a paperback book: "

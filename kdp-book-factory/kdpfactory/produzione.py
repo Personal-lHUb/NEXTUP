@@ -186,6 +186,11 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
                               "«copertina» all'autore, poi `copertina <slug> --scegli N`")
         if any(_nome_base(r.percorso) == "cowork-copertina.md" for r in mie):
             return stato("7", "aspettare le varianti di copertina", (), ("cowork-copertina.md",))
+        # Generate con Higgsfield ma ferme sulla sua CDN: le scarica Cowork. Non si
+        # rigenerano, si aspettano (rigenerarle ricompra le stesse varianti).
+        if any(_nome_base(r.percorso) == "cowork-immagini-scarica.md" for r in mie):
+            return stato("7", "aspettare le varianti di copertina, già generate", (),
+                         ("cowork-immagini-scarica.md",))
         if higgsfield.attivo(project.root.parent.parent):
             return stato("7", f"`copertina {slug} --genera`: tre varianti con Higgsfield "
                               "(senza accesso: l'autore fa `higgsfield auth login`)")

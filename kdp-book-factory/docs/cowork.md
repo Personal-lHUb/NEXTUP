@@ -187,6 +187,15 @@ Cowork non riceve richieste. Il CLI di Higgsfield vuole l'accesso dell'autore
 (`higgsfield auth login`); senza, `produzione` dà il passo e dice che cosa
 manca. Con `"generatore": "cowork"` vale quello che segue.
 
+Se la rete dell'ambiente blocca i domini di Higgsfield, la sessione genera dal
+connettore Higgsfield di claude.ai, che passa dal proxy di Anthropic, con gli
+stessi prompt del sistema. Le immagini restano sulla CDN di Higgsfield, che la
+rete può bloccare a sua volta: allora la sessione scrive
+`manuale/cowork-immagini-scarica.md` (`richiesteimmagini.scaricamento`, ruolo
+`immagini`, nessun accesso da aprire) e Cowork le scarica sul corriere con i
+nomi `books__<slug>__assets__…`. Finché la richiesta è aperta `produzione` dà
+la copertina in attesa: le varianti già pagate non si rigenerano.
+
 ## Il progetto ChatGPT delle immagini
 
 Le immagini nascono in un progetto di ChatGPT, «NEXTUP — Immagini»: le regole

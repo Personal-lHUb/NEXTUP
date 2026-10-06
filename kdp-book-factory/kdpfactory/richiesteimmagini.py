@@ -111,6 +111,40 @@ def copertina(
     return COPERTINA, corpo
 
 
+SCARICA = "cowork-immagini-scarica.md"
+
+
+def scaricamento(slug: str, titolo: str, immagini: list[tuple[str, str]], canale: dict) -> tuple[str, str]:
+    """La richiesta a Cowork di portare sul corriere immagini già generate.
+
+    Higgsfield genera dal suo connettore, ma la rete del container non raggiunge
+    la CDN dove mette i file: le immagini esistono a un indirizzo pubblico, e
+    serve solo che qualcuno le scarichi e le lasci nella cartella del corriere
+    col nome giusto. Nessun accesso da aprire: gli indirizzi sono pubblici.
+    `immagini` è l'elenco (nome su Drive, indirizzo).
+    """
+    righe = "\n".join(f"   - `{nome}` ← {url}" for nome, url in immagini)
+    corpo = (
+        cowork.intestazione(
+            f"Cowork · immagini da scaricare — {slug}",
+            SCARICA.replace(".md", "-risposta.md"),
+            RUOLO,
+            canale,
+            f"books/{slug}/manuale",
+        )
+        + f"\nIl libro: «{titolo}». Le immagini sono già generate (Higgsfield, dal prompt della\n"
+        "fabbrica): non c'è niente da generare né da incollare in ChatGPT.\n\n"
+        "1. **Scarica e salva.** Apri ogni indirizzo, scarica il file così com'è e salvalo\n"
+        "   nella cartella del corriere con il nome indicato:\n"
+        f"{righe}\n"
+        "   Non ritagliarlo, non comprimerlo, non convertirlo: la fabbrica misura i pixel veri.\n"
+        "2. **Misure.** Per ogni file, le misure in pixel e il peso.\n\n"
+        "Chi usa i risultati: l'agente `copertina`, che misura le varianti e propone\n"
+        "all'autore quella da usare. La applica la sessione della fabbrica.\n"
+    )
+    return SCARICA, corpo
+
+
 def nome_figura(slug: str, percorso: str) -> str:
     """Il nome su Drive di una figura dell'interno: arriva in assets/ al suo percorso."""
     return f"books/{slug}/assets/{percorso}".replace("/", "__")
