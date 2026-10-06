@@ -70,7 +70,10 @@ trovate: se il libro mantiene la promessa dell'indice lo giudica il
 
 ## Le immagini
 
-I prompt li scrive il sistema (`CLAUDE.md`). Per ChatGPT il comando
+I prompt li scrive il sistema (`CLAUDE.md`) e le immagini le genera Higgsfield
+da questa sessione: `copertina <slug> --genera` e `immagini <slug> --genera`
+(`kdpfactory/higgsfield.py`), sempre alla risoluzione più alta che il modello
+dichiara. Per incollarli a mano in ChatGPT il comando
 `copertina <slug>` scrive `build/copertina-prompt.txt` e lo stampa nel
 terminale: un blocco di testo da incollare così com'è in una chat del progetto
 «NEXTUP — Immagini», più il messaggio per le varianti successive e i nomi con

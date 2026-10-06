@@ -97,6 +97,13 @@ class TestCorriere(Base):
         self.assertEqual(corriere.piano(self.radice, self.elenco())["togli"],
                          [{"percorso": self.richiesta, "id": "id-1"}])
 
+    def test_una_richiesta_ritirata_si_toglie_da_drive(self):
+        corriere.registra_caricato(self.radice, self.richiesta, "id-1")
+        corriere.registra_caricato(self.radice, "config/leggimi-cowork.md", "id-2")
+        (self.radice / self.richiesta).unlink()
+        self.assertEqual(corriere.piano(self.radice, self.elenco())["togli"],
+                         [{"percorso": self.richiesta, "id": "id-1"}])
+
     def test_la_risposta_di_cowork_arriva_e_non_si_riscrive(self):
         from kdpfactory import cli
 

@@ -1,0 +1,5 @@
+{
+  "_nota": "Chi genera le immagini dei libri. «higgsfield»: questa sessione, con `copertina <slug> --genera` e `immagini <slug> --genera`, dal prompt del sistema (serve `higgsfield auth login` dell'autore nel container). «cowork»: la richiesta va sul corriere al ruolo immagini, che usa ChatGPT.",
+  "generatore": "higgsfield",
+  "modello": "gpt_image_2_5"
+}

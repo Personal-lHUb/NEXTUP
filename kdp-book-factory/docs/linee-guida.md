@@ -414,7 +414,7 @@ Un solo agente, dall'inizio alla fine: `copertina`. Le regole sono in
 
 | | |
 |---|---|
-| **Chi** | `copertina` scrive il prompt e misura; **Cowork**, ruolo `immagini`, genera tre varianti con ChatGPT; l'autore sceglie, con il silenzio-assenso |
+| **Chi** | `copertina` scrive il prompt e misura; **Higgsfield** genera tre varianti dal prompt del sistema (`copertina <slug> --genera`); l'autore sceglie, con il silenzio-assenso |
 | **Entra** | i dati del libro: categoria, categorie KDP, promessa, pubblico, palette, occhiello e gancio della scheda, pagine vere; se all'avvio l'autore ha chiesto una copertina più attraente, la descrizione di quella del concorrente (`concorrente/copertina.md`) |
 | **Esce** | `build/copertina-brief.md` (il prompt), poi `build/<slug>-copertina.pdf` |
 | **Come si chiama** | «usa copertina su <slug>» |
@@ -437,7 +437,11 @@ rappresentazione riconoscibile, un solo fattore distintivo, niente testo
 nell'immagine, misure dell'ultima impaginazione, formula della categoria,
 nessuna rivendicazione vietata, nessun nome altrui.
 
-**2. L'immagine.** In ChatGPT si incolla il testo di `build/copertina-prompt.txt`,
+**2. L'immagine.** `copertina <slug> --genera` manda a Higgsfield un prompt per
+variante — lo stesso testo, con una composizione diversa per ognuna — alla
+risoluzione più alta del modello, e salva `assets/copertina-1.png` … `-3.png`
+con la loro traccia in `build/immagini-generate.json`. Senza Higgsfield, in
+ChatGPT si incolla il testo di `build/copertina-prompt.txt`,
 che lo stesso comando stampa nel terminale: il prompt della prima variante, poi
 il messaggio per le altre, poi i nomi con cui salvarle. È il brief ridotto a
 quello che decide l'immagine; il brief completo, con dorso e specifiche di

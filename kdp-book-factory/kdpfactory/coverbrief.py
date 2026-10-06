@@ -224,6 +224,18 @@ def nome_colore(esadecimale: str) -> str:
     return f"{nome} (#{codice.upper()})"
 
 
+#: Come cambia la composizione da una variante all'altra quando le genera un
+#: programma: ogni chiamata è indipendente e non sa delle altre, quindi la
+#: differenza va chiesta dentro il prompt.
+COMPOSIZIONE_VARIANTI = (
+    "",
+    "Composition for this version: a closer view, from a nearer and lower viewpoint, "
+    "so the main object fills more of the frame.",
+    "Composition for this version: a wider view of the room, seen from further back or "
+    "slightly from above, with more space around the scene.",
+)
+
+
 def prompt_da_incollare(
     spec: BookSpec,
     *,
@@ -233,6 +245,8 @@ def prompt_da_incollare(
     genre: str = "",
     concorrente: str = "",
     varianti: int = 3,
+    variante: int = 1,
+    per_chat: bool = True,
 ) -> str:
     """Il prompt della copertina in un blocco solo, da incollare in una chat di ChatGPT.
 
@@ -243,6 +257,10 @@ def prompt_da_incollare(
     l'immagine, prese dagli stessi dati: che cosa mostrare, lo stile, il
     fattore distintivo, la palette, la composizione, i divieti. In inglese, la
     lingua in cui i generatori sbagliano meno.
+
+    Con `per_chat=False` è il prompt per un generatore che si chiama da
+    programma (Higgsfield): niente frasi di conversazione, e la variante
+    `variante` porta la sua indicazione di composizione.
     """
     metadata = metadata or {}
     genre = genre or ("enigmi" if spec.genre == "puzzle" else spec.genre)
@@ -266,12 +284,15 @@ def prompt_da_incollare(
             "metaphor for the book's central idea; nothing else may compete with it."
         )
 
-    righe = [
-        f"Front cover illustration for a paperback book: «{titolo}». "
-        f"This is variant 1 of {varianti}.",
-        "",
-        RAPPRESENTAZIONE[chiave],
-    ]
+    if per_chat:
+        testa = (f"Front cover illustration for a paperback book: «{titolo}». "
+                 f"This is variant 1 of {varianti}.")
+    else:
+        testa = f"Front cover illustration for a paperback book: «{titolo}»."
+        composizione = COMPOSIZIONE_VARIANTI[(variante - 1) % len(COMPOSIZIONE_VARIANTI)]
+        if composizione:
+            testa += f" {composizione}"
+    righe = [testa, "", RAPPRESENTAZIONE[chiave]]
     if spec.audience:
         righe.append(f"Who it is for: {_prima_frase(spec.audience)}")
     if spec.promise or spec.topic:
@@ -305,12 +326,15 @@ def prompt_da_incollare(
             f"which looks like this: {rivale} Use a different dominant colour and a different "
             "kind of image. Do not copy, parody or answer that cover.",
         ]
-    righe += [
-        "",
-        "Make the image at the largest size you can. The print needs at least "
-        f"{px_w} x {px_h} px: if yours is smaller, deliver it anyway and say so. After the "
-        "image, tell me its exact size in pixels and the model that made it.",
-    ]
+    if per_chat:
+        righe += [
+            "",
+            "Make the image at the largest size you can. The print needs at least "
+            f"{px_w} x {px_h} px: if yours is smaller, deliver it anyway and say so. After the "
+            "image, tell me its exact size in pixels and the model that made it.",
+        ]
+    else:
+        righe += ["", "Portrait 2:3, at the highest resolution available, full bleed."]
     return "\n".join(righe)
 
 

@@ -25,6 +25,7 @@ from . import (
     cowork,
     decisioni,
     diagnostica,
+    higgsfield,
     imagebrief,
     kdpspecs,
     manuale,
@@ -467,10 +468,13 @@ def cmd_copertina(args) -> int:
     incollare.write_text(richiesteimmagini.testo_copertina(spec.slug, prompt), encoding="utf-8")
     save_backup(project, args, "prompt da incollare")
 
-    # Con il corriere l'illustrazione la genera Cowork, ruolo «immagini»: la
-    # richiesta porta dentro lo stesso prompt, parola per parola.
-    canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
-    if canale.get("canale") == "drive" and "immagini" in cowork.ruoli(canale):
+    # Chi genera l'illustrazione: Higgsfield, da questa sessione (`--genera`),
+    # oppure Cowork col corriere, e allora la richiesta porta lo stesso prompt.
+    radice = Path(__file__).resolve().parent.parent
+    con_higgsfield = higgsfield.attivo(radice)
+    canale = cowork.configurazione(radice)
+    if (not con_higgsfield and canale.get("canale") == "drive"
+            and "immagini" in cowork.ruoli(canale)):
         nome, testo = richiesteimmagini.copertina(spec.slug, titolo, prompt, minimo, canale)
         fatti: list[str] = []
         _scrivi_richiesta(project, args, project.root / "manuale" / nome, testo, fatti)
@@ -488,6 +492,10 @@ def cmd_copertina(args) -> int:
     if risposte and risposte.copertina and not rivale:
         print(f"\n! All'avvio è stata chiesta una copertina più attraente del concorrente, ma\n"
               f"  {avvio.copertina_path(project)} è vuoto: il brief non sa da che cosa distinguersi.")
+    if args.genera:
+        return _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, radice)
+    if con_higgsfield:
+        print(f"\nLe varianti le genera Higgsfield: python3 -m kdpfactory copertina {spec.slug} --genera")
     return 0
 
 
@@ -547,13 +555,75 @@ def cmd_immagini(args) -> int:
         incollare.write_text(richiesteimmagini.testo_figure(spec.slug, prompts), encoding="utf-8")
         save_backup(project, args, "prompt delle figure da incollare")
         print(f"Da incollare in ChatGPT (progetto «{richiesteimmagini.PROGETTO_CHATGPT}»): {incollare}")
-        canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
+        radice = Path(__file__).resolve().parent.parent
+        if args.genera:
+            return _genera_figure(project, args, spec, mancanti, radice)
+        if higgsfield.attivo(radice):
+            print(f"Le figure le genera Higgsfield: python3 -m kdpfactory immagini {spec.slug} --genera")
+            return 0
+        canale = cowork.configurazione(radice)
         if canale.get("canale") == "drive" and "immagini" in cowork.ruoli(canale):
             nome, testo = richiesteimmagini.figure(spec.slug, titolo, prompts, canale)
             fatti: list[str] = []
             _scrivi_richiesta(project, args, project.root / "manuale" / nome, testo, fatti)
             for percorso in fatti:
                 print(f"Richiesta a Cowork (ruolo immagini): {percorso}")
+    return 0
+
+
+def _genera_figure(project, args, spec, mancanti, radice) -> int:
+    """Le figure che mancano generate con Higgsfield, ognuna dal suo prompt, in 4:3."""
+    motivo = higgsfield.pronto()
+    if motivo:
+        raise SystemExit(f"Higgsfield non è pronto: {motivo}.")
+    modello = higgsfield.configurazione(radice).get("modello") or higgsfield.MODELLO_IMMAGINI
+    schema = higgsfield.schema(modello)
+    generate = []
+    for figura in mancanti:
+        destinazione = project.assets_dir / figura.percorso
+        print(f"{figura.percorso} con {modello}…", flush=True)
+        generata = higgsfield.genera(imagebrief.prompt_incollabile(spec, figura), destinazione,
+                                     proporzione="4:3", modello=modello, schema_modello=schema)
+        generate.append(generata)
+        print(f"  {generata.larghezza} x {generata.altezza} px")
+    higgsfield.registra(project.build_dir, generate)
+    save_backup(project, args, f"{len(generate)} figure da Higgsfield")
+    print("\nPoi: build e qa (DPI sulla misura stampata, conversione in grigio).")
+    return 0
+
+
+def _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, radice) -> int:
+    """Le varianti di copertina generate con Higgsfield, dal prompt del sistema.
+
+    Ogni variante ha il suo prompt (`coverbrief.prompt_da_incollare`, modo
+    generatore) con un'indicazione di composizione diversa; tornano in
+    `assets/copertina-N.png`, e la loro traccia in `build/immagini-generate.json`.
+    """
+    motivo = higgsfield.pronto()
+    if motivo:
+        raise SystemExit(f"Higgsfield non è pronto: {motivo}.")
+    modello = higgsfield.configurazione(radice).get("modello") or higgsfield.MODELLO_IMMAGINI
+    schema = higgsfield.schema(modello)
+    generate = []
+    for numero in range(1, args.varianti + 1):
+        prompt = coverbrief.prompt_da_incollare(
+            spec, pages=pages, metadata=meta, copy=copy, concorrente=rivale,
+            varianti=args.varianti, variante=numero, per_chat=False,
+        )
+        destinazione = project.assets_dir / f"copertina-{numero}.png"
+        if destinazione.exists():
+            save_backup(project, args, f"variante {numero} di copertina precedente", force=True)
+        print(f"Variante {numero} di {args.varianti} con {modello}…", flush=True)
+        generata = higgsfield.genera(prompt, destinazione, proporzione="2:3",
+                                     modello=modello, schema_modello=schema)
+        generate.append(generata)
+        esito = "basta per la stampa" if generata.basta(minimo) else (
+            f"sotto il minimo di {minimo[0]} x {minimo[1]}: va ingrandita")
+        print(f"  {destinazione.name}: {generata.larghezza} x {generata.altezza} px, {esito}")
+    higgsfield.registra(project.build_dir, generate)
+    save_backup(project, args, f"{len(generate)} varianti di copertina da Higgsfield")
+    print("\nPoi: l'agente `copertina` le misura, la scelta passa dal silenzio-assenso,")
+    print(f"e `copertina {spec.slug} --scegli N` porta la variante in assets/copertina.jpg.")
     return 0
 
 
@@ -1515,7 +1585,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument("slug")
     p.add_argument("--scegli", type=int, default=0,
-                   help="la variante N consegnata da Cowork diventa assets/copertina.jpg")
+                   help="la variante N (assets/copertina-N.png) diventa assets/copertina.jpg")
+    p.add_argument("--genera", action="store_true",
+                   help="genera le varianti con Higgsfield dal prompt del sistema")
+    p.add_argument("--varianti", type=int, default=richiesteimmagini.VARIANTI,
+                   help="quante varianti generare con --genera")
     p.set_defaults(func=cmd_copertina)
 
     p = sub.add_parser(
@@ -1523,6 +1597,8 @@ def build_parser() -> argparse.ArgumentParser:
         help="prompt delle figure dell'interno, uno per figura (nessuna chiamata API)",
     )
     p.add_argument("slug")
+    p.add_argument("--genera", action="store_true",
+                   help="genera con Higgsfield le figure che mancano, dal prompt del sistema")
     p.set_defaults(func=cmd_immagini)
 
     p = sub.add_parser(

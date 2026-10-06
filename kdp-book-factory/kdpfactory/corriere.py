@@ -109,7 +109,8 @@ def piano(radice: Path, elenco: list[cowork.Richiesta]) -> dict:
     - `carica`: le richieste aperte, il LEGGIMI e il progetto che su Drive non ci
       sono o ci sono in una versione vecchia (la vecchia va tolta: Drive non
       riscrive il contenuto di un file, se ne fa uno nuovo);
-    - `togli`: le copie delle richieste ormai applicate, che Cowork non deve più vedere;
+    - `togli`: le copie delle richieste ormai applicate o ritirate (cancellate dal
+      repository), che Cowork non deve più vedere;
     - `attesi`: i nomi che Cowork può consegnare — le risposte alle richieste
       aperte — e il prefisso delle immagini ammesse.
     """
@@ -125,10 +126,13 @@ def piano(radice: Path, elenco: list[cowork.Richiesta]) -> dict:
         if prima.get("sha") != firma:
             carica.append(Carico(relativo, nome_drive(relativo), firma, prima.get("id", "")))
     chiuse = {r.percorso for r in elenco if r.stato == cowork.CHIUSA}
+    # Una richiesta ritirata si cancella dal repository: la sua copia su Drive
+    # resterebbe lì, e Cowork la farebbe lo stesso.
+    ritirate = {p for p in caricati if not (radice / p).exists()}
     togli = [
         {"percorso": p, "id": dati["id"]}
         for p, dati in caricati.items()
-        if p in chiuse and dati.get("id")
+        if (p in chiuse or p in ritirate) and dati.get("id")
     ]
     attesi = [nome_drive(r.risposta) for r in elenco if r.stato == cowork.APERTA]
     return {

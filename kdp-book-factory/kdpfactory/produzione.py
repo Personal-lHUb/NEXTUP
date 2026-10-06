@@ -20,7 +20,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 from . import avvio as avvio_module
-from . import cowork, decisioni
+from . import cowork, decisioni, higgsfield
 from .models import BookProject
 
 #: I quattro agenti del reparto, nell'ordine, con il file che lasciano in concorrente/.
@@ -186,6 +186,9 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
                               "«copertina» all'autore, poi `copertina <slug> --scegli N`")
         if any(_nome_base(r.percorso) == "cowork-copertina.md" for r in mie):
             return stato("7", "aspettare le varianti di copertina", (), ("cowork-copertina.md",))
+        if higgsfield.attivo(project.root.parent.parent):
+            return stato("7", f"`copertina {slug} --genera`: tre varianti con Higgsfield "
+                              "(senza accesso: l'autore fa `higgsfield auth login`)")
         return stato("7", "`copertina <slug>`: il brief e la richiesta a Cowork, ruolo immagini")
     qa = build / "qa-report.json"
     if not qa.exists():

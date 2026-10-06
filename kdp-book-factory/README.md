@@ -148,7 +148,7 @@ esempi usare, quale taglio dare).
 | `build <slug>` | impagina, converge sulle pagine, genera copertina ed EPUB |
 | `metadata <slug>` | scheda prodotto, keyword, categorie, prezzi |
 | `manuale <slug> <passo>` | **la fabbrica senza chiave API**: il sistema scrive il brief di scaletta, capitolo o scheda, tu porti la risposta e lui la valida ([`docs/linea-manuale.md`](docs/linea-manuale.md)) |
-| `copertina <slug>` | brief di copertina compilato coi dati del libro ([`docs/copertine.md`](docs/copertine.md)) e il prompt da incollare in ChatGPT, `build/copertina-prompt.txt`; nessuna chiamata API |
+| `copertina <slug>` | brief di copertina compilato coi dati del libro ([`docs/copertine.md`](docs/copertine.md)) e il prompt da incollare in ChatGPT, `build/copertina-prompt.txt`; con `--genera` tre varianti generate con Higgsfield in `assets/` |
 | `agents` | elenco del collegio (`--install` li installa in Claude Code) |
 | `backup <slug>` | elenco delle copie, `--now`, `--restore <id>`, `--prune N` |
 | `puzzle new/build <slug>` | libri di enigmi di deduzione, senza chiamate API |

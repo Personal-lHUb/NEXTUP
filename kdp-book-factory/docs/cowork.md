@@ -178,6 +178,15 @@ sistema, uguali per ogni libro.
 | `manuale/cowork-copertina.md` | immagini | copertina (fase 7) | `copertina <slug>` |
 | `manuale/cowork-figure.md` | immagini | figure dichiarate e mancanti | `immagini <slug>` |
 
+## Le immagini: Higgsfield da qui, Cowork solo se configurato
+
+Con `config/immagini.json` su `"generatore": "higgsfield"` le immagini non
+passano più dal corriere: le genera la sessione con `copertina <slug> --genera`
+e `immagini <slug> --genera`, dal prompt del sistema, e il ruolo `immagini` di
+Cowork non riceve richieste. Il CLI di Higgsfield vuole l'accesso dell'autore
+(`higgsfield auth login`); senza, `produzione` dà il passo e dice che cosa
+manca. Con `"generatore": "cowork"` vale quello che segue.
+
 ## Il progetto ChatGPT delle immagini
 
 Le immagini nascono in un progetto di ChatGPT, «NEXTUP — Immagini»: le regole

@@ -32,10 +32,13 @@ Nessuno dei due chiama il modello: leggono i dati che il libro ha già —
 categoria, promessa, pubblico, palette, misure di stampa calcolate sulle pagine
 vere — e ne fanno un prompt. I file restano in `build/`, entrano nel backup e si
 rigenerano quando il libro cambia: sono la traccia di come quell'immagine è
-stata chiesta. Gli stessi comandi scrivono `build/copertina-prompt.txt` e
-`build/immagini-prompt.txt`: il testo da copiare e incollare in una chat del
-progetto ChatGPT «NEXTUP — Immagini» (istruzioni in `config/progetto-chatgpt.md`),
-con il messaggio per le varianti e i nomi con cui salvare le immagini.
+stata chiesta. Con `--genera` lo stesso prompt va a **Higgsfield**
+(`kdpfactory/higgsfield.py`, modello GPT Image 2.5, la risoluzione più alta che
+dichiara): le varianti tornano in `assets/copertina-N.png`, le figure al loro
+percorso, e la traccia — modello, pixel, prompt — in `build/immagini-generate.json`,
+che serve anche per dichiarare a KDP i contenuti generati con l'IA. Gli stessi
+comandi scrivono `build/copertina-prompt.txt` e `build/immagini-prompt.txt`,
+il testo da incollare a mano in ChatGPT se Higgsfield non c'è.
 
 Tre cose che questi prompt non negoziano:
 
@@ -99,8 +102,11 @@ fermi ad aspettarle. Registri la proposta degli agenti con le alternative
 (`python3 -m kdpfactory decisioni <slug> --proponi …`), mandi la notifica
 all'autore e, se entro 24 ore non risponde, procedi con la proposta. Una sua
 risposta vince sempre. La **pubblicazione** non passa mai dal silenzio-assenso:
-la decide lui. L'immagine di copertina la genera Cowork (ruolo `immagini`), dal
-prompt del sistema.
+la decide lui. Le immagini — copertina e figure — le genera **questa sessione
+con Higgsfield**, dal prompt del sistema (`copertina <slug> --genera`,
+`immagini <slug> --genera`; `config/immagini.json`). Serve l'accesso
+dell'autore al CLI (`higgsfield auth login`), che nel container si perde
+quando la sessione si chiude: se manca, il passo lo dice e aspetta lui.
 
 **Ogni competenza ha un solo agente**, elencato in
 `kdpfactory/agents/competenze.py`. Quando chiami un agente, chiedigli il suo
