@@ -222,14 +222,12 @@ class TestCanaleGithub(Base):
                cowork.intestazione("K", "cowork-fonti-kdp-risposta.md", "fonti", CANALE_GITHUB,
                                    "books/libro/manuale", serve="l'accesso a KDP"))
 
-    def test_l_intestazione_dice_dove_consegnare_sul_ramo_e_il_ripiego(self):
+    def test_l_intestazione_manda_la_risposta_su_drive(self):
         testo = (self.radice / self.fonti).read_text(encoding="utf-8")
-        self.assertIn("`kdp-book-factory/books/libro/manuale/cowork-fonti-risposta.md`", testo)
-        self.assertIn(f"sul ramo `{corriere.RAMO_IMMAGINI}`", testo)
-        self.assertIn("https://github.com/o/r/new/cowork-immagini/kdp-book-factory/books/libro/manuale"
-                      "?filename=cowork-fonti-risposta.md", testo)
-        # senza browser la risposta va su Drive col nome che la fabbrica sa riportare
+        # la risposta va su Drive col nome che la fabbrica sa riportare su GitHub
         self.assertIn("`books__libro__manuale__cowork-fonti-risposta.md`", testo)
+        self.assertIn("in `kdp-book-factory/books/libro/manuale/cowork-fonti-risposta.md`", testo)
+        self.assertNotIn("Commit", testo)
         self.assertEqual(corriere.destinazione_ammessa(
             self.radice, "books__libro__manuale__cowork-fonti-risposta.md", self.elenco()),
             "books/libro/manuale/cowork-fonti-risposta.md")
@@ -256,16 +254,14 @@ class TestCanaleGithub(Base):
             fh.write("\n3. Un punto in più.\n")
         self.assertEqual(len(corriere.da_avviare(self.radice, self.elenco(), CANALE_GITHUB)), 1)
 
-    def test_l_indice_dice_dove_leggere_e_dove_consegnare(self):
+    def test_l_indice_dice_dove_leggere_e_come_si_chiama_la_risposta(self):
         testo = corriere.indice(self.elenco(), CANALE_GITHUB)
         self.assertIn("## Ruolo fonti", testo)
         self.assertIn("- `kdp-book-factory/books/libro/manuale/cowork-fonti.md`", testo)
-        self.assertIn("risposta: `kdp-book-factory/books/libro/manuale/cowork-fonti-risposta.md`"
-                      f" sul ramo `{corriere.RAMO_IMMAGINI}`", testo)
         self.assertIn("si fa: solo col browser del portatile — serve l'accesso a KDP", testo)
         self.assertIn("leggi: https://raw.githubusercontent.com/o/r/fabbrica/kdp-book-factory/books/libro/"
                       "manuale/cowork-fonti.md", testo)
-        self.assertIn("senza browser, su Drive: `books__libro__manuale__cowork-fonti-risposta.md`", testo)
+        self.assertIn("risposta su Drive: `books__libro__manuale__cowork-fonti-risposta.md`", testo)
         # l'indice si chiama come una richiesta, ma non lo è
         scrivi(self.radice, "config/cowork-aperte.md", testo)
         self.assertNotIn("config/cowork-aperte.md", [r.percorso for r in self.elenco()])
@@ -345,6 +341,38 @@ class TestProduzione(Base):
         self.assertEqual(base("books/x/manuale/cowork-copertina-2.md"), "cowork-copertina.md")
         self.assertEqual(base("config/cowork-kdp-12.md"), "cowork-kdp.md")
         self.assertEqual(base("books/x/cowork-parole-chiave.md"), "cowork-parole-chiave.md")
+
+    def test_le_varianti_pagate_si_scaricano_non_si_rigenerano(self):
+        import io as _io
+        from types import SimpleNamespace
+
+        from kdpfactory import cli
+
+        project = BookProject(self.radice / "books" / "libro")
+        scrivi(self.radice, "books/libro/build/copertina-higgsfield.json", json.dumps([
+            {"variante": 1, "url": "https://cdn.example/a.png"},
+            {"variante": 2, "url": "https://cdn.example/b.png"},
+        ]))
+        self.assertEqual([v["variante"] for v in produzione.generate_senza_file(project)], [1, 2])
+
+        from PIL import Image
+        buffer = _io.BytesIO()
+        Image.new("RGB", (4, 6)).save(buffer, "PNG")
+        png = buffer.getvalue()
+
+        def apri(url, timeout=0):
+            if url.endswith("b.png"):
+                raise OSError("connect_rejected")
+            return contextlib.closing(_io.BytesIO(png))
+
+        args = SimpleNamespace(no_backup=True, slug="libro")
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()) as errori:
+            esito = cli._scarica_generate(project, args, apri=apri)
+        self.assertEqual(esito, 1)
+        self.assertIn("cdn.example", errori.getvalue())
+        self.assertTrue((project.assets_dir / "copertina-1.png").exists())
+        # resta da scaricare solo quella bloccata
+        self.assertEqual([v["variante"] for v in produzione.generate_senza_file(project)], [2])
 
     def test_solo_i_libri_attivi(self):
         (self.radice / "books" / "altro" / "concorrente").mkdir(parents=True)

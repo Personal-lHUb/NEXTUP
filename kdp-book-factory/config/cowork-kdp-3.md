@@ -5,12 +5,9 @@ Serve: l'accesso a KDP (kdp.amazon.com)
 
 Richiesta della fabbrica per Cowork, con le regole di `kdp-book-factory/config/leggimi-cowork.md`
 (ramo `claude/dreamy-archimedes-hf8w45` del repository `Personal-lHUb/NEXTUP`).
-Consegna la risposta come file nuovo `kdp-book-factory/config/cowork-kdp-3-risposta.md`
-sul ramo `cowork-immagini`, con la stessa numerazione: col browser, da
-https://github.com/Personal-lHUb/NEXTUP/new/cowork-immagini/kdp-book-factory/config?filename=cowork-kdp-3-risposta.md
-e commit direttamente sul ramo. Senza browser, o se il commit non riesce,
-scrivi lo stesso testo su Drive, nella cartella «NEXTUP — corriere Cowork», come
-`config__cowork-kdp-3-risposta.md`: la fabbrica lo porta su GitHub.
+Scrivi la risposta come file nuovo nella cartella Drive «NEXTUP — corriere Cowork»,
+con il nome `config__cowork-kdp-3-risposta.md` e la stessa numerazione:
+la fabbrica la porta su GitHub, in `kdp-book-factory/config/cowork-kdp-3-risposta.md`.
 Per ogni punto: il fatto visto sulla pagina, l'URL, la data e l'ora.
 Se una pagina chiede un captcha o l'accesso e non si riesce ad andare avanti,
 scrivilo invece di stimare: l'accesso non lo fai tu.

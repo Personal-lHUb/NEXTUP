@@ -1,43 +1,43 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 10 · 6 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 11 · 7 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
-**Novità della versione 10: niente git, niente credenziali.** Gli esiti del 6
-ottobre l'hanno mostrato: le sessioni di Cowork non hanno `add_repo` e il proxy
-rifiuta il push («not in this session's authorized repository set»). Da ora:
+**Novità della versione 11: su GitHub si legge, su Drive si risponde.** Il giro
+delle 22:48 del 6 ottobre l'ha mostrato: la modalità automatica delle attività
+blocca la scrittura su GitHub dal browser dell'autore («Auto-Mode Bypass»), come
+prima il proxy aveva rifiutato il push. Va bene così: su GitHub Cowork non
+scrive, né con git né dal browser. Da ora:
 
-- **si legge** dagli indirizzi pubblici del repository, con WebFetch o col
-  browser (`raw.githubusercontent.com/...`, li dà l'indice);
-- **si consegna** col GitHub dell'autore già aperto nel browser del portatile:
-  la pagina che crea il file sul ramo `cowork-immagini`, commit direttamente
-  sul ramo;
-- **senza browser** (giro nel cloud) o se il commit non riesce, la risposta di
-  testo va su Drive col **nome di ripiego** che la richiesta e l'indice danno:
-  la fabbrica la porta su GitHub. Le immagini su Drive no.
+- **si legge** dagli indirizzi pubblici del repository, con WebFetch
+  (`raw.githubusercontent.com/...`, li dà l'indice);
+- **si risponde** su Drive, nella cartella del corriere, col nome che la
+  richiesta e l'indice danno: la fabbrica porta la risposta su GitHub, accanto
+  alla richiesta, entro l'ora;
+- **le immagini** Cowork non le consegna: Drive non porta file così pesanti e
+  GitHub non si scrive. Le genera e le scarica la fabbrica; se serve, le carica
+  l'autore.
 
 Restano gli esiti dei giri non riusciti (versione 9) e i giri lanciati dalla
 fabbrica (versione 8).
 
 ## Dove si lavora
 
-- **Repository** `Personal-lHUb/NEXTUP` su GitHub. Le richieste stanno sul
-  ramo `claude/dreamy-archimedes-hf8w45`; l'indice di quelle aperte è
+- **Le richieste** stanno su GitHub, repository `Personal-lHUb/NEXTUP`, ramo
+  `claude/dreamy-archimedes-hf8w45`. L'indice di quelle aperte è
   https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/config/cowork-aperte.md
-  e la fabbrica lo riscrive a ogni giro. Per ogni richiesta l'indice dà:
-  l'indirizzo per leggerla («leggi»), il percorso della risposta, la pagina
-  per consegnarla («consegna»), il nome di ripiego su Drive e se si fa nel
-  cloud o solo col browser del portatile.
-- **Le consegne** vanno sul ramo `cowork-immagini`, ognuna al percorso che la
-  richiesta indica, a partire dalla cartella `kdp-book-factory/`.
-- **Drive** («NEXTUP — corriere Cowork», id `1yprHuxzFDGj12k8clTp0othzTXjiyn5N`)
-  porta questo LEGGIMI, le risposte di ripiego e gli esiti dei giri non
-  riusciti: nient'altro. Gli altri file della cartella sono vecchi: non aprirli.
+  e la fabbrica lo riscrive a ogni giro. Per ogni richiesta l'indice dà
+  l'indirizzo per leggerla («leggi»), il nome della risposta su Drive e se si fa
+  nel cloud o solo col browser del portatile.
+- **Le risposte** vanno nella cartella Google Drive «NEXTUP — corriere Cowork»
+  (id `1yprHuxzFDGj12k8clTp0othzTXjiyn5N`), dove sta anche questo LEGGIMI. Nella
+  cartella si scrivono solo le risposte e gli esiti dei giri non riusciti. Gli
+  altri file sono vecchi o già portati via: non aprirli.
 - Se il prompt della tua attività parla di cercare le richieste su Drive, di
-  `add_repo`, di git o di base64, vale questo file.
+  `add_repo`, di git, di commit dal browser o di base64, vale questo file.
 
 ## Che cosa c'è da fare
 
@@ -45,15 +45,14 @@ fabbrica (versione 8).
   Una richiesta di un altro ruolo è di un'altra chat: non aprirla. Una
   richiesta senza ruolo non la prende nessuno: se la trovi, dillo all'autore e
   lasciala lì.
-- Una richiesta che ha già la risposta, sul ramo `cowork-immagini` o su Drive
-  col nome di ripiego, è fatta: saltala (la fabbrica la porta via entro l'ora
-  e la toglie dall'indice).
+- Una richiesta che ha già la sua risposta nella cartella Drive è fatta:
+  saltala (la fabbrica la porta via entro l'ora e la toglie dall'indice).
 - Una richiesta con la riga `Serve: …` sotto il ruolo chiede un accesso che
-  apre l'autore (KDP, ChatGPT, GitHub, Helium 10, Amazon, il browser del
-  portatile). Prima di tutto guarda se c'è. Se manca, salta la richiesta senza
-  scrivere niente: al giro dopo la ritrovi aperta. Se c'è, la fai come le altre.
+  apre l'autore (KDP, ChatGPT, Helium 10, Amazon, il browser del portatile).
+  Prima di tutto guarda se c'è. Se manca, salta la richiesta senza scrivere
+  niente: al giro dopo la ritrovi aperta. Se c'è, la fai come le altre.
 - Una richiesta scritta prima di questa versione può dire di consegnare con
-  git o in un altro modo: consegnala come dice questo file.
+  git, col browser su GitHub o altrove: rispondi come dice questo file.
 
 ## Come si risponde
 
@@ -66,43 +65,27 @@ fabbrica (versione 8).
      c'è più, dato che non si trova, strumento non accessibile)
 3. Per ogni punto: il fatto che hai visto sulla pagina, non una stima, con
    l'URL e la data e l'ora della verifica.
-4. Consegnala come dice la sezione qui sotto. Le immagini che una richiesta
-   chiede vanno sul ramo `cowork-immagini`, ognuna al percorso indicato; la
-   risposta riporta per ognuna le misure in pixel e il peso.
+4. Salvala come file nuovo nella cartella Drive, col nome indicato (per
+   esempio `books__x__concorrente__cowork-concorrente-risposta.md`), con
+   `create_file`, contentMimeType text/markdown, disableConversionToGoogleType
+   true.
+5. Se la richiesta chiede immagini, non caricarle da nessuna parte: scrivi
+   nella risposta dove sono (indirizzo, chat di ChatGPT), con misure in pixel e
+   peso. A portarle nel libro ci pensano la fabbrica o l'autore.
 
-## Leggere e consegnare
+## Leggere
 
-**Leggere.** Con WebFetch (o col browser) dagli indirizzi «leggi» dell'indice.
-Non servono git, `gh` né credenziali: il repository è pubblico. Se un indirizzo
-non si apre, scrivi l'esito (sezione «Se qualcosa non va»).
-
-**Consegnare col browser** (il GitHub dell'autore è già aperto nel browser del
-portatile; l'accesso non lo fai tu):
-
-1. apri la pagina «consegna» della voce: crea un file nuovo sul ramo
-   `cowork-immagini`, nella cartella giusta, col nome già scritto;
-2. controlla che il ramo sia `cowork-immagini` e il nome del file quello della
-   richiesta; incolla la risposta nell'editor;
-3. «Commit changes…», scegli «Commit directly to the `cowork-immagini`
-   branch», messaggio «Cowork: <nome della richiesta>», conferma. Se GitHub
-   propone una pull request, non aprirla;
-4. per un'immagine: nella stessa cartella del ramo, «Add file → Upload files»,
-   il file col nome indicato, commit direttamente sul ramo.
-
-**Consegnare senza browser** (giro nel cloud), o se il commit non riesce: la
-stessa risposta su Drive, nella cartella, col **nome di ripiego** dell'indice
-(per esempio `books__x__concorrente__cowork-concorrente-risposta.md`), con
-`create_file`, contentMimeType text/markdown, disableConversionToGoogleType
-true. La fabbrica la porta su GitHub. Le immagini non vanno su Drive: se non
-puoi caricarle col browser, scrivi l'esito.
+Con WebFetch dagli indirizzi «leggi» dell'indice. Non servono git, `gh` né
+credenziali: il repository è pubblico. Se un indirizzo non si apre, scrivi
+l'esito (sezione «Se qualcosa non va»). Il browser del portatile serve per il
+lavoro del tuo ruolo (Amazon, KDP, YouTube, ChatGPT), non per GitHub.
 
 ## Giri nel cloud
 
 Un giro lanciato dalla fabbrica, o qualsiasi giro in cui il browser del
 portatile non risponde, è un giro nel cloud.
 
-- Fai solo le richieste che l'indice segna «si fa: nel cloud o col browser», e
-  consegnale su Drive col nome di ripiego.
+- Fai solo le richieste che l'indice segna «si fa: nel cloud o col browser».
 - Quelle segnate «solo col browser del portatile», e ogni richiesta con la riga
   `Serve:`, le salti senza scrivere niente: le riprende l'attività oraria, col
   portatile collegato.
@@ -113,10 +96,9 @@ portatile non risponde, è un giro nel cloud.
 ## Se qualcosa non va
 
 Se in questo giro c'era una richiesta del tuo ruolo da fare e un passo tecnico
-non è riuscito — un indirizzo che non si apre, il commit nel browser che non
-va, un download bloccato, il browser che non risponde, un passo di questo
-LEGGIMI che non torna — scrivi su Drive, nella cartella, un file di testo
-nuovo:
+non è riuscito — un indirizzo che non si apre, un download bloccato, il browser
+che non risponde, un permesso negato, un passo di questo LEGGIMI che non torna
+— scrivi nella cartella Drive un file di testo nuovo:
 
 - nome `cowork-esito-<ruolo>-<AAAAMMGG-hhmm>.md`, con l'ora UTC (per esempio
   `cowork-esito-immagini-20261006-1845.md`);
@@ -125,35 +107,33 @@ nuovo:
   strumento usato, il messaggio d'errore **esatto**, copiato;
 - infine che cosa sei riuscito a consegnare, se qualcosa, e dove.
 
-Con `create_file`, contentMimeType text/markdown,
-disableConversionToGoogleType true. Niente immagini su Drive. Un giro senza
-richieste da fare, o in cui tutto è andato, non scrive nessun esito.
+Un permesso negato non si aggira: si scrive nell'esito e ci si ferma. Un giro
+senza richieste da fare, o in cui tutto è andato, non scrive nessun esito.
 
 ## Alla fine del giro
 
-Se in questo giro hai consegnato qualcosa e hai lo strumento `fire_trigger`,
+Se in questo giro hai scritto una risposta e hai lo strumento `fire_trigger`,
 lancia la routine della fabbrica: trigger_id `trig_014uG5o2CZ22kwnBS5FDxty7`,
-testo `Cowork, ruolo <ruolo>: consegnato <percorsi>.` Se lo strumento non c'è,
-non serve cercarlo: la fabbrica passa ogni ora.
+testo `Cowork, ruolo <ruolo>: consegnato <nomi>.` Se lo strumento non c'è, non
+serve cercarlo: la fabbrica passa ogni ora.
 
 ## Che cosa non si fa
 
-- Su GitHub si scrivono solo file nuovi, solo sul ramo `cowork-immagini`, solo
-  quelli che una richiesta chiede: le risposte e le immagini. Nessun altro
-  ramo, nessuna pull request, niente da unire, rinominare o cancellare,
-  nessuna impostazione del repository. Il codice, i `book.json`, i manoscritti
-  e gli agenti non si toccano.
-- Le richieste, l'indice e questo LEGGIMI non si modificano.
+- Su GitHub non si scrive niente: né con git, né dal browser, né file, né
+  commit, né pull request, né impostazioni.
+- Nella cartella Drive si scrivono solo file nuovi: le risposte e gli esiti.
+  Non si modificano, rinominano o cancellano file che non hai creato tu, né
+  questo LEGGIMI.
 - Una risposta già scritta non si riscrive. Se alla fabbrica serve altro, apre
   una richiesta nuova.
-- Su Drive si scrivono solo le risposte di ripiego e gli esiti.
 - Su KDP (kdp.amazon.com) si legge e basta: niente titoli nuovi, bozze,
   pubblicazioni o impostazioni cambiate.
-- Negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) e su
-  GitHub si usa solo l'accesso che l'autore ha già aperto nel browser: non si
-  inseriscono credenziali, non si compra, non si cambiano abbonamenti né
-  impostazioni.
-- Nessuna password, codice, token o cookie nei file o nei commit.
+- Negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) si usa
+  solo l'accesso che l'autore ha già aperto nel browser: non si inseriscono
+  credenziali, non si compra, non si cambiano abbonamenti né impostazioni.
+- Nessuna password, codice, token o cookie nei file.
+- Un permesso negato dalla modalità automatica non si aggira con un'altra
+  strada: si scrive l'esito.
 - `fire_trigger` si usa solo per la routine della fabbrica, alla fine del
   giro. Nessun'altra attività si lancia, si crea, si cambia o si cancella.
 
@@ -228,10 +208,11 @@ flusso di un titolo nuovo solo col browser del portatile.
 
 ### Ruolo immagini
 
-Le illustrazioni di copertina e le figure dell'interno: generate con
-**ChatGPT**, o già generate e da scaricare. Sempre col browser del portatile
-(le richieste hanno la riga `Serve:`): nel cloud la CDN delle immagini è
-bloccata e le immagini si caricano su GitHub solo dalla pagina web.
+Le illustrazioni di copertina e le figure dell'interno le genera la fabbrica
+con Higgsfield. Al ruolo restano le richieste di **ChatGPT** e di analisi
+(video, copertine da studiare), col browser del portatile: le richieste hanno
+la riga `Serve:`. Le immagini non si caricano da nessuna parte (sezione «Come
+si risponde», punto 5).
 
 - Se in ChatGPT c'è il progetto **«NEXTUP — Immagini»**, si lavora lì: una
   chat nuova del progetto per ogni richiesta, chiamata `<slug> — copertina` o
@@ -248,9 +229,8 @@ bloccata e le immagini si caricano su GitHub solo dalla pagina web.
   fabbrica.
 - Le immagini si scaricano a piena risoluzione, così come sono: niente
   ritagli, compressione o conversione.
-- Si generano tante varianti quante la richiesta ne chiede, ognuna caricata
-  sul ramo `cowork-immagini` al percorso indicato, con «Add file → Upload
-  files» nella cartella giusta e il commit direttamente sul ramo. Mai su Drive.
+- Si generano tante varianti quante la richiesta ne chiede; la risposta dice
+  dove sono e quanto misurano. Non si caricano né su GitHub né su Drive.
 - Le figure dell'interno sono in **scala di grigi**: due elementi non si
   distinguono solo per il colore.
 - Solo immagini generate nella sessione o già generate dalla fabbrica: mai

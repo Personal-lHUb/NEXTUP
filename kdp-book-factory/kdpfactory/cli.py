@@ -11,6 +11,8 @@ import json
 import math
 import os
 import sys
+import urllib.parse
+import urllib.request
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -431,6 +433,8 @@ def cmd_copertina(args) -> int:
     project, spec = open_project(args)
     if args.scegli:
         return _scegli_copertina(project, args)
+    if getattr(args, "scarica_generate", False):
+        return _scarica_generate(project, args)
     if args.preferisci or args.scarta:
         dividi = lambda testo: [k.strip() for k in testo.split(",") if k.strip()]  # noqa: E731
         try:
@@ -639,6 +643,49 @@ def _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, ra
     save_backup(project, args, f"{len(generate)} varianti di copertina da Higgsfield")
     print("\nPoi: l'agente `copertina` le misura, la scelta passa dal silenzio-assenso,")
     print(f"e `copertina {spec.slug} --scegli N` porta la variante in assets/copertina.jpg.")
+    return 0
+
+
+def _scarica_generate(project: BookProject, args, apri=urllib.request.urlopen) -> int:
+    """Le varianti già generate e pagate, dalla CDN di Higgsfield in assets/copertina-N.png.
+
+    Non si rigenera niente: si scaricano gli indirizzi che il generatore ha
+    restituito (`build/copertina-higgsfield.json`). La CDN la rete del container
+    può bloccarla: allora lo dice, con l'host da aprire.
+    """
+    from PIL import Image
+
+    mancanti = produzione.generate_senza_file(project)
+    if not mancanti:
+        print("Nessuna variante da scaricare: sono già tutte in assets/ (o non ce n'è nessuna generata).")
+        return 0
+    project.ensure_dirs()
+    falliti = []
+    for voce in mancanti:
+        destinazione = project.assets_dir / f"copertina-{voce['variante']}.png"
+        try:
+            with apri(voce["url"], timeout=300) as risposta:
+                contenuto = risposta.read()
+        except OSError as errore:
+            falliti.append((voce["variante"], f"{urllib.parse.urlsplit(voce['url']).netloc}: {errore}"))
+            continue
+        if not corriere.e_un_immagine(contenuto):
+            falliti.append((voce["variante"], "il file scaricato non è un'immagine"))
+            continue
+        destinazione.write_bytes(contenuto)
+        with Image.open(destinazione) as immagine:
+            larghezza, altezza = immagine.size
+        print(f"  {destinazione.name}: {larghezza} x {altezza} px, {len(contenuto)} byte")
+    if len(falliti) < len(mancanti):
+        save_backup(project, args, "varianti di copertina scaricate da Higgsfield")
+    for variante, motivo in falliti:
+        print(f"! variante {variante} non scaricata — {motivo}", file=sys.stderr)
+    if falliti:
+        print("La rete dell'ambiente deve lasciar passare la CDN di Higgsfield "
+              "(Network access → Allowed domains), oppure l'autore carica le varianti "
+              "sul ramo cowork-immagini.", file=sys.stderr)
+        return 1
+    print("Poi: l'agente `copertina` le misura, e `copertina <slug> --scegli N`.")
     return 0
 
 
@@ -1637,6 +1684,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="trattamenti scelti fra i bozzetti, separati da virgola (luce,serigrafia…)")
     p.add_argument("--scarta", default="", help="trattamenti scartati fra i bozzetti")
     p.add_argument("--perche", default="", help="il motivo della scelta, con le parole dell'autore")
+    p.add_argument("--scarica-generate", action="store_true",
+                   help="scarica in assets/ le varianti già generate (build/copertina-higgsfield.json)")
     p.set_defaults(func=cmd_copertina)
 
     p = sub.add_parser(

@@ -238,22 +238,21 @@ def registra_avviato(radice: Path, ruolo: str, elenco: list[cowork.Richiesta], c
 def indice(elenco: list[cowork.Richiesta], canale: dict) -> str:
     """L'indice delle richieste aperte, che Cowork legge dal ramo della fabbrica.
 
-    Per ogni richiesta: dove leggerla, dove consegnare la risposta, e se si può
-    fare in un giro nel cloud o serve il browser del portatile.
+    Per ogni richiesta: dove leggerla, il nome della risposta su Drive, e se si
+    può fare in un giro nel cloud o serve il browser del portatile.
     """
     repository = canale.get("repository", "Personal-lHUb/NEXTUP")
     ramo = canale.get("ramo", "")
-    consegna = canale.get("ramo_consegna", RAMO_IMMAGINI)
     righe = [
         "# Richieste aperte per Cowork",
         "",
         "<!-- Scritto da `python3 -m kdpfactory cowork corriere` a ogni giro. Non si",
         "     modifica a mano. -->",
         "",
-        f"Repository `{repository}`. Le richieste stanno sul ramo `{ramo}`; risposte e",
-        f"immagini si consegnano sul ramo `{consegna}`, al percorso indicato, col GitHub",
-        "aperto nel browser. Senza browser la risposta di testo va su Drive, col nome di",
-        f"ripiego. Le regole: {cowork.link_lettura(canale, 'config/leggimi-cowork.md', ramo)}",
+        f"Repository `{repository}`. Le richieste stanno sul ramo `{ramo}` e si leggono",
+        "agli indirizzi «leggi». Le risposte si scrivono nella cartella Drive del",
+        "corriere, col nome indicato: la fabbrica le porta su GitHub. Su GitHub Cowork",
+        f"non scrive. Le regole: {cowork.link_lettura(canale, 'config/leggimi-cowork.md', ramo)}",
         "",
     ]
     aperte = [r for r in elenco if r.stato == cowork.APERTA]
@@ -266,9 +265,7 @@ def indice(elenco: list[cowork.Richiesta], canale: dict) -> str:
             righe += [
                 f"- `{percorso_sul_ramo(r.percorso)}`",
                 f"  - leggi: {cowork.link_lettura(canale, r.percorso, ramo)}",
-                f"  - risposta: `{percorso_sul_ramo(r.risposta)}` sul ramo `{consegna}`",
-                f"  - consegna: {cowork.link_consegna(canale, r.risposta)}",
-                f"  - senza browser, su Drive: `{nome_drive(r.risposta)}`",
+                f"  - risposta su Drive: `{nome_drive(r.risposta)}`",
                 f"  - si fa: {dove}" + (f" — serve {r.serve}" if r.serve else ""),
             ]
         righe.append("")

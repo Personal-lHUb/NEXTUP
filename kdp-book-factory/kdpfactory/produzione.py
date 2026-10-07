@@ -111,6 +111,28 @@ def _capitoli(project: BookProject) -> tuple[int, int]:
     return previsti, scritti
 
 
+#: Le varianti di copertina generate dal connettore Higgsfield, con l'indirizzo
+#: da cui scaricarle: `copertina <slug> --scarica-generate` le porta in assets/.
+GENERATE = "copertina-higgsfield.json"
+
+
+def generate_senza_file(project: BookProject) -> list[dict]:
+    """Le varianti già generate (e pagate) che non sono ancora in assets/.
+
+    Si scaricano, non si rigenerano: rigenerarle ricompra le stesse immagini.
+    """
+    try:
+        voci = json.loads((project.root / "build" / GENERATE).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    assets = project.root / "assets"
+    return [
+        v for v in voci
+        if isinstance(v, dict) and v.get("url") and v.get("variante")
+        and not list(assets.glob(f"copertina-{v['variante']}.*"))
+    ]
+
+
 def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
     slug = project.root.name
     mie = [r for r in aperte if r.chiave == slug and r.stato == cowork.APERTA]
@@ -186,11 +208,14 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
                               "«copertina» all'autore, poi `copertina <slug> --scegli N`")
         if any(_nome_base(r.percorso) == "cowork-copertina.md" for r in mie):
             return stato("7", "aspettare le varianti di copertina", (), ("cowork-copertina.md",))
-        # Generate con Higgsfield ma ferme sulla sua CDN: le scarica Cowork. Non si
-        # rigenerano, si aspettano (rigenerarle ricompra le stesse varianti).
-        if any(_nome_base(r.percorso) == "cowork-immagini-scarica.md" for r in mie):
-            return stato("7", "aspettare le varianti di copertina, già generate", (),
-                         ("cowork-immagini-scarica.md",))
+        # Generate con Higgsfield ma ferme sulla sua CDN, che la rete del container
+        # blocca (e Cowork non le può consegnare). Non si rigenerano: si scaricano
+        # quando l'autore apre i domini di Higgsfield, o le carica lui sul ramo.
+        if generate_senza_file(project):
+            return stato("7", f"`copertina {slug} --scarica-generate`: "
+                              f"{len(generate_senza_file(project))} varianti già generate e pagate",
+                         (), (), "autore: aprire i domini di Higgsfield nella rete dell'ambiente, "
+                                 "o caricare le varianti sul ramo cowork-immagini")
         if higgsfield.attivo(project.root.parent.parent):
             return stato("7", f"`copertina {slug} --genera`: tre varianti con Higgsfield "
                               "(senza accesso: l'autore fa `higgsfield auth login`)")

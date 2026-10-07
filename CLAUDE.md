@@ -110,8 +110,10 @@ quando la sessione si chiude: se manca, il passo lo dice e aspetta lui. Se la
 rete del container blocca Higgsfield, si genera dal **connettore Higgsfield**
 (`generate_image_batch`) con gli stessi prompt del sistema
 (`coverbrief.prompt_da_incollare(..., per_chat=False)`), e se blocca anche la
-sua CDN le immagini le scarica Cowork, anche nel cloud, e le consegna sul ramo
-`cowork-immagini` (`richiesteimmagini.scaricamento`): non si rigenerano.
+sua CDN le varianti restano lì (`build/copertina-higgsfield.json`) e si
+scaricano con `copertina <slug> --scarica-generate` quando l'autore apre i
+domini di Higgsfield, o le carica lui sul ramo `cowork-immagini`: non si
+rigenerano.
 
 **Ogni competenza ha un solo agente**, elencato in
 `kdpfactory/agents/competenze.py`. Quando chiami un agente, chiedigli il suo
@@ -173,13 +175,15 @@ passarsi un file (`kdp-book-factory/docs/cowork.md`).
 - **Canale: tutto su GitHub** (`config/cowork.json`, `canale: "github"`). Le
   richieste stanno sul ramo della fabbrica, elencate nell'indice
   `config/cowork-aperte.md` che `python3 -m kdpfactory cowork corriere` riscrive
-  a ogni giro, e Cowork le legge dagli indirizzi pubblici del ramo. Le sessioni
-  di Cowork non hanno credenziali GitHub: consegnano risposte e immagini sul
-  ramo `cowork-immagini` col GitHub dell'autore aperto nel browser del
-  portatile, e `cowork corriere --dal-ramo` le porta nel repository. Senza
-  browser la risposta di testo arriva su Drive («NEXTUP — corriere Cowork») col
-  nome di ripiego e la sessione la porta su GitHub (`--scarica`); su Drive ci
-  sono anche il LEGGIMI e gli esiti dei giri non riusciti. Il registro è
+  a ogni giro, e Cowork le legge dagli indirizzi pubblici del ramo. **Su GitHub
+  Cowork non scrive**: niente credenziali, e la sua modalità automatica blocca
+  la scrittura dal browser dell'autore come un aggiramento — non si aggira. Le
+  risposte arrivano su Drive («NEXTUP — corriere Cowork») col nome che la
+  richiesta indica, e questa sessione le porta su GitHub (`--scarica`); su
+  Drive ci sono anche il LEGGIMI e gli esiti dei giri non riusciti. Le
+  immagini non passano da Cowork: le scarica questa sessione (`copertina
+  <slug> --scarica-generate`, coi domini di Higgsfield aperti nella rete
+  dell'ambiente) o le carica l'autore sul ramo `cowork-immagini`. Il registro è
   `config/corriere.json`.
 - **Ruoli**: un progetto di Claude Desktop con una chat e un'attività oraria per
   ruolo — `concorrente`, `parole-chiave`, `fonti`, `regole-kdp`, `immagini`. Il
@@ -187,15 +191,15 @@ passarsi un file (`kdp-book-factory/docs/cowork.md`).
   `config/progetto-cowork.md`.
 - **Richiesta a Cowork**: `cowork-<argomento>.md` nella cartella a cui serve,
   con l'intestazione di `cowork.intestazione()` (titolo, **un ruolo solo** nella
-  riga `Ruolo:`, percorso della risposta sul ramo `cowork-immagini`) e tutto
+  riga `Ruolo:`, nome della risposta su Drive) e tutto
   quello che serve dentro: Cowork legge l'indice e la richiesta, non il resto
   del repository. Le richieste di ogni libro le scrive il sistema (`avvio`,
   `parole-chiave`, `copertina`, `immagini`).
-- **Risposta di Cowork**: un file nuovo sul ramo `cowork-immagini`, che
-  `--dal-ramo` porta accanto alla richiesta come `cowork-<argomento>-risposta.md`.
-  La prima riga è `Esito: completa` o `Esito: parziale — punti …`. Le immagini
-  arrivano in `books/<slug>/assets/` solo se una richiesta le ha chieste;
-  nient'altro può arrivare dal ramo.
+- **Risposta di Cowork**: un file nuovo su Drive, che `--scarica` porta accanto
+  alla richiesta come `cowork-<argomento>-risposta.md`. La prima riga è `Esito:
+  completa` o `Esito: parziale — punti …`. Dal ramo `cowork-immagini` arrivano in
+  `books/<slug>/assets/` solo le immagini che una richiesta ha chiesto;
+  nient'altro può arrivare dal corriere né dal ramo.
 - **Senza attese**: dopo il push, la sessione lancia subito (`fire_trigger`) i
   ruoli che `cowork corriere` elenca in **avvia** — quelli che lavorano nel
   cloud (`"cloud": true`), per le richieste senza `Serve:` — e registra

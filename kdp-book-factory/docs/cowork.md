@@ -11,12 +11,10 @@ fabbrica (questa sessione)                    GitHub, Personal-lHUb/NEXTUP      
 ──────────────────────────                    ────────────────────────────            ──────
 richiesta + indice, commit e push      ─▶     ramo della fabbrica                ─▶   il ruolo legge l'indice
 lancia subito i ruoli che vanno nel cloud ─▶  (fire_trigger)                          e le sue richieste
-applica, segna «Stato: applicata»      ◀─     ramo cowork-immagini               ◀─   consegna col browser:
-assets/ del libro                      ◀─       …-risposta.md, immagini                GitHub dell'autore
-porta su GitHub (--scarica)            ◀─     Drive: risposte di ripiego         ◀─   senza browser: testo
+porta su GitHub (--scarica), applica   ◀─     Drive «NEXTUP — corriere Cowork»   ◀─   scrive la risposta
+segna «Stato: applicata»                       (risposte, esiti, LEGGIMI)
+assets/ del libro (--dal-ramo)         ◀─     ramo cowork-immagini               ◀─   l'autore, se carica immagini
 riparte subito                         ◀─     (fire_trigger della routine)       ◀─   avvisa la fabbrica
-
-Google Drive «NEXTUP — corriere Cowork»: il LEGGIMI, le risposte di ripiego, gli esiti dei giri non riusciti
 ```
 
 - La **richiesta** sta nel repository, nella cartella a cui serve:
@@ -27,19 +25,20 @@ Google Drive «NEXTUP — corriere Cowork»: il LEGGIMI, le risposte di ripiego,
   solo col browser del portatile. Lo riscrive `cowork corriere` a ogni giro;
   Cowork lo legge dall'indirizzo pubblico (`raw.githubusercontent.com`) e non
   apre altro.
-- Le sessioni di Cowork **non hanno credenziali GitHub**: niente `add_repo`, e
-  il proxy rifiuta il push (esiti del 6 ottobre 2026). Leggono il repository
-  pubblico e **consegnano** col GitHub dell'autore aperto nel browser del
-  portatile: la pagina «consegna» dell'indice crea il file sul ramo
-  `cowork-immagini`, commit direttamente sul ramo. Senza browser (giro nel
-  cloud) la risposta di testo va su Drive col **nome di ripiego**
-  (`books__x__…-risposta.md`), e la fabbrica la porta accanto alla richiesta
-  con `cowork corriere --scarica`. Le immagini solo col browser.
-- La fabbrica prende dal ramo solo le risposte alle sue richieste e le immagini
-  che una richiesta ha nominato.
+- **Su GitHub Cowork legge e basta.** Le sue sessioni non hanno credenziali
+  (niente `add_repo`, il proxy rifiuta il push) e la sua modalità automatica
+  blocca la scrittura su GitHub dal browser dell'autore come un aggiramento
+  («Auto-Mode Bypass», esiti del 6 ottobre 2026). Non si aggira: Cowork
+  scrive la risposta su Drive col nome che la richiesta indica
+  (`books__x__…-risposta.md`), e la fabbrica, con il suo accesso, la porta
+  accanto alla richiesta con `cowork corriere --scarica`.
+- **Le immagini** Cowork non le consegna (Drive non porta file pesanti, GitHub
+  non si scrive): le genera e le scarica la fabbrica; sul ramo
+  `cowork-immagini` arrivano solo quelle che carica l'autore, e la fabbrica
+  prende solo quelle che una richiesta ha nominato.
 - Se il repository diventa privato, Cowork non legge più gli indirizzi
-  pubblici: l'indice e le richieste si aprono solo col GitHub dell'autore nel
-  browser, quindi tutti i ruoli diventano «solo col browser del portatile».
+  pubblici, e non ha credenziali per leggerlo altrimenti: le richieste
+  dovrebbero tornare su Drive (`canale: "drive"` in `config/cowork.json`).
 - Il **ruolo**: ogni richiesta dice sotto il titolo quale ruolo di Cowork la
   prende (`Ruolo: concorrente`, `parole-chiave`, `fonti`, `regole-kdp`,
   `immagini`), e uno solo. Ogni ruolo ha la sua chat e la sua attività
@@ -258,14 +257,16 @@ manca. Con `"generatore": "cowork"` vale quello che segue.
 Se la rete dell'ambiente blocca i domini di Higgsfield, la sessione genera dal
 connettore Higgsfield di claude.ai, che passa dal proxy di Anthropic, con gli
 stessi prompt del sistema. Le immagini restano sulla CDN di Higgsfield, che la
-rete può bloccare a sua volta: allora la sessione scrive
-`manuale/cowork-immagini-scarica.md` (`richiesteimmagini.scaricamento`, ruolo
-`immagini`, col browser del portatile: nel cloud la CDN è bloccata anche per
-Cowork) e Cowork le scarica e le carica col browser sul ramo `cowork-immagini`,
-da cui `cowork corriere --dal-ramo` le porta in `assets/`. Se l'autore apre i
-domini di Higgsfield nella rete dell'ambiente, la sessione le scarica da sé e
-la richiesta si ritira.
-Finché la richiesta è aperta `produzione` dà la copertina in attesa: le
+rete può bloccare a sua volta. Allora gli indirizzi restano in
+`build/copertina-higgsfield.json`, e `copertina <slug> --scarica-generate` le
+porta in `assets/copertina-N.png` appena la rete lascia passare la CDN: l'autore
+aggiunge i domini di Higgsfield nelle impostazioni dell'ambiente (Network access,
+Custom, Allowed domains: `higgsfield.ai`, `fnf.higgsfield.ai`,
+`fnf-api-gw.higgsfield.ai`, `clerk.higgsfield.ai`,
+`d8j0ntlcm91z4.cloudfront.net`). In alternativa le carica lui sul ramo
+`cowork-immagini`, da cui `cowork corriere --dal-ramo` le porta in `assets/`.
+Cowork non le può consegnare: la sua CDN è bloccata nel cloud e su GitHub non
+scrive. Finché mancano, `produzione` dà la copertina in attesa dell'autore: le
 varianti già pagate non si rigenerano.
 
 ## Il progetto ChatGPT delle immagini

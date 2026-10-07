@@ -1,10 +1,10 @@
 {
-  "_nota": "Il canale con Cowork, su GitHub. Le richieste stanno sul ramo della fabbrica, con l'indice config/cowork-aperte.md, e Cowork le legge dagli indirizzi pubblici (raw.githubusercontent.com): le sue sessioni non hanno credenziali GitHub. Consegna sul ramo `ramo_consegna` col GitHub dell'autore aperto nel browser del portatile; senza browser la risposta di testo va su Drive col nome di ripiego, e la fabbrica la porta su GitHub (`cowork corriere --scarica`). `cowork corriere --dal-ramo` prende quello che arriva sul ramo. Su Drive ci sono il LEGGIMI, le risposte di ripiego e gli esiti dei giri non riusciti. La fabbrica lancia subito i ruoli che possono lavorare nel cloud (`cloud`: true).",
+  "_nota": "Il canale con Cowork. Le richieste stanno su GitHub, sul ramo della fabbrica, con l'indice config/cowork-aperte.md, e Cowork le legge dagli indirizzi pubblici (raw.githubusercontent.com). Su GitHub Cowork non scrive: niente credenziali, e la sua modalità automatica blocca la scrittura dal browser dell'autore. Le risposte arrivano su Drive col nome indicato, e la fabbrica le porta su GitHub (`cowork corriere --scarica`). Il ramo `ramo_consegna` riceve solo le immagini che carica l'autore, e `cowork corriere --dal-ramo` le porta nei libri. La fabbrica lancia subito i ruoli che lavorano nel cloud (`cloud`: true).",
   "canale": "github",
   "repository": "Personal-lHUb/NEXTUP",
   "ramo": "claude/dreamy-archimedes-hf8w45",
   "leggimi": "kdp-book-factory/config/leggimi-cowork.md",
-  "leggimi_versione": 10,
+  "leggimi_versione": 11,
   "progetto": {
     "_nota": "Il progetto di Cowork in Claude Desktop: una chat e un'attività pianificata per ruolo. Il testo da incollare lo scrive `python3 -m kdpfactory cowork progetto` in config/progetto-cowork.md.",
     "nome": "NEXTUP — Cowork",
@@ -72,11 +72,11 @@
       "attivita": "NEXTUP — Immagini",
       "ogni": "ora",
       "minuto": 45,
-      "compito": "le illustrazioni di copertina e le figure interne, generate con ChatGPT dal prompt che scrive il sistema o già generate da scaricare, caricate col browser sul ramo cowork-immagini di GitHub",
+      "compito": "le richieste d'immagine che passano da ChatGPT e le analisi visive (video, copertine), col browser del portatile; le immagini le genera e le scarica la fabbrica",
       "strumento": "ChatGPT",
       "note": [
-        "ChatGPT e GitHub si usano nel browser del portatile, con gli account dell'autore già aperti: se chiedono l'accesso, la risposta è parziale e l'accesso non lo fai tu;",
-        "scarica ogni immagine alla risoluzione piena (non la miniatura dell'anteprima) e caricala col browser sul ramo cowork-immagini, al percorso indicato, con «Add file → Upload files» e il commit direttamente sul ramo: non su Drive, che non porta file così pesanti. Nel cloud la CDN delle immagini è bloccata: niente download da lì."
+        "ChatGPT si usa nel browser del portatile, con l'account dell'autore già aperto: se chiede l'accesso, la risposta è parziale e l'accesso non lo fai tu;",
+        "le immagini non si caricano da nessuna parte: la risposta dice dove sono e quanto misurano."
       ],
       "trigger": "trig_01S5VYkF4ziuGsQBZX2pjWnK",
       "cloud": false

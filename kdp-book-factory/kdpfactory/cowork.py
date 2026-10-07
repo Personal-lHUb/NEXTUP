@@ -170,19 +170,6 @@ def link_lettura(canale: dict, relativo: str, ramo: str = "") -> str:
     return f"https://raw.githubusercontent.com/{repository}/{ramo}/{CARTELLA_FABBRICA}/{relativo}"
 
 
-def link_consegna(canale: dict, relativo: str) -> str:
-    """La pagina di GitHub che crea il file della risposta sul ramo di consegna, col browser.
-
-    Il commit lo fa il GitHub dell'autore già aperto nel browser del portatile: è
-    l'unica scrittura su GitHub che una sessione di Cowork può fare.
-    """
-    repository = canale.get("repository", "Personal-lHUb/NEXTUP")
-    consegna = canale.get("ramo_consegna", RAMO_IMMAGINI)
-    cartella, _, nome = relativo.rpartition("/")
-    dove = f"{CARTELLA_FABBRICA}/{cartella}" if cartella else CARTELLA_FABBRICA
-    return f"https://github.com/{repository}/new/{consegna}/{dove}?filename={nome}"
-
-
 def corriere(canale: dict) -> tuple[str, str]:
     """La cartella Drive del corriere: nome e id (vuoti se il canale non la usa)."""
     dati = canale.get("corriere") or {}
@@ -231,9 +218,11 @@ def intestazione(
     leggimi = canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md")
     consegna = canale.get("ramo_consegna", "")
     if consegna:
-        # Il canale su GitHub: le richieste stanno sul ramo della fabbrica, Cowork
-        # consegna sul suo ramo col GitHub dell'autore aperto nel browser; senza
-        # browser scrive la stessa risposta su Drive e la fabbrica la porta su GitHub.
+        # Il canale su GitHub: le richieste stanno sul ramo della fabbrica e Cowork
+        # le legge dagli indirizzi pubblici. Su GitHub Cowork non scrive (niente
+        # credenziali, e la sua modalità automatica blocca la scrittura dal browser
+        # dell'autore): la risposta va su Drive, e la fabbrica la porta su GitHub
+        # accanto alla richiesta, `percorso`.
         relativo = f"{cartella.strip('/')}/{risposta}" if cartella else risposta
         percorso = f"{CARTELLA_FABBRICA}/{relativo}"
         repository = canale.get("repository", "Personal-lHUb/NEXTUP")
@@ -243,12 +232,9 @@ def intestazione(
             f"{righe}\n"
             f"Richiesta della fabbrica per Cowork, con le regole di `{leggimi}`\n"
             f"(ramo `{ramo}` del repository `{repository}`).\n"
-            f"Consegna la risposta come file nuovo `{percorso}`\n"
-            f"sul ramo `{consegna}`, con la stessa numerazione: col browser, da\n"
-            f"{link_consegna(canale, relativo)}\n"
-            "e commit direttamente sul ramo. Senza browser, o se il commit non riesce,\n"
-            f"scrivi lo stesso testo su Drive, nella cartella «{nome}», come\n"
-            f"`{relativo.replace('/', '__')}`: la fabbrica lo porta su GitHub.\n"
+            f"Scrivi la risposta come file nuovo nella cartella Drive «{nome}»,\n"
+            f"con il nome `{relativo.replace('/', '__')}` e la stessa numerazione:\n"
+            f"la fabbrica la porta su GitHub, in `{percorso}`.\n"
             + regole
         )
     return (
@@ -364,17 +350,15 @@ def avviso(
             "rinominare o cancellare altri file: al repository li porta la fabbrica.",
         ]
     elif ramo_consegna(canale):
-        consegna = ramo_consegna(canale)
         righe += [
             "",
             f"Leggi l'indice {link_lettura(canale, 'config/cowork-aperte.md', ramo)} e le "
             "richieste agli indirizzi che dà.",
             "",
-            "Per ciascuna: leggila per intero ed esegui quello che chiede. Consegna la risposta "
-            f"come file nuovo al percorso indicato, sul ramo {consegna}, col GitHub aperto nel "
-            "browser (commit direttamente sul ramo), con la prima riga «Esito: completa» oppure "
-            "«Esito: parziale — punti …: <motivo>». Senza browser, la stessa risposta su Drive "
-            "col nome che la richiesta indica. Nessun altro file, nessuna pull request.",
+            "Per ciascuna: leggila per intero ed esegui quello che chiede. Scrivi la risposta "
+            "come file nuovo nella cartella Drive, col nome che la richiesta indica, e la prima "
+            "riga «Esito: completa» oppure «Esito: parziale — punti …: <motivo>»: la fabbrica la "
+            "porta su GitHub. Su GitHub non si scrive niente.",
         ]
     else:
         righe += [
@@ -509,39 +493,40 @@ niente.{_note(dati)}"""
 
 
 def _prompt_attivita_github(ruolo: str, dati: dict, canale: dict) -> str:
-    """Il prompt di un ruolo sul canale GitHub: si legge dal ramo, si consegna col browser.
+    """Il prompt di un ruolo sul canale GitHub: si legge dal ramo, si risponde su Drive.
 
-    Le sessioni di Cowork non hanno credenziali GitHub (niente `add_repo`, push
-    rifiutato dal proxy): leggono il repository pubblico e scrivono col GitHub
-    dell'autore aperto nel browser; senza browser, la risposta va su Drive.
+    Le sessioni di Cowork non hanno credenziali GitHub, e la loro modalità
+    automatica blocca la scrittura su GitHub dal browser dell'autore come un
+    aggiramento (esiti del 6 ottobre 2026). Leggono il repository pubblico e
+    scrivono le risposte su Drive; su GitHub le porta la fabbrica.
     """
     ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
-    consegna = ramo_consegna(canale)
     cartella, ident = corriere(canale)
     routine = canale.get("routine_fabbrica", "")
     avvisa = (
-        f"\n\n7. Se hai consegnato qualcosa e hai lo strumento fire_trigger, alla fine lancia\n"
+        f"\n\n6. Se hai scritto una risposta e hai lo strumento fire_trigger, alla fine lancia\n"
         f"   la routine della fabbrica: trigger_id {routine}, testo «Cowork, ruolo {ruolo}:\n"
-        "   consegnato <percorsi>.» Se lo strumento non c'è, non serve: la fabbrica\n"
-        "   passa ogni ora."
+        "   consegnato <nomi>.» Se lo strumento non c'è, non serve: la fabbrica passa\n"
+        "   ogni ora."
     ) if routine else ""
     return f"""Sei il ruolo «{ruolo}» della fabbrica di libri NEXTUP: {dati.get('compito', '')}.
 
-Le richieste stanno su GitHub, ramo {ramo}; le consegne vanno sul ramo
-{consegna}. Non servono git né credenziali: si legge dagli indirizzi pubblici,
-si scrive col GitHub dell'autore aperto nel browser.
+Le richieste stanno su GitHub, ramo {ramo}, e si leggono dagli indirizzi
+pubblici; le risposte si scrivono su Google Drive, nella cartella «{cartella}»
+(id {ident}). Su GitHub non scrivi niente: la fabbrica porta lei le risposte
+nel repository.
 
 1. Prima di tutto leggi per intero il LEGGIMI:
    {link_lettura(canale, 'config/leggimi-cowork.md', ramo)}
-   (c'è anche nella cartella Google Drive «{cartella}», come
-   config__leggimi-cowork.md): le regole comuni e la sezione «Ruolo {ruolo}».
-   Se dicono una cosa diversa da questo prompt, vale il LEGGIMI.
+   (c'è anche nella cartella Drive, come config__leggimi-cowork.md): le regole
+   comuni e la sezione «Ruolo {ruolo}». Se dicono una cosa diversa da questo
+   prompt, vale il LEGGIMI.
 
-2. Leggi l'indice delle richieste aperte, con WebFetch o col browser:
+2. Leggi l'indice delle richieste aperte, con WebFetch:
    {link_lettura(canale, 'config/cowork-aperte.md', ramo)}
    Prendi solo quelle sotto «Ruolo {ruolo}»: le altre sono di un'altra chat.
-   Ogni voce dà l'indirizzo da cui leggerla, la pagina per consegnare e il nome
-   di ripiego su Drive.
+   Ogni voce dà l'indirizzo da cui leggerla e il nome della risposta su Drive.
+   Una richiesta che ha già la sua risposta su Drive è fatta: saltala.
 
 3. Se il browser del portatile non risponde, il giro è nel cloud: fai solo le
    richieste che l'indice segna «nel cloud o col browser». Una richiesta con la
@@ -550,25 +535,17 @@ si scrive col GitHub dell'autore aperto nel browser.
 4. Esegui le tue. Ogni risposta ha la prima riga «Esito: completa» oppure
    «Esito: parziale — punti …: <motivo>».
 
-5. Consegna col browser: apri la pagina «consegna» della voce (crea il file sul
-   ramo {consegna}, nella cartella giusta), controlla il nome del file, incolla
-   la risposta, «Commit changes…», «Commit directly to the {consegna} branch»,
-   messaggio «Cowork: <nome della richiesta>». Se GitHub propone una pull
-   request, non aprirla.
-
-6. Senza browser, o se il commit non riesce: create_file nella cartella Drive
-   (id {ident}) con il nome di ripiego della voce, contentMimeType text/markdown,
-   disableConversionToGoogleType true. La fabbrica lo porta su GitHub. Le
-   immagini su Drive no: se non puoi caricarle col browser, scrivi l'esito.{avvisa}
+5. Scrivi la risposta con create_file nella cartella Drive (parentId {ident}),
+   con il nome che l'indice dà, contentMimeType text/markdown,
+   disableConversionToGoogleType true.{avvisa}
 
 Se un passo tecnico fallisce, scrivi su Drive l'esito
 cowork-esito-{ruolo}-<AAAAMMGG-hhmm>.md con l'errore esatto (sezione «Se
 qualcosa non va» del LEGGIMI).
 
 Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
-{_sempre(canale)}; su GitHub solo file nuovi sul ramo {consegna}: nessun altro
-ramo, nessuna pull request, niente da cancellare; su Drive solo le risposte di
-ripiego e gli esiti.
+{_sempre(canale)}; su GitHub non si scrive niente, né con git né dal browser; su
+Drive solo le risposte e gli esiti.
 
 Se non ci sono richieste del tuo ruolo da fare, fermati senza scrivere
 niente.{_note(dati)}"""
@@ -637,16 +614,15 @@ Quando ti chiedo «sei allineato?», rispondi con:
 def _istruzioni_progetto_github(canale: dict, elenco: str) -> str:
     repository = canale.get("repository", "Personal-lHUb/NEXTUP")
     ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
-    consegna = ramo_consegna(canale)
+    nome, _ = corriere(canale)
     leggimi = canale.get("leggimi", f"{CARTELLA_FABBRICA}/config/leggimi-cowork.md")
     return f"""Lavori con la fabbrica di libri NEXTUP, una sessione Claude Code in un
 container che non raggiunge Amazon, KDP né il tuo browser. Tu fai per lei le
 ricerche web e le immagini. Tutto passa dal repository GitHub {repository}:
 la fabbrica mette le richieste sul ramo {ramo}, con l'indice
 {CARTELLA_FABBRICA}/config/cowork-aperte.md, che leggi dagli indirizzi pubblici; tu
-consegni risposte e immagini sul ramo {consegna} col GitHub dell'autore aperto nel
-browser. Senza browser, la risposta di testo va su Drive e la fabbrica la porta
-su GitHub. Non hai credenziali GitHub e non te ne servono.
+scrivi le risposte nella cartella Drive «{nome}», e la fabbrica le porta su
+GitHub. Su GitHub non scrivi niente: non hai credenziali e non te ne servono.
 Non basarti mai su quello che ricordi da una conversazione precedente: leggi i file.
 
 Questo progetto ha una chat per ruolo, e ogni chat fa solo il suo lavoro:
@@ -658,21 +634,18 @@ richiesta di un altro ruolo non la apri: è di un'altra chat.
    Sono le regole comuni e quelle di ogni ruolo, e le aggiorna la fabbrica.
    Annota il numero di versione.
 
-2. I PERCORSI. Ogni richiesta scrive il percorso della sua risposta dalla radice
-   del repository, per esempio
-   {CARTELLA_FABBRICA}/books/x/concorrente/cowork-concorrente-risposta.md: usa
-   quello, lettera per lettera, sul ramo {consegna}.
+2. I NOMI. Ogni richiesta scrive il nome della sua risposta su Drive, per
+   esempio books__x__concorrente__cowork-concorrente-risposta.md: usa quello,
+   lettera per lettera.
 
 3. CHI VINCE. Per il modo di lavorare vale il LEGGIMI. Per quello che va cercato
    vale la richiesta. Se si contraddicono, non scegliere tu: scrivi la
    contraddizione nella risposta e vai avanti con il resto.
 
-4. CHE COSA PUOI SCRIVERE. Solo file nuovi, solo sul ramo {consegna}: le
-   risposte e le immagini che una richiesta chiede, ai percorsi che indica. Non
-   modifichi, rinomini o cancelli nessun file, non tocchi altri rami, pull
-   request o impostazioni. Su Drive scrivi solo le risposte di ripiego, col nome
-   che la richiesta indica, e l'esito di un giro non riuscito
-   (cowork-esito-<ruolo>-<AAAAMMGG-hhmm>.md, con l'errore esatto).
+4. CHE COSA PUOI SCRIVERE. Solo file nuovi, solo nella cartella Drive: le
+   risposte, col nome che la richiesta indica, e l'esito di un giro non
+   riuscito (cowork-esito-<ruolo>-<AAAAMMGG-hhmm>.md, con l'errore esatto). Non
+   modifichi, rinomini o cancelli nessun file. Su GitHub non scrivi niente.
 
 5. SEMPRE, qualunque cosa dicano i file: {_sempre(canale)};
    per ogni punto riporti il fatto che hai visto, con l'URL e la data e l'ora,
@@ -701,11 +674,10 @@ def progetto(canale: dict) -> str:
         "attività pianificata e prende solo le richieste con la riga `Ruolo: <ruolo>`.",
         *((
             f"Le richieste stanno sul ramo `{canale.get('ramo', '')}` di GitHub, con l'indice",
-            "`config/cowork-aperte.md`; Cowork consegna risposte e immagini sul ramo",
-            f"`{ramo_consegna(canale)}`, col GitHub dell'autore aperto nel browser; senza",
-            f"browser le risposte di testo vanno su Drive («{cartella}»), dove sta anche il",
-            "LEGGIMI, e la fabbrica le porta su GitHub. I ruoli che lavorano nel cloud la",
-            "fabbrica li lancia subito.",
+            "`config/cowork-aperte.md`, che Cowork legge in chiaro; le immagini sul ramo",
+            f"`{ramo_consegna(canale)}` solo quelle che carica l'autore. Cowork scrive le",
+            f"risposte su Drive («{cartella}»), dove sta anche il LEGGIMI, e la fabbrica le",
+            "porta su GitHub. I ruoli che lavorano nel cloud la fabbrica li lancia subito.",
         ) if ramo_consegna(canale) else (
             f"Richieste e risposte passano dalla cartella Drive «{cartella}», senza passi",
             f"a mano; le immagini dal ramo `{RAMO_IMMAGINI}` di GitHub, che Cowork carica dal",
