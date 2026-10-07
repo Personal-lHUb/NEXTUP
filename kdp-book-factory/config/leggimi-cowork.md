@@ -1,12 +1,20 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 11 · 7 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 12 · 7 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
-**Novità della versione 11: su GitHub si legge, su Drive si risponde.** Il giro
+**Novità della versione 12: si legge solo con WebFetch.** Il giro delle 08:18
+del 7 ottobre ha provato `curl` dalla shell, la modalità automatica l'ha negato
+e il giro si è fermato, giustamente: un permesso negato non si aggira con un
+altro strumento. Perché non succeda più, il modo di leggere è uno solo e si usa
+per primo: **WebFetch** sugli indirizzi «leggi» dell'indice. Niente `curl`,
+`wget`, git o `gh` dalla shell, nemmeno se il prompt dell'attività li nomina:
+vale questo file.
+
+**Versione 11: su GitHub si legge, su Drive si risponde.** Il giro
 delle 22:48 del 6 ottobre l'ha mostrato: la modalità automatica delle attività
 blocca la scrittura su GitHub dal browser dell'autore («Auto-Mode Bypass»), come
 prima il proxy aveva rifiutato il push. Va bene così: su GitHub Cowork non
@@ -75,10 +83,13 @@ fabbrica (versione 8).
 
 ## Leggere
 
-Con WebFetch dagli indirizzi «leggi» dell'indice. Non servono git, `gh` né
-credenziali: il repository è pubblico. Se un indirizzo non si apre, scrivi
-l'esito (sezione «Se qualcosa non va»). Il browser del portatile serve per il
-lavoro del tuo ruolo (Amazon, KDP, YouTube, ChatGPT), non per GitHub.
+Con WebFetch dagli indirizzi «leggi» dell'indice, e solo con WebFetch: è il
+primo strumento da usare, non un ripiego. Non usare `curl`, `wget`, git o `gh`
+dalla shell: la modalità automatica li nega, e dopo un rifiuto non si riprova
+con un altro strumento. Non servono credenziali: il repository è pubblico. Se
+un indirizzo non si apre, scrivi l'esito (sezione «Se qualcosa non va»). Il
+browser del portatile serve per il lavoro del tuo ruolo (Amazon, KDP, YouTube,
+ChatGPT), non per GitHub.
 
 ## Giri nel cloud
 

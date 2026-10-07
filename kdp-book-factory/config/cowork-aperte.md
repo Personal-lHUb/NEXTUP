@@ -8,13 +8,6 @@ agli indirizzi «leggi». Le risposte si scrivono nella cartella Drive del
 corriere, col nome indicato: la fabbrica le porta su GitHub. Su GitHub Cowork
 non scrive. Le regole: https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/config/leggimi-cowork.md
 
-## Ruolo concorrente
-
-- `kdp-book-factory/books/household-bills/concorrente/cowork-copertine-categoria.md`
-  - leggi: https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/books/household-bills/concorrente/cowork-copertine-categoria.md
-  - risposta su Drive: `books__household-bills__concorrente__cowork-copertine-categoria-risposta.md`
-  - si fa: solo col browser del portatile
-
 ## Ruolo regole-kdp
 
 - `kdp-book-factory/config/cowork-kdp-3.md`

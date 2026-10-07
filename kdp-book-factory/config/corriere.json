@@ -2,8 +2,8 @@
   "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N",
   "caricati": {
     "config/leggimi-cowork.md": {
-      "id": "167pxpgkI4ExtcVmgKX7Q53VoUHzVOy3d",
-      "sha": "366a9c15c912c070ac623f297bfdf3b583b82ba96450ba6974c34e2e976d31d2"
+      "id": "16Srn9jg3LDeaEk2knFXIjRBesnEggWGe",
+      "sha": "c73b4744e53d2fb8267835cca1bb3db0bca85c4d009ecc08c7b702a76a48a430"
     }
   },
   "scaricati": {
@@ -62,6 +62,10 @@
     "config__cowork-copertine-video-2-risposta.md": {
       "id": "1Z0HzUmq_rLgMnIWNqYLKdvV7yVaU-XRt",
       "sha": "675965adadc9227adf2bc2ef159c8595b3765f6fe78813b7f46f6f51ceaf5b53"
+    },
+    "books__household-bills__concorrente__cowork-copertine-categoria-risposta.md": {
+      "id": "1FuK0mS9OW3dCS7JM-yX2eA6uSe8jrJWX",
+      "sha": "57076df9b3787bb2055f6f1e291da390a7a3226aa2cac3828975d9f80dcc440b"
     }
   },
   "avviate": {
