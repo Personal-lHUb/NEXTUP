@@ -1,7 +1,22 @@
 {
   "_nota": "Il piano delle figure, deciso dall'architetto con la scaletta. `servono`: se il libro ha bisogno di figure; `perche`: perché sì o perché no, in italiano. `mondo`: in inglese, il mondo visivo comune a tutte le figure generate (ambiente, epoca, personaggi ricorrenti), perché siano coerenti con la trama. Per ogni figura: `percorso` (immagini/NN-nome.jpg, lo stesso del manoscritto), `capitolo`, `mostra` (che cosa deve mostrare), `perche` (che cosa spiega meglio del testo), `fonte` (generata | pubblica: pubblica solo quando il contesto non lascia generarla — persone o luoghi reali, documenti, fatti storici, opere d'arte) e, per le pubbliche, `cerca` (le parole da cercare negli archivi, in inglese). La `provenienza` la scrive il sistema quando prende l'immagine.",
-  "servono": null,
-  "perche": "",
-  "mondo": "",
-  "figure": []
+  "servono": true,
+  "perche": "Il libro è prosa da leggere, e quasi tutto si spiega meglio a parole: le scene delle famiglie, le decisioni, le leggi, i servizi. Due concetti invece sono visivi, e sono quelli che il lettore sbaglia più spesso. Il primo è come una copia di un gene passa dal genitore al figlio, a sorte e di nuovo per ciascun figlio. Il secondo è perché «il doppio del rischio» non dice niente senza il punto da cui si parte. Sono i due disegni che un consulente genetico fa di solito su un foglio davanti alla famiglia, e occupano mezza pagina ciascuno. Non ce ne sono altre: niente cervelli, scansioni, persone o luoghi reali, niente figure decorative. Nota sui numeri: `capitolo` segue la numerazione di outline.json, dove l'introduzione è la sezione 1. Le due figure stanno quindi nei capitoli stampati 2 e 5, cioè le sezioni 3 e 6.",
+  "mondo": "These figures are explanatory diagrams, not scenes: the kind of sketch a genetic counselor draws on a notepad for a family, redrawn cleanly for print. Simple, friendly, neutral human silhouettes with round heads and no facial features, and no cues of age, gender or ethnicity beyond the difference in size between adults and children. Flat shapes on a plain white background, black outlines of even weight, solid black only for the element the text points to and white or very light grey for everything else, so the meaning survives black-and-white printing. Calm and unclinical: no brains, DNA helices, hospitals, syringes, warning signs or dramatic lighting. The book follows composite American families living with dementia, but the figures show generic people, never the book's characters, and both diagrams share the same silhouettes and line weight.",
+  "figure": [
+    {
+      "percorso": "immagini/01-dominant-inheritance.jpg",
+      "capitolo": 3,
+      "mostra": "A simple inheritance diagram on a white background. At the top, two adult human silhouettes stand side by side, joined by a short horizontal line: the parents. Inside the torso of the left parent are two short vertical bars, one solid black and one white with a black outline; inside the torso of the right parent are two white bars with black outlines. Below them, two child silhouettes of equal size stand side by side, each connected to both parents by thin lines. The left child holds one solid black bar and one white bar; the right child holds two white bars. The two children are drawn with equal weight, as two equally likely outcomes. No text, numbers, letters or symbols.",
+      "perche": "Come passa una copia del gene è una questione di spazio: ogni persona ha due copie e al figlio ne passa una sola, a caso. A parole si segue male. Il disegno mostra i due esiti possibili con lo stesso peso, invece di una famiglia di quattro figli divisa a metà. Così non alimenta l'equivoco che il capitolo deve smontare, cioè che «metà dei figli» si ammalerà, e la didascalia può dire che il sorteggio si rifà per ogni figlio.",
+      "fonte": "generata"
+    },
+    {
+      "percorso": "immagini/02-twice-the-risk.jpg",
+      "capitolo": 6,
+      "mostra": "Two square grids of one hundred small identical human icons each, ten rows of ten, side by side with clear space between them. In the left grid exactly two icons are solid black and the other ninety-eight are white with thin black outlines; in the right grid exactly four icons are solid black and the other ninety-six are white with thin black outlines. In both grids the black icons sit together at the right end of the bottom row. The two grids are identical in size and spacing, so the only difference is the number of black icons. No text, numbers or labels.",
+      "perche": "«Il doppio del rischio» spaventa perché il lettore non vede da dove si parte. Due griglie di cento persone affiancate mostrano a colpo d'occhio che il doppio di poco resta poco. È uno dei modi più usati per spiegare il rischio ai pazienti. I numeri sono dichiaratamente illustrativi e non sono dati sulla demenza: la didascalia lo deve dire, e chi riceve l'immagine deve contare le icone nere prima di accettarla.",
+      "fonte": "generata"
+    }
+  ]
 }
