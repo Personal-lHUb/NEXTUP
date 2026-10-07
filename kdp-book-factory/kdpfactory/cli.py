@@ -1445,9 +1445,9 @@ def cmd_avvio(args) -> int:
         print(f"  scritto {percorso}")
     if risposte.asin or risposte.pagina == "cowork":
         print("\nRichieste per Cowork: `cowork corriere` (l'indice), poi commit e push in questo")
-        print("stesso giro, e i lanci di «avvia». Arrivate le risposte (`cowork corriere")
-        print("--dal-ramo`), la fase 0 le legge dove sono: non serve copiarle in")
-        print("concorrente/pagina.md.")
+        print("stesso giro, e i lanci di «avvia». Cowork consegna lanciando la routine;")
+        print("salvate le risposte (`cowork corriere --ricevi`), la fase 0 le legge dove sono:")
+        print("non serve copiarle in concorrente/pagina.md.")
     if risposte.pagina == "incolla" and risposte.asin:
         print(f"\nIncolla la pagina Amazon in {acquisizione.pagina_path(project)}, poi parte la fase 0.")
     return 0
