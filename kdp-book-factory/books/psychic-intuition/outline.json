@@ -3,31 +3,44 @@
   "subtitle": "A Workbook for Beginners, from First Hunch to Trusted Insight",
   "thesis": "Intuition becomes a practice, not a string of lucky moments, when it is worked in short, safe sessions that open and close the same way and end with something written down and honestly checked. A workbook that asks for something different on every page, from a profile of the senses to score sheets, logs and a dictionary of the reader's own symbols, turns scattered hunches into a record the reader can read back and learn to weigh.",
   "back_cover": "You have already had the hunch, the dream that came true, the call you knew was coming. This workbook shows you what to do next, pen in hand.\n\nPsychic Practice, Step by Step is for beginners who have read an introduction or two and still don't know what to do, in what order, or how to tell whether it's working. Every session opens and closes with the same short routine to ground, center and set your boundaries. The rest happens on the page: a profile of your strongest intuitive sense and exercises for each sense, ways to tell a true hunch from fear or wishful thinking, simple experiments you run alone and score honestly, a symbol dictionary built from your own impressions, logs for dreams and signs, partner exercises with clear ethics, and a guided meditation to meet a guide with discernment.\n\nNo tarot, no pendulums, no blank journal pages: every page asks for something different, and the only instrument is your own perception. This book doesn't promise powers, accuracy or results. It gives you a method, a safe frame and an honest record of your progress, and at the end you design a routine that is yours to keep.",
+  "target_words_total": 39367,
   "parts": [
     {
       "title": "Starting Safe and Honest",
-      "first_chapter": 1
+      "first_chapter": 2
     },
     {
       "title": "One Sense at a Time",
-      "first_chapter": 6
+      "first_chapter": 7
     },
     {
       "title": "Testing and Translating",
-      "first_chapter": 11
+      "first_chapter": 12
     },
     {
       "title": "Widening the Circle",
-      "first_chapter": 15
+      "first_chapter": 16
     },
     {
       "title": "Staying With the Practice",
-      "first_chapter": 20
+      "first_chapter": 21
     }
   ],
   "chapters": [
     {
       "number": 1,
+      "title": "Introduction",
+      "summary": "Perché questo libro, per chi è, cosa ottiene il lettore.",
+      "beats": [
+        "il problema concreto",
+        "la promessa",
+        "come è organizzato il percorso"
+      ],
+      "target_words": 1022,
+      "role": "intro"
+    },
+    {
+      "number": 2,
       "title": "Take Stock of the Experiences You Have Already Had",
       "summary": "The reader takes stock of the hunches, dreams that came true and moments of knowing they have already lived, and learns a simple framework to name each kind. It comes first because the practice starts from the reader's own history, and it closes by setting personal intentions and honest expectations before any exercise begins.",
       "beats": [
@@ -38,10 +51,11 @@
         "Honest expectations: a short checklist of what this practice offers and what it does not (no powers, no accuracy rates, no deadlines), which the reader signs as an agreement with themselves.",
         "Going further: experienced practitioners add a column for how they responded to each experience at the time and mark the ones they have never told anyone about."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 2,
+      "number": 3,
       "title": "Ground, Center and Set Your Boundaries",
       "summary": "This chapter teaches the opening half of the session frame used before every exercise in the book: grounding, centering and setting energetic boundaries. It sits this early because no exercise starts until the reader can settle, feel steady and decide what they let in.",
       "beats": [
@@ -51,10 +65,11 @@
         "Settling Scale: three practice runs of the opening, each rating restlessness and steadiness before and after on a simple scale, with a different question for each run (what helped, what distracted, what the body did).",
         "Going further: hold the grounded state for longer, try the opening standing or with eyes open, and practice it somewhere ordinary such as a bus or a queue."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 3,
+      "number": 4,
       "title": "Close Down and Learn the Session Frame by Heart",
       "summary": "The second half of the session frame: gathering energy back, closing down, clearing and returning to ordinary attention, then joining both halves into a checklist the reader can follow from memory. Without a closing, practice spills into the rest of the day; with it, every later chapter has a safe container.",
       "beats": [
@@ -64,10 +79,11 @@
         "Short-version builder: a page for designing a quick open-and-close for busy days, deciding which steps can be shortened and which are never skipped.",
         "Going further: a closing after everyday moments that leave the reader feeling crowded or drained, such as a busy shop, a party or a hard conversation."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 4,
+      "number": 5,
       "title": "Tell a Hunch From Fear, Hope, Memory or Imagination",
       "summary": "This chapter shows how an intuitive impression differs from fear, wishful thinking, memory and imagination, the four voices most often mistaken for it. It comes before any testing because a reader who cannot tell these apart will count noise as insight.",
       "beats": [
@@ -77,10 +93,11 @@
         "Hunch post-mortem: a guided page that takes a past hunch that turned out wrong and one that turned out right, and asks which voice each really was and what gave it away.",
         "Going further: practitioners who already give readings review a recent session and mark where a voice other than intuition may have spoken."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 5,
+      "number": 6,
       "title": "Map Where Intuition Shows Up in Your Body",
       "summary": "The reader maps where intuition, fear and desire show up physically, then carries that map into ordinary days with a comparison log. It follows the five voices because body signals are the quickest way to tell them apart in the moment.",
       "beats": [
@@ -91,10 +108,11 @@
         "End-of-week reading: three questions that set the log against the map and redraw the map where the body said something unexpected.",
         "Going further: repeat the body scan at different times of day for a single signal and note how it shifts."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 6,
+      "number": 7,
       "title": "Find Your Strongest Intuitive Sense",
       "summary": "A self-profile of the intuitive senses (seeing, hearing, feeling and knowing, plus smell and taste) shows the reader which channel is strongest for them and which is quietest. It opens the senses section so the reader knows where to start and what to strengthen in the chapters that follow.",
       "beats": [
@@ -104,10 +122,11 @@
         "Where to start: a reading route that sends the reader first to the exercises for their strongest sense, then to the quietest, with a word on why every sense is worth some time.",
         "Going further: a second profile drawn from the Experience Inventory, noting which sense carried each past experience, compared with the questionnaire result."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 7,
+      "number": 8,
       "title": "Seeing Images on Your Inner Screen",
       "summary": "Exercises for the seeing sense, from holding a simple image steady in the mind's eye to letting an unplanned image arrive and recording it before the mind explains it away. It comes first among the sense exercises because images are where many people first notice impressions, and the skill returns in the envelope tests.",
       "beats": [
@@ -117,10 +136,11 @@
         "Detail recall drill: picture a room just left (shapes, light, objects out of place), list what comes, then go back and compare.",
         "Going further: hold an image with eyes open on a blank wall, or let a still inner scene begin to move and follow it."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 8,
+      "number": 9,
       "title": "Hearing a Quiet Word Beneath Your Self-Talk",
       "summary": "Exercises for the hearing sense: layered listening to the room and then to the quieter inner voice, and a way to tell a received word from the reader's own self-talk. It follows seeing so the reader can compare the two channels and notice which answers more readily.",
       "beats": [
@@ -130,10 +150,11 @@
         "Self-talk check: a page that sets each received word beside the reader's usual inner commentary, to spot differences in tone, speed and vocabulary.",
         "Going further: songs that arrive unbidden, logged with the line that stuck and what was happening that day."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 9,
+      "number": 10,
       "title": "Feeling Rooms and Moods, Smelling and Tasting",
       "summary": "Exercises for the feeling sense, where impressions arrive as bodily sensation or emotion, and for the rarer channels of smell and taste. It sits here because feeling is the sense many readers already use without naming it, and smell and taste tend to arrive the same way, through the body.",
       "beats": [
@@ -143,10 +164,11 @@
         "Smell and taste: a scent-memory exercise (recall a smell vividly, then notice what arrives uninvited) and a note page for sudden smells or tastes with no source and what the reader linked them to.",
         "Going further: read the felt quality of a public place, such as a library or a park, at two different times and compare."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 10,
+      "number": 11,
       "title": "Knowing Versus Guessing, Side by Side",
       "summary": "Exercises for the sense of simply knowing something without knowing how. It closes the senses section because knowing is the easiest sense to confuse with guessing, and the reader now has the tools to tell them apart.",
       "beats": [
@@ -156,10 +178,11 @@
         "Certainty meter: each knowing is rated for how certain it felt at the time and marked later for what happened, to see whether felt certainty and outcome travel together for this reader.",
         "Going further: note the first thing the reader knows about the day on waking and check it in the evening."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 11,
+      "number": 12,
       "title": "Colors, Calls and an Honest Way to Score",
       "summary": "This chapter teaches the scoring method used in every experiment that follows (hit, near miss, miss) and applies it to the first two low-stakes tests the reader can run alone: colors and who is calling. It opens the testing section because how a score is read matters more than the score itself.",
       "beats": [
@@ -169,10 +192,11 @@
         "Reading results honestly: why a handful of hits means little on its own, why near misses carry information, and how to log a miss without self-deception and without discouragement; the scores are personal feedback for the reader, not a verdict on psychic ability.",
         "Going further: add a second impression for each color card, such as a feeling or a temperature, and score it separately to see which sense helps."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 12,
+      "number": 13,
       "title": "Sealed Envelopes and Objects in the Hand",
       "summary": "Two more experiments the reader can run alone: sealed envelopes holding a picture or a word, and an object with an unknown story held in the hand. It follows the scoring chapter because both tests use the same honest key, and it ends with a running record that shows the reader their own pattern over time.",
       "beats": [
@@ -182,10 +206,11 @@
         "Running record: a page that gathers the scores from every test so far, by test, by sense and by time of day, so the reader looks for a pattern across sessions instead of judging any single session.",
         "Going further: ask a friend to prepare the envelopes so even the setup is blind to the reader."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 13,
+      "number": 14,
       "title": "Ask a Question an Impression Can Answer",
       "summary": "This chapter shows how to phrase a clear question an impression can answer, and how impressions arrive as images, words or sensations. It comes before the symbol dictionary because a vague question produces impressions no dictionary can translate.",
       "beats": [
@@ -195,10 +220,11 @@
         "Raw versus read: a two-step page that keeps the impression exactly as it came apart from its interpretation, so meaning is added only at the end and can be revised.",
         "Going further: a question ladder that narrows a broad question in stages and records which stage drew the clearest impression."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 14,
+      "number": 15,
       "title": "Build a Symbol Dictionary of Your Own",
       "summary": "The reader starts a personal symbol dictionary built from their own impressions rather than a borrowed list, recording what each recurring image, word or sensation has pointed to in their practice. It sits at the end of the testing section because the dictionary draws on the sketches, sheets and logs the reader has already filled in.",
       "beats": [
@@ -208,10 +234,11 @@
         "Symbol review: a page to revisit each entry after more sessions and mark whether its meaning held, shifted or faded.",
         "Going further: trace a single symbol back through every sheet filled in so far and write its history in a few lines."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 15,
+      "number": 16,
       "title": "Catch Your Dreams Before They Fade",
       "summary": "Recall techniques and a dream log whose prompts change from page to page help the reader catch dreams before they fade and notice which ones seem to connect with waking life. It opens the wider practice because dreams keep arriving whether or not the reader sits down to practice.",
       "beats": [
@@ -222,10 +249,11 @@
         "Unsettling dreams: dreams about illness, death or danger are recorded but not treated as predictions, with a calm reset and the closing routine for the morning after.",
         "Going further: set a specific question before sleep and log what the night brings back."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 16,
+      "number": 17,
       "title": "Track Signs, Then See What Held Up Weeks Later",
       "summary": "A sign log for synchronicities (repeated numbers, names, songs, chance meetings) and a structured way to review both the sign log and the dream log weeks later to see what held up. It follows the dream log because a review only works once there is a record to look back on.",
       "beats": [
@@ -235,10 +263,11 @@
         "Patterns page: themes, places and times of day that recur across both logs, and the symbols that earn a place in the symbol dictionary.",
         "Going further: a second review a few months on, set beside the first to see what still stands."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 17,
+      "number": 18,
       "title": "Seek a Partner's Consent and Choose Words With Care",
       "summary": "Before any partner exercise, this chapter sets out the ethical framework for sharing impressions: consent, care with words, topics that stay off limits and no comparing progress. It comes before the partner exercises because how an impression is offered matters as much as what it is.",
       "beats": [
@@ -248,10 +277,11 @@
         "No comparing: a reflection page on measuring progress against friends, teachers or psychics on television, and on keeping the reader's own record as the only yardstick.",
         "Going further: an agreement page for partners who practice together regularly, covering confidentiality and how feedback will be given."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 18,
+      "number": 19,
       "title": "Sit Back to Back and Trade Feedback",
       "summary": "Simple exercises to run with a consenting partner, and a way to give and receive feedback that keeps both people honest and comfortable. It sits right after the ethics chapter so every exercise here runs inside that framework.",
       "beats": [
@@ -261,10 +291,11 @@
         "Receiving feedback: how to hear 'that doesn't fit' without arguing, explaining or stretching the impression, and how to keep partner scores separate from solo tests in the running record.",
         "Going further: spend a session on the sending side and note how holding an image for someone changes the way the reader receives."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 19,
+      "number": 20,
       "title": "Meet a Guide and Ask If It Feels Safe and Kind",
       "summary": "A guided meditation to meet a guide, questions for discernment (does it feel safe, kind and consistent) and pages to record each contact. The spiritual frame is taken seriously without a hierarchy of beings, and the chapter comes late because it needs a steady session frame and practice at telling impressions from noise.",
       "beats": [
@@ -275,10 +306,11 @@
         "What this practice leaves out: no ranking of guides, no other realms, no contact with the dead; a guide is one practice among others, not a requirement.",
         "Going further: bring a clear question to the meeting and record the answer apart from the contact itself."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 20,
+      "number": 21,
       "title": "Reset When Practice Stalls or Feels Like Too Much",
       "summary": "Doubt, plateaus, feeling too open and changes in sleep or mood can all come with practice; this chapter gives quick resets, clear signs for when to pause, and when to talk to a doctor or a therapist. It sits before the final plan so the reader builds their own routine knowing how to adjust it.",
       "beats": [
@@ -288,10 +320,11 @@
         "When to pause and when to get help: plain signs that mean stopping practice for a while, and signs that mean talking to a doctor or a therapist; this book never replaces either.",
         "Going further: experienced practitioners write their own early-warning list from past periods of overload."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 21,
+      "number": 22,
       "title": "Your First Month, Planned Week by Week",
       "summary": "A four-week starter plan recombines the exercises of the book into short sessions, so the reader practices in a sensible order without deciding each time. It opens the closing section because a plan with a known shape is the step between doing exercises and keeping a practice.",
       "beats": [
@@ -301,10 +334,11 @@
         "Swap rules: how to replace an exercise that isn't working with another from the same section, and when to repeat a week instead of moving on.",
         "Going further: a harder version of each week for readers who already practice, such as longer silent sits or a partner test at the end of the week."
       ],
+      "target_words": 1704,
       "role": "chapter"
     },
     {
-      "number": 22,
+      "number": 23,
       "title": "Design a Routine That Is Yours to Keep",
       "summary": "The reader designs a personal routine from the exercises that suited them, with a monthly review page to keep it honest and going further variations for those who already practice. It closes the book because the aim from the start was a practice the reader owns, not a program to follow.",
       "beats": [
@@ -314,7 +348,20 @@
         "Going further for experienced practitioners: longer sessions, combining two senses in one exercise, blind tests with a partner, and a seasonal pass through the symbol dictionary.",
         "Keeping the record going beyond the book, and coming back to the session frame after any pause without starting over."
       ],
+      "target_words": 1704,
       "role": "chapter"
+    },
+    {
+      "number": 24,
+      "title": "Conclusion",
+      "summary": "Chiusura del ragionamento e primi 30 giorni di applicazione.",
+      "beats": [
+        "il punto centrale del libro",
+        "cosa fare adesso",
+        "l'errore da evitare"
+      ],
+      "target_words": 852,
+      "role": "conclusion"
     }
   ]
 }
