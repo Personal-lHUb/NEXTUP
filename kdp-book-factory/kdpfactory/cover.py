@@ -7,6 +7,7 @@ dorso, quindi la copertina va rigenerata **dopo** l'impaginazione definitiva.
 
 from __future__ import annotations
 
+import io
 import textwrap
 from dataclasses import asdict
 from pathlib import Path
@@ -28,6 +29,8 @@ INCH = kdpspecs.INCH
 #: unico riferimento per il margine di sicurezza: disegno e verifica devono
 #: usare lo stesso numero, altrimenti il controllo non controlla niente.
 SAFE_MARGIN_IN = coverdesign.SAFE_MARGIN_IN
+#: il testo, sulla prima e sulla quarta, sta a 1 cm dal taglio (video A, 19:43)
+TEXT_MARGIN_IN = coverdesign.TEXT_MARGIN_IN
 
 
 def pick_theme(spec: BookSpec, genre: str = "non-fiction") -> Palette:
@@ -84,6 +87,8 @@ def build_cover(
     medium-content diventano il quantificatore in copertina, e in ogni caso
     sono i soli che il controllo accetta di vedere stampati.
     """
+    from . import coverbrief
+
     genre = genre or ("enigmi" if getattr(spec, "genre", "") == "puzzle" else spec.genre)
     theme = pick_theme(spec, genre)
     cover_copy = copy or coverdesign.derive_copy(
@@ -92,6 +97,13 @@ def build_cover(
     display = register_family("sans")
     serif = register_family("serif")
     set_default_canvas_font(serif)
+    # La voce del titolo dice il genere, e il gancio la segue: due famiglie al
+    # massimo, una per il titolo e una per il resto (docs/copertine.md).
+    tipografia = coverbrief.tipografia(spec, genre, metadata)
+    title_display = coverdesign.title_face(tipografia)
+    hook_font = f"{serif}-Italic" if tipografia == "elegante" else serif
+    layout = getattr(spec, "cover_layout", "auto")
+    layout = layout if layout in coverdesign.LAYOUTS else "alto"
 
     trim_w, trim_h = kdpspecs.trim_size_in(spec.trim)
     spine_in = kdpspecs.spine_width_in(pages, spec.paper)
@@ -107,7 +119,7 @@ def build_cover(
     spine_x0 = (bleed + trim_w) * INCH
     front_x0 = (bleed + trim_w + spine_in) * INCH
     trim_w_pt, trim_h_pt = trim_w * INCH, trim_h * INCH
-    safe = SAFE_MARGIN_IN * INCH
+    safe = TEXT_MARGIN_IN * INCH
 
     # Fondo
     c.setFillColor(colors.HexColor(theme.background))
@@ -115,21 +127,6 @@ def build_cover(
 
     # --- prima di copertina ------------------------------------------------
     front_width = trim_w_pt + bleed * INCH
-    image_report = None
-    if image_path is not None:
-        prepared = output.parent / f"{spec.slug}-copertina-immagine.jpg"
-        image_report = coverimage.prepare(
-            image_path, prepared, spec.trim, enhance=enhance_image
-        )
-        c.drawImage(
-            str(prepared), front_x0, 0, width=front_width, height=height,
-            preserveAspectRatio=False, anchor="c", mask=None,
-        )
-        # La velatura per la leggibilità è già dentro il JPEG preparato.
-    else:
-        c.setFillColor(colors.HexColor(theme.deep))
-        c.rect(front_x0, 0, front_width, height, stroke=0, fill=1)
-
     front_box = FrontBox(
         x0=front_x0,
         y0=0.0,
@@ -140,17 +137,46 @@ def build_cover(
         bleed=bleed * INCH,
         safe=safe,
     )
+    disegno = {
+        "display": display,
+        "text_font": hook_font,
+        "genre": genre,
+        "art_name": getattr(spec, "cover_art", "auto"),
+        "condensed": register_condensed_display(),
+        "title_display": title_display,
+        "layout": layout,
+    }
+
+    image_report = None
+    if image_path is not None:
+        # Dove cadrà il titolo si sa prima di disegnarlo: una prova a vuoto dà
+        # il rettangolo, e l'immagine si prepara sapendo che cosa avrà sopra.
+        prova = coverdesign.draw_front(
+            pdfcanvas.Canvas(io.BytesIO(), pagesize=(width, height)), front_box,
+            cover_copy, theme, over_image=True, **disegno,
+        )
+        zona = coverimage.title_zone(prova.block_box, front_x0, front_width, height)
+        prepared = output.parent / f"{spec.slug}-copertina-immagine.jpg"
+        image_report = coverimage.prepare(
+            image_path, prepared, spec.trim, enhance=enhance_image,
+            layout=layout, title_zone=zona,
+        )
+        c.drawImage(
+            str(prepared), front_x0, 0, width=front_width, height=height,
+            preserveAspectRatio=False, anchor="c", mask=None,
+        )
+        # La velatura per la leggibilità è già dentro il JPEG preparato.
+    else:
+        c.setFillColor(colors.HexColor(theme.deep))
+        c.rect(front_x0, 0, front_width, height, stroke=0, fill=1)
+
     draw_result = coverdesign.draw_front(
         c,
         front_box,
         cover_copy,
         theme,
-        display=display,
-        text_font=serif,
-        genre=genre,
         over_image=image_report is not None,
-        art_name=getattr(spec, "cover_art", "auto"),
-        condensed=register_condensed_display(),
+        **disegno,
     )
 
     # --- dorso -------------------------------------------------------------
@@ -182,11 +208,14 @@ def build_cover(
     y = height - (bleed + 0.9) * INCH
 
     if back_cover_text:
+        # Il retro parla con la voce del fronte: stesso carattere del titolo per
+        # la frase d'apertura, stessa palette (video A, 28:02).
         headline, _, rest = back_cover_text.partition("\n\n")
-        head_size = _fit_font_size(headline[:40] or "X", display, text_w, 19, 11)
+        head_font = title_display if tipografia == "elegante" else display
+        head_size = _fit_font_size(headline[:40] or "X", head_font, text_w, 19, 11)
         c.setFillColor(colors.HexColor(theme.title))
-        for line in _wrap_lines(headline, display, head_size, text_w):
-            c.setFont(display, head_size)
+        for line in _wrap_lines(headline, head_font, head_size, text_w):
+            c.setFont(head_font, head_size)
             c.drawString(text_x, y, line)
             y -= head_size * 1.25
         y -= 0.18 * INCH
@@ -237,6 +266,10 @@ def build_cover(
         output, trim=spec.trim, pages=pages, paper=spec.paper,
         palette=theme, title=spec.title,
     )
+    if image_report is not None:
+        # Su un'immagine il contrasto della palette non dice niente: conta
+        # quello contro i pixel che il titolo ha davvero dietro.
+        verdict.problems.extend(coverimage.title_problems(image_report))
     thumbnail = None
     try:
         thumbnail = coverdesign.render_thumbnail(
@@ -257,7 +290,10 @@ def build_cover(
         "theme": theme.name,
         "spine_text": kdpspecs.spine_text_allowed(pages),
         "titolo_corpo": draw_result.title_size,
+        "titolo_righe": draw_result.title_lines,
         "illustrazione": draw_result.art,
+        "composizione": draw_result.layout,
+        "tipografia": tipografia,
         "testi": asdict(cover_copy),
         "verifica": verdict.to_dict(),
     }

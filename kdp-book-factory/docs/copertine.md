@@ -25,9 +25,71 @@ misura il PDF finito.
 Le prime quattro si misurano sul PDF, le ultime tre sui testi di copertina.
 Le soglie sono costanti in cima a `coverdesign.py`: `MIN_TITLE_CAP_RATIO`,
 `GOOD_TITLE_CAP_RATIO`, `MIN_CONTRAST`, `MAX_TOP_ELEMENTS`, `MAX_TITLE_LINES`,
-`THUMBNAIL_WIDTH_PX`.
+`THUMBNAIL_WIDTH_PX`, `TEXT_MARGIN_IN`, `MAX_FONT_FAMILIES`,
+`MIN_CONTRAST_ON_IMAGE`.
 
-### Il titolo in condensato
+## Le regole dei due video
+
+Il 6 ottobre 2026 l'autore ha chiesto di scrivere nel sistema le regole di due
+video sulle copertine che vendono su Amazon, e ha deciso che **dove
+contraddicono la direzione di prima vincono i video**. Le ha trascritte Cowork,
+con la frase esatta e il minuto (`config/cowork-copertine-video-2-risposta.md`):
+
+- A — «Come creare una copertina di successo per il tuo libro: 9 consigli
+  essenziali» (Stefano Murari, 29 marzo 2025);
+- B — «COPERTINE che VENDONO su Amazon KDP» (Lorenzo Self Publish, 10 luglio 2025).
+
+Del video B si sono prese solo le regole sulla copertina, non gli strumenti.
+Ogni regola sta in un posto preciso: o il motore la fa da sé, o il prompt la
+chiede, o una misura la controlla.
+
+| regola | video | dove sta |
+|---|---|---|
+| il titolo è il protagonista: è la scritta che ferma chi scorre | A 22:11, B 3:37 | soglie del titolo; il prompt lascia il posto al titolo |
+| gerarchia titolo → sottotitolo → autore | A 20:12 | ordine e corpi di `draw_front` |
+| massimo due caratteri, uno per il titolo e uno per il resto | A 8:25 | motore (il gancio passa al bastone se il titolo è condensato); misura: `famiglie di caratteri` |
+| il carattere dice il genere: deciso o morbido ed elegante | A 7:46, 7:59 | voce tipografica `deciso`/`elegante` (`cover_type`, o la categoria) |
+| niente caratteri sottili | A 6:59, 23:19 | il titolo è sempre in neretto |
+| titolo in alto o al centro, mai in basso | A 9:29, B 4:03, 16:02 | composizione `alto`/`centro` (`cover_layout`); misura: `metà bassa` |
+| andata a capo equilibrata, senza spezzature forzate | A 24:27 | `wrap_balanced`: nessuna parola debole a fine riga, righe simili |
+| allineamento centrato | A 20:42 | motore |
+| contorno o ombra per staccare la scritta | A 12:35, B 15:17 | su un'immagine il titolo ha il contorno scuro |
+| almeno 1 cm fra il testo e i bordi | A 19:43 | margine del testo nel motore; misura: `a meno di 1 cm` |
+| semplicità: un elemento forte, pochi soggetti nello stesso stile | A 3:14, 4:01, B 2:55, 9:45 | direzione visiva nel prompt; al massimo tre elementi per direzione |
+| spazio vuoto, l'immagine sostiene il titolo | A 4:16, 5:06 | il prompt lascia calma la zona del titolo |
+| il colore dice il genere, da due a quattro colori | A 10:28, 12:53 | palette del motore scelta nella direzione; il prompt chiede 2-4 colori del genere |
+| chiaro su scuro o viceversa, niente sfondi rumorosi sotto le scritte | A 7:15, 12:42 | velatura misurata (4,5:1 contro i pixel chiari dietro il titolo); misura: `sfondo rumoroso` |
+| immagine nitida, ad alta risoluzione | A 15:01, B 2:43 | 300 DPI sulla prima; varianti alla risoluzione più alta |
+| niente dominante giallo-senape delle immagini generate | B 2:24 | il prompt la vieta; misura: `giallo-senape` |
+| soggetti rivolti verso il centro, profondità con le ombre | B 20:42, 18:38 | il prompt della composizione al centro |
+| la miniatura a circa 150 × 250 px | A 36:00 | la miniatura larga 160 px, che il sistema già produce |
+| studiare i bestseller della categoria | A 32:10 | lo studio di Cowork prima delle direzioni |
+| rispettare i codici del genere, distinguersi con una sfumatura | A 31:49, 33:01 | il prompt contro il concorrente: stessi codici, colore ed elemento diversi |
+| due o tre versioni da confrontare | A 36:46 | le tre direzioni, coi bozzetti |
+| niente copertina fatta e finita dall'IA, niente elementi difettosi | B 0:27, 24:14 | il testo lo compone il motore; il prompt vieta gli oggetti deformati; l'agente li cerca a occhio |
+| retro coerente col fronte | A 28:02 | stessa palette; con la voce elegante, la frase d'apertura nel carattere del titolo |
+| il colore va visto anche stampato | A 13:53 | copia di prova prima di pubblicare (`linee-guida.md`, fase 8) |
+
+Dove i video non sono d'accordo fra loro il sistema ha scelto così:
+
+- **quanti elementi**: un solo punto focale, la scritta, e al massimo tre
+  elementi nello stesso stile. La scena ricca del video B entra solo come
+  composizione al centro, con pochi soggetti intorno al titolo;
+- **dove il titolo**: in alto di norma, al centro come scelta di una direzione;
+- **le sovrapposizioni**: il video B fa passare un soggetto davanti alla
+  scritta. Il motore compone il testo sopra un'immagine sola, senza livelli,
+  quindi non lo fa: un soggetto davanti al titolo richiederebbe di scontornarlo,
+  e la leggibilità non si potrebbe più misurare.
+
+### Il titolo, il carattere, la voce
+
+Il titolo è sempre in neretto, in una di due voci: **deciso** (il bastone,
+Liberation Sans Bold, o il condensato) per manuali, soldi, enigmi, affari;
+**elegante** (EB Garamond Bold, il carattere del libro) dove il genere parla
+sottovoce — sentimenti, diario, spiritualità, cura, memorie. La sceglie
+`cover_type` in `book.json`, o la direzione d'arte scelta, o la categoria
+(`coverbrief.tipografia`). Se il titolo elegante non entra nella misura, torna
+al bastone: la voce del genere conta, una parola rifilata non si legge.
 
 Sulle parole lunghe il sans normale non arriva alla soglia dominante:
 «REMEMBERED», a tutta larghezza su una prima 6x9, esce a 55 punti, cioè il
@@ -104,34 +166,71 @@ Per scriverli a mano basta metterli in `metadata.json`:
 La linea enigmistica li costruisce da sé, dai numeri veri del libro
 (`cover_copy()` in `kdpfactory/puzzle/book.py`).
 
-## La direzione visiva, e come la impara il sistema
+## Le tre direzioni d'arte
 
-L'autore vuole copertine **semplici, pulite, poco articolate, con un forte
-impatto visivo dato da un forte contrasto** (6 ottobre 2026). Il sistema lo
-mette in ogni prompt (`coverbrief.DIREZIONE_VISIVA`): un soggetto solo, al
-massimo tre elementi, forme grandi che reggono in miniatura, niente dettagli
-minuti né scene piene di oggetti; un soggetto chiaro su un fondo scuro, campi
-di colore quasi piatti, molto spazio vuoto.
+La copertina si progetta come la progetterebbe una casa editrice: prima si
+guarda che cosa vende nella categoria, poi un direttore artistico propone più
+concetti, e solo quando l'autore ne ha scelto uno si spende sulla versione
+finale. Lo fa `kdpfactory/direzioni.py`.
 
-Come rendere quel soggetto lo decide l'autore guardando dei **bozzetti**:
+1. **Lo studio della categoria.** `copertina <slug> --direzioni` chiede a Cowork
+   (ruolo `concorrente`, `concorrente/cowork-copertine-categoria.md`) le prime
+   dieci copertine della categoria, descritte a parole: colori, tipo
+   d'immagine, posizione e carattere del titolo, elementi; che cosa hanno in
+   comune (i codici del genere) e che cosa non fa nessuna (lo spazio libero).
+   Per un libro nuovo la richiesta parte già con le domande d'avvio.
+2. **Le tre direzioni.** L'agente `copertina` le scrive in
+   `books/<slug>/copertina-direzioni.json`, sul modello che il comando lascia.
+   Ogni direzione ha un nome, l'idea e il perché venderebbe (in italiano, per
+   l'autore), come si distingue restando nel genere, e i dati del prompt in
+   inglese: soggetto, da uno a tre elementi, resa, luce, emozione. Più la
+   palette del motore, la composizione (`alto`/`centro`) e la voce
+   tipografica. Prima di proporle l'agente legge le scelte dell'autore sui
+   libri precedenti, in `config/copertine-direzione.json`.
+3. **I controlli.** Rilanciato, `copertina <slug> --direzioni` le controlla —
+   tre, complete, al massimo tre elementi, palette e composizione che il
+   motore sa comporre, nessun testo chiesto all'immagine, nessuna imitazione,
+   e diverse fra loro almeno in due fra soggetto, resa, composizione e
+   palette — e scrive i prompt dei bozzetti (`build/copertina-bozzetti-prompt.json`)
+   e il riepilogo per l'autore (`build/copertina-direzioni.md`).
+4. **I bozzetti.** Il prompt di un bozzetto è quello della variante finale
+   (`coverbrief.prompt_da_incollare(..., direzione=...)`): il bozzetto deve
+   mostrare quello che la copertina sarà. Cambia solo la spesa —
+   `copertina <slug> --bozzetti --genera` usa la risoluzione più bassa e la
+   qualità media. La traccia resta in `build/copertina-bozzetti.json`.
+5. **La scelta.** È dell'autore, e non passa dal silenzio-assenso:
+   `copertina <slug> --direzione N --perche "…"` scrive in `book.json`
+   `cover_theme`, `cover_layout` e `cover_type`, e aggiunge la scelta, con le
+   direzioni scartate, a `config/copertine-direzione.json`. Da lì `copertina
+   <slug> --genera` fa tre varianti della direzione scelta alla risoluzione più
+   alta, numerate dopo quelle che ci sono già.
 
-1. `coverbrief.prompt_bozza(spec, trattamento, …)` scrive un prompt corto per
-   ogni trattamento di `coverbrief.TRATTAMENTI` (luce, silhouette, serigrafia,
-   campo diviso, carta, dettaglio, linea, fotografia). Cambia solo il
-   trattamento: oggetto, palette e direzione restano fermi, così le differenze
-   si vedono.
-2. I bozzetti si generano con Higgsfield a 1K, qualità media (0,5 crediti
-   l'uno), e la traccia resta in `build/copertina-bozze.json`.
-3. L'autore dice quali gli piacciono e quali no, e la sessione lo registra:
+Senza direzioni — un libro lavorato prima che esistessero — il prompt prende
+soggetto e stile dalla categoria (`RAPPRESENTAZIONE`, `STILE`) e il trattamento
+preferito fra i bozzetti di prova (`TRATTAMENTI`, `--preferisci`/`--scarta`).
 
-   ```bash
-   python3 -m kdpfactory copertina <slug> --preferisci luce,serigrafia --scarta linea --perche "…"
-   ```
+### La direzione visiva
 
-   Le scelte vanno in `config/copertine-direzione.json`, che vale per tutta la
-   fabbrica. Da lì in poi le varianti delle copertine vere prendono i
-   trattamenti preferiti, uno per variante, e i bozzetti dei libri successivi
-   non ripropongono quelli scartati.
+Vale per ogni prompt, prima dello stile (`coverbrief.DIREZIONE_VISIVA`): un
+soggetto chiaro e al massimo tre elementi, nello stesso stile e sotto la stessa
+luce, forme grandi che reggono in miniatura, molto spazio calmo, niente
+dettaglio minuto dove va il titolo; l'impatto dal contrasto fra chiaro e scuro
+e da una palette di due-quattro colori del genere; nitidezza, e nessuna
+dominante gialla, senape o seppia. È la direzione chiesta dall'autore il 6
+ottobre 2026 (semplice, pulita, forte contrasto) completata dalle regole dei
+video.
+
+### La composizione e la velatura
+
+Il titolo va in alto (`alto`, l'immagine sotto) o al centro (`centro`, i
+soggetti intorno, rivolti verso il titolo). Il prompt lo dice al generatore
+(`coverbrief.POSTO_DEL_TITOLO`), e il motore ne tiene conto quando prepara
+l'immagine: prova il disegno a vuoto per sapere dove cadrà il blocco del titolo,
+e scurisce quella zona a passi, con i bordi sfumati, finché il titolo bianco non
+stacca di 4,5:1 contro i pixel chiari che ha dietro, fascia per fascia. Il
+rapporto (`state.json` → `cover.immagine`) dice il contrasto ottenuto, quanto
+dettaglio c'è dietro il titolo e la quota di giallo-senape; l'agente ne fa
+rilievi. Sopra, il titolo ha un contorno scuro.
 
 ## L'illustrazione
 

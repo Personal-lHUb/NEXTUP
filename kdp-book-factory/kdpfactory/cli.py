@@ -27,6 +27,7 @@ from . import (
     cowork,
     decisioni,
     diagnostica,
+    direzioni,
     higgsfield,
     imagebrief,
     kdpspecs,
@@ -435,6 +436,10 @@ def cmd_copertina(args) -> int:
         return _scegli_copertina(project, args)
     if getattr(args, "scarica_generate", False):
         return _scarica_generate(project, args)
+    if getattr(args, "direzione", 0):
+        return _scegli_direzione(project, spec, args)
+    if getattr(args, "direzioni", False) or getattr(args, "bozzetti", False):
+        return _direzioni_copertina(project, spec, args)
     if args.preferisci or args.scarta:
         dividi = lambda testo: [k.strip() for k in testo.split(",") if k.strip()]  # noqa: E731
         try:
@@ -450,17 +455,13 @@ def cmd_copertina(args) -> int:
               + (", ".join(s["trattamento"] for s in direzione["scartati"]) or "nessuno"))
         print(f"Registrata in {coverbrief.DIREZIONE_APPRESA}: vale per i prompt da qui in poi.")
         return 0
-    state = project.load_state()
-    pages = (state.get("build") or {}).get("pagine") or spec.target_pages
-    meta_path = project.build_dir / "metadata.json"
-    meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
-    testi = (state.get("cover") or {}).get("testi") or {}
-    copy = coverdesign.copy_from_dict(testi, spec) if testi else None
-
-    # Se all'avvio l'autore ha chiesto una copertina più attraente di quella
-    # del concorrente, il brief riceve la descrizione di quella da battere.
+    pages, meta, copy, rivale = _dati_copertina(project, spec)
     risposte = avvio.leggi(project)
-    rivale = avvio.leggi_copertina(project) if risposte and risposte.copertina else ""
+    # La direzione d'arte scelta dall'autore, se le direzioni ci sono: le varianti
+    # finali e il prompt da incollare nascono da lei, non dalla categoria.
+    dati_direzioni = direzioni.leggi(project)
+    scelta = direzioni.scelta(dati_direzioni)
+    direzione = scelta[1] if scelta else None
 
     project.ensure_dirs()
     output = project.build_dir / "copertina-brief.md"
@@ -479,7 +480,7 @@ def cmd_copertina(args) -> int:
     # Il prompt da incollare in ChatGPT: gli stessi dati del brief, senza le
     # specifiche di stampa che a un generatore d'immagini fanno disegnare un wrap.
     prompt = coverbrief.prompt_da_incollare(
-        spec, pages=pages, metadata=meta, copy=copy, concorrente=rivale
+        spec, pages=pages, metadata=meta, copy=copy, concorrente=rivale, direzione=direzione,
     )
     incollare = project.build_dir / richiesteimmagini.CHATGPT_COPERTINA
     if incollare.exists():
@@ -511,10 +512,136 @@ def cmd_copertina(args) -> int:
     if risposte and risposte.copertina and not rivale:
         print(f"\n! All'avvio è stata chiesta una copertina più attraente del concorrente, ma\n"
               f"  {avvio.copertina_path(project)} è vuoto: il brief non sa da che cosa distinguersi.")
+    if dati_direzioni is not None and direzione is None:
+        print(f"\nLe direzioni d'arte ci sono ({direzioni.FILE}) ma l'autore non ne ha scelta\n"
+              f"nessuna: le varianti finali aspettano `copertina {spec.slug} --direzione N`.")
+        if args.genera:
+            return 1
     if args.genera:
-        return _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, radice)
+        return _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, radice,
+                                 direzione)
     if con_higgsfield:
         print(f"\nLe varianti le genera Higgsfield: python3 -m kdpfactory copertina {spec.slug} --genera")
+    return 0
+
+
+def _dati_copertina(project: BookProject, spec: BookSpec) -> tuple:
+    """Pagine, scheda, testi di copertina e copertina da battere: i dati dei prompt."""
+    state = project.load_state()
+    pages = (state.get("build") or {}).get("pagine") or spec.target_pages
+    meta_path = project.build_dir / "metadata.json"
+    meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
+    testi = (state.get("cover") or {}).get("testi") or {}
+    copy = coverdesign.copy_from_dict(testi, spec) if testi else None
+    # Se all'avvio l'autore ha chiesto una copertina più attraente di quella
+    # del concorrente, il brief riceve la descrizione di quella da battere.
+    risposte = avvio.leggi(project)
+    rivale = avvio.leggi_copertina(project) if risposte and risposte.copertina else ""
+    return pages, meta, copy, rivale
+
+
+def _direzioni_copertina(project: BookProject, spec: BookSpec, args) -> int:
+    """Le tre direzioni d'arte: il file da compilare, i suoi problemi, i prompt dei bozzetti.
+
+    Le direzioni le scrive l'agente `copertina`; il sistema chiede a Cowork lo
+    studio delle copertine della categoria, controlla le direzioni e ne scrive i
+    prompt — gli stessi delle varianti finali — più il riepilogo per l'autore.
+    """
+    fatti: list[str] = []
+    if not direzioni.risposta_studio(project).exists():
+        risposte = avvio.leggi(project)
+        mercato = risposte.mercato if risposte else ("amazon.it" if spec.language == "it" else "amazon.com")
+        radice = Path(__file__).resolve().parent.parent
+        nome, testo = direzioni.richiesta_studio(
+            spec.slug, mercato, spec.categories[0] if spec.categories else "",
+            cowork.configurazione(radice), asin=risposte.asin if risposte else "",
+        )
+        _scrivi_richiesta(project, args, project.root / "concorrente" / nome, testo, fatti)
+        for percorso in fatti:
+            print(f"Richiesta a Cowork (ruolo concorrente): {percorso}")
+
+    dati = direzioni.leggi(project)
+    if dati is None or direzioni.stato(project) == "da-compilare":
+        file = direzioni.percorso(project)
+        if dati is None:
+            file.write_text(json.dumps(direzioni.modello(spec), ensure_ascii=False, indent=2) + "\n",
+                            encoding="utf-8")
+            save_backup(project, args, "direzioni di copertina da compilare")
+        print(f"Da compilare dall'agente `copertina`: {file}")
+        print(f"  legge: {direzioni.risposta_studio(project).relative_to(project.root)} (lo studio "
+              "della categoria), concorrente/, build/vetrina.md, docs/copertine.md e")
+        print(f"  {coverbrief.DIREZIONE_APPRESA.name} (le scelte dell'autore sui libri prima).")
+        return 0
+    problemi = direzioni.problemi(dati)
+    if problemi:
+        print(f"{direzioni.FILE}: {len(problemi)} problemi, li corregge l'agente `copertina`.")
+        for problema in problemi:
+            print(f"  - {problema}")
+        return 1
+
+    pages, meta, copy, rivale = _dati_copertina(project, spec)
+    if (project.build_dir / direzioni.PROMPT_BOZZETTI).exists():
+        save_backup(project, args, "prompt dei bozzetti precedenti", force=True)
+    prompt_file, riepilogo = direzioni.scrivi_bozzetti(
+        project, spec, dati, pages=pages, metadata=meta, copy=copy, concorrente=rivale,
+    )
+    save_backup(project, args, "prompt dei bozzetti delle tre direzioni")
+    print(f"Le tre direzioni, per l'autore: {riepilogo}")
+    print(f"I prompt dei bozzetti: {prompt_file}")
+    for numero, d in enumerate(dati["direzioni"], 1):
+        print(f"  {numero}. {d['nome']} — {d['composizione']}, palette {d['palette']}")
+    if args.bozzetti and args.genera:
+        return _genera_bozzetti(project, args, prompt_file)
+    print(f"\nI bozzetti, a bassa risoluzione: copertina {spec.slug} --bozzetti --genera")
+    print("(o il connettore Higgsfield con gli stessi prompt). Poi la scelta è dell'autore:")
+    print(f"copertina {spec.slug} --direzione N --perche \"…\".")
+    return 0
+
+
+def _genera_bozzetti(project: BookProject, args, prompt_file: Path) -> int:
+    """Un bozzetto per direzione, con Higgsfield alla risoluzione più bassa."""
+    motivo = higgsfield.pronto()
+    if motivo:
+        raise SystemExit(f"Higgsfield non è pronto: {motivo}.")
+    radice = Path(__file__).resolve().parent.parent
+    modello = higgsfield.configurazione(radice).get("modello") or higgsfield.MODELLO_IMMAGINI
+    schema = higgsfield.schema(modello)
+    voci = []
+    for voce in json.loads(prompt_file.read_text(encoding="utf-8")):
+        destinazione = project.assets_dir / f"bozzetto-{voce['direzione']}.png"
+        if destinazione.exists():
+            save_backup(project, args, f"bozzetto {voce['direzione']} precedente", force=True)
+        print(f"Bozzetto {voce['direzione']} «{voce['nome']}» con {modello}…", flush=True)
+        generata = higgsfield.genera(voce["prompt"], destinazione, proporzione="2:3",
+                                     modello=modello, schema_modello=schema, bozza=True)
+        voci.append({**voce, "file": str(destinazione), "url": generata.url, "job": generata.job,
+                     "modello": modello, "pixel": [generata.larghezza, generata.altezza],
+                     "generata": generata.quando, "via": "CLI Higgsfield"})
+        print(f"  {destinazione.name}: {generata.larghezza} x {generata.altezza} px")
+    direzioni.registra_bozzetti(project, voci)
+    save_backup(project, args, f"{len(voci)} bozzetti delle direzioni")
+    print("\nLa scelta è dell'autore, senza silenzio-assenso: copertina <slug> --direzione N.")
+    return 0
+
+
+def _scegli_direzione(project: BookProject, spec: BookSpec, args) -> int:
+    """La direzione scelta dall'autore: in `book.json` palette, composizione e carattere."""
+    # Lo snapshot prende book.json e le direzioni insieme: sono i due file che cambiano.
+    save_backup(project, args, "book.json e direzioni prima della direzione scelta", force=True)
+    try:
+        d = direzioni.scegli(project, args.direzione, args.perche,
+                             quando=datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+    except ValueError as errore:
+        raise SystemExit(str(errore)) from errore
+    spec.cover_theme = d["palette"]
+    spec.cover_layout = d["composizione"]
+    spec.cover_type = d.get("tipografia") or "auto"
+    spec.save(project.spec_path)
+    save_backup(project, args, f"copertina: direzione {args.direzione}")
+    print(f"Direzione {args.direzione} «{d['nome']}»: palette {d['palette']}, titolo "
+          f"{d['composizione']}, carattere {spec.cover_type}. Scritta in book.json e in "
+          f"{coverbrief.DIREZIONE_APPRESA.name}.")
+    print(f"Poi: copertina {spec.slug} --genera (le varianti finali, alla risoluzione più alta).")
     return 0
 
 
@@ -611,12 +738,33 @@ def _genera_figure(project, args, spec, mancanti, radice) -> int:
     return 0
 
 
-def _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, radice) -> int:
+def _prima_variante_libera(project: BookProject) -> int:
+    """Il primo numero di variante non ancora usato, in assets/ o fra quelle generate.
+
+    Le varianti di una direzione nuova si aggiungono alle vecchie, non le
+    sovrascrivono: quelle già pagate restano una possibilità.
+    """
+    usati = {0}
+    for file in project.assets_dir.glob("copertina-*.*"):
+        numero = file.stem.split("-", 1)[1]
+        if numero.isdigit():
+            usati.add(int(numero))
+    try:
+        voci = json.loads((project.build_dir / produzione.GENERATE).read_text(encoding="utf-8"))
+        usati |= {int(v["variante"]) for v in voci if isinstance(v, dict) and v.get("variante")}
+    except (OSError, ValueError):
+        pass
+    return max(usati) + 1
+
+
+def _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, radice,
+                      direzione: dict | None = None) -> int:
     """Le varianti di copertina generate con Higgsfield, dal prompt del sistema.
 
     Ogni variante ha il suo prompt (`coverbrief.prompt_da_incollare`, modo
     generatore) con un'indicazione di composizione diversa; tornano in
     `assets/copertina-N.png`, e la loro traccia in `build/immagini-generate.json`.
+    Con una direzione scelta i prompt nascono da lei.
     """
     motivo = higgsfield.pronto()
     if motivo:
@@ -624,15 +772,17 @@ def _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, ra
     modello = higgsfield.configurazione(radice).get("modello") or higgsfield.MODELLO_IMMAGINI
     schema = higgsfield.schema(modello)
     generate = []
-    for numero in range(1, args.varianti + 1):
+    primo = _prima_variante_libera(project)
+    for indice in range(1, args.varianti + 1):
+        numero = primo + indice - 1
         prompt = coverbrief.prompt_da_incollare(
             spec, pages=pages, metadata=meta, copy=copy, concorrente=rivale,
-            varianti=args.varianti, variante=numero, per_chat=False,
+            varianti=args.varianti, variante=indice, per_chat=False, direzione=direzione,
         )
         destinazione = project.assets_dir / f"copertina-{numero}.png"
         if destinazione.exists():
             save_backup(project, args, f"variante {numero} di copertina precedente", force=True)
-        print(f"Variante {numero} di {args.varianti} con {modello}…", flush=True)
+        print(f"Variante {numero} ({indice} di {args.varianti}) con {modello}…", flush=True)
         generata = higgsfield.genera(prompt, destinazione, proporzione="2:3",
                                      modello=modello, schema_modello=schema)
         generate.append(generata)
@@ -655,22 +805,28 @@ def _scarica_generate(project: BookProject, args, apri=urllib.request.urlopen) -
     """
     from PIL import Image
 
-    mancanti = produzione.generate_senza_file(project)
+    # Anche i bozzetti delle direzioni, se sono rimasti sulla CDN: servono
+    # all'autore per scegliere, e all'agente per misurarli.
+    mancanti = [(f"copertina-{v['variante']}.png", v) for v in produzione.generate_senza_file(project)]
+    mancanti += [
+        (f"bozzetto-{v['direzione']}.png", v) for v in direzioni.bozzetti(project)
+        if v.get("url") and not (project.assets_dir / f"bozzetto-{v['direzione']}.png").exists()
+    ]
     if not mancanti:
         print("Nessuna variante da scaricare: sono già tutte in assets/ (o non ce n'è nessuna generata).")
         return 0
     project.ensure_dirs()
     falliti = []
-    for voce in mancanti:
-        destinazione = project.assets_dir / f"copertina-{voce['variante']}.png"
+    for nome, voce in mancanti:
+        destinazione = project.assets_dir / nome
         try:
             with apri(voce["url"], timeout=300) as risposta:
                 contenuto = risposta.read()
         except OSError as errore:
-            falliti.append((voce["variante"], f"{urllib.parse.urlsplit(voce['url']).netloc}: {errore}"))
+            falliti.append((nome, f"{urllib.parse.urlsplit(voce['url']).netloc}: {errore}"))
             continue
         if not corriere.e_un_immagine(contenuto):
-            falliti.append((voce["variante"], "il file scaricato non è un'immagine"))
+            falliti.append((nome, "il file scaricato non è un'immagine"))
             continue
         destinazione.write_bytes(contenuto)
         with Image.open(destinazione) as immagine:
@@ -678,8 +834,8 @@ def _scarica_generate(project: BookProject, args, apri=urllib.request.urlopen) -
         print(f"  {destinazione.name}: {larghezza} x {altezza} px, {len(contenuto)} byte")
     if len(falliti) < len(mancanti):
         save_backup(project, args, "varianti di copertina scaricate da Higgsfield")
-    for variante, motivo in falliti:
-        print(f"! variante {variante} non scaricata — {motivo}", file=sys.stderr)
+    for nome, motivo in falliti:
+        print(f"! {nome} non scaricata — {motivo}", file=sys.stderr)
     if falliti:
         print("La rete dell'ambiente deve lasciar passare la CDN di Higgsfield "
               "(Network access → Allowed domains), oppure l'autore carica le varianti "
@@ -1173,6 +1329,13 @@ def cmd_avvio(args) -> int:
         # Le parole chiave della nicchia si cercano comunque, chiunque porti la
         # pagina: il posizionamento sceglie le sette frasi da quella tabella.
         nome, testo = parolechiave.esplorazione(risposte.asin, risposte.mercato, args.slug, canale)
+        _scrivi_richiesta(project, args, acquisizione.cartella(project) / nome, testo, fatti)
+    if risposte.asin and risposte.copertina:
+        # Le copertine che vendono nella categoria del concorrente, nello stesso
+        # giro: l'agente `copertina` ne ricava i codici del genere per le tre
+        # direzioni d'arte (docs/copertine.md).
+        nome, testo = direzioni.richiesta_studio(args.slug, risposte.mercato, "", canale,
+                                                 asin=risposte.asin)
         _scrivi_richiesta(project, args, acquisizione.cartella(project) / nome, testo, fatti)
     save_backup(project, args, "domande d'avvio")
     if produzione.attiva(Path(__file__).resolve().parent.parent, args.slug):
@@ -1686,6 +1849,12 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--perche", default="", help="il motivo della scelta, con le parole dell'autore")
     p.add_argument("--scarica-generate", action="store_true",
                    help="scarica in assets/ le varianti già generate (build/copertina-higgsfield.json)")
+    p.add_argument("--direzioni", action="store_true",
+                   help="le tre direzioni d'arte: modello da compilare, controlli, prompt dei bozzetti")
+    p.add_argument("--bozzetti", action="store_true",
+                   help="con --genera, un bozzetto per direzione a bassa risoluzione")
+    p.add_argument("--direzione", type=int, default=0,
+                   help="la direzione N scelta dall'autore: palette, composizione e carattere in book.json")
     p.set_defaults(func=cmd_copertina)
 
     p = sub.add_parser(

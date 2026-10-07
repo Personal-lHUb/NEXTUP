@@ -111,16 +111,44 @@ RAPPRESENTAZIONE: dict[str, str] = {
     ),
 }
 
-#: La direzione visiva di ogni copertina, chiesta dall'autore il 6 ottobre 2026:
-#: semplice, pulita, poco articolata, con un impatto che viene dal contrasto. Vale
-#: per ogni categoria e sta in ogni prompt, prima dello stile.
+#: La direzione visiva di ogni copertina. L'ha chiesta l'autore il 6 ottobre
+#: 2026 (semplice, pulita, poco articolata, impatto dal contrasto) e la
+#: completano le regole dei due video sulle copertine che vendono
+#: (`config/cowork-copertine-video-2-risposta.md`), che dove dicono altro
+#: vincono: pochi elementi nello stesso stile (B 9:45, 21:52), colori del
+#: genere, da due a quattro (A 10:28, 12:53), chiaro contro scuro (A 7:15),
+#: niente sfondo rumoroso dove vanno le scritte (A 12:42), nitidezza (A 15:01) e
+#: niente dominante giallo-senape (B 2:24). Sta in ogni prompt, prima dello stile.
 DIREZIONE_VISIVA = (
-    "Keep it simple and visually clean: one subject, at most three elements in the "
-    "whole image, bold simple shapes that still read at thumbnail size, no small "
-    "details, no busy textures, no scene full of objects. The impact comes from strong "
-    "contrast: a bright subject on a deep, dark field, large calm areas of nearly flat "
-    "colour, generous empty space."
+    "Keep it simple: one clear focal subject and at most three elements in the whole "
+    "image, all drawn in the same style and under the same light, with bold shapes that "
+    "still read at thumbnail size and generous calm space. No small scattered details, no "
+    "busy texture where the title will sit. The impact comes from strong light-against-dark "
+    "contrast and a palette of two to four colours that belongs to the genre. Pin-sharp, "
+    "high-resolution rendering, with no overall yellow, mustard or sepia cast."
 )
+
+#: Dove il titolo verrà composto, detto al generatore: l'immagine gli lascia il
+#: posto, perché è il titolo che ferma chi scorre (video B, 3:37) e l'immagine
+#: lo sostiene, non lo soffoca (video A, 5:06).
+POSTO_DEL_TITOLO = {
+    "alto": (
+        "Keep the upper third calm and simple, because the title will be set there "
+        "afterwards in large type; the subject sits in the middle and lower part."
+    ),
+    "centro": (
+        "Keep a calm, plain area in the middle of the image — roughly a circle over the "
+        "central third — because the title will be set there afterwards in large type. "
+        "Place the subjects around it, at the sides and below, turned towards the centre, "
+        "with soft shadows that give depth."
+    ),
+}
+
+
+def posto_del_titolo(spec: BookSpec) -> str:
+    layout = getattr(spec, "cover_layout", "auto")
+    return POSTO_DEL_TITOLO.get(layout, POSTO_DEL_TITOLO["alto"])
+
 
 #: Che cosa disegnare nei bozzetti, quando la rappresentazione della categoria è
 #: una scena: l'oggetto solo, che il trattamento poi riduce all'essenziale.
@@ -251,6 +279,32 @@ SPIE_CATEGORIA: tuple[tuple[str, tuple[str, ...]], ...] = (
 )
 
 
+#: Le categorie dove il carattere del titolo è elegante (il Garamond del libro)
+#: invece che deciso: dove il genere parla sottovoce — sentimenti, diario,
+#: spiritualità, cura, lutto, memorie — un bastone condensato urla (video A,
+#: 7:59: «un romanzo rosa richiede caratteri più morbidi e più eleganti»).
+TIPOGRAFIA_ELEGANTE = frozenset({"romance", "journal"})
+SPIE_ELEGANTE = (
+    "spiritual", "new age", "mind & spirit", "intuition", "intuizione", "meditation",
+    "meditazione", "mindfulness", "memoir", "biograph", "grief", "lutto", "caregiv",
+    "dementia", "alzheimer", "demenza", "poetry", "poesia",
+)
+
+
+def tipografia(spec: BookSpec, genre: str = "", metadata: dict | None = None) -> str:
+    """La voce del titolo: quella scelta in `book.json`, o quella della categoria."""
+    scelta = getattr(spec, "cover_type", "auto")
+    if scelta in coverdesign.TIPOGRAFIE:
+        return scelta
+    metadata = metadata or {}
+    genre = genre or ("enigmi" if spec.genre == "puzzle" else spec.genre)
+    nicchia = ", ".join(metadata.get("categories") or spec.categories) or spec.topic
+    if _chiave(spec, genre, nicchia) in TIPOGRAFIA_ELEGANTE:
+        return "elegante"
+    testo = f"{nicchia} {spec.topic} {spec.title}".lower()
+    return "elegante" if any(spia in testo for spia in SPIE_ELEGANTE) else "deciso"
+
+
 def _chiave(spec: BookSpec, genre: str, nicchia: str = "") -> str:
     """La categoria da cui prendere la rappresentazione e lo stile."""
     if (genre or "").strip().lower() == "enigmi":
@@ -331,9 +385,9 @@ def nome_colore(esadecimale: str) -> str:
 COMPOSIZIONE_VARIANTI = (
     "",
     "Composition for this version: a closer view, from a nearer and lower viewpoint, "
-    "so the main object fills more of the frame.",
-    "Composition for this version: a wider view of the room, seen from further back or "
-    "slightly from above, with more space around the scene.",
+    "so the main subject fills more of the frame.",
+    "Composition for this version: a wider view, seen from further back or slightly "
+    "from above, with more calm space around the subject.",
 )
 
 
@@ -348,6 +402,7 @@ def prompt_da_incollare(
     varianti: int = 3,
     variante: int = 1,
     per_chat: bool = True,
+    direzione: dict | None = None,
 ) -> str:
     """Il prompt della copertina in un blocco solo, da incollare in una chat di ChatGPT.
 
@@ -362,11 +417,19 @@ def prompt_da_incollare(
     Con `per_chat=False` è il prompt per un generatore che si chiama da
     programma (Higgsfield): niente frasi di conversazione, e la variante
     `variante` porta la sua indicazione di composizione.
+
+    Con `direzione` (una delle tre direzioni d'arte di `direzioni.py`, quella
+    scelta dall'autore) soggetto, elementi, resa, luce, palette e posto del
+    titolo vengono da lì invece che dalla categoria: la categoria dice che cosa
+    mostra un libro così, la direzione come lo mostra questo.
     """
     metadata = metadata or {}
     genre = genre or ("enigmi" if spec.genre == "puzzle" else spec.genre)
     copy = copy or coverdesign.derive_copy(spec, metadata, genre, pages=pages)
     palette = coverdesign.pick_palette(spec, genre)
+    if direzione:
+        palette = next((t for t in coverdesign.PALETTES if t.name == direzione.get("palette")),
+                       palette)
     panel_w, panel_h = coverimage.front_panel_size_in(spec.trim)
     px_w, px_h = math.ceil(panel_w * FRONT_DPI), math.ceil(panel_h * FRONT_DPI)
     nicchia = ", ".join(metadata.get("categories") or spec.categories) or spec.topic
@@ -393,7 +456,16 @@ def prompt_da_incollare(
         composizione = COMPOSIZIONE_VARIANTI[(variante - 1) % len(COMPOSIZIONE_VARIANTI)]
         if composizione:
             testa += f" {composizione}"
-    righe = [testa, "", RAPPRESENTAZIONE[chiave]]
+    if direzione:
+        elementi = [e for e in direzione.get("elementi") or [] if e]
+        rappresentazione = (
+            f"Show {direzione['soggetto'].rstrip('.')}. "
+            + (f"The image holds only: {'; '.join(elementi)}. " if elementi else "")
+            + "Nothing else may compete with the main subject."
+        )
+    else:
+        rappresentazione = RAPPRESENTAZIONE[chiave]
+    righe = [testa, "", rappresentazione]
     if spec.audience:
         righe.append(f"Who it is for: {_prima_frase(spec.audience)}")
     if spec.promise or spec.topic:
@@ -402,28 +474,41 @@ def prompt_da_incollare(
         righe.append(f"The question it answers, for the mood only (never write it): «{copy.hook}»")
     # Il trattamento: quello che l'autore ha scelto fra i bozzetti, uno per
     # variante a giro; senza scelte resta lo stile della categoria.
-    preferiti = trattamenti_preferiti()
-    trattamento = (
-        f" Treatment: {TRATTAMENTI[preferiti[(variante - 1) % len(preferiti)]]}."
-        if preferiti else ""
-    )
+    if direzione:
+        stile = (
+            f"Rendering: {direzione['tecnica'].rstrip('.')}."
+            + (f" Light: {direzione['luce'].rstrip('.')}." if direzione.get("luce") else "")
+            + (f" Mood: {direzione['emozione'].rstrip('.')}." if direzione.get("emozione") else "")
+        )
+        posto = POSTO_DEL_TITOLO.get(direzione.get("composizione"), POSTO_DEL_TITOLO["alto"])
+        distinto = []
+    else:
+        preferiti = trattamenti_preferiti()
+        trattamento = (
+            f" Treatment: {TRATTAMENTI[preferiti[(variante - 1) % len(preferiti)]]}."
+            if preferiti else ""
+        )
+        stile = f"Style: {STILE[chiave]}{trattamento}"
+        posto = posto_del_titolo(spec)
+        distinto = [f"Include {distintivo}"]
     righe += [
         "",
         f"Direction: {DIREZIONE_VISIVA}",
-        f"Style: {STILE[chiave]}{trattamento} Art-directed and current, like a cover a major "
-        "publisher would release this year: not a stock template, not a generic AI image.",
-        f"Include {distintivo}",
+        f"{stile} Art-directed and current, like a cover a major publisher would release "
+        "this year: not a stock template, not a generic AI image.",
+        *distinto,
         f"Colour: a {nome_colore(palette.background)} background, {nome_colore(palette.deep)} "
         f"for depth and a single accent of {nome_colore(palette.accent)}. Strong contrast, so "
         "the cover stands out on Amazon's white search page.",
         "",
-        "Composition: portrait, 2:3. One dominant focal point. Keep the upper third calm and "
-        "simple, because the title will be set there afterwards in large type. Keep anything "
+        f"Composition: portrait, 2:3. One dominant focal point. {posto} Keep anything "
         "important at least 4% of the width inside every edge: the print is trimmed. It must "
         "still read as a 160-pixel-wide thumbnail.",
         "",
         "Absolutely no text: no letters, numbers, title, author name, logo, signature or "
         "watermark anywhere. Any paper, screen or calendar in the scene stays blank.",
+        "No deformed or half-formed objects, and no stray marks that look like lettering: "
+        "every element must be finished and recognisable.",
         "Original work: do not imitate any existing book cover, artist, brand or character, "
         "and do not show a recognisable real person. No border, no frame, no 3D book mock-up.",
     ]
@@ -431,9 +516,11 @@ def prompt_da_incollare(
         rivale = " ".join(concorrente.split())
         righe += [
             "",
-            "It must stand apart at a glance from the best-selling cover it sits next to, "
-            f"which looks like this: {rivale} Use a different dominant colour and a different "
-            "kind of image. Do not copy, parody or answer that cover.",
+            "Readers of this category must recognise it as one of theirs, and tell it apart at "
+            f"a glance from the best-selling cover it sits next to, which looks like this: {rivale} "
+            "Keep the conventions of the genre — the kind of image and the layout its readers "
+            "expect — and change the nuance: a different dominant colour and a different "
+            "distinctive element. Do not copy, parody or answer that cover.",
         ]
     if per_chat:
         righe += [
@@ -478,8 +565,7 @@ def prompt_bozza(
         f"Direction: {DIREZIONE_VISIVA}",
         f"Colours: a {nome_colore(palette.background)} field and {nome_colore(palette.accent)} "
         "for the subject; nothing else.",
-        "Leave the upper third empty: the title goes there. No text, letters or numbers "
-        "anywhere. Portrait 2:3.",
+        f"{posto_del_titolo(spec)} No text, letters or numbers anywhere. Portrait 2:3.",
     ])
 
 
@@ -583,10 +669,12 @@ def brief(
         "In search results this cover sits next to the best-selling cover in its niche,\n"
         "described here as it looks at thumbnail size:\n\n"
         + "\n".join(f"> {r}" if r.strip() else ">" for r in concorrente.strip().splitlines())
-        + "\n\nThe buyer must notice this one first and tell them apart at a glance:\n"
+        + "\n\nReaders of this category must recognise this cover as one of theirs: keep the\n"
+        "conventions of the genre — the kind of image and the layout they expect — and\n"
+        "differ by a nuance, so the buyer notices this one first and tells them apart:\n"
         "- a different dominant colour, chosen for contrast against that one;\n"
-        "- a different kind of image: not the same object, scene or layout;\n"
-        "- a calmer upper third, so the title set over it reads larger than theirs.\n"
+        "- a different distinctive element: not the same object or scene;\n"
+        "- a calmer area where the title goes, so it reads larger than theirs.\n"
         "Do not copy, parody or answer that cover: it is a reference to move away from.\n"
         if concorrente.strip()
         else ""
@@ -669,6 +757,8 @@ surrounded by twenty others.
 - At most {coverdesign.MAX_TOP_ELEMENTS} text blocks in the upper half.
 - Exactly ONE unique factor. It must aid recognition without competing with the title.
 - Intentional negative space; no clutter, no decorative filler.
+- Every element in the same style and the same light; two to four main colours.
+- No deformed or half-formed generated element left in the image.
 - Commercial publishing aesthetics, not a stock template.
 {_lines(strategia)}
 
@@ -693,8 +783,8 @@ cover going out illegible or getting trimmed in print. A title baked into
 pixels can be measured by nobody, keeps whatever spelling the model gave it,
 and shows its edges at 300 DPI.
 
-So: leave the upper third of the composition calm and uncluttered. That is
-where the title goes, and a busy area there costs the cover its contrast.
+So: {posto_del_titolo(spec)} A busy area where the title goes costs the
+cover its contrast.
 
 For reference only: the engine will set the following text, written in
 {LANGUAGE_NAMES.get(spec.language, spec.language)} because that is the language
@@ -775,7 +865,7 @@ target under 40 MB (hard limit 650 MB).
 
 1. The category is recognisable at a glance.
 2. The promise is understandable immediately.
-3. The upper third is calm enough for a large title to stay readable at thumbnail size.
+3. The area where the title goes is calm enough for a large title to stay readable at thumbnail size.
 4. There is one dominant visual idea.
 5. There is exactly one unique factor.
 6. It does not look generic.

@@ -69,4 +69,4 @@ sulla stessa cosa confondono chi deve correggere.
 - la coerenza interna del libro: contraddizioni e conti che non tornano fra un capitolo e l'altro, ripetizioni, concetti usati prima di essere spiegati, capitoli superflui o sbilanciati, aperture tutte uguali → `editor-sviluppo`
 - le affermazioni sul mondo fuori dal libro: dati, statistiche, fonti, citazioni, norme, generalizzazioni assolute, casi inventati presentati come veri → `fact-checker`
 - le bozze: refusi, accenti e apostrofi, accordi, punteggiatura, maiuscole, ripetizioni ravvicinate della stessa parola → `correttore`
-- la copertina: il prompt dell'illustrazione e delle figure interne, le misure del PDF di copertina, i testi stampati sulla copertina → `copertina`
+- la copertina: le tre direzioni d'arte dallo studio della categoria, il prompt dell'illustrazione e delle figure interne, le misure del PDF di copertina, i testi stampati sulla copertina → `copertina`

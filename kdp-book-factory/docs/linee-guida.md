@@ -76,8 +76,9 @@ quando la sua fase lo richiede**.
 | il livello è `alta` | in più `correttore`, capitolo per capitolo | subagent |
 | le correzioni sono applicate | di nuovo `impaginazione`; e l'agente che aveva dato un bloccante, solo sui capitoli corretti, per verificare che sia chiuso | comando e subagent |
 | la scheda è importata | `conformita` sulla scheda; Cowork, ruolo `parole-chiave`, verifica le sette frasi | subagent su `build/kdp-listing.md`; `parole-chiave <slug>` |
-| l'impaginazione è definitiva | `copertina`, primo tempo: il prompt | `copertina <slug>` (e `immagini <slug>` se ci sono figure) |
-| arrivano le varianti `assets/copertina-N.png` da Cowork | `copertina`, secondo tempo: misura le varianti e propone la scelta all'autore | `copertina <slug> --scegli N` dopo il silenzio-assenso, poi `build` e `review <slug> --agents copertina` |
+| la scheda è chiusa (fase 7) | `copertina`, le direzioni: legge lo studio della categoria e scrive le tre direzioni d'arte | `copertina <slug> --direzioni`, poi `--bozzetti --genera`; la scelta all'autore |
+| l'autore ha scelto la direzione e l'impaginazione è definitiva | `copertina`, primo tempo: il prompt | `copertina <slug>` e `--genera` (e `immagini <slug>` se ci sono figure) |
+| arrivano le varianti `assets/copertina-N.png` | `copertina`, secondo tempo: misura le varianti e propone la scelta all'autore | `copertina <slug> --scegli N` dopo il silenzio-assenso, poi `build` e `review <slug> --agents copertina` |
 | prima di consegnare | `qa` e `diagnostica` | comandi |
 
 Tre regole per la sessione che li chiama:
@@ -147,7 +148,8 @@ A  avvio                        domande all'autore → pagina del concorrente   
 4  controllo del testo          lettore-cieco · editor-sviluppo · fact-checker · conformita  (+ correttore)
 5  correzione                   editor → build                                   cancello: 0 bloccanti, 0 importanti aperti
 6  scheda prodotto              scheda → conformita sulla scheda → vetrina       cancello: 0 bloccanti
-7  copertina                    copertina (prompt) → l'immagine → copertina (misure)   cancello: 0 bloccanti
+7  copertina                    studio della categoria → copertina (tre direzioni) → bozzetti → scelta dell'autore
+                                → copertina (prompt) → le varianti → copertina (misure)   cancello: 0 bloccanti
 8  chiusura                     qa → checklist KDP                               cancello: 0 errori
 ```
 
@@ -410,48 +412,63 @@ sistema la scrive così e un test lo verifica — e non promette risultati.
 ### 7 · Copertina
 
 Un solo agente, dall'inizio alla fine: `copertina`. Le regole sono in
-[`copertine.md`](copertine.md); qui c'è la sequenza.
+[`copertine.md`](copertine.md); qui c'è la sequenza. Si lavora come una casa
+editrice: prima si guarda che cosa vende nella categoria, poi si propongono tre
+direzioni d'arte, l'autore ne sceglie una sui bozzetti, e solo allora si spende
+sulle varianti finali.
 
 | | |
 |---|---|
-| **Chi** | `copertina` scrive il prompt e misura; **Higgsfield** genera tre varianti dal prompt del sistema (`copertina <slug> --genera`); l'autore sceglie, con il silenzio-assenso |
-| **Entra** | i dati del libro: categoria, categorie KDP, promessa, pubblico, palette, occhiello e gancio della scheda, pagine vere; se all'avvio l'autore ha chiesto una copertina più attraente, la descrizione di quella del concorrente (`concorrente/copertina.md`) |
-| **Esce** | `build/copertina-brief.md` (il prompt), poi `build/<slug>-copertina.pdf` |
+| **Chi** | Cowork studia le copertine della categoria; `copertina` scrive le tre direzioni e misura; il sistema scrive i prompt; **Higgsfield** genera bozzetti e varianti; l'autore sceglie la direzione (senza silenzio-assenso) e poi la variante (con) |
+| **Entra** | i dati del libro: categoria, categorie KDP, promessa, pubblico, occhiello e gancio della scheda, pagine vere; lo studio della categoria (`concorrente/cowork-copertine-categoria-risposta.md`); la copertina del concorrente (`concorrente/copertina.md`), se all'avvio l'autore l'ha chiesta; le scelte dell'autore sui libri prima (`config/copertine-direzione.json`) |
+| **Esce** | `copertina-direzioni.json`, `build/copertina-direzioni.md` e i bozzetti; poi `build/copertina-brief.md` (il prompt) e `build/<slug>-copertina.pdf` |
 | **Come si chiama** | «usa copertina su <slug>» |
-| **Cancello** | zero bloccanti delle misure; la miniatura supera le cinque domande |
+| **Cancello** | zero problemi nelle direzioni; la direzione scelta dall'autore; zero bloccanti delle misure; la miniatura supera le cinque domande |
 
-**1. Il prompt.** Si fa dopo l'ultima impaginazione, perché dorso e misure
+**1. Lo studio della categoria.** `copertina <slug> --direzioni` apre a Cowork
+(ruolo `concorrente`) la richiesta delle prime dieci copertine della
+categoria, descritte a parole: colori, tipo d'immagine, posizione e carattere
+del titolo, quanti elementi, che cosa le accomuna e che cosa non fa nessuna. Per
+un libro nuovo parte già con le domande d'avvio.
+
+**2. Le tre direzioni.** L'agente `copertina` le scrive in
+`books/<slug>/copertina-direzioni.json` sul modello che lo stesso comando
+lascia: per ciascuna idea, soggetto, al massimo tre elementi, resa, luce,
+palette del motore, composizione (titolo in alto o al centro), voce tipografica,
+perché venderebbe e come si distingue restando nel genere. Rilanciato,
+`copertina <slug> --direzioni` le controlla — tre, complete, diverse fra loro,
+senza testo né imitazioni — e scrive i prompt dei bozzetti e il riepilogo per
+l'autore (`build/copertina-direzioni.md`).
+
+**3. I bozzetti e la scelta.** `copertina <slug> --bozzetti --genera` fa un
+bozzetto per direzione alla risoluzione più bassa, con lo stesso prompt delle
+varianti finali. La direzione la sceglie l'autore guardandoli, e **non passa dal
+silenzio-assenso**: `copertina <slug> --direzione N --perche "…"` scrive in
+`book.json` palette, composizione e carattere, e la ricorda in
+`config/copertine-direzione.json` per i libri dopo.
+
+**4. Le varianti finali.** Dopo l'ultima impaginazione, perché dorso e misure
 dipendono dalle pagine:
 
 ```bash
 python3 -m kdpfactory build <slug>
-python3 -m kdpfactory copertina <slug>     # build/copertina-brief.md
-python3 -m kdpfactory immagini <slug>      # se il manoscritto dichiara figure
+python3 -m kdpfactory copertina <slug>            # build/copertina-brief.md
+python3 -m kdpfactory copertina <slug> --genera   # tre varianti della direzione scelta
+python3 -m kdpfactory immagini <slug>             # se il manoscritto dichiara figure
 ```
 
-Il brief **non si riscrive a mano**. Se qualcosa non va — il gancio non è un
-ciclo aperto, la rappresentazione non è quella del libro, la palette — si
-corregge il dato da cui nasce (`cover_hook`, `categories`, `cover_art`,
-`cover_theme`…) e si rigenera. L'agente verifica il brief su sette punti:
-rappresentazione riconoscibile, un solo fattore distintivo, niente testo
-nell'immagine, misure dell'ultima impaginazione, formula della categoria,
-nessuna rivendicazione vietata, nessun nome altrui.
+Il brief **non si riscrive a mano**. Se qualcosa non va si corregge il dato da
+cui nasce — la direzione, `cover_hook`, `categories`, `cover_theme`… — e si
+rigenera. `--genera` manda a Higgsfield un prompt per variante, nato dalla
+direzione scelta, con una composizione diversa per ognuna, alla risoluzione più
+alta del modello; le varianti si numerano dopo quelle che ci sono già, che
+restano. Senza Higgsfield, in ChatGPT si incolla `build/copertina-prompt.txt`.
+Torna **solo l'illustrazione della prima**, senza testo, almeno 1800 × 2700 px
+per un 6x9. La variante la sceglie l'autore con il silenzio-assenso, e
+`copertina <slug> --scegli N` la porta in `assets/copertina.jpg`. Il testo lo
+compone il motore, sempre, in vettoriale: è l'unico modo di misurarlo.
 
-**2. L'immagine.** `copertina <slug> --genera` manda a Higgsfield un prompt per
-variante — lo stesso testo, con una composizione diversa per ognuna — alla
-risoluzione più alta del modello, e salva `assets/copertina-1.png` … `-3.png`
-con la loro traccia in `build/immagini-generate.json`. Senza Higgsfield, in
-ChatGPT si incolla il testo di `build/copertina-prompt.txt`,
-che lo stesso comando stampa nel terminale: il prompt della prima variante, poi
-il messaggio per le altre, poi i nomi con cui salvarle. È il brief ridotto a
-quello che decide l'immagine; il brief completo, con dorso e specifiche di
-stampa, resta il riferimento dell'agente e di un grafico. Torna **solo
-l'illustrazione della prima**,
-senza testo, almeno 1800 × 2700 px per un 6x9: si salva in
-`books/<slug>/assets/copertina.jpg`. Il testo lo compone il motore, sempre, in
-vettoriale: è l'unico modo di misurarlo.
-
-**3. Le misure.**
+**5. Le misure.**
 
 ```bash
 python3 -m kdpfactory build <slug>
@@ -459,11 +476,15 @@ python3 -m kdpfactory review <slug> --agents copertina
 ```
 
 Corpo del titolo in miniatura (almeno 6% dell'altezza, dominante dall'8,5%),
-contrasto almeno 7:1, stacco su fondo bianco, area di sicurezza, dorso, area
-del codice a barre, font incorporati, autore uguale alla scheda. Poi la
-miniatura a occhio, in quest'ordine: si capisce la categoria in due secondi?
-L'immagine mostra il soggetto vero? Un solo concetto dominante? Il titolo vince?
-Sembra una copertina di quest'anno?
+contrasto almeno 7:1 sul fondo e 4,5:1 sull'immagine che il titolo ha dietro,
+sfondo calmo dove sta il titolo, testo a 1 cm dal taglio, due famiglie di
+caratteri, titolo in alto o al centro, stacco su fondo bianco, area di
+sicurezza, dorso, area del codice a barre, font incorporati, autore uguale alla
+scheda, nessuna dominante giallo-senape. Poi la miniatura a occhio, in
+quest'ordine: si capisce la categoria in due secondi? L'immagine mostra il
+soggetto vero? Un solo concetto dominante? Il titolo vince? Sembra una
+copertina di quest'anno? E c'è un elemento generato difettoso — un oggetto
+deformato, segni che sembrano lettere? Se c'è, la variante non si usa.
 
 ### 8 · Chiusura
 
@@ -478,7 +499,8 @@ corrispondenza fra indice e capitoli nei due sensi (`INDICE`). Poi
 [`checklist-kdp.md`](checklist-kdp.md): caricare l'interno, la copertina
 generata **dopo** l'impaginazione finale, compilare la scheda da
 `kdp-listing.md`, dichiarare l'uso dell'IA, controllare l'anteprima di stampa,
-ordinare una copia di prova.
+ordinare una copia di prova: i colori della copertina si giudicano anche stampati,
+non solo a schermo (video A, 13:53).
 
 ---
 
@@ -504,9 +526,13 @@ elenca i soli file ammessi.
 | passo | chi | che cosa |
 |---|---|---|
 | dati | autore | categoria, categorie KDP, promessa, occhiello e gancio nella scheda |
+| studio | Cowork | le prime dieci copertine della categoria, a parole |
+| direzioni | `copertina` | tre direzioni d'arte in `copertina-direzioni.json`; il sistema le controlla e ne scrive i prompt |
+| bozzetti | Higgsfield | uno per direzione, a bassa risoluzione, dal prompt del sistema |
+| scelta | autore | la direzione, senza silenzio-assenso; poi la variante, con |
 | prompt | `copertina` | `kdpfactory copertina <slug>`; verifica dei sette punti; correzioni sui dati, mai sul brief |
-| immagine | autore | il brief nel generatore; torna l'illustrazione della prima, senza testo |
-| composizione | motore | `build`: ritaglio, 300 DPI, titolo in vettoriale, dorso, retro |
+| immagine | Higgsfield | tre varianti della direzione scelta; torna l'illustrazione della prima, senza testo |
+| composizione | motore | `build`: ritaglio, 300 DPI, velatura misurata, titolo in vettoriale col contorno, dorso, retro |
 | misure | `copertina` | `review --agents copertina`; la miniatura a occhio |
 
 Il titolo si compone nel condensato del progetto quando il sans non basta a
@@ -528,16 +554,18 @@ Nessun agente decide queste cose, e nessun cancello le sostituisce:
 - **chi racconta**: se il libro presenta casi reali, composti o inventati, e
   come lo dichiara al lettore;
 - **il prezzo**;
-- **l'immagine di copertina**: il sistema scrive il prompt, Cowork genera le
-  varianti, l'autore sceglie;
+- **la direzione d'arte della copertina**: il sistema scrive i prompt dalle tre
+  direzioni dell'agente, Higgsfield genera i bozzetti, l'autore sceglie — senza
+  silenzio-assenso; poi, fra le varianti della direzione scelta, la variante;
 - **la pubblicazione**, dopo aver letto il libro.
 
 Quando un agente tocca una di queste, la segnala come domanda, non la risolve.
 La sessione la registra con la proposta degli agenti e le alternative
 (`decisioni <slug> --proponi …`) e manda la notifica all'autore: se entro 24
 ore non risponde, vale la proposta (**silenzio-assenso**). La sua risposta,
-quando arriva, vince sempre. La pubblicazione è la sola che non passa dal
-silenzio-assenso.
+quando arriva, vince sempre. Non passano dal silenzio-assenso la
+pubblicazione e la direzione d'arte della copertina: la prima è sua per
+definizione, la seconda l'ha voluta vedere lui (7 ottobre 2026).
 
 ---
 

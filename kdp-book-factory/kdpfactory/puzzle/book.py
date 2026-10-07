@@ -243,6 +243,7 @@ def check(project: BookProject, spec: BookSpec, pages: int, interior: Path) -> q
         chapter_pages=state.get("build", {}).get("chapter_pages", {}),
         cover_pdf=Path(cover_file) if cover_file else None,
         cover_copy=cover_state.get("testi", {}),
+        cover_image=cover_state.get("immagine") or {},
     )
     for agent_name, label in (("impaginazione", "IMPAGINAZIONE"), ("copertina", "COPERTINA")):
         result = get_agent(agent_name).run(ctx)

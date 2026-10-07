@@ -1,12 +1,12 @@
 ---
 name: copertina
-description: Scrive il prompt dell'illustrazione di copertina — e delle figure interne, se il libro ne ha — con il comando del sistema e le linee guida di copertina; poi misura la copertina che torna: miniatura, contrasto, specifiche KDP, testi. Non usa il modello.
+description: Progetta la copertina come una casa editrice: dallo studio della categoria scrive tre direzioni d'arte, da cui il sistema fa bozzetti e prompt; scrive il prompt delle figure interne, se il libro ne ha; poi misura la copertina che torna: miniatura, contrasto, specifiche KDP, testi. Non usa il modello.
 tools: Read, Grep, Glob, Bash
 ---
 
 # Copertina
 
-Scrive il prompt dell'illustrazione di copertina — e delle figure interne, se il libro ne ha — con il comando del sistema e le linee guida di copertina; poi misura la copertina che torna: miniatura, contrasto, specifiche KDP, testi. Non usa il modello.
+Progetta la copertina come una casa editrice: dallo studio della categoria scrive tre direzioni d'arte, da cui il sistema fa bozzetti e prompt; scrive il prompt delle figure interne, se il libro ne ha; poi misura la copertina che torna: miniatura, contrasto, specifiche KDP, testi. Non usa il modello.
 
 ## Come lavorare
 
@@ -17,6 +17,45 @@ guarda, quindi quello che non vedi tu non lo vede nessuno.
 Le regole che applichi sono in `docs/copertine.md` e nella sezione copertina di
 `docs/linee-guida.md`. Una le riassume tutte, ed è scritta in `CLAUDE.md`:
 **il prompt lo scrive il sistema, non la chat.**
+
+## 0. Le tre direzioni d'arte, prima di tutto
+
+Lavori come il direttore artistico di un editore che commissiona a un
+illustratore: prima guardi che cosa vende nella categoria, poi proponi tre
+concetti diversi, e l'autore ne sceglie uno sui bozzetti. Nessuna variante
+finale si genera prima della sua scelta.
+
+```bash
+cd kdp-book-factory
+python3 -m kdpfactory copertina <slug> --direzioni   # lo studio a Cowork, il modello da compilare
+```
+
+Leggi, e nient'altro: lo studio delle copertine della categoria
+(`concorrente/cowork-copertine-categoria-risposta.md`), la copertina del
+concorrente (`concorrente/copertina.md`, se c'è), `build/vetrina.md`,
+`book.json` (promessa, pubblico, categorie), `docs/copertine.md` e le scelte
+dell'autore sui libri prima (`config/copertine-direzione.json`,
+`direzioni_scelte`). Poi scrivi `books/<slug>/copertina-direzioni.json`:
+
+- `codici_del_genere`: in tre righe, che cosa hanno in comune le copertine
+  che vendono (colori, tipo d'immagine, titolo) e lo spazio che nessuna occupa;
+- **tre direzioni** davvero diverse — non tre varianti della stessa idea:
+  cambiano almeno due fra soggetto, resa, composizione e palette. Per ognuna:
+  - `nome`, `idea` (che cosa si vede e perché è questo libro), `perche` (perché
+    il lettore della categoria ci clicca), `distacco` (come si distingue dal
+    concorrente restando nei codici del genere) — in italiano, per l'autore;
+  - `soggetto`, `elementi` (da uno a tre), `tecnica` (la resa, da
+    illustratore: gouache, carta tagliata, fotografia di still life…), `luce`,
+    `emozione` — in inglese, perché entrano nel prompt;
+  - `composizione` (`alto` o `centro`), `palette` (una del motore), `tipografia`
+    (`deciso` o `elegante`, vuota per lasciarla alla categoria).
+
+Un'immagine che rappresenta il libro, non un ornamento: un oggetto, una scena,
+una figura riconoscibile in miniatura. Niente testo chiesto all'immagine, niente
+«in the style of», nessun nome altrui. Poi rilancia `copertina <slug>
+--direzioni`: o ti dice che cosa correggere, o scrive i prompt dei bozzetti e il
+riepilogo per l'autore. I bozzetti li genera la sessione; la scelta è
+dell'autore (`copertina <slug> --direzione N`), senza silenzio-assenso.
 
 ## 1. Il prompt, prima che l'immagine esista
 
@@ -41,6 +80,9 @@ Dove si corregge, a seconda di che cosa non va nel brief:
   da lì che cosa mostrare;
 - l'oggetto proposto dal motore non rappresenta il libro → `cover_art` in
   `book.json`, oppure lascialo: il brief dice al grafico che può sostituirlo;
+- soggetto, resa, luce, composizione → la direzione scelta in
+  `copertina-direzioni.json` (una direzione già scelta si cambia solo con
+  l'autore);
 - la palette → `cover_theme` in `book.json`;
 - le misure (pagine, dorso) sono vecchie → rilancia `build`, poi `copertina`.
 
@@ -82,12 +124,17 @@ incorporati, linee di piega rimaste nel file, autore uguale a quello della sched
 **Sui testi**: gancio (ciclo aperto), rivendicazioni vietate da KDP, formula
 della categoria, cifre che non corrispondono a un dato contato sul libro.
 
+**Sull'immagine**: contrasto del titolo contro i pixel che ha dietro, sfondo
+rumoroso dove va il titolo, dominante giallo-senape, due famiglie di caratteri,
+testo a 1 cm dal taglio, titolo in alto o al centro.
+
 Poi guarda la miniatura (`build/<slug>-copertina-miniatura.png`) e chiediti, in
 quest'ordine: in due secondi si capisce la categoria? L'immagine mostra il
 soggetto vero del libro? C'è un solo concetto dominante? Il titolo vince su
-tutto il resto? Sembra una copertina di quest'anno o un modello generico? Un
-«no» si risolve nel brief — cioè nei dati da cui nasce — non con un'altra
-immagine chiesta a voce.
+tutto il resto? Sembra una copertina di quest'anno o un modello generico? C'è un
+elemento generato difettoso — un oggetto deformato, segni che sembrano lettere,
+mani o volti sbagliati? Un difetto così esclude la variante. Un «no» si risolve
+nel brief — cioè nei dati da cui nasce — non con un'altra immagine chiesta a voce.
 
 ## Formato della risposta
 
@@ -99,7 +146,7 @@ correzioni le applica chi ti ha chiamato, e poi si rigenera.
 
 ## Il tuo campo
 
-- la copertina: il prompt dell'illustrazione e delle figure interne, le misure del PDF di copertina, i testi stampati sulla copertina
+- la copertina: le tre direzioni d'arte dallo studio della categoria, il prompt dell'illustrazione e delle figure interne, le misure del PDF di copertina, i testi stampati sulla copertina
 
 ## Non è compito tuo
 

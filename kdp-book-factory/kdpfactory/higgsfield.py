@@ -133,12 +133,16 @@ def _numero_risoluzione(valore: str) -> float:
     return numero * 1000 if unita == "k" else numero
 
 
-def parametri(schema_modello: dict, proporzione: str) -> list[str]:
+def parametri(schema_modello: dict, proporzione: str, bozza: bool = False) -> list[str]:
     """I flag per la resa migliore che il modello dichiara: proporzione, risoluzione, qualità.
 
     La risoluzione più alta disponibile, sempre: la stampa ne chiede tanta, e una
     copertina che non basta va ingrandita, che è peggio che generarla grande.
     Se il modello non dichiara la proporzione chiesta si passa quella più vicina.
+
+    Con `bozza` il contrario: la risoluzione più bassa e la qualità media. Un
+    bozzetto serve a scegliere una direzione, non a stampare, e costa una
+    frazione di una variante finale.
     """
     flag: list[str] = []
     proporzioni = _valori(schema_modello, "aspect_ratio")
@@ -155,10 +159,16 @@ def parametri(schema_modello: dict, proporzione: str) -> list[str]:
     flag += ["--aspect_ratio", proporzione]
     risoluzioni = _valori(schema_modello, "resolution")
     if risoluzioni:
-        flag += ["--resolution", max(risoluzioni, key=_numero_risoluzione)]
+        scegli = min if bozza else max
+        flag += ["--resolution", scegli(risoluzioni, key=_numero_risoluzione)]
     qualita = [q for q in _valori(schema_modello, "quality") if q.lower() in _QUALITA]
     if qualita:
-        flag += ["--quality", max(qualita, key=lambda q: _QUALITA.index(q.lower()))]
+        media = [q for q in qualita if q.lower() == "medium"]
+        if bozza:
+            flag += ["--quality", media[0] if media else
+                     min(qualita, key=lambda q: _QUALITA.index(q.lower()))]
+        else:
+            flag += ["--quality", max(qualita, key=lambda q: _QUALITA.index(q.lower()))]
     return flag
 
 
@@ -202,11 +212,15 @@ def genera(
     eseguitore=subprocess.run,
     scarica=_scarica,
     schema_modello: dict | None = None,
+    bozza: bool = False,
 ) -> Generata:
-    """Genera un'immagine dal prompt e la salva in `destinazione`, alla resa più alta."""
+    """Genera un'immagine dal prompt e la salva in `destinazione`, alla resa più alta.
+
+    Con `bozza` alla resa più bassa: è un bozzetto per scegliere la direzione.
+    """
     schema_modello = schema_modello if schema_modello is not None else schema(modello, eseguitore)
     argomenti = ["generate", "create", modello, "--prompt", prompt,
-                 *parametri(schema_modello, proporzione),
+                 *parametri(schema_modello, proporzione, bozza=bozza),
                  "--wait", "--wait-timeout", ATTESA_MASSIMA, "--json"]
     esito = _esegui(argomenti, eseguitore)
     if esito.returncode != 0:

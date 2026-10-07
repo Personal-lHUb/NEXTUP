@@ -265,6 +265,7 @@ def run_review(
                 chapter_pages=build.get("chapter_pages", {}),
                 cover_pdf=cover_pdf,
                 cover_copy=cover.get("testi", {}),
+                cover_image=cover.get("immagine") or {},
             )
             result = agent.run(ctx, None)
         elif agent.name == "conformita":

@@ -46,6 +46,7 @@ del libro**: i numeri veri li conta la pipeline, gli altri non si stampano.
 from __future__ import annotations
 
 import hashlib
+import itertools
 import re
 from collections.abc import Iterable
 from dataclasses import dataclass, field
@@ -68,6 +69,26 @@ THUMBNAIL_WIDTH_PX = 160        # com'è vista davvero nei risultati di ricerca
 MAX_TOP_ELEMENTS = 4            # blocchi di testo nella metà alta della prima
 MAX_TITLE_LINES = 3             # oltre, il titolo non è un'insegna ma un paragrafo
 SAFE_MARGIN_IN = 0.25           # margine di sicurezza KDP dal taglio
+#: Il testo sta ad almeno 1 cm dal taglio (video A, 19:43: «almeno 1 cm di
+#: margine tra il testo e i bordi esterni»). È più largo dell'area di sicurezza
+#: di KDP, che resta il limite bloccante: sotto 1 cm la copertina si stampa, ma
+#: sembra stretta.
+TEXT_MARGIN_IN = 0.3937
+#: Due famiglie di caratteri al massimo: una per il titolo, una per il resto
+#: (video A, 8:25: «non superare i due font differenti»).
+MAX_FONT_FAMILIES = 2
+#: Un titolo su un'immagine si misura contro i pixel che ha dietro, non contro
+#: la palette. 4,5:1 è la soglia AAA delle linee guida di accessibilità per il
+#: testo grande, che è quello che un titolo di copertina è.
+MIN_CONTRAST_ON_IMAGE = 4.5
+#: Le due composizioni ammesse (video A, 9:29 e 24:06; video B, 4:03 e 16:02):
+#: titolo in alto con l'immagine sotto, o titolo al centro con i soggetti
+#: intorno. In basso no: «rischiano di passare inosservati».
+LAYOUTS = ("alto", "centro")
+#: Le due voci tipografiche: il carattere deve dire il genere (video A, 7:46 e
+#: 7:59: «un thriller dovrebbe avere un font forte e deciso, un romanzo rosa
+#: caratteri più morbidi e più eleganti»).
+TIPOGRAFIE = ("deciso", "elegante")
 
 #: spaziatura fra i caratteri, in frazione del corpo, per i testi in maiuscolo
 KICKER_TRACKING = 0.28
@@ -295,7 +316,32 @@ def derive_copy(
     )
 
 
-def title_problems(title: str, *, trim: str = "6x9") -> list[str]:
+def title_face(tipografia: str = "deciso") -> str:
+    """Il carattere del titolo per la voce tipografica: sempre in neretto.
+
+    Un titolo in tondo normale, a 160 pixel, ha aste di tre pixel: si legge, ma
+    non si impone (video A, 23:19: «un errore frequente è scegliere un font
+    troppo sottile»). Il deciso è il bastone, l'elegante il Garamond del libro.
+    """
+    from .typography import register_family
+
+    famiglia = register_family("serif" if tipografia == "elegante" else "sans")
+    return f"{famiglia}-Bold"
+
+
+def font_family(face: str) -> str:
+    """La famiglia di un carattere, senza peso né stile: «KDP-sans-Bold» → «KDP-sans».
+
+    Vale anche per i nomi che PyMuPDF legge nel PDF («ABCDEF+EBGaramond-Italic»
+    → «EBGaramond»), così disegno e verifica contano le stesse famiglie.
+    """
+    nome = face.split("+")[-1]
+    if nome.startswith("KDP-"):
+        return re.sub(r"-(Bold|Italic|BoldItalic)$", "", nome)
+    return re.split(r"[-,]", nome)[0]
+
+
+def title_problems(title: str, *, trim: str = "6x9", tipografia: str = "deciso") -> list[str]:
     """Questo titolo sta in copertina a misura leggibile? Solo conti, zero token.
 
     Il controllo sta qui e non nel controllo qualità perché qui costa un file e
@@ -314,11 +360,11 @@ def title_problems(title: str, *, trim: str = "6x9") -> list[str]:
     sul PDF vero. Fermare la produzione per quello sarebbe severità, non
     misura.
     """
-    from .typography import register_condensed_display, register_family
+    from .typography import register_condensed_display
 
-    display = register_family("sans")
+    display = title_face(tipografia)
     trim_width, trim_height = kdpspecs.trim_size_in(trim)
-    measure = trim_width * INCH - 2.4 * SAFE_MARGIN_IN * INCH
+    measure = trim_width * INCH - 2 * TEXT_MARGIN_IN * INCH
     floor = trim_height * INCH * MIN_TITLE_CAP_RATIO / 0.72
 
     parole = title.upper().split()
@@ -329,6 +375,8 @@ def title_problems(title: str, *, trim: str = "6x9") -> list[str]:
     # condensato e la parola ci entra, la copertina la comporrà lì. Misurare
     # solo il sans bloccherebbe in partenza un titolo che si stampa benissimo.
     caratteri = [display] + [f for f in (register_condensed_display(),) if f]
+    if tipografia == "elegante":
+        caratteri.append(title_face("deciso"))
 
     def non_entra(font: str) -> bool:
         larga_qui = max(parole, key=lambda word: pdfmetrics.stringWidth(word, font, 100))
@@ -458,7 +506,9 @@ class FrontBox:
 
     @property
     def measure(self) -> float:
-        return self.trim_width - 2.4 * self.safe
+        # Il margine del testo è già quello da rispettare (1 cm): la misura è
+        # la larghezza che resta, senza altre riserve.
+        return self.trim_width - 2 * self.safe
 
 
 @dataclass
@@ -468,6 +518,14 @@ class DrawResult:
     cap_ratio: float = 0.0
     contrast: float = 0.0
     art: str = ""           # l'illustrazione effettivamente disegnata
+    #: il rettangolo del titolo sulla pagina (x0, y0, x1, y1, origine in basso):
+    #: serve a misurare l'immagine che il titolo ha dietro
+    title_box: tuple[float, float, float, float] = (0.0, 0.0, 0.0, 0.0)
+    #: il rettangolo di tutto il blocco, occhiello e gancio compresi
+    block_box: tuple[float, float, float, float] = (0.0, 0.0, 0.0, 0.0)
+    #: le famiglie di caratteri usate sulla prima
+    families: tuple[str, ...] = ()
+    layout: str = "alto"
 
 
 def tracked_width(text: str, font: str, size: float, tracking: float = 0.0) -> float:
@@ -514,6 +572,52 @@ def wrap(text: str, font: str, size: float, max_width: float) -> list[str]:
     return lines
 
 
+#: Le parole che non chiudono una riga di titolo: «BILLS IN / ORDER» lascia la
+#: preposizione appesa a fine riga (video A, 24:27: «una suddivisione che
+#: risulti visivamente equilibrata, evitate righe troppo dense e spezzature
+#: forzate»).
+WEAK_WORDS = frozenset({
+    "a", "an", "the", "of", "in", "on", "to", "for", "and", "or", "with", "at", "by", "from",
+    "il", "lo", "la", "i", "gli", "le", "un", "uno", "una", "di", "da", "con", "su", "per",
+    "tra", "fra", "e", "o", "al", "del", "della", "dei", "delle", "nel", "nella", "che",
+})
+
+
+def weak_endings(lines: list[str]) -> int:
+    """Quante righe, tranne l'ultima, finiscono con una parola debole."""
+    return sum(
+        1 for line in lines[:-1]
+        if line.split() and line.split()[-1].strip(",.:;!?").lower() in WEAK_WORDS
+    )
+
+
+def wrap_balanced(text: str, font: str, size: float, max_width: float) -> list[str]:
+    """Il titolo spezzato come lo spezzerebbe un grafico, non un programma di videoscrittura.
+
+    Le righe restano quante ne servono al riempimento normale — andare a capo
+    più spesso rimpicciolirebbe il titolo —, ma il punto di rottura si sceglie:
+    prima nessuna parola debole a fine riga, poi righe di lunghezza simile.
+    Oltre le 14 parole non è un titolo da copertina e si torna al riempimento.
+    """
+    greedy = wrap(text, font, size, max_width)
+    words = text.split()
+    if len(greedy) <= 1 or len(words) > 14:
+        return greedy
+    best: tuple | None = None
+    for cuts in itertools.combinations(range(1, len(words)), len(greedy) - 1):
+        bounds = list(zip((0, *cuts), (*cuts, len(words)), strict=True))
+        lines = [" ".join(words[a:b]) for a, b in bounds]
+        widths = [pdfmetrics.stringWidth(line, font, size) for line in lines]
+        if max(widths) > max_width:
+            continue
+        weak = weak_endings(lines)
+        ragged = sum((max(widths) - width) ** 2 for width in widths)
+        score = (weak, ragged)
+        if best is None or score < best[0]:
+            best = (score, lines)
+    return best[1] if best else greedy
+
+
 def _tracked(canvas, x: float, y: float, text: str, font: str, size: float, tracking: float):
     """Testo centrato in `x` con spaziatura fra i caratteri.
 
@@ -545,13 +649,22 @@ def title_block_size(copy: CoverCopy, display: str, box: FrontBox) -> tuple[floa
     ceiling = box.trim_height * 0.13
     floor = box.trim_height * MIN_TITLE_CAP_RATIO / 0.72
     size = min(ceiling, fit_size(longest, display, box.measure, ceiling, floor))
-    lines = wrap(copy.title.upper(), display, size, box.measure)
+    lines = wrap_balanced(copy.title.upper(), display, size, box.measure)
     while len(lines) > MAX_TITLE_LINES and size > floor:
         # Mai sotto la soglia di leggibilità: un titolo di quattro righe si
         # legge ancora, un titolo illeggibile in miniatura no. Se non ci sta
         # nemmeno così, il problema è il titolo — e `audit()` lo segnala.
         size = max(floor, size - 1)
-        lines = wrap(copy.title.upper(), display, size, box.measure)
+        lines = wrap_balanced(copy.title.upper(), display, size, box.measure)
+    # Una parola debole a fine riga («BILLS IN / ORDER») vale un corpo un po'
+    # più piccolo: fino al 12% in meno, mai sotto la soglia, a parità di righe.
+    if weak_endings(lines):
+        trial = size
+        while trial - 1 >= max(floor, size * 0.88):
+            trial -= 1
+            candidate = wrap_balanced(copy.title.upper(), display, trial, box.measure)
+            if len(candidate) <= len(lines) and not weak_endings(candidate):
+                return trial, candidate
     return size, lines
 
 
@@ -564,7 +677,8 @@ CONDENSED_MIN_GAIN = 1.10
 
 
 def title_font_and_size(
-    copy: CoverCopy, display: str, condensed: str | None, box: FrontBox
+    copy: CoverCopy, display: str, condensed: str | None, box: FrontBox,
+    fallback: tuple[str, ...] = (),
 ) -> tuple[str, float, list[str]]:
     """Il carattere e il corpo del titolo: il sans di sempre, o il condensato.
 
@@ -573,20 +687,70 @@ def title_font_and_size(
     dominante. Il condensato entra solo quando la guadagna.
     """
     size, lines = title_block_size(copy, display, box)
+    parole = copy.title.upper().split() or ["A"]
+
+    def esce(font: str, corpo: float) -> bool:
+        larga = max(parole, key=lambda word: pdfmetrics.stringWidth(word, font, 100))
+        return pdfmetrics.stringWidth(larga, font, corpo) > box.measure + 0.5
+
     if not condensed:
+        # Senza condensato, un titolo che non entra prova i caratteri di
+        # riserva, dal neretto del bastone al suo tondo: la voce del genere e il
+        # neretto contano, ma una parola rifilata non si legge affatto.
+        if esce(display, size):
+            prove = [(display, size, lines)] + [
+                (riserva, *title_block_size(copy, riserva, box))
+                for riserva in fallback if riserva != display
+            ]
+            for prova in prove[1:]:
+                if not esce(prova[0], prova[1]):
+                    return prova
+            # Non entra in nessuno: almeno quello che esce di meno.
+            return min(prove, key=lambda prova: max(
+                pdfmetrics.stringWidth(word, prova[0], prova[1]) for word in parole))
         return display, size, lines
     c_size, c_lines = title_block_size(copy, condensed, box)
     # Se nel sans la parola più larga non entra nemmeno al corpo minimo, il
     # condensato non è un guadagno: è l'unico modo di non farla rifilare.
-    parole = copy.title.upper().split() or ["A"]
-    larga = max(parole, key=lambda word: pdfmetrics.stringWidth(word, display, 100))
-    esce = pdfmetrics.stringWidth(larga, display, size) > box.measure + 0.5
-    if esce or c_size >= size * CONDENSED_MIN_GAIN:
+    if esce(display, size) or c_size >= size * CONDENSED_MIN_GAIN:
         return condensed, c_size, c_lines
     return display, size, lines
 
 
 # -- prima di copertina -----------------------------------------------------
+#: Lo spessore del contorno del titolo su un'immagine, in frazione del corpo
+#: (video B, 15:17: «dobbiamo andare a contrastarlo con un colore un pochino più
+#: scuro»; video A, 12:35: ombre o contorni «per migliorare la leggibilità»).
+#: È la parte che sporge dalla lettera: il riempimento ci si posa sopra.
+TITLE_OUTLINE_RATIO = 0.045
+
+
+def _title_line(canvas, center: float, y: float, text: str, font: str, size: float,
+                fill: str, outline: str | None) -> None:
+    """Una riga del titolo, centrata; su un'immagine con il contorno scuro sotto.
+
+    Il contorno si disegna prima, con il tratto largo il doppio di quanto deve
+    sporgere, e la lettera piena ci si posa sopra: così la lettera non si
+    assottiglia, e il contorno resta tutto fuori.
+    """
+    x = center - pdfmetrics.stringWidth(text, font, size) / 2
+    if outline:
+        canvas.saveState()
+        canvas.setStrokeColor(colors.HexColor(outline))
+        canvas.setLineWidth(size * TITLE_OUTLINE_RATIO * 2)
+        canvas.setLineJoin(1)
+        stroke = canvas.beginText(x, y)
+        stroke.setTextRenderMode(1)
+        stroke.setFont(font, size)
+        stroke.textOut(text)
+        stroke.setTextRenderMode(0)
+        canvas.drawText(stroke)
+        canvas.restoreState()
+    canvas.setFillColor(colors.HexColor(fill))
+    canvas.setFont(font, size)
+    canvas.drawString(x, y, text)
+
+
 def draw_front(
     canvas,
     box: FrontBox,
@@ -599,39 +763,76 @@ def draw_front(
     over_image: bool = False,
     art_name: str = "auto",
     condensed: str | None = None,
+    title_display: str | None = None,
+    layout: str = "alto",
 ) -> DrawResult:
     """Disegna la prima di copertina secondo il sistema.
 
     Ordine di lettura imposto: genere → titolo → gancio → motivo → numeri →
     autore. Chi guarda una miniatura si ferma ai primi due; chi apre la scheda
     scende fino ai numeri.
+
+    `display` è il carattere dei testi piccoli (occhiello, numeri, autore),
+    `text_font` quello del gancio, `title_display` quello del titolo (il
+    neretto della voce tipografica; senza, il titolo usa `display`). Due
+    famiglie al massimo: se il titolo finisce nel condensato, il gancio passa al
+    carattere dei testi piccoli. `layout` mette il blocco del titolo in alto o
+    al centro della prima.
     """
     title_color = "#FFFFFF" if over_image else palette.title
+    outline = palette.deep if over_image else None
     center = box.center
     top = box.y0 + box.height - box.bleed
+    layout = layout if layout in LAYOUTS else "alto"
+
+    title_font, title_size, lines = title_font_and_size(
+        copy, title_display or display, condensed, box,
+        fallback=(title_face("deciso"), display),
+    )
+    hook_font = text_font
+    if (font_family(title_font) not in {font_family(display), font_family(text_font)}
+            and font_family(display) != font_family(text_font)):
+        hook_font = display
+
+    kicker_size = (
+        fit_size(copy.kicker.upper(), display, box.measure,
+                 max(box.trim_height * 0.016, 7.5), 6.5, KICKER_TRACKING)
+        if copy.kicker else 0.0
+    )
+    hook_size = (
+        fit_size(copy.hook, hook_font, box.measure, box.trim_height * 0.028, 9)
+        if copy.hook else 0.0
+    )
+    hook_lines = wrap(copy.hook, hook_font, hook_size, box.measure) if copy.hook else []
+
+    # Quanto è alto il blocco occhiello-titolo-gancio: serve per metterlo al
+    # centro, dove il video B lo vuole «dentro un ipotetico cerchio» (16:02).
+    head = kicker_size * 2.6 if copy.kicker else box.safe * 0.4
+    last_title = head + title_size * 0.92 + (len(lines) - 1) * title_size * 1.02
+    block = last_title + title_size * 0.1
+    if hook_lines:
+        block = (last_title + title_size * 0.74 + hook_size * 2.2
+                 + (len(hook_lines) - 1) * hook_size * 1.3 + hook_size * 0.3)
+    if layout == "centro":
+        y = top - box.trim_height / 2 + block / 2
+    else:
+        y = top - box.safe * 1.5
+    block_top = y - kicker_size * 0.28 if copy.kicker else y - head - title_size * 0.2
 
     # 1. kicker: dice il genere in due parole, piccolo e tracciato
-    y = top - box.safe * 1.5
     if copy.kicker:
-        size = fit_size(
-            copy.kicker.upper(), display, box.measure,
-            max(box.trim_height * 0.016, 7.5), 6.5, KICKER_TRACKING,
-        )
         canvas.setFillColor(colors.HexColor(palette.accent))
-        _tracked(canvas, center, y - size, copy.kicker.upper(), display, size,
-                 size * KICKER_TRACKING)
-        y -= size * 2.6
-    else:
-        y -= box.safe * 0.4
+        _tracked(canvas, center, y - kicker_size, copy.kicker.upper(), display, kicker_size,
+                 kicker_size * KICKER_TRACKING)
+    y -= head
 
     # 2. titolo: l'elemento dominante
-    title_font, title_size, lines = title_font_and_size(copy, display, condensed, box)
-    canvas.setFillColor(colors.HexColor(title_color))
     y -= title_size * 0.92
+    first_baseline = y
     for line in lines:
-        canvas.setFont(title_font, title_size)
-        canvas.drawCentredString(center, y, line)
+        _title_line(canvas, center, y, line, title_font, title_size, title_color, outline)
         y -= title_size * 1.02
+    last_baseline = y + title_size * 1.02
 
     # 3. filetto d'accento, largo quanto la riga più lunga del titolo
     widest = max(
@@ -643,14 +844,15 @@ def draw_front(
     canvas.line(center - widest * 0.3, y, center + widest * 0.3, y)
 
     # 4. gancio: il ciclo aperto
-    if copy.hook:
-        hook_size = fit_size(copy.hook, text_font, box.measure, box.trim_height * 0.028, 9)
+    if hook_lines:
         y -= hook_size * 2.2
         canvas.setFillColor(colors.HexColor("#FFFFFF" if over_image else palette.muted))
-        for line in wrap(copy.hook, text_font, hook_size, box.measure):
-            canvas.setFont(text_font, hook_size)
+        for line in hook_lines:
+            canvas.setFont(hook_font, hook_size)
             canvas.drawCentredString(center, y, line)
             y -= hook_size * 1.3
+    block_bottom = (y + hook_size * 1.3 - hook_size * 0.3 if hook_lines
+                    else last_baseline - title_size * 0.05)
 
     # 5. il piede si misura prima di disegnarlo: serve al motivo per sapere
     #    dove fermarsi, e a ogni riga per non finire sotto il margine di
@@ -727,6 +929,9 @@ def draw_front(
         display, author_size, author_size * AUTHOR_TRACKING,
     )
 
+    families = {font_family(title_font), font_family(display)}
+    if hook_lines:
+        families.add(font_family(hook_font))
     cap_ratio = title_size * 0.72 / box.trim_height
     return DrawResult(
         title_size=title_size,
@@ -734,6 +939,15 @@ def draw_front(
         cap_ratio=cap_ratio,
         contrast=contrast_ratio(title_color, palette.background),
         art=drawn_art,
+        title_box=(
+            center - widest / 2,
+            last_baseline - title_size * 0.05,
+            center + widest / 2,
+            first_baseline + title_size * 0.72,
+        ),
+        block_box=(center - box.measure / 2, block_bottom, center + box.measure / 2, block_top),
+        families=tuple(sorted(families)),
+        layout=layout,
     )
 
 
@@ -750,6 +964,8 @@ class CoverAudit:
     inside_safe_area: bool
     title_lines: int = 0
     problems: list[str] = field(default_factory=list)
+    font_families: tuple[str, ...] = ()
+    inside_text_margin: bool = True
 
     @property
     def ok(self) -> bool:
@@ -764,6 +980,8 @@ class CoverAudit:
             "stacca_su_bianco": self.pops_on_white,
             "elementi_in_alto": self.top_elements,
             "dentro_area_sicura": self.inside_safe_area,
+            "testo_a_1_cm_dal_taglio": self.inside_text_margin,
+            "famiglie_di_caratteri": list(self.font_families),
             "problemi": self.problems,
         }
 
@@ -810,9 +1028,15 @@ def audit(
     words = [word for word in parole if len(word) > 3] or parole
     title_spans: list[dict] = []
     front_spans: list[dict] = []
-    top_blocks: set[int] = set()
+    top_blocks: set[tuple] = set()
+    # Il titolo su un'immagine si disegna due volte, il contorno e poi la
+    # lettera piena: nel PDF sono due righe uguali nello stesso punto. Si
+    # contano una volta sola, o un titolo di due righe ne risulterebbe di quattro.
+    seen: set[tuple] = set()
 
-    for block_index, block in enumerate(page.get_text("dict")["blocks"]):
+    for block in page.get_text("dict")["blocks"]:
+        block_key: list[tuple] = []
+        in_top = False
         for line in block.get("lines", []):
             # Il dorso è testo ruotato: la sua misura va letta in verticale e
             # non c'entra con l'area di sicurezza della prima.
@@ -826,11 +1050,18 @@ def audit(
                 # sia da trovare: in stampa quella parola viene rifilata.
                 if not text or span["bbox"][2] < front_x0 or vertical:
                     continue
+                key = (text, *(round(v) for v in span["bbox"]))
+                block_key.append(key)
+                if key in seen:
+                    continue
+                seen.add(key)
                 front_spans.append(span)
                 if any(word in text.upper() for word in words):
                     title_spans.append(span)
                 if span["bbox"][1] < page_height * 0.5:
-                    top_blocks.add(block_index)
+                    in_top = True
+        if in_top:
+            top_blocks.add(tuple(block_key))
     document.close()
 
     # Fra le righe che contengono una parola del titolo, il titolo è la più
@@ -900,6 +1131,44 @@ def audit(
             f"rischia il taglio — {listed}."
         )
 
+    # Dentro l'area di KDP ma a meno di 1 cm dal taglio: si stampa, e sembra
+    # stretta (video A, 19:43). Le righe già fuori dall'area di sicurezza sono
+    # contate sopra, con la loro gravità.
+    margin = TEXT_MARGIN_IN * INCH
+    tight = [
+        span
+        for span in front_spans
+        if span not in outside and (
+            span["bbox"][0] < front_x0 + margin - 1
+            or span["bbox"][2] > front_x0 + trim_w * INCH - margin + 1
+            or span["bbox"][1] < bleed * INCH + margin - 1
+            or span["bbox"][3] > (bleed + trim_h) * INCH - margin + 1
+        )
+    ]
+    if tight:
+        listed = ", ".join(f"«{span['text'].strip()[:28]}»" for span in tight[:3])
+        problems.append(
+            f"Testo a meno di 1 cm dal taglio ({len(tight)} righe): dentro l'area di KDP, "
+            f"ma la copertina sembra stretta — {listed}."
+        )
+
+    families = tuple(sorted({font_family(span["font"]) for span in front_spans}))
+    if len(families) > MAX_FONT_FAMILIES:
+        problems.append(
+            f"Sulla prima ci sono {len(families)} famiglie di caratteri ({', '.join(families)}): "
+            f"il massimo è {MAX_FONT_FAMILIES}, una per il titolo e una per il resto."
+        )
+
+    # Il titolo in alto o al centro, mai in basso: in basso «rischia di passare
+    # inosservato» (video A, 9:29). Si guarda dove comincia la prima riga.
+    if title_spans:
+        title_top = min(span["bbox"][1] for span in title_spans) - bleed * INCH
+        if title_top > trim_h * INCH * 0.55:
+            problems.append(
+                "Il titolo comincia nella metà bassa della prima: chi scorre i risultati "
+                "guarda in alto e al centro, e lì non lo trova."
+            )
+
     return CoverAudit(
         title_cap_px=cap_px,
         title_cap_ratio=cap_ratio,
@@ -909,6 +1178,8 @@ def audit(
         inside_safe_area=inside_safe,
         title_lines=len(title_spans),
         problems=problems,
+        font_families=families,
+        inside_text_margin=not tight and not outside,
     )
 
 

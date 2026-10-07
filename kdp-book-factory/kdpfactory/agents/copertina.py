@@ -39,9 +39,10 @@ class Copertina(Agent):
     name = "copertina"
     title = "Copertina"
     description = (
-        "Scrive il prompt dell'illustrazione di copertina — e delle figure interne, se il "
-        "libro ne ha — con il comando del sistema e le linee guida di copertina; poi misura "
-        "la copertina che torna: miniatura, contrasto, specifiche KDP, testi. Non usa il modello."
+        "Progetta la copertina come una casa editrice: dallo studio della categoria scrive "
+        "tre direzioni d'arte, da cui il sistema fa bozzetti e prompt; scrive il prompt delle "
+        "figure interne, se il libro ne ha; poi misura la copertina che torna: miniatura, "
+        "contrasto, specifiche KDP, testi. Non usa il modello."
     )
     stage = "controllo"
     comando = "python3 -m kdpfactory copertina <slug>"
@@ -52,6 +53,45 @@ guarda, quindi quello che non vedi tu non lo vede nessuno.
 Le regole che applichi sono in `docs/copertine.md` e nella sezione copertina di
 `docs/linee-guida.md`. Una le riassume tutte, ed è scritta in `CLAUDE.md`:
 **il prompt lo scrive il sistema, non la chat.**
+
+## 0. Le tre direzioni d'arte, prima di tutto
+
+Lavori come il direttore artistico di un editore che commissiona a un
+illustratore: prima guardi che cosa vende nella categoria, poi proponi tre
+concetti diversi, e l'autore ne sceglie uno sui bozzetti. Nessuna variante
+finale si genera prima della sua scelta.
+
+```bash
+cd kdp-book-factory
+python3 -m kdpfactory copertina <slug> --direzioni   # lo studio a Cowork, il modello da compilare
+```
+
+Leggi, e nient'altro: lo studio delle copertine della categoria
+(`concorrente/cowork-copertine-categoria-risposta.md`), la copertina del
+concorrente (`concorrente/copertina.md`, se c'è), `build/vetrina.md`,
+`book.json` (promessa, pubblico, categorie), `docs/copertine.md` e le scelte
+dell'autore sui libri prima (`config/copertine-direzione.json`,
+`direzioni_scelte`). Poi scrivi `books/<slug>/copertina-direzioni.json`:
+
+- `codici_del_genere`: in tre righe, che cosa hanno in comune le copertine
+  che vendono (colori, tipo d'immagine, titolo) e lo spazio che nessuna occupa;
+- **tre direzioni** davvero diverse — non tre varianti della stessa idea:
+  cambiano almeno due fra soggetto, resa, composizione e palette. Per ognuna:
+  - `nome`, `idea` (che cosa si vede e perché è questo libro), `perche` (perché
+    il lettore della categoria ci clicca), `distacco` (come si distingue dal
+    concorrente restando nei codici del genere) — in italiano, per l'autore;
+  - `soggetto`, `elementi` (da uno a tre), `tecnica` (la resa, da
+    illustratore: gouache, carta tagliata, fotografia di still life…), `luce`,
+    `emozione` — in inglese, perché entrano nel prompt;
+  - `composizione` (`alto` o `centro`), `palette` (una del motore), `tipografia`
+    (`deciso` o `elegante`, vuota per lasciarla alla categoria).
+
+Un'immagine che rappresenta il libro, non un ornamento: un oggetto, una scena,
+una figura riconoscibile in miniatura. Niente testo chiesto all'immagine, niente
+«in the style of», nessun nome altrui. Poi rilancia `copertina <slug>
+--direzioni`: o ti dice che cosa correggere, o scrive i prompt dei bozzetti e il
+riepilogo per l'autore. I bozzetti li genera la sessione; la scelta è
+dell'autore (`copertina <slug> --direzione N`), senza silenzio-assenso.
 
 ## 1. Il prompt, prima che l'immagine esista
 
@@ -76,6 +116,9 @@ Dove si corregge, a seconda di che cosa non va nel brief:
   da lì che cosa mostrare;
 - l'oggetto proposto dal motore non rappresenta il libro → `cover_art` in
   `book.json`, oppure lascialo: il brief dice al grafico che può sostituirlo;
+- soggetto, resa, luce, composizione → la direzione scelta in
+  `copertina-direzioni.json` (una direzione già scelta si cambia solo con
+  l'autore);
 - la palette → `cover_theme` in `book.json`;
 - le misure (pagine, dorso) sono vecchie → rilancia `build`, poi `copertina`.
 
@@ -117,12 +160,17 @@ incorporati, linee di piega rimaste nel file, autore uguale a quello della sched
 **Sui testi**: gancio (ciclo aperto), rivendicazioni vietate da KDP, formula
 della categoria, cifre che non corrispondono a un dato contato sul libro.
 
+**Sull'immagine**: contrasto del titolo contro i pixel che ha dietro, sfondo
+rumoroso dove va il titolo, dominante giallo-senape, due famiglie di caratteri,
+testo a 1 cm dal taglio, titolo in alto o al centro.
+
 Poi guarda la miniatura (`build/<slug>-copertina-miniatura.png`) e chiediti, in
 quest'ordine: in due secondi si capisce la categoria? L'immagine mostra il
 soggetto vero del libro? C'è un solo concetto dominante? Il titolo vince su
-tutto il resto? Sembra una copertina di quest'anno o un modello generico? Un
-«no» si risolve nel brief — cioè nei dati da cui nasce — non con un'altra
-immagine chiesta a voce.
+tutto il resto? Sembra una copertina di quest'anno o un modello generico? C'è un
+elemento generato difettoso — un oggetto deformato, segni che sembrano lettere,
+mani o volti sbagliati? Un difetto così esclude la variante. Un «no» si risolve
+nel brief — cioè nei dati da cui nasce — non con un'altra immagine chiesta a voce.
 
 ## Formato della risposta
 
@@ -151,6 +199,13 @@ correzioni le applica chi ti ha chiamato, e poi si rigenera."""
 #: quanto pesa ciascun difetto misurato: un titolo illeggibile in miniatura o
 #: un testo tagliato dalla rifilatura fermano la pubblicazione, il resto no
 SEVERITY_BY_KEYWORD = (
+    # Le regole dei due video (docs/copertine.md): pesano sulla vendita, non
+    # sul caricamento. Vengono prima perché alcune nominano il contrasto.
+    ("famiglie di caratteri", "importante"),
+    ("a meno di 1 cm", "importante"),
+    ("metà bassa", "importante"),
+    ("sfondo rumoroso", "importante"),
+    ("giallo-senape", "importante"),
     ("area di sicurezza", "bloccante"),
     ("troppo piccolo", "bloccante"),
     ("contrasto", "bloccante"),
@@ -233,6 +288,15 @@ def _measure(ctx: AgentContext) -> list[AgentFinding]:
         palette=palette,
         title=ctx.spec.title,
     )
+    problems = list(verdict.problems)
+    if ctx.cover_image:
+        # Su un'immagine conta quello che il titolo ha dietro: lo misura la
+        # preparazione dell'immagine, e il rapporto è nello stato del libro.
+        from .. import coverimage
+
+        noti = {f for f in coverimage.ImageReport.__dataclass_fields__}
+        rapporto = coverimage.ImageReport(**{k: v for k, v in ctx.cover_image.items() if k in noti})
+        problems += coverimage.title_problems(rapporto)
     findings = [
         AgentFinding(
             agent=Copertina.name,
@@ -241,7 +305,7 @@ def _measure(ctx: AgentContext) -> list[AgentFinding]:
             issue=problem,
             suggestion=_remedy(problem),
         )
-        for problem in verdict.problems
+        for problem in problems
     ]
     if not findings and verdict.title_cap_ratio < coverdesign.GOOD_TITLE_CAP_RATIO:
         findings.append(
@@ -261,6 +325,17 @@ def _measure(ctx: AgentContext) -> list[AgentFinding]:
 
 
 REMEDIES = {
+    "famiglie di caratteri": "Un carattere per il titolo e uno per tutto il resto: il motore "
+                             "lo fa da sé, quindi la copertina non è del motore.",
+    "a meno di 1 cm": "Porta il testo ad almeno 1 cm dal taglio: accorcia la riga o "
+                      "riduci il corpo.",
+    "metà bassa": "Titolo in alto (`cover_layout: alto`) o al centro (`centro`), mai in basso.",
+    "sfondo rumoroso": "Una direzione con un'area calma dove va il titolo, o il titolo "
+                       "nell'altra posizione (`cover_layout`).",
+    "giallo-senape": "Rigenera con la stessa direzione: il prompt la vieta già, ma il "
+                     "generatore a volte la mette. Non si corregge con un filtro.",
+    "sull'immagine": "Scegli una variante con la zona del titolo più scura o più calma, "
+                     "o sposta il titolo (`cover_layout`).",
     "area di sicurezza": "Riduci la misura del testo o accorcia la riga: KDP rifila 3 mm.",
     "troppo piccolo": "Accorcia il titolo: meno parole, corpo più grande.",
     "contrasto": "Cambia palette, o porta il titolo a bianco pieno sul fondo scuro.",

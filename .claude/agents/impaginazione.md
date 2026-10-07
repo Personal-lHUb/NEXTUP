@@ -32,4 +32,4 @@ capitolo) e quali sull'impaginazione (testo fuori gabbia, aperture di capitolo).
 Se lo noti, lascialo: se ne occupa un altro agente, e due segnalazioni
 sulla stessa cosa confondono chi deve correggere.
 
-- la copertina: il prompt dell'illustrazione e delle figure interne, le misure del PDF di copertina, i testi stampati sulla copertina → `copertina`
+- la copertina: le tre direzioni d'arte dallo studio della categoria, il prompt dell'illustrazione e delle figure interne, le misure del PDF di copertina, i testi stampati sulla copertina → `copertina`

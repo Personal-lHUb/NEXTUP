@@ -1,0 +1,51 @@
+{
+  "_nota": "Tre direzioni d'arte per la copertina, diverse fra loro, scritte dall'agente `copertina` come le scriverebbe il direttore artistico di un editore. In italiano per l'autore: nome, idea, perche, distacco, codici_del_genere. In inglese, perché entrano nel prompt: soggetto, elementi (da 1 a 3), tecnica, luce, emozione. composizione: alto | centro. palette: una del motore (notturno, allarme, inchiostro, bosco, terracotta, indaco). tipografia: deciso | elegante (vuota = la decide la categoria). Niente testo nell'immagine, niente nomi o stili altrui. Il prompt lo scrive `kdpfactory copertina <slug> --direzioni`.",
+  "libro": "household-bills",
+  "codici_del_genere": "",
+  "fonti": [],
+  "direzioni": [
+    {
+      "nome": "",
+      "idea": "",
+      "perche": "",
+      "distacco": "",
+      "soggetto": "",
+      "elementi": [],
+      "tecnica": "",
+      "luce": "",
+      "emozione": "",
+      "composizione": "alto",
+      "palette": "",
+      "tipografia": ""
+    },
+    {
+      "nome": "",
+      "idea": "",
+      "perche": "",
+      "distacco": "",
+      "soggetto": "",
+      "elementi": [],
+      "tecnica": "",
+      "luce": "",
+      "emozione": "",
+      "composizione": "alto",
+      "palette": "",
+      "tipografia": ""
+    },
+    {
+      "nome": "",
+      "idea": "",
+      "perche": "",
+      "distacco": "",
+      "soggetto": "",
+      "elementi": [],
+      "tecnica": "",
+      "luce": "",
+      "emozione": "",
+      "composizione": "alto",
+      "palette": "",
+      "tipografia": ""
+    }
+  ],
+  "scelta": null
+}

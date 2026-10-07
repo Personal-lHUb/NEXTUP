@@ -20,7 +20,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 from . import avvio as avvio_module
-from . import cowork, decisioni, higgsfield
+from . import cowork, decisioni, direzioni, higgsfield
 from .models import BookProject
 
 #: I quattro agenti del reparto, nell'ordine, con il file che lasciano in concorrente/.
@@ -116,10 +116,11 @@ def _capitoli(project: BookProject) -> tuple[int, int]:
 GENERATE = "copertina-higgsfield.json"
 
 
-def generate_senza_file(project: BookProject) -> list[dict]:
+def generate_senza_file(project: BookProject, direzione: int = 0) -> list[dict]:
     """Le varianti già generate (e pagate) che non sono ancora in assets/.
 
     Si scaricano, non si rigenerano: rigenerarle ricompra le stesse immagini.
+    Con `direzione` solo quelle nate da quella direzione d'arte.
     """
     try:
         voci = json.loads((project.root / "build" / GENERATE).read_text(encoding="utf-8"))
@@ -130,7 +131,43 @@ def generate_senza_file(project: BookProject) -> list[dict]:
         v for v in voci
         if isinstance(v, dict) and v.get("url") and v.get("variante")
         and not list(assets.glob(f"copertina-{v['variante']}.*"))
+        and (not direzione or v.get("direzione") == direzione)
     ]
+
+
+def _passo_direzioni(project: BookProject, slug: str) -> tuple | None:
+    """Il passo delle direzioni d'arte, se il libro è ancora lì; `None` se le ha superate.
+
+    Restituisce il testo del passo, le richieste che aspetta e, se c'è, che cosa
+    aspetta dall'autore. Superate vuol dire: direzione scelta e varianti finali
+    già generate (o in arrivo), cioè il percorso di sempre.
+    """
+    fase = direzioni.stato(project)
+    studio = (direzioni.STUDIO,)
+    if fase in ("nessuna", "da-compilare"):
+        if not direzioni.risposta_studio(project).exists():
+            if not direzioni.studio_path(project).exists():
+                return (f"`copertina {slug} --direzioni`: la richiesta dello studio della "
+                        "categoria a Cowork e il modello delle tre direzioni", ())
+            return ("aspettare lo studio delle copertine della categoria", studio)
+        return (f"subagent `copertina` → {direzioni.FILE}: tre direzioni d'arte, poi "
+                f"`copertina {slug} --direzioni`", ())
+    if fase == "da-correggere":
+        return (f"subagent `copertina`: correggere {direzioni.FILE} "
+                f"(`copertina {slug} --direzioni` dice che cosa)", ())
+    if fase == "senza-bozzetti":
+        return (f"`copertina {slug} --bozzetti --genera`: un bozzetto per direzione a bassa "
+                "risoluzione (o il connettore Higgsfield coi prompt del sistema)", ())
+    if fase == "da-scegliere":
+        return ("aspettare la direzione scelta dall'autore", (),
+                "autore: scegliere una delle tre direzioni (non passa dal silenzio-assenso)")
+    # Scelta: se le varianti finali di questa direzione non ci sono ancora, si generano.
+    numero, _ = direzioni.scelta(direzioni.leggi(project))
+    if not list((project.root / "assets").glob("copertina-*.*")) and not generate_senza_file(
+            project, direzione=numero):
+        return (f"`copertina {slug} --genera`: le varianti finali della direzione scelta, alla "
+                "risoluzione più alta (o il connettore Higgsfield coi prompt del sistema)", ())
+    return None
 
 
 def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
@@ -203,6 +240,15 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
         if any(d["chiave"] == "copertina" for d in attese):
             return Stato(slug, "7", "aspettare la scelta della variante", [proposta(d) for d in attese
                          if d["chiave"] == "copertina"], [richiesta(r) for r in mie], da_applicare)
+        # Le tre direzioni d'arte vengono prima delle varianti: si spende sulla
+        # versione finale solo quando l'autore ha scelto che cosa deve essere.
+        passo = _passo_direzioni(project, slug)
+        if passo is not None:
+            testo, aspetta, *altro = passo
+            if generate_senza_file(project):
+                altro.append(f"{len(generate_senza_file(project))} varianti della direzione "
+                             "precedente sulla CDN di Higgsfield: si scaricano coi domini aperti")
+            return stato("7", testo, (), aspetta, *altro)
         if varianti:
             return stato("7", f"{len(varianti)} varianti arrivate: `copertina` le misura, proposta "
                               "«copertina» all'autore, poi `copertina <slug> --scegli N`")

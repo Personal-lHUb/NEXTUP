@@ -91,6 +91,8 @@ class AgentContext:
     metadata: dict = field(default_factory=dict)
     cover_pdf: Path | None = None
     cover_copy: dict = field(default_factory=dict)
+    #: il rapporto sull'immagine di copertina (`coverimage.ImageReport`), se c'è
+    cover_image: dict = field(default_factory=dict)
 
 
 @dataclass

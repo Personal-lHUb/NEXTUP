@@ -65,3 +65,5 @@ Chi usa i risultati: la sessione della fabbrica, che le scrive nelle regole di
 copertina (coverbrief, docs/copertine.md) per tutti i libri, e poi rifà i
 bozzetti di Bills in Order. Dove contraddicono la direzione attuale (semplice,
 pulita, pochi elementi, forte contrasto), l'autore ha deciso che vincono i video.
+
+Stato: applicata il 2026-10-07 — 45 regole scritte nel sistema (docs/copertine.md, «Le regole dei due video»): due caratteri al massimo, voce tipografica del genere, titolo in neretto, andata a capo senza parole deboli, contorno sul titolo, 1 cm dal taglio, titolo in alto o al centro, velatura misurata contro i pixel dietro il titolo, sfondo rumoroso e dominante giallo-senape misurati, codici del genere rispettati contro il concorrente, studio della categoria e tre direzioni d'arte. Il punto 4 resta parziale (esempi del video A non visti fotogramma per fotogramma): non serve un seguito, le regole ci sono tutte.

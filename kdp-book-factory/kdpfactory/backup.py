@@ -32,7 +32,8 @@ DEFAULT_BACKUP_DIR = Path(
 )
 
 #: che cosa entra nello snapshot, in ordine di importanza
-INCLUDED_FILES = ("book.json", "brief.md", "outline.json", "state.json")
+INCLUDED_FILES = ("book.json", "brief.md", "outline.json", "state.json",
+                  "copertina-direzioni.json", "figure.json")
 #: `concorrente/` ha le domande d'avvio e l'analisi del concorrente, che costa
 #: quattro chiamate su una pagina intera: si salva come il resto del libro.
 INCLUDED_DIRS = ("assets", "manuscript", "build", "concorrente")

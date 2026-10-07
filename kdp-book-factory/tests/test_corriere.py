@@ -430,7 +430,7 @@ class TestImmagini(unittest.TestCase):
                                           "«Bills in Order — A Household Guide»"))
         self.assertIn("variant 1 of 3", prompt)
         self.assertIn("paper envelope", prompt)         # la rappresentazione della categoria
-        self.assertIn("Direction: Keep it simple and visually clean", prompt)
+        self.assertIn("Direction: Keep it simple: one clear focal subject", prompt)
         self.assertIn("portrait, 2:3", prompt)
         self.assertIn("Absolutely no text", prompt)
         self.assertIn("1838 x 2775 px", prompt)

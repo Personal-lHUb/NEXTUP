@@ -73,8 +73,9 @@ COMPETENZE: tuple[Competenza, ...] = (
     # -- oggetto stampato -----------------------------------------------------
     Competenza("oggetto stampato", "l'interno impaginato: vedove, orfane, code di capitolo, testo "
                "fuori gabbia, aperture, varietà delle pagine di un medium-content", "impaginazione"),
-    Competenza("oggetto stampato", "la copertina: il prompt dell'illustrazione e delle figure "
-               "interne, le misure del PDF di copertina, i testi stampati sulla copertina",
+    Competenza("oggetto stampato", "la copertina: le tre direzioni d'arte dallo studio della "
+               "categoria, il prompt dell'illustrazione e delle figure interne, le misure del "
+               "PDF di copertina, i testi stampati sulla copertina",
                "copertina"),
 )
 

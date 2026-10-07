@@ -51,6 +51,12 @@ class BookSpec:
     cover_style: str = "auto"            # auto | immagine | tipografica
     #: illustrazione della prima: auto = scelta dal contenuto, nessuna = solo testo
     cover_art: str = "auto"              # auto | nessuna | treno | lente | elenco | orologio | scala | porta
+    #: dove sta il titolo sulla prima: in alto con l'immagine sotto, o al centro
+    #: con i soggetti intorno (docs/copertine.md); auto = in alto
+    cover_layout: str = "auto"           # auto | alto | centro
+    #: la voce del carattere del titolo: deciso (bastone) o elegante (il Garamond
+    #: del libro); auto = la decide la categoria
+    cover_type: str = "auto"             # auto | deciso | elegante
     body_font: str = "serif"             # serif | sans
     #: 11,5 su 15,5: il Garamond ha l'occhio piccolo, e a 11 punti si legge come
     #: un Times a 10. È il corpo dei libri di saggistica in 6x9 degli editori.
@@ -141,6 +147,10 @@ class BookSpec:
                 "`cover_art` supportati: 'auto', 'nessuna', "
                 f"{', '.join(repr(name) for name in coverart.BY_NAME)}."
             )
+        if self.cover_layout not in {"auto", "alto", "centro"}:
+            problems.append("`cover_layout` supportati: 'auto', 'alto', 'centro'.")
+        if self.cover_type not in {"auto", "deciso", "elegante"}:
+            problems.append("`cover_type` supportati: 'auto', 'deciso', 'elegante'.")
         if self.language not in {"it", "en"}:
             problems.append("`language` supportate: 'it', 'en'.")
         if self.genre not in {"non-fiction", "fiction"}:

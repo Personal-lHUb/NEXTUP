@@ -40,6 +40,17 @@ che serve anche per dichiarare a KDP i contenuti generati con l'IA. Gli stessi
 comandi scrivono `build/copertina-prompt.txt` e `build/immagini-prompt.txt`,
 il testo da incollare a mano in ChatGPT se Higgsfield non c'è.
 
+**La copertina si progetta come in una casa editrice**
+(`kdpfactory/direzioni.py`, `docs/copertine.md`): Cowork studia le copertine
+che vendono nella categoria, l'agente `copertina` scrive tre direzioni d'arte in
+`books/<slug>/copertina-direzioni.json`, il sistema ne fa i prompt e un bozzetto
+per direzione a bassa risoluzione (`copertina <slug> --direzioni`, `--bozzetti
+--genera`), e l'autore sceglie la direzione (`--direzione N`). Le varianti
+finali, alla risoluzione più alta, nascono solo dalla direzione scelta. Le regole
+dei due video sulle copertine che vendono (`config/cowork-copertine-video-2-risposta.md`)
+stanno nel motore, nei prompt e nelle misure; dove contraddicevano la direzione
+di prima, hanno vinto i video.
+
 Tre cose che questi prompt non negoziano:
 
 - **Il testo lo compone il motore**, sempre, in vettoriale. Il generatore
@@ -102,7 +113,9 @@ fermi ad aspettarle. Registri la proposta degli agenti con le alternative
 (`python3 -m kdpfactory decisioni <slug> --proponi …`), mandi la notifica
 all'autore e, se entro 24 ore non risponde, procedi con la proposta. Una sua
 risposta vince sempre. La **pubblicazione** non passa mai dal silenzio-assenso:
-la decide lui. Le immagini — copertina e figure — le genera **questa sessione
+la decide lui. Nemmeno la **direzione d'arte della copertina**, fra le tre dei
+bozzetti: l'autore ha chiesto di sceglierla lui; la variante finale, fra quelle
+della direzione scelta, torna al silenzio-assenso. Le immagini — copertina e figure — le genera **questa sessione
 con Higgsfield**, dal prompt del sistema (`copertina <slug> --genera`,
 `immagini <slug> --genera`; `config/immagini.json`). Serve l'accesso
 dell'autore al CLI (`higgsfield auth login`), che nel container si perde
