@@ -46,3 +46,5 @@ risposta: sono copertine di altri, e il brief di copertina non le nomina.
 
 Chi usa i risultati: l'agente `copertina` della fabbrica, per le tre direzioni
 d'arte della copertina di household-bills (`copertina-direzioni.json`).
+
+Stato: applicata il 2026-10-07 — lo studio delle copertine della categoria è la base delle tre direzioni d'arte in `copertina-direzioni.json` e dei loro bozzetti.
