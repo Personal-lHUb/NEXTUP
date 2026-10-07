@@ -1,11 +1,13 @@
 """Il canale con Cowork: le richieste di ricerca web e le loro risposte, su GitHub.
 
 Il container della fabbrica non raggiunge Amazon né KDP. Quello che serve da lì
-lo fa una sessione Cowork sul computer dell'autore. Lo scambio passa dal
-repository su GitHub, sul ramo del canale (`config/cowork.json`), con due nomi
-fissi nella stessa cartella: `cowork-<argomento>.md` è la richiesta,
-`cowork-<argomento>-risposta.md` la risposta. La fabbrica fa commit e push delle
-richieste, Cowork fa il commit delle risposte sullo stesso ramo.
+lo fa una sessione Cowork sul computer dell'autore. Richieste e risposte stanno
+nel repository su GitHub, sul ramo del canale (`config/cowork.json`), con due
+nomi fissi nella stessa cartella: `cowork-<argomento>.md` è la richiesta,
+`cowork-<argomento>-risposta.md` la risposta. GitHub è l'unico posto dove i file
+si salvano. Cowork su GitHub non scrive: legge le richieste dagli indirizzi
+pubblici e consegna la risposta come testo, lanciando la routine della fabbrica
+(`CONSEGNA`); la salva nel repository questa sessione (`corriere.ricevi`).
 
 Questo modulo non va in rete. Legge i file e chiede a git due cose: com'è la
 richiesta sul ramo remoto, così si vede se è stata inviata, e quando è stato
@@ -39,6 +41,15 @@ _RUOLO = re.compile(r"^Ruolo:\s*([a-z][a-z-]*)\s*$", re.M)
 #: non è aperto, Cowork non risponde e la richiesta aspetta l'autore, non Cowork
 SERVE = "Serve:"
 _SERVE = re.compile(r"^Serve:\s*(.+?)\s*$", re.M)
+
+#: La prima riga del testo con cui Cowork consegna, lanciando la routine della
+#: fabbrica: dice dove va il resto. Una risposta porta il suo percorso dalla
+#: radice del repository, un giro non riuscito il ruolo.
+CONSEGNA = "Cowork · risposta ·"
+ESITO = "Cowork · esito ·"
+#: Il campo di testo di fire_trigger porta fino a 64 KiB: una risposta più
+#: lunga si consegna in parti, ognuna sotto questo numero di caratteri.
+MASSIMO_PARTE = 50_000
 
 APERTA, ARRIVATA, SUPERATA, CHIUSA = "aperta", "risposta arrivata", "risposta superata", "applicata"
 DA_INVIARE, INVIATA, NON_CONTROLLATA = "da inviare", "inviata", "non controllata"
@@ -170,21 +181,21 @@ def link_lettura(canale: dict, relativo: str, ramo: str = "") -> str:
     return f"https://raw.githubusercontent.com/{repository}/{ramo}/{CARTELLA_FABBRICA}/{relativo}"
 
 
-def corriere(canale: dict) -> tuple[str, str]:
-    """La cartella Drive del corriere: nome e id (vuoti se il canale non la usa)."""
-    dati = canale.get("corriere") or {}
-    return dati.get("cartella", "NEXTUP — corriere Cowork"), dati.get("cartella_id", "")
+def riga_consegna(relativo: str) -> str:
+    """La prima riga della consegna di una risposta, dato il suo percorso in kdp-book-factory/."""
+    return f"{CONSEGNA} {CARTELLA_FABBRICA}/{relativo.strip('/')}"
 
 
 def intestazione(
     titolo: str, risposta: str, ruolo: str, canale: dict, cartella: str = "", serve: str = ""
 ) -> str:
-    """La testa uguale per ogni richiesta: ruolo, regole, dove va la risposta.
+    """La testa uguale per ogni richiesta: ruolo, regole, come si consegna la risposta.
 
     La riga `Ruolo:` è quella che l'attività di ciascun ruolo cerca: una
     richiesta senza ruolo non la prende nessuno. `cartella` è dove sta la
-    richiesta nel repository (per esempio `books/x/concorrente`): sul corriere
-    la risposta si chiama come il suo percorso, con `__` al posto di `/`.
+    richiesta nel repository (per esempio `books/x/concorrente`): la prima riga
+    della consegna porta il percorso intero della risposta, e così la fabbrica
+    sa dove salvarla senza indovinare.
 
     `serve` è l'accesso che l'autore deve aprire nel browser di Cowork perché la
     richiesta si possa fare (per esempio «l'accesso a KDP»). Con la riga `Serve:`
@@ -202,39 +213,27 @@ def intestazione(
             "scrivere nessuna risposta: la richiesta resta aperta e la riprendi al giro dopo.\n"
         )
     righe = f"{RUOLO} {ruolo}\n" + (f"{SERVE} {serve}\n" if serve else "")
-    if canale.get("canale") == "drive":
-        nome, _ = corriere(canale)
-        percorso = f"{cartella.strip('/')}/{risposta}" if cartella else risposta
-        return (
-            f"# {titolo}\n\n"
-            f"{righe}\n"
-            "Richiesta della fabbrica per Cowork, con le regole del LEGGIMI\n"
-            "(`config__leggimi-cowork.md`, nella stessa cartella).\n"
-            f"Scrivi la risposta come file nuovo nella cartella Drive «{nome}»,\n"
-            f"con il nome `{percorso.replace('/', '__')}` e la stessa numerazione.\n"
-            + regole
-        )
     ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
     leggimi = canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md")
-    consegna = canale.get("ramo_consegna", "")
-    if consegna:
+    if canale.get("ramo_consegna", ""):
         # Il canale su GitHub: le richieste stanno sul ramo della fabbrica e Cowork
         # le legge dagli indirizzi pubblici. Su GitHub Cowork non scrive (niente
         # credenziali, e la sua modalità automatica blocca la scrittura dal browser
-        # dell'autore): la risposta va su Drive, e la fabbrica la porta su GitHub
-        # accanto alla richiesta, `percorso`.
+        # dell'autore): consegna il testo lanciando la routine della fabbrica, e
+        # questa sessione lo salva accanto alla richiesta.
         relativo = f"{cartella.strip('/')}/{risposta}" if cartella else risposta
-        percorso = f"{CARTELLA_FABBRICA}/{relativo}"
         repository = canale.get("repository", "Personal-lHUb/NEXTUP")
-        nome, _ = corriere(canale)
+        routine = canale.get("routine_fabbrica", "")
         return (
             f"# {titolo}\n\n"
             f"{righe}\n"
             f"Richiesta della fabbrica per Cowork, con le regole di `{leggimi}`\n"
             f"(ramo `{ramo}` del repository `{repository}`).\n"
-            f"Scrivi la risposta come file nuovo nella cartella Drive «{nome}»,\n"
-            f"con il nome `{relativo.replace('/', '__')}` e la stessa numerazione:\n"
-            f"la fabbrica la porta su GitHub, in `{percorso}`.\n"
+            f"Consegna la risposta lanciando la routine della fabbrica (fire_trigger\n"
+            f"`{routine}`), con questa prima riga nel testo e sotto la risposta:\n\n"
+            f"    {riga_consegna(relativo)}\n\n"
+            "Non scrivere file da nessuna parte: la risposta la salva la fabbrica, su\n"
+            "GitHub, accanto a questa richiesta e con la stessa numerazione.\n"
             + regole
         )
     return (
@@ -300,20 +299,9 @@ def avviso(
     repo = canale.get("repository", "Personal-lHUb/NEXTUP")
     ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
     leggimi = canale.get("leggimi", "kdp-book-factory/config/leggimi-cowork.md")
-    drive = canale.get("canale") == "drive"
-    if drive:
-        # Sul corriere i file si chiamano come il loro percorso, con «__» al posto di «/».
-        cartella, _ = corriere(canale)
-        leggimi = "config__leggimi-cowork.md, nella stessa cartella,"
-
-        def dal_repo(relativo: str) -> str:
-            return relativo.replace("/", "__")
     aperte = [r for r in elenco if r.stato == APERTA and (not ruolo or r.ruolo == ruolo)]
     per = f" per il ruolo «{ruolo}»" if ruolo else ""
-    dove = (
-        f"Nella cartella Google Drive «{cartella}»" if drive
-        else f"Sul repository GitHub {repo}, ramo {ramo},"
-    )
+    dove = f"Sul repository GitHub {repo}, ramo {ramo},"
     if not aperte:
         return f"{dove} non ci sono richieste aperte{per}.\n"
     righe = [
@@ -323,10 +311,15 @@ def avviso(
         + (f", e la sezione del ruolo «{ruolo}» vale per te." if ruolo else "."),
         "",
     ]
+    consegna = bool(ramo_consegna(canale))
+
+    def voce(r: Richiesta) -> str:
+        if consegna:
+            return f"- `{dal_repo(r.percorso)}` → consegna con la prima riga «{riga_consegna(r.risposta)}»"
+        return f"- `{dal_repo(r.percorso)}` → rispondi in `{dal_repo(r.risposta)}`"
+
     if ruolo:
-        righe += [
-            f"- `{dal_repo(r.percorso)}` → rispondi in `{dal_repo(r.risposta)}`" for r in aperte
-        ]
+        righe += [voce(r) for r in aperte]
     else:
         # Un avviso per tutte le richieste va in una chat che non ha un ruolo
         # suo: deve sapere che le fa tutte, ciascuna con le regole del suo ruolo,
@@ -337,28 +330,19 @@ def avviso(
         ]
         for nome in dict.fromkeys(r.ruolo for r in aperte):
             righe += ["", f"Ruolo «{nome}»:" if nome else "Senza ruolo:"]
-            righe += [
-                f"- `{dal_repo(r.percorso)}` → rispondi in `{dal_repo(r.risposta)}`"
-                for r in aperte if r.ruolo == nome
-            ]
-    if drive:
-        righe += [
-            "",
-            "Per ciascuna: leggila per intero ed esegui quello che chiede. Scrivi la risposta "
-            "come file nuovo nella stessa cartella, con il nome indicato, e la prima riga "
-            "«Esito: completa» oppure «Esito: parziale — punti …: <motivo>». Non modificare, "
-            "rinominare o cancellare altri file: al repository li porta la fabbrica.",
-        ]
-    elif ramo_consegna(canale):
+            righe += [voce(r) for r in aperte if r.ruolo == nome]
+    if consegna:
+        routine = canale.get("routine_fabbrica", "")
         righe += [
             "",
             f"Leggi l'indice {link_lettura(canale, 'config/cowork-aperte.md', ramo)} e le "
             "richieste agli indirizzi che dà.",
             "",
-            "Per ciascuna: leggila per intero ed esegui quello che chiede. Scrivi la risposta "
-            "come file nuovo nella cartella Drive, col nome che la richiesta indica, e la prima "
-            "riga «Esito: completa» oppure «Esito: parziale — punti …: <motivo>»: la fabbrica la "
-            "porta su GitHub. Su GitHub non si scrive niente.",
+            "Per ciascuna: leggila per intero ed esegui quello che chiede. La risposta comincia "
+            "con «Esito: completa» oppure «Esito: parziale — punti …: <motivo>». Consegnala "
+            f"lanciando la routine della fabbrica (fire_trigger {routine}): nel testo, la prima "
+            "riga di consegna indicata e sotto la risposta intera. La salva la fabbrica, su "
+            "GitHub: non scrivere file da nessuna parte, né su GitHub né su Drive.",
         ]
     else:
         righe += [
@@ -383,17 +367,12 @@ def avviso(
         "inserire credenziali, non comprare, non cambiare niente;",
         "- nessuna password, codice o cookie nei file.",
         "",
-        *([] if drive or ramo_consegna(canale) else [
+        *([] if consegna else [
             "Alla fine fai il push delle risposte sul ramo. Se non puoi farlo tu, dimmelo: lo "
             "faccio io da GitHub Desktop. Finché non c'è il push, la fabbrica non le vede.",
             "",
         ]),
-        *([
-            f"Alla fine, se hai consegnato qualcosa, lancia la routine della fabbrica "
-            f"(fire_trigger {canale['routine_fabbrica']}): la risposta si applica subito.",
-            "",
-        ] if ramo_consegna(canale) and canale.get("routine_fabbrica") else []),
-        "Quando hai finito, dimmi quali risposte hai scritto e quali punti sono rimasti "
+        "Quando hai finito, dimmi quali risposte hai consegnato e quali punti sono rimasti "
         "senza risposta.",
     ]
     return "\n".join(righe) + "\n"
@@ -415,8 +394,7 @@ def rapporto(elenco: list[Richiesta], noti: frozenset[str] | set[str] = frozense
     )
     da_inviare = [r.percorso for r in elenco if r.invio == DA_INVIARE and r.stato != CHIUSA]
     if da_inviare:
-        righe.append("Da inviare (push sul ramo della fabbrica; sul canale Drive, `cowork corriere`): "
-                     + ", ".join(da_inviare))
+        righe.append("Da inviare (commit e push sul ramo della fabbrica): " + ", ".join(da_inviare))
     # Ogni attività di Cowork prende solo le richieste del suo ruolo: una
     # richiesta aperta senza ruolo, o con un ruolo che non esiste, resta lì.
     orfane = [
@@ -453,101 +431,66 @@ def _sempre(canale: dict) -> str:
     )
 
 
+def _migliaia(numero: int) -> str:
+    return f"{numero:,}".replace(",", ".")
+
+
 def prompt_attivita(ruolo: str, dati: dict, canale: dict) -> str:
-    """Il prompt dell'attività pianificata di un ruolo: prende solo le sue richieste."""
-    if ramo_consegna(canale):
-        return _prompt_attivita_github(ruolo, dati, canale)
-    nome, ident = corriere(canale)
-    return f"""Sei il ruolo «{ruolo}» della fabbrica di libri NEXTUP: {dati.get('compito', '')}.
-
-Lavori nella cartella di Google Drive «{nome}» (id {ident}). Per richieste e
-risposte non serve GitHub: la fabbrica porta da sola i file fra quella cartella
-e il repository. Le immagini invece vanno su GitHub, nel ramo
-{RAMO_IMMAGINI}: il connettore Drive non porta file così pesanti.
-
-Prima di tutto leggi per intero il file config__leggimi-cowork.md di quella
-cartella: le regole comuni e la sezione «Ruolo {ruolo}». Se dicono una cosa
-diversa da questo prompt, vale il LEGGIMI.
-
-Poi cerca le richieste del tuo ruolo: i file della cartella il cui nome contiene
-«cowork-» e finisce in «.md», esclusi quelli che finiscono in «-risposta.md», che
-contengono la riga «Ruolo: {ruolo}». Salta quelle che hanno già nella cartella il
-file con lo stesso nome e «-risposta». Le richieste di un altro ruolo non le apri:
-sono di un'altra chat.
-
-Esegui le tue. Ogni risposta è un file nuovo nella stessa cartella, con il nome
-che la richiesta indica e la prima riga «Esito: completa» oppure «Esito: parziale
-— punti …: <motivo>». Non modificare, rinominare o cancellare nessun altro file.
-
-La cartella si usa con il connettore Google Drive: search_files con
-parentId = '{ident}' per trovare i file, read_file_content o
-download_file_content per leggerli; create_file con parentId '{ident}', il
-titolo indicato, contentMimeType text/markdown e disableConversionToGoogleType
-true per scrivere una risposta.
-
-Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
-{_sempre(canale)}.
-
-Se non ci sono richieste del tuo ruolo senza risposta, fermati senza scrivere
-niente.{_note(dati)}"""
-
-
-def _prompt_attivita_github(ruolo: str, dati: dict, canale: dict) -> str:
-    """Il prompt di un ruolo sul canale GitHub: si legge dal ramo, si risponde su Drive.
+    """Il prompt dell'attività pianificata di un ruolo: prende solo le sue richieste.
 
     Le sessioni di Cowork non hanno credenziali GitHub, e la loro modalità
     automatica blocca la scrittura su GitHub dal browser dell'autore come un
     aggiramento (esiti del 6 ottobre 2026). Leggono il repository pubblico e
-    scrivono le risposte su Drive; su GitHub le porta la fabbrica.
+    consegnano la risposta come testo, lanciando la routine della fabbrica: è
+    questa sessione a salvarla su GitHub, l'unico posto dove i file stanno.
     """
     ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
-    cartella, ident = corriere(canale)
     routine = canale.get("routine_fabbrica", "")
-    avvisa = (
-        f"\n\n6. Se hai scritto una risposta e hai lo strumento fire_trigger, alla fine lancia\n"
-        f"   la routine della fabbrica: trigger_id {routine}, testo «Cowork, ruolo {ruolo}:\n"
-        "   consegnato <nomi>.» Se lo strumento non c'è, non serve: la fabbrica passa\n"
-        "   ogni ora."
-    ) if routine else ""
     return f"""Sei il ruolo «{ruolo}» della fabbrica di libri NEXTUP: {dati.get('compito', '')}.
 
 Le richieste stanno su GitHub, ramo {ramo}, e si leggono dagli indirizzi
-pubblici; le risposte si scrivono su Google Drive, nella cartella «{cartella}»
-(id {ident}). Su GitHub non scrivi niente: la fabbrica porta lei le risposte
-nel repository.
+pubblici. Le risposte le consegni lanciando la routine della fabbrica, che le
+salva lei su GitHub. Tu non scrivi file da nessuna parte: né su GitHub né su
+Google Drive.
 
-1. Prima di tutto leggi per intero il LEGGIMI:
+1. Prima di tutto leggi per intero il LEGGIMI, con WebFetch:
    {link_lettura(canale, 'config/leggimi-cowork.md', ramo)}
-   (c'è anche nella cartella Drive, come config__leggimi-cowork.md): le regole
-   comuni e la sezione «Ruolo {ruolo}». Se dicono una cosa diversa da questo
-   prompt, vale il LEGGIMI.
+   Le regole comuni e la sezione «Ruolo {ruolo}». Se dicono una cosa diversa
+   da questo prompt, vale il LEGGIMI.
 
 2. Leggi l'indice delle richieste aperte, con WebFetch:
    {link_lettura(canale, 'config/cowork-aperte.md', ramo)}
-   Prendi solo quelle sotto «Ruolo {ruolo}»: le altre sono di un'altra chat.
-   Ogni voce dà l'indirizzo da cui leggerla e il nome della risposta su Drive.
-   Una richiesta che ha già la sua risposta su Drive è fatta: saltala.
+   Prendi solo quelle sotto «Ruolo {ruolo}», che sotto il titolo hanno la riga
+   «Ruolo: {ruolo}»: le altre sono di un'altra chat. Ogni voce dà l'indirizzo da
+   cui leggerla e la prima riga della consegna. L'indice elenca solo le
+   richieste ancora senza risposta.
 
 3. Se il browser del portatile non risponde, il giro è nel cloud: fai solo le
    richieste che l'indice segna «nel cloud o col browser». Una richiesta con la
-   riga «Serve:» il cui accesso manca la salti senza scrivere niente.
+   riga «Serve:» il cui accesso manca la salti senza consegnare niente.
 
 4. Esegui le tue. Ogni risposta ha la prima riga «Esito: completa» oppure
    «Esito: parziale — punti …: <motivo>».
 
-5. Scrivi la risposta con create_file nella cartella Drive (parentId {ident}),
-   con il nome che l'indice dà, contentMimeType text/markdown,
-   disableConversionToGoogleType true.{avvisa}
+5. Consegna ogni risposta con fire_trigger, trigger_id {routine}: nel testo,
+   la prima riga di consegna che l'indice dà («{CONSEGNA} …»), poi a capo
+   la risposta intera. Una consegna per risposta. Oltre {_migliaia(MASSIMO_PARTE)} caratteri
+   la dividi fra una riga e l'altra in parti, ognuna con la stessa prima riga
+   seguita da « · parte N/M».
 
-Se un passo tecnico fallisce, scrivi su Drive l'esito
-cowork-esito-{ruolo}-<AAAAMMGG-hhmm>.md con l'errore esatto (sezione «Se
-qualcosa non va» del LEGGIMI).
+6. Se fire_trigger non c'è, scrivi le consegne intere come ultimo messaggio
+   del giro, una dopo l'altra, e in fondo «Consegna non riuscita: manca
+   fire_trigger». Non le salvi da nessun'altra parte: le porta l'autore.
+
+Se un passo tecnico fallisce, consegna l'esito allo stesso modo, con la prima
+riga «{ESITO} {ruolo}» e sotto l'errore esatto (sezione «Se qualcosa non va»
+del LEGGIMI).
 
 Anche se non riesci a leggere il LEGGIMI, queste regole valgono sempre:
-{_sempre(canale)}; su GitHub non si scrive niente, né con git né dal browser; su
-Drive solo le risposte e gli esiti.
+{_sempre(canale)}; non scrivi file né su GitHub (né con git né dal browser)
+né su Drive; fire_trigger solo per la routine della fabbrica.
 
-Se non ci sono richieste del tuo ruolo da fare, fermati senza scrivere
+Se non ci sono richieste del tuo ruolo da fare, fermati senza lanciare
 niente.{_note(dati)}"""
 
 
@@ -561,68 +504,23 @@ def _note(dati: dict) -> str:
 
 def istruzioni_progetto(canale: dict) -> str:
     """Le istruzioni comuni a tutte le chat del progetto: che cosa leggere per restare allineati."""
-    nome, ident = corriere(canale)
     elenco = "\n".join(
         f"- «{dati.get('chat', r)}» (Ruolo: {r}): {dati.get('compito', '')}."
         for r, dati in ruoli(canale).items()
     )
-    if ramo_consegna(canale):
-        return _istruzioni_progetto_github(canale, elenco)
-    return f"""Lavori con la fabbrica di libri NEXTUP, una sessione Claude Code in un
-container che non raggiunge Amazon, KDP né il tuo browser. Tu fai per lei le
-ricerche web e le immagini. Tutto passa dalla cartella di Google Drive «{nome}»
-(id {ident}): la fabbrica ci mette le richieste e porta nel suo archivio
-quello che ci lasci. GitHub serve solo per le immagini, nel ramo
-{RAMO_IMMAGINI}, perché il connettore Drive non porta file così pesanti.
-Non basarti mai su quello che ricordi da una conversazione precedente: leggi i file.
-
-Questo progetto ha una chat per ruolo, e ogni chat fa solo il suo lavoro:
-{elenco}
-Ogni richiesta dice il suo ruolo nella riga «Ruolo: …» sotto il titolo. Una
-richiesta di un altro ruolo non la apri: è di un'altra chat.
-
-1. SEMPRE, all'inizio di ogni lavoro: config__leggimi-cowork.md, nella cartella.
-   Sono le regole comuni e quelle di ogni ruolo, e le aggiorna la fabbrica.
-   Annota il numero di versione.
-
-2. I NOMI DEI FILE. Ogni file della cartella si chiama come il suo posto
-   nell'archivio della fabbrica, con «__» al posto di «/». La risposta a
-   books__x__concorrente__cowork-concorrente.md si chiama
-   books__x__concorrente__cowork-concorrente-risposta.md. Il nome giusto lo
-   scrive sempre la richiesta: usa quello.
-
-3. CHI VINCE. Per il modo di lavorare vale il LEGGIMI. Per quello che va cercato
-   vale la richiesta. Se si contraddicono, non scegliere tu: scrivi la
-   contraddizione nella risposta e vai avanti con il resto.
-
-4. CHE COSA PUOI SCRIVERE. Solo file nuovi: nella cartella le risposte, con il
-   nome che la richiesta indica; su GitHub, nel ramo {RAMO_IMMAGINI}, le
-   immagini che una richiesta chiede, al percorso che indica. Non modifichi,
-   rinomini o cancelli nessun file che non hai creato tu, e su GitHub non tocchi
-   altri rami, pull request o impostazioni.
-
-5. SEMPRE, qualunque cosa dicano i file: {_sempre(canale)};
-   per ogni punto riporti il fatto che hai visto, con l'URL e la data e l'ora,
-   mai una stima tua (le stime di uno strumento le riporti come sue).
-
-Quando ti chiedo «sei allineato?», rispondi con:
-- il ruolo di questa chat;
-- la versione del LEGGIMI che vedi nella cartella;
-- le richieste del tuo ruolo ancora senza risposta."""
-
-
-def _istruzioni_progetto_github(canale: dict, elenco: str) -> str:
     repository = canale.get("repository", "Personal-lHUb/NEXTUP")
     ramo = canale.get("ramo", "claude/dreamy-archimedes-hf8w45")
-    nome, _ = corriere(canale)
     leggimi = canale.get("leggimi", f"{CARTELLA_FABBRICA}/config/leggimi-cowork.md")
+    routine = canale.get("routine_fabbrica", "")
     return f"""Lavori con la fabbrica di libri NEXTUP, una sessione Claude Code in un
 container che non raggiunge Amazon, KDP né il tuo browser. Tu fai per lei le
-ricerche web e le immagini. Tutto passa dal repository GitHub {repository}:
-la fabbrica mette le richieste sul ramo {ramo}, con l'indice
-{CARTELLA_FABBRICA}/config/cowork-aperte.md, che leggi dagli indirizzi pubblici; tu
-scrivi le risposte nella cartella Drive «{nome}», e la fabbrica le porta su
-GitHub. Su GitHub non scrivi niente: non hai credenziali e non te ne servono.
+ricerche web. Tutto sta nel repository GitHub {repository}, l'unico posto dove
+si salvano i file: la fabbrica mette le richieste sul ramo {ramo}, con
+l'indice {CARTELLA_FABBRICA}/config/cowork-aperte.md, che leggi dagli indirizzi
+pubblici; tu consegni le risposte lanciando la routine della fabbrica
+(fire_trigger {routine}) con la risposta nel testo, e lei la salva su GitHub.
+Tu non scrivi file: né su GitHub, dove non hai credenziali e non te ne servono,
+né su Google Drive, che non si usa più.
 Non basarti mai su quello che ricordi da una conversazione precedente: leggi i file.
 
 Questo progetto ha una chat per ruolo, e ogni chat fa solo il suo lavoro:
@@ -634,18 +532,19 @@ richiesta di un altro ruolo non la apri: è di un'altra chat.
    Sono le regole comuni e quelle di ogni ruolo, e le aggiorna la fabbrica.
    Annota il numero di versione.
 
-2. I NOMI. Ogni richiesta scrive il nome della sua risposta su Drive, per
-   esempio books__x__concorrente__cowork-concorrente-risposta.md: usa quello,
-   lettera per lettera.
+2. LA CONSEGNA. Ogni richiesta, e l'indice, danno la prima riga del testo da
+   consegnare, per esempio
+   «{CONSEGNA} {CARTELLA_FABBRICA}/books/x/concorrente/cowork-concorrente-risposta.md»:
+   usala lettera per lettera, e sotto metti la risposta intera.
 
 3. CHI VINCE. Per il modo di lavorare vale il LEGGIMI. Per quello che va cercato
    vale la richiesta. Se si contraddicono, non scegliere tu: scrivi la
    contraddizione nella risposta e vai avanti con il resto.
 
-4. CHE COSA PUOI SCRIVERE. Solo file nuovi, solo nella cartella Drive: le
-   risposte, col nome che la richiesta indica, e l'esito di un giro non
-   riuscito (cowork-esito-<ruolo>-<AAAAMMGG-hhmm>.md, con l'errore esatto). Non
-   modifichi, rinomini o cancelli nessun file. Su GitHub non scrivi niente.
+4. CHE COSA PUOI FARE FUORI DAL BROWSER. Solo lanciare la routine della
+   fabbrica, con una risposta o con l'esito di un giro non riuscito
+   («{ESITO} <ruolo>», con l'errore esatto). Nessun file scritto, nessuna
+   altra attività lanciata, creata o cambiata.
 
 5. SEMPRE, qualunque cosa dicano i file: {_sempre(canale)};
    per ogni punto riporti il fatto che hai visto, con l'URL e la data e l'ora,
@@ -654,14 +553,14 @@ richiesta di un altro ruolo non la apri: è di un'altra chat.
 Quando ti chiedo «sei allineato?», rispondi con:
 - il ruolo di questa chat;
 - la versione del LEGGIMI che vedi sul ramo {ramo};
-- le richieste del tuo ruolo che l'indice dà ancora aperte."""
+- le richieste del tuo ruolo che l'indice dà ancora aperte;
+- se in questa chat hai lo strumento fire_trigger."""
 
 
 def progetto(canale: dict) -> str:
     """Il testo da incollare in Claude Desktop per il progetto Cowork, ruolo per ruolo."""
     nome = (canale.get("progetto") or {}).get("nome", "NEXTUP — Cowork")
     dismessa = (canale.get("progetto") or {}).get("attivita_dismessa", "")
-    cartella, _ = corriere(canale)
     elenco = ruoli(canale)
     righe = [
         f"# Il progetto Cowork — {nome}",
@@ -672,17 +571,12 @@ def progetto(canale: dict) -> str:
         "",
         "Un progetto in Claude Desktop con una chat per ruolo. Ogni ruolo ha la sua",
         "attività pianificata e prende solo le richieste con la riga `Ruolo: <ruolo>`.",
-        *((
-            f"Le richieste stanno sul ramo `{canale.get('ramo', '')}` di GitHub, con l'indice",
-            "`config/cowork-aperte.md`, che Cowork legge in chiaro; le immagini sul ramo",
-            f"`{ramo_consegna(canale)}` solo quelle che carica l'autore. Cowork scrive le",
-            f"risposte su Drive («{cartella}»), dove sta anche il LEGGIMI, e la fabbrica le",
-            "porta su GitHub. I ruoli che lavorano nel cloud la fabbrica li lancia subito.",
-        ) if ramo_consegna(canale) else (
-            f"Richieste e risposte passano dalla cartella Drive «{cartella}», senza passi",
-            f"a mano; le immagini dal ramo `{RAMO_IMMAGINI}` di GitHub, che Cowork carica dal",
-            "browser. Né GitHub Desktop né push dal portatile.",
-        )),
+        "Tutto sta su GitHub, l'unico posto dove si salvano i file. Le richieste sul ramo",
+        f"`{canale.get('ramo', '')}`, con l'indice `config/cowork-aperte.md`, che Cowork legge in",
+        f"chiaro; sul ramo `{ramo_consegna(canale) or RAMO_IMMAGINI}` solo quello che carica",
+        "l'autore. Cowork consegna le risposte lanciando la routine della fabbrica, con la",
+        "risposta nel testo, e la fabbrica la salva accanto alla richiesta. Google Drive non",
+        "si usa più. I ruoli che lavorano nel cloud la fabbrica li lancia subito.",
         "",
         "## 1. Il progetto",
         "",
@@ -737,8 +631,8 @@ def progetto(canale: dict) -> str:
             "`config/attivita-cowork.json`, una voce per attività, con update_trigger. Finché "
             "restano quelli vecchi, vale il LEGGIMI."
         )
-    passi.append("In ogni chat chiedi «sei allineato?»: deve rispondere con il suo ruolo e la "
-                 "versione del LEGGIMI.")
+    passi.append("In ogni chat chiedi «sei allineato?»: deve rispondere con il suo ruolo, la "
+                 "versione del LEGGIMI e se ha lo strumento fire_trigger, con cui consegna.")
     righe += ["", "## 4. Il passaggio", ""]
     righe += [f"{i}. {testo}" for i, testo in enumerate(passi, 1)]
     return "\n".join(righe) + "\n"

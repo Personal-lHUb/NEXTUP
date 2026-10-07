@@ -1,4 +1,4 @@
-"""Il giro automatico: corriere su Drive, decisioni con silenzio-assenso, bussola della produzione."""
+"""Il giro automatico: consegne di Cowork su GitHub, silenzio-assenso, bussola della produzione."""
 
 import contextlib
 import io
@@ -22,10 +22,14 @@ from kdpfactory import figure as figure_module
 from kdpfactory.models import BookProject, BookSpec
 
 CANALE = {
-    "canale": "drive",
-    "corriere": {"cartella": "NEXTUP — corriere Cowork", "cartella_id": "abc123"},
-    "ruoli": {"concorrente": {}, "immagini": {}},
+    "canale": "github",
+    "repository": "o/r",
+    "ramo": "fabbrica",
+    "ramo_consegna": "cowork-immagini",
+    "routine_fabbrica": "trig_fab",
+    "ruoli": {"concorrente": {"trigger": "trig_c", "cloud": False}, "immagini": {}},
 }
+RISPOSTA = "books/libro/concorrente/cowork-concorrente-risposta.md"
 
 
 def scrivi(radice: Path, relativo: str, testo: str) -> Path:
@@ -52,72 +56,102 @@ class Base(unittest.TestCase):
         return cowork.richieste(self.radice)
 
 
-class TestCorriere(Base):
-    def test_i_nomi_su_drive_sono_i_percorsi(self):
-        self.assertEqual(corriere.nome_drive(self.richiesta),
-                         "books__libro__concorrente__cowork-concorrente.md")
-        self.assertEqual(corriere.percorso_da_nome("books__libro__assets__copertina-1.png"),
-                         "books/libro/assets/copertina-1.png")
+class TestConsegne(Base):
+    """Cowork consegna lanciando la routine: la prima riga dice dove va il resto."""
 
-    def test_l_intestazione_dice_il_nome_della_risposta_su_drive(self):
-        testo = (self.radice / self.richiesta).read_text(encoding="utf-8")
-        self.assertIn("`books__libro__concorrente__cowork-concorrente-risposta.md`", testo)
-        self.assertIn("NEXTUP — corriere Cowork", testo)
-        self.assertNotIn("ramo", testo)
+    def ricevi(self, testo: str) -> tuple[int, str, str]:
+        from types import SimpleNamespace
 
-    def test_il_piano_carica_una_volta_e_ricarica_se_cambia(self):
-        piano = corriere.piano(self.radice, self.elenco())
-        self.assertEqual({c["percorso"] for c in piano["carica"]},
-                         {self.richiesta, "config/leggimi-cowork.md"})
-        self.assertEqual(piano["attesi"], ["books__libro__concorrente__cowork-concorrente-risposta.md"])
-        corriere.registra_caricato(self.radice, self.richiesta, "id-1")
-        corriere.registra_caricato(self.radice, "config/leggimi-cowork.md", "id-2")
-        self.assertEqual(corriere.piano(self.radice, self.elenco())["carica"], [])
-        scrivi(self.radice, "config/leggimi-cowork.md", "# LEGGIMI versione nuova\n")
-        carica = corriere.piano(self.radice, self.elenco())["carica"]
-        self.assertEqual([(c["percorso"], c["vecchio_id"]) for c in carica],
-                         [("config/leggimi-cowork.md", "id-2")])
-
-    def test_cowork_scrive_solo_risposte_e_immagini(self):
-        elenco = self.elenco()
-        ammessa = corriere.destinazione_ammessa
-        risposta = "books__libro__concorrente__cowork-concorrente-risposta.md"
-        self.assertEqual(ammessa(self.radice, risposta, elenco),
-                         "books/libro/concorrente/cowork-concorrente-risposta.md")
-        self.assertEqual(ammessa(self.radice, "books__libro__assets__copertina-2.png", elenco),
-                         "books/libro/assets/copertina-2.png")
-        for nome in ("books__libro__book.json", "kdpfactory__cli.py", "books__libro__assets__..__x.png",
-                     "books__altro__assets__copertina-1.png", "books__libro__assets__note.md"):
-            self.assertEqual(ammessa(self.radice, nome, elenco), "", nome)
-
-    def test_una_richiesta_applicata_si_toglie_da_drive(self):
-        corriere.registra_caricato(self.radice, self.richiesta, "id-1")
-        with (self.radice / self.richiesta).open("a", encoding="utf-8") as fh:
-            fh.write("\nStato: applicata il 2026-10-05\n")
-        self.assertEqual(corriere.piano(self.radice, self.elenco())["togli"],
-                         [{"percorso": self.richiesta, "id": "id-1"}])
-
-    def test_una_richiesta_ritirata_si_toglie_da_drive(self):
-        corriere.registra_caricato(self.radice, self.richiesta, "id-1")
-        corriere.registra_caricato(self.radice, "config/leggimi-cowork.md", "id-2")
-        (self.radice / self.richiesta).unlink()
-        self.assertEqual(corriere.piano(self.radice, self.elenco())["togli"],
-                         [{"percorso": self.richiesta, "id": "id-1"}])
-
-    def test_la_risposta_di_cowork_arriva_e_non_si_riscrive(self):
         from kdpfactory import cli
 
-        scaricato = scrivi(self.radice, "tmp/risposta.md", "Esito: completa\n")
-        nome = "books__libro__concorrente__cowork-concorrente-risposta.md"
-        args = type("A", (), {"caricato": "", "tolto": "", "scarica": nome, "id": "id-9",
-                              "file": str(scaricato)})()
-        with contextlib.redirect_stdout(io.StringIO()):
-            cli._cmd_corriere(args, self.radice, CANALE, self.elenco())
-        risposta = self.radice / "books/libro/concorrente/cowork-concorrente-risposta.md"
-        self.assertEqual(risposta.read_text(encoding="utf-8"), "Esito: completa\n")
-        args.id = "id-10"
+        file = scrivi(self.radice, "tmp/consegna.txt", testo)
+        uscita, errori = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(uscita), contextlib.redirect_stderr(errori):
+            esito = cli._cmd_corriere(SimpleNamespace(ricevi=str(file)), self.radice, CANALE,
+                                      self.elenco())
+        return esito, uscita.getvalue(), errori.getvalue()
+
+    def test_l_intestazione_dice_come_consegnare(self):
+        testo = (self.radice / self.richiesta).read_text(encoding="utf-8")
+        self.assertIn(f"\n    Cowork · risposta · kdp-book-factory/{RISPOSTA}\n", testo)
+        self.assertIn("fire_trigger\n`trig_fab`", testo)
+        self.assertIn("Non scrivere file da nessuna parte", testo)
+        self.assertNotIn("Drive", testo)
+
+    def test_la_risposta_arriva_accanto_alla_richiesta_e_non_si_riscrive(self):
+        esito, uscita, _ = self.ricevi(
+            "Produzione NEXTUP (routine oraria…)\n\n"   # il prompt della routine, copiato per sbaglio
+            f"Cowork · risposta · kdp-book-factory/{RISPOSTA}\nEsito: completa\n\n1. Fatto.\n")
+        self.assertEqual(esito, 0)
+        self.assertIn(f"Scritta {RISPOSTA}", uscita)
+        fatto = "Esito: completa\n\n1. Fatto.\n"
+        self.assertEqual((self.radice / RISPOSTA).read_text(encoding="utf-8"), fatto)
+        self.assertIn(RISPOSTA, corriere.leggi_registro(self.radice)["ricevute"])
+        # la stessa consegna due volte: niente da fare
+        esito, uscita, _ = self.ricevi(f"Cowork · risposta · kdp-book-factory/{RISPOSTA}\n"
+                                       "Esito: completa\n\n1. Fatto.\n")
+        self.assertEqual((esito, uscita.strip()), (0, f"Già nel repository: {RISPOSTA}"))
+        # una versione diversa non riscrive quella di Cowork
+        esito, _, errori = self.ricevi(f"Cowork · risposta · kdp-book-factory/{RISPOSTA}\nEsito: parziale\n")
+        self.assertEqual(esito, 1)
+        self.assertIn("non si riscrive", errori)
+        self.assertEqual((self.radice / RISPOSTA).read_text(encoding="utf-8"), fatto)
+
+    def test_entra_solo_la_risposta_di_una_richiesta(self):
+        scrivi(self.radice, "books/libro/book.json", "{}")
+        for percorso in ("books/libro/book.json", "kdpfactory/cli.py",
+                         "books/libro/../libro/x-risposta.md",
+                         "books/altro/concorrente/cowork-concorrente-risposta.md", "/etc/passwd"):
+            consegna = corriere.Consegna("risposta", percorso, 1, 1, "Esito: completa\n")
+            with self.assertRaises(ValueError, msg=percorso):
+                corriere.ricevi(self.radice, consegna, self.elenco())
+        self.assertEqual((self.radice / "books/libro/book.json").read_text(encoding="utf-8"), "{}")
+        esito, _, errori = self.ricevi("Cowork · risposta · kdp-book-factory/books/libro/book.json\n{}\n")
+        self.assertEqual(esito, 1)
+        self.assertIn("resta fuori dal repository", errori)
+
+    def test_senza_prima_riga_non_entra_niente(self):
         with self.assertRaises(SystemExit):
-            cli._cmd_corriere(args, self.radice, CANALE, self.elenco())
+            self.ricevi("Esito: completa\nnessuna prima riga di consegna\n")
+        self.assertFalse((self.radice / RISPOSTA).exists())
+
+    def test_la_prima_riga_si_riconosce_anche_riscritta_a_mano(self):
+        for riga in (f"Cowork · risposta · kdp-book-factory/{RISPOSTA}",
+                     f"`Cowork · risposta · kdp-book-factory/{RISPOSTA}`",
+                     f"«Cowork · risposta · {RISPOSTA}»",
+                     f"**Cowork - risposta - kdp-book-factory/{RISPOSTA}**"):
+            [consegna] = corriere.leggi_consegne(f"{riga}\nEsito: completa\n")
+            self.assertEqual((consegna.tipo, consegna.dove, consegna.testo),
+                             ("risposta", RISPOSTA, "Esito: completa\n"), riga)
+
+    def test_piu_consegne_in_un_testo_e_le_parti(self):
+        testo = (f"Cowork · risposta · kdp-book-factory/{RISPOSTA} · parte 2/2\nseconda metà\n\n"
+                 "Cowork · esito · concorrente\nEsito: non riuscito\nHTTP 403\n"
+                 f"Cowork · risposta · kdp-book-factory/{RISPOSTA} · parte 1/2\n"
+                 "Esito: completa\nprima metà\n")
+        consegne = corriere.leggi_consegne(testo)
+        self.assertEqual([(c.tipo, c.parte, c.parti) for c in consegne],
+                         [("risposta", 2, 2), ("esito", 1, 1), ("risposta", 1, 2)])
+        adesso = datetime(2026, 10, 7, 13, 5, tzinfo=timezone.utc)
+        self.assertEqual(corriere.ricevi(self.radice, consegne[0], self.elenco(), adesso),
+                         ("in arrivo", RISPOSTA))
+        self.assertEqual(corriere.in_arrivo(self.radice), {RISPOSTA: ["2/2"]})
+        self.assertFalse((self.radice / RISPOSTA).exists())
+        self.assertEqual(corriere.ricevi(self.radice, consegne[1], self.elenco(), adesso),
+                         ("esito", "config/cowork-esiti/20261007-130500-concorrente.md"))
+        self.assertEqual(corriere.ricevi(self.radice, consegne[1], self.elenco(), adesso)[0], "già")
+        self.assertEqual(corriere.ricevi(self.radice, consegne[2], self.elenco(), adesso),
+                         ("scritta", RISPOSTA))
+        self.assertEqual((self.radice / RISPOSTA).read_text(encoding="utf-8"),
+                         "Esito: completa\nprima metà\nseconda metà\n")
+        self.assertEqual(corriere.in_arrivo(self.radice), {})
+
+    def test_il_piano_dice_che_cosa_aspettarsi_e_niente_altrove(self):
+        piano = corriere.piano(self.radice, self.elenco(), CANALE)
+        self.assertEqual(piano["attese"], [f"Cowork · risposta · kdp-book-factory/{RISPOSTA}"])
+        self.assertEqual(piano["routine"], "trig_fab")
+        for chiave in ("carica", "togli", "attesi", "cartella_id"):
+            self.assertNotIn(chiave, piano)
 
 
 PNG = b"\x89PNG\r\n\x1a\n" + b"\0" * 32
@@ -222,25 +256,14 @@ class TestCanaleGithub(Base):
                cowork.intestazione("K", "cowork-fonti-kdp-risposta.md", "fonti", CANALE_GITHUB,
                                    "books/libro/manuale", serve="l'accesso a KDP"))
 
-    def test_l_intestazione_manda_la_risposta_su_drive(self):
+    def test_l_intestazione_porta_la_riga_di_consegna(self):
         testo = (self.radice / self.fonti).read_text(encoding="utf-8")
-        # la risposta va su Drive col nome che la fabbrica sa riportare su GitHub
-        self.assertIn("`books__libro__manuale__cowork-fonti-risposta.md`", testo)
-        self.assertIn("in `kdp-book-factory/books/libro/manuale/cowork-fonti-risposta.md`", testo)
+        riga = "Cowork · risposta · kdp-book-factory/books/libro/manuale/cowork-fonti-risposta.md"
+        self.assertIn(riga, testo)
         self.assertNotIn("Commit", testo)
-        self.assertEqual(corriere.destinazione_ammessa(
-            self.radice, "books__libro__manuale__cowork-fonti-risposta.md", self.elenco()),
-            "books/libro/manuale/cowork-fonti-risposta.md")
-
-    def test_su_drive_resta_solo_il_leggimi(self):
-        scrivi(self.radice, "config/progetto-cowork.md", "# progetto\n")
-        corriere.registra_caricato(self.radice, self.richiesta, "id-1")
-        corriere.registra_caricato(self.radice, "config/progetto-cowork.md", "id-3")
-        piano = corriere.piano(self.radice, self.elenco(), CANALE_GITHUB)
-        self.assertEqual([c["percorso"] for c in piano["carica"]], ["config/leggimi-cowork.md"])
-        # le copie caricate quando il canale era Drive — richieste ancora aperte, progetto — si tolgono
-        self.assertEqual(piano["togli"], [{"percorso": self.richiesta, "id": "id-1"},
-                                          {"percorso": "config/progetto-cowork.md", "id": "id-3"}])
+        [consegna] = corriere.leggi_consegne(f"{riga}\nEsito: completa\n")
+        self.assertEqual(corriere.ricevi(self.radice, consegna, self.elenco()),
+                         ("scritta", "books/libro/manuale/cowork-fonti-risposta.md"))
 
     def test_si_lancia_solo_quello_che_si_fa_nel_cloud_e_una_volta_sola(self):
         avvia = corriere.da_avviare(self.radice, self.elenco(), CANALE_GITHUB)
@@ -261,7 +284,10 @@ class TestCanaleGithub(Base):
         self.assertIn("si fa: solo col browser del portatile — serve l'accesso a KDP", testo)
         self.assertIn("leggi: https://raw.githubusercontent.com/o/r/fabbrica/kdp-book-factory/books/libro/"
                       "manuale/cowork-fonti.md", testo)
-        self.assertIn("risposta su Drive: `books__libro__manuale__cowork-fonti-risposta.md`", testo)
+        self.assertIn("consegna: `Cowork · risposta · kdp-book-factory/books/libro/manuale/"
+                      "cowork-fonti-risposta.md`", testo)
+        self.assertIn("fire_trigger", testo)
+        self.assertNotIn("risposta su Drive", testo)
         # l'indice si chiama come una richiesta, ma non lo è
         scrivi(self.radice, "config/cowork-aperte.md", testo)
         self.assertNotIn("config/cowork-aperte.md", [r.percorso for r in self.elenco()])
@@ -404,7 +430,8 @@ class TestImmagini(unittest.TestCase):
         self.assertIn("ramo `cowork-immagini`", testo)
         self.assertIn("Serve: l'accesso a ChatGPT e a GitHub", testo)
         self.assertIn("1838 x 2775", testo)
-        self.assertIn("`books__libro__manuale__cowork-copertina-risposta.md`", testo)
+        self.assertIn("Cowork · risposta · kdp-book-factory/books/libro/manuale/cowork-copertina-risposta.md",
+                      testo)
 
     def test_le_immagini_gia_generate_si_chiedono_da_scaricare(self):
         nome, testo = richiesteimmagini.scaricamento(
@@ -417,12 +444,13 @@ class TestImmagini(unittest.TestCase):
         self.assertIn("`kdp-book-factory/books/libro/assets/copertina-1.png` ← https://cdn.example/a.png",
                       testo)
         self.assertIn("ramo `cowork-immagini`", testo)
-        self.assertIn("`books__libro__manuale__cowork-immagini-scarica-risposta.md`", testo)
+        self.assertIn("Cowork · risposta · kdp-book-factory/books/libro/manuale/"
+                      "cowork-immagini-scarica-risposta.md", testo)
         nome, testo = richiesteimmagini.scaricamento(
             "libro", "Titolo", [("copertina-1.png", "https://cdn.example/a.png")], CANALE, seguito=2,
         )
         self.assertEqual(nome, "cowork-immagini-scarica-2.md")
-        self.assertIn("`books__libro__manuale__cowork-immagini-scarica-2-risposta.md`", testo)
+        self.assertIn("kdp-book-factory/books/libro/manuale/cowork-immagini-scarica-2-risposta.md", testo)
 
     def test_il_prompt_da_incollare_ha_solo_quello_che_decide_l_immagine(self):
         prompt = coverbrief.prompt_da_incollare(self.spec(), pages=192)
@@ -493,7 +521,7 @@ class TestImmagini(unittest.TestCase):
     def test_il_progetto_chatgpt_tiene_le_regole_fisse(self):
         testo = richiesteimmagini.progetto_chatgpt(CANALE)
         self.assertIn(richiesteimmagini.ISTRUZIONI_CHATGPT, testo)
-        self.assertIn("NEXTUP — corriere Cowork", testo)
+        self.assertIn("Google Drive non si usa più", testo)
         self.assertIn(f"build/{richiesteimmagini.CHATGPT_COPERTINA}", testo)
         self.assertNotIn("allegat", testo)
         for regola in ("No text of any kind", "grayscale only", "portrait 2:3", "real person"):
@@ -519,12 +547,17 @@ class TestImmagini(unittest.TestCase):
 
 
 class TestConfigurazioneVera(unittest.TestCase):
-    def test_il_canale_vero_e_il_corriere_con_cinque_ruoli(self):
+    def test_il_canale_vero_e_github_con_cinque_ruoli(self):
         radice = Path(__file__).resolve().parent.parent
         canale = json.loads((radice / "config" / "cowork.json").read_text(encoding="utf-8"))
         self.assertEqual(canale["canale"], "github")
         self.assertEqual(canale["ramo_consegna"], corriere.RAMO_IMMAGINI)
-        self.assertTrue(canale["corriere"]["cartella_id"])
+        # Google Drive non si usa più: nessuna cartella, e Cowork consegna alla routine
+        self.assertNotIn("corriere", canale)
+        self.assertTrue(canale["routine_fabbrica"].startswith("trig_"))
+        leggimi = (radice / "config" / "leggimi-cowork.md").read_text(encoding="utf-8")
+        self.assertIn(f"Versione {canale['leggimi_versione']} ", leggimi)
+        self.assertIn(canale["routine_fabbrica"], leggimi)
         self.assertEqual(set(canale["ruoli"]),
                          {"concorrente", "parole-chiave", "fonti", "regole-kdp", "immagini"})
         minuti = [r["minuto"] for r in canale["ruoli"].values()]

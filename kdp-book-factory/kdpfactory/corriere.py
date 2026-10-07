@@ -1,27 +1,31 @@
-"""Il corriere su Google Drive: il pezzo del canale che Cowork e la fabbrica raggiungono da soli.
+"""Il corriere: come le risposte di Cowork arrivano su GitHub, l'unico posto dove i file stanno.
 
-Con GitHub Desktop il giro non si chiudeva: il Pull prima e il push dopo li
-faceva l'autore, e quando non c'era il canale restava fermo. Drive invece lo
-raggiungono tutti e due senza passi a mano: Cowork dal portatile, la fabbrica
-dal connettore di questa sessione. GitHub resta l'archivio, cioè il posto dove
-richieste e risposte vivono e hanno la loro storia; Drive è solo il tragitto.
+Cowork legge le richieste dal ramo della fabbrica, agli indirizzi pubblici, ma
+su GitHub non scrive: non ha credenziali, e la sua modalità automatica blocca
+la scrittura dal browser dell'autore come un aggiramento. Consegna allora la
+risposta come testo, lanciando la routine della fabbrica (fire_trigger): la
+prima riga dice dove va, il resto è la risposta.
 
-Il tragitto ha una regola sola, i nomi: un file su Drive si chiama come il suo
-percorso nel repository, con `__` al posto di `/`.
+    Cowork · risposta · kdp-book-factory/books/x/concorrente/cowork-concorrente-risposta.md
+    Esito: completa
+    …
 
-    books/x/concorrente/cowork-concorrente.md  ⇄  books__x__concorrente__cowork-concorrente.md
+La sessione salva il testo in un file e lo passa a `ricevi`, che scrive la
+risposta accanto alla sua richiesta. Passa una cosa sola: la risposta a una
+richiesta che esiste e non ha ancora risposta. Un percorso che punta al codice
+o a `book.json` non arriva mai nel repository. Una risposta lunga arriva in
+parti (` · parte 2/3`), che aspettano in `config/cowork-in-arrivo/` finché non
+ci sono tutte; un giro non riuscito arriva come esito (`Cowork · esito ·
+<ruolo>`) e resta in `config/cowork-esiti/`, dove la sessione lo legge.
 
-Così una risposta (`…-risposta.md`) o un'immagine che Cowork lascia nella
-cartella dice da sola dove va. Questo modulo non va su Drive: dice che cosa
-caricare, che cosa togliere e che cosa scaricare, e tiene il registro in
-`config/corriere.json`. Le chiamate a Drive le fa la sessione, con il connettore.
-
-Le immagini fanno un'altra strada. Il connettore Drive porta testo, non file da
-qualche megabyte, né all'andata né al ritorno: una copertina a piena
-risoluzione pesa 8 MB. Cowork le carica allora su GitHub, nel ramo
+Le immagini fanno un'altra strada: il testo di fire_trigger non le porta. Le
+scarica la fabbrica, oppure le carica l'autore su GitHub, nel ramo
 `cowork-immagini`, che il container raggiunge con git; `preleva_dal_ramo` ne
-prende solo le immagini in `books/<slug>/assets/`, con la stessa regola del
-corriere: nient'altro arriva da lì.
+prende solo le immagini che una richiesta ha chiesto e le risposte che
+mancano: nient'altro arriva da lì.
+
+Fino al 7 ottobre 2026 le risposte passavano da una cartella di Google Drive.
+Drive non si usa più: il registro ne conserva la storia sotto `drive_dismesso`.
 """
 
 from __future__ import annotations
@@ -31,37 +35,34 @@ import json
 import re
 import subprocess
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 
 from . import cowork
 
 REGISTRO = Path("config") / "corriere.json"
-SEPARATORE = "__"
-#: Le immagini che Cowork può consegnare: solo nella cartella del libro, sotto assets/.
+#: Le immagini che possono arrivare dal ramo: solo nella cartella del libro, sotto assets/.
 IMMAGINI = (".jpg", ".jpeg", ".png", ".webp")
-#: Il ramo di GitHub dove Cowork consegna le immagini, e dove sta la fabbrica nel
+#: Il ramo di GitHub dove l'autore carica le immagini, e dove sta la fabbrica nel
 #: repository: sul ramo i percorsi partono dalla radice, non da kdp-book-factory/.
 RAMO_IMMAGINI = cowork.RAMO_IMMAGINI
 CARTELLA_FABBRICA = cowork.CARTELLA_FABBRICA
+#: Le parti di una consegna lunga, finché non sono arrivate tutte.
+IN_ARRIVO = Path("config") / "cowork-in-arrivo"
+#: Gli esiti dei giri di Cowork non riusciti, come li ha consegnati.
+ESITI = Path("config") / "cowork-esiti"
 #: Le prime righe di un PNG, di un JPEG e di un WebP: il nome non basta a dire
 #: che un file è un'immagine.
 _FIRME = (b"\x89PNG\r\n\x1a\n", b"\xff\xd8\xff")
-#: File che Cowork legge a ogni giro e che quindi viaggiano sempre: le regole e il progetto.
-SEMPRE = ("config/leggimi-cowork.md", "config/progetto-cowork.md", "config/attivita-cowork.json")
-#: Sul canale GitHub su Drive va solo il LEGGIMI: il prompt delle attività dice di
-#: leggerlo per primo, e lui manda al ramo, dove stanno anche progetto e attività.
-SEMPRE_GITHUB = ("config/leggimi-cowork.md",)
 _SICURO = re.compile(r"^[A-Za-z0-9._-]+$")
-
-
-def nome_drive(relativo: str) -> str:
-    """Il nome del file su Drive, dal percorso nel repository (relativo a kdp-book-factory/)."""
-    return relativo.strip("/").replace("/", SEPARATORE)
-
-
-def percorso_da_nome(nome: str) -> str:
-    """Il percorso nel repository, dal nome del file su Drive."""
-    return nome.replace(SEPARATORE, "/")
+#: La prima riga di una consegna. Il punto in mezzo si accetta anche come
+#: trattino o barra, perché a mano si riscrive così; apici e grassetto attorno
+#: alla riga si tolgono prima.
+_SEP = r"\s+[·•|–-]\s+"
+_TESTA = re.compile(
+    r"^Cowork" + _SEP + r"(risposta|esito)" + _SEP + r"(\S+?)"
+    r"(?:" + _SEP + r"parte\s+(\d+)\s*/\s*(\d+))?\s*$"
+)
 
 
 def sha(testo: str | bytes) -> str:
@@ -72,33 +73,17 @@ def sha(testo: str | bytes) -> str:
 def leggi_registro(radice: Path) -> dict:
     percorso = radice / REGISTRO
     if not percorso.exists():
-        return {"cartella_id": "", "caricati": {}, "scaricati": {}}
+        return {"ricevute": {}}
     dati = json.loads(percorso.read_text(encoding="utf-8"))
-    dati.setdefault("caricati", {})
-    dati.setdefault("scaricati", {})
+    dati.setdefault("ricevute", {})
     return dati
 
 
 def salva_registro(radice: Path, registro: dict) -> Path:
     percorso = radice / REGISTRO
+    percorso.parent.mkdir(parents=True, exist_ok=True)
     percorso.write_text(json.dumps(registro, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return percorso
-
-
-def destinazione_ammessa(radice: Path, nome: str, elenco: list[cowork.Richiesta]) -> str:
-    """Dove va un file trovato su Drive, oppure vuoto se Cowork non può scriverlo lì.
-
-    Cowork scrive solo due cose: la risposta accanto a una richiesta che esiste,
-    e le immagini dentro `books/<slug>/assets/`. Tutto il resto resta su Drive:
-    un nome che punta al codice o a `book.json` non arriva mai nel repository.
-    """
-    relativo = percorso_da_nome(nome)
-    if not _percorso_sicuro(relativo):
-        return ""
-    risposte = {r.risposta for r in elenco}
-    if relativo in risposte or immagine_ammessa(radice, relativo):
-        return relativo
-    return ""
 
 
 def _percorso_sicuro(relativo: str) -> bool:
@@ -106,7 +91,7 @@ def _percorso_sicuro(relativo: str) -> bool:
 
 
 def immagine_ammessa(radice: Path, relativo: str) -> bool:
-    """Un'immagine in `books/<slug>/assets/` di un libro che esiste: l'unica cosa che Cowork consegna."""
+    """Un'immagine in `books/<slug>/assets/` di un libro che esiste: l'unica che arriva dal ramo."""
     parti = relativo.split("/")
     return (
         _percorso_sicuro(relativo)
@@ -122,66 +107,156 @@ def e_un_immagine(contenuto: bytes) -> bool:
     return contenuto.startswith(_FIRME) or (contenuto[:4] == b"RIFF" and contenuto[8:12] == b"WEBP")
 
 
-@dataclass(frozen=True)
-class Carico:
-    percorso: str      # nel repository
-    nome: str          # su Drive
-    sha: str
-    vecchio_id: str    # la copia superata su Drive, da togliere; vuoto se non c'era
-
-    def to_dict(self) -> dict:
-        return {"percorso": self.percorso, "nome": self.nome, "sha": self.sha, "vecchio_id": self.vecchio_id}
-
-
 def su_github(canale: dict | None) -> bool:
-    """Il canale su GitHub: richieste sul ramo della fabbrica, consegne sul ramo di Cowork."""
+    """Il canale su GitHub: richieste sul ramo della fabbrica, consegne con la routine."""
     return bool(cowork.ramo_consegna(canale))
 
 
-def piano(radice: Path, elenco: list[cowork.Richiesta], canale: dict | None = None) -> dict:
-    """Che cosa fare su Drive in questo giro.
+# --------------------------------------------------------------------------
+# Le consegne di Cowork
+# --------------------------------------------------------------------------
+@dataclass(frozen=True)
+class Consegna:
+    tipo: str          # «risposta» o «esito»
+    dove: str          # la risposta: il percorso relativo a kdp-book-factory/; l'esito: il ruolo
+    parte: int
+    parti: int
+    testo: str         # tutto quello che sta sotto la prima riga
 
-    - `carica`: le richieste aperte, il LEGGIMI e il progetto che su Drive non ci
-      sono o ci sono in una versione vecchia (la vecchia va tolta: Drive non
-      riscrive il contenuto di un file, se ne fa uno nuovo);
-    - `togli`: le copie delle richieste ormai applicate o ritirate (cancellate dal
-      repository), che Cowork non deve più vedere;
-    - `attesi`: i nomi che Cowork può consegnare — le risposte alle richieste
-      aperte — e il prefisso delle immagini ammesse.
+
+def _testa(riga: str) -> re.Match | None:
+    pulita = riga.strip().strip("`*_«»\"").strip()
+    return _TESTA.match(pulita)
+
+
+def leggi_consegne(testo: str) -> list[Consegna]:
+    """Le consegne contenute in un testo, una per ogni prima riga «Cowork · …».
+
+    Quello che sta prima della prima consegna (il prompt della routine, se è
+    stato copiato con lei) si scarta. Un testo può portarne più d'una: è il caso
+    di un giro senza fire_trigger, che le scrive tutte nell'ultimo messaggio.
     """
+    consegne: list[Consegna] = []
+    corrente: re.Match | None = None
+    corpo: list[str] = []
+
+    def chiudi() -> None:
+        if corrente is None:
+            return
+        tipo, dove, parte, parti = corrente.groups()
+        dove = dove.strip("`")
+        if tipo == "risposta" and dove.startswith(CARTELLA_FABBRICA + "/"):
+            dove = dove[len(CARTELLA_FABBRICA) + 1:]
+        consegne.append(Consegna(tipo, dove, int(parte or 1), int(parti or 1),
+                                 "\n".join(corpo).strip("\n") + "\n"))
+
+    for riga in testo.lstrip("﻿").splitlines():
+        trovata = _testa(riga)
+        if trovata:
+            chiudi()
+            corrente, corpo = trovata, []
+        elif corrente is not None:
+            corpo.append(riga)
+    chiudi()
+    return consegne
+
+
+def _nome_parte(relativo: str, parte: int, parti: int) -> Path:
+    return IN_ARRIVO / f"{relativo}.parte-{parte}-di-{parti}"
+
+
+def ricevi(
+    radice: Path, consegna: Consegna, elenco: list[cowork.Richiesta], adesso: datetime | None = None
+) -> tuple[str, str]:
+    """Salva nel repository quello che Cowork ha consegnato. Restituisce (com'è andata, percorso).
+
+    Com'è andata: «scritta» (la risposta è al suo posto), «in arrivo» (una
+    parte di una consegna lunga: mancano le altre), «già» (la stessa risposta
+    c'era già: una consegna doppia), «esito» (un giro non riuscito, da leggere).
+    ValueError per tutto quello che non può entrare: un percorso che non è la
+    risposta di una richiesta, una risposta diversa da quella già salvata.
+    """
+    adesso = adesso or datetime.now(timezone.utc)
     registro = leggi_registro(radice)
-    caricati = registro["caricati"]
-    carica: list[Carico] = []
-    github = su_github(canale)
-    # Sul canale GitHub Cowork legge le richieste dal ramo della fabbrica: su Drive
-    # resta solo quello che le sue attività leggono per primo, il LEGGIMI.
-    aperte = [] if github else [r.percorso for r in elenco if r.stato == cowork.APERTA]
-    sempre = SEMPRE_GITHUB if github else SEMPRE
-    da_mandare = aperte + [p for p in sempre if (radice / p).exists()]
-    for relativo in da_mandare:
-        firma = sha((radice / relativo).read_text(encoding="utf-8"))
-        prima = caricati.get(relativo) or {}
-        if prima.get("sha") != firma:
-            carica.append(Carico(relativo, nome_drive(relativo), firma, prima.get("id", "")))
-    chiuse = {r.percorso for r in elenco if r.stato == cowork.CHIUSA}
-    # Una richiesta ritirata si cancella dal repository: la sua copia su Drive
-    # resterebbe lì, e Cowork la farebbe lo stesso.
-    ritirate = {p for p in caricati if not (radice / p).exists()}
-    togli = [
-        {"percorso": p, "id": dati["id"]}
-        for p, dati in caricati.items()
-        if (p in chiuse or p in ritirate or (github and p not in sempre)) and dati.get("id")
-    ]
-    attesi = [nome_drive(r.risposta) for r in elenco if r.stato == cowork.APERTA]
+    if consegna.tipo == "esito":
+        ruolo = consegna.dove
+        if not re.fullmatch(r"[a-z][a-z-]*", ruolo):
+            raise ValueError(f"«{ruolo}» non è il nome di un ruolo")
+        for vecchio in sorted((radice / ESITI).glob(f"*-{ruolo}.md")):
+            if vecchio.read_text(encoding="utf-8") == consegna.testo:
+                return "già", vecchio.relative_to(radice).as_posix()
+        relativo = (ESITI / f"{adesso:%Y%m%d-%H%M%S}-{ruolo}.md").as_posix()
+        (radice / relativo).parent.mkdir(parents=True, exist_ok=True)
+        (radice / relativo).write_text(consegna.testo, encoding="utf-8")
+        return "esito", relativo
+
+    relativo = consegna.dove
+    if not _percorso_sicuro(relativo) or relativo not in {r.risposta for r in elenco}:
+        raise ValueError(
+            f"«{relativo}» non è la risposta di una richiesta che esiste: resta fuori dal repository"
+        )
+    if not 1 <= consegna.parte <= consegna.parti:
+        raise ValueError(f"{relativo}: parte {consegna.parte} di {consegna.parti}?")
+    testo = consegna.testo
+    if consegna.parti > 1:
+        file = radice / _nome_parte(relativo, consegna.parte, consegna.parti)
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_text(testo, encoding="utf-8")
+        presenti = [radice / _nome_parte(relativo, i, consegna.parti) for i in range(1, consegna.parti + 1)]
+        if not all(p.exists() for p in presenti):
+            return "in arrivo", relativo
+        # Cowork divide fra una riga e l'altra: si ricuce con un a capo.
+        testo = "\n".join(p.read_text(encoding="utf-8").rstrip("\n") for p in presenti) + "\n"
+    bersaglio = radice / relativo
+    if bersaglio.exists():
+        if bersaglio.read_text(encoding="utf-8") == testo:
+            _togli_parti(radice, relativo)
+            return "già", relativo
+        # Una risposta di Cowork non si riscrive: se serve altro, un seguito «-2».
+        raise ValueError(
+            f"{relativo} c'è già, diversa: una risposta di Cowork non si riscrive. "
+            "Se serve, apri una richiesta di seguito."
+        )
+    bersaglio.parent.mkdir(parents=True, exist_ok=True)
+    bersaglio.write_text(testo, encoding="utf-8")
+    _togli_parti(radice, relativo)
+    registro["ricevute"][relativo] = {
+        "sha": sha(testo), "quando": adesso.strftime("%Y-%m-%dT%H:%M:%SZ"), "parti": consegna.parti,
+    }
+    salva_registro(radice, registro)
+    return "scritta", relativo
+
+
+def _togli_parti(radice: Path, relativo: str) -> None:
+    for parte in (radice / IN_ARRIVO).glob(f"{relativo}.parte-*"):
+        parte.unlink()
+
+
+def in_arrivo(radice: Path) -> dict[str, list[str]]:
+    """Le consegne arrivate solo in parte: per ogni risposta, le parti che ci sono."""
+    cartella = radice / IN_ARRIVO
+    parti: dict[str, list[str]] = {}
+    for file in sorted(cartella.rglob("*.parte-*")) if cartella.exists() else []:
+        relativo, _, quale = file.relative_to(cartella).as_posix().rpartition(".parte-")
+        parti.setdefault(relativo, []).append(quale.replace("-di-", "/"))
+    return parti
+
+
+def piano(radice: Path, elenco: list[cowork.Richiesta], canale: dict | None = None) -> dict:
+    """Che cosa aspettarsi da Cowork in questo giro, e chi lanciare.
+
+    - `attese`: le prime righe delle consegne che possono arrivare, una per
+      richiesta aperta;
+    - `in_arrivo`: le consegne lunghe arrivate solo in parte;
+    - `avvia`: i ruoli da lanciare subito (quelli che lavorano nel cloud).
+    """
+    canale = canale or {}
     return {
-        "cartella_id": registro.get("cartella_id", ""),
-        "carica": [c.to_dict() for c in carica],
-        "togli": togli,
-        "attesi": attesi,
-        "immagini": "books__<slug>__assets__<nome>.(jpg|png|webp)",
+        "routine": canale.get("routine_fabbrica", ""),
+        "attese": [cowork.riga_consegna(r.risposta) for r in elenco if r.stato == cowork.APERTA],
+        "in_arrivo": in_arrivo(radice),
         "ramo_immagini": RAMO_IMMAGINI,
-        "gia_scaricati": registro["scaricati"],
-        "avvia": da_avviare(radice, elenco, canale) if github else [],
+        "avvia": da_avviare(radice, elenco, canale) if su_github(canale) else [],
     }
 
 
@@ -238,8 +313,9 @@ def registra_avviato(radice: Path, ruolo: str, elenco: list[cowork.Richiesta], c
 def indice(elenco: list[cowork.Richiesta], canale: dict) -> str:
     """L'indice delle richieste aperte, che Cowork legge dal ramo della fabbrica.
 
-    Per ogni richiesta: dove leggerla, il nome della risposta su Drive, e se si
-    può fare in un giro nel cloud o serve il browser del portatile.
+    Per ogni richiesta: dove leggerla, la prima riga con cui consegnare la
+    risposta, e se si può fare in un giro nel cloud o serve il browser del
+    portatile.
     """
     repository = canale.get("repository", "Personal-lHUb/NEXTUP")
     ramo = canale.get("ramo", "")
@@ -250,9 +326,11 @@ def indice(elenco: list[cowork.Richiesta], canale: dict) -> str:
         "     modifica a mano. -->",
         "",
         f"Repository `{repository}`. Le richieste stanno sul ramo `{ramo}` e si leggono",
-        "agli indirizzi «leggi». Le risposte si scrivono nella cartella Drive del",
-        "corriere, col nome indicato: la fabbrica le porta su GitHub. Su GitHub Cowork",
-        f"non scrive. Le regole: {cowork.link_lettura(canale, 'config/leggimi-cowork.md', ramo)}",
+        "agli indirizzi «leggi». Ogni risposta si consegna lanciando la routine della",
+        f"fabbrica (fire_trigger `{canale.get('routine_fabbrica', '')}`): nel testo la riga",
+        "«consegna» della richiesta e sotto la risposta intera. La salva la fabbrica, su",
+        "GitHub. Cowork non scrive file: né su GitHub né su Google Drive, che non si usa più.",
+        f"Le regole: {cowork.link_lettura(canale, 'config/leggimi-cowork.md', ramo)}",
         "",
     ]
     aperte = [r for r in elenco if r.stato == cowork.APERTA]
@@ -265,35 +343,11 @@ def indice(elenco: list[cowork.Richiesta], canale: dict) -> str:
             righe += [
                 f"- `{percorso_sul_ramo(r.percorso)}`",
                 f"  - leggi: {cowork.link_lettura(canale, r.percorso, ramo)}",
-                f"  - risposta su Drive: `{nome_drive(r.risposta)}`",
+                f"  - consegna: `{cowork.riga_consegna(r.risposta)}`",
                 f"  - si fa: {dove}" + (f" — serve {r.serve}" if r.serve else ""),
             ]
         righe.append("")
     return "\n".join(righe).rstrip() + "\n"
-
-
-def registra_caricato(radice: Path, relativo: str, drive_id: str) -> None:
-    registro = leggi_registro(radice)
-    firma = sha((radice / relativo).read_text(encoding="utf-8"))
-    registro["caricati"][relativo] = {"id": drive_id, "sha": firma}
-    salva_registro(radice, registro)
-
-
-def registra_tolto(radice: Path, relativo: str) -> None:
-    registro = leggi_registro(radice)
-    registro["caricati"].pop(relativo, None)
-    salva_registro(radice, registro)
-
-
-def registra_scaricato(radice: Path, nome: str, drive_id: str, contenuto: bytes) -> None:
-    registro = leggi_registro(radice)
-    registro["scaricati"][nome] = {"id": drive_id, "sha": sha(contenuto)}
-    salva_registro(radice, registro)
-
-
-def gia_scaricato(radice: Path, nome: str, drive_id: str) -> bool:
-    """Un file di Cowork già portato nel repository: stesso nome e stesso file su Drive."""
-    return (leggi_registro(radice)["scaricati"].get(nome) or {}).get("id") == drive_id
 
 
 # --------------------------------------------------------------------------

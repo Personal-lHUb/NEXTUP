@@ -200,13 +200,17 @@ passarsi un file (`kdp-book-factory/docs/cowork.md`).
   `config/cowork-aperte.md` che `python3 -m kdpfactory cowork corriere` riscrive
   a ogni giro, e Cowork le legge dagli indirizzi pubblici del ramo. **Su GitHub
   Cowork non scrive**: niente credenziali, e la sua modalità automatica blocca
-  la scrittura dal browser dell'autore come un aggiramento — non si aggira. Le
-  risposte arrivano su Drive («NEXTUP — corriere Cowork») col nome che la
-  richiesta indica, e questa sessione le porta su GitHub (`--scarica`); su
-  Drive ci sono anche il LEGGIMI e gli esiti dei giri non riusciti. Le
-  immagini non passano da Cowork: le scarica questa sessione (`copertina
-  <slug> --scarica-generate`, coi domini di Higgsfield aperti nella rete
-  dell'ambiente) o le carica l'autore sul ramo `cowork-immagini`. Il registro è
+  la scrittura dal browser dell'autore come un aggiramento — non si aggira.
+  **GitHub è l'unico posto dove si salvano i file: Google Drive non si usa più**
+  (decisione dell'autore, 7 ottobre 2026). Cowork consegna ogni risposta come
+  testo, lanciando la routine della fabbrica (`fire_trigger`) con la prima riga
+  `Cowork · risposta · kdp-book-factory/<percorso della risposta>`, e questa
+  sessione la salva con `cowork corriere --ricevi <file>`; un giro non riuscito
+  arriva allo stesso modo, come `Cowork · esito · <ruolo>`, e finisce in
+  `config/cowork-esiti/`. Le immagini non passano da Cowork: le scarica questa
+  sessione (`copertina <slug> --scarica-generate`, coi domini di Higgsfield
+  aperti nella rete dell'ambiente) o le carica l'autore sul ramo
+  `cowork-immagini`. Il registro è
   `config/corriere.json`.
 - **Ruoli**: un progetto di Claude Desktop con una chat e un'attività oraria per
   ruolo — `concorrente`, `parole-chiave`, `fonti`, `regole-kdp`, `immagini`. Il
@@ -214,26 +218,28 @@ passarsi un file (`kdp-book-factory/docs/cowork.md`).
   `config/progetto-cowork.md`.
 - **Richiesta a Cowork**: `cowork-<argomento>.md` nella cartella a cui serve,
   con l'intestazione di `cowork.intestazione()` (titolo, **un ruolo solo** nella
-  riga `Ruolo:`, nome della risposta su Drive) e tutto
+  riga `Ruolo:`, prima riga della consegna) e tutto
   quello che serve dentro: Cowork legge l'indice e la richiesta, non il resto
   del repository. Le richieste di ogni libro le scrive il sistema (`avvio`,
   `parole-chiave`, `copertina`, `immagini`).
-- **Risposta di Cowork**: un file nuovo su Drive, che `--scarica` porta accanto
-  alla richiesta come `cowork-<argomento>-risposta.md`. La prima riga è `Esito:
-  completa` o `Esito: parziale — punti …`. Dal ramo `cowork-immagini` arrivano in
-  `books/<slug>/assets/` solo le immagini che una richiesta ha chiesto;
-  nient'altro può arrivare dal corriere né dal ramo.
+- **Risposta di Cowork**: il testo di una consegna, che `--ricevi` salva accanto
+  alla richiesta come `cowork-<argomento>-risposta.md`, solo se è la risposta di
+  una richiesta che esiste e non c'è ancora. La prima riga è `Esito: completa` o
+  `Esito: parziale — punti …`. Dal ramo `cowork-immagini` arrivano in
+  `books/<slug>/assets/` solo le immagini che una richiesta ha chiesto, e le
+  risposte che mancano; nient'altro può arrivare dal corriere né dal ramo.
 - **Senza attese**: dopo il push, la sessione lancia subito (`fire_trigger`) i
   ruoli che `cowork corriere` elenca in **avvia** — quelli che lavorano nel
   cloud (`"cloud": true`), per le richieste senza `Serve:` — e registra
   `--avviato <ruolo>`. Un giro lanciato così è nel cloud, senza il browser del
-  portatile: le richieste col browser aspettano l'orario del ruolo. Alla fine
-  di un giro in cui ha consegnato, Cowork lancia la routine della fabbrica.
+  portatile: le richieste col browser aspettano l'orario del ruolo. Ogni
+  consegna di Cowork è un lancio della routine della fabbrica.
   Ogni giro di Cowork costa: si lancia solo quello che c'è da fare.
 - **Stato**: `python3 -m kdpfactory cowork stato`; a che punto è ogni libro:
   `python3 -m kdpfactory produzione`.
 - **Giro orario**: la routine «Produzione NEXTUP» riprende questa sessione ogni
-  ora (minuto 57) e quando Cowork consegna: `--dal-ramo`, risposte da applicare,
+  ora (minuto 57) e quando Cowork consegna: consegne (`--ricevi`), `--dal-ramo`,
+  risposte da applicare,
   decisioni scadute, il prossimo passo di ogni libro attivo
   (`config/produzione.json`), indice, push, lanci. Le attività di Cowork girano
   ogni ora sul portatile dell'autore, sfalsate di dieci minuti.
@@ -247,14 +253,14 @@ passarsi un file (`kdp-book-factory/docs/cowork.md`).
   - una richiesta corretta dopo la risposta rende la risposta superata: la
     versione corretta va in `-2`;
   - le decisioni dell'autore passano dal silenzio-assenso; la pubblicazione no.
-- **Le regole per Cowork** stanno in `config/leggimi-cowork.md`, che viaggia
-  anche su Drive e Cowork legge a ogni giro. Per cambiarle si aggiorna il LEGGIMI
-  (nuova versione, anche in `config/cowork.json`), senza toccare il prompt di
-  Cowork.
+- **Le regole per Cowork** stanno in `config/leggimi-cowork.md`, che Cowork
+  legge a ogni giro dall'indirizzo pubblico del ramo. Per cambiarle si aggiorna
+  il LEGGIMI (nuova versione, anche in `config/cowork.json`), senza toccare il
+  prompt di Cowork.
 - **Resoconto**: per ogni risposta applicata, una riga all'autore:
   «<richiesta>: applicata, <cosa è cambiato>, <decisioni che ti servono>».
-- Cowork non modifica codice, `book.json`, manoscritto né agenti: scrive solo
-  risposte e immagini. Applicare i risultati resta compito di questa sessione.
+- Cowork non modifica codice, `book.json`, manoscritto né agenti: consegna solo
+  risposte ed esiti, come testo. Applicare i risultati resta compito di questa sessione.
 - Le cartelle dove serve una ricerca web, e che cosa cercare in ciascuna, sono
   elencate in `RICERCA-WEB.md`, alla radice del repo.
 

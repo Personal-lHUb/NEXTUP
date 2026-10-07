@@ -7,10 +7,11 @@ che sa già. Qui sotto sono elencate le cartelle dove serve una ricerca web.
 La fa Cowork, sul computer dell'autore.
 
 Lo scambio segue la regola di `CLAUDE.md`, «collaborazione con Cowork, in
-automatico»: le richieste nascono nel repository (`cowork-<argomento>.md`), il
-giro orario le porta sulla cartella Drive «NEXTUP — corriere Cowork», Cowork ci
-lascia le risposte (`cowork-<argomento>-risposta.md`) e le immagini, e il giro
-le riporta accanto alla richiesta. Le regole per Cowork sono in
+automatico»: le richieste nascono nel repository (`cowork-<argomento>.md`) e
+Cowork le legge dal ramo; consegna ogni risposta lanciando la routine della
+fabbrica, con il testo, e il giro la salva accanto alla richiesta
+(`cowork-<argomento>-risposta.md`). I file stanno solo su GitHub: Google Drive
+non si usa più. Le regole per Cowork sono in
 `kdp-book-factory/config/leggimi-cowork.md`.
 
 ## Le cartelle dove serve il web

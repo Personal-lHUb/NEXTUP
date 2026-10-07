@@ -60,8 +60,8 @@ quando la sua fase lo richiede**.
   permanente di `CLAUDE.md`. Le decisioni dell'autore (elencate più avanti)
   non la fermano: le propone con il silenzio-assenso, e l'immagine di
   copertina la genera Cowork.
-- **Il giro orario** la sveglia da solo: la routine «Produzione NEXTUP» porta
-  i file fra Drive e il repository, applica le risposte di Cowork, chiude le
+- **Il giro orario** la sveglia da solo: la routine «Produzione NEXTUP» salva
+  su GitHub le consegne di Cowork, le applica, chiude le
   decisioni scadute e fa il prossimo passo di ogni libro attivo, quello che
   dice `python3 -m kdpfactory produzione` ([`cowork.md`](cowork.md)).
 
@@ -603,7 +603,7 @@ Ogni regola qui sopra viene da un difetto trovato su un libro vero.
 | le domande d'avvio esistevano solo nella chat di un libro: il successivo sarebbe partito senza | A, avvio | le sette domande stanno nel sistema (`avvio`), e le risposte arrivano da sole a posizionamento, scheda e copertina |
 | le parole chiave di Bills in Order le aveva inventate il posizionamento, e Cowork ne ha trovate sei su sette da rifare | A e 6, `parole-chiave` | all'avvio Cowork cerca le parole chiave della nicchia e il posizionamento sceglie da lì; alla scheda le sette scelte si verificano |
 | una richiesta a Cowork mescolava pagina del concorrente, KDP e parole chiave: un solo accesso mancante la lasciava parziale tutta | canale Cowork | un ruolo per richiesta; le richieste che mescolano si dividono |
-| da quattro giorni nessuna risposta di Cowork: il push da GitHub Desktop lo faceva l'autore, e quando non c'era il canale restava fermo | canale Cowork | il corriere su Drive, che Cowork e la fabbrica raggiungono da soli; GitHub resta l'archivio |
+| da quattro giorni nessuna risposta di Cowork: il push da GitHub Desktop lo faceva l'autore, e quando non c'era il canale restava fermo | canale Cowork | il corriere su Drive, che Cowork e la fabbrica raggiungono da soli; GitHub resta l'archivio (dal 7 ottobre 2026 niente più Drive: Cowork consegna col lancio della routine, e i file stanno solo su GitHub) |
 | un libro in automatico si sarebbe fermato sei volte ad aspettare l'autore | tutte | silenzio-assenso a 24 ore per le decisioni dell'autore; la pubblicazione resta fuori |
 | quattro risposte su sei parziali per accessi non aperti nel browser di Cowork (ChatGPT, KDP, Helium 10, Amazon): un seguito uguale sarebbe tornato parziale a ogni giro | canale Cowork | la riga `Serve:` nel seguito: Cowork aspetta l'accesso senza rispondere, `produzione` dice che lo deve aprire l'autore |
 | il testo in un clone del Times, i titoli in un clone dell'Arial, la pagina 1 sull'occhiello: il libro sembrava fatto in casa | 3, motore | una famiglia da libro sola (EB Garamond) nel testo pieno, numerazione dalla prima pagina del testo ([`standard-editoriale.md`](standard-editoriale.md)) |

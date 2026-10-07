@@ -4,17 +4,17 @@ La fabbrica gira in un container che non raggiunge Amazon, KDP né il browser
 dell'autore. Le ricerche web e le immagini le fa Cowork (app Claude Desktop),
 col portatile dell'autore o nel cloud. Il dialogo è automatico: nessuno dei due
 aspetta l'autore per passarsi un file, e nessuno dei due aspetta l'altro più
-del necessario.
+del necessario. **I file stanno solo su GitHub**: Google Drive non si usa più
+dal 7 ottobre 2026 (decisione dell'autore).
 
 ```
 fabbrica (questa sessione)                    GitHub, Personal-lHUb/NEXTUP            Cowork
 ──────────────────────────                    ────────────────────────────            ──────
 richiesta + indice, commit e push      ─▶     ramo della fabbrica                ─▶   il ruolo legge l'indice
 lancia subito i ruoli che vanno nel cloud ─▶  (fire_trigger)                          e le sue richieste
-porta su GitHub (--scarica), applica   ◀─     Drive «NEXTUP — corriere Cowork»   ◀─   scrive la risposta
-segna «Stato: applicata»                       (risposte, esiti, LEGGIMI)
+salva la risposta (--ricevi), commit   ◀─     fire_trigger della routine,        ◀─   consegna la risposta
+applica, segna «Stato: applicata»              con la risposta nel testo                (o l'esito di un giro fallito)
 assets/ del libro (--dal-ramo)         ◀─     ramo cowork-immagini               ◀─   l'autore, se carica immagini
-riparte subito                         ◀─     (fire_trigger della routine)       ◀─   avvisa la fabbrica
 ```
 
 - La **richiesta** sta nel repository, nella cartella a cui serve:
@@ -29,16 +29,16 @@ riparte subito                         ◀─     (fire_trigger della routine)  
   (niente `add_repo`, il proxy rifiuta il push) e la sua modalità automatica
   blocca la scrittura su GitHub dal browser dell'autore come un aggiramento
   («Auto-Mode Bypass», esiti del 6 ottobre 2026). Non si aggira: Cowork
-  scrive la risposta su Drive col nome che la richiesta indica
-  (`books__x__…-risposta.md`), e la fabbrica, con il suo accesso, la porta
-  accanto alla richiesta con `cowork corriere --scarica`.
-- **Le immagini** Cowork non le consegna (Drive non porta file pesanti, GitHub
-  non si scrive): le genera e le scarica la fabbrica; sul ramo
+  **consegna la risposta come testo**, lanciando la routine della fabbrica
+  (sezione «La consegna»), e la fabbrica, con il suo accesso, la salva accanto
+  alla richiesta.
+- **Le immagini** Cowork non le consegna (il testo di una consegna non porta
+  file, GitHub non si scrive): le genera e le scarica la fabbrica; sul ramo
   `cowork-immagini` arrivano solo quelle che carica l'autore, e la fabbrica
   prende solo quelle che una richiesta ha nominato.
 - Se il repository diventa privato, Cowork non legge più gli indirizzi
-  pubblici, e non ha credenziali per leggerlo altrimenti: le richieste
-  dovrebbero tornare su Drive (`canale: "drive"` in `config/cowork.json`).
+  pubblici, e non ha credenziali per leggerlo altrimenti: prima di renderlo
+  privato serve un'altra strada di lettura, che non sia Drive.
 - Il **ruolo**: ogni richiesta dice sotto il titolo quale ruolo di Cowork la
   prende (`Ruolo: concorrente`, `parole-chiave`, `fonti`, `regole-kdp`,
   `immagini`), e uno solo. Ogni ruolo ha la sua chat e la sua attività
@@ -56,12 +56,11 @@ riparte subito                         ◀─     (fire_trigger della routine)  
 
 ## Le regole di Cowork stanno nel LEGGIMI
 
-`config/leggimi-cowork.md` sta sul ramo della fabbrica e viaggia anche su Drive
-come `config__leggimi-cowork.md`, perché il prompt delle attività dice di
-leggerlo per primo. Per cambiare una regola non si tocca il prompt di Cowork: si
-modifica il LEGGIMI, si alza il numero di versione lì e in `config/cowork.json`,
-si fa commit. Il giro lo ricarica su Drive da sé, e dal giro dopo Cowork segue
-la versione nuova.
+`config/leggimi-cowork.md` sta sul ramo della fabbrica, e il prompt delle
+attività dice di leggerlo per primo, dall'indirizzo pubblico. Per cambiare una
+regola non si tocca il prompt di Cowork: si modifica il LEGGIMI, si alza il
+numero di versione lì e in `config/cowork.json`, si fa commit e push. Dal giro
+dopo Cowork segue la versione nuova.
 
 ## I ruoli e il progetto Cowork
 
@@ -103,34 +102,72 @@ Tre cose tolgono le attese fra un giro e l'altro:
 - **Le altre aspettano l'orario del ruolo**, col portatile acceso e collegato
   (l'autore lo tiene acceso negli orari di lavoro). L'indice le segna «solo col
   browser del portatile», e un giro nel cloud le salta senza scrivere niente.
-- **Cowork avvisa la fabbrica.** Alla fine di un giro in cui ha consegnato
-  qualcosa, Cowork lancia la routine della fabbrica (`routine_fabbrica`), che
-  riprende questa sessione e applica la risposta subito, invece che al minuto
-  57 dell'ora dopo.
+- **La consegna è il lancio.** Cowork consegna ogni risposta lanciando la
+  routine della fabbrica (`routine_fabbrica`), che riprende questa sessione e
+  la salva e applica subito, invece che al minuto 57 dell'ora dopo.
 
 Ogni giro di Cowork costa: si lancia solo quello che c'è da fare.
 
-Un giro che fallisce in silenzio — accesso negato, push rifiutato, un indirizzo
-che non si scarica — costa come uno riuscito. Per questo il LEGGIMI chiede a
-Cowork di scrivere su Drive `cowork-esito-<ruolo>-<AAAAMMGG-hhmm>.md` con
-l'errore esatto, e il giro della fabbrica li cerca (`title contains
-'cowork-esito'`), li legge e li riporta all'autore. Un giro senza richieste, o
-riuscito, non scrive esiti.
+Un giro che fallisce in silenzio — accesso negato, un indirizzo che non si
+scarica — costa come uno riuscito. Per questo il LEGGIMI chiede a Cowork di
+consegnare anche l'esito di un giro non riuscito, con la prima riga
+`Cowork · esito · <ruolo>` e l'errore esatto: la fabbrica lo salva in
+`config/cowork-esiti/`, lo legge e lo riporta all'autore. Un giro senza
+richieste, o riuscito, non consegna esiti.
+
+## La consegna
+
+Cowork consegna con `fire_trigger` sulla routine della fabbrica
+(`trig_014uG5o2CZ22kwnBS5FDxty7`). Nel testo, la prima riga dice dove va il
+resto — è la riga «consegna» che l'indice e l'intestazione della richiesta
+danno — e dalla riga dopo c'è la risposta intera, che comincia con `Esito: …`:
+
+```
+Cowork · risposta · kdp-book-factory/books/x/concorrente/cowork-concorrente-risposta.md
+Esito: completa
+…
+```
+
+Il testo di `fire_trigger` porta fino a 64 KiB: una risposta oltre 50.000
+caratteri arriva in parti, ognuna con la stessa prima riga seguita da
+` · parte N/M`. La sessione copia il testo che arriva dopo il prompt della
+routine in un file dello scratchpad e lo passa a
+
+```bash
+python3 -m kdpfactory cowork corriere --ricevi <file>
+```
+
+che riconosce una o più consegne nel testo e per ciascuna:
+
+- **risposta**: la scrive accanto alla sua richiesta, se il percorso è la
+  risposta di una richiesta che esiste e la risposta non c'è ancora; una
+  consegna doppia uguale non fa niente, una diversa viene rifiutata (una
+  risposta di Cowork non si riscrive: se serve altro, un seguito `-2`).
+  Qualunque altro percorso — codice, `book.json`, un altro libro — resta fuori.
+  Le parti aspettano in `config/cowork-in-arrivo/` finché non ci sono tutte;
+- **esito**: lo salva in `config/cowork-esiti/<AAAAMMGG-hhmmss>-<ruolo>.md`.
+
+Il registro delle consegne salvate è `config/corriere.json`, sotto `ricevute`.
+
+**Se una sessione di Cowork non ha `fire_trigger`**, il LEGGIMI le chiede di
+scrivere le consegne intere nell'ultimo messaggio del giro, con la riga
+«Consegna non riuscita: manca fire_trigger». Da lì le porta l'autore: le
+incolla a questa sessione (che le passa a `--ricevi`), oppure carica il file
+della risposta sul ramo `cowork-immagini`, al suo percorso, e `--dal-ramo` lo
+prende. Quando l'autore chiede a una chat «sei allineato?», la chat dice anche
+se ha lo strumento.
 
 ## Il corriere: che cosa passa e da dove
 
-`python3 -m kdpfactory cowork corriere` dice che cosa fare in questo giro,
-senza andare in rete, e scrive l'indice `config/cowork-aperte.md`:
+`python3 -m kdpfactory cowork corriere` dice che cosa aspettarsi in questo
+giro, senza andare in rete, e scrive l'indice `config/cowork-aperte.md`:
 
-- **carica** e **togli**: su Drive resta solo il LEGGIMI; progetto e attività
-  Cowork li legge dal ramo. Drive non riscrive il contenuto di un file: se ne
-  crea uno nuovo e il vecchio (`vecchio_id`) va nel cestino, poi
-  `cowork corriere --caricato <percorso> --id <id>`. Le copie caricate quando il
-  canale era Drive — richieste, progetto, attività — si cestinano e si registra
-  `--tolto <percorso>`.
+- **attese**: le prime righe delle consegne che possono arrivare, una per
+  richiesta aperta;
+- **in_arrivo**: le consegne lunghe arrivate solo in parte;
 - **avvia**: i ruoli da lanciare subito, qui sopra.
 
-Le consegne arrivano dal ramo:
+Dal ramo arriva quello che carica l'autore:
 
 ```bash
 python3 -m kdpfactory cowork corriere --dal-ramo
@@ -146,9 +183,10 @@ libri. Un file già preso (registro `dal_ramo` in `config/corriere.json`) non si
 riscrive; una versione nuova di un'immagine sì, con la copia di sicurezza della
 vecchia.
 
-Con `canale: "drive"` in `config/cowork.json` il corriere torna quello di
-prima: richieste e risposte sulla cartella Drive, con `--scarica <nome> --id
-<id> --file <scaricato>`, e le immagini comunque sul ramo.
+Fino al 7 ottobre 2026 le risposte passavano dalla cartella Drive «NEXTUP —
+corriere Cowork». Drive non si usa più: la cartella resta com'è, nessuno la
+legge né la scrive, e `config/corriere.json` ne conserva la storia sotto
+`drive_dismesso`.
 
 ## Il giro orario
 
@@ -156,8 +194,8 @@ La routine «Produzione NEXTUP» riprende questa sessione ogni ora, al minuto 57
 e ogni volta che Cowork consegna; fa da sola tutto quello che non è
 dell'autore:
 
-1. `git pull`; poi `cowork corriere --dal-ramo` e il **corriere**: indice,
-   LEGGIMI su Drive se è cambiato.
+1. `git pull`; le **consegne** arrivate col lancio (`cowork corriere --ricevi`),
+   gli esiti da leggere; poi `cowork corriere --dal-ramo`.
 2. `cowork stato`: applica ogni **risposta arrivata** (regole di ingaggio qui
    sotto) e segna la richiesta `Stato: applicata il <data>`.
 3. `decisioni --scadute` e `produzione`: le **decisioni** prese, dall'autore o
@@ -224,14 +262,15 @@ silenzio-assenso: la decide l'autore.
 
 Sono le istruzioni del progetto, comuni a tutte le chat, nella prima sezione di
 `config/progetto-cowork.md`. Quando l'autore chiede a una chat «sei
-allineato?», risponde con il suo ruolo, la versione del LEGGIMI che vede e le
-richieste del suo ruolo che l'indice dà ancora aperte.
+allineato?», risponde con il suo ruolo, la versione del LEGGIMI che vede, le
+richieste del suo ruolo che l'indice dà ancora aperte e se ha lo strumento
+`fire_trigger`, con cui consegna.
 
 ## Per aprire una richiesta nuova
 
 Si scrive `cowork-<argomento>.md` nella cartella a cui serve, con l'intestazione
-comune di `cowork.intestazione()` — titolo, riga `Ruolo:`, regole, percorso
-della risposta sul ramo `cowork-immagini` — e le istruzioni complete. Le cartelle dove serve il web sono
+comune di `cowork.intestazione()` — titolo, riga `Ruolo:`, regole, prima riga
+della consegna — e le istruzioni complete. Le cartelle dove serve il web sono
 in `RICERCA-WEB.md`, alla radice del repository.
 
 Le richieste che ogni libro fa sempre non si scrivono a mano: le produce il

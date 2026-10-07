@@ -68,10 +68,9 @@ Lo stesso testo lo stampa il comando nel terminale, pronto da copiare.
 
 Ogni immagine si scarica alla risoluzione piena (non l'anteprima) e si carica
 su GitHub, nel ramo `cowork-immagini`, al percorso che il file indica, per
-esempio `kdp-book-factory/books/<slug>/assets/copertina-1.png`. Non nella
-cartella Drive «NEXTUP — corriere Cowork»: lì viaggiano solo richieste e risposte, perché il
-connettore non porta file così pesanti. Il giro orario porta l'immagine nel
-libro da sola; l'agente `copertina` misura le varianti e propone quella da
+esempio `kdp-book-factory/books/<slug>/assets/copertina-1.png`: GitHub è l'unico
+posto dove si salvano i file, Google Drive non si usa più. Il giro orario porta
+l'immagine nel libro da sola; l'agente `copertina` misura le varianti e propone quella da
 usare, con il silenzio-assenso.
 
 ## 4. Cowork

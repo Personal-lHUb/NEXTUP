@@ -151,9 +151,9 @@ class TestRuoli(unittest.TestCase):
         self.assertIn("«Ruolo: fonti»", voce["prompt"])
         self.assertIn("- una nota", voce["prompt"])
 
-    def test_sul_canale_github_l_attivita_legge_in_chiaro_e_risponde_su_drive(self):
+    def test_sul_canale_github_l_attivita_legge_in_chiaro_e_consegna_con_la_routine(self):
         canale = {**self.CANALE, "canale": "github", "repository": "o/r", "ramo_consegna": "consegne",
-                  "routine_fabbrica": "trig_fab", "corriere": {"cartella": "C", "cartella_id": "id-c"},
+                  "routine_fabbrica": "trig_fab",
                   "ruoli": {"fonti": {"trigger": "trig_x", "ogni": "ora", "minuto": 25}}}
         [voce] = cowork.attivita(canale)
         prompt = voce["prompt"]
@@ -162,12 +162,17 @@ class TestRuoli(unittest.TestCase):
                       prompt)
         self.assertNotIn("add_repo", prompt)
         self.assertNotIn("git push", prompt)
-        # ...e scrive su Drive: la scrittura su GitHub dal browser è bloccata come aggiramento
-        self.assertIn("create_file nella cartella Drive (parentId id-c)", prompt)
-        self.assertIn("su GitHub non si scrive niente, né con git né dal browser", prompt)
-        self.assertNotIn("Commit directly", prompt)
-        self.assertIn("trigger_id trig_fab", prompt)
-        self.assertIn("Su GitHub non scrivi niente", cowork.istruzioni_progetto(canale))
+        # ...e consegna il testo alla routine: su GitHub non scrive (la scrittura dal
+        # browser è bloccata come aggiramento) e Drive non si usa più
+        self.assertIn("Consegna ogni risposta con fire_trigger, trigger_id trig_fab", prompt)
+        self.assertIn("non scrivi file né su GitHub (né con git né dal browser)\nné su Drive", prompt)
+        self.assertIn("Oltre 50.000 caratteri", prompt)
+        self.assertIn("«Cowork · esito · fonti»", prompt)
+        for vecchio in ("create_file", "parentId", "Commit directly"):
+            self.assertNotIn(vecchio, prompt)
+        istruzioni = cowork.istruzioni_progetto(canale)
+        self.assertIn("Tu non scrivi file", istruzioni)
+        self.assertIn("fire_trigger trig_fab", istruzioni)
         self.assertIn("approva i prompt nuovi delle attività", cowork.progetto(canale))
 
     def test_lo_stato_segnala_le_richieste_che_nessuno_prende(self):
@@ -182,7 +187,8 @@ class TestRuoli(unittest.TestCase):
         self.assertIn("alle 7:52 e alle 13:52", testo)
         self.assertIn("Disattiva l'attività «Cowork — casella NEXTUP»", testo)
         self.assertIn("non compri e non cambi niente", testo)
-        self.assertIn("NEXTUP — corriere Cowork", testo)
+        self.assertIn("né su Google Drive, che non si usa più", testo)
+        self.assertNotIn("create_file", testo)
         orario = cowork.progetto({**self.CANALE, "ruoli": {"fonti": {"ogni": "ora", "minuto": 5}}})
         self.assertIn("ogni ora, al minuto 05", orario)
 

@@ -156,7 +156,7 @@ esempi usare, quale taglio dare).
 | `parole-chiave <slug>` | la richiesta a Cowork per verificare le sette parole chiave e le categorie della scheda ([`docs/cowork.md`](docs/cowork.md)) |
 | `produzione` | a che punto è ogni libro attivo, il prossimo passo e che cosa lo blocca: la bussola del giro orario |
 | `decisioni <slug>` | le decisioni dell'autore con il silenzio-assenso: `--proponi`, `--scegli`, `--scadute`, `--applicata` |
-| `cowork stato/avviso/progetto/corriere` | il canale con Cowork: stato delle richieste per ruolo, l'avviso per una chat (`--ruolo`), il testo del progetto con una chat e un'attività per ruolo, il tragitto sul corriere Drive |
+| `cowork stato/avviso/progetto/corriere` | il canale con Cowork: stato delle richieste per ruolo, l'avviso per una chat (`--ruolo`), il testo del progetto con una chat e un'attività per ruolo, le consegne di Cowork (`corriere --ricevi`) e l'indice delle richieste aperte |
 | `concorrente new/build/importa <slug>` | da una scheda Amazon incollata alla scheda di un libro nuovo che copre quello che i suoi lettori non hanno trovato ([`docs/acquisizione.md`](docs/acquisizione.md)) |
 | `review <slug>` | fa leggere il libro agli agenti di controllo |
 | `revise <slug>` | l'editor applica le segnalazioni raccolte |

@@ -1,74 +1,79 @@
 {
-  "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N",
-  "caricati": {
-    "config/leggimi-cowork.md": {
-      "id": "16Srn9jg3LDeaEk2knFXIjRBesnEggWGe",
-      "sha": "c73b4744e53d2fb8267835cca1bb3db0bca85c4d009ecc08c7b702a76a48a430"
-    }
-  },
-  "scaricati": {
-    "books__household-bills__concorrente__cowork-prezzo-risposta.md": {
-      "id": "1qw8CTEva49DY-f0ozzi3375h9BWZTGL1",
-      "sha": "03e74be69229921bea6eda7623bf54e1ef6292f86a93531312b697fb235a86de"
-    },
-    "books__household-bills__manuale__cowork-copertina-risposta.md": {
-      "id": "1crUWqjs0TATr0pbaRaZqA1tugx5YTOJK",
-      "sha": "6a09dc05cd464694e0934cac792acd77a64c1f4a29d387a15f564fab853d083e"
-    },
-    "config__cowork-kdp-2-risposta.md": {
-      "id": "1dIy873NMkqsoSbDV7OCGTHPvN_8tsgI0",
-      "sha": "e1332c00d139bddcb993fb716af3c5612e515c651ba062ef88bb9dfeb18ca929"
-    },
-    "books__household-bills__manuale__cowork-verifica-parole-chiave-risposta.md": {
-      "id": "13n7BVxX0GL4hHmHITIDdz_l6rF8TXiUJ",
-      "sha": "6912378d2f7d4b5f4b8558cbad90f04533d5ae864ec1ed293c73b2ba2f273ed6"
-    },
-    "books__psychic-intuition__concorrente__cowork-concorrente-risposta.md": {
-      "id": "10SQH8lH0NObBtONBQG0dm_11sUZSZ-H7",
-      "sha": "8785ed7e495056973e281a88cc16871cc4c92dc8c03df920aa970784f4861cb0"
-    },
-    "books__dementia-family__concorrente__cowork-concorrente-risposta.md": {
-      "id": "1nXAw3mE4jLT568XbpOw4GDR5nPBtlSoX",
-      "sha": "da3fd34b2061c1dbab22d40538dd01e208b917a107995d1ccda8909bd6fb098e"
-    },
-    "books__household-bills__manuale__cowork-verifica-parole-chiave-2-risposta.md": {
-      "id": "1RVXYTAiGXSdzrAHIo1psIyr5GOeNuvwT",
-      "sha": "51b02cda04d62b34a9a6cc9b13dd734ccb6e7ef860c6a00091892917b81ebc63"
-    },
-    "books__household-bills__manuale__cowork-immagini-scarica-risposta.md": {
-      "id": "1N8IoYO7YckweD0smZD7JaLLzKyk5009V",
-      "sha": "33fca5e9b347166747d427e2db101f58aea4cfbf94856b7c17dc7e7e6f19b025"
-    },
-    "books__psychic-intuition__concorrente__cowork-concorrente-2-risposta.md": {
-      "id": "1aIKSfCfNi42KIU6jDk_o-wdVL0FhjngS",
-      "sha": "ae845010ccd5f9e239bf0db7b20346ebcfca7a109bde6618ca3bb0dfa89689c8"
-    },
-    "books__dementia-family__concorrente__cowork-concorrente-2-risposta.md": {
-      "id": "1TUt46qKOJIdYcUt1cuGVoYddGUQRtti1",
-      "sha": "e14cea02a59f9075d35966a865d4f8c1bc59f247f4bcf69dad3eada2a91fa9fa"
-    },
-    "books__psychic-intuition__concorrente__cowork-parole-chiave-risposta.md": {
-      "id": "1z94dNsgwbjgSJ-tQMaOzZONxz3LsVTEl",
-      "sha": "64f120edd4f2e1b582e7cbad9840fe062c87f1f28e1d8158a55f82a97772b6bc"
-    },
-    "books__dementia-family__concorrente__cowork-parole-chiave-risposta.md": {
-      "id": "1NSH3t-9TPRzp-AHrJbz7sfQb8ciNwQtM",
-      "sha": "973ad3bcbfd04c3840300e8d26bd3ed67225e61d1a2420482a89b43f8479379b"
-    },
-    "config__cowork-copertine-video-risposta.md": {
-      "id": "1wz6DdzEv_jr_XK6X126K8jWiDyNNOiiY",
-      "sha": "ec9310feaa5170ada7006c2877c26e7b979e474e98b715faacb07e4c97ddc936"
-    },
-    "config__cowork-copertine-video-2-risposta.md": {
-      "id": "1Z0HzUmq_rLgMnIWNqYLKdvV7yVaU-XRt",
-      "sha": "675965adadc9227adf2bc2ef159c8595b3765f6fe78813b7f46f6f51ceaf5b53"
-    },
-    "books__household-bills__concorrente__cowork-copertine-categoria-risposta.md": {
-      "id": "1FuK0mS9OW3dCS7JM-yX2eA6uSe8jrJWX",
-      "sha": "57076df9b3787bb2055f6f1e291da390a7a3226aa2cac3828975d9f80dcc440b"
-    }
-  },
+  "_nota": "Il registro del corriere: le consegne di Cowork salvate nel repository (ricevute), le richieste lanciate nel cloud (avviate) e i file presi dal ramo cowork-immagini (dal_ramo). drive_dismesso è la storia del tragitto su Google Drive, chiuso il 7 ottobre 2026: non si usa più.",
+  "ricevute": {},
   "avviate": {
     "books/household-bills/manuale/cowork-immagini-scarica-2.md": "eefc85e2f34513826ae0dba442218222e3b771c400e16baa174313e8bec92fdf"
+  },
+  "dal_ramo": {},
+  "drive_dismesso": {
+    "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N",
+    "caricati": {
+      "config/leggimi-cowork.md": {
+        "id": "16Srn9jg3LDeaEk2knFXIjRBesnEggWGe",
+        "sha": "c73b4744e53d2fb8267835cca1bb3db0bca85c4d009ecc08c7b702a76a48a430"
+      }
+    },
+    "scaricati": {
+      "books__household-bills__concorrente__cowork-prezzo-risposta.md": {
+        "id": "1qw8CTEva49DY-f0ozzi3375h9BWZTGL1",
+        "sha": "03e74be69229921bea6eda7623bf54e1ef6292f86a93531312b697fb235a86de"
+      },
+      "books__household-bills__manuale__cowork-copertina-risposta.md": {
+        "id": "1crUWqjs0TATr0pbaRaZqA1tugx5YTOJK",
+        "sha": "6a09dc05cd464694e0934cac792acd77a64c1f4a29d387a15f564fab853d083e"
+      },
+      "config__cowork-kdp-2-risposta.md": {
+        "id": "1dIy873NMkqsoSbDV7OCGTHPvN_8tsgI0",
+        "sha": "e1332c00d139bddcb993fb716af3c5612e515c651ba062ef88bb9dfeb18ca929"
+      },
+      "books__household-bills__manuale__cowork-verifica-parole-chiave-risposta.md": {
+        "id": "13n7BVxX0GL4hHmHITIDdz_l6rF8TXiUJ",
+        "sha": "6912378d2f7d4b5f4b8558cbad90f04533d5ae864ec1ed293c73b2ba2f273ed6"
+      },
+      "books__psychic-intuition__concorrente__cowork-concorrente-risposta.md": {
+        "id": "10SQH8lH0NObBtONBQG0dm_11sUZSZ-H7",
+        "sha": "8785ed7e495056973e281a88cc16871cc4c92dc8c03df920aa970784f4861cb0"
+      },
+      "books__dementia-family__concorrente__cowork-concorrente-risposta.md": {
+        "id": "1nXAw3mE4jLT568XbpOw4GDR5nPBtlSoX",
+        "sha": "da3fd34b2061c1dbab22d40538dd01e208b917a107995d1ccda8909bd6fb098e"
+      },
+      "books__household-bills__manuale__cowork-verifica-parole-chiave-2-risposta.md": {
+        "id": "1RVXYTAiGXSdzrAHIo1psIyr5GOeNuvwT",
+        "sha": "51b02cda04d62b34a9a6cc9b13dd734ccb6e7ef860c6a00091892917b81ebc63"
+      },
+      "books__household-bills__manuale__cowork-immagini-scarica-risposta.md": {
+        "id": "1N8IoYO7YckweD0smZD7JaLLzKyk5009V",
+        "sha": "33fca5e9b347166747d427e2db101f58aea4cfbf94856b7c17dc7e7e6f19b025"
+      },
+      "books__psychic-intuition__concorrente__cowork-concorrente-2-risposta.md": {
+        "id": "1aIKSfCfNi42KIU6jDk_o-wdVL0FhjngS",
+        "sha": "ae845010ccd5f9e239bf0db7b20346ebcfca7a109bde6618ca3bb0dfa89689c8"
+      },
+      "books__dementia-family__concorrente__cowork-concorrente-2-risposta.md": {
+        "id": "1TUt46qKOJIdYcUt1cuGVoYddGUQRtti1",
+        "sha": "e14cea02a59f9075d35966a865d4f8c1bc59f247f4bcf69dad3eada2a91fa9fa"
+      },
+      "books__psychic-intuition__concorrente__cowork-parole-chiave-risposta.md": {
+        "id": "1z94dNsgwbjgSJ-tQMaOzZONxz3LsVTEl",
+        "sha": "64f120edd4f2e1b582e7cbad9840fe062c87f1f28e1d8158a55f82a97772b6bc"
+      },
+      "books__dementia-family__concorrente__cowork-parole-chiave-risposta.md": {
+        "id": "1NSH3t-9TPRzp-AHrJbz7sfQb8ciNwQtM",
+        "sha": "973ad3bcbfd04c3840300e8d26bd3ed67225e61d1a2420482a89b43f8479379b"
+      },
+      "config__cowork-copertine-video-risposta.md": {
+        "id": "1wz6DdzEv_jr_XK6X126K8jWiDyNNOiiY",
+        "sha": "ec9310feaa5170ada7006c2877c26e7b979e474e98b715faacb07e4c97ddc936"
+      },
+      "config__cowork-copertine-video-2-risposta.md": {
+        "id": "1Z0HzUmq_rLgMnIWNqYLKdvV7yVaU-XRt",
+        "sha": "675965adadc9227adf2bc2ef159c8595b3765f6fe78813b7f46f6f51ceaf5b53"
+      },
+      "books__household-bills__concorrente__cowork-copertine-categoria-risposta.md": {
+        "id": "1FuK0mS9OW3dCS7JM-yX2eA6uSe8jrJWX",
+        "sha": "57076df9b3787bb2055f6f1e291da390a7a3226aa2cac3828975d9f80dcc440b"
+      }
+    }
   }
 }

@@ -476,7 +476,6 @@ def cmd_copertina(args) -> int:
 
     panel_w, panel_h = coverimage.front_panel_size_in(spec.trim)
     minimo = (math.ceil(panel_w * coverbrief.FRONT_DPI), math.ceil(panel_h * coverbrief.FRONT_DPI))
-    titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
 
     # Il prompt da incollare in ChatGPT: gli stessi dati del brief, senza le
     # specifiche di stampa che a un generatore d'immagini fanno disegnare un wrap.
@@ -489,18 +488,9 @@ def cmd_copertina(args) -> int:
     incollare.write_text(richiesteimmagini.testo_copertina(spec.slug, prompt), encoding="utf-8")
     save_backup(project, args, "prompt da incollare")
 
-    # Chi genera l'illustrazione: Higgsfield, da questa sessione (`--genera`),
-    # oppure Cowork col corriere, e allora la richiesta porta lo stesso prompt.
+    # Chi genera l'illustrazione: Higgsfield, da questa sessione (`--genera`).
     radice = Path(__file__).resolve().parent.parent
     con_higgsfield = higgsfield.attivo(radice)
-    canale = cowork.configurazione(radice)
-    if (not con_higgsfield and canale.get("canale") == "drive"
-            and "immagini" in cowork.ruoli(canale)):
-        nome, testo = richiesteimmagini.copertina(spec.slug, titolo, prompt, minimo, canale)
-        fatti: list[str] = []
-        _scrivi_richiesta(project, args, project.root / "manuale" / nome, testo, fatti)
-        for percorso in fatti:
-            print(f"Richiesta a Cowork (ruolo immagini): {percorso}")
 
     categoria = "medium-content" if spec.is_medium_content else "full-content"
     print(f"Brief di copertina [{categoria}, {pages} pagine]: {output}")
@@ -720,7 +710,6 @@ def cmd_immagini(args) -> int:
     if mancanti:
         print(f"\nSalva le immagini in {figure_module.cartella(project.assets_dir)}")
         print("poi rilancia `build` e `qa`.")
-        titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
         prompts = [(f.percorso, imagebrief.prompt_incollabile(spec, f, mondo=mondo, titoli=titoli))
                    for f in mancanti]
         incollare = project.build_dir / richiesteimmagini.CHATGPT_FIGURE
@@ -735,13 +724,6 @@ def cmd_immagini(args) -> int:
         if higgsfield.attivo(radice):
             print(f"Le figure le genera Higgsfield: python3 -m kdpfactory immagini {spec.slug} --genera")
             return 0
-        canale = cowork.configurazione(radice)
-        if canale.get("canale") == "drive" and "immagini" in cowork.ruoli(canale):
-            nome, testo = richiesteimmagini.figure(spec.slug, titolo, prompts, canale)
-            fatti: list[str] = []
-            _scrivi_richiesta(project, args, project.root / "manuale" / nome, testo, fatti)
-            for percorso in fatti:
-                print(f"Richiesta a Cowork (ruolo immagini): {percorso}")
     return 0
 
 
@@ -1603,54 +1585,46 @@ def cmd_list(args) -> int:
 
 
 def _cmd_corriere(args, radice: Path, canale: dict, elenco: list) -> int:
-    """Il tragitto su Drive: il piano del giro, e la registrazione di quello che si è fatto.
+    """Il corriere su GitHub: le consegne di Cowork, il ramo delle immagini, l'indice e il piano.
 
-    Le chiamate a Drive le fa la sessione con il connettore; qui si decide che
-    cosa caricare, che cosa togliere e dove va ogni file che Cowork ha lasciato.
+    Cowork consegna lanciando la routine della fabbrica, con la risposta nel
+    testo: la sessione lo salva in un file e lo passa a `--ricevi`, che lo
+    scrive accanto alla sua richiesta. Nient'altro entra dal corriere.
     """
-    registro = corriere.leggi_registro(radice)
-    if not registro.get("cartella_id"):
-        registro["cartella_id"] = cowork.corriere(canale)[1]
-        corriere.salva_registro(radice, registro)
-    if args.caricato:
-        corriere.registra_caricato(radice, args.caricato, args.id)
-        print(f"Registrato su Drive: {args.caricato} ({args.id})")
-        return 0
-    if args.tolto:
-        corriere.registra_tolto(radice, args.tolto)
-        print(f"Tolto dal registro: {args.tolto}")
-        return 0
-    if args.scarica:
-        destinazione = corriere.destinazione_ammessa(radice, args.scarica, elenco)
-        if not destinazione:
+    if getattr(args, "ricevi", ""):
+        testo = Path(args.ricevi).read_text(encoding="utf-8")
+        consegne = corriere.leggi_consegne(testo)
+        if not consegne:
             raise SystemExit(
-                f"«{args.scarica}» non è una risposta a una richiesta aperta né un'immagine in "
-                "books/<slug>/assets/: resta su Drive."
+                f"In {args.ricevi} non c'è nessuna consegna: la prima riga dev'essere "
+                f"«{cowork.CONSEGNA} kdp-book-factory/<percorso della risposta>» "
+                f"oppure «{cowork.ESITO} <ruolo>»."
             )
-        if corriere.gia_scaricato(radice, args.scarica, args.id):
-            print(f"Già nel repository: {destinazione}")
-            return 0
-        bersaglio = radice / destinazione
-        contenuto = Path(args.file).read_bytes()
-        if bersaglio.exists() and destinazione.endswith(cowork.SUFFISSO_RISPOSTA + ".md"):
-            # Una risposta di Cowork non si riscrive: una seconda versione su Drive
-            # si segnala, e se serve altro si apre un seguito.
-            raise SystemExit(
-                f"{destinazione} c'è già: la seconda versione su Drive ({args.id}) non la "
-                "sovrascrive. Se serve, apri una richiesta di seguito."
-            )
-        if bersaglio.exists():
-            parti = Path(destinazione).parts
-            save_backup(BookProject(radice / parti[0] / parti[1]), args,
-                        f"{bersaglio.name} prima della versione di Cowork", force=True)
-        bersaglio.parent.mkdir(parents=True, exist_ok=True)
-        bersaglio.write_bytes(contenuto)
-        corriere.registra_scaricato(radice, args.scarica, args.id, contenuto)
-        print(f"Scritto {destinazione}")
-        return 0
+        rifiutate = 0
+        for consegna in consegne:
+            try:
+                esito, percorso = corriere.ricevi(radice, consegna, elenco)
+            except ValueError as errore:
+                rifiutate += 1
+                print(f"Rifiutata: {errore}", file=sys.stderr)
+                continue
+            if esito == "scritta":
+                prima = (radice / percorso).read_text(encoding="utf-8").splitlines()[:1]
+                if not prima or not prima[0].startswith("Esito:"):
+                    print(f"Avviso: {percorso} non comincia con «Esito: …»", file=sys.stderr)
+                print(f"Scritta {percorso}")
+            elif esito == "in arrivo":
+                print(f"In arrivo {percorso}: parte {consegna.parte} di {consegna.parti}, "
+                      "aspetto le altre")
+            elif esito == "esito":
+                print(f"Esito di un giro non riuscito: {percorso}")
+            else:
+                print(f"Già nel repository: {percorso}")
+        return 1 if rifiutate else 0
     if getattr(args, "dal_ramo", False):
-        # Le immagini non passano da Drive: Cowork le carica sul ramo di GitHub,
-        # e da lì arrivano nel libro solo quelle in books/<slug>/assets/.
+        # Le immagini non passano dal testo delle consegne: l'autore le carica sul
+        # ramo di GitHub, e da lì arrivano nel libro solo quelle che una richiesta
+        # ha chiesto, con le risposte che mancano.
         immagini, avvisi = corriere.preleva_dal_ramo(radice, elenco)
         for avviso in avvisi:
             print(f"Avviso: {avviso}")
@@ -1759,19 +1733,7 @@ def cmd_cowork(args) -> int:
             print(f"Scritto {file}: {len(voci)} attività da applicare con update_trigger.")
         return 0
     git = cowork.Git(radice, canale.get("ramo", "claude/dreamy-archimedes-hf8w45"))
-    remoto = git.remoto
-    if canale.get("canale") == "drive":
-        # Sul corriere «inviata» vuol dire che su Drive c'è questa stessa versione.
-        registro = corriere.leggi_registro(radice)
-
-        def remoto(relativo: str) -> str | None:
-            percorso = radice / relativo
-            if not percorso.exists():
-                return None
-            testo = percorso.read_text(encoding="utf-8")
-            dati = registro["caricati"].get(relativo) or {}
-            return testo if dati.get("sha") == corriere.sha(testo) else None
-    elenco = cowork.richieste(radice, remoto, git.ultimo_commit)
+    elenco = cowork.richieste(radice, git.remoto, git.ultimo_commit)
     if args.azione == "corriere":
         return _cmd_corriere(args, radice, canale, elenco)
     if args.azione == "avviso":
@@ -2128,14 +2090,12 @@ def build_parser() -> argparse.ArgumentParser:
         default="stato",
         choices=["stato", "avviso", "progetto", "corriere"],
         help="progetto: scrive config/progetto-cowork.md, il testo per le chat e le attività dei ruoli; "
-        "corriere: il tragitto su Drive",
+        "corriere: l'indice delle richieste aperte e il piano del giro",
     )
     p.add_argument("--ruolo", default="", help="l'avviso per la chat di un solo ruolo")
-    p.add_argument("--caricato", default="", help="corriere: il percorso appena caricato su Drive")
-    p.add_argument("--tolto", default="", help="corriere: il percorso appena tolto da Drive")
-    p.add_argument("--scarica", default="", help="corriere: il nome del file di Cowork su Drive")
-    p.add_argument("--id", default="", help="corriere: l'id del file su Drive")
-    p.add_argument("--file", default="", help="corriere: dove la sessione ha salvato il file scaricato")
+    p.add_argument("--ricevi", default="", metavar="FILE",
+                   help="corriere: il testo che Cowork ha consegnato lanciando la routine, salvato in "
+                   "un file: la risposta va accanto alla sua richiesta, l'esito in config/cowork-esiti/")
     p.add_argument("--avviato", default="",
                    help="corriere: il ruolo appena lanciato con fire_trigger (le sue richieste nel cloud)")
     p.add_argument("--dal-ramo", action="store_true",

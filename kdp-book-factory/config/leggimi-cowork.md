@@ -1,36 +1,23 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 12 · 7 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 13 · 7 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
-**Novità della versione 12: si legge solo con WebFetch.** Il giro delle 08:18
-del 7 ottobre ha provato `curl` dalla shell, la modalità automatica l'ha negato
-e il giro si è fermato, giustamente: un permesso negato non si aggira con un
-altro strumento. Perché non succeda più, il modo di leggere è uno solo e si usa
-per primo: **WebFetch** sugli indirizzi «leggi» dell'indice. Niente `curl`,
-`wget`, git o `gh` dalla shell, nemmeno se il prompt dell'attività li nomina:
-vale questo file.
+**Novità della versione 13: Google Drive non si usa più.** L'autore ha deciso
+che i file si salvano in un posto solo, GitHub. Su GitHub Cowork continua a non
+scrivere (versione 11): la risposta la **consegni come testo**, lanciando la
+routine della fabbrica con `fire_trigger`, e la fabbrica la salva nel
+repository, accanto alla richiesta. Nella cartella Drive del corriere non si
+scrive più niente e non si legge più niente, nemmeno questo LEGGIMI: vale
+quello sul ramo. Se il prompt della tua attività dice di scrivere su Drive con
+`create_file`, vale questo file.
 
-**Versione 11: su GitHub si legge, su Drive si risponde.** Il giro
-delle 22:48 del 6 ottobre l'ha mostrato: la modalità automatica delle attività
-blocca la scrittura su GitHub dal browser dell'autore («Auto-Mode Bypass»), come
-prima il proxy aveva rifiutato il push. Va bene così: su GitHub Cowork non
-scrive, né con git né dal browser. Da ora:
-
-- **si legge** dagli indirizzi pubblici del repository, con WebFetch
-  (`raw.githubusercontent.com/...`, li dà l'indice);
-- **si risponde** su Drive, nella cartella del corriere, col nome che la
-  richiesta e l'indice danno: la fabbrica porta la risposta su GitHub, accanto
-  alla richiesta, entro l'ora;
-- **le immagini** Cowork non le consegna: Drive non porta file così pesanti e
-  GitHub non si scrive. Le genera e le scarica la fabbrica; se serve, le carica
-  l'autore.
-
-Restano gli esiti dei giri non riusciti (versione 9) e i giri lanciati dalla
-fabbrica (versione 8).
+Restano: si legge solo con WebFetch (versione 12), su GitHub non si scrive
+(versione 11), gli esiti dei giri non riusciti (versione 9), i giri lanciati
+dalla fabbrica (versione 8).
 
 ## Dove si lavora
 
@@ -38,13 +25,13 @@ fabbrica (versione 8).
   `claude/dreamy-archimedes-hf8w45`. L'indice di quelle aperte è
   https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/config/cowork-aperte.md
   e la fabbrica lo riscrive a ogni giro. Per ogni richiesta l'indice dà
-  l'indirizzo per leggerla («leggi»), il nome della risposta su Drive e se si fa
-  nel cloud o solo col browser del portatile.
-- **Le risposte** vanno nella cartella Google Drive «NEXTUP — corriere Cowork»
-  (id `1yprHuxzFDGj12k8clTp0othzTXjiyn5N`), dove sta anche questo LEGGIMI. Nella
-  cartella si scrivono solo le risposte e gli esiti dei giri non riusciti. Gli
-  altri file sono vecchi o già portati via: non aprirli.
-- Se il prompt della tua attività parla di cercare le richieste su Drive, di
+  l'indirizzo per leggerla («leggi»), la prima riga della consegna
+  («consegna») e se si fa nel cloud o solo col browser del portatile.
+- **Le risposte** si consegnano con `fire_trigger` alla routine della fabbrica,
+  trigger_id `trig_014uG5o2CZ22kwnBS5FDxty7` (sezione «Come si consegna»). Non
+  si scrivono file da nessuna parte: né su GitHub, né su Google Drive, né sul
+  portatile.
+- Se il prompt della tua attività parla di Drive, di `create_file`, di
   `add_repo`, di git, di commit dal browser o di base64, vale questo file.
 
 ## Che cosa c'è da fare
@@ -53,14 +40,17 @@ fabbrica (versione 8).
   Una richiesta di un altro ruolo è di un'altra chat: non aprirla. Una
   richiesta senza ruolo non la prende nessuno: se la trovi, dillo all'autore e
   lasciala lì.
-- Una richiesta che ha già la sua risposta nella cartella Drive è fatta:
-  saltala (la fabbrica la porta via entro l'ora e la toglie dall'indice).
+- L'indice elenca solo le richieste ancora senza risposta: una richiesta che ne
+  esce ha la sua risposta su GitHub. Una richiesta consegnata in questo giro
+  non si consegna una seconda volta. Se un giro dopo l'indice la dà ancora, la
+  consegna non è arrivata: rifalla.
 - Una richiesta con la riga `Serve: …` sotto il ruolo chiede un accesso che
   apre l'autore (KDP, ChatGPT, Helium 10, Amazon, il browser del portatile).
-  Prima di tutto guarda se c'è. Se manca, salta la richiesta senza scrivere
+  Prima di tutto guarda se c'è. Se manca, salta la richiesta senza consegnare
   niente: al giro dopo la ritrovi aperta. Se c'è, la fai come le altre.
-- Una richiesta scritta prima di questa versione può dire di consegnare con
-  git, col browser su GitHub o altrove: rispondi come dice questo file.
+- Una richiesta scritta prima di questa versione può dire di rispondere su
+  Drive, con git, col browser su GitHub o altrove: consegna come dice questo
+  file, con la prima riga che l'indice dà.
 
 ## Come si risponde
 
@@ -73,13 +63,36 @@ fabbrica (versione 8).
      c'è più, dato che non si trova, strumento non accessibile)
 3. Per ogni punto: il fatto che hai visto sulla pagina, non una stima, con
    l'URL e la data e l'ora della verifica.
-4. Salvala come file nuovo nella cartella Drive, col nome indicato (per
-   esempio `books__x__concorrente__cowork-concorrente-risposta.md`), con
-   `create_file`, contentMimeType text/markdown, disableConversionToGoogleType
-   true.
+4. Consegnala come dice la sezione «Come si consegna».
 5. Se la richiesta chiede immagini, non caricarle da nessuna parte: scrivi
    nella risposta dove sono (indirizzo, chat di ChatGPT), con misure in pixel e
    peso. A portarle nel libro ci pensano la fabbrica o l'autore.
+
+## Come si consegna
+
+Ogni risposta è un lancio di `fire_trigger`:
+
+- `trigger_id`: `trig_014uG5o2CZ22kwnBS5FDxty7` (la routine della fabbrica);
+- `text`: sulla prima riga la consegna che l'indice dà per quella richiesta,
+  lettera per lettera, per esempio
+
+      Cowork · risposta · kdp-book-factory/books/x/concorrente/cowork-concorrente-risposta.md
+
+  e dalla riga dopo la risposta intera, cominciando da `Esito: …`.
+
+Una consegna per risposta. Il testo porta al massimo 64 KiB: una risposta oltre
+50.000 caratteri si divide fra una riga e l'altra in parti, e ogni parte ha la
+stessa prima riga seguita da ` · parte N/M` (per esempio `… -risposta.md ·
+parte 1/3`). La fabbrica le ricuce quando sono arrivate tutte.
+
+La fabbrica riceve la consegna, la salva su GitHub accanto alla richiesta e la
+toglie dall'indice entro il giro. Rifiuta da sola tutto quello che non è la
+risposta di una richiesta aperta: non serve controllarlo tu.
+
+**Se `fire_trigger` non c'è** fra i tuoi strumenti, non cercare altre strade:
+scrivi le consegne intere, ognuna con la sua prima riga, come ultimo messaggio
+del giro, e in fondo la riga `Consegna non riuscita: manca fire_trigger`. Non
+le salvi da nessuna parte: le porta l'autore.
 
 ## Leggere
 
@@ -109,33 +122,25 @@ portatile non risponde, è un giro nel cloud.
 Se in questo giro c'era una richiesta del tuo ruolo da fare e un passo tecnico
 non è riuscito — un indirizzo che non si apre, un download bloccato, il browser
 che non risponde, un permesso negato, un passo di questo LEGGIMI che non torna
-— scrivi nella cartella Drive un file di testo nuovo:
+— consegna l'esito come una risposta, con `fire_trigger` alla routine della
+fabbrica:
 
-- nome `cowork-esito-<ruolo>-<AAAAMMGG-hhmm>.md`, con l'ora UTC (per esempio
-  `cowork-esito-immagini-20261006-1845.md`);
-- prima riga `Esito: non riuscito`;
+- prima riga `Cowork · esito · <ruolo>` (per esempio `Cowork · esito · fonti`);
+- poi `Esito: non riuscito` e l'ora UTC del giro;
 - poi, per ogni passo che non è andato: che cosa volevi fare, il comando o lo
   strumento usato, il messaggio d'errore **esatto**, copiato;
-- infine che cosa sei riuscito a consegnare, se qualcosa, e dove.
+- infine che cosa sei riuscito a consegnare, se qualcosa.
 
-Un permesso negato non si aggira: si scrive nell'esito e ci si ferma. Un giro
-senza richieste da fare, o in cui tutto è andato, non scrive nessun esito.
-
-## Alla fine del giro
-
-Se in questo giro hai scritto una risposta e hai lo strumento `fire_trigger`,
-lancia la routine della fabbrica: trigger_id `trig_014uG5o2CZ22kwnBS5FDxty7`,
-testo `Cowork, ruolo <ruolo>: consegnato <nomi>.` Se lo strumento non c'è, non
-serve cercarlo: la fabbrica passa ogni ora.
+Un permesso negato non si aggira: si consegna l'esito e ci si ferma. Un giro
+senza richieste da fare, o in cui tutto è andato, non consegna nessun esito.
 
 ## Che cosa non si fa
 
 - Su GitHub non si scrive niente: né con git, né dal browser, né file, né
   commit, né pull request, né impostazioni.
-- Nella cartella Drive si scrivono solo file nuovi: le risposte e gli esiti.
-  Non si modificano, rinominano o cancellano file che non hai creato tu, né
-  questo LEGGIMI.
-- Una risposta già scritta non si riscrive. Se alla fabbrica serve altro, apre
+- Google Drive non si usa più: né per scrivere, né per leggere. La cartella del
+  corriere resta com'è: non si modifica e non si cancella niente.
+- Una risposta consegnata non si cambia. Se alla fabbrica serve altro, apre
   una richiesta nuova.
 - Su KDP (kdp.amazon.com) si legge e basta: niente titoli nuovi, bozze,
   pubblicazioni o impostazioni cambiate.
@@ -145,8 +150,9 @@ serve cercarlo: la fabbrica passa ogni ora.
 - Nessuna password, codice, token o cookie nei file.
 - Un permesso negato dalla modalità automatica non si aggira con un'altra
   strada: si scrive l'esito.
-- `fire_trigger` si usa solo per la routine della fabbrica, alla fine del
-  giro. Nessun'altra attività si lancia, si crea, si cambia o si cancella.
+- `fire_trigger` si usa solo per la routine della fabbrica, per consegnare
+  risposte ed esiti. Nessun'altra attività si lancia, si crea, si cambia o si
+  cancella.
 
 ## Richieste di seguito e ritirate
 
@@ -155,8 +161,8 @@ punti rimasti aperti, o la versione corretta di una domanda. Una richiesta che
 sparisce dall'indice è applicata o ritirata: non si risponde a una copia
 vecchia.
 
-Se non ci sono richieste del tuo ruolo da fare, il giro finisce senza scrivere
-niente.
+Se non ci sono richieste del tuo ruolo da fare, il giro finisce senza
+consegnare niente.
 
 ## I ruoli
 
@@ -241,7 +247,7 @@ si risponde», punto 5).
 - Le immagini si scaricano a piena risoluzione, così come sono: niente
   ritagli, compressione o conversione.
 - Si generano tante varianti quante la richiesta ne chiede; la risposta dice
-  dove sono e quanto misurano. Non si caricano né su GitHub né su Drive.
+  dove sono e quanto misurano. Non si caricano da nessuna parte.
 - Le figure dell'interno sono in **scala di grigi**: due elementi non si
   distinguono solo per il colore.
 - Solo immagini generate nella sessione o già generate dalla fabbrica: mai

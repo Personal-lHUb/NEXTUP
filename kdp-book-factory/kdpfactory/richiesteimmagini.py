@@ -6,11 +6,11 @@ l'autore a mano, ma Cowork con ChatGPT, dal portatile. Qui il prompt diventa una
 richiesta completa: che cosa incollare, quante varianti, quanto grande, e dove
 caricare ogni file perché arrivi da solo in `assets/`.
 
-Le immagini non viaggiano sul corriere di Drive: il connettore porta testo, non
-file da qualche megabyte. Cowork le carica su GitHub, nel ramo
-`cowork-immagini`, al percorso che la richiesta indica, e `cowork corriere
---dal-ramo` le porta nel libro. Per caricarle serve il GitHub dell'autore aperto
-nel browser: le richieste lo dicono nella riga `Serve:`.
+Le immagini non viaggiano col testo delle consegne: fire_trigger porta testo,
+non file da qualche megabyte. Si caricano su GitHub, l'unico posto dove i file
+si salvano, nel ramo `cowork-immagini`, al percorso che la richiesta indica, e
+`cowork corriere --dal-ramo` le porta nel libro. Per caricarle serve il GitHub
+dell'autore aperto nel browser: le richieste lo dicono nella riga `Serve:`.
 
 La scelta fra le varianti della copertina resta una decisione dell'autore: la
 propone l'agente copertina dopo averle misurate, e vale il silenzio-assenso.
@@ -90,11 +90,10 @@ def consegna(canale: dict) -> str:
             "   ognuna al percorso indicato, col GitHub dell'autore aperto nel browser:\n"
             "   «Add file → Upload files» nella cartella giusta, commit direttamente sul\n"
             "   ramo. Solo quei file: nessun altro ramo, nessuna pull request, niente da\n"
-            "   unire o da cancellare. Su Drive no: non porta file così pesanti.\n"
+            "   unire o da cancellare.\n"
         )
     return (
-        "   Non nella cartella Drive: il connettore non porta file così pesanti. Caricale\n"
-        f"   su GitHub, repository `{repository}`, ramo `{corriere.RAMO_IMMAGINI}`, ognuna al\n"
+        f"   Caricale su GitHub, repository `{repository}`, ramo `{corriere.RAMO_IMMAGINI}`, ognuna al\n"
         "   percorso indicato, con «Add file → Upload files». Se il ramo non c'è, crealo\n"
         "   dalla stessa pagina con «Create a new branch». Solo quei file: nessun altro\n"
         "   ramo, nessuna pull request, niente da unire o da cancellare.\n"
@@ -278,7 +277,6 @@ def testo_figure(slug: str, prompts: list[tuple[str, str]]) -> str:
 
 def progetto_chatgpt(canale: dict) -> str:
     """Il testo per creare in ChatGPT il progetto delle immagini, e come usarlo libro per libro."""
-    cartella, _ = cowork.corriere(canale)
     return "\n".join([
         f"# Il progetto ChatGPT — {PROGETTO_CHATGPT}",
         "",
@@ -328,10 +326,9 @@ def progetto_chatgpt(canale: dict) -> str:
         "",
         "Ogni immagine si scarica alla risoluzione piena (non l'anteprima) e si carica",
         f"su GitHub, nel ramo `{corriere.RAMO_IMMAGINI}`, al percorso che il file indica, per",
-        "esempio `kdp-book-factory/books/<slug>/assets/copertina-1.png`. Non nella",
-        f"cartella Drive «{cartella}»: lì viaggiano solo richieste e risposte, perché il",
-        "connettore non porta file così pesanti. Il giro orario porta l'immagine nel",
-        "libro da sola; l'agente `copertina` misura le varianti e propone quella da",
+        "esempio `kdp-book-factory/books/<slug>/assets/copertina-1.png`: GitHub è l'unico",
+        "posto dove si salvano i file, Google Drive non si usa più. Il giro orario porta",
+        "l'immagine nel libro da sola; l'agente `copertina` misura le varianti e propone quella da",
         "usare, con il silenzio-assenso.",
         "",
         "## 4. Cowork",

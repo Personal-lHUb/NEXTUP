@@ -1,10 +1,10 @@
 {
-  "_nota": "Il canale con Cowork. Le richieste stanno su GitHub, sul ramo della fabbrica, con l'indice config/cowork-aperte.md, e Cowork le legge dagli indirizzi pubblici (raw.githubusercontent.com). Su GitHub Cowork non scrive: niente credenziali, e la sua modalità automatica blocca la scrittura dal browser dell'autore. Le risposte arrivano su Drive col nome indicato, e la fabbrica le porta su GitHub (`cowork corriere --scarica`). Il ramo `ramo_consegna` riceve solo le immagini che carica l'autore, e `cowork corriere --dal-ramo` le porta nei libri. La fabbrica lancia subito i ruoli che lavorano nel cloud (`cloud`: true).",
+  "_nota": "Il canale con Cowork, tutto su GitHub: l'unico posto dove si salvano i file (Google Drive non si usa più dal 7 ottobre 2026). Le richieste stanno sul ramo della fabbrica, con l'indice config/cowork-aperte.md, e Cowork le legge dagli indirizzi pubblici (raw.githubusercontent.com). Su GitHub Cowork non scrive: niente credenziali, e la sua modalità automatica blocca la scrittura dal browser dell'autore. Consegna ogni risposta lanciando la routine della fabbrica (`routine_fabbrica`) con la risposta nel testo, sotto la prima riga «Cowork · risposta · <percorso>»; la sessione la salva accanto alla richiesta (`cowork corriere --ricevi`). Il ramo `ramo_consegna` riceve solo quello che carica l'autore (immagini, o una risposta), e `cowork corriere --dal-ramo` lo porta nei libri. La fabbrica lancia subito i ruoli che lavorano nel cloud (`cloud`: true).",
   "canale": "github",
   "repository": "Personal-lHUb/NEXTUP",
   "ramo": "claude/dreamy-archimedes-hf8w45",
   "leggimi": "kdp-book-factory/config/leggimi-cowork.md",
-  "leggimi_versione": 12,
+  "leggimi_versione": 13,
   "progetto": {
     "_nota": "Il progetto di Cowork in Claude Desktop: una chat e un'attività pianificata per ruolo. Il testo da incollare lo scrive `python3 -m kdpfactory cowork progetto` in config/progetto-cowork.md.",
     "nome": "NEXTUP — Cowork",
@@ -81,11 +81,6 @@
       "trigger": "trig_01S5VYkF4ziuGsQBZX2pjWnK",
       "cloud": false
     }
-  },
-  "corriere": {
-    "_nota": "La cartella Drive dove viaggiano richieste, risposte e immagini. Era la casella «NEXTUP — libri/cowork», chiusa il 30 settembre e riaperta come corriere il 5 ottobre 2026. I file si chiamano come il loro percorso nel repository, con __ al posto di /.",
-    "cartella": "NEXTUP — corriere Cowork",
-    "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N"
   },
   "ramo_consegna": "cowork-immagini",
   "routine_fabbrica": "trig_014uG5o2CZ22kwnBS5FDxty7"
