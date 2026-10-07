@@ -366,6 +366,10 @@ def nome_colore(esadecimale: str) -> str:
         nome = next(n for limite, n in nomi if gradi < limite)
         if nome == "blue" and luce < 0.25:
             nome = "navy"
+        # Un rosso o un arancio molto scuri si vedono marroni: chiamarli «deep
+        # red» fa dipingere al generatore un fondo vinaccia al posto del bruno.
+        if nome in ("red", "orange") and luce < 0.2 and gradi < 40:
+            nome = "brown"
         if luce > 0.85 and 30 <= gradi < 60:
             nome = "cream"
         elif luce < 0.25:

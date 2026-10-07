@@ -1,50 +1,69 @@
 {
-  "_nota": "Tre direzioni d'arte per la copertina, diverse fra loro, scritte dall'agente `copertina` come le scriverebbe il direttore artistico di un editore. In italiano per l'autore: nome, idea, perche, distacco, codici_del_genere. In inglese, perché entrano nel prompt: soggetto, elementi (da 1 a 3), tecnica, luce, emozione. composizione: alto | centro. palette: una del motore (notturno, allarme, inchiostro, bosco, terracotta, indaco). tipografia: deciso | elegante (vuota = la decide la categoria). Niente testo nell'immagine, niente nomi o stili altrui. Il prompt lo scrive `kdpfactory copertina <slug> --direzioni`.",
   "libro": "household-bills",
-  "codici_del_genere": "",
-  "fonti": [],
+  "codici_del_genere": "Le dieci cartacee che vendono in Budgeting & Money Management hanno il titolo protagonista (un terzo o più dell'altezza, quasi sempre bastone neretto condensato maiuscolo) su fondi piatti: bianco/crema o un primario saturo (blu, arancione, rosso, senape), 2-4 colori ad alto contrasto, l'oro come colore della ricchezza.\nQuando c'è un'immagine è un solo simbolo del denaro (banconote che formano una figura, carta di credito tagliata, albero d'oro) o il ritratto dell'autore, mai una scena; il concorrente, un quaderno, mostra invece la pagina di un registro da compilare.\nLo spazio che nessuna occupa: i conti di casa (buste, cassetta della posta, tavolo di cucina) al posto della ricchezza, i colori domestici (terracotta, verde, blu notte) al posto del primario saturo, la resa disegnata o in carta al posto della foto di banconote.",
+  "fonti": [
+    "concorrente/cowork-copertine-categoria-risposta.md",
+    "concorrente/pagina.md",
+    "concorrente/scheda.json",
+    "build/vetrina.md",
+    "book.json",
+    "docs/copertine.md"
+  ],
+  "scritte_da": "agente copertina, 2026-10-07",
   "direzioni": [
     {
-      "nome": "",
-      "idea": "",
-      "perche": "",
-      "distacco": "",
-      "soggetto": "",
-      "elementi": [],
-      "tecnica": "",
-      "luce": "",
-      "emozione": "",
+      "nome": "La busta-casa",
+      "idea": "Una busta di carta chiara, in piedi, con l'aletta aperta verso l'alto: il suo profilo è quello di una casetta, e una finestra quadrata ritagliata nella busta è accesa di arancio. Bolletta e casa diventano un oggetto solo: è il libro di chi tiene in ordine i conti di casa, non di chi vuole diventare ricco. Carta tagliata su fondo bruno caldo, titolo in alto.",
+      "perche": "In miniatura si legge in un colpo: un rettangolo, un triangolo, un quadrato acceso. Usa lo stesso meccanismo dei bestseller — un oggetto di carta che diventa una figura, come le banconote del #1 e del #3 — ma con l'oggetto che questo lettore tiene in mano ogni mese. La finestra accesa dice casa, sera, calma: il tono del libro, senza promettere niente.",
+      "distacco": "Il concorrente mostra la pagina di un registro e dice «quaderno»; questa mostra un oggetto e dice «libro». Dai primi dieci prende un simbolo solo, il titolo dominante e tre colori, ma toglie soldi e oro e mette il colore domestico che nessuno usa — terracotta e bruno — e la carta tagliata al posto della fotografia.",
+      "soggetto": "an upright off-white paper envelope standing on its edge, its open flap pointing up so that the whole outline reads as a small house, with one square window cut into its face glowing warm orange from inside",
+      "elementi": [
+        "an upright off-white envelope whose open flap forms the roof of a small house",
+        "one square window cut into the envelope, glowing warm orange from inside",
+        "a thin paper ground strip the envelope stands on"
+      ],
+      "tecnica": "cut-paper illustration: a few layered matte paper pieces with crisp cut edges and soft drop shadows between the layers, very few pieces, on a smooth dark brown paper field",
+      "luce": "soft warm light from the upper left with short gentle shadows; the only bright point is the glowing window",
+      "emozione": "safety and calm at home: the household is in order",
       "composizione": "alto",
-      "palette": "",
-      "tipografia": ""
+      "palette": "terracotta",
+      "tipografia": "elegante"
     },
     {
-      "nome": "",
-      "idea": "",
-      "perche": "",
-      "distacco": "",
-      "soggetto": "",
-      "elementi": [],
-      "tecnica": "",
-      "luce": "",
-      "emozione": "",
-      "composizione": "alto",
-      "palette": "",
-      "tipografia": ""
+      "nome": "Il tavolo di cucina, la sera",
+      "idea": "Il tavolo di cucina visto dall'alto, la sera: una tazza, una pila di buste aperte e squadrate tenuta da una sola pinza verde acqua, una penna. Gli oggetti stanno ai lati e in basso, rivolti verso il centro, dove il piano blu notte resta vuoto per il titolo. È la scena in cui il libro si legge — un capitolo alla volta, al tavolo di cucina — e la pinza è l'ordine.",
+      "perche": "Il lettore si riconosce: è il suo tavolo, la sua sera, le sue buste. La fotografia di still life è la resa più vicina a quella dei bestseller (#1, #3, #4), quindi sembra un libro del reparto; il blu notte con un solo punto verde acqua stacca sul bianco della pagina, che gli altri usano come fondo. Calma, non allarme: niente carta di credito tagliata, niente rosso.",
+      "distacco": "Nessuna delle dieci mostra una scena di casa né oggetti della vita quotidiana: questa è la sola. Il concorrente fa vedere il registro da riempire; qui le buste sono già raccolte in una pila ordinata e non c'è niente da compilare. Il titolo al centro con gli oggetti intorno è una composizione che nello scaffale non c'è.",
+      "soggetto": "a kitchen table seen from directly above in the evening, with a mug, a squared stack of opened plain envelopes held by one binder clip, and a pen, arranged around an empty dark centre",
+      "elementi": [
+        "a plain white ceramic mug of coffee at the lower left",
+        "a squared stack of opened plain envelopes at the right, held by one binder clip in the teal accent",
+        "a pen lying below, pointing towards the centre"
+      ],
+      "tecnica": "overhead still-life photograph, studio-sharp focus, matte ceramic, paper and deep navy painted wood, soft natural shadows",
+      "luce": "one soft neutral lamp light from the upper left, gentle shadows falling to the lower right, the corners of the frame sinking into deep navy shadow",
+      "emozione": "quiet evening control: unhurried, unjudged, everything gathered in one place",
+      "composizione": "centro",
+      "palette": "inchiostro",
+      "tipografia": "deciso"
     },
     {
-      "nome": "",
-      "idea": "",
-      "perche": "",
-      "distacco": "",
-      "soggetto": "",
-      "elementi": [],
-      "tecnica": "",
-      "luce": "",
-      "emozione": "",
+      "nome": "La cassetta della posta",
+      "idea": "La cassetta della posta americana sul suo palo, con la bandierina alzata e il bordo di una busta che si vede dallo sportello socchiuso: il pagamento è pronto a partire. Stampa serigrafica piatta in tre colori pieni — verde bosco, crema e il verde acceso della bandierina —, titolo in alto in bastone condensato neretto.",
+      "perche": "È la sagoma più americana e domestica che ci sia, e a 160 pixel resta riconoscibile: il lettore di amazon.com ci vede la sua posta e le sue bollette prima di leggere il titolo. La bandierina alzata è il solo punto in accento e racconta il libro: la bolletta pagata e spedita. Il verde scuro pieno è l'unico fondo verde della categoria, e il verde acceso dice «fatto», non «ricchezza».",
+      "distacco": "Dai bestseller prende la forza del manifesto — pochi colori pieni, bastone condensato maiuscolo, un simbolo solo, come il #2 —, ma l'illustrazione piatta e il fondo verde non li usa nessuno dei dieci. Il concorrente parla di registro; questa parla della posta che arriva e che parte, cioè delle bollette, senza nessuna griglia.",
+      "soggetto": "a classic American curbside mailbox on a straight post, its side flag raised, the door half open with the edge of one plain envelope showing",
+      "elementi": [
+        "a plain unmarked curbside mailbox on a straight post",
+        "its side flag raised, in the bright green accent",
+        "the edge of one plain envelope at the half-open door"
+      ],
+      "tecnica": "flat screen-print poster illustration: three solid colours only — deep forest green field, cream and one bright green accent — crisp edges, no gradients, no inner detail",
+      "luce": "flat shadowless poster light; the contrast comes only from the cream shapes on the deep green field",
+      "emozione": "the small relief of a bill sent off in time: steady, practical, unhurried",
       "composizione": "alto",
-      "palette": "",
-      "tipografia": ""
+      "palette": "bosco",
+      "tipografia": "deciso"
     }
   ],
   "scelta": null
