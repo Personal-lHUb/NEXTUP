@@ -48,6 +48,7 @@ Se lo noti, lascialo: se ne occupa un altro agente, e due segnalazioni
 sulla stessa cosa confondono chi deve correggere.
 
 - la struttura del libro: tesi, sequenza e contenuto dei capitoli, raggruppamento in parti, testo di quarta → `architetto`
+- il piano delle figure: se il libro ne ha bisogno, quali, in che capitolo, generate o pubbliche (pubblico dominio e CC0) → `architetto`
 - l'esperienza di chi legge: dove ci si perde, dove ci si annoia, che cosa suona falso → `lettore-cieco`
 - le promesse fatte al cliente prima dell'acquisto — titolo, sottotitolo, gancio di copertina, descrizione, indice — e se il libro le mantiene; gli annunci «lo vedremo più avanti» che non arrivano; il lettore o il lessico che cambiano per strada → `lettore-cieco`
 - le affermazioni sul mondo fuori dal libro: dati, statistiche, fonti, citazioni, norme, generalizzazioni assolute, casi inventati presentati come veri → `fact-checker`

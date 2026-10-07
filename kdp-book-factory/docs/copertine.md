@@ -471,6 +471,51 @@ devono spiegare, in bianco e nero, accanto a un testo che le ha già annunciate.
 Mestiere diverso, modulo diverso: `kdpfactory/figure.py` e
 `kdpfactory/imagebrief.py`.
 
+### Prima: servono?
+
+Non tutti i libri hanno bisogno di figure, e una figura che non spiega niente
+costa pagine, DPI da verificare e una riga in più nella dichiarazione dell'IA.
+Lo decide **l'architetto, libro per libro**, insieme alla scaletta, nel **piano
+delle figure** (`books/<slug>/figure.json`, che `immagini <slug> --piano`
+lascia da compilare):
+
+- `servono` e `perche`: sì solo se una figura spiega quello che il testo, da
+  solo, spiega peggio — un luogo, un oggetto, una sequenza, un confronto;
+- `mondo`, in inglese: il mondo visivo comune a tutte le figure generate —
+  ambiente, epoca, personaggi ricorrenti —, che entra in ogni prompt perché le
+  figure siano **coerenti con la trama** e fra loro, insieme al capitolo e al
+  titolo dove cadono;
+- per ogni figura `percorso`, `capitolo`, `mostra`, `perche` e la **fonte**:
+  - `generata` quando si può inventare — una scena, un oggetto, un ambiente del
+    libro: la genera la sessione con Higgsfield, dal prompt del sistema, in grigio;
+  - `pubblica` quando il contesto non lascia generarla — una persona o un luogo
+    reali da riconoscere, un documento, un fatto storico, un'opera d'arte: lì
+    un'immagine generata sarebbe un falso.
+
+Il ghostwriter riceve nel brief di ogni capitolo le figure che il piano ci
+mette, con la riga esatta da scrivere.
+
+### Le immagini pubbliche: solo pubblico dominio e CC0
+
+Le pubbliche si cercano negli archivi aperti, e si prende solo quello che si
+stampa senza obblighi — **pubblico dominio e CC0**, scelta dell'autore del 7
+ottobre 2026 — (`kdpfactory/pubbliche.py`):
+
+```bash
+python3 -m kdpfactory immagini <slug> --cerca                                  # Openverse e Wikimedia Commons
+python3 -m kdpfactory immagini <slug> --prendi immagini/03-nome.jpg --candidato N
+```
+
+`--cerca` interroga **Openverse** (che raccoglie Wikimedia, musei e archivi, già
+filtrato per licenza) e **Wikimedia Commons** (licenza letta dai metadati di ogni
+file; esclusi i file con un marchio registrato) e scrive i candidati in
+`build/immagini-pubbliche.json`. Si sceglie quello coerente con il libro, e
+`--prendi` lo scarica, ricontrolla la licenza e scrive la **provenienza** nel
+piano: archivio, titolo, autore, licenza, pagina dell'opera, indirizzo del file,
+pixel, data. Gli archivi vanno aperti nella rete dell'ambiente
+(`api.openverse.org`, `commons.wikimedia.org`, `upload.wikimedia.org` e i server
+dei musei da cui viene il file); se sono chiusi il comando lo dice.
+
 ### Si dichiarano prima di esistere
 
 Nel manoscritto:
@@ -520,6 +565,9 @@ per il full-content.
 | controllo | gravità |
 |---|---|
 | l'immagine dichiarata non c'è | **errore**: il libro si impagina, ma non si carica |
+| il piano dice che non servono figure e il testo ne dichiara | **errore**: o il piano o il testo |
+| una figura pubblica senza licenza ammessa (pubblico dominio o CC0) e provenienza | **errore**: è l'immagine di qualcun altro |
+| una figura fuori dal piano, o «generata» che non risulta generata | avviso: non si sa da dove viene |
 | sotto i 300 DPI **alla misura stampata** | **errore**: 900 px sono magnifici a 3 pollici e inaccettabili a 5 |
 | immagine a colori | avviso: viene convertita, ma due colori possono diventare lo stesso grigio |
 

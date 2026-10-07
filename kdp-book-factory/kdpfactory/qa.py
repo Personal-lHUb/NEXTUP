@@ -430,12 +430,28 @@ def _controlla_figure(
     definitivo — ma un PDF con dei rettangoli tratteggiati dentro non si carica.
     """
     geo = kdpspecs.page_geometry(spec.trim, spec.target_pages)
-    totale = 0
+    trovate = []
     for numero, _titolo, markdown in chapters:
         for figura in figure_module.figure_del_manoscritto(markdown, assets_dir, numero):
-            totale += 1
+            trovate.append(figura)
             for problema in figure_module.problemi(figura, geo.text_width):
                 gravita = "avviso" if "a colori" in problema else "errore"
                 report.add(gravita, "FIGURE", problema)
-    if totale:
-        report.add("info", "FIGURE", f"{totale} figure dichiarate nel manoscritto.")
+    # Il piano: se le figure servono, e da dove viene ognuna. Una figura
+    # pubblica senza licenza ammessa (pubblico dominio o CC0) non si stampa.
+    radice = Path(assets_dir).parent
+    piano = figure_module.leggi_piano(radice)
+    generate: set[str] = set()
+    try:
+        import json
+
+        from . import higgsfield
+
+        registro = json.loads((radice / "build" / higgsfield.REGISTRO).read_text(encoding="utf-8"))
+        generate = {Path(str(v.get("file", ""))).name for v in registro if isinstance(v, dict)}
+    except (OSError, ValueError):
+        pass
+    for gravita, problema in figure_module.problemi_piano(piano, trovate, generate):
+        report.add(gravita, "FIGURE", problema)
+    if trovate:
+        report.add("info", "FIGURE", f"{len(trovate)} figure dichiarate nel manoscritto.")

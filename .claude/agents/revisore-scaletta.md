@@ -40,4 +40,5 @@ Se lo noti, lascialo: se ne occupa un altro agente, e due segnalazioni
 sulla stessa cosa confondono chi deve correggere.
 
 - la struttura del libro: tesi, sequenza e contenuto dei capitoli, raggruppamento in parti, testo di quarta → `architetto`
+- il piano delle figure: se il libro ne ha bisogno, quali, in che capitolo, generate o pubbliche (pubblico dominio e CC0) → `architetto`
 - il testo dell'indice: il titolo definitivo di ogni capitolo e di ogni parte → `indice`

@@ -207,3 +207,141 @@ class Rapporto:
             "mancanti": len(self.mancanti),
             "figure": [f.to_dict() for f in self.figure],
         }
+
+
+# --------------------------------------------------------------------------
+# Il piano delle figure: se servono, quali, da dove
+# --------------------------------------------------------------------------
+# Non tutti i libri hanno bisogno di figure, e una figura che non spiega niente
+# costa pagine, DPI da verificare e una riga in più nella dichiarazione dell'IA.
+# Il piano lo decide libro per libro l'architetto, insieme alla scaletta, e dice
+# per ogni figura da dove viene: **generata** (dal prompt del sistema, in
+# grigio, coerente con il mondo del libro) o **pubblica** — quando il contesto
+# non lascia generarla: persone o luoghi reali da riconoscere, documenti,
+# fatti storici, opere d'arte. Le pubbliche sono solo di pubblico dominio o
+# CC0, e la loro provenienza resta scritta qui.
+
+#: il piano, nella cartella del libro
+PIANO = "figure.json"
+FONTI = ("generata", "pubblica")
+#: le licenze che una figura pubblica può avere: nessun obbligo di citazione,
+#: nessun rischio con KDP (scelta dell'autore, 7 ottobre 2026)
+LICENZE_AMMESSE = ("cc0", "pdm", "public domain")
+
+
+def piano_path(root: Path) -> Path:
+    return Path(root) / PIANO
+
+
+def leggi_piano(root: Path) -> dict | None:
+    import json
+
+    try:
+        return json.loads(piano_path(root).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+def modello_piano() -> dict:
+    return {
+        "_nota": (
+            "Il piano delle figure, deciso dall'architetto con la scaletta. `servono`: se il "
+            "libro ha bisogno di figure; `perche`: perché sì o perché no, in italiano. "
+            "`mondo`: in inglese, il mondo visivo comune a tutte le figure generate "
+            "(ambiente, epoca, personaggi ricorrenti), perché siano coerenti con la trama. "
+            "Per ogni figura: `percorso` (immagini/NN-nome.jpg, lo stesso del manoscritto), "
+            "`capitolo`, `mostra` (che cosa deve mostrare), `perche` (che cosa spiega meglio "
+            "del testo), `fonte` (generata | pubblica: pubblica solo quando il contesto non "
+            "lascia generarla — persone o luoghi reali, documenti, fatti storici, opere "
+            "d'arte) e, per le pubbliche, `cerca` (le parole da cercare negli archivi, in "
+            "inglese). La `provenienza` la scrive il sistema quando prende l'immagine."
+        ),
+        "servono": None,
+        "perche": "",
+        "mondo": "",
+        "figure": [],
+    }
+
+
+def licenza_ammessa(licenza: str) -> bool:
+    valore = " ".join((licenza or "").lower().replace("-", " ").split())
+    return any(valore == ammessa or valore.startswith(ammessa) for ammessa in LICENZE_AMMESSE) \
+        or valore in {"cc0 1.0", "pdm 1.0", "public domain mark", "public domain mark 1.0"}
+
+
+def voce_del_piano(piano: dict | None, percorso: str) -> dict | None:
+    for voce in (piano or {}).get("figure") or []:
+        suo = str(voce.get("percorso", ""))
+        if suo == percorso or Path(suo).name == Path(percorso).name:
+            return voce
+    return None
+
+
+def problemi_piano(piano: dict | None, figure: list[Figura],
+                   generate: set[str] | None = None) -> list[tuple[str, str]]:
+    """Le figure del manoscritto contro il piano: (gravità, problema).
+
+    Senza piano si avvisa soltanto — i libri nati prima del piano esistono —,
+    ma una figura pubblica senza una licenza ammessa è un errore: è
+    l'immagine di qualcun altro stampata in un libro in vendita.
+    """
+    generate = generate or set()
+    out: list[tuple[str, str]] = []
+    if piano is None:
+        if figure:
+            out.append(("avviso", f"{len(figure)} figure nel manoscritto e nessun piano "
+                                  f"({PIANO}): non si sa se servono né da dove vengono."))
+        return out
+    if piano.get("servono") is False and figure:
+        out.append(("errore", f"Il piano dice che il libro non ha bisogno di figure, ma il "
+                              f"manoscritto ne dichiara {len(figure)}: o il piano o il testo."))
+    for figura in figure:
+        voce = voce_del_piano(piano, figura.percorso)
+        dove = f"capitolo {figura.capitolo}" if figura.capitolo else "il libro"
+        if voce is None:
+            if piano.get("servono") is not False:
+                out.append(("avviso", f"«{figura.percorso}» in {dove} non è nel piano: non si sa "
+                                      "se generarla o cercarla fra le immagini pubbliche."))
+            continue
+        fonte = voce.get("fonte")
+        if fonte not in FONTI:
+            out.append(("errore", f"«{figura.percorso}»: fonte «{fonte}», ammesse {', '.join(FONTI)}."))
+            continue
+        if fonte == "pubblica":
+            provenienza = voce.get("provenienza") or {}
+            if not voce.get("cerca") and not provenienza:
+                out.append(("avviso", f"«{figura.percorso}» è da cercare fra le pubbliche, ma il "
+                                      "piano non dice che cosa cercare (`cerca`)."))
+            if figura.esiste and not licenza_ammessa(provenienza.get("licenza", "")):
+                out.append(("errore", f"«{figura.percorso}» è un'immagine pubblica senza una "
+                                      "licenza ammessa nel piano (solo pubblico dominio o CC0, "
+                                      "con la sua provenienza): non si stampa."))
+        elif figura.esiste and figura.percorso not in generate \
+                and Path(figura.percorso).name not in {Path(g).name for g in generate}:
+            out.append(("avviso", f"«{figura.percorso}» doveva essere generata, ma non risulta "
+                                  "fra le immagini generate (build/immagini-generate.json): "
+                                  "da dove viene?"))
+    return out
+
+
+def istruzioni_capitolo(piano: dict | None, numero: int) -> str:
+    """Le figure che il piano mette in questo capitolo, da dichiarare nel testo.
+
+    Il ghostwriter le scrive dove servono, con la riga che il sistema legge;
+    il file non c'è ancora, e l'impaginazione tiene il posto.
+    """
+    voci = [v for v in (piano or {}).get("figure") or [] if v.get("capitolo") == numero]
+    if not voci or (piano or {}).get("servono") is False:
+        return ""
+    righe = [
+        "",
+        "FIGURE DI QUESTO CAPITOLO",
+        "Il piano delle figure ne mette qui " + ("una" if len(voci) == 1 else str(len(voci))) + ". "
+        "Dichiarala nel punto del testo dove spiega, con questa riga esatta (il testo fra "
+        "parentesi quadre dice che cosa mostra, la riga dopo fra parentesi è la didascalia "
+        "che legge il lettore), e annunciala nel capoverso prima:",
+    ]
+    for voce in voci:
+        righe.append(f"![{voce.get('mostra', '')}]({voce.get('percorso', '')})")
+        righe.append("(una didascalia breve, nella lingua del libro)")
+    return "\n".join(righe)

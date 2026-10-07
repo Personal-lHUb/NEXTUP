@@ -218,7 +218,8 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
                           "categoria, prezzo) con il silenzio-assenso")
 
     if not project.outline_path.exists():
-        return stato("1", "scaletta: `architetto` → `indice` → `manuale <slug> scaletta --esamina`")
+        return stato("1", "scaletta e piano delle figure: `architetto` → `indice` → "
+                          "`manuale <slug> scaletta --esamina`")
     previsti, scritti = _capitoli(project)
     if scritti < previsti:
         return stato("2", f"capitolo {scritti + 1} di {previsti}: `ghostwriter`, poi "

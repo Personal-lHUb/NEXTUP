@@ -36,6 +36,7 @@ from . import (
     pipeline,
     planner,
     produzione,
+    pubbliche,
     richiesteimmagini,
     writer,
 )
@@ -646,14 +647,22 @@ def _scegli_direzione(project: BookProject, spec: BookSpec, args) -> int:
 
 
 def cmd_immagini(args) -> int:
-    """I prompt delle figure dell'interno. Nessuna chiamata API.
+    """Le figure dell'interno: il piano, i prompt di quelle da generare, le pubbliche.
 
-    Legge il manoscritto, trova le figure dichiarate e scrive un prompt per
-    ciascuna, con lo stile comune a tutto il libro e le misure calcolate sulla
-    gabbia vera. Le figure si dichiarano nel manoscritto anche prima che le
-    immagini esistano: così il conteggio pagine tiene già il loro posto.
+    Il piano (`figure.json`, dell'architetto) dice se il libro ha bisogno di
+    figure e, per ognuna, se si genera o si cerca fra le immagini pubbliche. Le
+    figure si dichiarano nel manoscritto anche prima che le immagini esistano:
+    così il conteggio pagine tiene già il loro posto. Nessuna chiamata API.
     """
     project, spec = open_project(args)
+    piano = figure_module.leggi_piano(project.root)
+    if getattr(args, "piano", False):
+        return _piano_figure(project, args, piano)
+    if getattr(args, "cerca", False):
+        return _cerca_pubbliche(project, args, piano)
+    if getattr(args, "prendi", ""):
+        return _prendi_pubblica(project, args, spec, piano)
+
     outline = project.load_outline()
     capitoli = writer.load_chapters(project, outline)
     if not capitoli:
@@ -667,9 +676,17 @@ def cmd_immagini(args) -> int:
         figure_trovate.extend(
             figure_module.figure_del_manoscritto(markdown, project.assets_dir, numero)
         )
+    titoli = {numero: titolo for numero, titolo, _ in capitoli}
+    mondo = (piano or {}).get("mondo", "")
 
     if not figure_trovate:
+        if piano and piano.get("servono") is False:
+            print(f"«{spec.title}»: il piano delle figure dice che non ne servono — "
+                  f"{piano.get('perche', '')}")
+            return 0
         print(f"«{spec.title}» non dichiara nessuna figura.")
+        if piano is None:
+            print(f"E non ha il piano delle figure: `immagini {spec.slug} --piano`, poi l'architetto.")
         print("\nPer aggiungerne una, scrivi nel manoscritto una riga così:")
         print("  ![che cosa deve mostrare l'immagine](immagini/03-nome.jpg)")
         print("  (didascalia facoltativa, fra parentesi, sulla riga dopo)")
@@ -677,24 +694,35 @@ def cmd_immagini(args) -> int:
         print("segnaposto della misura giusta, e il conteggio pagine è già definitivo.")
         return 0
 
+    def pubblica(figura) -> bool:
+        voce = figure_module.voce_del_piano(piano, figura.percorso)
+        return bool(voce) and voce.get("fonte") == "pubblica"
+
+    da_generare = [f for f in figure_trovate if not pubblica(f)]
     project.ensure_dirs()
     output = project.build_dir / "immagini-brief.md"
     if output.exists():
         save_backup(project, args, "prompt delle immagini precedenti", force=True)
-    output.write_text(imagebrief.brief(spec, figure_trovate), encoding="utf-8")
+    output.write_text(imagebrief.brief(spec, da_generare, mondo=mondo, titoli=titoli), encoding="utf-8")
     save_backup(project, args, "prompt delle immagini")
 
-    mancanti = [f for f in figure_trovate if not f.esiste]
+    mancanti = [f for f in da_generare if not f.esiste]
+    da_cercare = sum(1 for f in figure_trovate if pubblica(f) and not f.esiste)
     print(f"Prompt delle immagini: {output}")
-    print(f"  {len(figure_trovate)} figure dichiarate · {len(mancanti)} da produrre")
+    print(f"  {len(figure_trovate)} figure dichiarate · {len(mancanti)} da generare · "
+          f"{da_cercare} da cercare fra le pubbliche")
     for figura in figure_trovate:
         segno = " " if figura.esiste else "·"
-        print(f"    {segno} cap. {figura.capitolo:>2}  {figura.percorso}")
+        fonte = "pubblica" if pubblica(figura) else "generata"
+        print(f"    {segno} cap. {figura.capitolo:>2}  {figura.percorso}  ({fonte})")
+    if da_cercare:
+        print(f"\nLe pubbliche (solo pubblico dominio e CC0): immagini {spec.slug} --cerca")
     if mancanti:
         print(f"\nSalva le immagini in {figure_module.cartella(project.assets_dir)}")
         print("poi rilancia `build` e `qa`.")
         titolo = f"{spec.title} — {spec.subtitle}" if spec.subtitle else spec.title
-        prompts = [(f.percorso, imagebrief.prompt_incollabile(spec, f)) for f in mancanti]
+        prompts = [(f.percorso, imagebrief.prompt_incollabile(spec, f, mondo=mondo, titoli=titoli))
+                   for f in mancanti]
         incollare = project.build_dir / richiesteimmagini.CHATGPT_FIGURE
         if incollare.exists():
             save_backup(project, args, "prompt delle figure da incollare precedenti", force=True)
@@ -703,7 +731,7 @@ def cmd_immagini(args) -> int:
         print(f"Da incollare in ChatGPT (progetto «{richiesteimmagini.PROGETTO_CHATGPT}»): {incollare}")
         radice = Path(__file__).resolve().parent.parent
         if args.genera:
-            return _genera_figure(project, args, spec, mancanti, radice)
+            return _genera_figure(project, args, spec, mancanti, radice, mondo, titoli)
         if higgsfield.attivo(radice):
             print(f"Le figure le genera Higgsfield: python3 -m kdpfactory immagini {spec.slug} --genera")
             return 0
@@ -717,7 +745,95 @@ def cmd_immagini(args) -> int:
     return 0
 
 
-def _genera_figure(project, args, spec, mancanti, radice) -> int:
+def _piano_figure(project: BookProject, args, piano: dict | None) -> int:
+    """Il piano delle figure da compilare, o com'è adesso."""
+    file = figure_module.piano_path(project.root)
+    if piano is None:
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_text(json.dumps(figure_module.modello_piano(), ensure_ascii=False, indent=2) + "\n",
+                        encoding="utf-8")
+        save_backup(project, args, "piano delle figure da compilare")
+        print(f"Da compilare dall'architetto, con la scaletta: {file}")
+        return 0
+    servono = {True: "sì", False: "no", None: "da decidere"}.get(piano.get("servono"), "?")
+    print(f"Piano delle figure ({file}): servono {servono} — {piano.get('perche', '')}")
+    for voce in piano.get("figure") or []:
+        print(f"  cap. {voce.get('capitolo', '?'):>2}  {voce.get('percorso')}  ({voce.get('fonte')})"
+              + ("  · provenienza registrata" if voce.get("provenienza") else ""))
+    return 0
+
+
+def _cerca_pubbliche(project: BookProject, args, piano: dict | None,
+                     apri=urllib.request.urlopen) -> int:
+    """I candidati di pubblico dominio e CC0 per le figure pubbliche del piano."""
+    voci = pubbliche.da_cercare(piano, project.assets_dir)
+    if not voci:
+        print("Nessuna figura pubblica da cercare: il piano non ne ha, o hanno già il file.")
+        return 0
+    trovati: dict[str, list[dict]] = {}
+    errori_tutti: list[str] = []
+    for voce in voci:
+        termini = voce.get("cerca") or voce.get("mostra") or ""
+        candidati, errori = pubbliche.cerca(termini, apri)
+        trovati[voce["percorso"]] = [c.to_dict() for c in candidati]
+        errori_tutti += errori
+        print(f"{voce['percorso']} — «{termini}»: {len(candidati)} candidati")
+        for numero, c in enumerate(candidati, 1):
+            print(f"  {numero}. [{c.licenza}] {c.titolo[:60]} — {c.autore[:30]} "
+                  f"({c.larghezza}x{c.altezza}, {c.archivio})")
+    project.ensure_dirs()
+    file = project.build_dir / "immagini-pubbliche.json"
+    if file.exists():
+        save_backup(project, args, "candidati pubblici precedenti", force=True)
+    file.write_text(json.dumps(trovati, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    save_backup(project, args, "candidati delle figure pubbliche")
+    for errore in sorted(set(errori_tutti)):
+        print(f"! {errore}", file=sys.stderr)
+    if errori_tutti and not any(trovati.values()):
+        print("La rete dell'ambiente deve lasciar passare gli archivi "
+              f"({', '.join(pubbliche.DOMINI)}): Network access → Allowed domains.", file=sys.stderr)
+        return 1
+    print(f"\nCandidati in {file}. Si prende quello coerente col libro:")
+    print("  immagini <slug> --prendi immagini/NN-nome.jpg --candidato N")
+    return 0
+
+
+def _prendi_pubblica(project: BookProject, args, spec: BookSpec, piano: dict | None,
+                     apri=urllib.request.urlopen) -> int:
+    """Scarica il candidato scelto e ne scrive la provenienza nel piano."""
+    voce = figure_module.voce_del_piano(piano, args.prendi)
+    if voce is None or voce.get("fonte") != "pubblica":
+        raise SystemExit(f"«{args.prendi}» non è una figura pubblica del piano ({figure_module.PIANO}).")
+    try:
+        candidati = json.loads((project.build_dir / "immagini-pubbliche.json").read_text(encoding="utf-8"))
+        candidato = candidati[voce["percorso"]][args.candidato - 1]
+    except (OSError, ValueError, KeyError, IndexError) as errore:
+        raise SystemExit(f"Nessun candidato {args.candidato} per «{args.prendi}»: prima "
+                         f"`immagini {spec.slug} --cerca`.") from errore
+    destinazione = project.assets_dir / voce["percorso"]
+    save_backup(project, args, "figure prima dell'immagine pubblica", force=True)
+    try:
+        provenienza = pubbliche.prendi(candidato, destinazione, apri)
+    except (OSError, ValueError) as errore:
+        print(f"! {errore}", file=sys.stderr)
+        print(f"Se è la rete: va aperto {urllib.parse.urlsplit(candidato['file_url']).netloc} "
+              "(Network access → Allowed domains).", file=sys.stderr)
+        return 1
+    voce["provenienza"] = provenienza
+    figure_module.piano_path(project.root).write_text(
+        json.dumps(piano, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    save_backup(project, args, f"figura pubblica {voce['percorso']}")
+    geo = kdpspecs.page_geometry(spec.trim, spec.target_pages)
+    dpi = int(provenienza["pixel"][0] / (geo.text_width / kdpspecs.INCH))
+    print(f"{voce['percorso']}: {provenienza['pixel'][0]} x {provenienza['pixel'][1]} px, "
+          f"{provenienza['licenza']}, da {provenienza['archivio']}. A piena misura: {dpi} DPI"
+          + ("" if dpi >= figure_module.MIN_DPI else f" (sotto i {figure_module.MIN_DPI}: `qa` lo dirà)"))
+    print("Poi: build e qa.")
+    return 0
+
+
+def _genera_figure(project, args, spec, mancanti, radice, mondo: str = "",
+                   titoli: dict[int, str] | None = None) -> int:
     """Le figure che mancano generate con Higgsfield, ognuna dal suo prompt, in 4:3."""
     motivo = higgsfield.pronto()
     if motivo:
@@ -728,8 +844,9 @@ def _genera_figure(project, args, spec, mancanti, radice) -> int:
     for figura in mancanti:
         destinazione = project.assets_dir / figura.percorso
         print(f"{figura.percorso} con {modello}…", flush=True)
-        generata = higgsfield.genera(imagebrief.prompt_incollabile(spec, figura), destinazione,
-                                     proporzione="4:3", modello=modello, schema_modello=schema)
+        prompt = imagebrief.prompt_incollabile(spec, figura, mondo=mondo, titoli=titoli)
+        generata = higgsfield.genera(prompt, destinazione, proporzione="4:3", modello=modello,
+                                     schema_modello=schema)
         generate.append(generata)
         print(f"  {generata.larghezza} x {generata.altezza} px")
     higgsfield.registra(project.build_dir, generate)
@@ -1864,6 +1981,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("slug")
     p.add_argument("--genera", action="store_true",
                    help="genera con Higgsfield le figure che mancano, dal prompt del sistema")
+    p.add_argument("--piano", action="store_true",
+                   help="il piano delle figure (figure.json): servono? generate o pubbliche?")
+    p.add_argument("--cerca", action="store_true",
+                   help="cerca negli archivi aperti, solo pubblico dominio e CC0, le figure pubbliche")
+    p.add_argument("--prendi", default="",
+                   help="la figura pubblica (immagini/NN-nome.jpg) da prendere fra i candidati")
+    p.add_argument("--candidato", type=int, default=1, help="con --prendi, il numero del candidato")
     p.set_defaults(func=cmd_immagini)
 
     p = sub.add_parser(

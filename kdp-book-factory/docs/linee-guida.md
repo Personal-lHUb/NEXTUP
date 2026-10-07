@@ -142,7 +142,7 @@ produzione di un libro: lavorano sul sistema, e sono documentati in
 ```
 A  avvio                        domande all'autore → pagina del concorrente     cancello: tutte le domande viste
 0  acquisizione                 scheda-concorrente → analista-recensioni → posizionamento → originalita
-1  progetto                     architetto → indice → revisore-scaletta          cancello: 0 bloccanti
+1  progetto                     architetto (scaletta e piano delle figure) → indice → revisore-scaletta   cancello: 0 bloccanti
 2  stesura                      ghostwriter  (+ voce al livello alta)            cancello: il capitolo 1 ti convince
 3  prima impaginazione          build → impaginazione                            cancello: pagine nell'intervallo
 4  controllo del testo          lettore-cieco · editor-sviluppo · fact-checker · conformita  (+ correttore)
@@ -251,7 +251,7 @@ libro.
 |---|---|
 | **Chi** | `architetto` progetta, `indice` scrive i titoli, `revisore-scaletta` misura |
 | **Entra** | `book.json`, `brief.md`, il budget di pagine |
-| **Esce** | `outline.json`: capitoli, parti, sintesi, punti, parole di ciascuno, quarta |
+| **Esce** | `outline.json`: capitoli, parti, sintesi, punti, parole di ciascuno, quarta; `figure.json`: il piano delle figure |
 | **Linea API** | `python3 -m kdpfactory outline <slug>` — architetto, indice e revisore in un colpo solo |
 | **Linea manuale** | `manuale <slug> scaletta` → scrivi `manuale/scaletta.json` → **«usa indice su books/<slug>/manuale/scaletta.json»** → applica i titoli → `manuale <slug> scaletta --esamina` → `--importa` |
 | **Cancello** | zero bloccanti del revisore; gli importanti letti uno per uno |
@@ -270,7 +270,11 @@ Che cosa deve avere una scaletta prima di passare:
 - **le pagine previste stanno nell'intervallo**, parti comprese: il revisore
   le conta sulla scaletta con il modello tarato, perché il numero di capitoli
   e le parti li decide l'architetto dopo il budget, e ogni parte costa due
-  pagine.
+  pagine;
+- **il piano delle figure** (`immagini <slug> --piano`, poi l'architetto):
+  servono o no, e perché; per ognuna il capitolo, che cosa mostra e da dove
+  viene — generata, o pubblica di pubblico dominio o CC0 quando il contesto non
+  lascia generarla ([`copertine.md`](copertine.md), «Le figure dentro il libro»).
 
 #### L'agente `indice`
 

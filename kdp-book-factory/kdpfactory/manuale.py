@@ -37,6 +37,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from . import figure as figure_module
 from . import planner, prompts, writer
 from .agents import scaletta as revisore_scaletta
 from .llm import extract_json
@@ -250,7 +251,7 @@ def brief_capitolo(
             previous_summary=precedente,
             covered=covered,
             next_title=successivo,
-        ),
+        ) + figure_module.istruzioni_capitolo(figure_module.leggi_piano(project.root), numero),
     )
     return _scrivi(percorso_brief(project, f"capitolo-{numero:02d}"), testo)
 

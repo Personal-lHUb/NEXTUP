@@ -40,6 +40,8 @@ COMPETENZE: tuple[Competenza, ...] = (
     # -- progetto -------------------------------------------------------------
     Competenza("progetto", "la struttura del libro: tesi, sequenza e contenuto dei capitoli, "
                "raggruppamento in parti, testo di quarta", "architetto"),
+    Competenza("progetto", "il piano delle figure: se il libro ne ha bisogno, quali, in che "
+               "capitolo, generate o pubbliche (pubblico dominio e CC0)", "architetto"),
     Competenza("progetto", "il testo dell'indice: il titolo definitivo di ogni capitolo e di ogni parte",
                "indice"),
     Competenza("progetto", "le misure della scaletta: argomenti del brief scoperti, capitoli gemelli, "

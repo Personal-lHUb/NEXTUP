@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from . import figure as figure_module
 from . import planner, prompts
 from .i18n import L
 from .llm import LLMClient
@@ -152,6 +153,7 @@ def write_chapters(
     summaries: dict[int, str] = {int(k): v for k, v in state.get("summaries", {}).items()}
     written: dict[int, str] = {}
 
+    piano = figure_module.leggi_piano(project.root)
     for index, chapter in enumerate(outline.chapters):
         if only and chapter.number not in only:
             continue
@@ -171,7 +173,7 @@ def write_chapters(
                 previous_summary=summaries.get(chapter.number - 1, ""),
                 covered=_covered_topics(summaries, chapter.number),
                 next_title=next_title,
-            ),
+            ) + figure_module.istruzioni_capitolo(piano, chapter.number),
             label=f"capitolo {chapter.number}/{len(outline.chapters)} · {chapter.title}",
         )
         text = _normalize_chapter(text, chapter)

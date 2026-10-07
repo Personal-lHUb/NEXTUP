@@ -64,6 +64,16 @@ Tre cose che questi prompt non negoziano:
   di grigi: se due elementi si distinguono solo per il colore, sulla pagina
   sono la stessa cosa.
 
+**Le figure si valutano libro per libro.** Se servono lo decide l'architetto con
+la scaletta, nel piano `books/<slug>/figure.json` (`immagini <slug> --piano`):
+una figura entra solo se spiega quello che il testo spiega peggio. Ognuna è
+**generata** — coerente con la trama: il prompt porta il capitolo e il mondo
+visivo comune del libro — oppure, quando il contesto non lascia generarla
+(persone o luoghi reali, documenti, fatti storici, opere d'arte), **pubblica**:
+solo pubblico dominio o CC0, cercata negli archivi aperti (`immagini <slug>
+--cerca`, `--prendi`) con la provenienza scritta nel piano. `qa` non stampa una
+figura pubblica senza licenza ammessa.
+
 Le figure si dichiarano nel manoscritto **prima che il file esista**:
 
 ```markdown

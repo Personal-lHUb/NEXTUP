@@ -66,8 +66,14 @@ def _dimensioni(spec: BookSpec) -> tuple[float, float, int, int]:
     )
 
 
-def brief(spec: BookSpec, figure: list[figure_module.Figura]) -> str:
-    """Il documento con tutti i prompt delle figure di questo libro."""
+def brief(spec: BookSpec, figure: list[figure_module.Figura], *, mondo: str = "",
+          titoli: dict[int, str] | None = None) -> str:
+    """Il documento con tutti i prompt delle figure di questo libro.
+
+    `mondo` è il mondo visivo comune del piano delle figure (ambiente, epoca,
+    personaggi ricorrenti), `titoli` i titoli dei capitoli: entrano in ogni
+    prompt, perché ogni figura sia coerente con la trama e con le altre.
+    """
     larghezza_in, altezza_in, px_w, px_h = _dimensioni(spec)
     lingua = LANGUAGE_NAMES.get(spec.language, spec.language)
     mancanti = [f for f in figure if not f.esiste]
@@ -113,7 +119,8 @@ figura per volta e lo strumento non tiene il contesto.
   so nothing to translate.
 """
 
-    corpo = [_prompt_figura(spec, index, f, larghezza_in, altezza_in, px_w, px_h)
+    corpo = [_prompt_figura(spec, index, f, larghezza_in, altezza_in, px_w, px_h,
+                            mondo=mondo, titoli=titoli)
              for index, f in enumerate(figure, start=1)]
 
     coda = f"""
@@ -149,7 +156,25 @@ quando le immagini arrivano: il segnaposto occupava già il loro spazio.
     return testa + "\n" + "\n".join(corpo) + coda
 
 
-def prompt_incollabile(spec: BookSpec, figura: figure_module.Figura) -> str:
+def contesto(spec: BookSpec, figura: figure_module.Figura, *, mondo: str = "",
+             titoli: dict[int, str] | None = None) -> str:
+    """Dove sta la figura nel libro: il capitolo, l'argomento, il mondo comune.
+
+    Una figura generata deve appartenere alla storia che il testo racconta, non
+    a una qualunque: il prompt le dice in quale capitolo cade e com'è il mondo
+    di tutte le figure del libro.
+    """
+    titolo = (titoli or {}).get(figura.capitolo, "")
+    dove = (f"It illustrates chapter {figura.capitolo}" + (f", «{titolo}»," if titolo else "")
+            if figura.capitolo else "It belongs to")
+    righe = [f"{dove} of a book about {spec.topic.rstrip('.') or spec.title}."]
+    if mondo.strip():
+        righe.append(f"The visual world shared by every figure in this book: {mondo.strip()}")
+    return "\n".join(righe)
+
+
+def prompt_incollabile(spec: BookSpec, figura: figure_module.Figura, *, mondo: str = "",
+                       titoli: dict[int, str] | None = None) -> str:
     """Il prompt di una figura così com'è da incollare: descrizione, regole, misure.
 
     Basta a sé stesso, perché in ChatGPT si incolla una figura per messaggio e
@@ -163,6 +188,7 @@ def prompt_incollabile(spec: BookSpec, figura: figure_module.Figura) -> str:
         else ""
     )
     return f"""{figura.descrizione}
+{contesto(spec, figura, mondo=mondo, titoli=titoli)}
 
 Greyscale illustration for the interior of a printed book. One subject, plenty
 of white space, no text or lettering anywhere in the image, no border or frame.
@@ -179,6 +205,9 @@ def _prompt_figura(
     altezza_in: float,
     px_w: int,
     px_h: int,
+    *,
+    mondo: str = "",
+    titoli: dict[int, str] | None = None,
 ) -> str:
     stato = "già prodotta" if figura.esiste else "da produrre"
     dove = f"capitolo {figura.capitolo}" if figura.capitolo else "libro"
@@ -190,6 +219,6 @@ def _prompt_figura(
 **Salvala in:** `books/{spec.slug}/assets/{figura.percorso}`
 
 ```
-{prompt_incollabile(spec, figura)}
+{prompt_incollabile(spec, figura, mondo=mondo, titoli=titoli)}
 ```
 """
