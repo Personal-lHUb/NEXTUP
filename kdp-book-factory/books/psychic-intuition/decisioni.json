@@ -10,10 +10,10 @@
       "perche": "Il titolo dice la lacuna del concorrente: la pratica guidata, il «che cosa fare e come». Nei risultati di ricerca si legge «Psychic Practice, Step by Step: A Workbook for Beginners, fr…»: «workbook for beginners» resta prima del taglio. Originalità: due rilievi minori, sulla struttura e sul nome di un esercizio, da rispettare nella scaletta.",
       "chiesta_il": "2026-10-06T13:26:22Z",
       "scade_il": "2026-10-07T13:26:22Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "silenzio-assenso",
+      "valore": "Psychic Practice, Step by Step — A Workbook for Beginners, from First Hunch to Trusted Insight",
+      "deciso_il": "2026-10-07T13:58:28Z",
+      "applicata": true
     },
     {
       "chiave": "promessa",
@@ -24,10 +24,10 @@
       "perche": "L'unica lacuna che vale un libro è la pratica: la lettrice che ne parla trova la parte pratica «quite minimalistic». All'avvio hai scelto il vantaggio «più pratico».",
       "chiesta_il": "2026-10-06T13:26:22Z",
       "scade_il": "2026-10-07T13:26:22Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "silenzio-assenso",
+      "valore": "Una pratica da fare, non da leggere: dal primo presentimento alle impressioni verificate, con una routine di apertura e chiusura, test con punteggio, registri di sogni e segni, un dizionario dei simboli costruito dal lettore, esercizi in coppia con un'etica, e alla fine una routine propria. Un metodo e un registro dei progressi, senza promettere poteri, precisione o risultati.",
+      "deciso_il": "2026-10-07T13:58:28Z",
+      "applicata": true
     },
     {
       "chiave": "categoria",
@@ -38,10 +38,10 @@
       "perche": "La scelta è un'inferenza: nessuna recensione chiede pagine da compilare, ma l'autocompletamento di Amazon propone «psychic development workbook», «intuition workbook», «psychic journaling», e due workbook della nicchia vendono meglio del concorrente. Rischio: un libro da compilare si vende poco in Kindle, e le pagine di registro non devono ripetersi (lo misura l'impaginazione).",
       "chiesta_il": "2026-10-06T13:26:23Z",
       "scade_il": "2026-10-07T13:26:23Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "silenzio-assenso",
+      "valore": "medium-content (quaderno di pratica, ogni pagina diversa)",
+      "deciso_il": "2026-10-07T13:58:28Z",
+      "applicata": true
     },
     {
       "chiave": "prezzo",
@@ -53,10 +53,10 @@
       "perche": "A 160 pagine la stampa costa circa 2,92 USD: a 13,99 restano circa 5,47 USD a copia. Un libro da compilare si vende quasi solo in cartaceo, quindi il margine lo deve portare il cartaceo. Si ricalcola sulle pagine finali.",
       "chiesta_il": "2026-10-06T13:26:23Z",
       "scade_il": "2026-10-07T13:26:23Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "silenzio-assenso",
+      "valore": "13,99 USD",
+      "deciso_il": "2026-10-07T13:58:28Z",
+      "applicata": true
     },
     {
       "chiave": "pseudonimo",
@@ -68,10 +68,10 @@
       "perche": "All'avvio hai scelto uno pseudonimo nuovo. Un nome caldo e semplice, adatto alla nicchia spirituale; tenere quello della finanza di casa confonderebbe i lettori di tutti e due i libri.",
       "chiesta_il": "2026-10-06T13:26:23Z",
       "scade_il": "2026-10-07T13:26:23Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "silenzio-assenso",
+      "valore": "Maren Ashby",
+      "deciso_il": "2026-10-07T13:58:28Z",
+      "applicata": true
     }
   ]
 }

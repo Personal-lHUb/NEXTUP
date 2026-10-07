@@ -1,0 +1,7 @@
+{
+  "_nota": "Il piano delle figure, deciso dall'architetto con la scaletta. `servono`: se il libro ha bisogno di figure; `perche`: perché sì o perché no, in italiano. `mondo`: in inglese, il mondo visivo comune a tutte le figure generate (ambiente, epoca, personaggi ricorrenti), perché siano coerenti con la trama. Per ogni figura: `percorso` (immagini/NN-nome.jpg, lo stesso del manoscritto), `capitolo`, `mostra` (che cosa deve mostrare), `perche` (che cosa spiega meglio del testo), `fonte` (generata | pubblica: pubblica solo quando il contesto non lascia generarla — persone o luoghi reali, documenti, fatti storici, opere d'arte) e, per le pubbliche, `cerca` (le parole da cercare negli archivi, in inglese). La `provenienza` la scrive il sistema quando prende l'immagine.",
+  "servono": null,
+  "perche": "",
+  "mondo": "",
+  "figure": []
+}
