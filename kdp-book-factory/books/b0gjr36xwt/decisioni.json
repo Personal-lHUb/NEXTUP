@@ -79,10 +79,10 @@
       "perche": "Il cancello della fase 2: il capitolo 1 deve convincerti prima che si scrivano gli altri 24.",
       "chiesta_il": "2026-10-08T12:37:50Z",
       "scade_il": "2026-10-09T12:37:50Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "scelta dall'autore",
+      "valore": "La voce dell'introduzione e del capitolo 1, per tutto il libro",
+      "deciso_il": "2026-10-08T13:45:56Z",
+      "applicata": true
     }
   ]
 }
