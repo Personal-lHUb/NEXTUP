@@ -1,0 +1,348 @@
+{
+  "title": "Hard Calls, Clear Notes",
+  "subtitle": "The NP Casebook of Defensible Documentation",
+  "thesis": "After a bad outcome, an NP's note is read as the record of a decision, and the people reading it already know how the story ended. A defensible note is not longer or more defensive: in the clinician's own words, and in the time a shift allows, it shows what was seen, what was considered and why the decision was made.",
+  "back_cover": "After a bad outcome, someone will read your note knowing how the story ended. Will it show what you saw, what you considered, and why you decided?\n\nAs an RN you charted what you observed. As a nurse practitioner you sign decisions, and a provider note is read differently: as a timeline, against the standard of care, by readers who have hindsight. Hard Calls, Clear Notes works through the situations where an NP's note is most exposed: the differential, the abnormal result, the consultant who never comes, the capacity question, the patient leaving against medical advice, the discharge, the telehealth visit and the prescription.\n\nEach scenario is constructed for teaching. Each one shows what the record will be asked, a weak note beside its defensible rewrite, and the short list of elements the note must contain. Legal terms are defined in plain English, each principle is explained once, and the reference section is built to be opened mid-shift. This is not legal advice, and no book makes anyone lawsuit-proof. This one makes your reasoning visible on the record.",
+  "parts": [
+    {
+      "title": "How the Record Reads Your Reasoning",
+      "first_chapter": 1
+    },
+    {
+      "title": "Hard Calls in the Workup and the Plan",
+      "first_chapter": 8
+    },
+    {
+      "title": "Consent, Departure, and Follow-Up",
+      "first_chapter": 15
+    },
+    {
+      "title": "Reference for the Middle of a Shift",
+      "first_chapter": 23
+    }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "What a Chart Becomes After a Bad Outcome",
+      "summary": "Explains from zero how a provider note is read once something has gone wrong: as a timeline, by readers who already know the ending, against the question of the standard of care. It opens the book because every later chapter writes for this reader, and the explanation is given once, here.",
+      "beats": [
+        "The chart as a chronology: how a reviewer lines up every entry, order, result and timestamp on one timeline and looks at the gaps between them",
+        "Who reads the note later (risk manager, plaintiff and defense attorneys, expert witness, board investigator) and what each one looks for",
+        "Standard of care, negligence and causation in plain English: what a reasonably prudent NP would have done with the same information at that moment",
+        "Hindsight bias, and why the note must show what was known and what was not yet known when the decision was made",
+        "The premise of the book: documentation protects the patient first, then the license and the career, by making reasoning visible; it cannot promise an outcome"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 2,
+      "title": "The Provider Note Records a Decision",
+      "summary": "Shows why an NP's note is read differently from the nursing notes the reader wrote for years: the RN note documents an observation, while the provider note documents a judgment and the reasons for it. It comes before any writing method because a new NP has to know where the reasoning lives in each note they now sign.",
+      "beats": [
+        "Observation versus decision: one constructed patient charted in a nursing note and in a provider note, and what a reviewer expects from each",
+        "The provider note explained from scratch: history, exam, data, assessment and plan, and why the assessment and plan carry the most weight later",
+        "The notes a new NP signs (H&P, progress note, emergency or urgent-care visit note, discharge note) and the question each one answers on the record",
+        "Medical decision-making as reasoning written for the next reader, not as a billing level, and why this book leaves coding aside",
+        "Authorship and signature: what it means to sign, cosign or attest a note alongside a collaborating or supervising physician, with no state-by-state rules"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 3,
+      "title": "Where Claims Against NPs Actually Begin",
+      "summary": "Reads the public closed-claims reports on nurse practitioners to show which allegations recur, and how a licensing board complaint differs from a malpractice claim. It closes the framework by mapping those exposures onto the hard calls in the book and by setting out the shape every scenario chapter follows.",
+      "beats": [
+        "What public closed-claims reports on NPs, such as the CNA and NSO series, show about recurring allegations, with every figure cited to its source and checked before print",
+        "Malpractice claim, licensing board complaint, employer review: three processes, each with different readers of the same note",
+        "Allegations about diagnosis, treatment, medication and follow-up, and the point in each where a note could have shown the reasoning",
+        "What a defensible note is and is not: contemporaneous, specific, honest about uncertainty, and never a shield against a claim",
+        "How the scenario chapters are built: what the record will be asked, the weak note, the defensible rewrite, the short list of elements, and cross-references back to these principles"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 4,
+      "title": "Writing the Differential You Actually Ran",
+      "summary": "Turns the differential the NP already runs in their head into a few lines a reviewer can follow: what was considered, what was excluded and on what basis, including the dangerous diagnosis that had to be thought of. It opens the method because a missing or unexplained differential leaves the most exposed part of a provider note empty.",
+      "beats": [
+        "A one-line assessment beside a rewrite that names the alternatives considered and the reason each one was set aside",
+        "The can't-miss diagnosis: naming the dangerous possibility that was considered and the specific findings that made it unlikely",
+        "Pertinent negatives that carry the exclusion, in history, exam and data, and why a normal templated exam does not do that job",
+        "Decision tools and risk scores: recording the tool, its inputs and its limits, not only the result",
+        "The short differential that fits a busy shift and still shows the reasoning"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 5,
+      "title": "Uncertainty on the Record, Without Hedging",
+      "summary": "Shows how to write a working diagnosis and an honest statement of what is still unknown. It avoids two failures: excluding a diagnosis too early with false certainty, and hedging so much that the note says nothing. It follows the differential because the plan, the safety net and every later follow-up depend on how the uncertainty was written.",
+      "beats": [
+        "Working diagnosis versus final diagnosis: wording that says what you think now and what would change your mind",
+        "The overconfident note and the over-hedged note side by side, and why a reviewer distrusts both",
+        "The plan that follows from uncertainty: when to reassess, the findings that would trigger escalation, and what the patient was told to watch for",
+        "Symptoms not yet explained: documenting an undiagnosed complaint honestly when the workup is incomplete",
+        "Shared decision-making: recording the options offered and the patient's preference when the evidence leaves a real choice"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 6,
+      "title": "Facts, Quotes, and What Never Goes in the Chart",
+      "summary": "Sets the rules of objective language once for the whole book: observable facts instead of adjectives, the patient's own words in quotation marks, and the short list of things that never belong in a medical record. It comes before the scenarios because every hard call, from the refusal to the hostile encounter, is written with these rules and refers back to them.",
+      "beats": [
+        "Adjectives versus observations: replacing judgments of character or mood with what was seen, heard and measured",
+        "Quoting the patient: when exact words matter, how to quote accurately, and how much to quote",
+        "Labels that read badly later, such as noncompliant or drug-seeking, and the factual description that replaces each one",
+        "What never goes in the chart: blame of colleagues, staffing complaints, mention of incident reports, speculation about litigation, sarcasm",
+        "Reading your own note as a stranger would: a reread for neutral tone before signing"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 7,
+      "title": "Templates, Copy-Forward, and the Late Addendum",
+      "summary": "Treats the chart as a document with a memory of its own. It covers templated and copied text that contradicts the history, and the rules for late entries, addenda and corrections that the audit trail will later show. It closes the principles because every scenario note is written inside an EHR, and some will have to be completed or corrected after the fact.",
+      "beats": [
+        "Copy-forward and carried-over text: how yesterday's exam or plan becomes a statement signed today",
+        "Templated exam and review of systems that contradict the history, prefilled fields, default normals and auto-inserted phrases: how a reviewer spots them, with no instructions for any specific EHR",
+        "Late entries and addenda: labeling the time of writing and the time of the event, and stating the reason for the addition",
+        "Correcting an error without altering the record, and why deleting or rewriting an entry is the worst possible move",
+        "The audit trail: what the system records about who opened, wrote, edited and signed, and when"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 8,
+      "title": "The Test You Order and the Test You Don't",
+      "summary": "Works the first hard call of the workup: documenting why a test was ordered and, above all, why it was not, so that a decision not to image or not to draw a lab reads as a choice and not as an omission. It opens the scenarios because the ordering decision sets up the result, the delay and the discharge that follow.",
+      "beats": [
+        "What the record will be asked: was the test considered, and was the decision reasonable with what was known at the time",
+        "Constructed scenario: a minor head injury in urgent care with no CT ordered; the weak note beside the defensible rewrite",
+        "Naming the decision rule and the findings that applied it, and recording the patient's view when the choice was shared",
+        "The test deferred to follow-up: who will order it, when, and how the patient knows; a test the patient declines is handled by cross-reference to informed refusal",
+        "The short list of elements: the indication or the reason not to test, the decision rule and its inputs, the patient discussion, the deferred plan"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 9,
+      "title": "Closing the Loop on the Abnormal Result",
+      "summary": "Follows a result from the moment it posts to the moment someone acts on it: who reviewed it, what was done, and who was told, when and how. It includes incidental findings and results that arrive after the patient has left. It comes after the ordering decision because a result nobody acted on is the classic break in the follow-up chain.",
+      "beats": [
+        "What the record will be asked: who saw the result, when, and what happened next",
+        "Constructed scenario: a critical lab value that posts at the end of a primary-care day; the weak note and the defensible rewrite",
+        "The incidental finding: a nodule on a scan ordered for something else, who owns its follow-up, and how it reaches the patient and the next clinician",
+        "The result that arrives after discharge: tests pending at departure, the callback, the attempts to reach the patient, and the addendum that records them",
+        "The short list of elements: reviewer, action, who was notified, by what method, at what time, and the plan if the patient cannot be reached"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 10,
+      "title": "The Delayed Scan and the Bed That Never Opens",
+      "summary": "Covers the system delays an NP does not control: the imaging study that does not get done, and the bed or transfer that does not become available. It shows how to document the delay, the interim management and each reassessment, so the record shows a patient who was watched while the system was slow.",
+      "beats": [
+        "What the record will be asked: what you knew about the delay, what you did in the meantime, and how often you looked again",
+        "Constructed scenario: an emergency patient who waits hours for CT and then for an inpatient bed; the weak note and the defensible rewrite",
+        "Interim management and reassessments written as times, findings and decisions rather than reassurance",
+        "The transfer that stalls: the accepting facility, transport, what the patient and family were told, and the alternatives considered",
+        "The short list of elements, with the delay recorded as a fact of the timeline and no commentary on the department"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 11,
+      "title": "The Consultant Who Never Comes",
+      "summary": "Works the call to a specialist who does not call back or does not arrive, and the escalation that follows: the repeat page, the collaborating or supervising physician, the chain of command. It follows the system delays because it adds the human link and the hardest writing problem: recording a colleague's silence without accusing anyone.",
+      "beats": [
+        "What the record will be asked: who was called, when, with what information, and what was done while no answer came",
+        "Constructed scenario: a hospital-medicine patient with a worsening finding and a consultant paged twice; the weak note and the defensible rewrite",
+        "The call log inside the note: times, the question asked, the answer received, and any recommendation given by phone",
+        "Escalation step by step: when to involve the collaborating or supervising physician, when to use the chain of command, and how each step appears in the record",
+        "The short list of elements, and the wording that records an unanswered page as a time and an action, never as a complaint"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 12,
+      "title": "The Prescription as a Documented Decision",
+      "summary": "Treats every prescription as a decision with a rationale and a conversation about risk. It also works the controlled-substance request, where state law or organizational policy requires specific checks. It explains what the note records without giving state-by-state rules, and tells the reader whom to ask about their own state.",
+      "beats": [
+        "What the record will be asked: why this drug, at this dose, for this patient, and which risks were discussed",
+        "Constructed scenario: an acute-pain prescription after an ankle fracture in urgent care; the weak note and the defensible rewrite",
+        "Controlled-substance requests: recording the prescription drug monitoring program check, the relevant history and any agreement where the state requires them, and what to ask the state board",
+        "Allergies, interactions and high-risk patients: the lines that show they were considered",
+        "The short list of elements: indication, risks discussed, checks performed, duration, and who reassesses and when"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 13,
+      "title": "The Request You Decline: Drugs and Tests",
+      "summary": "Works the prescription not written and the test not ordered when the patient asked for them: the antibiotic for a likely viral illness, or a scan or medication requested and refused. It shows how a declined request reads as a reasoned clinical choice with an alternative and a safety net, not as a dismissal.",
+      "beats": [
+        "What the record will be asked: was the request heard, was the reason explained, and what was offered instead",
+        "Constructed scenario: a primary-care visit for sinus symptoms where the patient asks for an antibiotic; the weak note and the defensible rewrite",
+        "Recording the request in the patient's words and the clinical reason for declining it, with the differential by cross-reference",
+        "Alternatives and contingencies: delayed prescriptions, symptomatic care, and the specific signs that would change the decision",
+        "The imaging or specialist test requested and not ordered, and the short list of elements for any declined request"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 14,
+      "title": "Difficult Encounters in Neutral Words",
+      "summary": "Applies the objective-language rules to the encounters that strain them: hostile patients and families, a request repeated with growing pressure, a disagreement with a colleague. It closes the workup part because these encounters often grow out of a declined request, and it refers back to earlier principles instead of restating them.",
+      "beats": [
+        "What the record will be asked: what happened, what was said, and whether care decisions were driven by clinical facts",
+        "Constructed scenario: an angry family member at the bedside demanding a specific treatment; the weak note and the defensible rewrite",
+        "Threats, security calls and behavior agreements: what belongs in the note and what goes through the organization's reporting channels",
+        "The insistent request: recording rising pressure without letting the note sound defensive",
+        "Disagreeing with a colleague or supervising physician: documenting the clinical facts and the decision, never the conflict, and the short list of elements"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 15,
+      "title": "The Capacity Question, Decision by Decision",
+      "summary": "Explains how to assess and document decision-making capacity for one specific decision through the four abilities: understanding, appreciating the situation, reasoning, and expressing a choice. It opens this part because the refusal and AMA notes depend on it, and those chapters refer back here instead of repeating it.",
+      "beats": [
+        "What the record will be asked: capacity for which decision, assessed how, by whom, and when",
+        "Capacity versus competence: a clinical judgment about one decision at one time, not a legal finding about the person",
+        "Constructed scenario: an older inpatient with fluctuating delirium who declines a recommended procedure; the weak note and the defensible rewrite",
+        "Documenting each ability with the patient's own answers, and recording reassessment as the condition changes",
+        "When to involve psychiatry or the ethics committee, and how to document the surrogate decision-maker, their authority and their choices"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 16,
+      "title": "Informed Refusal and the Partial Yes",
+      "summary": "Treats informed refusal as the mirror image of informed consent: what the note must show when a patient declines a test, a treatment or an admission but stays in care. It follows capacity because a refusal is only as defensible as the capacity behind it, and it comes before AMA because many departures begin as a refusal.",
+      "beats": [
+        "What the record will be asked: did the patient understand what they were refusing and what could happen as a result",
+        "Why the signed refusal form is not enough: the form records a signature, while the note records the conversation",
+        "Constructed scenario: an emergency patient who accepts IV antibiotics but declines a lumbar puncture; the weak note and the defensible rewrite",
+        "The elements of the conversation: risks in plain words, alternatives offered, the patient's own words, and the capacity finding by cross-reference",
+        "Partial refusals: documenting the part of the plan accepted, the part refused, and the plan that remains"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 17,
+      "title": "The Patient Leaving Against Medical Advice",
+      "summary": "Works the departure against medical advice, from the patient who signs the form to the one who walks out without signing. It shows why the AMA form is not the note, and what the note must add: the door left open, the follow-up offered, and the prescriptions and instructions given anyway.",
+      "beats": [
+        "What the record will be asked: was the patient informed and capable, and given every reasonable chance to come back",
+        "Constructed scenario: an admitted patient with pneumonia who wants to leave before IV therapy is complete; the weak note and the defensible rewrite",
+        "Leaving the door open: the invitation to return in the patient's terms, the outpatient plan, and the prescriptions and return instructions offered",
+        "The patient who leaves without signing or before the evaluation ends: what was observed, the attempts to reach them, and who was notified under local policy",
+        "The short list of elements, with capacity and informed refusal handled by cross-reference"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 18,
+      "title": "The Discharge and the Patient Who Comes Back",
+      "summary": "Covers the emergency and urgent-care discharge as a decision about where the patient goes: return precautions written for the diagnosis, who sees the patient next and when, and what the patient understood. It also works the return visit, where the second note will be read beside the first.",
+      "beats": [
+        "What the record will be asked: why home was safe, what the patient was told to watch for, and who would see them next",
+        "Constructed scenario: abdominal pain discharged from urgent care with a working diagnosis; generic precautions beside precautions written for that diagnosis",
+        "Return precautions tied to the uncertainty in the assessment, with the uncertainty chapter by cross-reference",
+        "Follow-up that is named, timed and reachable: who, when, and what happens if the appointment cannot be made",
+        "The patient who returns: reading the first note, writing the second with fresh eyes, recording what changed, and the short list of elements"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 19,
+      "title": "Handoffs, Cross-Cover, and the Night Call",
+      "summary": "Works the inpatient handoff and overnight coverage, where an NP inherits patients they did not admit and decisions they did not make. It shows how to document what you were told, what you checked and what you did, so the record separates the handoff from your own judgment.",
+      "beats": [
+        "What the record will be asked: what the covering clinician knew, and what they did with it",
+        "Constructed scenario: an overnight call from a nurse about a cross-cover patient with new hypotension; the weak note and the defensible rewrite",
+        "Recording the information received at handoff and the pending items accepted",
+        "The cross-cover note: brief, timed, with your own assessment rather than the inherited one",
+        "Handing off at the end of your shift: what the next clinician must find in the chart, and the short list of elements"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 20,
+      "title": "The Telehealth Visit and the Portal Message",
+      "summary": "Covers the exposures away from the bedside: the video visit and the limits of a remote exam, advice given by phone or in a portal message, and the after-hours call. It follows discharge and handoffs because these are the encounters where the safety net is hardest to see on the record.",
+      "beats": [
+        "What the record will be asked: what could and could not be assessed without an in-person exam, and why remote care was still reasonable",
+        "Constructed scenario: a video visit for shortness of breath; the weak note and the rewrite that records the modality, what was observed and the threshold for in-person care",
+        "Telephone and portal advice: who asked, what was asked, what was advised, and how the reply was delivered",
+        "The after-hours call: a short timed note, the advice, the escalation threshold given, and the handoff to the daytime team",
+        "Consent, location and identity for remote visits as questions for one's own organization and state board, not national rules, and the short list of elements"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 21,
+      "title": "Missed Visits and Referrals That Go Nowhere",
+      "summary": "Works the patients who drop out of care: the missed appointment, the patient lost to follow-up, the referral that was sent but never completed. It shows how the record documents reasonable efforts to close the loop, so silence after the visit does not read as neglect.",
+      "beats": [
+        "What the record will be asked: was the follow-up necessary, was the patient told why, and what was done when it did not happen",
+        "Constructed scenario: a primary-care patient with an abnormal screening result who misses two follow-up visits; the weak chart and the defensible one",
+        "Documenting outreach: attempts, methods, messages left, letters sent, and why the follow-up matters, in plain words",
+        "The referral never completed: checking whether it was scheduled and whether the report came back, and who owns the next step",
+        "The patient who declines follow-up, handled by cross-reference to informed refusal, and the short list of elements"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 22,
+      "title": "The Adverse Event and the Records Request",
+      "summary": "Covers what comes after something has gone wrong: the note written after an adverse event, the line between the chart and the internal incident report, and what to do when a records request, board complaint or subpoena arrives. It closes the scenarios with general information, not legal advice, and with the rule that protects every earlier note: leave the chart untouched and call risk management and the insurer.",
+      "beats": [
+        "What goes in the chart after an adverse event: facts, times, actions taken, the patient's condition, and the disclosure conversation",
+        "What goes in the internal incident report instead, and why the chart never mentions the report",
+        "Constructed scenario: a medication error discovered on the next shift; the weak note and the defensible rewrite",
+        "When a records request, board complaint or subpoena arrives: no late addenda and no edits, the audit trail by cross-reference, and the first calls to risk management and the professional liability insurer",
+        "What to ask risk management, the insurer and an attorney, with no promise about outcomes"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 23,
+      "title": "Phrasebook: Weak Wording, Defensible Wording",
+      "summary": "Gathers, scenario by scenario, the weak phrases a reviewer will question and a defensible alternative for each, in plain clinical English. It opens the reference part because it serves the moment of writing, when there is no time to reread a chapter.",
+      "beats": [
+        "Entries arranged in the order of the scenario chapters, each pointing back to its chapter",
+        "Each pair: the weak wording, the defensible wording, and a one-line reason why the second holds up better",
+        "Phrases for the assessment, the plan, the refusal, the departure, the discharge, the remote visit and the prescription",
+        "A reminder that the phrases are models to rewrite in the reader's own words, never text to paste"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 24,
+      "title": "What Each Note Must Contain: Scenario Finder",
+      "summary": "Collects the short list of required elements from every scenario in one place, indexed by what is happening right now and by setting: hospital medicine, emergency and urgent care, primary care. It lets a reader in the middle of a shift find the right list and the right chapter in seconds.",
+      "beats": [
+        "The scenario finder: situations listed by what is happening, each with the chapter that works it",
+        "A settings index: which scenarios recur in hospital medicine, in emergency and urgent care, and in primary care",
+        "The element lists, one per scenario, in the same wording as the chapters",
+        "How to use the lists: a reread before signing, not a form to fill in"
+      ],
+      "role": "chapter"
+    },
+    {
+      "number": 25,
+      "title": "Glossary of Legal Terms for NPs",
+      "summary": "Defines in plain English the legal and risk-management terms an NP meets in this book and in practice, from standard of care to subpoena. It closes the book so that every term defined on first use in the chapters can be found again quickly.",
+      "beats": [
+        "Core terms: negligence, duty, breach, causation, damages, standard of care, expert witness",
+        "Process terms: claim, deposition, discovery, subpoena, records request, licensing board complaint",
+        "Record terms: audit trail, addendum, late entry, informed consent, informed refusal, capacity, surrogate",
+        "Each entry pointing to the chapter where the term first appears, with a note that the definitions are general information, not legal advice"
+      ],
+      "role": "chapter"
+    }
+  ]
+}

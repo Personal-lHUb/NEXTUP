@@ -412,7 +412,17 @@ def argomenti_del_brief(brief: str) -> list[str]:
     return [a for a in argomenti if len(_parole(a)) >= COPERTURA_PAROLE]
 
 
-def _controlla_copertura(outline: Outline, brief: str) -> list[AgentFinding]:
+def _lingua_prevalente(testo: str) -> str:
+    """La lingua delle parole grammaticali più frequenti; vuoto se pari o se non ce ne sono."""
+    parole = [p.strip(".,;:!?()«»\"") for p in _piatto(testo).split()]
+    conta = {lingua: sum(1 for p in parole if p in spie) for lingua, spie in SPIE_LINGUA.items()}
+    prima, seconda = sorted(conta.values(), reverse=True)[:2]
+    if prima == 0 or prima == seconda:
+        return ""
+    return max(conta, key=lambda lingua: conta[lingua])
+
+
+def _controlla_copertura(outline: Outline, brief: str, lingua: str = "") -> list[AgentFinding]:
     """Ogni argomento chiesto dall'autore deve avere un capitolo che lo prende.
 
     È il controllo che vale di più: un argomento dimenticato qui non comparirà
@@ -421,6 +431,24 @@ def _controlla_copertura(outline: Outline, brief: str) -> list[AgentFinding]:
     argomenti = argomenti_del_brief(brief)
     if not argomenti:
         return []
+    # La copertura si misura con le parole in comune: argomenti in italiano e
+    # capitoli in inglese non ne hanno, e ne uscivano un bloccante per argomento
+    # che accusavano la scaletta di un difetto del brief.
+    del_brief = _lingua_prevalente(" ".join(argomenti))
+    atteso = (lingua or "")[:2].lower()
+    if atteso in SPIE_LINGUA and del_brief and del_brief != atteso:
+        return [
+            _segnala(
+                "bloccante",
+                "brief in un'altra lingua",
+                f"Gli argomenti di brief.md sono in «{del_brief}» e il libro è in «{atteso}»: "
+                "la copertura si misura parola per parola, e così non si può misurare.",
+                suggestion=(
+                    "Riscrivi i temi di brief.md (e `argomenti` nel piano) nella lingua del "
+                    "libro, senza cambiarne il contenuto, poi rilancia il revisore."
+                ),
+            )
+        ]
     capitoli = [c for c in outline.chapters if c.role == "chapter"]
     insiemi = {c.number: _parole(_testo(c)) for c in capitoli}
 
@@ -882,7 +910,7 @@ def esamina(
     rilievi += _controlla_conteggio(outline, capitoli_attesi)
     rilievi += _controlla_pagine(spec, pagine_previste)
     rilievi += _controlla_lingua(outline, spec)
-    rilievi += _controlla_copertura(outline, brief or spec.brief or "")
+    rilievi += _controlla_copertura(outline, brief or spec.brief or "", spec.language)
     rilievi += _controlla_divieti(outline)
     rilievi += _controlla_sovrapposizioni(outline)
     rilievi += _controlla_titoli(outline)

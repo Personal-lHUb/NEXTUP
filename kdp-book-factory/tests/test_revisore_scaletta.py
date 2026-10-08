@@ -316,6 +316,25 @@ class TestLetturaDelBrief(unittest.TestCase):
         rilievi = revisore.esamina(Outline.from_dict(BUONA), spec_demo(brief=""), brief="")
         self.assertNotIn("argomento scoperto", categorie(rilievi))
 
+    def test_un_brief_in_un_altra_lingua_lo_dice_una_volta_sola(self):
+        """Temi in italiano, capitoli in inglese: non è la scaletta a scoprirli.
+
+        Il confronto è parola per parola, quindi ogni tema usciva «scoperto» e
+        il revisore dava alla scaletta dodici bloccanti che erano del brief.
+        """
+        brief = """## Temi da trattare
+
+- Che cosa succede in una seduta, minuto per minuto: l'induzione, le domande,
+  le parole della persona e il ritorno.
+- Come si sceglie un operatore serio, e le domande che lo distinguono da chi fa spettacolo.
+"""
+        rilievi = revisore.esamina(Outline.from_dict(BUONA), spec_demo(brief=brief), brief=brief)
+        self.assertNotIn("argomento scoperto", categorie(rilievi))
+        nella_lingua = [r for r in rilievi if r.category == "brief in un'altra lingua"]
+        self.assertEqual(len(nella_lingua), 1)
+        self.assertEqual(nella_lingua[0].severity, "bloccante")
+        self.assertIn("«it»", nella_lingua[0].issue)
+
 
 class TestNessunaChiamataAlModello(unittest.TestCase):
     def test_il_modulo_non_usa_il_client(self):

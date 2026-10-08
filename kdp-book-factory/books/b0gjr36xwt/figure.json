@@ -1,7 +1,7 @@
 {
   "_nota": "Il piano delle figure, deciso dall'architetto con la scaletta. `servono`: se il libro ha bisogno di figure; `perche`: perché sì o perché no, in italiano. `mondo`: in inglese, il mondo visivo comune a tutte le figure generate (ambiente, epoca, personaggi ricorrenti), perché siano coerenti con la trama. Per ogni figura: `percorso` (immagini/NN-nome.jpg, lo stesso del manoscritto), `capitolo`, `mostra` (che cosa deve mostrare), `perche` (che cosa spiega meglio del testo), `fonte` (generata | pubblica: pubblica solo quando il contesto non lascia generarla — persone o luoghi reali, documenti, fatti storici, opere d'arte) e, per le pubbliche, `cerca` (le parole da cercare negli archivi, in inglese). La `provenienza` la scrive il sistema quando prende l'immagine.",
-  "servono": null,
-  "perche": "",
+  "servono": false,
+  "perche": "Il libro vive di note scritte: la nota debole, la sua riscrittura difendibile e l'elenco degli elementi rendono meglio come testo composto in pagina, che si legge, si cerca nell'EPUB e non si deforma, che come immagine. Gli unici candidati (la cartella come cronologia, il ciclo chiuso di un risultato, la catena delle chiamate al consulente) sono schemi fatti di etichette e orari. Un'immagine generata scriverebbe male quelle etichette, mentre la nota stessa, con gli orari in sequenza, spiega già la stessa cosa. Non c'è niente di reale da riconoscere: gli scenari sono costruiti e dichiarati come tali, senza documenti, persone o luoghi veri, quindi nessuna figura pubblica. Una scena decorativa in corsia costerebbe pagine in un libro tarato su 176 senza spiegare niente al lettore che lo apre durante il turno.",
   "mondo": "",
   "figure": []
 }
