@@ -18,8 +18,8 @@ chiude: la successiva riparte dai file, non dalla memoria della chat.
    senza chiedere il permesso. Ognuno ha **un campo solo** (`kdpfactory/agents/competenze.py`) e
    **il suo modello** (`MODELLI`: opus scrive o giudica, sonnet estrae e
    controlla, haiku esegue un comando). Chiedi all'agente solo il suo campo;
-   dagli i percorsi, non il testo; salva la sua uscita con uno script dalla
-   trascrizione, mai ricopiandola. Confini: le promesse della vetrina le giudica
+   dagli i percorsi, non il testo; salva la sua uscita dalla trascrizione
+   (`trascrizione <id-agente> <file.json>`), mai ricopiandola. Confini: le promesse della vetrina le giudica
    solo il `lettore-cieco`; i conti interni sono dell'`editor-sviluppo`, il
    `fact-checker` guarda solo il mondo fuori; la copertina è dell'agente
    `copertina`. Un confine si sposta nella tabella, poi

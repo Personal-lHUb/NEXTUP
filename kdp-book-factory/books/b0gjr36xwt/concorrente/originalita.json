@@ -1,0 +1,19 @@
+{
+  "notes": "Il libro nuovo è indipendente da quello di partenza: titolo e sottotitolo sono distinguibili, nessun nome (titolo, autrice, editore, sito) compare nel piano, e la lacuna dichiarata è la prima di lacune.json. Gli argomenti non ricalcano nulla, perché l'indice del libro di partenza non è disponibile e le voci della descrizione sono la nicchia. Restano due piccole incoerenze di conformità.",
+  "findings": [
+    {
+      "severity": "minore",
+      "category": "parole chiave in contrasto col piano",
+      "issue": "Alcune parole chiave promettono ciò che il piano dichiara di non fare. «prevent lawsuits» e «malpractice prevention» promettono un esito, mentre il piano dice «Non promette di mettere al riparo da cause, reclami o sanzioni». «high-risk charting scenarios with real examples» promette esempi reali, mentre gli scenari sono costruiti e il piano dice «Non racconta casi giudiziari reali».",
+      "quote": "avoid charting mistakes and prevent lawsuits",
+      "suggestion": "Togliere «prevent lawsuits» e «malpractice prevention» e usare formule che descrivono il contenuto, per esempio «nurse practitioner charting mistakes to avoid» e «malpractice risk for nurse practitioners». Sostituire «real examples» con «worked examples» o «sample notes»."
+    },
+    {
+      "severity": "minore",
+      "category": "sottotitolo che suggerisce credenziali",
+      "issue": "Il possessivo «A Nurse Practitioner's Casebook» si legge anche come «il casebook di un NP», cioè come se l'autore fosse un NP. Il piano stesso esclude credenziali e biografia da clinico per lo pseudonimo, perché uno pseudonimo non può averne.",
+      "quote": "A Nurse Practitioner's Casebook for Defensible Documentation",
+      "suggestion": "Riformulare in modo che il destinatario sia chiaro e la paternità no, per esempio «A Casebook of Defensible Documentation for Nurse Practitioners», e ricontrollare la lettura in miniatura."
+    }
+  ]
+}

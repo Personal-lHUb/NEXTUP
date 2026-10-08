@@ -38,6 +38,7 @@ from . import (
     produzione,
     pubbliche,
     richiesteimmagini,
+    trascrizione,
     writer,
 )
 from . import figure as figure_module
@@ -1712,6 +1713,16 @@ def cmd_produzione(args) -> int:
     return 0
 
 
+def cmd_trascrizione(args) -> int:
+    """Salva la risposta JSON di un subagent dalla sua trascrizione, senza ricopiarla."""
+    try:
+        dati = trascrizione.salva(args.agente, Path(args.uscita), args.etichetta)
+    except (FileNotFoundError, ValueError) as errore:
+        raise SystemExit(str(errore)) from errore
+    print(f"{args.uscita}: {', '.join(dati)}")
+    return 0
+
+
 def cmd_cowork(args) -> int:
     """Il canale con Cowork su GitHub: stato delle richieste, e l'avviso da mandargli."""
     radice = Path(__file__).resolve().parent.parent
@@ -2124,6 +2135,14 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--json", action="store_true")
     p.add_argument("--tutti", action="store_true", help="anche i libri fuori dalla produzione")
     p.set_defaults(func=cmd_produzione)
+
+    p = sub.add_parser("trascrizione",
+                       help="salva la risposta JSON di un subagent dalla sua trascrizione")
+    p.add_argument("agente", help="l'id del subagent, o il percorso della sua trascrizione .jsonl")
+    p.add_argument("uscita", help="il file JSON da scrivere (books/<slug>/concorrente/scheda.json)")
+    p.add_argument("--etichetta", default="",
+                   help="l'oggetto dopo questa parola (SCALETTA, FIGURE), se il messaggio ne ha più d'uno")
+    p.set_defaults(func=cmd_trascrizione)
 
     p = sub.add_parser(
         "parole-chiave",

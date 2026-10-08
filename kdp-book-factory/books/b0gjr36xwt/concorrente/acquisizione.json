@@ -1,0 +1,247 @@
+{
+  "asin": "B0GJR36XWT",
+  "indicazione": "Dalle domande d'avvio (`concorrente/avvio.json`), decise dall'autore:\n\n- Mercato: amazon.com. Il libro è in lingua «en» e il prezzo si propone in USD.\n- Categoria: La stessa del libro di partenza: full-content se è un testo da leggere, medium-content se è un libro da compilare. Il posizionamento la propone, l'autore la conferma prima della scaletta.\n- Dove il libro nuovo deve battere quello di partenza:\n  - Le lacune delle recensioni: quello che chi ha già comprato l'altro libro dice di non aver trovato, soprattutto nelle recensioni da 2 e 3 stelle.\n  - Più pratico: struttura chiara, esempi concreti, passi da seguire, un indice che si consulta.\n  - Contenuto migliore: più completo e più preciso, senza allungare e senza ripetere quello che l'altro libro fa già bene.\n  - Un lettore più preciso: una situazione, un'età o un mestiere che l'altro libro serve male.\n  - Una copertina più attraente: nei risultati di ricerca, accanto all'altra, si nota prima e il titolo si legge meglio. Per questo il titolo dev'essere corto e forte in miniatura: le parole lunghe vanno nel sottotitolo.",
+  "scheda": {
+    "asin": "B0GJR36XWT",
+    "titolo": "Chart Like a Lawyer",
+    "sottotitolo": "Legal-Proof Documentation for Nurses & NPs",
+    "autore": "Jaime Weiland",
+    "editore": "Legal NP",
+    "lingua": "en",
+    "prezzo": null,
+    "valuta": "",
+    "pagine": 138,
+    "formato": "",
+    "pubblicato_il": "December 1, 2025",
+    "voto_medio": 4.7,
+    "numero_recensioni": 15,
+    "rango_generale": 2228,
+    "categorie": [
+      {
+        "nome": "Family & Health Malpractice Law",
+        "rango": 1
+      },
+      {
+        "nome": "Nursing Fundamentals & Skills",
+        "rango": 2
+      },
+      {
+        "nome": "Law",
+        "rango": 2
+      },
+      {
+        "nome": "Amazon Best Sellers in Nursing",
+        "rango": null
+      }
+    ],
+    "descrizione": [
+      "In Chart Like a Lawyer, Legal Nurse Consultant and Nurse Practitioner Jaime Weiland shows nurses and NPs how to protect their licenses with legally defensible documentation. Drawing from real-world malpractice cases, she breaks down what attorneys look for in your notes — and what could be used against you.",
+      "Learn how to:\n• Replace risky phrases like \"will continue to monitor\" with strong, protective language\n• Document critical thinking and clinical judgment clearly\n• Avoid common charting pitfalls that lead to lawsuits\n• Write notes that hold up under legal scrutiny",
+      "Whether you're new to nursing or a seasoned NP, this book will transform the way you document — giving you confidence, clarity, and control over your practice.",
+      "[parafrasi: versione dei rivenditori, riassunta dalla ricerca, non citata alla lettera] Documentation can either defend you or destroy you in court. Practical guidance on what plaintiff attorneys look for in chart notes, documenting reasoning rather than just tasks, safer alternatives to stock phrases, common charting pitfalls, and objective wording that holds up under oath. Written for bedside nurses, nurse practitioners and clinical leaders, with case breakdowns and charting strategies. Appendices at the back."
+    ],
+    "recensioni": [
+      {
+        "stelle": null,
+        "titolo": "",
+        "testo": "The examples of what NOT to chart and what TO chart were excellent. The appendices at the back are helpful for referencing.\nI feel like some parts of the book were very repetitive.\n[parafrasi] The same reader valued the explanation of depositions and legal processes."
+      },
+      {
+        "stelle": null,
+        "titolo": "",
+        "testo": "Rather surface level and slightly misleading as its only RN applicable nothing covering NP scenarios.\nGood basic tips but left wanting more especially for NP side with covering differentials, ama discharges, capacity determination, how to document system delays like if imaging delayed or q consult is called but doesnt show for prolonged time etc."
+      },
+      {
+        "stelle": null,
+        "titolo": "",
+        "testo": "I think every nurse should read this book! Especially as a new grad nurse trying to figure out my style of charting and what to chart/what not to chart,"
+      },
+      {
+        "stelle": null,
+        "titolo": "",
+        "testo": "Highly recommend this book to new nurses!"
+      },
+      {
+        "stelle": null,
+        "titolo": "",
+        "testo": "Solid content, but for the price I was disappointed to see some errors in formatting/typos."
+      }
+    ],
+    "problemi": [
+      "Il testo non è una pagina Amazon copiata: è una scheda compilata dalla ricerca web con le fonti, perché amazon.com non si raggiunge dal container e Cowork è spento. Le istantanee non hanno data e possono essere vecchie.",
+      "Le recensioni Amazon non sono arrivate: il testo non è stato raggiunto. Di Amazon c'è solo il voto medio 4.7 su 15 voti, preso da un elenco Bestseller in Nursing (istantanea senza data). `numero_recensioni` = 15 sono voti (ratings), non recensioni scritte.",
+      "Le 5 recensioni riportate sono tutte di Goodreads, non di Amazon. Le stelle delle singole recensioni non erano indicate, quindi `stelle` è null. Hanno data solo la seconda (May 2026) e la terza (September 2026). La prima contiene una riga [parafrasi], cioè riassunta dalla ricerca e non citata. Su Goodreads il libro ha 4.34 su 41 voti, con 6 recensioni scritte e circa l'87% di voti a 4 o 5 stelle. Altri voti: AbeBooks 4.38 su 13 (dati Goodreads), sito dell'autore thelegalnp.com 4.4. Non sono usati in `voto_medio`.",
+      "Prezzo Amazon non trovato, né per il paperback né per il Kindle: `prezzo` è null e `valuta` è vuota. Prezzi di listino trovati altrove, non su Amazon: $36.98 (Barnes & Noble, ThriftBooks); $36.97 di listino e $35.49 in offerta (World of Books).",
+      "Dimensioni del libro non trovate: `formato` è vuoto.",
+      "Indice (table of contents) non trovato in nessuna fonte, né dell'editore né dei rivenditori.",
+      "La descrizione è il testo dell'editore come postato dall'autore (fonte indicata: TikTok), non letto dalla pagina Amazon. L'ultimo elemento di `descrizione` è una [parafrasi] della versione dei rivenditori, non testo alla lettera.",
+      "`pagine` = 138 è del paperback (ASIN B0GJR36XWT, ISBN-13 979-8218860660). Altri formati: Kindle ASIN B0GF4H2LVS, 132 pagine; ebook Apple Books/RedShelf ISBN 979-8218860677, 104 pagine.",
+      "Classifica (amazon.com, paperback, istantanea di data ignota): il rango generale 2.228 in Books va in `rango_generale`; i ranghi di categoria sono separati. «Amazon Best Sellers in Nursing» risulta n. 1 in un'istantanea e n. 3 in un'altra, quindi `rango` è null. Il badge «#1 Best Seller in Family & Health Malpractice Law» è dell'edizione Kindle e non è tra le categorie del paperback.",
+      "La sezione «OTHER BOOKS IN THE NICHE» non è la scheda del concorrente e non è stata usata per nessun campo."
+    ]
+  },
+  "lacune": {
+    "lettore_reale": "L'infermiere/a agli inizi che compra per capire che cosa scrivere in cartella e che cosa no («Especially as a new grad nurse trying to figure out my style of charting and what to chart/what not to chart»; «Highly recommend this book to new nurses!»). L'unica lettrice con profilo da NP lo trova pensato solo per gli RN («its only RN applicable»). La scheda parla anche a chi è «seasoned NP», quindi il mercato reale sta un gradino sotto la promessa.",
+    "confidenza": "bassa",
+    "perche_questa_confidenza": "Cinque recensioni, tutte di Goodreads e nessuna di Amazon. Nessuna ha le stelle, quindi non si separano le critiche dalle lodi per voto: lo si fa solo dal contenuto. Il campione è stato raccolto dalla ricerca web, non è casuale. Due recensioni sono lodi senza difetti dichiarati, tre contengono un rilievo critico (la 1, la 2 e la 5), e i tre rilievi riguardano temi diversi. Nessun tema critico compare in due recensioni, quindi nessuna lacuna è confermata da più lettori. Le lacune sotto sono indizi da verificare con più recensioni, non tendenze. Il 4.7 su 15 di Amazon sono voti, non recensioni scritte, e dice solo che il libro piace.",
+    "lacune": [
+      {
+        "tema": "Scenari da NP assenti (promessa non mantenuta)",
+        "ricorrenze": 1,
+        "che_cosa_manca": "La scheda si rivolge a infermieri e NP («whether you're new to nursing or a seasoned NP»), ma una lettrice trova il contenuto valido solo per gli RN e vuole situazioni tipiche dell'NP: differenziali in copertura, dimissioni contro parere medico (AMA), valutazione della capacità decisionale, ritardi di sistema (imaging in ritardo, consulenza chiamata che non arriva). È l'indizio più specifico del campione, ma poggia su una sola recensione su cinque.",
+        "citazioni": [
+          "Rather surface level and slightly misleading as its only RN applicable nothing covering NP scenarios.",
+          "Good basic tips but left wanting more especially for NP side with covering differentials, ama discharges, capacity determination, how to document system delays like if imaging delayed or q consult is called but doesnt show for prolonged time etc."
+        ],
+        "vale_un_libro": false
+      },
+      {
+        "tema": "Ripetitività",
+        "ricorrenze": 1,
+        "che_cosa_manca": "Una lettrice, che pure ha apprezzato gli esempi, trova alcune parti troppo ripetitive. È una richiesta implicita di un testo più asciutto, non un tema mancante. Una sola recensione su cinque.",
+        "citazioni": [
+          "I feel like some parts of the book were very repetitive."
+        ],
+        "vale_un_libro": false
+      },
+      {
+        "tema": "Cura editoriale: refusi e impaginazione",
+        "ricorrenze": 1,
+        "che_cosa_manca": "Un lettore giudica il contenuto solido ma lamenta errori di impaginazione e refusi. Riguarda il testo e la composizione del libro, non la copia fisica ricevuta, quindi non si scarta. È un livello di esecuzione da superare (l'indice deve corrispondere al libro, niente refusi), non un libro da scrivere. Una sola recensione su cinque.",
+        "citazioni": [
+          "Solid content, but for the price I was disappointed to see some errors in formatting/typos."
+        ],
+        "vale_un_libro": false
+      }
+    ],
+    "da_non_toccare": [
+      {
+        "punto": "Gli esempi in coppia di che cosa NON scrivere e che cosa scrivere in cartella, e i consigli di base per chi inizia. È il motivo più concreto per cui il libro piace: lo citano la recensione 1 (lode esplicita), la 3 (il bisogno da cui nasce l'acquisto) e la 2 (che pure è critica).",
+        "citazioni": [
+          "The examples of what NOT to chart and what TO chart were excellent.",
+          "Especially as a new grad nurse trying to figure out my style of charting and what to chart/what not to chart",
+          "Good basic tips"
+        ]
+      },
+      {
+        "punto": "Le appendici in fondo, usate come materiale da consultare. Una sola recensione le cita, ma è l'unica che parla di consultazione e non di lettura.",
+        "citazioni": [
+          "The appendices at the back are helpful for referencing."
+        ]
+      },
+      {
+        "punto": "Il libro è raccomandato soprattutto ai nuovi infermieri e giudicato di contenuto solido: il livello di ingresso (da principiante) è quello che i lettori riconoscono e premiano.",
+        "citazioni": [
+          "Highly recommend this book to new nurses!",
+          "I think every nurse should read this book!",
+          "Solid content"
+        ]
+      }
+    ],
+    "prezzo": "Nessuna recensione dà un prezzo né dice che sia alto. Una sola lega il prezzo alla qualità di esecuzione: «Solid content, but for the price I was disappointed to see some errors in formatting/typos.» È un'osservazione sul rapporto qualità/prezzo (chi paga questa cifra si aspetta un libro senza refusi), non una lamentela sul prezzo in sé. Una recensione su cinque.",
+    "scartate": [
+      "Nessuna lamentela sulla copia fisica (pagine staccate, arrivato rovinato, consegna): nel campione non ce n'è nessuna, quindi non si è scartato nulla per questo motivo.",
+      "La riga della recensione 1 «[parafrasi] The same reader valued the explanation of depositions and legal processes.» non è testo del lettore ma un riassunto della ricerca web. Non può fare da citazione e non sostiene alcun punto: la spiegazione di deposizioni e processi legali resta un'ipotesi non verificata su cui non si costruisce nulla.",
+      "Le recensioni 3 e 4 sono lodi senza difetti dichiarati: servono solo a descrivere il lettore reale e non producono lacune.",
+      "La descrizione del libro (inclusa la versione in parafrasi dei rivenditori) non è una recensione e non è stata usata come citazione."
+    ]
+  },
+  "piano": {
+    "titolo": "Hard Calls, Clear Notes",
+    "sottotitolo": "A Casebook of Defensible Documentation for Nurse Practitioners",
+    "lingua": "en",
+    "argomento": "Legally defensible documentation for nurse practitioners, worked case by case through the provider-level situations where an NP's note is most exposed.",
+    "lettore": "Nurse practitioners in their first years of practice, especially RNs who have just moved into the provider role and now sign their own H&Ps, progress notes, emergency and urgent-care visits and discharge notes. They know how to chart as nurses but were never taught how a provider note is read after a bad outcome; they work in hospital medicine, emergency and urgent care or primary care, and need answers they can find in the middle of a shift. Final-year NP students on clinical rotations can use it too; bedside RNs are not the reader.",
+    "promessa": "A defensible note for each hard call an NP makes: the differential, the abnormal result, the consultant who never comes, the capacity question, the patient leaving against medical advice, the discharge, the telehealth visit, the prescription. For every situation the reader sees what the record will be asked later, a weak note next to its defensible rewrite, and the short list of elements the note has to contain, so they can write, in their own words and in the time a shift allows, a note that shows what they saw, what they considered and why they decided. It does not make anyone lawsuit-proof: it makes their reasoning visible on the record.",
+    "tono": "Precise, calm and practical: plain American English, legal terms defined the first time they appear, no fear-mongering and no war stories. Every principle is shown on a concrete note, each idea is explained once and cross-referenced rather than repeated, and the scenario chapters are built the same way so they can be found and used mid-shift.",
+    "genere": "non-fiction",
+    "categoria": "full",
+    "perche_questa_categoria": "Full-content, come il libro di partenza (un manuale a testo pieno con esempi e appendici): l'autore ha chiesto la categoria del concorrente, e le recensioni non spingono altrove. Chiedono più sostanza («Rather surface level», «left wanting more», gli scenari da NP che mancano), non esercizi né pagine da compilare. Le cose lodate, cioè gli esempi di che cosa scrivere e che cosa no e le appendici da consultare, sono contenuto, non spazi vuoti. Un NP documenta nell'EHR, non su carta: schede da compilare gli servirebbero poco, e nella nicchia ci sono già libri con template e cheat sheet. La praticità chiesta all'avvio arriva dalla struttura (scenari costruiti allo stesso modo, frasario, elenchi degli elementi, indice degli scenari), non da pagine interattive.",
+    "pagine_obiettivo": 176,
+    "prezzo": 21.99,
+    "valuta": "USD",
+    "perche_questo_prezzo": "Le pagine prima di tutto. 176 pagine bastano per una prima parte di principi, spiegati una volta sola, una ventina di capitoli-scenario e le appendici di consultazione, senza allungare: il libro di partenza ne ha 138 e una lettrice lo trova ripetitivo. In 6x9 bianco e nero su amazon.com la stampa costa circa $3.11 (1.00 + 176 × 0.012, da config/printing_costs.json, verificato il 2026-09-30). A $21.99 il libro sta nella fascia di royalty del 60% (da $9.99 in su) e rende circa $10.08 a copia (0.6 × 21.99 − 3.11). La formula della fabbrica, con $3 di royalty, darebbe $10.99: è poco per un manuale professionale che il lettore usa sul lavoro, e rischia di sembrare un libro di poco conto. Il prezzo non è agganciato a quello dell'altro libro (circa $37, che è un prezzo di listino di B&N e ThriftBooks, non di Amazon): la vetrina scelta dall'autore è la copertina, non il prezzo. Il prezzo del Kindle si fissa alla scheda prodotto.",
+    "parole_chiave": [
+      "legal charting guide for nurse practitioners",
+      "np documentation to protect your license",
+      "malpractice risk for nurse practitioners",
+      "nurse practitioner charting mistakes to avoid",
+      "high-risk charting scenarios with sample notes",
+      "legally defensible documentation for nps",
+      "ama discharge and capacity documentation"
+    ],
+    "categorie": [
+      "Books > Medical Books > Nursing > Assessment & Diagnosis",
+      "Books > Law > Family & Health Malpractice Law",
+      "Books > Medical Books > Medical Law & Legislation"
+    ],
+    "la_lacuna_che_copre": "Scenari da NP assenti (promessa non mantenuta). Nella nicchia della documentazione difendibile, i libri che si rivolgono a infermieri e NP insieme lavorano sulla nota infermieristica. Chi firma la nota da provider non ci trova le proprie situazioni: il differenziale da mettere per iscritto, la capacità decisionale, le dimissioni contro parere medico, i ritardi di sistema (l'imaging che non si fa, il consulente chiamato che non arriva). Questo libro è fatto di quelle situazioni. Accanto ci sono due lacune di esecuzione che il libro non deve ripetere: la ripetitività (ogni principio si spiega una volta e gli scenari ci rimandano) e i refusi e gli errori d'impaginazione (standard editoriale e controlli qa).",
+    "che_cosa_tiene": [
+      "Per ogni scenario, la nota debole accanto alla sua riscrittura difendibile: è la cosa che i lettori della nicchia lodano di più. Scenari, pazienti e formulazioni sono nostri, mai le frasi-esempio usate nella vetrina di altri libri.",
+      "Le appendici da consultare in fondo al libro: frasario per scenario, elenco degli elementi che la nota deve contenere, glossario dei termini legali.",
+      "Il livello d'ingresso che i lettori premiano, portato sul nuovo NP: la nota da provider si spiega da zero e il gergo legale non si dà per scontato.",
+      "La premessa della nicchia: la documentazione protegge il paziente, la licenza e la carriera, e si scrive pensando a chi la rileggerà dopo un esito avverso.",
+      "Il linguaggio oggettivo e i consigli pratici di base, che anche i lettori critici riconoscono come il punto forte del genere."
+    ],
+    "che_cosa_non_fa": [
+      "Non insegna la documentazione infermieristica al letto del paziente (flowsheet, consegne SBAR, note narrative dell'RN): la nicchia la copre già, e questo libro è per chi firma la nota da provider.",
+      "Non tratta codifica e fatturazione (livelli E/M, MDM ai fini del rimborso): il ragionamento clinico si documenta per chi lo rileggerà, non per il livello di fatturazione.",
+      "Non è consulenza legale e non dà regole stato per stato su scope of practice, collaborazione o prescrizione: dice che cosa chiedere a risk management, all'assicuratore e al board del proprio stato.",
+      "Non insegna a diagnosticare né a trattare: dà per acquisita la competenza clinica e lavora su come metterla per iscritto.",
+      "Non racconta casi giudiziari reali e non presenta come veri casi inventati: gli scenari sono costruiti e dichiarati come tali.",
+      "Niente moduli, template o pagine da compilare: è un testo da leggere e da consultare.",
+      "Non promette di mettere al riparo da cause, reclami o sanzioni.",
+      "Non dà istruzioni per i singoli software EHR.",
+      "Non ripete in ogni capitolo i principi generali: si spiegano una volta nella prima parte."
+    ],
+    "argomenti": [
+      "Come si legge una nota da provider dopo un esito avverso: la cartella come cronologia, il perito che la esamina e la domanda sullo standard di cura. Perché la nota dell'NP, che documenta una decisione, si legge diversamente da quella dell'RN, che documenta un'osservazione. Da dove nascono le richieste di risarcimento contro gli NP secondo i rapporti pubblici sui sinistri chiusi (per esempio CNA/NSO, da verificare). Si spiega una volta qui, e gli scenari ci rimandano invece di ripeterlo.",
+      "La valutazione come ragionamento scritto: il differenziale (che cosa si è considerato, che cosa si è escluso e su quale base, la diagnosi da non mancare pensata e scartata), la diagnosi di lavoro, l'incertezza dichiarata senza eccesso di sicurezza, le negatività pertinenti che reggono l'esclusione.",
+      "Esami e risultati, fino a chiudere il cerchio: perché si ordina un esame o non lo si ordina, chi rivede il risultato anomalo e che cosa ne fa, i reperti incidentali, il risultato che arriva quando il paziente è già andato via; chi è stato avvisato, quando e come.",
+      "Ritardi di sistema ed escalation: l'imaging che non si fa, il consulente chiamato che non arriva, il letto o il trasferimento che non si liberano. La cronologia delle chiamate, la gestione nel frattempo, il confronto con il medico collaboratore o di riferimento e la catena di comando, senza accusare i colleghi in cartella.",
+      "La capacità decisionale: valutarla e documentarla per una decisione precisa (comprendere, valutare la propria situazione, ragionare, esprimere una scelta), quando coinvolgere la psichiatria o il comitato etico, il decisore sostituto e le sue scelte.",
+      "Rifiuto informato e dimissioni contro parere medico: perché il modulo firmato non basta. Che cosa la nota deve mostrare: capacità, rischi spiegati in parole semplici, le parole del paziente, alternative offerte, porta lasciata aperta, follow-up proposto. I rifiuti parziali e il paziente che se ne va senza firmare.",
+      "Destinazione e rete di sicurezza: la dimissione da pronto soccorso e urgent care, istruzioni di ritorno specifiche per la diagnosi e non generiche, chi rivede il paziente e quando, il paziente che ritorna. Consegne e copertura notturna: che cosa ti è stato detto, che cosa hai fatto.",
+      "Le esposizioni lontano dal letto del paziente: la televisita e i limiti dell'esame a distanza, i consigli per telefono e nei messaggi del portale, le chiamate fuori orario, le visite saltate e i pazienti persi al follow-up, i referral mai completati.",
+      "La prescrizione come decisione documentata: la motivazione e i rischi discussi; le richieste di sostanze controllate e i controlli documentati dove lo chiede la legge del proprio stato, senza regole stato per stato; l'antibiotico non prescritto; il farmaco o l'esame chiesto dal paziente e non concesso.",
+      "Il linguaggio oggettivo negli incontri difficili: pazienti e familiari ostili, la richiesta insistente, il disaccordo con un collega. I fatti al posto degli aggettivi, le parole del paziente tra virgolette, che cosa non si scrive mai in cartella.",
+      "La cartella come documento. Le trappole dell'EHR: copia-avanti, esame obiettivo e revisione dei sistemi da modello che contraddicono l'anamnesi, campi precompilati, frasi automatiche. Annotazioni tardive e addendum, come correggere un errore senza alterare la cartella, la traccia di controllo. L'evento avverso: che cosa va in cartella e che cosa nella segnalazione interna. Quando arrivano una richiesta della cartella, un reclamo al board o una citazione: non toccare la cartella, chiamare risk management e l'assicuratore (informazione generale, non consulenza legale).",
+      "Le appendici di consultazione: per ogni scenario un frasario (formulazione debole → formulazione difendibile) e l'elenco degli elementi che la nota deve contenere, un breve glossario dei termini legali che un NP incontra, un indice degli scenari per ritrovarli durante il turno."
+    ],
+    "rischi": [
+      "Confidenza bassa. lacune.json poggia su cinque recensioni di Goodreads: nessuna è di Amazon e nessuna ha le stelle. Ogni lacuna ha una sola ricorrenza, e l'analista non ne ha giudicata nessuna «vale un libro» da sola. Il lettore NP non è costruito sulla sola recensione critica come se fosse una tendenza. Lo reggono insieme tre cose: la promessa che il libro di partenza fa e non mantiene (sottotitolo e descrizione si rivolgono anche agli NP, fino al «seasoned NP»); la scelta «lettore più preciso» fatta dall'autore all'avvio; la lista della nicchia, dove i titoli che nominano gli NP li mettono insieme agli infermieri e nessuno è solo per NP. Resta un'ipotesi. Va verificata con più recensioni (quelle da 2-3 stelle su Amazon, che non sono arrivate) e con i volumi di ricerca prima della scaletta, se Cowork torna disponibile.",
+      "Il lettore confermato da più recensioni è il neo-infermiere (due su cinque). Scegliendo l'NP si rinuncia al lettore più numeroso: gli NP negli Stati Uniti sono circa un decimo degli RN (stima da verificare). In cambio si ha un lettore servito male e un mercato meno affollato: nella lista della nicchia almeno tre libri, compreso quello di partenza, puntano già sul neo-infermiere. Se la verifica dei volumi desse quasi zero per le frasi su nurse practitioner documentation e charting, il ripiego è allargare agli advanced practice provider (NP e PA) con lo stesso impianto, non tornare all'RN.",
+      "Parole chiave senza volumi verificati. Cowork è spento e Amazon non si raggiunge, quindi cowork-parole-chiave-risposta.md non c'è. Le sette frasi vengono dai titoli e sottotitoli della sezione «OTHER BOOKS IN THE NICHE» di pagina.md (legal charting, protect your license, prevent lawsuits e avoid charting mistakes, high-risk scenarios, real charting examples, legally defensible documentation) e dalla scheda (malpractice, Nurses & NPs), adattate al lettore NP. Nessuna ha autocompletamento, volume o concorrenza verificati. «ama discharge and capacity documentation» viene solo dalla recensione critica: è la meno sicura e la prima da sostituire. La verifica si fa alla scheda prodotto (cowork-verifica-parole-chiave).",
+      "Autorevolezza. Il libro di partenza vende anche sulle credenziali dell'autrice (consulente legale infermieristica e NP, anni di area critica). Uno pseudonimo non può averne: niente sigle dopo il nome, niente biografia da clinico, niente «come NP ho visto…». L'autorevolezza deve venire dal contenuto: precisione, scenari credibili, fonti pubbliche verificabili (rapporti sui sinistri, letteratura sulla capacità decisionale e sulle dimissioni contro parere). In una nicchia professionale questo può convertire meno.",
+      "Materia YMYL. Responsabilità professionale, scope of practice e regole di prescrizione cambiano da stato a stato. Servono un'avvertenza chiara (informazione generale, non consulenza legale) e il fact-checker su ogni affermazione normativa o statistica, e nessuna regola va presentata come nazionale se non lo è. «Casebook» non deve far pensare a una raccolta di sentenze: gli scenari sono dichiarati costruiti.",
+      "Titolo. In miniatura si legge solo «HARD CALLS, CLEAR NOTES», che da solo non dice né NP né cartella. Lo dice il sottotitolo, che nei risultati di ricerca sta prima del taglio dei 60 caratteri («Hard Calls, Clear Notes: A Nurse Practitioner's Casebook for»), ma in copertina è piccolo. Se il controllo in miniatura lo mostra debole, l'alternativa è aggiungere «for NPs» al titolo.",
+      "Categorie. I percorsi sono ricostruiti dai nomi foglia della scheda (Family & Health Malpractice Law) e del bollino di un libro della nicchia (Medical Law & Legislation), senza verificare i nodi intermedi. «Nursing > Assessment & Diagnosis» è una scelta per il lettore NP, non un dato. Si verificano alla scheda.",
+      "Prezzo. I prezzi degli altri libri della nicchia non sono nei dati, e quello del libro di partenza (circa $37) è un listino fuori da Amazon. Se alla scheda i titoli comparabili risultassero sotto i $20, si scende a $19.99: royalty circa $8.88, sempre nella fascia del 60%."
+    ],
+    "pseudonimo": "Dana Ellery",
+    "perche_questo_pseudonimo": "Nome breve e neutro, credibile sul mercato USA e leggibile in copertina. Non somiglia all'autrice del libro di partenza né agli autori della lista della nicchia. Non porta credenziali né sigle professionali, che uno pseudonimo non può avere. Prima di confermarlo va verificato che su Amazon non esista già un autore con questo nome nella nicchia medica o infermieristica."
+  },
+  "originalita": {
+    "note": "Il libro nuovo è indipendente da quello di partenza: titolo e sottotitolo sono distinguibili, nessun nome (titolo, autrice, editore, sito) compare nel piano, e la lacuna dichiarata è la prima di lacune.json. Gli argomenti non ricalcano nulla, perché l'indice del libro di partenza non è disponibile e le voci della descrizione sono la nicchia. Restano due piccole incoerenze di conformità.",
+    "segnalazioni": [
+      {
+        "agent": "originalita",
+        "severity": "minore",
+        "category": "parole chiave in contrasto col piano",
+        "issue": "Alcune parole chiave promettono ciò che il piano dichiara di non fare. «prevent lawsuits» e «malpractice prevention» promettono un esito, mentre il piano dice «Non promette di mettere al riparo da cause, reclami o sanzioni». «high-risk charting scenarios with real examples» promette esempi reali, mentre gli scenari sono costruiti e il piano dice «Non racconta casi giudiziari reali».",
+        "chapter": null,
+        "quote": "avoid charting mistakes and prevent lawsuits",
+        "suggestion": "Togliere «prevent lawsuits» e «malpractice prevention» e usare formule che descrivono il contenuto, per esempio «nurse practitioner charting mistakes to avoid» e «malpractice risk for nurse practitioners». Sostituire «real examples» con «worked examples» o «sample notes»."
+      },
+      {
+        "agent": "originalita",
+        "severity": "minore",
+        "category": "sottotitolo che suggerisce credenziali",
+        "issue": "Il possessivo «A Nurse Practitioner's Casebook» si legge anche come «il casebook di un NP», cioè come se l'autore fosse un NP. Il piano stesso esclude credenziali e biografia da clinico per lo pseudonimo, perché uno pseudonimo non può averne.",
+        "chapter": null,
+        "quote": "A Nurse Practitioner's Casebook for Defensible Documentation",
+        "suggestion": "Riformulare in modo che il destinatario sia chiaro e la paternità no, per esempio «A Casebook of Defensible Documentation for Nurse Practitioners», e ricontrollare la lettura in miniatura."
+      }
+    ]
+  }
+}

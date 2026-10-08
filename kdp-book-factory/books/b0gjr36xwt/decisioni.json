@@ -1,0 +1,73 @@
+{
+  "decisioni": [
+    {
+      "chiave": "categoria",
+      "proposta": "full-content",
+      "alternative": [
+        "medium-content"
+      ],
+      "perche": "Come il concorrente, scelto all'avvio: i lettori chiedono più sostanza e scenari, non pagine da compilare; un NP documenta nell'EHR.",
+      "chiesta_il": "2026-10-08T05:54:54Z",
+      "scade_il": "2026-10-09T05:54:54Z",
+      "stato": "in attesa",
+      "valore": "",
+      "deciso_il": "",
+      "applicata": false
+    },
+    {
+      "chiave": "titolo",
+      "proposta": "Hard Calls, Clear Notes: The NP Casebook of Defensible Documentation",
+      "alternative": [
+        "Hard Calls, Clear Notes: A Casebook of Defensible Documentation for Nurse Practitioners",
+        "Hard Calls, Clear Notes for NPs: A Casebook of Defensible Documentation"
+      ],
+      "perche": "Lettore NP, la lacuna più specifica delle recensioni; il sottotitolo mette NP prima del taglio a 60 caratteri dei risultati di ricerca e non fa pensare che l'autore sia un NP.",
+      "chiesta_il": "2026-10-08T05:54:54Z",
+      "scade_il": "2026-10-09T05:54:54Z",
+      "stato": "in attesa",
+      "valore": "",
+      "deciso_il": "",
+      "applicata": false
+    },
+    {
+      "chiave": "promessa",
+      "proposta": "A defensible note for each hard call an NP makes (differential, abnormal result, consultant who never comes, capacity, AMA, discharge, telehealth, prescription): the weak note beside its defensible rewrite, and the elements the note must contain. It makes reasoning visible on the record; it does not make anyone lawsuit-proof.",
+      "alternative": [],
+      "perche": "Copre gli scenari da NP che il concorrente promette e non dà; tiene gli esempi prima/dopo e le appendici che i lettori lodano.",
+      "chiesta_il": "2026-10-08T05:54:55Z",
+      "scade_il": "2026-10-09T05:54:55Z",
+      "stato": "in attesa",
+      "valore": "",
+      "deciso_il": "",
+      "applicata": false
+    },
+    {
+      "chiave": "prezzo",
+      "proposta": "21.99 USD (cartaceo, 176 pagine)",
+      "alternative": [
+        "19.99 USD"
+      ],
+      "perche": "Fascia di royalty del 60%, circa 10 USD a copia; il concorrente costa circa 37 USD fuori da Amazon; si scende a 19.99 se i comparabili su Amazon stanno sotto i 20.",
+      "chiesta_il": "2026-10-08T05:54:55Z",
+      "scade_il": "2026-10-09T05:54:55Z",
+      "stato": "in attesa",
+      "valore": "",
+      "deciso_il": "",
+      "applicata": false
+    },
+    {
+      "chiave": "pseudonimo",
+      "proposta": "Dana Ellery",
+      "alternative": [
+        "uno pseudonimo scelto dall'autore"
+      ],
+      "perche": "Breve, neutro, credibile sul mercato USA, senza credenziali; la ricerca web non trova autori con questo nome.",
+      "chiesta_il": "2026-10-08T05:54:55Z",
+      "scade_il": "2026-10-09T05:54:55Z",
+      "stato": "in attesa",
+      "valore": "",
+      "deciso_il": "",
+      "applicata": false
+    }
+  ]
+}

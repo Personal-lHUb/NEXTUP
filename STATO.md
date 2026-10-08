@@ -5,20 +5,36 @@ sessione dopo parte da qui.
 
 ## Il libro in corso
 
-**`b0gjr36xwt`**: libro nuovo contro il concorrente **B0GJR36XWT**
-(amazon.com, inglese). Domande d'avvio complete: categoria come il concorrente;
-da battere su lacune delle recensioni, praticità, contenuto e lettore; in
-vetrina con la copertina; pseudonimo nuovo; pagina portata da Cowork.
+**`b0gjr36xwt`**: *Hard Calls, Clear Notes: The NP Casebook of Defensible
+Documentation*, di Dana Ellery. Full-content, inglese, amazon.com, 176 pagine,
+21,99 USD. Libro per nurse practitioner sulla documentazione difendibile,
+scenario per scenario (differenziale, risultati anomali, consulente che non
+arriva, capacità decisionale, dimissioni contro parere, televisita,
+prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
+138 pagine): promette anche agli NP ma, secondo una recensione, serve solo gli RN.
 
-- **Fase 0, ferma.** Mancano la pagina Amazon del concorrente con le
-  recensioni (`concorrente/cowork-concorrente.md`), le parole chiave della
-  nicchia (`concorrente/cowork-parole-chiave.md`) e lo studio delle copertine
-  della categoria (`concorrente/cowork-copertine-categoria.md`).
-- **La via più rapida**: l'autore incolla il testo della pagina Amazon (scheda,
-  descrizione, recensioni, soprattutto quelle da 2-3 stelle) in
-  `books/b0gjr36xwt/concorrente/pagina.md`, o nella chat; poi parte la fase 0
-  (`scheda-concorrente` → `analista-recensioni` → `posizionamento` →
-  `originalita`, `docs/linee-guida.md`).
+- **Fase 0 chiusa** (8 ottobre). Amazon non si raggiunge dal container, quindi
+  la pagina del concorrente (`concorrente/pagina.md`) è stata compilata dalla
+  ricerca web, con le fonti. Uscite dei quattro agenti in `concorrente/`
+  (`scheda`, `lacune`, `piano`, `originalita`), poi `concorrente importa`:
+  `book.json` e `brief.md`. Originalità: zero bloccanti. Le due minori
+  (parole chiave che promettevano un esito, sottotitolo che faceva pensare a un
+  autore NP) sono corrette nel piano. Il sottotitolo in `book.json` mette «NP»
+  prima del taglio a 60 caratteri. La linea editoriale è in `notes`.
+- **Debolezze dichiarate**: le lacune hanno confidenza bassa (cinque recensioni
+  di Goodreads, nessuna di Amazon). Le sette parole chiave non hanno volumi
+  verificati. Le categorie KDP sono ricostruite. Si verificano alla scheda
+  prodotto (fase 6), o prima, se Cowork torna.
+- **Decisioni dell'autore in silenzio-assenso** (`decisioni.json`): categoria,
+  titolo, promessa, prezzo, pseudonimo. Scadono il **9 ottobre alle 05:55 UTC**.
+  Una risposta dell'autore vince sempre (`decisioni b0gjr36xwt --scegli … --valore …`).
+- **Prossimo passo: fase 1**, in una sessione nuova: `architetto` (scaletta e
+  piano delle figure) → `indice` → `manuale b0gjr36xwt scaletta --esamina`.
+  `produzione` la dà ferma finché le decisioni non scadono o non arriva la
+  risposta.
+- L'uscita di un agente si salva con
+  `python3 -m kdpfactory trascrizione <id-agente> <file.json>`, con
+  `--etichetta SCALETTA` / `FIGURE` per l'architetto.
 
 ## Routine e Cowork
 
@@ -28,6 +44,10 @@ vetrina con la copertina; pseudonimo nuovo; pagina portata da Cowork.
 - Le attività di Cowork sul portatile hanno ancora il **prompt vecchio, quello
   di Drive**: prima di riaccenderle, l'autore approva in una conversazione Cowork
   sul portatile i prompt nuovi di `kdp-book-factory/config/attivita-cowork.json`.
+- Restano aperte per b0gjr36xwt: `cowork-concorrente.md` (le recensioni Amazon
+  da 2-3 stelle servirebbero a verificare il lettore NP),
+  `cowork-parole-chiave.md` e `cowork-copertine-categoria.md` (lo studio delle
+  copertine serve alla fase 7).
 - Nessuna consegna col canale nuovo (`fire_trigger` con la risposta nel testo) è
   ancora arrivata: non è dimostrato che Cowork abbia lo strumento.
 
