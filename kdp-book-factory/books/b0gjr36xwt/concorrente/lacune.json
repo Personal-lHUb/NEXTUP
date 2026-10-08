@@ -1,0 +1,66 @@
+{
+  "lettore_reale": "L'infermiere/a agli inizi che compra per capire che cosa scrivere in cartella e che cosa no («Especially as a new grad nurse trying to figure out my style of charting and what to chart/what not to chart»; «Highly recommend this book to new nurses!»). L'unica lettrice con profilo da NP lo trova pensato solo per gli RN («its only RN applicable»). La scheda parla anche a chi è «seasoned NP», quindi il mercato reale sta un gradino sotto la promessa.",
+  "confidenza": "bassa",
+  "perche_questa_confidenza": "Cinque recensioni, tutte di Goodreads e nessuna di Amazon. Nessuna ha le stelle, quindi non si separano le critiche dalle lodi per voto: lo si fa solo dal contenuto. Il campione è stato raccolto dalla ricerca web, non è casuale. Due recensioni sono lodi senza difetti dichiarati, tre contengono un rilievo critico (la 1, la 2 e la 5), e i tre rilievi riguardano temi diversi. Nessun tema critico compare in due recensioni, quindi nessuna lacuna è confermata da più lettori. Le lacune sotto sono indizi da verificare con più recensioni, non tendenze. Il 4.7 su 15 di Amazon sono voti, non recensioni scritte, e dice solo che il libro piace.",
+  "lacune": [
+    {
+      "tema": "Scenari da NP assenti (promessa non mantenuta)",
+      "ricorrenze": 1,
+      "che_cosa_manca": "La scheda si rivolge a infermieri e NP («whether you're new to nursing or a seasoned NP»), ma una lettrice trova il contenuto valido solo per gli RN e vuole situazioni tipiche dell'NP: differenziali in copertura, dimissioni contro parere medico (AMA), valutazione della capacità decisionale, ritardi di sistema (imaging in ritardo, consulenza chiamata che non arriva). È l'indizio più specifico del campione, ma poggia su una sola recensione su cinque.",
+      "citazioni": [
+        "Rather surface level and slightly misleading as its only RN applicable nothing covering NP scenarios.",
+        "Good basic tips but left wanting more especially for NP side with covering differentials, ama discharges, capacity determination, how to document system delays like if imaging delayed or q consult is called but doesnt show for prolonged time etc."
+      ],
+      "vale_un_libro": false
+    },
+    {
+      "tema": "Ripetitività",
+      "ricorrenze": 1,
+      "che_cosa_manca": "Una lettrice, che pure ha apprezzato gli esempi, trova alcune parti troppo ripetitive. È una richiesta implicita di un testo più asciutto, non un tema mancante. Una sola recensione su cinque.",
+      "citazioni": [
+        "I feel like some parts of the book were very repetitive."
+      ],
+      "vale_un_libro": false
+    },
+    {
+      "tema": "Cura editoriale: refusi e impaginazione",
+      "ricorrenze": 1,
+      "che_cosa_manca": "Un lettore giudica il contenuto solido ma lamenta errori di impaginazione e refusi. Riguarda il testo e la composizione del libro, non la copia fisica ricevuta, quindi non si scarta. È un livello di esecuzione da superare (l'indice deve corrispondere al libro, niente refusi), non un libro da scrivere. Una sola recensione su cinque.",
+      "citazioni": [
+        "Solid content, but for the price I was disappointed to see some errors in formatting/typos."
+      ],
+      "vale_un_libro": false
+    }
+  ],
+  "da_non_toccare": [
+    {
+      "punto": "Gli esempi in coppia di che cosa NON scrivere e che cosa scrivere in cartella, e i consigli di base per chi inizia. È il motivo più concreto per cui il libro piace: lo citano la recensione 1 (lode esplicita), la 3 (il bisogno da cui nasce l'acquisto) e la 2 (che pure è critica).",
+      "citazioni": [
+        "The examples of what NOT to chart and what TO chart were excellent.",
+        "Especially as a new grad nurse trying to figure out my style of charting and what to chart/what not to chart",
+        "Good basic tips"
+      ]
+    },
+    {
+      "punto": "Le appendici in fondo, usate come materiale da consultare. Una sola recensione le cita, ma è l'unica che parla di consultazione e non di lettura.",
+      "citazioni": [
+        "The appendices at the back are helpful for referencing."
+      ]
+    },
+    {
+      "punto": "Il libro è raccomandato soprattutto ai nuovi infermieri e giudicato di contenuto solido: il livello di ingresso (da principiante) è quello che i lettori riconoscono e premiano.",
+      "citazioni": [
+        "Highly recommend this book to new nurses!",
+        "I think every nurse should read this book!",
+        "Solid content"
+      ]
+    }
+  ],
+  "prezzo": "Nessuna recensione dà un prezzo né dice che sia alto. Una sola lega il prezzo alla qualità di esecuzione: «Solid content, but for the price I was disappointed to see some errors in formatting/typos.» È un'osservazione sul rapporto qualità/prezzo (chi paga questa cifra si aspetta un libro senza refusi), non una lamentela sul prezzo in sé. Una recensione su cinque.",
+  "scartate": [
+    "Nessuna lamentela sulla copia fisica (pagine staccate, arrivato rovinato, consegna): nel campione non ce n'è nessuna, quindi non si è scartato nulla per questo motivo.",
+    "La riga della recensione 1 «[parafrasi] The same reader valued the explanation of depositions and legal processes.» non è testo del lettore ma un riassunto della ricerca web. Non può fare da citazione e non sostiene alcun punto: la spiegazione di deposizioni e processi legali resta un'ipotesi non verificata su cui non si costruisce nulla.",
+    "Le recensioni 3 e 4 sono lodi senza difetti dichiarati: servono solo a descrivere il lettore reale e non producono lacune.",
+    "La descrizione del libro (inclusa la versione in parafrasi dei rivenditori) non è una recensione e non è stata usata come citazione."
+  ]
+}

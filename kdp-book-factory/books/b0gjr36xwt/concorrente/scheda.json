@@ -1,0 +1,79 @@
+{
+  "asin": "B0GJR36XWT",
+  "titolo": "Chart Like a Lawyer",
+  "sottotitolo": "Legal-Proof Documentation for Nurses & NPs",
+  "autore": "Jaime Weiland",
+  "editore": "Legal NP",
+  "lingua": "en",
+  "prezzo": null,
+  "valuta": "",
+  "pagine": 138,
+  "formato": "",
+  "pubblicato_il": "December 1, 2025",
+  "voto_medio": 4.7,
+  "numero_recensioni": 15,
+  "rango_generale": 2228,
+  "categorie": [
+    {
+      "nome": "Family & Health Malpractice Law",
+      "rango": 1
+    },
+    {
+      "nome": "Nursing Fundamentals & Skills",
+      "rango": 2
+    },
+    {
+      "nome": "Law",
+      "rango": 2
+    },
+    {
+      "nome": "Amazon Best Sellers in Nursing",
+      "rango": null
+    }
+  ],
+  "descrizione": [
+    "In Chart Like a Lawyer, Legal Nurse Consultant and Nurse Practitioner Jaime Weiland shows nurses and NPs how to protect their licenses with legally defensible documentation. Drawing from real-world malpractice cases, she breaks down what attorneys look for in your notes — and what could be used against you.",
+    "Learn how to:\n• Replace risky phrases like \"will continue to monitor\" with strong, protective language\n• Document critical thinking and clinical judgment clearly\n• Avoid common charting pitfalls that lead to lawsuits\n• Write notes that hold up under legal scrutiny",
+    "Whether you're new to nursing or a seasoned NP, this book will transform the way you document — giving you confidence, clarity, and control over your practice.",
+    "[parafrasi: versione dei rivenditori, riassunta dalla ricerca, non citata alla lettera] Documentation can either defend you or destroy you in court. Practical guidance on what plaintiff attorneys look for in chart notes, documenting reasoning rather than just tasks, safer alternatives to stock phrases, common charting pitfalls, and objective wording that holds up under oath. Written for bedside nurses, nurse practitioners and clinical leaders, with case breakdowns and charting strategies. Appendices at the back."
+  ],
+  "recensioni": [
+    {
+      "stelle": null,
+      "titolo": "",
+      "testo": "The examples of what NOT to chart and what TO chart were excellent. The appendices at the back are helpful for referencing.\nI feel like some parts of the book were very repetitive.\n[parafrasi] The same reader valued the explanation of depositions and legal processes."
+    },
+    {
+      "stelle": null,
+      "titolo": "",
+      "testo": "Rather surface level and slightly misleading as its only RN applicable nothing covering NP scenarios.\nGood basic tips but left wanting more especially for NP side with covering differentials, ama discharges, capacity determination, how to document system delays like if imaging delayed or q consult is called but doesnt show for prolonged time etc."
+    },
+    {
+      "stelle": null,
+      "titolo": "",
+      "testo": "I think every nurse should read this book! Especially as a new grad nurse trying to figure out my style of charting and what to chart/what not to chart,"
+    },
+    {
+      "stelle": null,
+      "titolo": "",
+      "testo": "Highly recommend this book to new nurses!"
+    },
+    {
+      "stelle": null,
+      "titolo": "",
+      "testo": "Solid content, but for the price I was disappointed to see some errors in formatting/typos."
+    }
+  ],
+  "problemi": [
+    "Il testo non è una pagina Amazon copiata: è una scheda compilata dalla ricerca web con le fonti, perché amazon.com non si raggiunge dal container e Cowork è spento. Le istantanee non hanno data e possono essere vecchie.",
+    "Le recensioni Amazon non sono arrivate: il testo non è stato raggiunto. Di Amazon c'è solo il voto medio 4.7 su 15 voti, preso da un elenco Bestseller in Nursing (istantanea senza data). `numero_recensioni` = 15 sono voti (ratings), non recensioni scritte.",
+    "Le 5 recensioni riportate sono tutte di Goodreads, non di Amazon. Le stelle delle singole recensioni non erano indicate, quindi `stelle` è null. Hanno data solo la seconda (May 2026) e la terza (September 2026). La prima contiene una riga [parafrasi], cioè riassunta dalla ricerca e non citata. Su Goodreads il libro ha 4.34 su 41 voti, con 6 recensioni scritte e circa l'87% di voti a 4 o 5 stelle. Altri voti: AbeBooks 4.38 su 13 (dati Goodreads), sito dell'autore thelegalnp.com 4.4. Non sono usati in `voto_medio`.",
+    "Prezzo Amazon non trovato, né per il paperback né per il Kindle: `prezzo` è null e `valuta` è vuota. Prezzi di listino trovati altrove, non su Amazon: $36.98 (Barnes & Noble, ThriftBooks); $36.97 di listino e $35.49 in offerta (World of Books).",
+    "Dimensioni del libro non trovate: `formato` è vuoto.",
+    "Indice (table of contents) non trovato in nessuna fonte, né dell'editore né dei rivenditori.",
+    "La descrizione è il testo dell'editore come postato dall'autore (fonte indicata: TikTok), non letto dalla pagina Amazon. L'ultimo elemento di `descrizione` è una [parafrasi] della versione dei rivenditori, non testo alla lettera.",
+    "`pagine` = 138 è del paperback (ASIN B0GJR36XWT, ISBN-13 979-8218860660). Altri formati: Kindle ASIN B0GF4H2LVS, 132 pagine; ebook Apple Books/RedShelf ISBN 979-8218860677, 104 pagine.",
+    "Classifica (amazon.com, paperback, istantanea di data ignota): il rango generale 2.228 in Books va in `rango_generale`; i ranghi di categoria sono separati. «Amazon Best Sellers in Nursing» risulta n. 1 in un'istantanea e n. 3 in un'altra, quindi `rango` è null. Il badge «#1 Best Seller in Family & Health Malpractice Law» è dell'edizione Kindle e non è tra le categorie del paperback.",
+    "La sezione «OTHER BOOKS IN THE NICHE» non è la scheda del concorrente e non è stata usata per nessun campo."
+  ]
+}
