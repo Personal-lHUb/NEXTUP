@@ -25,13 +25,27 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   di Goodreads, nessuna di Amazon). Le sette parole chiave non hanno volumi
   verificati. Le categorie KDP sono ricostruite. Si verificano alla scheda
   prodotto (fase 6), o prima, se Cowork torna.
-- **Decisioni dell'autore in silenzio-assenso** (`decisioni.json`): categoria,
-  titolo, promessa, prezzo, pseudonimo. Scadono il **9 ottobre alle 05:55 UTC**.
-  Una risposta dell'autore vince sempre (`decisioni b0gjr36xwt --scegli … --valore …`).
-- **Prossimo passo: fase 1**, in una sessione nuova: `architetto` (scaletta e
-  piano delle figure) → `indice` → `manuale b0gjr36xwt scaletta --esamina`.
-  `produzione` la dà ferma finché le decisioni non scadono o non arriva la
-  risposta.
+- **Decisioni dell'autore** (`decisioni.json`): categoria full-content, titolo,
+  promessa e pseudonimo **scelti dall'autore** l'8 ottobre. Il prezzo (21,99
+  USD, alternativa 19,99) è in silenzio-assenso fino al 9 ottobre, 05:55 UTC.
+- **Fase 1 chiusa** (8 ottobre). Scaletta dell'architetto: 25 capitoli in
+  quattro parti (principi; workup; rifiuti, uscite e dopo; consultazione con
+  frasario, elenchi per scenario e glossario), più l'introduzione. Nessuna
+  figura (`figure.json`, `servono: false`): le note rendono meglio come testo
+  composto. Titoli dell'agente `indice` in `manuale/indice.json`, applicati alla
+  scaletta. Revisore: zero bloccanti, zero importanti (una minore, falsa: due
+  «one» in quarta che non sono quantità). `include_conclusion: false` in
+  `book.json`: la conclusione sarebbe caduta dopo il glossario. `outline.json`:
+  26 sezioni, circa 44.700 parole, ~1.750 per capitolo.
+- Correzione del motore emersa qui: il posizionamento scriveva i temi del brief
+  in italiano per un libro in inglese, e il revisore dava 12 bloccanti falsi.
+  Ora il prompt chiede la lingua del libro e il revisore dà un bloccante solo,
+  «brief in un'altra lingua». I temi di questo libro sono stati tradotti.
+- **Prossimo passo: fase 2, stesura**, in una sessione nuova:
+  `manuale b0gjr36xwt capitolo --numero 1` → `ghostwriter` → `manuale
+  b0gjr36xwt capitolo --numero 1 --importa`, e così per le 26 sezioni.
+  **Cancello: il capitolo 1 deve convincere l'autore** prima di scrivere gli
+  altri: dopo il primo, si manda all'autore e si aspetta.
 - L'uscita di un agente si salva con
   `python3 -m kdpfactory trascrizione <id-agente> <file.json>`, con
   `--etichetta SCALETTA` / `FIGURE` per l'architetto.
