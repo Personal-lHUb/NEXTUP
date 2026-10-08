@@ -41,15 +41,27 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   in italiano per un libro in inglese, e il revisore dava 12 bloccanti falsi.
   Ora il prompt chiede la lingua del libro e il revisore dà un bloccante solo,
   «brief in un'altra lingua». I temi di questo libro sono stati tradotti.
-- **Fase 2, stesura, in corso** (8 ottobre). Scritte e importate la sezione 1
-  (introduzione, 1.091 parole) e la 2 (capitolo 1, «What a Chart Becomes After a
-  Bad Outcome», 1.812 parole). **Cancello aperto: la voce** è proposta
-  all'autore in silenzio-assenso fino al **9 ottobre, 12:37 UTC**; `produzione`
-  dà la fase ferma fino ad allora o alla sua risposta. Poi le sezioni 3-26, una
-  alla volta: `manuale b0gjr36xwt capitolo --numero N` (rigenera il brief col
-  già scritto) → `ghostwriter` (gli si danno il brief e i capitoli già in
-  `manuscript/`) → `trascrizione <id> books/b0gjr36xwt/manuale/capitolo-NN.md
-  --testo` → `manuale b0gjr36xwt capitolo --numero N --importa`.
+- **Fase 2 chiusa** (8 ottobre). La voce del capitolo 1 è stata scelta
+  dall'autore per tutto il libro. 26 sezioni scritte e importate, 47.700 parole;
+  il libro intero in un file è `manoscritto-completo.md`. Prima parte in fila,
+  seconda e terza in due flussi paralleli (cognomi A-L e M-Z per non avere
+  personaggi doppi), consultazione per ultima. Lo «Scenario Finder» è il 53%
+  sopra budget perché riporta alla lettera gli elenchi dei capitoli: voluto.
+- **Fase 3, prima impaginazione di lavoro** in 6×9: 176 pagine
+  (intervallo 167-185). Impaginazione: 0 bloccanti, 0 importanti, 3 minori.
+  **Il formato definitivo lo decide l'autore** dopo il confronto coi
+  concorrenti (`concorrente/ricerca-web-vetrina.md`: 6×9 per i libri da leggere,
+  8,5×11 per le raccolte di modelli).
+- **Fase 4, collegio in corso**: lettore cieco (libro e vetrina), editor di
+  sviluppo, tre fact-checker (sezioni 1-8, 9-16, 17-26), conformità con la
+  proposta di disclaimer. I rapporti si salvano con `trascrizione <id>
+  books/b0gjr36xwt/revisioni/<agente>.md --testo` (cominciano con `# Rapporto`).
+- **Richieste dell'autore per dopo il collegio**: se il lettore cieco dà l'OK,
+  le immagini dell'interno prendendo a riferimento i libri analoghi (i box per
+  le note deboli e riscritte, più quello che il confronto suggerisce, con un
+  piano da proporre); la copertina come bozza a bassa risoluzione su Higgsfield,
+  da far approvare all'autore (studio della categoria dalla ricerca web); il
+  formato di stampa da proporre all'autore, che dà l'OK.
 - `manuscript/` non entra in git: il testo consegnato sta in
   `manuale/capitolo-NN.md`. In una sessione nuova si ricostruisce con
   `manuale b0gjr36xwt capitolo --numero N --importa` per ogni sezione già
