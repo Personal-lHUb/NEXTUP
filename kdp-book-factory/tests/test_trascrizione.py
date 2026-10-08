@@ -46,6 +46,17 @@ class TestTrascrizione(unittest.TestCase):
         self.assertEqual(trascrizione.oggetto(percorso, "SCALETTA"), {"chapters": [1, 2]})
         self.assertEqual(trascrizione.oggetto(percorso, "FIGURE"), {"servono": False})
 
+    def test_il_capitolo_si_salva_dal_titolo_senza_preambolo_ne_recinzione(self):
+        self._scrivi(
+            "ghost",
+            _riga("assistant", "Here is the chapter.\n\n```markdown\n# The Title\n\nFirst line.\n\n"
+                               "## A Section\n\nMore text.\n```\n"),
+        )
+        uscita = self.radice / "manuale" / "capitolo-02.md"
+        corpo = trascrizione.salva_testo("ghost", uscita, radice=self.radice)
+        self.assertEqual(corpo, "# The Title\n\nFirst line.\n\n## A Section\n\nMore text.\n")
+        self.assertEqual(uscita.read_text(encoding="utf-8"), corpo)
+
     def test_senza_oggetto_lo_dice(self):
         percorso = self._scrivi("vuoto", _riga("assistant", "Non ho trovato la pagina."))
         with self.assertRaises(ValueError):

@@ -84,6 +84,32 @@ def oggetto(percorso: Path, etichetta: str = "") -> dict:
     raise ValueError(f"Nessun oggetto JSON{dove} nei messaggi di {percorso.name}.")
 
 
+def testo(percorso: Path, inizio: str = "# ") -> str:
+    """Il testo dell'ultimo messaggio che contiene una riga che comincia con `inizio`.
+
+    Per gli agenti che scrivono (il ghostwriter consegna il capitolo in
+    markdown): si tiene dalla prima riga che comincia con `inizio` in poi, così
+    un preambolo o una recinzione ```markdown non finiscono nel manoscritto.
+    """
+    for messaggio in reversed(_testi(percorso)):
+        righe = messaggio.splitlines()
+        for i, riga in enumerate(righe):
+            if riga.startswith(inizio):
+                corpo = righe[i:]
+                while corpo and corpo[-1].strip() in {"", "```"}:
+                    corpo.pop()
+                return "\n".join(corpo) + "\n"
+    raise ValueError(f"Nessun messaggio di {percorso.name} ha una riga che comincia con «{inizio}».")
+
+
+def salva_testo(agente: str, uscita: Path, inizio: str = "# ", radice: Path = PROGETTI) -> str:
+    """Trova la trascrizione, ne estrae il testo consegnato e lo scrive in `uscita`."""
+    corpo = testo(trova(agente, radice), inizio)
+    uscita.parent.mkdir(parents=True, exist_ok=True)
+    uscita.write_text(corpo, encoding="utf-8")
+    return corpo
+
+
 def salva(agente: str, uscita: Path, etichetta: str = "", radice: Path = PROGETTI) -> dict:
     """Trova la trascrizione, ne estrae l'oggetto e lo scrive in `uscita`."""
     dati = oggetto(trova(agente, radice), etichetta)

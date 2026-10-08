@@ -1716,6 +1716,10 @@ def cmd_produzione(args) -> int:
 def cmd_trascrizione(args) -> int:
     """Salva la risposta JSON di un subagent dalla sua trascrizione, senza ricopiarla."""
     try:
+        if args.testo:
+            corpo = trascrizione.salva_testo(args.agente, Path(args.uscita))
+            print(f"{args.uscita}: {len(corpo.split())} parole")
+            return 0
         dati = trascrizione.salva(args.agente, Path(args.uscita), args.etichetta)
     except (FileNotFoundError, ValueError) as errore:
         raise SystemExit(str(errore)) from errore
@@ -2142,6 +2146,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("uscita", help="il file JSON da scrivere (books/<slug>/concorrente/scheda.json)")
     p.add_argument("--etichetta", default="",
                    help="l'oggetto dopo questa parola (SCALETTA, FIGURE), se il messaggio ne ha più d'uno")
+    p.add_argument("--testo", action="store_true",
+                   help="salva il testo markdown consegnato (dal primo «# »), non un oggetto JSON")
     p.set_defaults(func=cmd_trascrizione)
 
     p = sub.add_parser(
