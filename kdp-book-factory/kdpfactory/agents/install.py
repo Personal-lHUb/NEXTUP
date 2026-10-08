@@ -11,12 +11,13 @@ from pathlib import Path
 
 from ..models import BookSpec
 from .base import REGISTRY, AgentContext
-from .competenze import competenze_di, fuori_campo
+from .competenze import competenze_di, fuori_campo, modello_di
 
 HEADER = """---
 name: {name}
 description: {description}
 tools: {tools}
+model: {model}
 ---
 
 """
@@ -105,6 +106,7 @@ def render_agent_markdown(agent) -> str:
         description=agent.description.replace("\n", " ").strip(),
         # L'agente di impaginazione esegue un comando, gli altri leggono file.
         tools="Read, Grep, Glob, Bash" if not blocks else "Read, Grep, Glob",
+        model=modello_di(agent.name),
     )
     body += f"# {agent.title}\n\n{agent.description}\n\n"
 

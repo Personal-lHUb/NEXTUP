@@ -2,6 +2,7 @@
 name: architetto
 description: Progetta la scaletta: tesi portante, sequenza dei capitoli, promessa di ogni capitolo, testo di quarta. Non scrive il libro.
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Architetto della struttura

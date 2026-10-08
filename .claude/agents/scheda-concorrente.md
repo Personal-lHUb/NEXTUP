@@ -2,6 +2,7 @@
 name: scheda-concorrente
 description: Legge una scheda prodotto di Amazon copiata e incollata e ne ricava i dati strutturati: prezzo, pagine, categorie con la classifica, descrizione, recensioni.
 tools: Read, Grep, Glob
+model: sonnet
 ---
 
 # Scheda del concorrente

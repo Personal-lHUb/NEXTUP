@@ -1,8 +1,0 @@
-{
-  "_nota": "Il piano delle figure, deciso dall'architetto con la scaletta. `servono`: se il libro ha bisogno di figure; `perche`: perché sì o perché no, in italiano. `mondo`: in inglese, il mondo visivo comune a tutte le figure generate (ambiente, epoca, personaggi ricorrenti), perché siano coerenti con la trama. Per ogni figura: `percorso` (immagini/NN-nome.jpg, lo stesso del manoscritto), `capitolo`, `mostra` (che cosa deve mostrare), `perche` (che cosa spiega meglio del testo), `fonte` (generata | pubblica: pubblica solo quando il contesto non lascia generarla — persone o luoghi reali, documenti, fatti storici, opere d'arte) e, per le pubbliche, `cerca` (le parole da cercare negli archivi, in inglese). La `provenienza` la scrive il sistema quando prende l'immagine.",
-  "servono": false,
-  "perche": "Ciò che questo libro deve spiegare sono documenti e date: le righe di una bolletta, le date e i saldi di un estratto conto della carta, i giorni di paga e le scadenze nello stesso mese. Una figura utile su questi argomenti mostrerebbe un documento pieno di cifre e di diciture. Un'immagine generata non può contenere testo, una bolletta vera presa da un archivio porta il marchio di un fornitore, e una bolletta o un calendario d'esempio già compilati sarebbero proprio il modello da ricopiare che la linea editoriale vieta di stampare. Le scene che si potrebbero disegnare, come il vassoio della posta del capitolo 9 o il tavolo di cucina, sono già descritte in una riga e resterebbero decorazione, mentre il libro, a 192 pagine con il prezzo fissato sulle pagine vere, pagherebbe ogni pagina in più nel costo di stampa.",
-  "mondo": "",
-  "figure": [],
-  "deciso_da": "architetto, 2026-10-07"
-}

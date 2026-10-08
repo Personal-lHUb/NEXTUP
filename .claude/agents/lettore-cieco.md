@@ -2,6 +2,7 @@
 name: lettore-cieco
 description: Legge senza scaletta e senza contesto, come chi ha comprato il libro: sul capitolo segnala dove ci si perde; sul libro intero verifica che il libro mantenga quello che la vetrina — copertina, descrizione, indice — prometteva e che il contesto non cambi per strada.
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Lettore cieco

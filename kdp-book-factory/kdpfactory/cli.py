@@ -1437,7 +1437,9 @@ def cmd_avvio(args) -> int:
                                                  asin=risposte.asin)
         _scrivi_richiesta(project, args, acquisizione.cartella(project) / nome, testo, fatti)
     save_backup(project, args, "domande d'avvio")
-    if produzione.attiva(Path(__file__).resolve().parent.parent, args.slug):
+    # Il registro dei libri attivi sta accanto a books/: con --books-dir (le prove)
+    # resta fuori dalla fabbrica vera.
+    if produzione.attiva(books.resolve().parent, args.slug):
         fatti.append("config/produzione.json (il libro entra nel giro orario)")
 
     print("\nDomande d'avvio complete.")

@@ -2,6 +2,7 @@
 name: correttore
 description: Rilettura parola per parola: refusi, accenti e apostrofi, accordi, punteggiatura, maiuscole, ripetizioni ravvicinate.
 tools: Read, Grep, Glob
+model: sonnet
 ---
 
 # Correttore di bozze

@@ -2,6 +2,7 @@
 name: impaginazione
 description: Controlla il PDF impaginato: righe vedove e orfane, titoli in fondo alla pagina, code di capitolo, testo fuori gabbia, sillabazione, aperture di capitolo. Non usa il modello: misura le coordinate del testo.
 tools: Read, Grep, Glob, Bash
+model: haiku
 ---
 
 # Controllo impaginazione

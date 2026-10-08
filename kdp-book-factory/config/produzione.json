@@ -1,10 +1,6 @@
 {
   "_nota": "I libri che il giro orario fa avanzare da solo, e il silenzio-assenso. Un libro entra qui quando finiscono le sue domande d'avvio (`avvio`), o a mano; esce quando è pubblicato o messo in pausa dall'autore. I libri che non sono qui il giro non li tocca.",
   "attivi": [
-    "household-bills",
-    "psychic-intuition",
-    "dementia-family",
-    "libro",
     "b0gjr36xwt"
   ],
   "silenzio_assenso_ore": 24

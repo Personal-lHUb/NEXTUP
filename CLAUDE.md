@@ -156,6 +156,24 @@ Per spostare un confine si cambia la tabella delle competenze e si rigenerano
 i file degli agenti (`python3 -m kdpfactory agents --install ../.claude/agents`),
 non si modifica a mano un file in `.claude/agents/`.
 
+## Regola permanente: un libro alla volta, agenti col modello giusto
+
+**Si lavora a un solo libro per volta**: quello in `config/produzione.json`
+(`attivi`, un solo slug). Gli altri non esistono finché non tocca a loro.
+Qualità alta e crediti spesi solo dove servono (`docs/linee-guida.md`,
+«Orchestrazione efficiente»):
+
+- **ogni agente ha il suo modello**, scritto nel suo file da
+  `kdpfactory/agents/competenze.py` (`MODELLI`): `opus` per chi scrive o
+  giudica quello che il lettore legge e vede, `sonnet` per chi estrae e
+  controlla contro regole scritte, `haiku` per chi esegue un comando e riporta;
+- **gli agenti leggono i file da soli**: il messaggio dà i percorsi, non il testo;
+- **l'uscita di un agente si salva con uno script dalla sua trascrizione**, mai
+  ricopiandola a mano nella chat;
+- **il giro gira una volta al giorno** (8:57, ora di Roma) e quando Cowork
+  consegna; dei ruoli di Cowork restano accese solo le attività che hanno una
+  richiesta aperta del libro in corso.
+
 ## Regola permanente: ogni libro nuovo parte dalle domande d'avvio
 
 **Un libro nuovo nasce contro un concorrente preciso** — un libro che vende già

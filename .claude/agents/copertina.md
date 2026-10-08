@@ -2,6 +2,7 @@
 name: copertina
 description: Progetta la copertina come una casa editrice: dallo studio della categoria scrive tre direzioni d'arte, da cui il sistema fa bozzetti e prompt; scrive il prompt delle figure interne, se il libro ne ha; poi misura la copertina che torna: miniatura, contrasto, specifiche KDP, testi. Non usa il modello.
 tools: Read, Grep, Glob, Bash
+model: opus
 ---
 
 # Copertina

@@ -250,3 +250,25 @@ class TestPannello(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestModelli(unittest.TestCase):
+    """Ogni agente del collegio ha il suo modello, scritto nel file che Claude Code legge."""
+
+    def test_ogni_agente_ha_un_modello(self):
+        from kdpfactory.agents.base import REGISTRY
+        from kdpfactory.agents.competenze import MODELLI
+
+        self.assertEqual(set(REGISTRY), set(MODELLI))
+        self.assertTrue(set(MODELLI.values()) <= {"opus", "sonnet", "haiku"})
+        # chi scrive il testo che si stampa usa il modello più forte
+        for agente in ("ghostwriter", "editor", "architetto", "lettore-cieco"):
+            self.assertEqual(MODELLI[agente], "opus", agente)
+
+    def test_il_file_esportato_porta_il_modello(self):
+        from kdpfactory.agents.base import REGISTRY
+        from kdpfactory.agents.install import render_agent_markdown
+
+        testo = render_agent_markdown(REGISTRY["revisore-scaletta"])
+        self.assertIn("\nmodel: haiku\n", testo.split("---", 2)[1] + "\n")
+

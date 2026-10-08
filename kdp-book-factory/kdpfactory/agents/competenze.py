@@ -82,6 +82,41 @@ COMPETENZE: tuple[Competenza, ...] = (
 )
 
 
+#: Il modello di ogni agente, scritto nel suo file `.claude/agents/<nome>.md`.
+#: La qualità si spende dove il lettore la vede: scrive o giudica il testo che
+#: si stampa, la struttura del libro o la copertina → `opus`. Estrae, verifica
+#: o controlla contro regole scritte → `sonnet`. Esegue un comando che misura e
+#: riporta quello che esce → `haiku`. Chi cambia un modello lo cambia qui e
+#: rigenera i file (`agents --install ../.claude/agents`).
+MODELLI: dict[str, str] = {
+    # scrivono o giudicano quello che il lettore legge e vede
+    "posizionamento": "opus",
+    "architetto": "opus",
+    "ghostwriter": "opus",
+    "voce": "opus",
+    "editor": "opus",
+    "lettore-cieco": "opus",
+    "editor-sviluppo": "opus",
+    "copertina": "opus",
+    # estraggono, verificano, controllano contro regole scritte
+    "scheda-concorrente": "sonnet",
+    "analista-recensioni": "sonnet",
+    "originalita": "sonnet",
+    "indice": "sonnet",
+    "fact-checker": "sonnet",
+    "conformita": "sonnet",
+    "correttore": "sonnet",
+    # eseguono un comando che misura e riportano l'esito
+    "revisore-scaletta": "haiku",
+    "impaginazione": "haiku",
+}
+
+
+def modello_di(agente: str) -> str:
+    """Il modello dell'agente; chi non è in tabella prende quello della sessione."""
+    return MODELLI.get(agente, "inherit")
+
+
 def competenze_di(agente: str) -> list[Competenza]:
     return [c for c in COMPETENZE if c.agente == agente]
 

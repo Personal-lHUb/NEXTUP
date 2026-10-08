@@ -92,6 +92,24 @@ Tre regole per la sessione che li chiama:
 - **Si aspetta la fase intera** prima di correggere, e si riferisce all'autore
   quando la fase è chiusa, non a ogni agente che finisce.
 
+## Orchestrazione efficiente
+
+Un libro alla volta, e ogni chiamata al modello dove la qualità si vede:
+
+| modello | agenti | perché |
+|---|---|---|
+| `opus` | posizionamento, architetto, ghostwriter, voce, editor, lettore-cieco, editor-sviluppo, copertina | scrivono o giudicano il testo che si stampa, la struttura e la copertina |
+| `sonnet` | scheda-concorrente, analista-recensioni, originalita, indice, fact-checker, conformita, correttore | estraggono, verificano, controllano contro regole scritte |
+| `haiku` | revisore-scaletta, impaginazione | eseguono un comando che misura e riportano l'esito |
+
+La tabella sta in `competenze.py` (`MODELLI`) e finisce nei file degli agenti
+con `agents --install`. Le altre regole: tutto quello che si misura lo fa un
+comando, non un agente; l'agente riceve i percorsi e legge da sé; la sua uscita
+si salva con uno script dalla trascrizione, senza ricopiarla; il collegio di
+controllo gira una volta per fase sul libro intero, in parallelo; il giro gira
+una volta al giorno e quando Cowork consegna, e dei ruoli di Cowork restano
+accese solo le attività con una richiesta aperta.
+
 ## Chi fa che cosa
 
 Il campo di ogni agente del collegio di produzione. È la stessa tabella di

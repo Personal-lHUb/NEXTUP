@@ -2,6 +2,7 @@
 name: editor
 description: Applica al capitolo le segnalazioni raccolte dagli agenti di controllo, senza riscrivere ciò che non è stato segnalato e rispettando il budget di parole.
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Editor

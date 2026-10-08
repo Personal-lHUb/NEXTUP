@@ -68,6 +68,7 @@ def attiva(radice: Path, slug: str) -> bool:
     if slug in dati.setdefault("attivi", []):
         return False
     dati["attivi"].append(slug)
+    (radice / CONFIG).parent.mkdir(parents=True, exist_ok=True)
     (radice / CONFIG).write_text(json.dumps(dati, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return True
 
