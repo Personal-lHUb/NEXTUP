@@ -24,10 +24,10 @@
       "perche": "Lettore NP, la lacuna più specifica delle recensioni; il sottotitolo mette NP prima del taglio a 60 caratteri dei risultati di ricerca e non fa pensare che l'autore sia un NP.",
       "chiesta_il": "2026-10-08T05:54:54Z",
       "scade_il": "2026-10-09T05:54:54Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "scelta dall'autore",
+      "valore": "Hard Calls, Clear Notes: The NP Casebook of Defensible Documentation",
+      "deciso_il": "2026-10-08T06:04:31Z",
+      "applicata": true
     },
     {
       "chiave": "promessa",
@@ -36,10 +36,10 @@
       "perche": "Copre gli scenari da NP che il concorrente promette e non dà; tiene gli esempi prima/dopo e le appendici che i lettori lodano.",
       "chiesta_il": "2026-10-08T05:54:55Z",
       "scade_il": "2026-10-09T05:54:55Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "scelta dall'autore",
+      "valore": "A defensible note for each hard call an NP makes (differential, abnormal result, consultant who never comes, capacity, AMA, discharge, telehealth, prescription): the weak note beside its defensible rewrite, and the elements the note must contain. It makes reasoning visible on the record; it does not make anyone lawsuit-proof.",
+      "deciso_il": "2026-10-08T06:04:32Z",
+      "applicata": true
     },
     {
       "chiave": "prezzo",
@@ -64,10 +64,10 @@
       "perche": "Breve, neutro, credibile sul mercato USA, senza credenziali; la ricerca web non trova autori con questo nome.",
       "chiesta_il": "2026-10-08T05:54:55Z",
       "scade_il": "2026-10-09T05:54:55Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "scelta dall'autore",
+      "valore": "Dana Ellery",
+      "deciso_il": "2026-10-08T06:04:32Z",
+      "applicata": true
     }
   ]
 }
