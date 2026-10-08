@@ -9,10 +9,10 @@
       "perche": "Come il concorrente, scelto all'avvio: i lettori chiedono più sostanza e scenari, non pagine da compilare; un NP documenta nell'EHR.",
       "chiesta_il": "2026-10-08T05:54:54Z",
       "scade_il": "2026-10-09T05:54:54Z",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "scelta dall'autore",
+      "valore": "full-content",
+      "deciso_il": "2026-10-08T06:00:19Z",
+      "applicata": true
     },
     {
       "chiave": "titolo",
