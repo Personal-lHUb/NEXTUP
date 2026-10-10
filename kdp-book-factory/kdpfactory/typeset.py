@@ -731,7 +731,55 @@ def markdown_to_flowables(
     return flowables
 
 
-def _front_matter(spec: BookSpec, outline: Outline, styles: dict, year: int) -> list:
+#: la calata del colophon quando ci sta: la pagina di copyright tiene il testo in basso
+CALATA_COLOPHON = 3.2 * INCH
+#: il corpo più piccolo a cui scende il colophon prima di lasciarlo andare a capo pagina
+CORPO_MINIMO_COLOPHON = 7.0
+
+
+def _colophon(
+    righe: list, stile: ParagraphStyle, geo: kdpspecs.PageGeometry | None,
+) -> list:
+    """Il colophon su una pagina sola, in basso finché ci sta.
+
+    `righe`: testo, oppure "" per una riga di stacco, None per mezza. Con
+    un'avvertenza lunga (b0gjr36xwt: cinque paragrafi) la calata fissa spingeva
+    le ultime righe sulla pagina dopo, e tutto il resto slittava di una. Prima
+    si accorcia la calata, poi, se non basta, scende il corpo di mezzo punto
+    alla volta, come fanno gli editori con le pagine di copyright fitte.
+    """
+
+    def componi(st: ParagraphStyle) -> list:
+        blocco: list = []
+        for riga in righe:
+            if riga:
+                blocco.append(Paragraph(mdlite.inline_to_markup(riga), st))
+            else:
+                blocco.append(Spacer(1, st.leading * (0.6 if riga == "" else 0.3)))
+        return blocco
+
+    blocco = componi(stile)
+    if geo is None:
+        return [Spacer(1, CALATA_COLOPHON), *blocco]
+    # un margine di sicurezza per i padding del frame
+    disponibile = geo.text_height - 24
+    corpo, interlinea = stile.fontSize, stile.leading
+    while True:
+        altezza = sum(f.wrap(geo.text_width, geo.text_height)[1] for f in blocco)
+        if altezza <= disponibile or corpo - 0.5 < CORPO_MINIMO_COLOPHON:
+            break
+        corpo, interlinea = corpo - 0.5, interlinea - 0.5
+        blocco = componi(ParagraphStyle(
+            f"{stile.name}Fitto", parent=stile, fontSize=corpo, leading=interlinea,
+        ))
+    calata = max(0.0, min(CALATA_COLOPHON, disponibile - altezza))
+    return [Spacer(1, calata), *blocco]
+
+
+def _front_matter(
+    spec: BookSpec, outline: Outline, styles: dict, year: int,
+    geo: kdpspecs.PageGeometry | None = None,
+) -> list:
     lang = spec.language
     story: list = []
 
@@ -752,12 +800,20 @@ def _front_matter(spec: BookSpec, outline: Outline, styles: dict, year: int) -> 
     story.append(Paragraph(mdlite.inline_to_markup(spec.author), styles["author"]))
     story.append(PageBreak())
 
-    # Colophon
+    # Colophon. Una riga vuota fra i blocchi; fra i paragrafi dell'avvertenza
+    # ne basta mezza, perché si leggano come un testo solo.
+    avvertenza = spec.disclaimer_paragraphs or [L(lang, "disclaimer_body")]
+    avvertenza[0] = L(lang, "disclaimer_title") + ": " + avvertenza[0]
     copyright_lines = [
         f"© {year} {spec.author}. {L(lang, 'copyright')}",
         L(lang, "copyright_body"),
         "",
-        L(lang, "disclaimer_title") + ": " + (spec.disclaimer.strip() or L(lang, "disclaimer_body")),
+    ]
+    for i, paragrafo in enumerate(avvertenza):
+        if i:
+            copyright_lines.append(None)
+        copyright_lines.append(paragrafo)
+    copyright_lines += [
         "",
         L(lang, "ai_disclosure"),
         "",
@@ -768,12 +824,7 @@ def _front_matter(spec: BookSpec, outline: Outline, styles: dict, year: int) -> 
     if spec.publisher:
         copyright_lines.append(spec.publisher)
     copyright_lines.append(L(lang, "printed_by"))
-    story.append(Spacer(1, 3.2 * INCH))
-    for line in copyright_lines:
-        if line:
-            story.append(Paragraph(mdlite.inline_to_markup(line), styles["front"]))
-        else:
-            story.append(Spacer(1, styles["front"].leading * 0.6))
+    story.extend(_colophon(copyright_lines, styles["front"], geo))
     story.append(PageBreak())
 
     # Dedica
@@ -927,7 +978,7 @@ def _run_typeset(
     doc = InteriorDoc(str(output), spec, geo, styles)
     lang = spec.language
 
-    story: list = _front_matter(spec, outline, styles, year)
+    story: list = _front_matter(spec, outline, styles, year, geo)
     story.append(StartOnRecto())
     story.append(DocAction("body_start"))
 

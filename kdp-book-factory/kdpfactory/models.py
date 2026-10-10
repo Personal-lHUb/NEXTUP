@@ -81,7 +81,8 @@ class BookSpec:
     #: l'avvertenza della pagina di copyright, se questo libro ne vuole una sua.
     #: Vuota, vale quella generica di `i18n`, che non dice di che consulenza non
     #: si tratta né che le regole cambiano: a un libro su soldi, salute o diritto
-    #: non basta (rodaggio household-bills, controllo di conformità).
+    #: non basta (rodaggio household-bills, controllo di conformità). Una riga
+    #: vuota separa i paragrafi.
     disclaimer: str = ""
     #: `true` se questa cartella non è un libro ma un banco di prova: la
     #: pipeline ci gira sopra a secco, la diagnostica la lascia fuori dai
@@ -105,6 +106,17 @@ class BookSpec:
     @property
     def is_medium_content(self) -> bool:
         return self.content_type == "medium"
+
+    @property
+    def disclaimer_paragraphs(self) -> list[str]:
+        """I paragrafi dell'avvertenza propria del libro; vuota se non ne ha una.
+
+        Un'avvertenza da casa editrice per un libro su diritto o salute supera
+        il paragrafo (b0gjr36xwt: cinque). Stampata in un blocco solo non si
+        legge; per questo la riga vuota nel campo diventa un capoverso.
+        """
+        blocchi = re.split(r"\n\s*\n", self.disclaimer.strip())
+        return [" ".join(b.split()) for b in blocchi if b.strip()]
 
     @property
     def profondita_indice(self) -> int:
