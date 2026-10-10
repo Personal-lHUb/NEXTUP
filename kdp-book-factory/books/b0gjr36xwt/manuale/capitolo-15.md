@@ -2,9 +2,9 @@
 
 ## A son who wants a hundred percent
 
-The scenario that follows is constructed. Rebecca Dorsey spent seven years as a nurse on a pulmonary step-down unit and has now worked four months as a hospital medicine NP. Eugene Lowell, seventy-four, was admitted on Friday night with an exacerbation of COPD. His blood gas showed carbon dioxide building up, so his orders set an oxygen saturation target of 88 to 92 percent.
+"He can't breathe. I want him on a hundred percent." Craig Lowell flew in on Saturday afternoon to see his father, Eugene, seventy-four, admitted on Friday night with an exacerbation of COPD, and he wants the oxygen turned up. His father's blood gas showed carbon dioxide building up, so the orders set an oxygen saturation target of 88 to 92 percent. At 18:30 the nurse, Hector Avila, calls Rebecca Dorsey, a hospital medicine NP for four months, to the room. The scene, like everyone in it, is imagined.
 
-At 18:30 on Saturday Mr. Lowell's nurse, Hector Avila, calls Rebecca to the room. His son, Craig, who flew in that afternoon, wants the oxygen turned up: "He can't breathe. I want him on a hundred percent." Rebecca examines his father, who says he feels about the same as that morning, and explains the target. Craig swears, asks for "a real doctor, not a nurse," and at 18:50 slaps the overbed table and says he will be waiting for her in the parking lot. Hector calls security, and Craig leaves the unit with an officer at 19:00.
+Rebecca examines Mr. Lowell, who says he feels about the same as that morning, and explains the target. Craig swears, asks for "a real doctor, not a nurse," and at 18:50 slaps the overbed table and says he will be waiting for her in the parking lot. Hector calls security, and Craig leaves the unit with an officer at 19:00.
 
 ## What the record will be asked
 
@@ -20,7 +20,7 @@ The note is about the son. The patient appears twice, as "a CO2 retainer" and as
 
 ## The rewrite
 
-Here is the same evening, written from what Rebecca saw, heard and did:
+The same evening, written from what Rebecca saw, heard and did:
 
 > 18:35. Seen at request of RN Hector Avila. Sitting up, full sentences. SpO2 90% on 2 L NC, RR 22, HR 94. Scattered expiratory wheeze, no accessory muscle use; unchanged from my 08:15 exam. Alert, oriented, answers promptly. Patient: "I'm breathing about like this morning." Admission ABG Fri 21:40: pH 7.33, PaCO2 58; SpO2 target 88–92% ordered.
 >
@@ -46,7 +46,7 @@ Then let the episode end. If "son hostile, security involved" is copied into eac
 
 ## The request that keeps coming back
 
-The second scenario is also constructed. Gemma Lockhart, a first-year urgent care NP, sees Neil Carver, fifty-one, on day three of a cold. He has type 2 diabetes and wants a steroid shot. She declines, with reasons written as the chapter on the antibiotic or scan you decline describes. He asks again ten minutes later, then a third time, louder, standing by the door. Her first draft argues back:
+The next encounter never happened either. Gemma Lockhart, a first-year urgent care NP, sees Neil Carver, fifty-one, on day three of a cold. He has type 2 diabetes and wants a steroid shot. She declines, with reasons written as the chapter on the antibiotic or scan you decline describes. He asks again ten minutes later, then a third time, louder, standing by the door. Her first draft argues back:
 
 > Pt repeatedly demanding steroid injection despite multiple explanations. Became argumentative. I spent 20 minutes patiently explaining why it is not indicated. Pt would not accept plan.
 
@@ -58,7 +58,7 @@ The timestamps count the requests, and one observed behavior and one quotation c
 
 ## When the disagreement is with a colleague
 
-The third scenario is constructed as well. Natalie Corbin, an emergency NP in her second year, sees Lorraine Abernathy, sixty-three, who fainted at her kitchen sink. Natalie would admit her for cardiac monitoring; Dr. Gordon Hale, the attending supervising her shift, thinks the faint was orthostatic. The tempting line, "Dr. Hale overruled my recommendation to admit," charts the conflict and leaves out every clinical reason on both sides. Part of her note, written as clinical content, reads:
+The last case, just as hypothetical, puts the disagreement inside the team. Natalie Corbin, an emergency NP in her second year, sees Lorraine Abernathy, sixty-three, who fainted at her kitchen sink. Natalie would admit her for cardiac monitoring; Dr. Gordon Hale, the attending supervising her shift, thinks the faint was orthostatic. The tempting line, "Dr. Hale overruled my recommendation to admit," charts the conflict and leaves out every clinical reason on both sides. Part of her note, written as clinical content, reads:
 
 > 15:40. Syncope, discussed with Dr. Gordon Hale, ED attending, 15:20. Admission for telemetry considered: no warning before the faint; ECG first-degree AV block, not present on 2022 ECG. Dr. Hale examined patient 15:30. His assessment: orthostatic syncope; BP 134/80 lying, 108/70 standing, with lightheadedness; hydrochlorothiazide started 12 days ago. His plan: discharge, stop hydrochlorothiazide, ambulatory heart monitor, cardiology clinic within 1 week.
 

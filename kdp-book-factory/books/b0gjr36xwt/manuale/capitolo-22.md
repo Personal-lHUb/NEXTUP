@@ -2,7 +2,7 @@
 
 ## A positive test and two empty slots
 
-The scenario that follows is constructed. Nina Sandoval spent eight years as a public health nurse and has now worked eleven months as an NP at Maplewood Family Practice. At her annual visit on March 4, Marlene Ostrowski, fifty-eight, takes home a fecal immunochemical test, or FIT: a stool test for blood too slight to see, used to screen for colorectal cancer. On Tuesday, March 18, the result posts: positive.
+At her annual visit on March 4, Marlene Ostrowski, fifty-eight, takes home a fecal immunochemical test, or FIT: a stool test for blood too slight to see, used to screen for colorectal cancer. Nina Sandoval, who ordered it, is a former public health nurse in her first year as an NP at a family practice. On Tuesday, March 18, the result posts: positive. The practice and everyone in this case exist only on these pages.
 
 At 16:10 Nina reaches her at home. A positive test does not mean cancer, she explains, but the blood has a source, and a colonoscopy is how it is found. Ms. Ostrowski wants to talk it through in person before agreeing to anything, so a visit is booked for March 25 at 10:00. She does not come. The clinic rebooks her for April 8 at 09:20, and she misses that visit too.
 
@@ -24,7 +24,7 @@ Between patients, Nina writes two entries:
 
 ## The rewrite
 
-Here are the same weeks, written from what Nina did and heard:
+The same weeks, written from what Nina did and heard:
 
 > Tue 3/18, 16:25. Telephone encounter. FIT from 3/4 visit, resulted 09:40 today: positive. Called home 16:10, reached patient, identity confirmed by date of birth. Told in plain words: the test found hidden blood in her stool; it does not mean cancer, but the source must be found, and colonoscopy is how; polyps and early cancers found this way are easier to treat. She asked to discuss in person before any referral: "I'm not agreeing to a scope over the phone." Visit booked Tue 3/25 10:00 for that discussion. She said: "So it may be nothing, but only the scope can tell." Added to problem list: positive FIT, colonoscopy not yet done.
 >
@@ -34,7 +34,7 @@ Here are the same weeks, written from what Nina did and heard:
 >
 > Fri 4/11, 15:40. No call; portal shows message unread. Letter sent by certified mail per clinic policy, copy in chart: a test result needs follow-up; waiting could let a treatable problem become harder to treat; my direct line and clinic hours. Chart alert: positive FIT, colonoscopy not done; route any contact to me.
 >
-> Wed 4/16, 12:50. Telephone encounter. Patient called 12:30. Why she missed both visits: "I kept putting it off. I was scared of what they'd find." Explained again why colonoscopy is needed and what it involves; questions answered. Agrees to referral: "Okay. Better to know." Referral sent 12:45 to Dr. Samuel Tran, Lakeside Gastroenterology, marked positive FIT. Will check scheduling by 5/14.
+> Wed 4/16, 12:50. Telephone encounter. Patient called 12:30. Why she missed both visits: "I kept putting it off. I was scared of what they'd find." Explained again why colonoscopy is needed and what it involves; questions answered. Agrees to referral: "Okay. Better to know." Referral sent 12:45 to Dr. Samuel Tran, gastroenterology, marked positive FIT. Will check scheduling by 5/14.
 
 ## Outreach the record can count
 
@@ -48,17 +48,17 @@ Had she never called, the April 11 entry could stand as the last step policy req
 
 ## The referral that never comes back
 
-The scenario continues, still constructed. On May 14, the date Nina set, the referral still reads "sent" in the clinic's system, with no appointment beside it. She calls Lakeside, then the patient, and writes:
+The invented case goes on. On May 14, the date Nina set, the referral still reads "sent" in the clinic's system, with no appointment beside it. She calls the gastroenterology practice, then the patient, and writes:
 
-> Wed 5/14, 11:40. Referral check, positive FIT (referral sent 4/16). No appointment in system. 11:05 called Lakeside Gastroenterology: referral received 4/17; voicemails left for patient 4/18 and 4/25, no reply. 11:20 called patient: "I thought they'd call me again." Lakeside's scheduling number given; she will call today.
+> Wed 5/14, 11:40. Referral check, positive FIT (referral sent 4/16). No appointment in system. 11:05 called GI practice: referral received 4/17; voicemails left for patient 4/18 and 4/25, no reply. 11:20 called patient: "I thought they'd call me again." GI practice's scheduling number given; she will call today.
 >
-> Addendum, 16:40. Lakeside confirms colonoscopy booked Tue 6/10. Will check for report by 6/24.
+> Addendum, 16:40. GI practice confirms colonoscopy booked Tue 6/10. Will check for report by 6/24.
 >
-> Tue 6/24, 09:40. Colonoscopy report not in chart. 09:10 called Lakeside: done 6/10; report sent, received 09:30 and reviewed. Two polyps removed; pathology pending. Per Lakeside, Dr. Tran's office will give patient the pathology result and set her next colonoscopy; copy to be sent here. Problem list updated: colonoscopy 6/10, pathology pending at Lakeside.
+> Tue 6/24, 09:40. Colonoscopy report not in chart. 09:10 called GI practice: done 6/10; report sent, received 09:30 and reviewed. Two polyps removed; pathology pending. Per GI practice, Dr. Tran's office will give patient the pathology result and set her next colonoscopy; copy to be sent here. Problem list updated: colonoscopy 6/10, pathology pending at GI practice.
 
 A referral marked "sent" records an order, not an appointment, and an appointment is not a result. Nina's two checks sit where referrals stall: the scheduling that never happens and the report that never comes back. Each was dated at the step before it, so neither depended on her memory. Who tracks referrals is your organization's decision: a referral coordinator in some, the ordering clinician in others. Ask who it is where you work, and what happens when one stalls.
 
-Ownership follows the rule from the chapter on closing the loop on the abnormal result: it passes only when the next clinician knows and accepts. Until the colonoscopy was done and its report read, the question raised by the test Nina ordered was hers. On June 24 Dr. Tran's office took on the next step, and the entry names it. Nothing in her entries faults Lakeside or the patient; the unanswered voicemails and the missing report appear as facts with times.
+Ownership follows the rule from the chapter on closing the loop on the abnormal result: it passes only when the next clinician knows and accepts. Until the colonoscopy was done and its report read, the question raised by the test Nina ordered was hers. On June 24 Dr. Tran's office took on the next step, and the entry names it. Nothing in her entries faults the GI practice or the patient; the unanswered voicemails and the missing report appear as facts with times.
 
 ## The patient who says no
 

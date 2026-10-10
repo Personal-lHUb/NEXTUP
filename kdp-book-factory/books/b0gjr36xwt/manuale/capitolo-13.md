@@ -2,9 +2,9 @@
 
 ## A fibula on a Saturday
 
-The scenario that follows is constructed. Audrey Kincaid spent nine years as a hospice nurse, giving opioids that others had ordered, and has now worked a year as an NP at an urgent care clinic. At 16:20 on a Saturday she sees Russell Eckert, fifty-three, who missed the bottom step of a friend's deck at 14:30 and rolled his left ankle. The X-ray shows a nondisplaced fracture of the distal fibula at the level of the joint, with the joint still aligned.
+Russell Eckert's X-ray shows a nondisplaced fracture of the distal fibula at the level of the joint, with the joint still aligned. He is fifty-three, and at 14:30 on a Saturday he missed the bottom step of a friend's deck and rolled his left ankle. Audrey Kincaid, who saw him at 16:20 in an urgent care clinic, spent nine years as a hospice nurse giving opioids that others had ordered; she has been an NP for a year. The drugs, doses and quantities below belong to a constructed patient. They show how to record a decision, not what to prescribe; check current labeling, your formulary and your state's rules.
 
-He takes sertraline for depression and sleeps with CPAP for obstructive sleep apnea. He drinks two or three beers on weekend evenings and lives with his wife, who drove him in, and their sixteen-year-old son. Ibuprofen at 16:30 brings his pain from 8 out of 10 to 6, and at 17:00 he asks: "Ibuprofen won't get me through the night. Can I get a Percocet?" At 17:05 Audrey searches the **prescription drug monitoring program**, or PDMP, the state's database of dispensed prescriptions for controlled drugs such as oxycodone. Then she prescribes ten tablets of oxycodone 5 mg beside scheduled ibuprofen and acetaminophen, not the Percocet he named.
+Mr. Eckert takes sertraline for depression and sleeps with CPAP for obstructive sleep apnea. He drinks two or three beers on weekend evenings and lives with his wife, who drove him in, and their sixteen-year-old son. Ibuprofen at 16:30 brings his pain from 8 out of 10 to 6, and at 17:00 he asks: "Ibuprofen won't get me through the night. Can I get a Percocet?" At 17:05 Audrey searches the **prescription drug monitoring program**, or PDMP, the state's database of dispensed prescriptions for controlled drugs such as oxycodone. Then she prescribes ten tablets of oxycodone 5 mg beside scheduled ibuprofen and acetaminophen, not the Percocet he named.
 
 ## What the record will be asked
 
@@ -18,13 +18,13 @@ At 17:30 Audrey writes:
 
 > 53M rolled L ankle, nondisplaced distal fibula fx on XR. Posterior splint, crutches, NWB. Pain 8/10. Rx oxycodone 5 mg q6h prn pain #10, ibuprofen, APAP. PDMP reviewed. NKDA. Risks/benefits discussed. F/u ortho.
 
-Every line but one is true, and none shows a decision. "NKDA" came from a prefilled field, the trap described in the chapter on templates, while the allergy list shows penicillin. "Rx oxycodone" gives no reason for an opioid at all, or for this one over the combination he asked for. "Prn pain" sets no threshold: any ache would qualify. "PDMP reviewed" has no time and no result.
+No line shows a decision, and one is wrong: "NKDA" came from a prefilled field, the trap described in the chapter on templates, while the allergy list shows penicillin. "Rx oxycodone" gives no reason for an opioid at all, or for this one over the combination he asked for. "Prn pain" sets no threshold: any ache would qualify. "PDMP reviewed" has no time and no result.
 
 "Risks/benefits discussed" is the inserted phrase from the same chapter. It names no risk, and none of the ones that mattered for this man appears: not his sleep apnea, his beer, his son or his sertraline. "F/u ortho" names no one and no day, so ten tablets have no end but the bottle. Nor does anything tie the drug to the danger it could hide.
 
 ## The rewrite
 
-Here is the same visit, rewritten:
+The rewrite puts each decision beside its reason:
 
 > 53M, rolled L ankle 14:30 missing bottom step of a deck. Seen 16:20. Lateral malleolus swollen, tender; foot warm, cap refill under 2 s, sensation and toe movement intact. XR: nondisplaced distal fibula fracture at level of joint, mortise intact. Posterior splint, crutches, non-weight-bearing. Pain 8/10; ibuprofen 600 mg 16:30, pain 6/10 at 17:00. Asked: "Ibuprofen won't get me through the night. Can I get a Percocet?"
 >
@@ -32,13 +32,13 @@ Here is the same visit, rewritten:
 >
 > Assessment: acute pain from nondisplaced distal fibula fracture, likely severe for 2–3 days.
 >
-> Plan: ibuprofen 600 mg every 6 h with food, up to 5 days, and acetaminophen 1,000 mg every 8 h, max 3,000 mg/day given alcohol use, both scheduled. Oxycodone 5 mg, 1 tab up to every 6 h, only for severe pain these do not relieve; #10, no refills, enough until ortho visit. Oxycodone alone, not the combination he asked for, so acetaminophen is counted in one place. Tramadol not used: serotonin risk with sertraline. Ibuprofen kept to 5 days: SSRI plus NSAID raises GI bleeding risk; no ulcer or GI bleed history.
+> Plan: ibuprofen 600 mg every 6 h with food, up to 5 days, and acetaminophen 1,000 mg every 8 h, max 3,000 mg/day given alcohol use, both scheduled. Oxycodone 5 mg, 1 tab up to every 6 h, only for severe pain these do not relieve; #10, no refills, enough until ortho visit. Oxycodone alone, not the combination he asked for, so acetaminophen is counted in one place. Tramadol not used: serotonin syndrome and seizure risk with sertraline. Ibuprofen kept to 5 days: SSRI plus NSAID raises GI bleeding risk; no ulcer or GI bleed history.
 >
 > Discussed with patient and wife, present at his request: oxycodone can cause drowsiness and slowed breathing, more so with sleep apnea or alcohol. No alcohol or driving while taking it; CPAP for any sleep, naps included; may constipate. Store tablets out of son's reach; leftovers to a drug take-back site. Naloxone nasal spray prescribed given OSA; use explained to both. He said: "Ibuprofen and Tylenol on the clock, the oxy only if the pain won't let me sleep, and no beer." To ED for pain the medicines no longer control, numbness, or pale, blue or cold toes: the splint can tighten as swelling rises. Ortho: Dr. Lena Jaffe, Tue 09:40, booked; she will decide on further pain treatment.
 
 ## Dose, days and the next look
 
-In the rewrite, a diagnosis with an expected course justifies a drug for severe pain; the scheduled drugs carry the base, and the as-needed dose has a threshold Mr. Eckert can recognize at two in the morning. The quantity is arithmetic anyone can check: ten tablets at up to four a day reach Tuesday's visit, where Dr. Jaffe makes the next decision. His request is quoted with no label, as the chapter on facts and quotes asks, and the change to it has its reason beside it. The last instruction ties the drug to what it could hide: in a splinted fracture, pain the medicine no longer controls can mean a splint too tight or pressure building in the leg, a reason to come back rather than take another tablet.
+In the rewrite, a diagnosis with an expected course justifies a drug for severe pain; the scheduled drugs carry the base, and the as-needed dose has a threshold Mr. Eckert can recognize at two in the morning. The quantity is arithmetic anyone can check: ten tablets at up to four a day reach Tuesday's visit, where Dr. Jaffe makes the next decision. His request is quoted with no label, as the chapter on facts and quotes asks, and the change to it has its reason beside it. The last instruction ties the drug to what it could hide: in this scenario, pain the medicine no longer controls could mean a splint too tight or pressure building in the leg, a reason for Mr. Eckert to come back rather than take another tablet.
 
 ## The checks a controlled substance adds
 
@@ -46,7 +46,7 @@ Federal law sorts controlled substances into schedules, and oxycodone is in Sche
 
 The history that matters is the history that could change the prescription: earlier opioids and how the patient did on them, substance use disorder or overdose, alcohol, other sedating drugs, breathing during sleep and who else lives in the home. Each line either changed the plan or cleared the way for it. Mr. Eckert's beer capped the acetaminophen and added a warning, his son put storage into the conversation, and the absence of sedatives and earlier opioids let a small dose stand.
 
-A **controlled-substance agreement** sets out in writing the terms of ongoing prescribing, such as a single prescriber and pharmacy, how refills are requested and what monitoring to expect. Whether one is required, and for which prescriptions, depends on your state and your organization; Audrey's clinic requires none for a few days' supply after an injury. Where one applies, the note says it was discussed and signed. Like the refusal form in the chapter on informed refusal, it does not replace the conversation.
+A **controlled-substance agreement** sets out in writing the terms of ongoing prescribing, such as a single prescriber and pharmacy, how refills are requested and what monitoring to expect. Whether one is required, and for which prescriptions, depends on your state and your organization; Audrey's clinic requires none for a few days' supply after an injury. Where one applies, the note says it was discussed and signed. It records terms, not the conversation.
 
 The rules behind these checks vary by state, so ask before your first controlled-substance prescription in a new job or a new state. Your state board can tell you which schedules your license lets you prescribe and on what terms, when a PDMP search is required, whether a first opioid prescription for acute pain is limited in days or quantity, and whether an agreement, a signed consent or an offer of naloxone is ever required. Your organization's policy may ask for more than the law, and your risk manager can tell you what it adds.
 

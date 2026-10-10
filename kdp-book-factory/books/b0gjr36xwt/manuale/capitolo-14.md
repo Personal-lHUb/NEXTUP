@@ -1,12 +1,12 @@
 # When You Say No to an Antibiotic or a Scan
 
-## A Z-Pak before a long drive
+## An antibiotic request before a long drive
 
-The scenario that follows is constructed. Holly Bianchi spent seven years as an infusion nurse and has now worked two months as an NP in a family practice. At 15:10 on a Thursday in February she sees Scott Garrity, forty-two, whose nose has been blocked since Saturday. His sore throat and cough have faded; the yellow discharge and pressure over both cheeks have not changed since Tuesday. He has had no fever. Last winter, after two colds like this one, another clinic gave him azithromycin each time.
+Last winter Scott Garrity had two colds like the one he has now, and another clinic gave him azithromycin for each. At 15:10 on a Thursday in February, with his nose blocked since Saturday, the forty-two-year-old sees Holly Bianchi, a former infusion nurse two months into her work as an NP in a family practice; both of them are fictional. His sore throat and cough have faded; the yellow discharge and pressure over both cheeks have not changed since Tuesday. He has had no fever.
 
 His temperature is 99.0°F. His cheeks are mildly tender and his nasal lining swollen, with purulent discharge; his eyelids look normal, his eyes move without pain, and his neck is supple. At 15:25 he asks: "Every time I get this, it turns into a sinus infection. Can you just call in a Z-Pak? I'm driving to my mother's in Ohio on Saturday, and I'll be there a week."
 
-Holly does not call in the Z-Pak. He leaves at 15:45 with a different plan, not entirely happy with it.
+Holly does not call in the antibiotic. He leaves at 15:45 with a different plan, not entirely happy with it.
 
 ## What the record will be asked
 
@@ -18,13 +18,13 @@ The same questions can come with no complication at all. A patient who leaves fe
 
 At 15:50 Holly writes:
 
-> 42M sinus congestion x 6 days. Requesting Z-Pak. Viral URI, abx not indicated. Educated on antibiotic stewardship. Supportive care. RTC PRN.
+> 42M sinus congestion x 6 days. Requesting azithromycin. Viral URI, abx not indicated. Educated on antibiotic stewardship. Supportive care. RTC PRN.
 
 The request survives, but not the two things inside it that the rest of the visit answered: a belief that his colds always turn bacterial, and a week away from the clinic. "Abx not indicated" is a verdict with nothing underneath, like "No indication for CT head" in the chapter on the test you order and the test you don't. "Educated on antibiotic stewardship" says the conversation was about resistance in the community, not about him; read beside an Ohio emergency record, it says nothing about the risks of his own illness. "Supportive care" names no treatment, and "RTC PRN" gives no threshold. Nothing records his answer, so a reader cannot tell a patient who agreed from one who left unconvinced.
 
 ## The rewrite
 
-Here is the same visit, rewritten:
+Holly could have written this instead:
 
 > 42M, nasal congestion since Sat (day 6). Sore throat, cough days 1–2, resolved. Since Tue, thick yellow discharge and pressure over both cheeks, unchanged, not worse. No fever at home. Two similar illnesses last winter, azithromycin elsewhere both times. No drug allergies. Seen 15:10: T 99.0°F. Mild bilateral maxillary tenderness; nasal mucosa swollen, purulent discharge. No eyelid swelling or redness; eye movements full and painless. No severe headache; neck supple.
 >
@@ -36,7 +36,7 @@ Here is the same visit, rewritten:
 
 ## The request, the reason and the answer
 
-His words come first, quoted by the rules in the chapter on facts and quotes, because they hold what the plan answers. The line on discolored discharge answers his belief, and the delayed prescription answers his trip. Shrink the quotation to "requesting Z-Pak" and both lines lose their reason.
+His words come first, quoted by the rules in the chapter on facts and quotes, because they hold what the plan answers. The line on discolored discharge answers his belief, and the delayed prescription answers his trip. Shrink the quotation to "requesting azithromycin" and both lines lose their reason.
 
 The decision is written as Holly's, with a date on it: "no antibiotic started today." "Antibiotics deferred" would hide that anything was asked for, and "patient declined antibiotics" would put the choice in the wrong hands. "Today" keeps it a judgment about day 6 that a later day may revise.
 
@@ -48,13 +48,13 @@ A no that ends the visit reads as a dismissal; a no followed by a plan reads as 
 
 A *delayed prescription*, written today to be used only if something changes, is still a prescription, and the chapter on prescribing applies to it in full, down to why his drug differs from the one he named. It adds one element: what that something is. Holly's conditions are the bacterial criteria from her assessment, turned into a date and symptoms he can recognize: the sentence about what would change your mind, from the chapter on what you don't know yet, handed to the patient. A delayed prescription suits a patient who cannot easily come back; for one who can, a recheck on a set day may serve better. The portal message lets the record show whether and when he started.
 
-The second list means be seen today, not start the pills: an infection spreading toward the eye or brain is not managed with tablets at home. The note keeps the two lists apart, as the conversation did.
+The second list means be seen today, not start the pills: in this scenario, signs of an infection spreading toward the eye or brain call for an exam that day, not tablets at home. The note keeps the two lists apart, as the conversation did.
 
 "I'd still rather have it now" stays in the note. A note showing a patient who disagreed, understood and left with a plan holds up better than one saying he agreed, because a complaint letter would confirm the first and contradict the second. If after the discussion you do prescribe, write the clinical reason: "per patient request" is a drug without an indication.
 
 ## The scan he wanted now
 
-The second scenario is also constructed. Wendy Cho, a former endoscopy nurse, is in her third year as a primary care NP. At 09:30 on a Monday she sees Dale Henning, thirty-nine, whose lower back has hurt since he lifted a box at work on Thursday; the pain reaches his right buttock, not his leg. He wants an MRI and, if it shows a disc, a spine surgeon. Part of her note reads:
+Wendy Cho's visit, invented like Holly's, is about a scan. A former endoscopy nurse, she is in her third year as a primary care NP. At 09:30 on a Monday she sees Dale Henning, thirty-nine, whose lower back has hurt since he lifted a box at work on Thursday; the pain reaches his right buttock, not his leg. He wants an MRI and, if it shows a disc, a spine surgeon. Part of her note reads:
 
 > 09:40, asked: "My brother waited on his back and ended up needing surgery. I want to know now." No fever, weight loss, cancer history, injection drug or steroid use; no numbness between the legs, bladder or bowel change, or leg weakness. Strength, reflexes and sensation normal both legs; straight-leg raise negative. Assessment: acute low back strain; nerve root compression, cauda equina syndrome, infection and cancer considered, not supported by findings above. MRI and surgical referral not ordered today: neither would change the plan; disc changes are common on MRI in people without back pain. Accepted: physical therapy referral, light-duty note for 2 weeks, heat, keep walking. Recheck booked in 4 weeks; MRI reconsidered then if not improving, sooner for pain or numbness spreading down a leg or leg weakness. ED at once for numbness between the legs, trouble passing urine, or loss of bladder or bowel control. He said: "If my leg goes weak or I can't pee right, I go in. Otherwise we talk MRI in a month."
 

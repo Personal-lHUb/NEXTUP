@@ -2,9 +2,9 @@
 
 ## A bag packed at 14:10
 
-The scenario that follows is constructed. Fiona Strand spent eight years in a hospital float pool and has now worked seven months as a hospital medicine NP. Dennis Quigley, sixty-six, was admitted on Monday at 22:00 with right lower lobe pneumonia, a temperature of 102.8°F and an oxygen saturation of 89%, and started on IV ceftriaxone and azithromycin. He came off oxygen on Tuesday evening, but at 06:00 on Wednesday his temperature was 100.9°F, and the team plans at least one more day of IV treatment.
+At 14:10 on a Wednesday, Dennis Quigley, sixty-six, is dressed, his bag is packed and he wants his IV out. He was admitted on Monday at 22:00 with right lower lobe pneumonia, a temperature of 102.8°F and an oxygen saturation of 89%, and started on IV ceftriaxone and azithromycin. He came off oxygen on Tuesday evening, but at 06:00 this morning his temperature was 100.9°F, and the team plans at least one more day of IV treatment. Nobody in this case is a real person.
 
-At 14:10 his nurse, Theo Nakamura, pages Fiona. Mr. Quigley is dressed, his bag is packed and he wants his IV out. His wife had a stroke last year and cannot be left alone, and the neighbor staying with her goes home tonight. "I'm not lying in this bed," he tells Theo, "while she's on the floor somewhere."
+His nurse, Silas Nakamura, pages Fiona Strand, a hospital medicine NP in her first year. Mr. Quigley's wife had a stroke last year and cannot be left alone, and the neighbor staying with her goes home tonight. "I'm not lying in this bed," he tells Silas, "while she's on the floor somewhere."
 
 Fiona sits with him from 14:20 to 14:45, and Dr. Vikram Mehta, the attending, joins them at 14:35. Mr. Quigley signs the hospital's form at 15:00 and walks out at 15:15.
 
@@ -24,9 +24,9 @@ The chapter on informed refusal showed what a form cannot record, and the note b
 
 ## The rewrite
 
-Here is the same departure, rewritten from what Fiona did and heard:
+Fiona's rewrite keeps to what she did and heard:
 
-> 15:30. Left hospital against medical advice at 15:15. His reason: "My wife can't be alone tonight. The neighbor goes home at six." Day 3 of IV ceftriaxone and azithromycin for RLL pneumonia. T 100.9°F at 06:00, 99.8°F at 14:00; HR 96; SpO2 93% RA at rest, 91% walking at 13:30 per RN T. Nakamura. Recommended: stay at least 24 more hours for IV antibiotics and monitoring until fever resolves.
+> 15:30. Left hospital against medical advice at 15:15. His reason: "My wife can't be alone tonight. The neighbor goes home at six." Day 3 of IV ceftriaxone and azithromycin for RLL pneumonia. T 100.9°F at 06:00, 99.8°F at 14:00; HR 96; SpO2 93% RA at rest, 91% walking at 13:30 per RN S. Nakamura. Recommended: stay at least 24 more hours for IV antibiotics and monitoring until fever resolves.
 >
 > Discussed 14:20–14:45; Dr. V. Mehta, attending, from 14:35. Explained in plain words: the infection is better but not controlled. If he leaves now, it is more likely to get worse, spread to his blood or lower his oxygen, and any of these can be life-threatening and can happen at home overnight. Offered: social worker to arrange overnight help for his wife so he could stay (declined: "She won't let a stranger in the house"). His account of the risk: "It's not finished, and it could get bad fast. If I can't breathe or I get mixed up, I come right back." Capacity for this decision: restated the risks in his own words, applies them to himself, reason consistent with his values, choice unchanged over 25 minutes. Has capacity at this time to decline further admission.
 >
@@ -42,9 +42,9 @@ Each part of the plan he leaves with also needs an owner, as the chapter on clos
 
 ## The patient who is simply gone
 
-If Mr. Quigley had refused to sign, the rewrite would change in one line: "Declined to sign form; witnessed by RN T. Nakamura." Some patients leave before any conversation can happen. The second scenario is also constructed. Omar Rahimi, a former interventional radiology nurse, is in his second year as an NP in a community emergency department. At 01:00 on a Sunday he sees Troy Underwood, forty-seven, whose chest pressure began at 23:00 and has faded. The ECG and the first troponin are normal, and a second troponin is due at 03:10. At 01:40 Omar tells him why: "A heart attack doesn't always show on the first test." At 02:40 his nurse, Nora Vance, finds the room empty.
+If Mr. Quigley had refused to sign, the rewrite would change in one line: "Declined to sign form; witnessed by RN S. Nakamura." Some patients leave before any conversation can happen, as in a second case, imaginary like the first. Tariq Rahimi, a former interventional radiology nurse, is in his second year as an NP in a community emergency department. At 01:00 on a Sunday he sees Troy Underwood, forty-seven, whose chest pressure began at 23:00 and has faded. The ECG and the first high-sensitivity troponin are normal, and a second troponin is due at 03:10. At 01:40 Tariq tells him why: "A heart attack doesn't always show on the first test." At 02:40 his nurse, Nora Vance, finds the room empty.
 
-Nobody discussed leaving with him, so there is no refusal to record, and the note must not invent one. "Left AMA" implies that the risks were explained and a choice was made. Your organization may use another label for a departure nobody witnessed, such as *eloped* or *left before treatment complete*. At 02:55 Omar writes:
+Nobody discussed leaving with him, so there is no refusal to record, and the note must not invent one. "Left AMA" implies that the risks were explained and a choice was made. Your organization may use another label for a departure nobody witnessed, such as *eloped* or *left before treatment complete*. At 02:55 Tariq writes:
 
 > 02:55. Not in room at 02:40, when RN N. Vance came to draw repeat troponin; last seen by her 02:05, vitals normal, no pain. Gown on bed; saline lock on bedside table, catheter intact. ED, restrooms and waiting room checked; security checked main exit, did not see him. Workup incomplete: ECG 01:05 and troponin 01:10 normal; repeat troponin due 03:10 not drawn. At 01:40, alert and oriented, told the plan and why the second test is needed. No discussion of leaving took place. 02:50 called cell on file: voicemail asked him to call or come back, no results stated. Dr. Alan Wexler, ED attending, informed 02:55; per department policy, no police welfare check requested: no concern about capacity. Will call again 03:30.
 >
