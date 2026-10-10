@@ -335,6 +335,14 @@ class TestDecisioni(unittest.TestCase):
         self.assertEqual([v["chiave"] for v in tolte], ["titolo"])
         self.assertEqual(decisioni.chiudi_scadute(self.project, self.t0 + timedelta(days=30)), [])
 
+    def test_il_formato_di_stampa_e_dell_autore_e_ferma_la_copertina(self):
+        """Il formato decide misure e dorso della copertina: la fase 7 lo aspetta."""
+        decisioni.proponi(self.project, "formato", "6x9", ["8.5x11"], ore=None, adesso=self.t0)
+        self.assertIn("formato", produzione.SERVONO["7"])
+        self.assertIn("formato", produzione.SERVONO["8"])
+        decisioni.scegli(self.project, "formato", "6x9", adesso=self.t0 + timedelta(hours=1))
+        self.assertEqual(decisioni.valore(self.project, "formato"), "6x9")
+
 
 class TestProduzione(Base):
     def test_il_libro_fermo_aspetta_solo_quello_che_gli_serve(self):

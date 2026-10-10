@@ -21,7 +21,11 @@ from pathlib import Path
 from .models import BookProject
 
 #: Le decisioni che il silenzio-assenso può chiudere.
-CHIAVI = ("categoria", "titolo", "promessa", "voce", "prezzo", "copertina", "pseudonimo")
+CHIAVI = (
+    "categoria", "titolo", "promessa", "voce", "prezzo", "copertina", "pseudonimo",
+    # il formato di stampa (`trim` in book.json): fissa la copertina e il dorso
+    "formato",
+)
 #: Quella che non chiude mai: un libro non si pubblica perché nessuno ha risposto.
 MAI = "pubblicazione"
 ORE_PREDEFINITE = 24

@@ -51,7 +51,9 @@ def _nome_base(percorso: str) -> str:
 SERVONO = {
     "1": ("categoria", "titolo", "promessa", "voce", "pseudonimo"),
     "2": ("categoria", "titolo", "promessa", "voce", "pseudonimo"),
-    "8": ("prezzo", "copertina"),
+    # la copertina si disegna sul formato: dimensioni e dorso vengono da lì
+    "7": ("formato",),
+    "8": ("prezzo", "copertina", "formato"),
 }
 
 
