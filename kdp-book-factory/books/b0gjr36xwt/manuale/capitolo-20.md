@@ -2,7 +2,7 @@
 
 ## A pressure of 84 at 02:10
 
-The scenario that follows is constructed. Claire Yamada spent eight years as a burn unit nurse and has now worked five months as a hospital medicine NP on nights. At 19:00 on a Tuesday she takes over thirty-eight patients she has never met. One is Leonard Vogel, seventy-two, admitted at 14:30 by the day NP, Deepa Natarajan, with right pyelonephritis.
+Thirty-eight patients become Claire Yamada's at 19:00 on a Tuesday, five months into her work as a night hospital medicine NP, and she has never met any of them. One is Leonard Vogel, seventy-two, admitted at 14:30 by the day NP, Deepa Natarajan, with right pyelonephritis. The night is invented, and so is everyone in it.
 
 His sign-out takes ninety seconds. Ceftriaxone has run since 13:10, and blood cultures from the emergency department are pending. His blood pressure, Deepa says, is "a little soft, 104 over 62 at five, after a liter in the ED. Probably dry. I'm holding his lisinopril." A repeat lactate is due at 21:00; the first, at 12:50, was 2.4. "If his systolic drops under 90, give him 500 of LR and recheck." Claire writes it on her list.
 
@@ -16,11 +16,11 @@ The second part asks whether the decisions after the page were hers: did she see
 
 ## The note as written
 
-At 02:55, with two more pages waiting, Claire writes:
+Her 02:55 note, typed between pages, reads:
 
 > 02:55. Cross-cover. Called for hypotension. 72M w/ R pyelo on ceftriaxone, BCx pending. BP soft since admission, lisinopril held. Pt seen, mentating. Hypotension likely sepsis vs meds. 1 L LR bolus, labs. Dr. Mensah aware. Will monitor. Day team to f/u in AM.
 
-Nothing in it is false, and almost nothing in it is Claire's. "BP soft since admission, lisinopril held" is the sign-out in her voice, with no values and no source. It fits the day team's plan and the order Claire stopped at 02:30, but not the 21:00 dose, and beside a medication record that shows the dose, it reads like a clinician who never looked.
+Almost nothing in it is Claire's. "BP soft since admission, lisinopril held" is the sign-out in her voice, with no values and no source. It fits the day team's plan and the order Claire stopped at 02:30, but not the 21:00 dose, and beside a medication record that shows the dose, it reads like a clinician who never looked.
 
 "Pt seen, mentating" has no time and no findings, so the nurse's "sleepier" goes unanswered. "Sepsis vs meds" names two causes without saying which she favored, or why the bolus was twice the size the sign-out planned. "Dr. Mensah aware" does not say when, of what, or whether he saw the patient. "Will monitor" sets no limit, and "day team to f/u" hands nothing to anyone.
 

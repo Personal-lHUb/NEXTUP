@@ -2,7 +2,7 @@
 
 ## A peak flow held up to the camera
 
-The scenario that follows is constructed. Maya Thibodeaux spent seven years as an outpatient infusion nurse and has now worked ten months as an NP at Northgate Primary Care, where Thursday afternoons are video visits. At 14:40 she connects with Colleen Pacheco, forty-six, who has had asthma since childhood. A cold began on Saturday; since Monday she has been wheezing and short of breath, and since Tuesday she has needed her albuterol inhaler every four hours.
+Thursday afternoons are video visits at the primary care practice where Maya Thibodeaux, a postpartum nurse for six years, now works as an NP. At 14:40 she connects with Colleen Pacheco, forty-six, who has had asthma since childhood. A cold began on Saturday; since Monday she has been wheezing and short of breath, and since Tuesday she has needed her albuterol inhaler every four hours. This visit never happened, and neither did the night call later in the chapter.
 
 Maya cannot listen to her lungs, so she asks for what a camera can show. Ms. Pacheco talks in full sentences while she walks to the kitchen and back, lowers her collar, holds her pulse oximeter up to the lens, blows three times into her peak flow meter and turns the laptop toward her calves. At 14:58 Maya decides on home treatment and sets the point at which Ms. Pacheco must be seen in person.
 
@@ -14,11 +14,11 @@ The chapter on what a chart becomes after a bad outcome showed that the setting 
 
 ## The note as written
 
-At 15:10, with the next video visit waiting, Maya writes:
+Maya closes her note at 15:10, as the next patient connects:
 
 > Telehealth visit. 46F hx asthma, SOB and wheeze x 3 days after URI, albuterol q4h. Gen: NAD. Resp: no respiratory distress, lungs clear to auscultation bilaterally. SpO2 95%. A: asthma exacerbation. P: prednisone 40 mg daily x 5 days, continue albuterol. ED if worse.
 
-Every line but one is true, and Maya never typed that one. "Lungs clear to auscultation" came from the clinic's default exam. It is the finding nobody could have made, from the chapter on templates and the late addendum, and it costs the rest of the exam its weight, "NAD" included. "Telehealth" does not say whether there was a picture or only a voice, and "SpO2 95%" has no device and no source. "ED if worse" gives a woman with a peak flow meter on her counter no number to watch. Nor does anything say an in-person exam was weighed, so the lungs nobody heard read as an oversight rather than a limit.
+Maya never typed one of these lines. "Lungs clear to auscultation" came from the clinic's default exam. It is the finding nobody could have made, from the chapter on templates and the late addendum, and it costs the rest of the exam its weight, "NAD" included. "Telehealth" does not say whether there was a picture or only a voice, and "SpO2 95%" has no device and no source. "ED if worse" gives a woman with a peak flow meter on her counter no number to watch. Nor does anything say an in-person exam was weighed, so the lungs nobody heard read as an oversight rather than a limit.
 
 ## The rewrite
 
@@ -50,7 +50,7 @@ Who asked is not always the patient: a daughter writing through her father's pro
 
 ## The call after hours
 
-The second scenario is also constructed. Jonah Soto, a former wound care nurse in his second year as an NP, covers Northgate's after-hours line from home. At 23:02 on a Wednesday, paged by the answering service, he reaches Gail Rinaldi, thirty-nine, on day three of amoxicillin for strep throat, with an itchy rash since 21:00. The answering service keeps a log of its own, but the day team will open the chart, so at 23:20 Jonah writes a short note there:
+The night call belongs to Jonah Soto, a former wound care nurse in his second year as an NP, who covers the practice's after-hours line from home. At 23:02 on a Wednesday, paged by the answering service, he reaches Gail Rinaldi, thirty-nine, on day three of amoxicillin for strep throat, with an itchy rash since 21:00. The answering service keeps a log of its own, but the day team will open the chart, so at 23:20 Jonah writes a short note there:
 
 > After-hours call 23:02–23:12. Caller: patient, identity confirmed by name and date of birth. Chart reviewed remotely: amoxicillin started Mon by Dr. Miriam Voss for strep pharyngitis; no allergies listed. Itchy raised rash since 21:00. No swelling of lips, tongue or throat; no trouble breathing or swallowing; no faintness. By phone: full sentences, voice not hoarse. Assessment: hives, likely reaction to amoxicillin; no features of anaphylaxis. Advised: stop amoxicillin; cetirizine 10 mg tonight. 911 for swelling of lips, tongue or throat, trouble breathing or swallowing, or feeling faint. She repeated: "Stop the pills, take the Zyrtec, 911 if my mouth swells or I can't breathe." Amoxicillin (hives) added to allergy list. For Dr. Voss, inbox 23:20: choose replacement antibiotic, call patient Thu by 10:00. Patient told to expect the call.
 
