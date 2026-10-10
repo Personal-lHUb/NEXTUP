@@ -2,11 +2,11 @@
 
 ## One patient, two notes
 
-This scenario is constructed. Priya Raman spent seven years as an emergency nurse before finishing her NP program, and she is now in her first year as a provider in a community emergency department. On a Tuesday afternoon Dolores Fitch, seventy-nine, arrives with her daughter after a fall at home. She takes apixaban, a blood thinner, for atrial fibrillation. Owen Castillo, the nurse who receives her, writes this at 15:05:
+Dolores Fitch, seventy-nine, arrives at a community emergency department on a Tuesday afternoon with her daughter, after a fall at home. She takes apixaban, a blood thinner, for atrial fibrillation. She and everyone who treats her are invented for this chapter. Owen Castillo, the nurse who receives her, writes this at 15:05:
 
 > 79-year-old female arrived with daughter after fall at home approx. 12:30. States she caught her foot on the edge of a rug and fell backward, striking the back of her head on a wood floor. Denies loss of consciousness. 3 cm raised hematoma to occiput, skin intact. Alert and oriented x4, pupils equal and reactive. Takes apixaban, last dose 08:00 per patient. BP 148/86, HR 78 irregular, RR 16, SpO2 97% on room air. Pain 3/10. NP Raman notified 14:57.
 
-It is a good nursing note, and Priya has written hundreds like it. It records what Owen saw and heard, when he saw it and whom he told. It does not say whether the fall was a trip or a faint, whether Mrs. Fitch needs a scan, or whether she can go home. Those questions are not his to answer, and no reviewer will look for the answers there. What a reviewer asks of his note is whether he saw what was there, wrote it down accurately and told the right person in time. On all three counts the note holds up.
+It is a good nursing note. Priya Raman, the first-year NP who will see Mrs. Fitch, wrote hundreds like it in seven years as an emergency nurse. It records what Owen saw and heard, when he saw it and whom he told. It does not say whether the fall was a trip or a faint, whether Mrs. Fitch needs a scan, or whether she can go home. Those questions are not his to answer, and no reviewer will look for the answers there. What a reviewer asks of his note is whether he saw what was there, wrote it down accurately and told the right person in time. On all three counts the note holds up.
 
 Priya sees Mrs. Fitch at 15:10 and orders a CT scan of the head, which is read at 16:35 as showing no bleeding. She talks with the attending physician and discharges Mrs. Fitch home with her daughter at 17:50. Then she writes:
 
@@ -14,7 +14,7 @@ Priya sees Mrs. Fitch at 15:10 and orders a CT scan of the head, which is read a
 
 Beside Owen's note, Priya's reads like more of the same: findings, a result, an outcome. That is the problem. A reviewer opens a provider note with a different question. The question is not what the clinician saw but what the clinician concluded, and why. Was this a trip, or a faint that ended on the floor? Why a CT? With a blood thinner on board, why home rather than a night of observation? What were the patient and her daughter told to watch for? Priya answered every one of those questions at the bedside. Her note answers none of them, so a later reader sees the result of a judgment but not the judgment itself.
 
-Here is the same note, rewritten:
+Written to answer those questions, the same note reads:
 
 > 79F on apixaban for AF (last dose 08:00), fell at home ~12:30. Per patient, a trip: caught foot on rug edge, fell backward, struck occiput. No LOC, recalls entire event. No lightheadedness, palpitations or chest pain beforehand. Exam: GCS 15, 3 cm occipital hematoma, no midline neck tenderness, pupils equal and reactive, no focal deficit, gait steady with cane. ECG: AF rate 78, unchanged from prior. CT head (read 16:35): no acute hemorrhage or fracture.
 >
@@ -56,7 +56,7 @@ This book uses the phrase in a plainer sense: the reasoning that took you from t
 
 When you sign a note, you become its author. Your signature says that you wrote the note, or reviewed and adopted it, and that it is accurate. It covers every line: the sentence a template inserted, the review of systems a scribe typed, the section a student drafted. Whether you typed a line or only accepted it, it is yours.
 
-Many NPs also work with a physician whose name appears in the record. Depending on the state and the setting, an NP may practice independently or under a **collaborative agreement**, a written arrangement that sets out how an NP and a physician work together. An NP may also practice under **supervision**, in which a physician holds a defined oversight role. This book gives no state rules. Ask your state board what applies to you, and ask your employer what its policy requires.
+Many NPs also work with a physician whose name appears in the record. Depending on the state and the setting, an NP may practice independently or under a **collaborative agreement**, an arrangement, usually in writing, that sets out how an NP and a physician work together. Some states use other names, such as practice agreement or protocol, and the required form and content vary. An NP may also practice under **supervision**, in which a physician holds a defined oversight role. This book gives no state rules. Ask your state board what applies to you, and ask your employer what its policy requires.
 
 A second signature tells a reader less than people assume. A **cosignature** is a second clinician's signature on a note someone else wrote. An **attestation** is a statement the second clinician adds about their own role: that they saw the patient, reviewed the note or agreed with the plan. Depending on the policy behind it, a cosignature may mean that the physician examined the patient, that they read the note line by line, or only that they signed it from a queue the next morning. The signature alone does not say which. A reviewer may assume a review that never happened, or doubt one that did.
 
