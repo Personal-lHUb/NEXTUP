@@ -2,7 +2,7 @@
 
 ## A hard morning, written two ways
 
-The scenario that follows is constructed. Kendra Walsh spent eight years as an orthopedic nurse and has now worked ten months as a hospital medicine NP. At 07:40 on a Sunday she sees Raymond Teague, sixty-two, admitted on Friday with cellulitis of the left lower leg. He has type 2 diabetes. Overnight he pulled out his IV, saying it burned. A new line went in at 05:15, and the cefazolin dose due at 02:00 was given at 05:30. The night nurse filed an incident report about the late dose.
+Raymond Teague, sixty-two, was admitted on Friday with cellulitis of the left lower leg. He has type 2 diabetes. Overnight he pulled out his IV, saying it burned. A new line went in at 05:15, and the cefazolin dose due at 02:00 was given at 05:30. The night nurse filed an incident report about the late dose. At 07:40 on Sunday he is first on the rounding list of Kendra Walsh, ten months into her first job as a hospital medicine NP. Neither of them is real; the case was built for this chapter.
 
 When Kendra walks in, Mr. Teague is sitting up and speaking loudly. He swears several times while describing the night. He says his leg pain is 8 out of 10, that "the pills don't touch it," and asks for IV hydromorphone by name. His fasting glucose is 287; asked about it, he says he stopped metformin about four months ago. Before she leaves he says he is going to get a lawyer. At 08:30, still irritated, she writes:
 
@@ -14,7 +14,7 @@ Very little of that is false. Mr. Teague was loud, the dose was late, and he did
 >
 > Exam: T 99.1°F, HR 92. L lower leg erythema within the border marked on admission; tenderness limited to the red area; no crepitus, blisters or dusky skin. New IV site clean. Asked him to call his nurse if the IV burns again rather than remove it; he said, "Fine, as long as somebody comes."
 
-The plan is left aside, because the pain request and the metformin belong to the chapters on prescribing. What changed is the language. The rewrite keeps the loud voice, the swearing, the removed line, the late dose and the request by name. It drops the verdicts on Mr. Teague's character, the account of who failed overnight, the report, the lawyer and the sarcasm. Where the weak note offered explanations, the rewrite gives times.
+The plan is left aside, because the pain request belongs to the chapter on prescribing. What changed is the language. The rewrite keeps the loud voice, the swearing, the removed line, the late dose and the request by name. It drops the verdicts on Mr. Teague's character, the account of who failed overnight, the report, the lawyer and the sarcasm. Where the weak note offered explanations, the rewrite gives times.
 
 ## Observations instead of adjectives
 
@@ -40,7 +40,7 @@ Some words are not descriptions at all but labels: short verdicts that travel. T
 
 "Drug-seeking" names a motive, and motives cannot be observed. The factual version records the exact request, the recent doses, any checks you ran and your assessment of the pain itself. The label has a clinical cost too. A patient with an infected leg whose pain keeps climbing needs another look at the leg, and a word in the last note that explains the pain away makes that look less likely. Kendra's exam line shows that she looked. "Poor historian" usually describes the conversation rather than the patient; write what you could not obtain and where the information came from instead. "Frequent flyer" belongs nowhere in a record.
 
-Patients can request their records, and many organizations now release notes to the patient portal as soon as they are signed. A patient who reads "drug-seeking" about himself may stop reporting his pain, or may answer with a complaint to your board. As the chapter on where claims begin noted, a complaint needs no injury behind it.
+Patients have a legal right to their records, and under the federal information-blocking rules in force since 2021, most US providers may not withhold signed notes without a recognized exception, so many notes reach the patient portal as soon as they are signed. A patient who reads "drug-seeking" about himself may stop reporting his pain, or may answer with a complaint to your board. As the chapter on where claims begin noted, a complaint needs no injury behind it.
 
 ## What never goes in the chart
 
@@ -48,7 +48,7 @@ The chart is the record of the patient's care. Some things that feel urgent whil
 
 Blame of colleagues comes first. "IV team didn't come for 3+ hrs" states a cause Kendra did not witness; the IV nurse may have been at a code. The facts that matter are in the rewrite, each with its time. A note that accuses invites the other clinician's note to answer, and a record in which clinicians argue helps no one defend the care. Writing about a colleague who never responds is worked in the chapter on the consultant who never comes.
 
-Staffing complaints are next. If staffing affected care, report it to your manager or through your organization's channel, where someone can act on it. In the chart, "short-staffed again" fixes nothing and reads as an admission that the unit was unsafe.
+Staffing complaints are next. "Short-staffed again" is an opinion about the cause, not a clinical fact. If staffing delayed care, the delay goes in the chart as a fact with its time and its source, the way the rewrite records the late dose. The cause goes to your manager or through your organization's reporting channel, where someone can act on it.
 
 The incident report is an internal document, and organizations generally keep it inside their safety and quality process. How far the law protects it varies, and depends partly on how it is handled. A line in the chart that names the report points every reader of the record toward it. The chart carries the clinical event instead: what happened to the patient, what you found and what you did. The chapter on the adverse event returns to this boundary.
 
@@ -60,4 +60,4 @@ Last comes sarcasm, along with jokes, exclamation points and your feelings about
 
 Before you sign, give the note one more pass, for tone alone. It takes less than a minute. Read it as three strangers would: the patient opening it in the portal, the colleague named in it, and a juror who has never met any of you. For every adjective about the patient, ask whether you could point to what you saw or heard. Check that each pair of quotation marks holds words actually said, with a speaker. Look for any line that explains someone else's failure, the staffing, a report or a lawyer.
 
-The reread matters most on the notes you write while angry. Kendra's two versions describe the same morning. Much of the distance between them can be covered in that one pass, before you sign, while a change is still just an edit.
+The reread matters most on the notes you write while angry. Kendra's two versions describe the same morning. Much of the distance between them can be covered in that one pass for tone, made before the patient, the colleague or the juror reads a word.

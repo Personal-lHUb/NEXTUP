@@ -2,9 +2,9 @@
 
 ## Ice in the parking lot
 
-The scenario that follows is constructed. Celeste Hartley spent ten years as a school nurse and has now worked five months as an NP at an urgent care clinic. The clinic has X-ray on site but no CT scanner; the nearest one is in an emergency department twenty minutes away. At 10:20 on a Tuesday in January she sees Curtis Faber, thirty-eight. At 07:50 he slipped on ice in the parking lot at work, fell backward onto his outstretched right hand and struck the back of his head on the pavement. The coworker who drove him in saw the fall and says he was "out for maybe five seconds."
+At 07:50 on a Tuesday in January, Curtis Faber, thirty-eight, slipped on ice in the parking lot at work, pitched forward onto his outstretched right hand and struck his forehead on the pavement. The coworker who drove him in saw the fall and says he was "out for maybe five seconds." At 10:20 Celeste Hartley, a former school nurse five months into her first NP job, sees him at an urgent care clinic that has X-ray on site but no CT scanner; the nearest one is in an emergency department twenty minutes away. The case is fiction, built for teaching like all the others.
 
-Mr. Faber remembers slipping and everything after he came to. He has a mild headache, has not vomited, takes no medications and has had no alcohol. His vital signs and neurological exam are normal, and apart from a swelling on the back of his head he shows no sign of a skull fracture. His right wrist is tender in the hollow at the base of the thumb, the anatomic snuffbox.
+Mr. Faber remembers slipping and everything after he came to. He has a mild headache, has not vomited, takes no medications and has had no alcohol. His vital signs and neurological exam are normal, and apart from a swelling on his forehead he shows no sign of a skull fracture. His right wrist is tender in the hollow at the base of the thumb, the anatomic snuffbox.
 
 Celeste orders an X-ray of the wrist with scaphoid views, and it shows no fracture. She does not order a CT of his head. The first decision leaves an order, a timestamp and a result in the chart. The second leaves nothing unless she writes it down.
 
@@ -18,21 +18,21 @@ Whether the decision was reasonable is the standard-of-care question, and it is 
 
 ## The note as written
 
-At 11:15, with the waiting room filling up, Celeste writes:
+The note Celeste signs at 11:15 reads, in full:
 
-> 38M slipped on ice 07:50, struck occiput, brief LOC. GCS 15, neuro intact. No indication for CT head. R wrist pain, XR neg. Thumb spica splint. Dx: concussion, R wrist injury. Head injury instructions given. F/u 10 days.
+> 38M slipped on ice 07:50, struck forehead, brief LOC. GCS 15, neuro intact. No indication for CT head. R wrist pain, XR neg. Thumb spica splint. Dx: concussion, R wrist injury. Head injury instructions given. F/u 10 days.
 
-Every line is true. But "No indication for CT head" is a verdict with nothing underneath it, the same problem the chapter on the differential found in "PE unlikely." A reviewer cannot tell whether Celeste applied a rule, which one, or whether Mr. Faber fell inside it. "Brief LOC" is the very finding that made the scan worth considering, and the note gives it no witness and no duration. Nothing says whether he takes a blood thinner, whether he vomited or whether he remembers the fall.
+"No indication for CT head" is a verdict with nothing underneath it, the same problem the chapter on the differential found in "PE unlikely." A reviewer cannot tell whether Celeste applied a rule, which one, or whether Mr. Faber fell inside it. "Brief LOC" is the very finding that made the scan worth considering, and the note gives it no witness and no duration. Nothing says whether he takes a blood thinner, whether he vomited or whether he remembers the fall.
 
 The wrist line fails differently. "XR neg" seems to close a question the X-ray could not close, because a scaphoid fracture can be invisible on the first film. Celeste knew that, which is why she splinted the thumb and booked the recheck. But "F/u 10 days" does not say what the follow-up is for, who will order the second X-ray or what Mr. Faber was told. Read six weeks later, after a fracture that failed to heal, the note shows a normal X-ray and a plan that could belong to a sprain.
 
 ## The rewrite
 
-Here is the same visit, rewritten:
+With both decisions on the page, the note reads:
 
-> 38M, slipped on ice in work parking lot 07:50, fell backward onto outstretched R hand, struck occiput on pavement. Coworker who drove him here saw the fall: "out for maybe five seconds." Recalls the slip and everything after coming to. Headache 3/10. No vomiting, no seizure. No anticoagulant or antiplatelet, no bleeding disorder, no alcohol today. Seen 10:20: BP 128/78, HR 74, GCS 15. 4 cm occipital hematoma, no step-off. No hemotympanum, periorbital or mastoid bruising, or fluid from nose or ears. Pupils equal and reactive, no focal deficit, gait normal. No midline neck tenderness, full painless rotation. R wrist tender in anatomic snuffbox; XR with scaphoid views: no fracture seen.
+> 38M, slipped on ice in work parking lot 07:50, fell forward onto outstretched R hand, struck forehead on pavement. Coworker who drove him here saw the fall: "out for maybe five seconds." Recalls the slip and everything after coming to. Headache 3/10. No vomiting, no seizure. No anticoagulant or antiplatelet, no bleeding disorder, no alcohol today. Seen 10:20: BP 128/78, HR 74, GCS 15. 4 cm frontal hematoma, no step-off. No hemotympanum, periorbital or mastoid bruising, or fluid from nose or ears. Pupils equal and reactive, no focal deficit, gait normal. No midline neck tenderness, full painless rotation. R wrist tender in anatomic snuffbox; XR with scaphoid views: no fracture seen.
 >
-> Assessment: concussion with brief witnessed LOC; occipital scalp hematoma. Intracranial injury considered. Canadian CT Head Rule applies (minor head injury with witnessed LOC, age 16 or over, no anticoagulant); none of its 7 criteria present: GCS 15 at 10:20, 2.5 h after injury; no sign of open, depressed or basal skull fracture; no vomiting; age 38; no amnesia before the fall; mechanism a ground-level slip. CT not required by the rule. R wrist: possible scaphoid fracture, which can be occult on the first X-ray.
+> Assessment: concussion with brief witnessed LOC; frontal scalp hematoma. Intracranial injury considered. Canadian CT Head Rule applies (minor head injury with witnessed LOC, age 16 or over, no anticoagulant); none of its 7 criteria present: GCS 15 at 10:20, 2.5 h after injury; no sign of open, depressed or basal skull fracture; no vomiting; age 38; no amnesia before the fall; mechanism a ground-level slip. CT not required by the rule. R wrist: possible scaphoid fracture, which can be occult on the first X-ray.
 >
 > Plan: rule explained to patient. Options: CT at nearest ED (none on site; several hours, small radiation dose, not needed per rule) or home with someone watching him tonight. He said: "If the rule says I don't need it, I'd rather go home and have my wife keep an eye on me." Wife home tonight. Told to go to the ED for worsening headache, vomiting more than once, confusion, trouble waking, weakness or seizure; repeated these back. Thumb spica splint, worn at all times. Recheck here booked Fri 09:00 (day 10); repeat scaphoid views ordered today for that visit. Told the first X-ray can miss this fracture, so the splint stays on until then; will call to rebook if he cannot come.
 
