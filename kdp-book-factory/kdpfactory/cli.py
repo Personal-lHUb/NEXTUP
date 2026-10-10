@@ -1763,8 +1763,14 @@ def cmd_consegna(args) -> int:
                 )
         elif args.in_file:
             print(f"{file.name} → {consegne.importa_file(project, file, args.in_file)}")
+        elif args.indice:
+            cambi, citati = consegne.applica_indice(project, file)
+            for riga in cambi or ["nessun titolo cambiato"]:
+                print(riga)
+            for riga in citati:
+                print(f"da sistemare: {riga}")
         else:
-            raise SystemExit("Indica --capitoli N [N …], --in <percorso nel libro> oppure --letta.")
+            raise SystemExit("Indica --capitoli N [N …], --in <percorso>, --indice oppure --letta.")
     except ValueError as errore:
         raise SystemExit(str(errore)) from errore
     return 0
@@ -2212,6 +2218,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="i numeri delle sezioni consegnate, in ordine: vanno in manuale/ e nel manoscritto")
     p.add_argument("--in", dest="in_file", default="",
                    help="il percorso nel libro dove copiarla intera (revisioni/lettore-cieco.md)")
+    p.add_argument("--indice", action="store_true",
+                   help="i titoli dell'agente indice: scaletta, capitoli e manuale/indice.json")
     p.add_argument("--letta", action="store_true", help="segnala nel diario che è stata letta e usata")
     p.set_defaults(func=cmd_consegna)
 

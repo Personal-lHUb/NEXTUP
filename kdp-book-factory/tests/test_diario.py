@@ -178,6 +178,56 @@ class TestConsegne(Base):
             consegne.importa_file(self.project, self.file, "../../fuori.md")
 
 
+class TestIndice(Base):
+    def setUp(self):
+        super().setUp()
+        from kdpfactory.models import PartPlan
+        Outline(title="Libro", parts=[PartPlan("Prima", 2), PartPlan("Seconda", 3)], chapters=[
+            ChapterPlan(number=1, title="Introduction", role="intro", target_words=50),
+            ChapterPlan(number=2, title="Where Claims Actually Begin", role="chapter", target_words=50),
+            ChapterPlan(number=3, title="Phrasebook", role="chapter", target_words=50),
+        ]).save(self.project.outline_path)
+        (self.libro / "manuale").mkdir()
+        (self.libro / "manuale" / "capitolo-02.md").write_text(
+            "# Where Claims Actually Begin\n\ntesto\n", encoding="utf-8")
+        (self.libro / "manuale" / "capitolo-03.md").write_text(
+            "# Phrasebook\n\n## Where Claims Actually Begin\n\ncoppie\n", encoding="utf-8")
+        backup.configure(directory=Path(self._tmp.name) / "backup")
+        self.addCleanup(backup.configure)
+        self.file = self.libro / "consegne" / "indice.json"
+        self.file.parent.mkdir()
+
+    def _consegna(self, primo_della_seconda=2):
+        self.file.write_text(json.dumps({
+            "chapters": [{"number": 1, "title": "Where Claims Begin"}, {"number": 2, "title": "Phrasebook"}],
+            "parts": [{"first_chapter": 1, "title": "Prima"},
+                      {"first_chapter": primo_della_seconda, "title": "Seconda, rivista"}],
+        }), encoding="utf-8")
+
+    def test_i_titoli_vanno_in_scaletta_capitoli_e_indice(self):
+        self._consegna()
+        cambi, citati = consegne.applica_indice(self.project, self.file, adesso=ORA)
+        self.assertEqual(len(cambi), 2)
+        outline = Outline.load(self.project.outline_path)
+        self.assertEqual(outline.chapters[1].title, "Where Claims Begin")
+        self.assertEqual(outline.parts[1].title, "Seconda, rivista")
+        self.assertTrue((self.libro / "manuale" / "capitolo-02.md").read_text(encoding="utf-8")
+                        .startswith("# Where Claims Begin\n"))
+        self.assertTrue(self.project.chapter_path(2).read_text(encoding="utf-8")
+                        .startswith("# Where Claims Begin"))
+        self.assertEqual(citati, ["capitolo-03.md cita ancora «Where Claims Actually Begin»"])
+        indice = json.loads((self.libro / "manuale" / "indice.json").read_text(encoding="utf-8"))
+        self.assertEqual(indice["parts"][1]["title"], "Seconda, rivista")
+        self.assertEqual(diario.da_importare(self.project), [])
+
+    def test_un_confine_spostato_non_applica_niente(self):
+        self._consegna(primo_della_seconda=1)
+        with self.assertRaises(ValueError):
+            consegne.applica_indice(self.project, self.file)
+        self.assertEqual(Outline.load(self.project.outline_path).chapters[1].title,
+                         "Where Claims Actually Begin")
+
+
 class TestAgentiConsegnano(unittest.TestCase):
     def test_chi_usa_il_modello_ha_write_e_la_regola_della_consegna(self):
         editor = render_agent_markdown(REGISTRY["editor"])

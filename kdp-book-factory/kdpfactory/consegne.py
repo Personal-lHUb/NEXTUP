@@ -14,6 +14,7 @@ che cosa ha consegnato prima che la sessione la importasse.
 
 from __future__ import annotations
 
+import json
 import shutil
 from datetime import datetime
 from pathlib import Path
@@ -118,3 +119,78 @@ def importa_file(
     shutil.copy2(file, arrivo)
     diario.annota(project, f"consegna `{file.name}` importata in `{destinazione}`")
     return arrivo
+
+
+def applica_indice(
+    project: BookProject, file: Path, adesso: datetime | None = None,
+) -> tuple[list[str], list[str]]:
+    """I titoli dell'agente `indice` nella scaletta, nei capitoli e in `manuale/indice.json`.
+
+    La consegna ha la forma di `manuale/indice.json`: i capitoli veri numerati
+    da 1 (introduzione esclusa) e le parti col loro primo capitolo. I confini
+    delle parti non si spostano da qui: se la consegna li sposta, non si
+    applica niente. Restituisce i cambi e, per ogni titolo cambiato, gli altri
+    capitoli che citano ancora il titolo vecchio (un frasario che lo usa come
+    titoletto, per esempio): quelli li sistema la sessione, perché il contesto
+    conta.
+    """
+    dati = json.loads(file.read_text(encoding="utf-8"))
+    outline = Outline.load(project.outline_path)
+    veri = [c for c in outline.chapters if c.role == "chapter"]
+    titoli = {int(c["number"]): str(c.get("title", "")).strip() for c in dati.get("chapters", [])}
+    if sorted(titoli) != list(range(1, len(veri) + 1)) or not all(titoli.values()):
+        raise ValueError(f"servono i titoli di tutti i {len(veri)} capitoli, numerati da 1")
+    parti_nuove = dati.get("parts") or []
+    parti = sorted(outline.parts, key=lambda p: p.first_chapter)
+    if len(parti_nuove) != len(parti):
+        raise ValueError(f"la scaletta ha {len(parti)} parti, la consegna {len(parti_nuove)}")
+    for vecchia, nuova in zip(parti, parti_nuove, strict=True):
+        primo = int(nuova.get("first_chapter", 0) or 0)
+        if not 1 <= primo <= len(veri) or veri[primo - 1].number != vecchia.first_chapter:
+            raise ValueError(f"la parte «{nuova.get('title')}» sposta un confine: qui non si applica")
+        if not str(nuova.get("title", "")).strip():
+            raise ValueError("una parte senza titolo")
+
+    copie = _cartella_backup(project, adesso)
+    copie.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(project.outline_path, copie / "outline.json.prima")
+    indice = project.root / "manuale" / "indice.json"
+    if indice.exists():
+        shutil.copy2(indice, copie / "indice.json.prima")
+
+    cambi: list[str] = []
+    vecchi: list[str] = []
+    for numero, piano in enumerate(veri, start=1):
+        nuovo = titoli[numero]
+        if nuovo == piano.title:
+            continue
+        cambi.append(f"capitolo {numero} (sezione {piano.number}): «{piano.title}» → «{nuovo}»")
+        vecchi.append(piano.title)
+        piano.title = nuovo
+        capitolo = project.root / "manuale" / f"capitolo-{piano.number:02d}.md"
+        if capitolo.exists():
+            shutil.copy2(capitolo, copie / f"{capitolo.name}.prima")
+            righe = capitolo.read_text(encoding="utf-8").splitlines()
+            if righe and righe[0].startswith("# "):
+                righe[0] = f"# {nuovo}"
+            testo = "\n".join(righe) + "\n"
+            capitolo.write_text(testo, encoding="utf-8")
+            manuale.importa_capitolo(project, outline, piano.number, testo)
+    for vecchia, nuova in zip(parti, parti_nuove, strict=True):
+        titolo = str(nuova["title"]).strip()
+        if titolo != vecchia.title:
+            cambi.append(f"parte «{vecchia.title}» → «{titolo}»")
+            vecchia.title = titolo
+    outline.save(project.outline_path)
+    indice.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(file, indice)
+
+    citati: list[str] = []
+    for capitolo in sorted((project.root / "manuale").glob("capitolo-*.md")):
+        testo = capitolo.read_text(encoding="utf-8")
+        for titolo in vecchi:
+            if titolo in testo:
+                citati.append(f"{capitolo.name} cita ancora «{titolo}»")
+    diario.annota(project, f"consegna `{file.name}` importata come indice: "
+                           f"{'; '.join(cambi) or 'nessun titolo cambiato'}")
+    return cambi, citati
