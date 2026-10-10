@@ -1,0 +1,123 @@
+{
+  "chapters": [
+    {
+      "number": 1,
+      "title": "What a Chart Becomes After a Bad Outcome"
+    },
+    {
+      "number": 2,
+      "title": "The Provider Note Records a Decision"
+    },
+    {
+      "number": 3,
+      "title": "Where a Claim, a Complaint, and a Review Begin"
+    },
+    {
+      "number": 4,
+      "title": "Writing the Differential You Actually Ran"
+    },
+    {
+      "number": 5,
+      "title": "What You Don't Know Yet, Written Plainly"
+    },
+    {
+      "number": 6,
+      "title": "Facts, Quotes, and What Never Goes in the Chart"
+    },
+    {
+      "number": 7,
+      "title": "Templates, Copy-Forward, and the Late Addendum"
+    },
+    {
+      "number": 8,
+      "title": "The Test You Order and the Test You Don't"
+    },
+    {
+      "number": 9,
+      "title": "Closing the Loop on the Abnormal Result"
+    },
+    {
+      "number": 10,
+      "title": "The Delayed Scan and the Bed That Never Opens"
+    },
+    {
+      "number": 11,
+      "title": "The Consultant Who Never Comes"
+    },
+    {
+      "number": 12,
+      "title": "Why This Drug, This Dose, This Patient"
+    },
+    {
+      "number": 13,
+      "title": "When You Say No to an Antibiotic or a Scan"
+    },
+    {
+      "number": 14,
+      "title": "Hostile Encounters in Neutral Words"
+    },
+    {
+      "number": 15,
+      "title": "The Capacity Question, Decision by Decision"
+    },
+    {
+      "number": 16,
+      "title": "Informed Refusal and the Partial Yes"
+    },
+    {
+      "number": 17,
+      "title": "The Patient Leaving Against Medical Advice"
+    },
+    {
+      "number": 18,
+      "title": "The Discharge and the Patient Who Comes Back"
+    },
+    {
+      "number": 19,
+      "title": "Handoffs, Cross-Cover, and the Night Call"
+    },
+    {
+      "number": 20,
+      "title": "The Telehealth Visit and the Portal Message"
+    },
+    {
+      "number": 21,
+      "title": "Missed Visits and Referrals That Go Nowhere"
+    },
+    {
+      "number": 22,
+      "title": "The Adverse Event and the Records Request"
+    },
+    {
+      "number": 23,
+      "title": "Phrasebook of Weak and Defensible Wording"
+    },
+    {
+      "number": 24,
+      "title": "Scenario Finder and What Each Note Must Contain"
+    },
+    {
+      "number": 25,
+      "title": "Glossary of Legal Terms in Plain English"
+    }
+  ],
+  "parts": [
+    {
+      "first_chapter": 1,
+      "title": "Writing for the Later Reader"
+    },
+    {
+      "first_chapter": 8,
+      "title": "Orders, Waits, and Pushback"
+    },
+    {
+      "first_chapter": 15,
+      "title": "Choices, Continuity, and Aftermath"
+    },
+    {
+      "first_chapter": 23,
+      "title": "The Mid-Shift Reference"
+    }
+  ],
+  "notes": "Cambiati tre titoli, tutti sotto i 55 caratteri, senza due punti né numeri. Cap. 3: «Where Claims Against NPs Actually Begin» diventa «Where a Claim, a Complaint, and a Review Begin» (46 caratteri, virgola seriale come negli altri titoli). Via «Actually» e via «Claims Against NPs», che facevano aspettare dati, graduatorie o una mappa dei reclami: il capitolo non cita cifre, raggruppa le accuse in quattro voci scelte dal libro e rimanda al rapporto dell'assicuratore. Il nuovo titolo dice quello che il capitolo fa davvero: parte da una visita e da una nota e mostra i tre procedimenti che la leggono (causa per danni, reclamo al board, revisione del datore di lavoro) e il punto della nota in cui cade ogni accusa. Il rimando del glossario «the chapter on where claims begin» regge ancora; l'intestazione di manuscript/04.md va allineata al titolo nuovo. Parte II (cap. 8-14): «The Workup Under Pressure» diventa «Orders, Waits, and Pushback»: ordini (test, prescrizione), attese (risultato anomalo, esame in ritardo, letto, consulente), resistenze (richiesta rifiutata, incontro ostile, disaccordo con un collega). «Workup» escludeva prescrizione e incontro ostile. Parte III (cap. 15-22): «Refusals, Exits, and Aftermath» diventa «Choices, Continuity, and Aftermath»: scelte del paziente (capacità, rifiuto, uscita contro parere), continuità della cura (dimissione e ritorno, passaggi di consegne, televisita e portale, visite saltate e invii), conseguenze (evento avverso e richiesta di cartella). Ho evitato «Handoffs» nel titolo di parte per non ripetere una parola del cap. 19. Invariati le parti I e IV e gli altri 22 titoli. «Actually» resta nel cap. 4, dove distingue il differenziale pensato da quello scritto. «The Bed That Never Opens» (cap. 10) resta, perché il capitolo corretto ora ha il paragrafo sul letto che non si libera entro il turno."
+}
