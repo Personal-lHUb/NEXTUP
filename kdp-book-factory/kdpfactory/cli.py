@@ -1659,7 +1659,19 @@ def _cmd_corriere(args, radice: Path, canale: dict, elenco: list) -> int:
 def cmd_decisioni(args) -> int:
     """Le decisioni dell'autore con il silenzio-assenso: proposte, risposte, scadute."""
     books = books_dir(args)
+    # L'autore può spegnere il silenzio-assenso (`silenzio_assenso_ore: null`):
+    # da lì ogni proposta aspetta la sua risposta, senza scadenza.
+    ore_silenzio = produzione.configurazione(books.resolve().parent).get(
+        "silenzio_assenso_ore", decisioni.ORE_PREDEFINITE)
     if args.scadute:
+        if not ore_silenzio:
+            tolte = []
+            for cartella in sorted(p for p in books.iterdir() if (p / "decisioni.json").exists()):
+                tolte += [(cartella.name, v) for v in decisioni.togli_scadenze(BookProject(cartella))]
+            for slug, voce in tolte:
+                print(f"{slug} · {voce['chiave']}: senza scadenza, aspetta la risposta dell'autore")
+            print("Silenzio-assenso spento dall'autore: nessuna proposta si chiude da sola.")
+            return 0
         # Il giro orario: le proposte senza risposta oltre la scadenza si chiudono.
         chiuse = []
         for cartella in sorted(p for p in books.iterdir() if (p / "decisioni.json").exists()):
@@ -1675,7 +1687,7 @@ def cmd_decisioni(args) -> int:
     try:
         if args.proponi:
             voce = decisioni.proponi(project, args.proponi, args.valore, args.alternativa,
-                                     args.perche, args.ore)
+                                     args.perche, ore_silenzio if args.ore is None else args.ore)
             print(decisioni.messaggio(args.slug, voce))
             return 0
         if args.scegli:
@@ -2128,8 +2140,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--valore", default="", help="la proposta, o la scelta dell'autore")
     p.add_argument("--alternativa", action="append", default=[], help="un'alternativa (ripetibile)")
     p.add_argument("--perche", default="", help="perché gli agenti propongono questo")
-    p.add_argument("--ore", type=int, default=decisioni.ORE_PREDEFINITE,
-                   help="dopo quante ore vale il silenzio")
+    p.add_argument("--ore", type=int, default=None,
+                   help="dopo quante ore vale il silenzio (0: mai); di norma `silenzio_assenso_ore` "
+                        "di config/produzione.json")
     p.add_argument("--applicata", default="", help="la decisione appena applicata ai file del libro")
     p.add_argument("--scadute", action="store_true", help="chiude le proposte scadute, in tutti i libri")
     p.add_argument("--json", action="store_true")

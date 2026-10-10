@@ -1,7 +1,7 @@
 {
-  "_nota": "I libri che il giro orario fa avanzare da solo, e il silenzio-assenso. Un libro entra qui quando finiscono le sue domande d'avvio (`avvio`), o a mano; esce quando è pubblicato o messo in pausa dall'autore. I libri che non sono qui il giro non li tocca.",
+  "_nota": "I libri in produzione e il silenzio-assenso. Un libro entra qui quando finiscono le sue domande d'avvio (`avvio`), o a mano; esce quando è pubblicato o messo in pausa dall'autore. `silenzio_assenso_ore: null` vuol dire silenzio-assenso spento (decisione dell'autore, 10 ottobre 2026): ogni proposta aspetta la sua risposta, senza scadenza.",
   "attivi": [
     "b0gjr36xwt"
   ],
-  "silenzio_assenso_ore": 24
+  "silenzio_assenso_ore": null
 }

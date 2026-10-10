@@ -67,10 +67,15 @@ def proponi(
     proposta: str,
     alternative: list[str] | None = None,
     perche: str = "",
-    ore: int = ORE_PREDEFINITE,
+    ore: int | None = ORE_PREDEFINITE,
     adesso: datetime | None = None,
 ) -> dict:
-    """Registra una proposta in attesa della risposta dell'autore, con la sua scadenza."""
+    """Registra una proposta in attesa della risposta dell'autore, con la sua scadenza.
+
+    Con `ore` a None (o zero) la proposta non scade: aspetta la risposta
+    dell'autore, comunque vada. È il caso in cui l'autore ha spento il
+    silenzio-assenso (`silenzio_assenso_ore: null` in `config/produzione.json`).
+    """
     if chiave == MAI:
         raise ValueError("La pubblicazione non passa dal silenzio-assenso: la decide l'autore.")
     if chiave not in CHIAVI:
@@ -85,7 +90,7 @@ def proponi(
         "alternative": list(alternative or []),
         "perche": perche,
         "chiesta_il": _iso(adesso),
-        "scade_il": _iso(adesso + timedelta(hours=ore)),
+        "scade_il": _iso(adesso + timedelta(hours=ore)) if ore else "",
         "stato": IN_ATTESA,
         "valore": "",
         "deciso_il": "",
@@ -130,6 +135,17 @@ def chiudi_scadute(project: BookProject, adesso: datetime | None = None) -> list
     return chiuse
 
 
+def togli_scadenze(project: BookProject) -> list[dict]:
+    """Le proposte in attesa perdono la scadenza: aspettano l'autore, senza silenzio-assenso."""
+    decisioni = leggi(project)
+    tolte = [v for v in decisioni if v["stato"] == IN_ATTESA and v.get("scade_il")]
+    for voce in tolte:
+        voce["scade_il"] = ""
+    if tolte:
+        salva(project, decisioni)
+    return tolte
+
+
 def segna_applicata(project: BookProject, chiave: str) -> dict:
     decisioni = leggi(project)
     voce = next(
@@ -165,5 +181,6 @@ def messaggio(slug: str, voce: dict) -> str:
         f"{slug} · {voce['chiave']}: proposta «{voce['proposta']}»"
         + (f"\n  perché: {voce['perche']}" if voce.get("perche") else "")
         + (f"\n  alternative:{alternative}" if alternative else "")
-        + f"\n  se non rispondi entro {voce['scade_il']} (UTC), procedo con la proposta."
+        + (f"\n  se non rispondi entro {voce['scade_il']} (UTC), procedo con la proposta."
+           if voce.get("scade_il") else "\n  aspetto la tua risposta: senza, questa decisione resta ferma.")
     )

@@ -575,19 +575,25 @@ Nessun agente decide queste cose, e nessun cancello le sostituisce:
 - **la promessa** e la **linea editoriale** (`notes` di `book.json`);
 - **chi racconta**: se il libro presenta casi reali, composti o inventati, e
   come lo dichiara al lettore;
-- **il prezzo**;
+- **il prezzo** e il **formato di stampa**;
 - **la direzione d'arte della copertina**: il sistema scrive i prompt dalle tre
-  direzioni dell'agente, Higgsfield genera i bozzetti, l'autore sceglie — senza
-  silenzio-assenso; poi, fra le varianti della direzione scelta, la variante;
+  direzioni dell'agente, Higgsfield genera i bozzetti, l'autore sceglie; poi,
+  fra le varianti della direzione scelta, la variante;
 - **la pubblicazione**, dopo aver letto il libro.
 
 Quando un agente tocca una di queste, la segnala come domanda, non la risolve.
 La sessione la registra con la proposta degli agenti e le alternative
-(`decisioni <slug> --proponi …`) e manda la notifica all'autore: se entro 24
-ore non risponde, vale la proposta (**silenzio-assenso**). La sua risposta,
-quando arriva, vince sempre. Non passano dal silenzio-assenso la
-pubblicazione e la direzione d'arte della copertina: la prima è sua per
-definizione, la seconda l'ha voluta vedere lui (7 ottobre 2026).
+(`decisioni <slug> --proponi …`), scrive all'autore in chat e gli manda una
+notifica push. **Nessuna decisione passa dal silenzio-assenso** (scelta
+dell'autore, 10 ottobre 2026: `silenzio_assenso_ore: null` in
+`config/produzione.json`): la proposta aspetta la sua risposta, senza
+scadenza, e intanto va avanti solo il lavoro che non ne dipende.
+
+**Che cosa va in automatico** (stessa data): la produzione del libro attivo e i
+tre bozzetti di copertina a bassa risoluzione. Un limite d'uso che ferma il
+lavoro lascia un solo promemoria all'ora in cui si azzera, per riprendere.
+Routine programmate, attività e lanci di Cowork, generazioni oltre i bozzetti e
+spese aspettano il consenso dell'autore.
 
 ---
 

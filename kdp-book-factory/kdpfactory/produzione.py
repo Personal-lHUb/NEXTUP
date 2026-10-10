@@ -186,6 +186,8 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
         return f"Cowork, ruolo {r.ruolo or '—'}: {Path(r.percorso).name}"
 
     def proposta(d: dict) -> str:
+        if not d.get("scade_il"):
+            return f"autore: {d['chiave']} (aspetta la sua risposta)"
         return f"autore: {d['chiave']} (silenzio-assenso dal {d['scade_il']})"
 
     def stato(fase: str, passo: str, ruoli: tuple[str, ...] = (), nomi: tuple[str, ...] = (),
@@ -216,7 +218,7 @@ def stato_libro(project: BookProject, aperte: list[cowork.Richiesta]) -> Stato:
                 aspetta = ("cowork-parole-chiave.md",) if agente == "posizionamento" else ()
                 return stato("0", f"subagent `{agente}` → concorrente/{nome}", (), aspetta)
         return stato("0", "`concorrente importa <slug>`, poi le proposte all'autore (titolo, promessa, "
-                          "categoria, prezzo) con il silenzio-assenso")
+                          "categoria, prezzo)")
 
     if not project.outline_path.exists():
         return stato("1", "scaletta e piano delle figure: `architetto` → `indice` → "

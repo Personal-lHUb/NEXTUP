@@ -52,7 +52,7 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   **Il formato definitivo lo decide l'autore** dopo il confronto coi
   concorrenti (`concorrente/ricerca-web-vetrina.md`: 6×9 per i libri da leggere,
   8,5×11 per le raccolte di modelli).
-- **Fase 4, collegio in corso**: lettore cieco (libro e vetrina), editor di
+- **Fase 4, collegio chiuso; fase 5, correzioni**: lettore cieco (libro e vetrina), editor di
   sviluppo, tre fact-checker (sezioni 1-8, 9-16, 17-26), conformità con la
   proposta di disclaimer. I rapporti si salvano con `trascrizione <id>
   books/b0gjr36xwt/revisioni/<agente>.md --testo` (cominciano con `# Rapporto`).
@@ -70,11 +70,24 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   `python3 -m kdpfactory trascrizione <id-agente> <file.json>`, con
   `--etichetta SCALETTA` / `FIGURE` per l'architetto.
 
+## Automazioni e consenso (10 ottobre, decisione dell'autore)
+
+- **In automatico** solo la produzione del libro attivo e i tre bozzetti di
+  copertina a bassa risoluzione (uno per direzione, Higgsfield). Se un limite
+  d'uso ferma il lavoro: un solo `send_later` all'ora in cui si azzera.
+- **Silenzio-assenso spento**: ogni decisione d'autore aspetta la sua risposta,
+  senza scadenza (`silenzio_assenso_ore: null`). In attesa ora: **prezzo**
+  (21,99 USD proposto, alternativa 19,99).
+- Tutto il resto (routine, Cowork, generazioni oltre i bozzetti, spese) aspetta
+  il suo consenso. Quando serve: riga in chat e notifica push.
+- Il prompt della routine «Produzione NEXTUP» parla ancora di silenzio-assenso
+  e di lanci di Cowork: se l'autore la vuole riaccesa, prima va riscritto.
+
 ## Routine e Cowork
 
 - **Tutte le routine sono spente** (8 ottobre, su richiesta dell'autore): la
-  fabbrica «Produzione NEXTUP» e le cinque attività di Cowork. Si lavora quando
-  l'autore scrive.
+  fabbrica «Produzione NEXTUP» e le cinque attività di Cowork. Verificato il 10
+  ottobre. Si riaccendono solo col consenso dell'autore.
 - Le attività di Cowork sul portatile hanno ancora il **prompt vecchio, quello
   di Drive**: prima di riaccenderle, l'autore approva in una conversazione Cowork
   sul portatile i prompt nuovi di `kdp-book-factory/config/attivita-cowork.json`.

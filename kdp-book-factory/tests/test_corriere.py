@@ -324,6 +324,17 @@ class TestDecisioni(unittest.TestCase):
         with self.assertRaises(ValueError):
             decisioni.proponi(self.project, "pubblicazione", "sì")
 
+    def test_senza_silenzio_assenso_la_proposta_aspetta_l_autore(self):
+        """L'autore ha spento il silenzio-assenso: nessuna proposta si chiude da sola."""
+        voce = decisioni.proponi(self.project, "prezzo", "21.99", ore=None, adesso=self.t0)
+        self.assertEqual(voce["scade_il"], "")
+        self.assertEqual(decisioni.chiudi_scadute(self.project, self.t0 + timedelta(days=30)), [])
+        self.assertIn("aspetto la tua risposta", decisioni.messaggio("libro", voce))
+        decisioni.proponi(self.project, "titolo", "Hard Calls", adesso=self.t0)
+        tolte = decisioni.togli_scadenze(self.project)
+        self.assertEqual([v["chiave"] for v in tolte], ["titolo"])
+        self.assertEqual(decisioni.chiudi_scadute(self.project, self.t0 + timedelta(days=30)), [])
+
 
 class TestProduzione(Base):
     def test_il_libro_fermo_aspetta_solo_quello_che_gli_serve(self):
