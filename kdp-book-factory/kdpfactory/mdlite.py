@@ -33,6 +33,14 @@ class BulletList:
 @dataclass
 class Quote:
     text: str
+    #: i capoversi della citazione, separati da una riga `>` vuota. Una nota
+    #: clinica riscritta ne ha tre (anamnesi, valutazione, piano): fusi in un
+    #: blocco solo, il lettore non vede più dove comincia il piano.
+    paragrafi: list[str] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        if not self.paragrafi and self.text:
+            self.paragrafi = [self.text]
 
 
 @dataclass
@@ -88,7 +96,14 @@ def parse(markdown: str) -> list[Block]:
     def flush_quote() -> None:
         nonlocal quote
         if quote:
-            blocks.append(Quote(" ".join(quote).strip()))
+            paragrafi, corrente = [], []
+            for riga in [*quote, ""]:
+                if riga:
+                    corrente.append(riga)
+                elif corrente:
+                    paragrafi.append(" ".join(corrente).strip())
+                    corrente = []
+            blocks.append(Quote(" ".join(paragrafi).strip(), paragrafi))
             quote = []
 
     def flush_all() -> None:

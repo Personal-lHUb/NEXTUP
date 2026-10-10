@@ -84,6 +84,11 @@ class BookSpec:
     #: non basta (rodaggio household-bills, controllo di conformità). Una riga
     #: vuota separa i paragrafi.
     disclaimer: str = ""
+    #: le citazioni (`>`) in un riquadro grigio chiaro con filetto, invece che
+    #: rientrate in grigio: per i libri in cui il blocco citato è un oggetto da
+    #: guardare, come le note cliniche prima e dopo di b0gjr36xwt (scelta
+    #: dell'autore «Box delle note»; i libri del genere fanno così).
+    quote_box: bool = False
     #: `true` se questa cartella non è un libro ma un banco di prova: la
     #: pipeline ci gira sopra a secco, la diagnostica la lascia fuori dai
     #: conti. Senza questo marcatore i difetti dell'attrezzatura di prova

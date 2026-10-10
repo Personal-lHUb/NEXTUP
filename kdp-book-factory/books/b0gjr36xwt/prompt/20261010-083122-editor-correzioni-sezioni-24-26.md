@@ -1,0 +1,9 @@
+<!-- agente: editor · Correzioni sezioni 24-26 · 2026-10-10 08:31:22 UTC -->
+
+Libro `b0gjr36xwt`, cartella `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/`. Correggi le sezioni 24, 25 e 26, la parte di consultazione (`manuscript/24.md` Phrasebook, `25.md` Scenario Finder, `26.md` Glossary).
+
+Leggi prima `revisioni/piano-correzioni.md` (voci «24 Phrasebook», «25 Scenario Finder», «26 Glossary» e gli interventi su tutto il libro): è vincolante dove i rapporti si sovrappongono. Per il dettaglio leggi i rapporti in `revisioni/` (lettore-cieco, editor-sviluppo, fact-checker-17-26, conformita). I capitoli 1-23 in `manuscript/` sono già corretti e definitivi: il frasario e gli elenchi devono riportarli come sono ora (nomi, valori, etichette in grassetto, voci dell'elenco «What the note must contain»), non come erano. Non leggere niente in `concorrente/`.
+
+Il tuo campo, e solo quello: applicare al testo le correzioni del piano che riguardano queste tre sezioni. Quando rimandi al capitolo 4, nominalo per argomento («the chapter on where claims begin»), non col titolo, che cambierà. Le fonti in fondo al glossario sono esattamente quelle del piano, con i riferimenti come sono scritti lì; nessuna fonte in più. Non riscrivere ciò che non è segnalato; mantieni la voce del libro (inglese americano piano). Il frasario e il glossario restano entro il 10% della lunghezza attuale; lo Scenario Finder può crescere quanto serve a riportare gli elenchi alla lettera. Non cambiare la riga del titolo `# …` di nessuna sezione.
+
+Consegna: scrivi i tre capitoli corretti, interi, in ordine (24, 25, 26), ognuno che comincia con la sua riga `# ` di titolo, senza preamboli, commenti o separatori, nel file `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor-24-26.md`. Poi rispondi con una riga sola: il percorso e quante parole ha ogni capitolo. Se non hai lo strumento Write, rispondi invece con i tre capitoli interi.

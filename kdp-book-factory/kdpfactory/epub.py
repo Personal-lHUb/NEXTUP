@@ -26,6 +26,9 @@ p { margin: 0; text-indent: 1.2em; text-align: justify; }
 p.first, h1 + p, h2 + p, h3 + p { text-indent: 0; }
 p.first { margin-top: 0.6em; }
 blockquote { margin: 1em 1.5em; font-style: italic; color: #444; }
+blockquote.nota { margin: 1em 0; padding: 0.5em 0.8em; font-style: normal; color: #000;
+  background: #efefef; border: 1px solid #8c8c8c; }
+blockquote p + p { margin-top: 0.8em; }
 ul, ol { margin: 0.8em 0 0.8em 1.4em; }
 li { margin-bottom: 0.3em; text-align: left; }
 hr.scene { border: 0; text-align: center; margin: 1.2em 0; }
@@ -53,7 +56,7 @@ def _xhtml(title: str, body: str, language: str) -> str:
 """
 
 
-def markdown_to_xhtml(markdown: str) -> str:
+def markdown_to_xhtml(markdown: str, riquadro: bool = False) -> str:
     out: list[str] = []
     first_para = True
     for block in mdlite.parse(markdown):
@@ -71,7 +74,9 @@ def markdown_to_xhtml(markdown: str) -> str:
             out.append(f"<{tag}>{items}</{tag}>")
             first_para = True
         elif isinstance(block, mdlite.Quote):
-            out.append(f"<blockquote><p>{_inline(block.text)}</p></blockquote>")
+            classe = ' class="nota"' if riquadro else ""
+            capoversi = "".join(f'<p class="first">{_inline(p)}</p>' for p in block.paragrafi)
+            out.append(f"<blockquote{classe}>{capoversi}</blockquote>")
             first_para = True
         elif isinstance(block, mdlite.Rule):
             out.append('<hr class="scene"/>')
@@ -141,7 +146,7 @@ def build_epub(
             voci.append((nome, titolo, []))
             dentro_una_parte = True
         nome = f"ch{number:02d}.xhtml"
-        body = f"<h1>{escape(chapter_title)}</h1>\n{markdown_to_xhtml(markdown)}"
+        body = f"<h1>{escape(chapter_title)}</h1>\n{markdown_to_xhtml(markdown, spec.quote_box)}"
         documents.append((nome, chapter_title, _xhtml(chapter_title, body, lang)))
         if dentro_una_parte:
             voci[-1][2].append((nome, chapter_title))

@@ -367,6 +367,23 @@ def build_styles(spec: BookSpec) -> dict[str, ParagraphStyle]:
             spaceAfter=lead * 0.5,
             alignment=TA_LEFT,
         ),
+        # Il riquadro delle note: fondo grigio chiaro e filetto, testo nero e
+        # dritto; il filetto sta dentro la gabbia (rientro = margine interno).
+        "quote_box": style(
+            "QuoteBox",
+            leftIndent=8,
+            rightIndent=8,
+            fontSize=size - 0.5,
+            leading=lead - 1,
+            backColor=colors.HexColor("#EFEFEF"),
+            borderColor=colors.HexColor("#8C8C8C"),
+            borderWidth=0.5,
+            borderPadding=7,
+            spaceBefore=lead * 0.5 + 7,
+            spaceAfter=lead * 0.5 + 7,
+            alignment=TA_LEFT,
+            firstLineIndent=0,
+        ),
         "bullet": style(
             "Bullet",
             leftIndent=0.3 * INCH,
@@ -642,6 +659,7 @@ def markdown_to_flowables(
     frame_height: float = 0.0,
     prepared_dir: Path | None = None,
     lead_in: bool = False,
+    riquadro: bool = False,
 ) -> list:
     flowables: list = []
     first_para_done = not first_paragraph_flush
@@ -702,7 +720,15 @@ def markdown_to_flowables(
             flowables.extend(items[1:])
             first_para_done = True
         elif isinstance(block, mdlite.Quote):
-            emit(Paragraph(mdlite.inline_to_markup(block.text), styles["quote"]))
+            if riquadro:
+                # Un paragrafo solo, coi capoversi separati da una riga vuota:
+                # il riquadro resta uno e, se va a pagina nuova, si spezza col
+                # testo, ridisegnato su ogni pezzo.
+                testo = "<br/><br/>".join(mdlite.inline_to_markup(p) for p in block.paragrafi)
+                emit(Paragraph(testo, styles["quote_box"]))
+            else:
+                for capoverso in block.paragrafi:
+                    emit(Paragraph(mdlite.inline_to_markup(capoverso), styles["quote"]))
             first_para_done = True
         elif isinstance(block, mdlite.Figure):
             if pending_heading is not None:
@@ -1028,6 +1054,7 @@ def _run_typeset(
                 frame_height=geo.text_height,
                 prepared_dir=output.parent / "immagini",
                 lead_in=not spec.is_medium_content,
+                riquadro=spec.quote_box,
             )
         )
         words_by_chapter[number] = mdlite.count_words(markdown)
