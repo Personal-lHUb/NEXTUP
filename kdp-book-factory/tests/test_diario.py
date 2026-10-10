@@ -70,6 +70,31 @@ class TestDiario(Base):
         self.assertEqual(salvate[0].read_text(encoding="utf-8").strip(), lunga.strip())
         self.assertEqual(diario.da_importare(self.project), [salvate[0].name])
 
+    def test_un_agente_interno_senza_tipo_non_entra_nel_diario(self):
+        # Il suggerimento del prossimo messaggio non è una risposta dell'autore.
+        self.hook("subagent-stop", agent_id="ab6", agent_type="",
+                  last_assistant_message="Confermo 6x9 e prezzo 21,99")
+        self.assertEqual(diario.righe(self.project), [])
+
+    def test_una_risposta_spezzata_dal_limite_si_salva_intera(self):
+        trascritta = Path(self._tmp.name) / "agent-x.jsonl"
+        def detto(testo):
+            return {"message": {"role": "assistant", "content": [{"type": "text", "text": testo}]}}
+
+        righe = [
+            {"message": {"role": "user", "content": [{"type": "tool_result", "content": "ok"}]}},
+            detto("# Glossary\n\n" + "a " * 900 + "a second"),
+            {"isMeta": True, "message": {"role": "user", "content": "Output token limit hit. Resume."}},
+            detto("clinician adds a note."),
+        ]
+        trascritta.write_text("\n".join(json.dumps(r) for r in righe), encoding="utf-8")
+        self.hook("subagent-stop", agent_id="x", agent_type="editor",
+                  last_assistant_message="clinician adds a note.", agent_transcript_path=str(trascritta))
+        salvata = next((self.libro / diario.CONSEGNE).iterdir()).read_text(encoding="utf-8")
+        self.assertTrue(salvata.startswith("# Glossary"))
+        self.assertIn("a second clinician adds a note.", salvata)
+        self.assertIn("ricucita da 2 messaggi", diario.righe(self.project)[-1])
+
     def test_senza_libro_attivo_gli_hook_non_scrivono_niente(self):
         (self.radice / "config" / "produzione.json").write_text('{"attivi": []}', encoding="utf-8")
         self.assertEqual(self.hook("pre-agent", tool_input={"prompt": "x"})[0], 0)

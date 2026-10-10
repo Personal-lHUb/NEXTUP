@@ -2,23 +2,67 @@
 
 ## Models, not text to paste
 
-The pairs follow the order of the scenario chapters, and each heading is the title of the chapter that shows the full note and its reasoning. The weak line is what a busy, competent NP might write. The defensible line is shortened from the rewrite of the same encounter, and the reason says in a line why it holds up better.
+The pairs follow the order of the chapters, and each heading is the title of the chapter that shows the full note and its reasoning. The weak line is what a busy, competent NP might write. The defensible line is shortened from the rewrite of the same encounter, and the reason says in a line why it holds up better. "Defensible" here means the note shows the reasoning; it is not a legal result.
 
-The phrases are models to rewrite, never text to paste. Their times, values, names and quotations belong to constructed patients. A line pasted without the care behind it becomes what the chapter on templates and the late addendum warned against: a sentence you sign without having written it. Keep the shape and write it in your own words, about your own patient.
+The phrases are models to rewrite, never text to paste. Their times, values, doses, thresholds, names and quotations belong to constructed patients. A line pasted without the care behind it becomes what the chapter on templates and the late addendum warned against: a sentence you sign without having written it. Keep the shape and write it in your own words, about your own patient.
+
+## Writing the Differential You Actually Ran
+
+**Weak:** PE unlikely.
+
+**Defensible:** PE considered: judged low risk on clinical grounds, then PERC applied, none of 8 criteria present (age 33, HR 84, SpO2 98% RA; no hemoptysis, hormone use, prior VTE, unilateral leg swelling, or recent surgery or trauma). No further testing for PE.
+
+**Why:** The danger has reasons of its own, and the rule shows its inputs after the clinical judgment it requires.
+
+## What You Don't Know Yet, Written Plainly
+
+**Weak:** r/o appendicitis. Clinical correlation recommended.
+
+**Defensible:** Early appendicitis not excluded: at 6 hrs the exam may not yet show it. Would reconsider if pain localizes to the RLQ, becomes constant or hurts with walking, or if fever develops.
+
+**Why:** "R/o" can mean open or excluded, and in a provider note the correlating clinician is you; say what would change your mind.
+
+**Weak:** Risks, benefits and alternatives discussed.
+
+**Defensible:** Options discussed: (1) ED now for blood work and imaging, likely several hours, may show nothing; (2) home, recheck here 09:00 tomorrow, accepting that appendicitis, if present, would be found later. Patient prefers 2, to avoid a night in the ED; roommate home overnight, has a car.
+
+**Why:** The options as offered, what each costs and the patient's reason; the phrase would fit any patient.
+
+## Facts, Quotes, and What Never Goes in the Chart
+
+**Weak:** Hx noncompliance, off metformin for months. Drug-seeking, demanding IV Dilaudid.
+
+**Defensible:** Has not taken metformin for ~4 months; states it caused stomach upset. Reports L leg pain 8/10, "the pills don't touch it"; asked for IV hydromorphone by name. Last oxycodone 5 mg at 04:10.
+
+**Why:** A behavior with its reason, and the exact request, replace a label that ends the asking and a motive nobody can observe.
+
+## Templates, Copy-Forward, and the Late Addendum
+
+**Weak** (copied forward): Feels better, breathing easier, slept well. Exam: alert and oriented x3, NAD.
+
+**Defensible:** Seen 08:45. RN charted new confusion at 05:30. Drowsy, rouses to voice, oriented to self only; oriented x3 on my exam yesterday.
+
+**Why:** Today's findings, written fresh, with the comparison to yesterday that copy-forward erases.
+
+**Weak** (signed 09:24): Plan: continue IV furosemide 40 mg BID.
+
+**Defensible:** Correction, 10:15, to progress note signed 09:24 today. Subjective, exam, assessment and plan were carried forward in error from yesterday's note. IV furosemide held 08:55, not continued.
+
+**Why:** The error stays readable, and a correction, never a silent edit, says who changed it, when and why.
+
+**Weak** (written at 15:50): 11:30. Awake, oriented to person and place, not date. Plan unchanged.
+
+**Defensible:** Late entry, written 15:50, for bedside reassessment at 11:30. Delayed by two admissions. At 11:30: awake, oriented to person and place, not date.
+
+**Why:** Labeled, with both times and a reason, a late entry is ordinary; disguised as contemporaneous, it is not.
 
 ## The Test You Order and the Test You Don't
 
 **Weak:** No indication for CT head.
 
-**Defensible:** Intracranial injury considered. Canadian CT Head Rule applies (minor head injury with witnessed LOC, age 16 or over, no anticoagulant); none of its 7 criteria present. CT not required by the rule.
+**Defensible:** Intracranial injury considered. Canadian CT Head Rule applies (minor head injury with witnessed LOC, age 16 or over, no anticoagulant); none of its 7 criteria present: GCS 15 at 10:20, 2.5 h after injury; no sign of open, depressed or basal skull fracture; no vomiting; age 38; no amnesia before the fall; mechanism a ground-level slip. CT not required by the rule.
 
-**Why:** The test weighed is named, with the rule, why the patient fell inside it and an output stated no larger than it is.
-
-**Weak:** R wrist pain, XR neg. F/u 10 days.
-
-**Defensible:** R wrist: possible scaphoid fracture, which can be occult on the first X-ray. Recheck booked Fri 09:00; repeat scaphoid views ordered today for that visit.
-
-**Why:** The test left for later has a reason, an owner and a date.
+**Why:** The test weighed is named, with the rule, why the patient fell inside it, each criterion with its value and time, and an output stated no larger than it is.
 
 ## Closing the Loop on the Abnormal Result
 
@@ -27,12 +71,6 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 **Defensible:** 17:20 called home, reached patient, identity confirmed with date of birth. Told him his potassium is high enough to disturb his heart rhythm and he needs the ED now.
 
 **Why:** The note shows which call reached him, and "advised ED" becomes go now, with the reason he heard.
-
-**Weak:** Incidental RLL nodule, f/u PCP.
-
-**Defensible:** EHR message to Dr. Ruth Lindqvist, PCP, naming the nodule and the recommended scan; her reply 11:05: "Got it, will order at his follow-up visit."
-
-**Why:** Ownership passes only when the next clinician knows and accepts; her reply records that moment.
 
 ## The Delayed Scan and the Bed That Never Opens
 
@@ -50,12 +88,6 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 ## The Consultant Who Never Comes
 
-**Weak** (the page): Please call 4 East.
-
-**Defensible:** "Urgent. 76F, 4 East bed 12, cold pulseless L foot since 13:15, prior SFA stent, heparin ordered. Need evaluation for revascularization. Call NP Holloway x4417."
-
-**Why:** The finding, its onset and the question travel with the request, and the note keeps the words.
-
 **Weak:** Vascular paged multiple times without response.
 
 **Defensible:** 14:20. No callback. Operator confirmed Dr. Kirby on call, same pager; second page, same text.
@@ -66,7 +98,7 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Weak:** Rx oxycodone 5 mg q6h prn pain #10.
 
-**Defensible:** Oxycodone 5 mg, 1 tab up to every 6 h, only for severe pain the scheduled drugs do not relieve; #10, no refills, enough until ortho visit. Tramadol not used: serotonin risk with sertraline.
+**Defensible:** Oxycodone 5 mg, 1 tab up to every 6 h, only for severe pain the scheduled drugs do not relieve; #10, no refills, enough until ortho visit. Tramadol not used: serotonin syndrome and seizure risk with sertraline.
 
 **Why:** The as-needed dose has a threshold, the quantity an end, and the drug set aside a reason.
 
@@ -98,12 +130,6 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Why:** Observed behavior, and the threat once in its exact words, let a reader judge the response.
 
-**Weak:** Dr. Hale overruled my recommendation to admit.
-
-**Defensible:** Admission for telemetry considered: no warning before the faint; ECG first-degree AV block, not present on 2022 ECG. Dr. Hale examined patient 15:30. His assessment: orthostatic syncope.
-
-**Why:** The option you favored keeps its findings, the decision its owner, and the conflict stays out.
-
 ## The Capacity Question, Decision by Decision
 
 **Weak:** Confused, A&O x1. Lacks capacity.
@@ -114,9 +140,9 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Weak:** Pt A&O x3 today, has capacity.
 
-**Defensible:** Has capacity at this time to decline EGD; deficits found at 17:05 not present.
+**Defensible:** 07:35. Understanding: "You put a camera down my throat to find the bleeding and maybe stop it." Reasoning: "My wife choked on one of those tubes and was never right after." Has capacity at this time to decline EGD; deficits found at 17:05 not present.
 
-**Why:** His answers on each ability, set against the evening's deficits, show a patient who changed, not a clinician who changed her mind.
+**Why:** His own answers, set against the evening's deficits, show a patient who changed, not a clinician who changed her mind.
 
 ## Informed Refusal and the Partial Yes
 
@@ -150,15 +176,9 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Weak:** Return to ED for worsening pain, fever or other concerns.
 
-**Defensible:** Told to go to Riverside Hospital ED, not this clinic, for pain that returns and lasts more than 3 h, temperature 100.4°F or higher or shaking chills, yellow eyes or skin or dark urine, or pain through to the back with vomiting.
+**Defensible:** Told to go to the hospital ED, not this clinic, for pain that returns and lasts more than 3 h, temperature 100.4°F or higher or shaking chills, yellow eyes or skin or dark urine, or pain through to the back with vomiting.
 
 **Why:** Each danger the assessment left open becomes a sign with a threshold, and the place named will be open.
-
-**Weak:** F/u PCP.
-
-**Defensible:** PCP Dr. Anjali Varma: EHR message sent 21:10 with findings and plan. If no US or PCP visit by Fri, return here Fri for recheck.
-
-**Why:** A named clinician who knows she is coming, and a floor for the appointment that cannot be made.
 
 ## Handoffs, Cross-Cover, and the Night Call
 
@@ -168,12 +188,6 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Why:** What you were told keeps its source and time, apart from what you checked.
 
-**Weak:** Hypotension likely sepsis vs meds.
-
-**Defensible:** Worsening sepsis from R kidney most likely; lisinopril at 21:00 likely contributing. Fever and drowsiness new since sign-out, so bolus larger than the 500 mL planned.
-
-**Why:** The assessment says which cause leads, and the change to the inherited plan reads as a decision, not a deviation.
-
 ## The Telehealth Visit and the Portal Message
 
 **Weak:** Telehealth visit. Lungs clear to auscultation bilaterally.
@@ -182,29 +196,17 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Why:** The exam is sorted by source, and the camera's limit replaces a finding nobody could have made.
 
-**Weak:** ED if worse.
-
-**Defensible:** ED or 911 for: cannot finish a sentence, blue lips, oximeter below 92%, peak flow below 215, or albuterol relief under 2 h.
-
-**Why:** The thresholds are numbers she can read on her own devices.
-
 ## Missed Visits and Referrals That Go Nowhere
-
-**Weak:** Pt no-show x2. Noncompliant with f/u.
-
-**Defensible:** No-show, 10:00 visit for positive FIT (see 3/18). 10:45 called cell: no answer; voicemail asked her to call clinic, result not stated.
-
-**Why:** The missed visit is noticed, tied to its result and pursued; "noncompliant" is a verdict on a reason nobody recorded.
 
 **Weak:** Referral sent.
 
-**Defensible:** Referral sent 12:45 to Dr. Samuel Tran, Lakeside Gastroenterology, marked positive FIT. Will check scheduling by 5/14.
+**Defensible:** Referral sent 12:45 to Dr. Samuel Tran, gastroenterology, marked positive FIT. Will check scheduling by 5/14.
 
 **Why:** "Sent" records an order, not an appointment; a dated check keeps it from depending on memory.
 
 ## The Adverse Event and the Records Request
 
-**Weak:** Pt received wrong dose of Lantus last night due to RN error.
+**Weak:** Pt received wrong dose of glargine last night due to RN error.
 
 **Defensible:** Per medication record, insulin glargine 40 units given 21:10 Tue; ordered dose 14 units.
 

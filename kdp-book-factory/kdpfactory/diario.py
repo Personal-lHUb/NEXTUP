@@ -22,8 +22,8 @@ consegne da importare e la coda del diario.
 
 Gli hook stanno in `.claude/settings.json` e chiamano
 `python3 -m kdpfactory.diario --hook <evento>`. Questo modulo usa solo la
-libreria standard: gira a ogni lancio di agente e deve costare pochi
-millisecondi. Un hook che fallisce non ferma mai il lavoro, tranne la guardia,
+libreria standard (e `trascrizione`, che fa lo stesso): gira a ogni lancio di
+agente e deve costare pochi millisecondi. Un hook che fallisce non ferma mai il lavoro, tranne la guardia,
 che esiste per fermarlo.
 """
 
@@ -35,6 +35,8 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+from . import trascrizione
 
 #: la cartella `kdp-book-factory`
 RADICE = Path(__file__).resolve().parent.parent
@@ -269,12 +271,26 @@ def hook(evento: str, dati: dict, radice: Path = RADICE,
         if trovato:
             annota(libro, f"`{agente}` «{descrizione}» in background, id `{trovato[1]}`", adesso)
     elif evento == "subagent-stop":
+        tipo = dati.get("agent_type") or ""
+        if not tipo:
+            # Gli agenti interni di Claude Code (il suggerimento del prossimo
+            # messaggio, per esempio) non hanno tipo. Il 10 ottobre uno ha
+            # lasciato nel diario «Confermo 6x9 e prezzo 21,99», che sembrava
+            # una risposta dell'autore e non lo era: non si registrano.
+            return 0, "", ""
         id_agente = dati.get("agent_id") or "?"
-        tipo = dati.get("agent_type") or "agente"
         ultimo = dati.get("last_assistant_message") or ""
         if isinstance(ultimo, (list, dict)):
             ultimo = json.dumps(ultimo, ensure_ascii=False)
+        pezzi = 1
+        trascritto = dati.get("agent_transcript_path") or ""
+        if trascritto and Path(trascritto).exists():
+            intera, pezzi = trascrizione.uscita_finale(Path(trascritto))
+            if len(intera) > len(ultimo):
+                ultimo = intera
         nota = f"finito `{tipo}` (id `{id_agente}`)"
+        if pezzi > 1:
+            nota += f", risposta ricucita da {pezzi} messaggi (controllare le giunture)"
         if len(ultimo) > SOGLIA_USCITA:
             file = salva_uscita(libro, tipo, id_agente, ultimo, adesso)
             nota += f": uscita lunga salvata in `{_relativo(libro, file)}`"

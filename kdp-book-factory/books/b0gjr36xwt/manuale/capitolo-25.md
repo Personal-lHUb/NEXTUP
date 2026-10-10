@@ -2,6 +2,10 @@
 
 ## What is happening now
 
+- A dangerous diagnosis to name and set aside, or a score or decision rule you relied on: *Writing the Differential You Actually Ran*
+- A working diagnosis you are not sure of, a choice the evidence leaves to the patient, a symptom with no cause yet: *What You Don't Know Yet, Written Plainly*
+- A behavior to describe, the patient's words to quote, a label or a complaint about staff you are tempted to chart: *Facts, Quotes, and What Never Goes in the Chart*
+- A copied or templated note, a signed note to correct or add to, care written up hours later: *Templates, Copy-Forward, and the Late Addendum*
 - A test to order, to skip or to leave for later: *The Test You Order and the Test You Don't*
 - A critical value, an incidental finding, a result after the patient has left: *Closing the Loop on the Abnormal Result*
 - A delayed scan, a bed or transfer that does not open: *The Delayed Scan and the Bed That Never Opens*
@@ -97,13 +101,13 @@ The abnormal result, the prescription, the antibiotic or scan you decline, the t
 
 ### The Capacity Question, Decision by Decision
 
-- The decision assessed, named specifically, and the time of the assessment.
-- What the patient was told, and any interpreter or sensory aid used.
-- Each of the four abilities, with the patient's own answers, right or wrong.
-- A finding limited to this decision at this time, with its likely cause.
-- Whether the decision could wait; each reassessment, timed, with what changed.
-- Who assessed, and any psychiatry or ethics consultation: question, answer, action.
-- For a surrogate: name, relationship, source of authority, what they were told, what they chose and why.
+- **The question.** The decision assessed, named specifically, and the time of the assessment.
+- **The information.** What the patient was told, and any interpreter or sensory aid used.
+- **The assessment.** Each of the four abilities, with the patient's own answers, right or wrong.
+- **The conclusion.** A finding limited to this decision at this time, with its likely cause.
+- **The timing.** Whether the decision could wait; each reassessment, timed, with what changed.
+- **The clinicians.** Who assessed, and any psychiatry or ethics consultation: question, answer, action.
+- **The surrogate.** For a surrogate: name, relationship, source of authority, what they were told, what they chose and why.
 
 ### Informed Refusal and the Partial Yes
 
@@ -180,4 +184,4 @@ The abnormal result, the prescription, the antibiotic or scan you decline, the t
 
 ## Before you sign
 
-Read the list for your scenario once the note is drafted, and look for each element in what you wrote; one you cannot find is a sentence to add before you sign, while a change is still just an edit. The lists are not a form to fill in: an element is there when your own sentences show it, not when a heading names it.
+Read the list for your scenario once the note is drafted, and look for each element in what you wrote; one you cannot find is a sentence to add before you sign. The lists are not a form to fill in: an element is there when your own sentences show it, not when a heading names it.

@@ -52,6 +52,51 @@ def _testi(percorso: Path) -> list[str]:
     return testi
 
 
+#: Il messaggio con cui Claude Code fa riprendere un agente che ha superato il
+#: limite d'uscita: la sua risposta continua nel messaggio dopo, spesso a metà
+#: frase (editor delle sezioni 24-26 di b0gjr36xwt: glossario tagliato in due).
+RIPRESA = "Output token limit hit"
+
+
+def _cuci(pezzi: list[str]) -> str:
+    """Ricuce i pezzi di una risposta spezzata: uno spazio dove il taglio cade fra due parole."""
+    testo = pezzi[0] if pezzi else ""
+    for pezzo in pezzi[1:]:
+        serve_spazio = testo and pezzo and not testo[-1].isspace() and not pezzo[0].isspace()
+        testo += (" " if serve_spazio else "") + pezzo
+    return testo
+
+
+def uscita_finale(percorso: Path) -> tuple[str, int]:
+    """L'ultima risposta dell'agente, intera anche se il limite d'uscita l'ha spezzata.
+
+    Restituisce il testo e in quanti pezzi è arrivato. La risposta finale è
+    quello che l'agente scrive dopo l'ultimo risultato di uno strumento; un
+    messaggio di ripresa non la interrompe, ogni altro messaggio sì.
+    """
+    pezzi: list[str] = []
+    for riga in percorso.read_text(encoding="utf-8").splitlines():
+        try:
+            voce = json.loads(riga)
+        except ValueError:
+            continue
+        messaggio = voce.get("message") or {}
+        contenuto = messaggio.get("content")
+        if messaggio.get("role") == "user":
+            if voce.get("isMeta") and isinstance(contenuto, str) and contenuto.startswith(RIPRESA):
+                continue
+            pezzi = []
+        elif messaggio.get("role") == "assistant":
+            if isinstance(contenuto, list):
+                testo = "".join(c.get("text", "") for c in contenuto
+                                if isinstance(c, dict) and c.get("type") == "text")
+            else:
+                testo = str(contenuto or "")
+            if testo.strip():
+                pezzi.append(testo)
+    return _cuci(pezzi), len(pezzi)
+
+
 def _primo_oggetto(testo: str) -> dict | None:
     decoder = json.JSONDecoder()
     for i, carattere in enumerate(testo):
@@ -91,7 +136,8 @@ def testo(percorso: Path, inizio: str = "# ") -> str:
     markdown): si tiene dalla prima riga che comincia con `inizio` in poi, così
     un preambolo o una recinzione ```markdown non finiscono nel manoscritto.
     """
-    for messaggio in reversed(_testi(percorso)):
+    finale, _ = uscita_finale(percorso)
+    for messaggio in [finale, *reversed(_testi(percorso))]:
         righe = messaggio.splitlines()
         for i, riga in enumerate(righe):
             if riga.startswith(inizio):
