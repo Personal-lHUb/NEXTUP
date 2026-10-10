@@ -105,7 +105,10 @@ Un libro alla volta, e ogni chiamata al modello dove la qualità si vede:
 La tabella sta in `competenze.py` (`MODELLI`) e finisce nei file degli agenti
 con `agents --install`. Le altre regole: tutto quello che si misura lo fa un
 comando, non un agente; l'agente riceve i percorsi e legge da sé; la sua uscita
-si salva con uno script dalla trascrizione, senza ricopiarla; il collegio di
+la scrive lui nel file di consegna (`books/<slug>/consegne/<nome>.md`), risponde
+con una riga, e `consegna <slug> <file>` la porta nel libro dopo il backup (se
+risponde col testo lungo, l'hook di fine agente la salva in `consegne/` lo
+stesso; `trascrizione` resta per le consegne vecchie); il collegio di
 controllo gira una volta per fase sul libro intero, in parallelo; il giro gira
 una volta al giorno e quando Cowork consegna, e dei ruoli di Cowork restano
 accese solo le attività con una richiesta aperta.

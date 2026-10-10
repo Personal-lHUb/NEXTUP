@@ -1,6 +1,6 @@
 # Stato della fabbrica
 
-Aggiornato l'8 ottobre 2026. Si aggiorna alla fine di ogni sessione: chi apre la
+Aggiornato il 10 ottobre 2026. Si aggiorna alla fine di ogni sessione: chi apre la
 sessione dopo parte da qui.
 
 ## Il libro in corso
@@ -26,8 +26,10 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   verificati. Le categorie KDP sono ricostruite. Si verificano alla scheda
   prodotto (fase 6), o prima, se Cowork torna.
 - **Decisioni dell'autore** (`decisioni.json`): categoria full-content, titolo,
-  promessa e pseudonimo **scelti dall'autore** l'8 ottobre. Il prezzo (21,99
-  USD, alternativa 19,99) è in silenzio-assenso fino al 9 ottobre, 05:55 UTC.
+  promessa e pseudonimo **scelti dall'autore** l'8 ottobre. **In attesa della
+  sua risposta**, senza scadenza: il prezzo (21,99 USD, alternativa 19,99) e il
+  formato di stampa (proposto 6×9: 176 pagine e 73 caratteri per riga, contro
+  124 pagine e 115 caratteri in 8,5×11). Il formato ferma la fase 7.
 - **Fase 1 chiusa** (8 ottobre). Scaletta dell'architetto: 25 capitoli in
   quattro parti (principi; workup; rifiuti, uscite e dopo; consultazione con
   frasario, elenchi per scenario e glossario), più l'introduzione. Nessuna
@@ -52,10 +54,19 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   **Il formato definitivo lo decide l'autore** dopo il confronto coi
   concorrenti (`concorrente/ricerca-web-vetrina.md`: 6×9 per i libri da leggere,
   8,5×11 per le raccolte di modelli).
-- **Fase 4, collegio chiuso; fase 5, correzioni**: lettore cieco (libro e vetrina), editor di
-  sviluppo, tre fact-checker (sezioni 1-8, 9-16, 17-26), conformità con la
-  proposta di disclaimer. I rapporti si salvano con `trascrizione <id>
-  books/b0gjr36xwt/revisioni/<agente>.md --testo` (cominciano con `# Rapporto`).
+- **Fase 4 chiusa**: lettore cieco (libro e vetrina), editor di sviluppo, tre
+  fact-checker (sezioni 1-8, 9-16, 17-26), conformità; rapporti in `revisioni/`,
+  decisioni per rilievo in `revisioni/piano-correzioni.md`.
+- **Fase 5, correzioni, in corso** (10 ottobre). Sezioni 1-23 corrette
+  dall'editor (tre per agente, in parallelo) e importate in `manuale/` e nel
+  manoscritto; aperture variate, nomi doppi tolti, ordini legali resi prassi.
+  Disclaimer della conformità in `book.json` (il motore ora stampa
+  un'avvertenza a paragrafi e tiene il colophon su una pagina). **Restano**: la
+  parte di consultazione (24 frasario, 25 elenchi per scenario, 26 glossario con
+  le fonti), per ultima perché riporta i capitoli; poi l'agente `indice` (titolo
+  del capitolo 4 senza «Actually», forse anche il 5), build, impaginazione,
+  verifica dell'editor di sviluppo sui capitoli corretti, `manoscritto-completo.md`
+  da rigenerare.
 - **Richieste dell'autore per dopo il collegio**: se il lettore cieco dà l'OK,
   le immagini dell'interno prendendo a riferimento i libri analoghi (i box per
   le note deboli e riscritte, più quello che il confronto suggerisce, con un
@@ -66,9 +77,20 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   `manuale/capitolo-NN.md`. In una sessione nuova si ricostruisce con
   `manuale b0gjr36xwt capitolo --numero N --importa` per ogni sezione già
   scritta.
-- L'uscita di un agente si salva con
-  `python3 -m kdpfactory trascrizione <id-agente> <file.json>`, con
-  `--etichetta SCALETTA` / `FIGURE` per l'architetto.
+- L'uscita di un agente: l'agente la scrive in `consegne/<nome>.md`, poi
+  `python3 -m kdpfactory consegna b0gjr36xwt <nome>.md --capitoli N …` (o
+  `--in revisioni/<file>.md`). Per le uscite vecchie resta `trascrizione`.
+
+## Contesto (10 ottobre, scelta dell'autore)
+
+- Hook in `.claude/settings.json` (`kdpfactory/diario.py`): prompt di ogni
+  agente in `books/<slug>/prompt/`, diario in `books/<slug>/diario.md`
+  (lancio, id, fine, consegne importate, decisioni), risposte lunghe salvate in
+  `consegne/`, guardia che lascia scrivere agli agenti solo lì. All'avvio e dopo
+  ogni riassunto della chat tornano in contesto STATO.md, produzione, agenti in
+  volo, consegne da importare e la coda del diario.
+- Gli agenti che usano il modello hanno `Write` (solo per la consegna) e
+  rispondono con una riga: la chat non si riempie di capitoli.
 
 ## Automazioni e consenso (10 ottobre, decisione dell'autore)
 

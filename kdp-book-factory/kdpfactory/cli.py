@@ -20,6 +20,7 @@ from . import (
     agents,
     avvio,
     backup,
+    consegne,
     corriere,
     coverbrief,
     coverdesign,
@@ -27,6 +28,7 @@ from . import (
     cowork,
     decisioni,
     diagnostica,
+    diario,
     direzioni,
     higgsfield,
     imagebrief,
@@ -1689,10 +1691,12 @@ def cmd_decisioni(args) -> int:
             voce = decisioni.proponi(project, args.proponi, args.valore, args.alternativa,
                                      args.perche, ore_silenzio if args.ore is None else args.ore)
             print(decisioni.messaggio(args.slug, voce))
+            diario.annota(project, f"proposta all'autore, {voce['chiave']}: «{voce['proposta']}»")
             return 0
         if args.scegli:
             voce = decisioni.scegli(project, args.scegli, args.valore)
             print(f"{args.slug} · {voce['chiave']}: scelta dell'autore, «{voce['valore']}»")
+            diario.annota(project, f"scelta dell'autore, {voce['chiave']}: «{voce['valore']}»")
             return 0
         if args.applicata:
             decisioni.segna_applicata(project, args.applicata)
@@ -1736,6 +1740,43 @@ def cmd_trascrizione(args) -> int:
     except (FileNotFoundError, ValueError) as errore:
         raise SystemExit(str(errore)) from errore
     print(f"{args.uscita}: {', '.join(dati)}")
+    return 0
+
+
+def cmd_consegna(args) -> int:
+    """Porta la consegna di un agente dove serve, dopo il backup; oppure la segna letta."""
+    project = BookProject(books_dir(args) / args.slug)
+    file = Path(args.file)
+    if not file.is_absolute() and not file.exists():
+        file = consegne.cartella(project) / args.file
+    if not file.exists():
+        raise SystemExit(f"Consegna non trovata: {args.file}")
+    try:
+        if args.letta:
+            consegne.segna_letta(project, file)
+            print(f"{file.name}: segnata come letta nel diario")
+        elif args.capitoli:
+            for esito in consegne.importa_capitoli(project, file, args.capitoli):
+                print(
+                    f"{esito['numero']:02d}: {esito['parole_prima']} → {esito['parole']} parole "
+                    f"su {esito['parole_chieste']} chieste ({esito['scarto']:+.0%})"
+                )
+        elif args.in_file:
+            print(f"{file.name} → {consegne.importa_file(project, file, args.in_file)}")
+        else:
+            raise SystemExit("Indica --capitoli N [N …], --in <percorso nel libro> oppure --letta.")
+    except ValueError as errore:
+        raise SystemExit(str(errore)) from errore
+    return 0
+
+
+def cmd_diario(args) -> int:
+    """Il diario del libro: le ultime righe, o una nota a mano."""
+    project = BookProject(books_dir(args) / args.slug)
+    if args.nota:
+        diario.annota(project, args.nota)
+    for riga in diario.righe(project)[-args.righe:]:
+        print(riga)
     return 0
 
 
@@ -2162,6 +2203,23 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--testo", action="store_true",
                    help="salva il testo markdown consegnato (dal primo «# »), non un oggetto JSON")
     p.set_defaults(func=cmd_trascrizione)
+
+    p = sub.add_parser("consegna",
+                       help="porta la consegna di un agente (books/<slug>/consegne/) dove serve")
+    p.add_argument("slug")
+    p.add_argument("file", help="il file in consegne/ (basta il nome)")
+    p.add_argument("--capitoli", type=int, nargs="+",
+                   help="i numeri delle sezioni consegnate, in ordine: vanno in manuale/ e nel manoscritto")
+    p.add_argument("--in", dest="in_file", default="",
+                   help="il percorso nel libro dove copiarla intera (revisioni/lettore-cieco.md)")
+    p.add_argument("--letta", action="store_true", help="segnala nel diario che è stata letta e usata")
+    p.set_defaults(func=cmd_consegna)
+
+    p = sub.add_parser("diario", help="le ultime righe del diario del libro, o una nota da aggiungere")
+    p.add_argument("slug")
+    p.add_argument("--nota", default="")
+    p.add_argument("--righe", type=int, default=30)
+    p.set_defaults(func=cmd_diario)
 
     p = sub.add_parser(
         "parole-chiave",

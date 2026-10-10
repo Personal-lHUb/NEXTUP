@@ -27,8 +27,8 @@ USAGE = """
 
 Ricevi il testo da esaminare nel messaggio, oppure il percorso di un file del
 progetto (`books/<slug>/manuscript/NN.md`): in quel caso leggilo prima di
-rispondere. Non modificare i file: il tuo compito è {compito}.
-
+rispondere. Non modificare i file del progetto: il tuo compito è {compito}.
+{consegna}
 ## Formato della risposta
 
 Elenca le segnalazioni dalla più grave, una per riga, in questa forma:
@@ -58,6 +58,21 @@ python3 -m kdpfactory review <slug> --agents {name}
 Riporta le segnalazioni così come escono, raggruppate per categoria, e indica
 quali sono bloccanti."""
 
+
+#: Chi usa il modello consegna in un file, e nella chat lascia una riga: tre
+#: capitoli rimandati interi in conversazione costavano ottomila token di
+#: contesto alla sessione (`kdpfactory/consegne.py`). La guardia degli hook
+#: (`kdpfactory/diario.py`) blocca ogni scrittura fuori da `consegne/`.
+CONSEGNA = """
+## Consegna
+
+Se il messaggio ti indica un file di consegna (`books/<slug>/consegne/<nome>.md`),
+scrivi lì la tua uscita intera, nella forma che ti è chiesta, con lo strumento
+Write: è l'unico file che puoi scrivere, e un controllo blocca tutti gli altri.
+Poi la tua risposta finale è una riga sola: il percorso e che cosa contiene
+(quanti capitoli e quante parole, o quante segnalazioni per gravità). Se il
+messaggio non indica un file, o non hai lo strumento Write, rispondi col testo.
+"""
 
 #: Nei prompt i confini stanno in fondo alle regole, in maiuscolo; nel file
 #: esportato diventano una sezione a sé, una volta sola anche per chi ha due
@@ -104,8 +119,9 @@ def render_agent_markdown(agent) -> str:
     body = HEADER.format(
         name=agent.name,
         description=agent.description.replace("\n", " ").strip(),
-        # L'agente di impaginazione esegue un comando, gli altri leggono file.
-        tools="Read, Grep, Glob, Bash" if not blocks else "Read, Grep, Glob",
+        # L'agente di impaginazione esegue un comando; gli altri leggono file
+        # e scrivono solo la loro consegna.
+        tools="Read, Grep, Glob, Bash" if not blocks else "Read, Grep, Glob, Write",
         model=modello_di(agent.name),
     )
     body += f"# {agent.title}\n\n{agent.description}\n\n"
@@ -125,13 +141,13 @@ def render_agent_markdown(agent) -> str:
             body += f"\n## {titolo}\n\n"
         body += _regole(regole) + "\n"
     if agent.istruzioni:
-        body += "\n## Come lavorare\n\n" + agent.istruzioni.rstrip() + "\n"
+        body += "\n## Come lavorare\n\n" + agent.istruzioni.rstrip() + "\n" + CONSEGNA
     else:
         compito = (
             "segnalare, non correggere" if agent.stage == "controllo"
             else "produrre il testo richiesto"
         )
-        body += USAGE.format(compito=compito)
+        body += USAGE.format(compito=compito, consegna=CONSEGNA)
     return body + _campo(agent.name)
 
 

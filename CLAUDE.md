@@ -5,8 +5,18 @@ copertina, EPUB, scheda prodotto, con un collegio di agenti. Tutto in italiano;
 i libri nella lingua del mercato.
 
 **All'inizio di ogni sessione leggi `STATO.md`** (libro in corso, fase, che cosa
-si aspetta). **Alla fine aggiornalo.** Una sessione fa una fase del libro, poi si
-chiude: la successiva riparte dai file, non dalla memoria della chat.
+si aspetta; arriva da solo con l'hook d'avvio). **Alla fine aggiornalo.** Una
+sessione fa una fase del libro, poi si chiude: la successiva riparte dai file,
+non dalla memoria della chat.
+
+**Il contesto non si perde** (scelta dell'autore, 10 ottobre 2026): gli hook di
+`.claude/settings.json` (`kdpfactory/diario.py`) salvano il prompt di ogni
+agente in `books/<slug>/prompt/`, scrivono nel diario del libro
+(`books/<slug>/diario.md`) lancio, id e fine di ogni agente, mettono in
+`consegne/` una risposta lunga e lasciano scrivere agli agenti solo lì; a ogni
+avvio e dopo ogni riassunto della chat rimettono in contesto STATO.md, la
+produzione, gli agenti in volo, le consegne da importare e la coda del diario.
+Diario, prompt e consegne entrano in git; una nota a mano: `diario <slug> --nota`.
 
 ## Regole permanenti
 
@@ -18,8 +28,10 @@ chiude: la successiva riparte dai file, non dalla memoria della chat.
    senza chiedere il permesso. Ognuno ha **un campo solo** (`kdpfactory/agents/competenze.py`) e
    **il suo modello** (`MODELLI`: opus scrive o giudica, sonnet estrae e
    controlla, haiku esegue un comando). Chiedi all'agente solo il suo campo;
-   dagli i percorsi, non il testo; salva la sua uscita dalla trascrizione
-   (`trascrizione <id-agente> <file.json>`), mai ricopiandola. Confini: le promesse della vetrina le giudica
+   dagli i percorsi, non il testo, e il suo file di consegna
+   (`books/<slug>/consegne/<nome>.md`): scrive lì l'uscita intera e risponde
+   con una riga. Nel libro la porta `consegna <slug> <file> --capitoli N …` (o
+   `--in <percorso>`), col backup; mai ricopiarla dalla chat. Confini: le promesse della vetrina le giudica
    solo il `lettore-cieco`; i conti interni sono dell'`editor-sviluppo`, il
    `fact-checker` guarda solo il mondo fuori; la copertina è dell'agente
    `copertina`. Un confine si sposta nella tabella, poi

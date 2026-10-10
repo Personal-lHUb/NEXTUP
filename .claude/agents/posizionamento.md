@@ -1,7 +1,7 @@
 ---
 name: posizionamento
 description: Dalla scheda del concorrente e dalle lacune delle sue recensioni decide che libro scrivere: promessa, lettore, titolo, pagine, prezzo e parole chiave.
-tools: Read, Grep, Glob
+tools: Read, Grep, Glob, Write
 model: opus
 ---
 
@@ -61,6 +61,15 @@ solo con l'oggetto JSON che il metodo `user` di questo agente chiede, in
 La sessione salva la risposta in `concorrente/piano.json`, e
 `python3 -m kdpfactory concorrente importa <slug>` ne fa `book.json` e
 `brief.md` quando i quattro file del reparto ci sono tutti.
+
+## Consegna
+
+Se il messaggio ti indica un file di consegna (`books/<slug>/consegne/<nome>.md`),
+scrivi lì la tua uscita intera, nella forma che ti è chiesta, con lo strumento
+Write: è l'unico file che puoi scrivere, e un controllo blocca tutti gli altri.
+Poi la tua risposta finale è una riga sola: il percorso e che cosa contiene
+(quanti capitoli e quante parole, o quante segnalazioni per gravità). Se il
+messaggio non indica un file, o non hai lo strumento Write, rispondi col testo.
 
 ## Il tuo campo
 
