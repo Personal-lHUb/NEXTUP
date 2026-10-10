@@ -2,9 +2,9 @@
 
 ## A potassium at five past five
 
-The scenario that follows is constructed. Hannah Albright spent nine years as a home health nurse and has now worked eight months as an NP in a primary care practice that closes at 17:30. Walter Delgado, seventy-one, has heart failure and takes lisinopril. Two weeks ago she added spironolactone, and at 09:40 on Tuesday the clinic drew a basic metabolic panel to check his potassium and kidney function.
+At 17:05, in a primary care practice that closes at 17:30, the laboratory phones with a *critical value*, a result on its list of values too dangerous to wait in an inbox: potassium 6.6. Gina Calloway, the medical assistant at the front desk, reads it back and brings a slip of paper to Hannah Albright, an NP there for eight months. Clinic, staff and patient are invented for this chapter.
 
-At 17:05 the laboratory phones the clinic with a *critical value*, a result on its list of values too dangerous to wait in an inbox: potassium 6.6. Gina Calloway, the medical assistant at the front desk, reads it back and brings Hannah a slip of paper. The same panel shows creatinine at 1.9, up from 1.3 in March, and the lab notes no hemolysis that would make the number doubtful.
+The result belongs to Walter Delgado, seventy-one, who has heart failure and takes lisinopril. A week ago Hannah added spironolactone, and at 09:40 on Tuesday the clinic drew a basic metabolic panel to check his potassium and kidney function. The same panel shows creatinine at 1.9, up from 1.3 in March, and the lab notes no hemolysis that would make the number doubtful.
 
 Hannah calls his cell phone at 17:14 and gets voicemail. At 17:20 she reaches him at home. He feels "a little tired, otherwise fine," and asks whether he can come in tomorrow. She tells him to go to the emergency department now and to take neither spironolactone nor lisinopril until he hears from the clinic. Then she phones the department, and at 19:00 she calls back to check that he has arrived.
 
@@ -28,9 +28,9 @@ Suppose Mr. Delgado never reaches the emergency department. His wife may say he 
 
 ## The rewrite
 
-Here is the same call, rewritten:
+Written with the whole chain in it, the same call reads:
 
-> Telephone encounter. Lab called critical K 6.6 at 17:05 to Gina Calloway, MA, who read it back; given to me 17:10. Drawn 09:40 today. Same panel: creatinine 1.9 (1.3 in March). Lab reports no hemolysis. On lisinopril 20 mg; spironolactone 25 mg added 14 days ago.
+> Telephone encounter. Lab called critical K 6.6 at 17:05 to Gina Calloway, MA, who read it back; given to me 17:10. Drawn 09:40 today. Same panel: creatinine 1.9 (1.3 in March). Lab reports no hemolysis. On lisinopril 20 mg; spironolactone 25 mg added 7 days ago.
 >
 > 17:14 called cell: no answer; voicemail asked him to call clinic, result not stated. 17:20 called home, reached patient, identity confirmed with date of birth. Feels "a little tired, otherwise fine." No palpitations, chest pain, shortness of breath or new weakness.
 >
@@ -46,7 +46,7 @@ The plan's last line does the most work. Telling a patient where to go does not 
 
 ## The finding nobody asked about
 
-The second scenario is also constructed. Simone Bergstrom, a former labor and delivery nurse, is in her third year as a hospital medicine NP. On a Monday she admits Frank Iverson, fifty-two, whose CT of the abdomen and pelvis shows sigmoid diverticulitis without abscess. The report's last line answers a question nobody asked: a 7 mm solid nodule in the right lower lobe, for which the radiologist recommends a chest CT in 6 to 12 months.
+A second case, made up like the first, moves to the hospital. Simone Bergstrom, a former labor and delivery nurse, is in her third year as a hospital medicine NP. On a Monday she admits Frank Iverson, fifty-two, whose CT of the abdomen and pelvis shows sigmoid diverticulitis without abscess. The report's last line answers a question nobody asked: a 7 mm solid nodule in the right lower lobe, for which the radiologist recommends a chest CT in 6 to 12 months.
 
 By Wednesday he is ready for home. Simone has told him about the nodule and messaged his primary care physician, but her draft discharge summary says only "Incidental RLL nodule, f/u PCP," a line that would read the same if neither had happened. As the chapter on the test you order and the test you don't showed, "per PCP" hands a task to someone who may never hear of it, and a finding nobody was waiting for is easier still to lose.
 
@@ -58,7 +58,7 @@ The rewrite shows Mr. Iverson hearing about the nodule in plain words, with a re
 
 ## When the patient has already left
 
-The third scenario is constructed as well. At 11:00 on a Saturday, Joy Kessler, an urgent care NP, sees Ana Gutierrez, thirty-four, with burning on urination. She sends a urine culture, prescribes trimethoprim-sulfamethoxazole and writes the pending test into the plan: "Urine culture pending; clinic will call if treatment needs to change. Cell number confirmed." That is the deferred-test plan from the previous chapter, applied to a result.
+The third case is fictional too. At 11:00 on a Saturday, Joy Kessler, an urgent care NP, sees Ana Gutierrez, thirty-four, with burning on urination. She sends a urine culture, prescribes trimethoprim-sulfamethoxazole and writes the pending test into the plan: "Urine culture pending; clinic will call if treatment needs to change. Cell number confirmed." That is the deferred-test plan from the previous chapter, applied to a result.
 
 On Monday at 14:20 the culture posts: *E. coli*, resistant to the drug she went home with. Joy is on shift, and she records each step as an addendum to the Saturday visit when she takes it:
 

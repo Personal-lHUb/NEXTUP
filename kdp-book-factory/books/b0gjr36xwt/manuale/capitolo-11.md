@@ -2,7 +2,7 @@
 
 ## A scanner out of service
 
-The scenario that follows is constructed. Bianca Ellison spent eight years as an oncology nurse and has now worked seven months as an NP in the emergency department of a community hospital with one CT scanner. At 09:25 on a Friday she sees Victor Langley, sixty-seven, who has had cramping abdominal pain since 06:00. He has vomited four times and has passed no stool or gas since the night before. In his thirties he had open surgery for a ruptured appendix. His abdomen is distended and tender all over, without guarding or rebound.
+One CT scanner serves the whole community hospital. At 09:25 on a Friday Bianca Ellison, an NP in its emergency department for seven months, sees Victor Langley, sixty-seven, who has had cramping abdominal pain since 06:00. He has vomited four times and has passed no stool or gas since the night before. In his thirties he had open surgery for a ruptured appendix. His abdomen is distended and tender all over, without guarding or rebound. Mr. Langley, Bianca and the hospital are constructed.
 
 Bianca suspects a small bowel obstruction. At 09:40 she orders blood work and a CT of the abdomen and pelvis with IV contrast, and starts IV fluids, an antiemetic and morphine. At 09:55 the CT technologist calls: the scanner is out of service, and the repair should be done by noon. It is back at 12:40.
 
@@ -20,7 +20,7 @@ At 20:40, with the bed assigned, Bianca writes:
 
 > 67M abd pain, vomiting, prior abd surgery. CT delayed, scanner down. CT: SBO, no ischemia. Surgery saw, recs nonop mgmt, NGT. Admitted to hospitalist, boarding in ED awaiting bed. Pt resting comfortably, VSS. Continued to monitor.
 
-Nothing in it is false, yet more than eleven hours fit into one clause and two reassurances. "CT delayed, scanner down" does not say when Bianca learned it, what she was told or whether she looked for another way to get the scan. "Resting comfortably" and "VSS," for vital signs stable, carry no time, and the nursing flowsheet shows a heart rate of 112 at 12:20; a reviewer will look for her response to that number. "Continued to monitor" gives no interval, no findings and no limit that would have ended the wait. Had his bowel perforated at 18:00, nothing here would show that anyone examined him between the scan and the bed.
+More than eleven hours fit into one clause and two reassurances. "CT delayed, scanner down" does not say when Bianca learned it, what she was told or whether she looked for another way to get the scan. "Resting comfortably" and "VSS," for vital signs stable, carry no time, and the nursing flowsheet shows a heart rate of 112 at 12:20; a reviewer will look for her response to that number. "Continued to monitor" gives no interval, no findings and no limit that would have ended the wait. Had his bowel perforated at 18:00, nothing here would show that anyone examined him between the scan and the bed.
 
 ## The rewrite
 
@@ -54,7 +54,7 @@ How often to look again is your clinical judgment, set by how fast the danger yo
 
 ## The transfer that stalls
 
-The second scenario is also constructed. Corinne Abbott, a former flight nurse, is in her second year as a hospital medicine NP at a forty-bed rural hospital. Elaine Burke, fifty-eight, was admitted on Sunday with right upper abdominal pain and jaundice. Her ultrasound shows a dilated bile duct, her bilirubin is rising, and the plan is an ERCP, an endoscopic procedure to clear the duct, which this hospital does not offer. By Monday evening the chart could say "Accepted at Regional, awaiting bed. Pt and family aware." Some of Corinne's entries show what that line would hide:
+Another constructed case moves the wait to a forty-bed rural hospital, where Corinne Abbott, a former flight nurse, is in her second year as a hospital medicine NP. Elaine Burke, fifty-eight, was admitted on Sunday with right upper abdominal pain and jaundice. Her ultrasound shows a dilated bile duct, her bilirubin is rising, and the plan is an ERCP, an endoscopic procedure to clear the duct, which this hospital does not offer. By Monday evening the chart could say "Accepted at Regional, awaiting bed. Pt and family aware." Some of Corinne's entries show what that line would hide:
 
 > 10:15. Transfer requested for ERCP, not available here. 10:50 accepted by Dr. Isaac Farrow, gastroenterology, Regional Medical Center, pending bed; no estimate. 13:40 Regional: no bed yet. University Hospital called as an alternative: no bed.
 >
@@ -67,6 +67,8 @@ The second scenario is also constructed. Corinne Abbott, a former flight nurse, 
 Acceptance is not a bed. Who accepted, when, and what the acceptance is pending are separate facts, and the bed gets its own time when it appears. Transport is a second delay, with its own source and estimate, and how she travels is a decision; Dr. Farrow's view is recorded as his, with the time he gave it.
 
 The alternatives, a second center and air transport, each have an answer, so a reviewer asking whether there was a faster route finds that Corinne looked for one. If Mrs. Burke worsens on the road, Megan will be asked what the hospital told her, and the 16:30 entry is the record's side of that answer. The 14:00 entry also holds the plan for the bed that never opens: an hour at which Corinne stops waiting and calls again, written before anyone knows it will be needed, like the plan for the unreachable patient in the chapter on closing the loop on the abnormal result.
+
+Sometimes the bed does not open before your shift ends. The last entry is then the handoff: its time, the clinician taking over, by name, and what you told them about the danger you named, the limits, the latest findings and when to look again. If Regional still had no bed at 20:00, Corinne's note would end with both calls and their answers, then her report to the night clinician, whom the nurse would now call. From that minute the record would show who was responsible for Mrs. Burke.
 
 ## What the note must contain
 

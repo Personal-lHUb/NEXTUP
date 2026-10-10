@@ -2,15 +2,15 @@
 
 ## The assessment that stops at the answer
 
-The scenario that follows is constructed. Talia Brennan spent nine years as a telemetry nurse and has now worked eleven months as an NP in the fast-track area of a suburban emergency department. At 13:40 on a Saturday she sees Alicia Moreno, thirty-three, who has had sharp pain on the left side of her chest for two days. It began the morning after she helped her sister move furniture, and it gets worse when she breathes deeply or twists.
-
-Talia thinks of a pulmonary embolism before anything else, and her questions show it: coughing blood, leg swelling, earlier clots, hormonal contraception, recent surgery or long travel. She asks whether the pain changes with exertion or with position. She listens to both lungs, presses along the ribs, looks at both calves, and gets an ECG and a chest X-ray. Everything points to a strained chest wall. She sends Ms. Moreno home with ibuprofen and writes:
-
 > 33F L chest pain x 2 days. Chest wall tender. ECG NSR, CXR neg. Assessment: MSK chest pain. Ibuprofen, RTC PRN.
 
-The assessment is a single line, and it is a conclusion. The ECG and the X-ray suggest that Talia was looking for something, but the note does not say what, or what she found when she looked. Suppose Ms. Moreno comes back four days later with a pulmonary embolism. As the previous chapter showed, the first question a reviewer brings to a diagnosis allegation is whether the dangerous possibility was considered at all. This note cannot answer it. Talia's reasoning happened in the room and never reached the page.
+Talia Brennan signs that note on a Saturday afternoon, eleven months into her work as an NP in the fast-track area of a suburban emergency department. She and her patient are invented; the visit behind the note begins at 13:40, when she sees Alicia Moreno, thirty-three, who has had sharp pain on the left side of her chest for two days. It began the morning after she helped her sister move furniture, and it gets worse when she breathes deeply or twists.
 
-Here is the same visit rewritten. The plan is left aside, because the discharge has a chapter of its own:
+Talia thinks of a pulmonary embolism before anything else, and her questions show it: coughing blood, leg swelling, earlier clots, hormonal contraception, recent surgery or long travel. She asks whether the pain changes with exertion or with position. She listens to both lungs, presses along the ribs, looks at both calves, and gets an ECG and a chest X-ray. Everything points to a strained chest wall, and she sends Ms. Moreno home with ibuprofen.
+
+The assessment in her note is a single line, and it is a conclusion. The ECG and the X-ray suggest that Talia was looking for something, but the note does not say what, or what she found when she looked. Suppose Ms. Moreno comes back four days later with a pulmonary embolism. As the previous chapter showed, the first question a reviewer brings to a diagnosis allegation is whether the dangerous possibility was considered at all. This note cannot answer it. Talia's reasoning happened in the room and never reached the page.
+
+Rewritten, with the plan left aside because the discharge has a chapter of its own, the same visit reads:
 
 > 33F, L-sided chest pain x 2 days, began the morning after moving furniture. Sharp, worse with deep breath and twisting. Not exertional; no change lying flat or sitting forward. No dyspnea, hemoptysis, fever, leg pain or swelling. Copper IUD, no hormone use. No prior DVT/PE; no surgery, trauma or long travel in past month. Nonsmoker, no diabetes or hypertension, no family history of early heart disease. HR 84, SpO2 98% RA. Pain reproduced exactly by pressure over L 4th–5th costochondral junctions. Breath sounds equal, no rub. Calves symmetric, nontender. ECG 13:55: NSR, no ST changes, no PR depression. CXR: no pneumothorax, no infiltrate.
 >

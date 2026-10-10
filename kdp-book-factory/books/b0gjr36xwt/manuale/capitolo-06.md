@@ -2,7 +2,7 @@
 
 ## Six hours into a stomachache
 
-The scenario that follows is constructed. Erin Kowalski spent six years as a recovery-room nurse before her NP program. For the last seven months she has worked at an urgent care clinic that closes at 21:00 and has no imaging on site. At 18:20 on a Wednesday she sees Ben Sorensen, nineteen, whose stomach began to ache around noon. The pain sits around his navel and comes in cramps. He vomited once at 15:00 and has eaten almost nothing since breakfast. His roommate was sick with vomiting last week.
+The urgent care clinic where Erin Kowalski has worked as an NP for seven months closes at 21:00 and has no imaging on site. At 18:20 on a Wednesday she sees Ben Sorensen, nineteen, whose stomach began to ache around noon. The pain sits around his navel and comes in cramps. He vomited once at 15:00 and has eaten almost nothing since breakfast. His roommate was sick with vomiting last week. The clinic, Erin and Ben are all made up for this chapter.
 
 His temperature is 99.5°F. His abdomen is soft and mildly tender around the navel, with no guarding and no rebound tenderness. Pressing on the lower right side hurts no more than pressing anywhere else. He climbs on and off the table easily, hops on one foot without wincing and keeps down the water he sips in the room.
 
@@ -20,7 +20,7 @@ And here is another:
 
 The first note is certain, and the certainty is the problem. Suppose Ben comes back two days later with a ruptured appendix. A reviewer will find a diagnosis stated as fact six hours into the illness, a plan that rests entirely on it, and nothing to show that Erin knew the picture could still change. She did know, but the note gives her no credit for it.
 
-The second note looks careful, and a reviewer distrusts it just as quickly. It names appendicitis and then shows nothing done about it. As the chapter on the differential explained, that reads worse than leaving it out. "Cannot rule out" is true of almost any diagnosis at any visit, so it says nothing about how worried Erin was. "Clinical correlation recommended" belongs in a radiology report, where it asks the treating clinician to weigh a finding; in a provider note, the treating clinician is the author. Like "RTC PRN," "persist or worsen" gives Ben no threshold he could recognize at two in the morning. Taken together, the note shows a clinician who saw danger everywhere and planned for none of it.
+The second note looks careful, and a reviewer distrusts it just as quickly. It names appendicitis and then shows nothing done about it. As the chapter on the differential explained, that reads worse than leaving it out. "Cannot rule out" is true of almost any diagnosis at any visit, so it says nothing about how worried Erin was. "Clinical correlation recommended" belongs in a radiology report, where it asks the treating clinician to weigh a finding; in a provider note, the treating clinician is the author. Like "RTC PRN," "persist or worsen" gives Ben no threshold he could recognize once he is home and the clinic is closed. Taken together, the note shows a clinician who saw danger everywhere and planned for none of it.
 
 The two notes fail in the same place. Neither says what Erin believed at 18:40, how firmly she believed it, or what would have changed her mind. Each of those fits in a sentence.
 
@@ -54,7 +54,7 @@ There is one limit. A choice is shared only when you would stand behind every op
 
 ## The symptom that has no name yet
 
-Some visits end without a working diagnosis worth the name. The second scenario is also constructed. Rachel Dunmore, a former dialysis nurse, is in her second year as a primary care NP. At 10:40 on a Monday she sees Joan Petrakis, fifty-four, who has felt tired for three months. The clinic scale recorded 162 pounds four months ago and 151 today, and Mrs. Petrakis has not been trying to lose weight. Nothing in the history or exam points anywhere in particular, so Rachel orders a first set of blood tests.
+Some visits end without a working diagnosis worth the name. Take a constructed one from a primary care practice. Rachel Dunmore, in her second year as an NP there, sees Joan Petrakis, fifty-four, at 10:40 on a Monday; Mrs. Petrakis has felt tired for three months. The clinic scale recorded 162 pounds four months ago and 151 today, and Mrs. Petrakis has not been trying to lose weight. Nothing in the history or exam points anywhere in particular, so Rachel orders a first set of blood tests.
 
 Two weak entries are tempting. "Fatigue, likely stress" gives the symptom a convenient explanation with nothing underneath it. Once such a label reaches the problem list, later notes tend to repeat it until nobody looks further. "Weight loss, r/o malignancy" has the ambiguity described earlier, and it names the most frightening possibility without saying what will settle it. The honest version makes the symptom itself the problem and says where the search stands:
 
