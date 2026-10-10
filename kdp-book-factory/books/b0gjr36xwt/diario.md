@@ -13,3 +13,5 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-10 08:58 UTC · fase 5: sezioni 24-26 importate; tutte le 26 sezioni corrette. I titoletti del frasario (24) ripetono i titoli dei capitoli: se l'agente indice li cambia (4, forse 5), vanno allineati
 - 2026-10-10 08:59 UTC · lanciato `indice` «Indice: titoli dopo le correzioni» → `prompt/20261010-085921-indice-indice-titoli-dopo-le-correzioni.md`
 - 2026-10-10 08:59 UTC · `indice` «Indice: titoli dopo le correzioni» in background, id `a2c6e9bb2f62570e1`
+- 2026-10-10 17:20 UTC · finito `indice` (id `a2c6e9bb2f62570e1`): fermato dal limite di sessione (azzeramento 13:00 UTC) prima di consegnare; nessun promemoria programmato. Da rifare quando l'autore lo fa partire: l'agente indice (prompt in prompt/20261010-085921-…), poi consegna --indice, build, impaginazione, editor di sviluppo
+- 2026-10-10 17:20 UTC · regola nuova dell'autore: ogni passo lo fa partire lui; niente si programma; al limite d'uso ci si ferma e si aspetta il suo «continua»

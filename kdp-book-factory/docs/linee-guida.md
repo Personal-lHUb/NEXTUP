@@ -592,11 +592,13 @@ dell'autore, 10 ottobre 2026: `silenzio_assenso_ore: null` in
 `config/produzione.json`): la proposta aspetta la sua risposta, senza
 scadenza, e intanto va avanti solo il lavoro che non ne dipende.
 
-**Che cosa va in automatico** (stessa data): la produzione del libro attivo e i
-tre bozzetti di copertina a bassa risoluzione. Un limite d'uso che ferma il
-lavoro lascia un solo promemoria all'ora in cui si azzera, per riprendere.
-Routine programmate, attività e lanci di Cowork, generazioni oltre i bozzetti e
-spese aspettano il consenso dell'autore.
+**Ogni passo lo fa partire l'autore** (stessa data, seconda scelta): fra un
+suo messaggio e l'altro non parte niente, nemmeno i bozzetti; il compito che
+dà si porta a termine e poi ci si ferma col passo dopo indicato. Niente si
+programma: nessun promemoria, nessuna routine, nessun lancio di Cowork. Un
+limite d'uso che ferma il lavoro si annota nel diario del libro, e si aspetta
+il suo «continua». Le tabelle qui sopra dicono chi fa che cosa quando l'autore
+fa partire il passo, non quando parte da solo.
 
 ---
 

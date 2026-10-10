@@ -92,16 +92,22 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
 - Gli agenti che usano il modello hanno `Write` (solo per la consegna) e
   rispondono con una riga: la chat non si riempie di capitoli.
 
-## Automazioni e consenso (10 ottobre, decisione dell'autore)
+## Automazioni e consenso (10 ottobre, decisioni dell'autore)
 
-- **In automatico** solo la produzione del libro attivo e i tre bozzetti di
-  copertina a bassa risoluzione (uno per direzione, Higgsfield). Se un limite
-  d'uso ferma il lavoro: un solo `send_later` all'ora in cui si azzera.
+- **Ogni passo lo fa partire l'autore.** Fra un suo messaggio e l'altro non
+  parte niente (nemmeno i bozzetti di copertina); il compito che dà si chiude
+  con commit e push, poi ci si ferma e gli si dice il passo dopo.
+- **Niente si programma**: nessun `send_later`, nessuna routine, nessun lancio
+  di Cowork. Le routine restano spente, non si cancellano. Un limite d'uso
+  si annota nel diario, e si aspetta il suo «continua».
 - **Silenzio-assenso spento**: ogni decisione d'autore aspetta la sua risposta,
-  senza scadenza (`silenzio_assenso_ore: null`). In attesa ora: **prezzo**
-  (21,99 USD proposto, alternativa 19,99).
-- Tutto il resto (routine, Cowork, generazioni oltre i bozzetti, spese) aspetta
-  il suo consenso. Quando serve: riga in chat e notifica push.
+  senza scadenza. In attesa ora: **prezzo** (21,99 USD, alternativa 19,99) e
+  **formato** (6×9 proposto).
+- Gli hook del contesto restano: registrano e rimettono in contesto, non
+  avviano lavoro. Quando qualcosa aspetta l'autore: riga in chat e notifica push.
+- Stamattina (10 ottobre) le cinque routine di Cowork risultano partite fra le
+  08:05 e le 08:45 UTC e «Produzione NEXTUP» lanciata alle 08:55, poi di nuovo
+  spente; questa sessione non le ha accese.
 - Il prompt della routine «Produzione NEXTUP» parla ancora di silenzio-assenso
   e di lanci di Cowork: se l'autore la vuole riaccesa, prima va riscritto.
 

@@ -43,15 +43,16 @@ Diario, prompt e consegne entrano in git; una nota a mano: `diario <slug> --nota
    --proponi …` registra la proposta con le alternative, e la decisione aspetta
    la sua risposta, senza scadenza (`silenzio_assenso_ore: null` in
    `config/produzione.json`). Intanto va avanti il lavoro che non ne dipende.
-6. **Che cosa va in automatico, e che cosa no.** In automatico: la produzione
-   del libro attivo (fasi, agenti, comandi, commit e push sul ramo) e la prima
-   bozza delle immagini, cioè tre bozzetti di copertina a bassa risoluzione, uno
-   per direzione d'arte, su Higgsfield. Se un limite d'uso ferma il lavoro, un
-   solo promemoria (`send_later`) all'ora in cui il limite si azzera, per
-   riprendere. **Tutto il resto aspetta il consenso dell'autore**: routine
-   programmate (la fabbrica, le attività di Cowork), lanci di Cowork, ogni
-   generazione oltre i tre bozzetti, ogni spesa. Quando qualcosa aspetta lui:
-   una riga in chat e una notifica push.
+6. **Ogni passo lo fa partire l'autore** (sua scelta, 10 ottobre 2026). Fra
+   un suo messaggio e l'altro non parte niente: nessuna fase, nessun agente,
+   nessun bozzetto. Il compito che dà si porta a termine (agenti, comandi,
+   backup, commit e push sul ramo), poi ci si ferma e gli si dice qual è il
+   passo dopo. **Niente si programma**: nessun `send_later`, nessuna routine,
+   nessun lancio di Cowork; le routine restano spente, non si cancellano. Se un
+   limite d'uso ferma il lavoro, si scrive nel diario dov'era e che cosa manca,
+   e si aspetta il suo «continua». Le spese e le generazioni a pagamento
+   aspettano il suo consenso. Quando qualcosa aspetta lui: una riga in chat e
+   una notifica push. Gli hook del contesto restano: registrano, non avviano.
 7. **Ogni libro nuovo parte dalle sette domande d'avvio** (`avvio <slug>
    --json`): il concorrente (ASIN) si chiede nel messaggio, le altre a scelta;
    `--predefinite` se l'autore lascia decidere.
