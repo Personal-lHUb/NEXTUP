@@ -186,7 +186,8 @@ def applica_indice(
     shutil.copy2(file, indice)
 
     citati: list[str] = []
-    for capitolo in sorted((project.root / "manuale").glob("capitolo-*.md")):
+    # solo i capitoli: i brief di stesura (`capitolo-NN-brief.md`) sono storia
+    for capitolo in sorted((project.root / "manuale").glob("capitolo-[0-9][0-9].md")):
         testo = capitolo.read_text(encoding="utf-8")
         for titolo in vecchi:
             if titolo in testo:

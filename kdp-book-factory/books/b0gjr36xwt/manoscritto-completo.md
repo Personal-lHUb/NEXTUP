@@ -6,41 +6,45 @@
 
 ## The note at the end of the shift
 
-The scenario that follows is constructed, like every case in this book. Leah Okafor spent six years as a medical-surgical nurse before finishing her NP program, and she is four months into her first provider job, at an urgent care clinic. Late on a Thursday she sees Marcus, forty-one, with a headache that has built slowly over two days.
+Leah Okafor, a former medical-surgical nurse, is four months into her first provider job, at an urgent care clinic. Late on a Thursday she sees Marcus, forty-one, with a headache that has built slowly over two days. Neither of them exists; every case in this book is constructed.
 
 She asks how it started, because she knows what a sudden, worst-ever headache can mean. She checks his neck, his temperature, his pupils, his strength and his gait. She considers bleeding and infection, finds nothing that points to either, and settles on a tension headache. Before he leaves she tells him exactly what should bring him back tonight: a sudden change, vomiting, confusion, fever, a stiff neck.
 
-Then, with three patients waiting, she writes her note:
+She types her note before calling the next patient:
 
 > HA x 2 days. Neuro intact. Likely tension HA. Ibuprofen. Return PRN.
 
-Nothing in it is false. Every line is supported by something she actually did. But the questions she asked about onset are not there, the dangerous diagnoses she thought of and set aside are not there, and the warnings she gave Marcus have shrunk to "Return PRN." If his headache turns out to be something else, the person who reads that note months later will see a clinician who wrote down a conclusion. They will have no way of seeing the clinician who reached it.
+The questions she asked about onset are not there, the dangerous diagnoses she thought of and set aside are not there, and the warnings she gave Marcus have shrunk to "Return PRN." If his headache turns out to be something else, the person who reads that note months later will see a clinician who wrote down a conclusion. They will have no way of seeing the clinician who reached it.
 
 ## The problem nobody taught you
 
 That gap between what was done and what was written is the problem this book is about. It is not a problem of competence. Leah's thinking was sound; her note simply did not carry it. Nursing school and years at the bedside trained her to chart what she observed, and she does that well. Nobody trained her to write down a judgment, the alternatives she weighed and the reasons she chose one, because until four months ago that was not her job.
 
-Now it is. If you have just moved from the RN role into the provider role, you now sign H&Ps, progress notes, urgent-care and emergency visits and discharge notes, and each records a decision that is yours. Final-year NP students on rotation are learning to sign the same notes. Much of what has been written about defensible charting is built around the nursing note: flowsheets, narrative entries, handoff formats. That material is useful, but it does not reach the moments where your note is most exposed: the capacity question at two in the morning, the patient walking out before the paperwork is ready, the specialist paged three times who never calls back.
+Now it is. If you have just moved from the RN role into the provider role, you now sign H&Ps, progress notes, urgent-care and emergency visits and discharge notes, and each records a decision that is yours. Final-year NP students on rotation are learning to write the same notes, usually under a preceptor's review. Much of what has been written about defensible charting is built around the nursing note: flowsheets, narrative entries, handoff formats. That material is useful, but it does not reach the moments where your note is most exposed: the capacity question, the patient walking out before the paperwork is ready, the specialist paged twice who never comes.
 
 ## What this book gives you
 
-This book is built from those moments. For each hard call an NP makes—the differential, the abnormal result, the consultant who never comes, the capacity question, the departure against medical advice, the discharge, the telehealth visit, the prescription—you will see three things. First, the questions the record will be asked later. Second, a weak note set beside a defensible rewrite of the same encounter, so the difference is visible line by line. Third, the short list of elements that note has to contain.
+This book is built from those moments. For each hard call an NP makes—the test you don't order, the abnormal result, the consultant who never comes, the capacity question, the departure against medical advice, the discharge, the telehealth visit, the prescription—you will see three things. First, the questions the record will be asked later. Second, a weak note set beside a defensible rewrite of the same encounter, so the difference is visible line by line. Third, the short list of elements that note has to contain.
 
-The defensible version is rarely much longer, and it is never more defensive. Leah's note needed perhaps three more sentences: what she asked about onset and what Marcus answered, which serious causes she considered and why she set them aside, and the warnings she gave him, in the words she used. That is two minutes of writing, and it is the kind of writing this book teaches: in your own words, in the time a shift allows. The goal is a note that shows what you saw, what you considered and why you decided.
+The defensible version is never more defensive, and the reasoning it adds is short. Leah's note needed perhaps three more sentences. With them, it reads:
+
+> HA x 2 days, gradual onset; denies sudden or worst-ever HA. Neuro intact. Considered bleed (onset not sudden) and CNS infection (afebrile, neck supple). Likely tension HA. Ibuprofen. Told to return tonight for sudden change, vomiting, confusion, fever or stiff neck.
+
+That is two minutes of writing, and it is the kind of writing this book teaches: in your own words, in the time a shift allows. Each scenario chapter shows the whole note, so its rewrite runs longer, mostly with the history and exam a provider note has anyway. For a full board, chapter 5 shows a short version. The goal is a note that shows what you saw, what you considered and why you decided.
 
 That goal has a limit. No note makes anyone immune to a lawsuit, a board complaint or a sanction, and this book does not pretend otherwise. What a good note does is make your reasoning visible on the record, so that a later reader judges the decision you actually made rather than the one a sparse note leaves them to guess at.
 
-The book also leaves some things out on purpose. It is not legal advice, and it gives no state-by-state rules on scope of practice, collaboration or prescribing; where those rules matter, it tells you what to ask your risk manager, your malpractice insurer and your state board. It assumes you know how to diagnose and treat, and it does not cover coding, billing or any particular EHR. There are no forms or templates to fill in, and no real court cases: every scenario is constructed and labeled as such.
+The book also leaves some things out on purpose. It is not legal advice and it is not clinical advice: it does not tell you how to diagnose or treat, and the doses, thresholds and decisions in its scenarios belong to constructed patients. It gives no state-by-state rules on scope of practice, collaboration or prescribing; where those rules matter, it tells you what to ask your risk manager, your malpractice insurer and your state board. It does not cover coding, billing or any particular EHR. There are no forms or templates to fill in, and no real court cases: every scenario is constructed and labeled as such.
 
 ## How the book is built
 
-The book moves from principle to practice, and each principle is explained once. The opening part sets out how a provider note is read after something goes wrong, why that reading differs from the way your nursing notes were read, and where claims against NPs tend to begin. The next part turns that understanding into a way of writing: the differential you actually ran, uncertainty stated honestly, objective language, and the EHR itself, which fills a note with text you did not type and keeps a trace of every change you make.
+The book has four parts and moves from principle to practice; each principle is explained once. Part One (chapters 2–8) sets out how a provider note is read after something goes wrong, why that reading differs from the way your nursing notes were read, and where claims against NPs tend to begin. It then turns that understanding into a way of writing: the differential you actually ran, uncertainty stated honestly, objective language, and the EHR itself, which fills a note with text you did not type and keeps a trace of every change you make.
 
-The scenario chapters follow, grouped roughly in the order a patient moves through your care: the workup and its delays, the prescription and the request you decline, the visit that turns hostile, the patient's right to choose and to leave, the discharge and the handoff, the encounters away from the bedside, and what happens after an adverse event. Each one is built the same way, so that once you know the shape of one you can find your way through any of them mid-shift. When a scenario rests on a principle, it points you back to where that principle is explained.
+The scenarios follow, roughly in the order a patient moves through your care. Part Two (chapters 9–15) covers the workup and its delays, the prescription and the request you decline, and the visit that turns hostile. Part Three (chapters 16–23) covers the patient's right to choose and to leave, the discharge and the handoff, the encounters away from the bedside, and what happens after an adverse event. Each scenario chapter is built the same way and points back to the principles it rests on, so once you know the shape of one you can find your way through any of them mid-shift.
 
-The last part is for the moment of writing. A phrasebook sets weak wording beside defensible wording, scenario by scenario. A scenario finder collects the required elements of each note, indexed by what is happening right now and by setting: hospital medicine, emergency and urgent care, primary care. A short glossary defines the legal terms in plain English; each is also defined where it first appears.
+Part Four (chapters 24–26) is for the moment of writing. A phrasebook sets weak wording beside defensible wording, scenario by scenario. A scenario finder collects the required elements of each note, indexed by what is happening right now and by setting: hospital medicine, emergency and urgent care, primary care. A short glossary defines the legal terms in plain English; each is also defined where it first appears.
 
-You do not have to read the scenarios front to back. Read the first two parts before your next shift if you can, then keep the book wherever you chart. The next time you do what Leah did, from the question about onset to the warning at the door, your note should show it.
+You do not have to read the scenarios front to back. Read Part One before your next shift if you can, then keep the book wherever you chart. The next time you do what Leah did, from the question about onset to the warning at the door, your note should show it.
 
 # What a Chart Becomes After a Bad Outcome
 
@@ -66,7 +70,7 @@ The timeline shows more than gaps. It also shows the order of events. Did a resu
 
 Several people may read that timeline, at different times and for different reasons, and each one comes to it with a question of their own.
 
-The first is usually the **risk manager**. This is the person in your organization whose job is to find out what happened after an adverse event, meaning any unexpected harm to a patient in the course of care, and how exposed the organization is. Risk managers often read the chart within days, sometimes before anyone has mentioned a lawyer. They look for three things: whether the record is complete, whether it supports the care that was actually given, and whether it contains anything that will be hard to explain later.
+The first is usually the **risk manager**. This is the person in your organization whose job includes finding out what happened after an adverse event, meaning unintended harm to a patient caused by the care rather than by the illness itself, and how exposed the organization is. Risk managers often read the chart within days, sometimes before anyone has mentioned a lawyer. They look for three things: whether the record is complete, whether it supports the care that was actually given, and whether it contains anything that will be hard to explain later.
 
 If a claim is filed, two **attorneys** read the same pages from opposite sides. The **plaintiff** is the patient or family bringing the claim. Their attorney looks for the gap, the contradiction and the decision with no visible reason, because each one is a place to build a story of warning signs that were ignored. The defense attorney, who may represent you or your employer, reads for the same things with the opposite hope: material that shows what you saw and why you acted as you did. Your testimony can add to the record. But an account given long afterward from memory carries less weight than a line written that evening, and both sides know it.
 
@@ -78,9 +82,9 @@ A complaint to your state licensing board brings a different reader, the **board
 
 Behind all these readings sits one legal question, and it helps to have it in plain words.
 
-A malpractice claim is a claim of **negligence**. In broad terms, it says that a clinician who owed the patient care failed to meet the standard of care, and that this failure harmed the patient. The **standard of care** is not perfection, and it is not the best care imaginable. It is what a reasonably prudent NP, with similar training and in similar circumstances, would have done with the same information at that moment. It is rarely a single right answer. Often several choices would have been reasonable, and the question is whether yours was one of them. The exact wording varies from state to state, but the core is the same. Its last words are the part your note controls: the same information, at that moment.
+In most cases, a malpractice claim is a claim of **negligence**. In broad terms, it says that a clinician who owed the patient care failed to meet the standard of care, and that this failure harmed the patient. The **standard of care** is not perfection, and it is not the best care imaginable. It is, in the usual formulation, what a reasonably prudent NP, with similar training and in similar circumstances, would have done with the same information at that moment. It is rarely a single right answer. Often several choices would have been reasonable, and the question is whether yours was one of them. The exact wording varies from state to state, and in some states a court may measure an NP against the physician standard for care that physicians also provide. In every version, the last words are the part your note controls: the same information, at that moment.
 
-**Causation** is the link between the failure and the harm. Even if an expert decides that something should have been done differently, the claim also has to show that doing it would have changed what happened to the patient. In Mr. Jensen's case, the experts on each side would argue over whether a different decision at 19:15 would have changed what happened at 23:50. Both sides build that argument from the timeline, so they build it from what the chart says was known at 19:15.
+**Causation** is the link between the failure and the harm. Even if an expert decides that something should have been done differently, the claim also has to show that doing it would, more likely than not, have changed what happened to the patient. Some states also allow a claim for a lost chance of a better outcome. In Mr. Jensen's case, the experts on each side would argue over whether a different decision at 19:15 would have changed what happened at 23:50. Both sides build that argument from the timeline, so they build it from what the chart says was known at 19:15.
 
 The words "similar circumstances" matter too. An urgent care clinic at ten at night with no CT scanner is not an emergency department with imaging down the hall. An evening with two admissions arriving at once is not a quiet one. The standard takes the setting into account, but only the setting the reader can see. If the record does not show the circumstances, the reader has to guess at them.
 
@@ -102,17 +106,17 @@ The note also records what was not yet known. At 19:25 Nadia could not know whet
 
 This book rests on a particular order of priorities, and the patient comes first. The night covering provider and the rapid response team would have read Nadia's 19:25 entry long before any attorney saw it. It would have told them how Mr. Jensen looked earlier in the evening, what had already been tried and what limits had been set. A note written for the next clinician serves the patient best. It is usually also the note that holds up best with every other reader.
 
-Only after that does the note protect your license and your career, and it does so in one way: by making your reasoning visible. It cannot make a wrong decision right. It cannot stop a family from filing a claim, or anyone from filing a complaint. A note written mainly to protect its author tends to read that way, crowded with boilerplate and self-justification, and the readers in this chapter spot it quickly. What a careful note offers is narrower, and more reliable. It lets people who arrive already knowing the ending see the moment you were in: what you knew, what you did not know yet, and why you chose what you chose.
+Only after that does the note serve your license and your career, and it does so in one way: by making your reasoning visible. It cannot make a wrong decision right. It cannot stop a family from filing a claim, or anyone from filing a complaint. A note written mainly to protect its author tends to read that way, crowded with boilerplate and self-justification, and the readers in this chapter spot it quickly. What a careful note offers is narrower, and more reliable. It lets people who arrive already knowing the ending see the moment you were in: what you knew, what you did not know yet, and why you chose what you chose.
 
 # The Provider Note Records a Decision
 
 ## One patient, two notes
 
-This scenario is constructed. Priya Raman spent seven years as an emergency nurse before finishing her NP program, and she is now in her first year as a provider in a community emergency department. On a Tuesday afternoon Dolores Fitch, seventy-nine, arrives with her daughter after a fall at home. She takes apixaban, a blood thinner, for atrial fibrillation. Owen Castillo, the nurse who receives her, writes this at 15:05:
+Dolores Fitch, seventy-nine, arrives at a community emergency department on a Tuesday afternoon with her daughter, after a fall at home. She takes apixaban, a blood thinner, for atrial fibrillation. She and everyone who treats her are invented for this chapter. Owen Castillo, the nurse who receives her, writes this at 15:05:
 
 > 79-year-old female arrived with daughter after fall at home approx. 12:30. States she caught her foot on the edge of a rug and fell backward, striking the back of her head on a wood floor. Denies loss of consciousness. 3 cm raised hematoma to occiput, skin intact. Alert and oriented x4, pupils equal and reactive. Takes apixaban, last dose 08:00 per patient. BP 148/86, HR 78 irregular, RR 16, SpO2 97% on room air. Pain 3/10. NP Raman notified 14:57.
 
-It is a good nursing note, and Priya has written hundreds like it. It records what Owen saw and heard, when he saw it and whom he told. It does not say whether the fall was a trip or a faint, whether Mrs. Fitch needs a scan, or whether she can go home. Those questions are not his to answer, and no reviewer will look for the answers there. What a reviewer asks of his note is whether he saw what was there, wrote it down accurately and told the right person in time. On all three counts the note holds up.
+It is a good nursing note. Priya Raman, the first-year NP who will see Mrs. Fitch, wrote hundreds like it in seven years as an emergency nurse. It records what Owen saw and heard, when he saw it and whom he told. It does not say whether the fall was a trip or a faint, whether Mrs. Fitch needs a scan, or whether she can go home. Those questions are not his to answer, and no reviewer will look for the answers there. What a reviewer asks of his note is whether he saw what was there, wrote it down accurately and told the right person in time. On all three counts the note holds up.
 
 Priya sees Mrs. Fitch at 15:10 and orders a CT scan of the head, which is read at 16:35 as showing no bleeding. She talks with the attending physician and discharges Mrs. Fitch home with her daughter at 17:50. Then she writes:
 
@@ -120,7 +124,7 @@ Priya sees Mrs. Fitch at 15:10 and orders a CT scan of the head, which is read a
 
 Beside Owen's note, Priya's reads like more of the same: findings, a result, an outcome. That is the problem. A reviewer opens a provider note with a different question. The question is not what the clinician saw but what the clinician concluded, and why. Was this a trip, or a faint that ended on the floor? Why a CT? With a blood thinner on board, why home rather than a night of observation? What were the patient and her daughter told to watch for? Priya answered every one of those questions at the bedside. Her note answers none of them, so a later reader sees the result of a judgment but not the judgment itself.
 
-Here is the same note, rewritten:
+Written to answer those questions, the same note reads:
 
 > 79F on apixaban for AF (last dose 08:00), fell at home ~12:30. Per patient, a trip: caught foot on rug edge, fell backward, struck occiput. No LOC, recalls entire event. No lightheadedness, palpitations or chest pain beforehand. Exam: GCS 15, 3 cm occipital hematoma, no midline neck tenderness, pupils equal and reactive, no focal deficit, gait steady with cane. ECG: AF rate 78, unchanged from prior. CT head (read 16:35): no acute hemorrhage or fracture.
 >
@@ -162,27 +166,27 @@ This book uses the phrase in a plainer sense: the reasoning that took you from t
 
 When you sign a note, you become its author. Your signature says that you wrote the note, or reviewed and adopted it, and that it is accurate. It covers every line: the sentence a template inserted, the review of systems a scribe typed, the section a student drafted. Whether you typed a line or only accepted it, it is yours.
 
-Many NPs also work with a physician whose name appears in the record. Depending on the state and the setting, an NP may practice independently or under a **collaborative agreement**, a written arrangement that sets out how an NP and a physician work together. An NP may also practice under **supervision**, in which a physician holds a defined oversight role. This book gives no state rules. Ask your state board what applies to you, and ask your employer what its policy requires.
+Many NPs also work with a physician whose name appears in the record. Depending on the state and the setting, an NP may practice independently or under a **collaborative agreement**, an arrangement, usually in writing, that sets out how an NP and a physician work together. Some states use other names, such as practice agreement or protocol, and the required form and content vary. An NP may also practice under **supervision**, in which a physician holds a defined oversight role. This book gives no state rules. Ask your state board what applies to you, and ask your employer what its policy requires.
 
 A second signature tells a reader less than people assume. A **cosignature** is a second clinician's signature on a note someone else wrote. An **attestation** is a statement the second clinician adds about their own role: that they saw the patient, reviewed the note or agreed with the plan. Depending on the policy behind it, a cosignature may mean that the physician examined the patient, that they read the note line by line, or only that they signed it from a queue the next morning. The signature alone does not say which. A reviewer may assume a review that never happened, or doubt one that did.
 
 Your own note can settle the question, because you know what the physician actually did. In this scenario, Priya's department asks the attending to cosign NP notes. Her last line names Dr. Grant and the time, says that he did not examine Mrs. Fitch, and states what he agreed with. When he cosigns the next morning, nobody has to guess what his part was. The rule also works the other way. "Discussed with attending" does not belong in a note when the only contact was a hallway remark that never touched the decision. The record should show who decided, who was consulted and what each of them did.
 
-# Where Claims Against NPs Actually Begin
+# Where a Claim, a Complaint, and a Review Begin
 
 ## What the closed-claims reports can tell you
 
 A **closed claim** is a malpractice claim that has reached its end: withdrawn, dismissed, settled or decided at trial. Once a claim closes, the insurer that handled it knows what was alleged, what the record showed and what the claim cost. Insurers study these files in bulk to learn where their policyholders get into trouble, and some publish what they find.
 
-For nurse practitioners, one public series of this kind comes from CNA, an insurer, and NSO, the Nurses Service Organization, which offers malpractice coverage to nurses and NPs. Together they have published several editions of a claim report on NPs, drawn from closed claims against the NPs they insure. Read the most recent edition on their websites, and read the methodology first. This book quotes no figures from it. Percentages and payment amounts change between editions, and a number printed in a book stays wrong after the report is updated.
+For nurse practitioners, one public series of this kind comes from CNA, an insurer, and NSO, the Nurses Service Organization, which offers malpractice coverage to nurses and NPs. Together they have published claim reports on NPs, drawn from closed claims of NPs insured through NSO. Read the most recent edition they have published, and read the methodology first. This book quotes no figures from it. Percentages and payment amounts change between editions, and a number printed in a book stays wrong after the report is updated.
 
-The methodology sets the limits of what the data can say. The claims come from one insurer's policyholders, not from every NP in the country. Claims often close years after the care, so each report describes practice as it was, not as it is. And a claims report counts only what reached the insurer: a case reviewed inside a clinic and never reported will not appear in it. What survives those limits is the pattern. Whatever labels a given edition uses, the allegations come back to a handful of clinical acts, which this book groups under four headings: the diagnosis, the treatment, the medication and the follow-up.
+The methodology sets the limits of what the data can say. The claims come from one insurer's policyholders, not from every NP in the country. Claims often close years after the care, so each report describes practice as it was, not as it is. And a claims report counts only what reached the insurer: a case reviewed inside a clinic and never reported will not appear in it. This book groups the allegations such claims raise under four headings of its own: the diagnosis, the treatment, the medication and the follow-up. Check how the current edition labels its categories.
 
 ## One note, three processes
 
-The scenario that follows is constructed. Devon Marsh has been an NP at a family practice clinic for fourteen months, after eight years as a pediatric nurse. At 10:15 on a Tuesday he sees Gary Pruitt, fifty-six, who has had a burning feeling high in his abdomen for a week. It comes mostly after meals, but twice it came while he was climbing the stairs at work. Devon thinks of the heart as well as the stomach.
+Gary Pruitt, fifty-six, has had a burning feeling high in his abdomen for a week. It comes mostly after meals, but twice it came while he was climbing the stairs at work. At 10:15 on a Tuesday he describes it to Devon Marsh, an NP at a family practice clinic for fourteen months, who thinks of the heart as well as the stomach. Neither man exists; the case, like every other in the book, is constructed.
 
-He gets an ECG in the clinic, which is normal, starts omeprazole and orders an exercise stress test, asking the front desk to book it within the week. He tells Mr. Pruitt to call the clinic if nobody has phoned him by Friday, and to call 911 if the burning comes on at rest or with sweating or shortness of breath. The booking request is lost in a staffing change. Twelve days later, with no test booked, Mr. Pruitt has a heart attack at home. He survives, with some damage to his heart.
+Devon gets an ECG in the clinic, which is normal, starts omeprazole and orders an exercise stress test, asking the front desk to book it within the week. He tells Mr. Pruitt to call the clinic if nobody has phoned him by Friday, and to call 911 if the burning comes on at rest or with sweating or shortness of breath. The booking request is lost in a staffing change. Twelve days later, with no test booked, Mr. Pruitt has a heart attack at home. He survives, with some damage to his heart.
 
 That one visit can now set off three separate processes, and each one reads Devon's note with a question of its own. The first is a **malpractice claim**: a civil claim for money damages, built on the elements of negligence described earlier. Mr. Pruitt's attorney and an expert witness will ask two things. Would a reasonably prudent NP, knowing what Devon knew that morning, have sent him to the emergency department or made sure the test happened sooner? And would either step have spared his heart? An insurer usually defends the claim, either Devon's own or his employer's. Any payment made on his behalf, by settlement or judgment, would be reported to the **National Practitioner Data Bank**, a federal repository that hospitals and licensing boards can query.
 
@@ -200,9 +204,9 @@ A claim usually reaches paper as a letter from an attorney, but it begins earlie
 
 > Epigastric burning x 1 wk, worse after meals. ECG NSR. Likely GERD. Start omeprazole 20 mg daily. Refer stress test. F/u 2 wks.
 
-Here is the same visit rewritten. Nothing in it goes beyond what Devon asked, found, thought or did:
+A rewrite of the same visit goes no further than what Devon asked, found, thought or did:
 
-> 56M, smoker, father had MI at 60. Epigastric burning x 1 wk, mostly within 30 min of meals; twice while climbing stairs at work, resolved within 3 min of rest. No pain at rest, no dyspnea, diaphoresis or syncope. Abdomen soft, nontender; heart regular, lungs clear. ECG 10:30: NSR, no ischemic changes. Assessment: GERD most likely given timing with meals, but the exertional episodes keep stable angina possible, and a normal resting ECG does not exclude it. Plan: omeprazole 20 mg daily. Exercise stress test ordered; front desk asked at 10:45 to book within 1 week. Patient to call clinic if not contacted by Friday. Told to call 911 for burning or chest pain at rest, or with sweating or shortness of breath. Recheck 2 wks.
+> 56M, smoker, father had MI at 60. Epigastric burning x 1 wk, mostly within 30 min of meals; twice while climbing stairs at work, resolved within 3 min of rest. No pain at rest, no dyspnea, diaphoresis or syncope. Abdomen soft, nontender; heart regular, lungs clear. ECG 10:30: NSR, no ischemic changes. Assessment: GERD most likely given timing with meals, but the exertional episodes keep angina possible, and a normal resting ECG does not exclude it. Plan: omeprazole 20 mg daily. Exercise stress test ordered; front desk asked at 10:45 to book within 1 week. Patient to call clinic if not contacted by Friday. Told to call 911 for burning or chest pain at rest, or with sweating or shortness of breath. Recheck 2 wks.
 
 The rewrite does not settle whether Devon was right. An expert may still argue that the test should have happened within days. But the argument is now about a decision anyone can see Devon making, with the danger named and a plan built around it. Nobody has to ask whether he thought of the heart at all.
 
@@ -222,7 +226,7 @@ It is also not a shield. Written exactly this way, it would not have stopped the
 
 ## How the scenario chapters are built
 
-Every scenario chapter follows the same order. It opens with a constructed scenario: a named clinician, a setting, a patient and the clock. Next comes what the record will be asked: the short set of questions that a claim, a complaint or a review would bring to that kind of encounter. Then comes the weak note, written the way a competent, busy NP might write it: nothing in it is false, but it is thin.
+Every scenario chapter follows the same order. It opens with a constructed scenario: a named clinician, a setting, a patient and the clock. Next comes what the record will be asked: the short set of questions that a claim, a complaint or a review would bring to that kind of encounter. Then comes the weak note, written the way a competent, busy NP might write it: accurate as far as it goes, but thin.
 
 Beside it is the defensible rewrite of the same encounter. Nothing is added that the clinician did not do, so the difference lies in the writing and not in the care. After that comes the short list of elements the note must contain. They are elements, not sentences, because the note should be in your words. Where a scenario rests on a principle explained earlier in the book, it names the chapter that explains it and moves on. When a patient is walking out or a page is waiting, the list is the part to reach for.
 
@@ -230,15 +234,15 @@ Beside it is the defensible rewrite of the same encounter. Nothing is added that
 
 ## The assessment that stops at the answer
 
-The scenario that follows is constructed. Talia Brennan spent nine years as a telemetry nurse and has now worked eleven months as an NP in the fast-track area of a suburban emergency department. At 13:40 on a Saturday she sees Alicia Moreno, thirty-three, who has had sharp pain on the left side of her chest for two days. It began the morning after she helped her sister move furniture, and it gets worse when she breathes deeply or twists.
-
-Talia thinks of a pulmonary embolism before anything else, and her questions show it: coughing blood, leg swelling, earlier clots, hormonal contraception, recent surgery or long travel. She asks whether the pain changes with exertion or with position. She listens to both lungs, presses along the ribs, looks at both calves, and gets an ECG and a chest X-ray. Everything points to a strained chest wall. She sends Ms. Moreno home with ibuprofen and writes:
-
 > 33F L chest pain x 2 days. Chest wall tender. ECG NSR, CXR neg. Assessment: MSK chest pain. Ibuprofen, RTC PRN.
 
-The assessment is a single line, and it is a conclusion. The ECG and the X-ray suggest that Talia was looking for something, but the note does not say what, or what she found when she looked. Suppose Ms. Moreno comes back four days later with a pulmonary embolism. As the previous chapter showed, the first question a reviewer brings to a diagnosis allegation is whether the dangerous possibility was considered at all. This note cannot answer it. Talia's reasoning happened in the room and never reached the page.
+Talia Brennan signs that note on a Saturday afternoon, eleven months into her work as an NP in the fast-track area of a suburban emergency department. She and her patient are invented; the visit behind the note begins at 13:40, when she sees Alicia Moreno, thirty-three, who has had sharp pain on the left side of her chest for two days. It began the morning after she helped her sister move furniture, and it gets worse when she breathes deeply or twists.
 
-Here is the same visit rewritten. The plan is left aside, because the discharge has a chapter of its own:
+Talia thinks of a pulmonary embolism before anything else, and her questions show it: coughing blood, leg swelling, earlier clots, hormonal contraception, recent surgery or long travel. She asks whether the pain changes with exertion or with position. She listens to both lungs, presses along the ribs, looks at both calves, and gets an ECG and a chest X-ray. Everything points to a strained chest wall, and she sends Ms. Moreno home with ibuprofen.
+
+The assessment in her note is a single line, and it is a conclusion. The ECG and the X-ray suggest that Talia was looking for something, but the note does not say what, or what she found when she looked. Suppose Ms. Moreno comes back four days later with a pulmonary embolism. As the previous chapter showed, the first question a reviewer brings to a diagnosis allegation is whether the dangerous possibility was considered at all. This note cannot answer it. Talia's reasoning happened in the room and never reached the page.
+
+Rewritten, with the plan left aside because the discharge has a chapter of its own, the same visit reads:
 
 > 33F, L-sided chest pain x 2 days, began the morning after moving furniture. Sharp, worse with deep breath and twisting. Not exertional; no change lying flat or sitting forward. No dyspnea, hemoptysis, fever, leg pain or swelling. Copper IUD, no hormone use. No prior DVT/PE; no surgery, trauma or long travel in past month. Nonsmoker, no diabetes or hypertension, no family history of early heart disease. HR 84, SpO2 98% RA. Pain reproduced exactly by pressure over L 4th–5th costochondral junctions. Breath sounds equal, no rub. Calves symmetric, nontender. ECG 13:55: NSR, no ST changes, no PR depression. CXR: no pneumothorax, no infiltrate.
 >
@@ -286,7 +290,7 @@ The shape works beyond the fast track. An admission H&P, a progress note on day 
 
 ## Six hours into a stomachache
 
-The scenario that follows is constructed. Erin Kowalski spent six years as a recovery-room nurse before her NP program. For the last seven months she has worked at an urgent care clinic that closes at 21:00 and has no imaging on site. At 18:20 on a Wednesday she sees Ben Sorensen, nineteen, whose stomach began to ache around noon. The pain sits around his navel and comes in cramps. He vomited once at 15:00 and has eaten almost nothing since breakfast. His roommate was sick with vomiting last week.
+The urgent care clinic where Erin Kowalski has worked as an NP for seven months closes at 21:00 and has no imaging on site. At 18:20 on a Wednesday she sees Ben Sorensen, nineteen, whose stomach began to ache around noon. The pain sits around his navel and comes in cramps. He vomited once at 15:00 and has eaten almost nothing since breakfast. His roommate was sick with vomiting last week. The clinic, Erin and Ben are all made up for this chapter.
 
 His temperature is 99.5°F. His abdomen is soft and mildly tender around the navel, with no guarding and no rebound tenderness. Pressing on the lower right side hurts no more than pressing anywhere else. He climbs on and off the table easily, hops on one foot without wincing and keeps down the water he sips in the room.
 
@@ -304,7 +308,7 @@ And here is another:
 
 The first note is certain, and the certainty is the problem. Suppose Ben comes back two days later with a ruptured appendix. A reviewer will find a diagnosis stated as fact six hours into the illness, a plan that rests entirely on it, and nothing to show that Erin knew the picture could still change. She did know, but the note gives her no credit for it.
 
-The second note looks careful, and a reviewer distrusts it just as quickly. It names appendicitis and then shows nothing done about it. As the chapter on the differential explained, that reads worse than leaving it out. "Cannot rule out" is true of almost any diagnosis at any visit, so it says nothing about how worried Erin was. "Clinical correlation recommended" belongs in a radiology report, where it asks the treating clinician to weigh a finding; in a provider note, the treating clinician is the author. Like "RTC PRN," "persist or worsen" gives Ben no threshold he could recognize at two in the morning. Taken together, the note shows a clinician who saw danger everywhere and planned for none of it.
+The second note looks careful, and a reviewer distrusts it just as quickly. It names appendicitis and then shows nothing done about it. As the chapter on the differential explained, that reads worse than leaving it out. "Cannot rule out" is true of almost any diagnosis at any visit, so it says nothing about how worried Erin was. "Clinical correlation recommended" belongs in a radiology report, where it asks the treating clinician to weigh a finding; in a provider note, the treating clinician is the author. Like "RTC PRN," "persist or worsen" gives Ben no threshold he could recognize once he is home and the clinic is closed. Taken together, the note shows a clinician who saw danger everywhere and planned for none of it.
 
 The two notes fail in the same place. Neither says what Erin believed at 18:40, how firmly she believed it, or what would have changed her mind. Each of those fits in a sentence.
 
@@ -338,7 +342,7 @@ There is one limit. A choice is shared only when you would stand behind every op
 
 ## The symptom that has no name yet
 
-Some visits end without a working diagnosis worth the name. The second scenario is also constructed. Rachel Dunmore, a former dialysis nurse, is in her second year as a primary care NP. At 10:40 on a Monday she sees Joan Petrakis, fifty-four, who has felt tired for three months. The clinic scale recorded 162 pounds four months ago and 151 today, and Mrs. Petrakis has not been trying to lose weight. Nothing in the history or exam points anywhere in particular, so Rachel orders a first set of blood tests.
+Some visits end without a working diagnosis worth the name. Take a constructed one from a primary care practice. Rachel Dunmore, in her second year as an NP there, sees Joan Petrakis, fifty-four, at 10:40 on a Monday; Mrs. Petrakis has felt tired for three months. The clinic scale recorded 162 pounds four months ago and 151 today, and Mrs. Petrakis has not been trying to lose weight. Nothing in the history or exam points anywhere in particular, so Rachel orders a first set of blood tests.
 
 Two weak entries are tempting. "Fatigue, likely stress" gives the symptom a convenient explanation with nothing underneath it. Once such a label reaches the problem list, later notes tend to repeat it until nobody looks further. "Weight loss, r/o malignancy" has the ambiguity described earlier, and it names the most frightening possibility without saying what will settle it. The honest version makes the symptom itself the problem and says where the search stands:
 
@@ -350,7 +354,7 @@ A symptom is a legitimate entry in an assessment, and "cause not yet identified"
 
 ## A hard morning, written two ways
 
-The scenario that follows is constructed. Kendra Walsh spent eight years as an orthopedic nurse and has now worked ten months as a hospital medicine NP. At 07:40 on a Sunday she sees Raymond Teague, sixty-two, admitted on Friday with cellulitis of the left lower leg. He has type 2 diabetes. Overnight he pulled out his IV, saying it burned. A new line went in at 05:15, and the cefazolin dose due at 02:00 was given at 05:30. The night nurse filed an incident report about the late dose.
+Raymond Teague, sixty-two, was admitted on Friday with cellulitis of the left lower leg. He has type 2 diabetes. Overnight he pulled out his IV, saying it burned. A new line went in at 05:15, and the cefazolin dose due at 02:00 was given at 05:30. The night nurse filed an incident report about the late dose. At 07:40 on Sunday he is first on the rounding list of Kendra Walsh, ten months into her first job as a hospital medicine NP. Neither of them is real; the case was built for this chapter.
 
 When Kendra walks in, Mr. Teague is sitting up and speaking loudly. He swears several times while describing the night. He says his leg pain is 8 out of 10, that "the pills don't touch it," and asks for IV hydromorphone by name. His fasting glucose is 287; asked about it, he says he stopped metformin about four months ago. Before she leaves he says he is going to get a lawyer. At 08:30, still irritated, she writes:
 
@@ -362,7 +366,7 @@ Very little of that is false. Mr. Teague was loud, the dose was late, and he did
 >
 > Exam: T 99.1°F, HR 92. L lower leg erythema within the border marked on admission; tenderness limited to the red area; no crepitus, blisters or dusky skin. New IV site clean. Asked him to call his nurse if the IV burns again rather than remove it; he said, "Fine, as long as somebody comes."
 
-The plan is left aside, because the pain request and the metformin belong to the chapters on prescribing. What changed is the language. The rewrite keeps the loud voice, the swearing, the removed line, the late dose and the request by name. It drops the verdicts on Mr. Teague's character, the account of who failed overnight, the report, the lawyer and the sarcasm. Where the weak note offered explanations, the rewrite gives times.
+The plan is left aside, because the pain request belongs to the chapter on prescribing. What changed is the language. The rewrite keeps the loud voice, the swearing, the removed line, the late dose and the request by name. It drops the verdicts on Mr. Teague's character, the account of who failed overnight, the report, the lawyer and the sarcasm. Where the weak note offered explanations, the rewrite gives times.
 
 ## Observations instead of adjectives
 
@@ -388,7 +392,7 @@ Some words are not descriptions at all but labels: short verdicts that travel. T
 
 "Drug-seeking" names a motive, and motives cannot be observed. The factual version records the exact request, the recent doses, any checks you ran and your assessment of the pain itself. The label has a clinical cost too. A patient with an infected leg whose pain keeps climbing needs another look at the leg, and a word in the last note that explains the pain away makes that look less likely. Kendra's exam line shows that she looked. "Poor historian" usually describes the conversation rather than the patient; write what you could not obtain and where the information came from instead. "Frequent flyer" belongs nowhere in a record.
 
-Patients can request their records, and many organizations now release notes to the patient portal as soon as they are signed. A patient who reads "drug-seeking" about himself may stop reporting his pain, or may answer with a complaint to your board. As the chapter on where claims begin noted, a complaint needs no injury behind it.
+Patients have a legal right to their records, and under the federal information-blocking rules in force since 2021, most US providers may not withhold signed notes without a recognized exception, so many notes reach the patient portal as soon as they are signed. A patient who reads "drug-seeking" about himself may stop reporting his pain, or may answer with a complaint to your board. As the chapter on where claims begin noted, a complaint needs no injury behind it.
 
 ## What never goes in the chart
 
@@ -396,7 +400,7 @@ The chart is the record of the patient's care. Some things that feel urgent whil
 
 Blame of colleagues comes first. "IV team didn't come for 3+ hrs" states a cause Kendra did not witness; the IV nurse may have been at a code. The facts that matter are in the rewrite, each with its time. A note that accuses invites the other clinician's note to answer, and a record in which clinicians argue helps no one defend the care. Writing about a colleague who never responds is worked in the chapter on the consultant who never comes.
 
-Staffing complaints are next. If staffing affected care, report it to your manager or through your organization's channel, where someone can act on it. In the chart, "short-staffed again" fixes nothing and reads as an admission that the unit was unsafe.
+Staffing complaints are next. "Short-staffed again" is an opinion about the cause, not a clinical fact. If staffing delayed care, the delay goes in the chart as a fact with its time and its source, the way the rewrite records the late dose. The cause goes to your manager or through your organization's reporting channel, where someone can act on it.
 
 The incident report is an internal document, and organizations generally keep it inside their safety and quality process. How far the law protects it varies, and depends partly on how it is handled. A line in the chart that names the report points every reader of the record toward it. The chart carries the clinical event instead: what happened to the patient, what you found and what you did. The chapter on the adverse event returns to this boundary.
 
@@ -408,15 +412,15 @@ Last comes sarcasm, along with jokes, exclamation points and your feelings about
 
 Before you sign, give the note one more pass, for tone alone. It takes less than a minute. Read it as three strangers would: the patient opening it in the portal, the colleague named in it, and a juror who has never met any of you. For every adjective about the patient, ask whether you could point to what you saw or heard. Check that each pair of quotation marks holds words actually said, with a speaker. Look for any line that explains someone else's failure, the staffing, a report or a lawyer.
 
-The reread matters most on the notes you write while angry. Kendra's two versions describe the same morning. Much of the distance between them can be covered in that one pass, before you sign, while a change is still just an edit.
+The reread matters most on the notes you write while angry. Kendra's two versions describe the same morning. Much of the distance between them can be covered in that one pass for tone, made before the patient, the colleague or the juror reads a word.
 
 # Templates, Copy-Forward, and the Late Addendum
 
 ## Yesterday's exam, signed today
 
-The scenario that follows is constructed. Mateo Ruiz spent five years as a cardiac step-down nurse and has now worked six months as a hospital medicine NP. Evelyn Kraus, eighty-one, was admitted on Monday with worsening heart failure and has been on IV furosemide since. At 05:30 on Wednesday her nurse charts new confusion. Mateo sees her at 08:45: drowsy, oriented only to herself, moving all four limbs. Her sodium, 134 on Tuesday, is 129 this morning, and at 08:55 he holds the furosemide.
+At 05:30 on a Wednesday, a nurse charts new confusion in Evelyn Kraus, eighty-one, admitted on Monday with worsening heart failure and on IV furosemide since. Mateo Ruiz, a former cardiac step-down nurse six months into hospital medicine as an NP, sees her at 08:45: drowsy, oriented only to herself, moving all four limbs. Her sodium, 134 on Tuesday, is 129 this morning, and at 08:55 he holds the furosemide. Patient, NP and timeline are all constructed.
 
-At 09:10 he opens Tuesday's progress note, copies it forward into a new one, updates the weight and the sodium, and signs at 09:24. Part of it reads:
+At 09:10 he opens Tuesday's progress note, copies it forward into a new one, updates the hospital day, the weight and the sodium, and signs at 09:24. Part of it reads:
 
 > Hospital day 3. Feels better, breathing easier, slept well. Exam: alert and oriented x3, NAD. Lungs: fine crackles at both bases. 1+ edema to mid-shin. Wt 71.2 kg. Na 129. Assessment: acute on chronic systolic heart failure, improving. Plan: continue IV furosemide 40 mg BID. Start lisinopril tomorrow if creatinine stable.
 
@@ -448,7 +452,7 @@ At 10:05 that Wednesday, Mrs. Kraus's nurse asks Mateo why his note says to cont
 
 The correction follows the old rule of the paper chart, where an error got a single line through it, the right entry beside it, and the writer's initials and the date. The old text stays readable, and the new text says who changed it, when and why. Most record systems offer a way to correct or amend a signed note, and your organization's policy says which one to use. What you never do is type over a signed note, delete it and sign a clean copy, or remove an entry because it looks bad. A note in the wrong patient's chart goes through your organization's procedure too, usually via health information management, not the delete key.
 
-Deleting is the worst move because it does not work. A silent edit does not remove the error; it adds a record that the entry was changed, by whom and when. A mistake corrected openly is one of the most ordinary entries in any chart. The same mistake rewritten in silence and found later turns a question about care into a question about honesty, and a reader who doubts one entry doubts the rest. Altering a record once a claim is pending or reasonably expected can also be treated as **spoliation**, the destruction or alteration of evidence. What follows depends on the state and the court, and the consequences can weigh more than the original question about the care.
+Deleting is the worst move because it does not work. A silent edit does not remove the error; it adds a record that the entry was changed, by whom and when. A mistake corrected openly is one of the most ordinary entries in any chart. The same mistake rewritten in silence and found later turns a question about care into a question about honesty, and a reader who doubts one entry doubts the rest. Altering a record once a claim is pending or reasonably expected can also be treated as **spoliation**, the destruction, alteration or failure to preserve evidence. What follows depends on the state and the court, and the consequences can weigh more than the original question about the care.
 
 ## Late entries and addenda
 
@@ -460,13 +464,13 @@ At 11:30 Mateo goes back to Mrs. Kraus. Two admissions arrive at noon, and he wr
 
 The entry is labeled for what it is. It gives two times and keeps them apart: the system stamps the time of writing on its own, but the time of the care has to be in the text. It states the reason for the delay in a few factual words, with no defense attached. It records only what Mateo remembers with confidence or can take from another source, such as the lab result; the daughter's remark has no quotation marks, because four hours is enough to lose her exact words. A late entry that says it is late is ordinary; one disguised as contemporaneous is not.
 
-A delay costs weight. Written four hours later, before anything has gone wrong, this entry reads as a busy afternoon. Written after a fall or a complaint, the same words read as a record being built for an argument, however accurate they are. Once a records request, a complaint or a claim has arrived, add nothing to the chart without speaking to risk management first; the chapter on the adverse event covers that moment.
+A delay costs weight. Written four hours later, before anything has gone wrong, this entry reads as a busy afternoon. Written after a fall or a complaint, the same words read as a record being built for an argument, however accurate they are. Once a complaint, a claim or an attorney's request has arrived, add nothing to the chart about the care in question and change nothing in it, and ask risk management first; the chapter on the adverse event covers that moment.
 
 ## What the audit trail sees
 
 Behind the chart you read, the system keeps a second record you usually cannot see. The **audit trail**, or audit log, records activity in the chart: which account opened which patient's record, when, and often from which device; what was viewed, created, edited, signed, printed or deleted; and in many systems each earlier version of a changed note. It does not depend on what anyone chose to write. What your system captures, and for how long, is a question for your health information management or privacy office.
 
-After a bad outcome, the audit trail can be requested along with the chart, and a reviewer lays it beside the notes, minute by minute. For Mrs. Kraus it would show a note opened at 09:10 and signed at 09:24, a correction at 10:15 and a late entry at 15:50, each saying what it is. The two records agree, and that agreement is what a reviewer looks for. A signed note changed in silence, or an entry describing 08:45 that was created at 16:00 and never says so, shows up just as plainly. So does every look, including a look at the chart of a patient who is not yours.
+After a bad outcome, the organization's reviewers can pull the audit trail, and in many courts the other side can ask for it in a lawsuit. Whoever has it lays it beside the notes, minute by minute. For Mrs. Kraus it would show a note opened at 09:10 and signed at 09:24, a correction at 10:15 and a late entry at 15:50, each saying what it is. The two records agree, and that agreement is what a reviewer looks for. A signed note changed in silence, or an entry describing 08:45 that was created at 16:00 and never says so, shows up just as plainly. So does every look, including a look at the chart of a patient who is not yours.
 
 Before you sign, a change is just an edit. After, it is an entry of its own, with your name and the minute attached. The only kind that helps you is the one that says what it is.
 
@@ -474,9 +478,9 @@ Before you sign, a change is just an edit. After, it is an entry of its own, wit
 
 ## Ice in the parking lot
 
-The scenario that follows is constructed. Celeste Hartley spent ten years as a school nurse and has now worked five months as an NP at an urgent care clinic. The clinic has X-ray on site but no CT scanner; the nearest one is in an emergency department twenty minutes away. At 10:20 on a Tuesday in January she sees Curtis Faber, thirty-eight. At 07:50 he slipped on ice in the parking lot at work, fell backward onto his outstretched right hand and struck the back of his head on the pavement. The coworker who drove him in saw the fall and says he was "out for maybe five seconds."
+At 07:50 on a Tuesday in January, Curtis Faber, thirty-eight, slipped on ice in the parking lot at work, pitched forward onto his outstretched right hand and struck his forehead on the pavement. The coworker who drove him in saw the fall and says he was "out for maybe five seconds." At 10:20 Celeste Hartley, a former school nurse five months into her first NP job, sees him at an urgent care clinic that has X-ray on site but no CT scanner; the nearest one is in an emergency department twenty minutes away. The case is fiction, built for teaching like all the others.
 
-Mr. Faber remembers slipping and everything after he came to. He has a mild headache, has not vomited, takes no medications and has had no alcohol. His vital signs and neurological exam are normal, and apart from a swelling on the back of his head he shows no sign of a skull fracture. His right wrist is tender in the hollow at the base of the thumb, the anatomic snuffbox.
+Mr. Faber remembers slipping and everything after he came to. He has a mild headache, has not vomited, takes no medications and has had no alcohol. His vital signs and neurological exam are normal, and apart from a swelling on his forehead he shows no sign of a skull fracture. His right wrist is tender in the hollow at the base of the thumb, the anatomic snuffbox.
 
 Celeste orders an X-ray of the wrist with scaphoid views, and it shows no fracture. She does not order a CT of his head. The first decision leaves an order, a timestamp and a result in the chart. The second leaves nothing unless she writes it down.
 
@@ -490,21 +494,21 @@ Whether the decision was reasonable is the standard-of-care question, and it is 
 
 ## The note as written
 
-At 11:15, with the waiting room filling up, Celeste writes:
+The note Celeste signs at 11:15 reads, in full:
 
-> 38M slipped on ice 07:50, struck occiput, brief LOC. GCS 15, neuro intact. No indication for CT head. R wrist pain, XR neg. Thumb spica splint. Dx: concussion, R wrist injury. Head injury instructions given. F/u 10 days.
+> 38M slipped on ice 07:50, struck forehead, brief LOC. GCS 15, neuro intact. No indication for CT head. R wrist pain, XR neg. Thumb spica splint. Dx: concussion, R wrist injury. Head injury instructions given. F/u 10 days.
 
-Every line is true. But "No indication for CT head" is a verdict with nothing underneath it, the same problem the chapter on the differential found in "PE unlikely." A reviewer cannot tell whether Celeste applied a rule, which one, or whether Mr. Faber fell inside it. "Brief LOC" is the very finding that made the scan worth considering, and the note gives it no witness and no duration. Nothing says whether he takes a blood thinner, whether he vomited or whether he remembers the fall.
+"No indication for CT head" is a verdict with nothing underneath it, the same problem the chapter on the differential found in "PE unlikely." A reviewer cannot tell whether Celeste applied a rule, which one, or whether Mr. Faber fell inside it. "Brief LOC" is the very finding that made the scan worth considering, and the note gives it no witness and no duration. Nothing says whether he takes a blood thinner, whether he vomited or whether he remembers the fall.
 
 The wrist line fails differently. "XR neg" seems to close a question the X-ray could not close, because a scaphoid fracture can be invisible on the first film. Celeste knew that, which is why she splinted the thumb and booked the recheck. But "F/u 10 days" does not say what the follow-up is for, who will order the second X-ray or what Mr. Faber was told. Read six weeks later, after a fracture that failed to heal, the note shows a normal X-ray and a plan that could belong to a sprain.
 
 ## The rewrite
 
-Here is the same visit, rewritten:
+With both decisions on the page, the note reads:
 
-> 38M, slipped on ice in work parking lot 07:50, fell backward onto outstretched R hand, struck occiput on pavement. Coworker who drove him here saw the fall: "out for maybe five seconds." Recalls the slip and everything after coming to. Headache 3/10. No vomiting, no seizure. No anticoagulant or antiplatelet, no bleeding disorder, no alcohol today. Seen 10:20: BP 128/78, HR 74, GCS 15. 4 cm occipital hematoma, no step-off. No hemotympanum, periorbital or mastoid bruising, or fluid from nose or ears. Pupils equal and reactive, no focal deficit, gait normal. No midline neck tenderness, full painless rotation. R wrist tender in anatomic snuffbox; XR with scaphoid views: no fracture seen.
+> 38M, slipped on ice in work parking lot 07:50, fell forward onto outstretched R hand, struck forehead on pavement. Coworker who drove him here saw the fall: "out for maybe five seconds." Recalls the slip and everything after coming to. Headache 3/10. No vomiting, no seizure. No anticoagulant or antiplatelet, no bleeding disorder, no alcohol today. Seen 10:20: BP 128/78, HR 74, GCS 15. 4 cm frontal hematoma, no step-off. No hemotympanum, periorbital or mastoid bruising, or fluid from nose or ears. Pupils equal and reactive, no focal deficit, gait normal. No midline neck tenderness, full painless rotation. R wrist tender in anatomic snuffbox; XR with scaphoid views: no fracture seen.
 >
-> Assessment: concussion with brief witnessed LOC; occipital scalp hematoma. Intracranial injury considered. Canadian CT Head Rule applies (minor head injury with witnessed LOC, age 16 or over, no anticoagulant); none of its 7 criteria present: GCS 15 at 10:20, 2.5 h after injury; no sign of open, depressed or basal skull fracture; no vomiting; age 38; no amnesia before the fall; mechanism a ground-level slip. CT not required by the rule. R wrist: possible scaphoid fracture, which can be occult on the first X-ray.
+> Assessment: concussion with brief witnessed LOC; frontal scalp hematoma. Intracranial injury considered. Canadian CT Head Rule applies (minor head injury with witnessed LOC, age 16 or over, no anticoagulant); none of its 7 criteria present: GCS 15 at 10:20, 2.5 h after injury; no sign of open, depressed or basal skull fracture; no vomiting; age 38; no amnesia before the fall; mechanism a ground-level slip. CT not required by the rule. R wrist: possible scaphoid fracture, which can be occult on the first X-ray.
 >
 > Plan: rule explained to patient. Options: CT at nearest ED (none on site; several hours, small radiation dose, not needed per rule) or home with someone watching him tonight. He said: "If the rule says I don't need it, I'd rather go home and have my wife keep an eye on me." Wife home tonight. Told to go to the ED for worsening headache, vomiting more than once, confusion, trouble waking, weakness or seizure; repeated these back. Thumb spica splint, worn at all times. Recheck here booked Fri 09:00 (day 10); repeat scaphoid views ordered today for that visit. Told the first X-ray can miss this fracture, so the splint stays on until then; will call to rebook if he cannot come.
 
@@ -539,9 +543,9 @@ A test you recommend and the patient declines is neither a deferral nor a shared
 
 ## A potassium at five past five
 
-The scenario that follows is constructed. Hannah Albright spent nine years as a home health nurse and has now worked eight months as an NP in a primary care practice that closes at 17:30. Walter Delgado, seventy-one, has heart failure and takes lisinopril. Two weeks ago she added spironolactone, and at 09:40 on Tuesday the clinic drew a basic metabolic panel to check his potassium and kidney function.
+At 17:05, in a primary care practice that closes at 17:30, the laboratory phones with a *critical value*, a result on its list of values too dangerous to wait in an inbox: potassium 6.6. Gina Calloway, the medical assistant at the front desk, reads it back and brings a slip of paper to Hannah Albright, an NP there for eight months. Clinic, staff and patient are invented for this chapter.
 
-At 17:05 the laboratory phones the clinic with a *critical value*, a result on its list of values too dangerous to wait in an inbox: potassium 6.6. Gina Calloway, the medical assistant at the front desk, reads it back and brings Hannah a slip of paper. The same panel shows creatinine at 1.9, up from 1.3 in March, and the lab notes no hemolysis that would make the number doubtful.
+The result belongs to Walter Delgado, seventy-one, who has heart failure and takes lisinopril. A week ago Hannah added spironolactone, and at 09:40 on Tuesday the clinic drew a basic metabolic panel to check his potassium and kidney function. The same panel shows creatinine at 1.9, up from 1.3 in March, and the lab notes no hemolysis that would make the number doubtful.
 
 Hannah calls his cell phone at 17:14 and gets voicemail. At 17:20 she reaches him at home. He feels "a little tired, otherwise fine," and asks whether he can come in tomorrow. She tells him to go to the emergency department now and to take neither spironolactone nor lisinopril until he hears from the clinic. Then she phones the department, and at 19:00 she calls back to check that he has arrived.
 
@@ -565,9 +569,9 @@ Suppose Mr. Delgado never reaches the emergency department. His wife may say he 
 
 ## The rewrite
 
-Here is the same call, rewritten:
+Written with the whole chain in it, the same call reads:
 
-> Telephone encounter. Lab called critical K 6.6 at 17:05 to Gina Calloway, MA, who read it back; given to me 17:10. Drawn 09:40 today. Same panel: creatinine 1.9 (1.3 in March). Lab reports no hemolysis. On lisinopril 20 mg; spironolactone 25 mg added 14 days ago.
+> Telephone encounter. Lab called critical K 6.6 at 17:05 to Gina Calloway, MA, who read it back; given to me 17:10. Drawn 09:40 today. Same panel: creatinine 1.9 (1.3 in March). Lab reports no hemolysis. On lisinopril 20 mg; spironolactone 25 mg added 7 days ago.
 >
 > 17:14 called cell: no answer; voicemail asked him to call clinic, result not stated. 17:20 called home, reached patient, identity confirmed with date of birth. Feels "a little tired, otherwise fine." No palpitations, chest pain, shortness of breath or new weakness.
 >
@@ -583,7 +587,7 @@ The plan's last line does the most work. Telling a patient where to go does not 
 
 ## The finding nobody asked about
 
-The second scenario is also constructed. Simone Bergstrom, a former labor and delivery nurse, is in her third year as a hospital medicine NP. On a Monday she admits Frank Iverson, fifty-two, whose CT of the abdomen and pelvis shows sigmoid diverticulitis without abscess. The report's last line answers a question nobody asked: a 7 mm solid nodule in the right lower lobe, for which the radiologist recommends a chest CT in 6 to 12 months.
+A second case, made up like the first, moves to the hospital. Simone Bergstrom, a former labor and delivery nurse, is in her third year as a hospital medicine NP. On a Monday she admits Frank Iverson, fifty-two, whose CT of the abdomen and pelvis shows sigmoid diverticulitis without abscess. The report's last line answers a question nobody asked: a 7 mm solid nodule in the right lower lobe, for which the radiologist recommends a chest CT in 6 to 12 months.
 
 By Wednesday he is ready for home. Simone has told him about the nodule and messaged his primary care physician, but her draft discharge summary says only "Incidental RLL nodule, f/u PCP," a line that would read the same if neither had happened. As the chapter on the test you order and the test you don't showed, "per PCP" hands a task to someone who may never hear of it, and a finding nobody was waiting for is easier still to lose.
 
@@ -595,7 +599,7 @@ The rewrite shows Mr. Iverson hearing about the nodule in plain words, with a re
 
 ## When the patient has already left
 
-The third scenario is constructed as well. At 11:00 on a Saturday, Joy Kessler, an urgent care NP, sees Ana Gutierrez, thirty-four, with burning on urination. She sends a urine culture, prescribes trimethoprim-sulfamethoxazole and writes the pending test into the plan: "Urine culture pending; clinic will call if treatment needs to change. Cell number confirmed." That is the deferred-test plan from the previous chapter, applied to a result.
+The third case is fictional too. At 11:00 on a Saturday, Joy Kessler, an urgent care NP, sees Ana Gutierrez, thirty-four, with burning on urination. She sends a urine culture, prescribes trimethoprim-sulfamethoxazole and writes the pending test into the plan: "Urine culture pending; clinic will call if treatment needs to change. Cell number confirmed." That is the deferred-test plan from the previous chapter, applied to a result.
 
 On Monday at 14:20 the culture posts: *E. coli*, resistant to the drug she went home with. Joy is on shift, and she records each step as an addendum to the Saturday visit when she takes it:
 
@@ -619,7 +623,7 @@ The entries were written one at a time, and the system stamped each at the momen
 
 ## A scanner out of service
 
-The scenario that follows is constructed. Bianca Ellison spent eight years as an oncology nurse and has now worked seven months as an NP in the emergency department of a community hospital with one CT scanner. At 09:25 on a Friday she sees Victor Langley, sixty-seven, who has had cramping abdominal pain since 06:00. He has vomited four times and has passed no stool or gas since the night before. In his thirties he had open surgery for a ruptured appendix. His abdomen is distended and tender all over, without guarding or rebound.
+One CT scanner serves the whole community hospital. At 09:25 on a Friday Bianca Ellison, an NP in its emergency department for seven months, sees Victor Langley, sixty-seven, who has had cramping abdominal pain since 06:00. He has vomited four times and has passed no stool or gas since the night before. In his thirties he had open surgery for a ruptured appendix. His abdomen is distended and tender all over, without guarding or rebound. Mr. Langley, Bianca and the hospital are constructed.
 
 Bianca suspects a small bowel obstruction. At 09:40 she orders blood work and a CT of the abdomen and pelvis with IV contrast, and starts IV fluids, an antiemetic and morphine. At 09:55 the CT technologist calls: the scanner is out of service, and the repair should be done by noon. It is back at 12:40.
 
@@ -637,7 +641,7 @@ At 20:40, with the bed assigned, Bianca writes:
 
 > 67M abd pain, vomiting, prior abd surgery. CT delayed, scanner down. CT: SBO, no ischemia. Surgery saw, recs nonop mgmt, NGT. Admitted to hospitalist, boarding in ED awaiting bed. Pt resting comfortably, VSS. Continued to monitor.
 
-Nothing in it is false, yet more than eleven hours fit into one clause and two reassurances. "CT delayed, scanner down" does not say when Bianca learned it, what she was told or whether she looked for another way to get the scan. "Resting comfortably" and "VSS," for vital signs stable, carry no time, and the nursing flowsheet shows a heart rate of 112 at 12:20; a reviewer will look for her response to that number. "Continued to monitor" gives no interval, no findings and no limit that would have ended the wait. Had his bowel perforated at 18:00, nothing here would show that anyone examined him between the scan and the bed.
+More than eleven hours fit into one clause and two reassurances. "CT delayed, scanner down" does not say when Bianca learned it, what she was told or whether she looked for another way to get the scan. "Resting comfortably" and "VSS," for vital signs stable, carry no time, and the nursing flowsheet shows a heart rate of 112 at 12:20; a reviewer will look for her response to that number. "Continued to monitor" gives no interval, no findings and no limit that would have ended the wait. Had his bowel perforated at 18:00, nothing here would show that anyone examined him between the scan and the bed.
 
 ## The rewrite
 
@@ -671,7 +675,7 @@ How often to look again is your clinical judgment, set by how fast the danger yo
 
 ## The transfer that stalls
 
-The second scenario is also constructed. Corinne Abbott, a former flight nurse, is in her second year as a hospital medicine NP at a forty-bed rural hospital. Elaine Burke, fifty-eight, was admitted on Sunday with right upper abdominal pain and jaundice. Her ultrasound shows a dilated bile duct, her bilirubin is rising, and the plan is an ERCP, an endoscopic procedure to clear the duct, which this hospital does not offer. By Monday evening the chart could say "Accepted at Regional, awaiting bed. Pt and family aware." Some of Corinne's entries show what that line would hide:
+Another constructed case moves the wait to a forty-bed rural hospital, where Corinne Abbott, a former flight nurse, is in her second year as a hospital medicine NP. Elaine Burke, fifty-eight, was admitted on Sunday with right upper abdominal pain and jaundice. Her ultrasound shows a dilated bile duct, her bilirubin is rising, and the plan is an ERCP, an endoscopic procedure to clear the duct, which this hospital does not offer. By Monday evening the chart could say "Accepted at Regional, awaiting bed. Pt and family aware." Some of Corinne's entries show what that line would hide:
 
 > 10:15. Transfer requested for ERCP, not available here. 10:50 accepted by Dr. Isaac Farrow, gastroenterology, Regional Medical Center, pending bed; no estimate. 13:40 Regional: no bed yet. University Hospital called as an alternative: no bed.
 >
@@ -685,6 +689,8 @@ Acceptance is not a bed. Who accepted, when, and what the acceptance is pending 
 
 The alternatives, a second center and air transport, each have an answer, so a reviewer asking whether there was a faster route finds that Corinne looked for one. If Mrs. Burke worsens on the road, Megan will be asked what the hospital told her, and the 16:30 entry is the record's side of that answer. The 14:00 entry also holds the plan for the bed that never opens: an hour at which Corinne stops waiting and calls again, written before anyone knows it will be needed, like the plan for the unreachable patient in the chapter on closing the loop on the abnormal result.
 
+Sometimes the bed does not open before your shift ends. The last entry is then the handoff: its time, the clinician taking over, by name, and what you told them about the danger you named, the limits, the latest findings and when to look again. If Regional still had no bed at 20:00, Corinne's note would end with both calls and their answers, then her report to the night clinician, whom the nurse would now call. From that minute the record would show who was responsible for Mrs. Burke.
+
 ## What the note must contain
 
 - **The delay as a fact.** What is delayed, who told you and when, the estimate and each change to it, with no comment on the department or facility.
@@ -697,9 +703,9 @@ The alternatives, a second center and air transport, each have an answer, so a r
 
 ## Two pages and a cold foot
 
-The scenario that follows is constructed. Jasmine Holloway spent eight years as a cardiac catheterization lab nurse and has now worked three months as a hospital medicine NP. Gloria Ainsworth, seventy-six, was admitted on Tuesday with pneumonia. She has peripheral artery disease and a stent in the main artery of her left thigh. At 13:50 on Thursday her nurse, Diego Fuentes, calls Jasmine: the left foot is cold, and Mrs. Ainsworth says it has hurt since lunch.
+Gloria Ainsworth, seventy-three, was admitted on Tuesday with a urinary tract infection. She has peripheral artery disease and a stent in the main artery of her left thigh. At 13:50 on Thursday her nurse, Diego Fuentes, calls Jasmine Holloway, a former cardiac catheterization lab nurse now in her third month as a hospital medicine NP. The left foot is cold, and Mrs. Ainsworth says it has hurt since lunch. Everyone in this case is constructed, the surgeons included.
 
-At 14:00 the foot is pale and cool to the ankle, with no pulse Jasmine can feel and only a faint signal on Doppler; sensation and movement are intact. She suspects the stent has closed, orders heparin and at 14:05 pages the vascular surgeon on call, Dr. Stefan Kirby. No call comes back. At 14:20 she pages him again, and at 14:25 she calls Dr. Omar Bashir, the attending hospitalist on her service.
+At 14:00 the foot is pale and cool to the ankle, with no pulse Jasmine can feel and only a faint signal on Doppler; sensation and movement are intact. She suspects the stent has closed, orders heparin and at 14:05 pages the vascular surgeon on call, Dr. Michael Kirby. No call comes back. At 14:20 she pages him again, and at 14:25 she calls Dr. Omar Bashir, the attending hospitalist on her service.
 
 By 14:40 the toes are numb. Dr. Bashir learns from the operating room desk that Dr. Kirby is scrubbed in a case, and through the house supervisor he reaches the chief of surgery, Dr. Helen Eastman, who is at the bedside at 15:25. Dr. Kirby never comes. Nobody need have failed for that to happen, and that is what makes the note hard to write.
 
@@ -713,9 +719,9 @@ These questions turn the treatment allegation from the chapter on where claims b
 
 At 16:40, with Mrs. Ainsworth in the angiography suite, Jasmine writes:
 
-> 76F PAD s/p L SFA stent, L foot cold and painful this afternoon, concern for acute limb ischemia. Heparin started. Vascular paged multiple times without response; attending aware. Escalated per policy. Eventually seen by surgery, to IR for angiogram.
+> 73F PAD s/p L SFA stent, L foot cold and painful this afternoon, concern for acute limb ischemia. Heparin started. Vascular paged multiple times without response; attending aware. Escalated per policy. Eventually seen by surgery, to IR for angiogram.
 
-Nothing in it is false, and almost none of it can be checked. "Paged multiple times" gives no times and no content: a reader cannot tell how far apart the pages came or what they said. "Attending aware" hides that Dr. Bashir came to the bedside, examined the patient and made the next calls himself. "Escalated per policy" names no person and no time. And the numb toes at 14:40, the finding that made waiting unsafe, are missing, so the escalation has no reason on the page.
+Almost none of it can be checked. "Paged multiple times" gives no times and no content: a reader cannot tell how far apart the pages came or what they said. "Attending aware" hides that Dr. Bashir came to the bedside, examined the patient and made the next calls himself. "Escalated per policy" names no person and no time. And the numb toes at 14:40, the finding that made waiting unsafe, are missing, so the escalation has no reason on the page.
 
 "Without response" and "eventually" are not findings but complaints. They set Jasmine's note against Dr. Kirby, who may answer that he was in an emergency operation and returned the page as soon as he could: the argument between clinicians that the chapter on facts and quotes warned against.
 
@@ -723,9 +729,9 @@ Nothing in it is false, and almost none of it can be checked. "Paged multiple ti
 
 The same afternoon, written as it happened:
 
-> 14:00. Called by RN Diego Fuentes 13:50 for cold, painful L foot. 76F admitted Tues with pneumonia; PAD, L superficial femoral artery stent 2 yrs ago. L foot pain since ~13:15, 7/10. L foot pale and cool to ankle, capillary refill 5 s; no palpable DP or PT pulse; Doppler: faint PT signal, no DP signal. R foot warm, pulses palpable. Light touch and toe movement intact L. Assessment: suspected acute L limb ischemia, possible stent occlusion. Plan: heparin per protocol, bolus 14:15; NPO; urgent vascular surgery consult. RN to check foot q15 min, call me at once for numbness, weakness or color change.
+> 14:00. Called by RN Diego Fuentes 13:50 for cold, painful L foot. 73F admitted Tues with UTI; PAD, L superficial femoral artery stent 2 yrs ago. L foot pain since ~13:15, 7/10. L foot pale and cool to ankle, capillary refill 5 s; no palpable DP or PT pulse; Doppler: faint PT signal, no DP signal. R foot warm, pulses palpable. Light touch and toe movement intact L. Assessment: suspected acute L limb ischemia, possible stent occlusion. Plan: heparin per protocol, bolus 14:15; NPO; urgent vascular surgery consult. RN to check foot q15 min, call me at once for numbness, weakness or color change.
 >
-> 14:05. Paged Dr. Stefan Kirby, vascular surgery on call per operator: "Urgent. 76F, 4 East bed 12, cold pulseless L foot since 13:15, prior SFA stent, heparin ordered. Need evaluation for revascularization. Call NP Holloway x4417."
+> 14:05. Paged Dr. Michael Kirby, vascular surgery on call per operator: "Urgent. 73F, 4 East bed 12, cold pulseless L foot since 13:15, prior SFA stent, heparin ordered. Need evaluation for revascularization. Call NP Holloway x4417."
 >
 > 14:20. No callback. Operator confirmed Dr. Kirby on call, same pager; second page, same text. 14:25 called Dr. Omar Bashir, attending hospitalist: gave exam, onset, heparin and both pages. He is coming to bedside.
 >
@@ -753,7 +759,7 @@ Between the calls, the entries about Mrs. Ainsworth herself follow the method of
 
 The first step is the repeat page. How long to wait before it is a clinical judgment set by how fast the danger can move; some hospitals also set an expected response time for on-call consultants, so find out whether yours does. With the repeat, try any other route the schedule lists, such as a backup number or the operating room desk.
 
-The second step is the physician you work with. Whether Dr. Bashir is Jasmine's collaborating or supervising physician, or simply the attending on her service, depends on her state and her employer, as the chapter on the provider note explained. Call that physician when the finding worsens, when waiting could cost the patient something, or when the next step is one your policy reserves for a physician. The trigger is the patient, not a number of unanswered pages. On the record the call is a name, a time, what you told them and what they did.
+The second step is the physician you work with. Whether Dr. Bashir is Jasmine's collaborating or supervising physician, or simply the attending on her service, depends on her state and her employer, as the chapter on the provider note explained. Many organizations expect you to call that physician when the finding worsens, when waiting could cost the patient something, or when the next step is one your policy reserves for a physician. The trigger is the patient, not a number of unanswered pages. On the record the call is a name, a time, what you told them and what they did.
 
 The third step is the **chain of command**: the route your organization sets for taking a clinical concern past the people who have not resolved it. Who comes next differs between organizations; a common path runs through the house supervisor or the administrator on call to the chief of the consultant's department, then to the chief medical officer. Read your policy before you need it. Use it when the consultant cannot be reached in a time the patient can afford, or when a consultant's answer leaves the patient at risk and a direct conversation has not changed it. In the note each step is a role, a name, a time, what was asked and the answer.
 
@@ -776,9 +782,9 @@ The chapter on facts and quotes already settles the hardest line in this note: f
 
 ## A fibula on a Saturday
 
-The scenario that follows is constructed. Audrey Kincaid spent nine years as a hospice nurse, giving opioids that others had ordered, and has now worked a year as an NP at an urgent care clinic. At 16:20 on a Saturday she sees Russell Eckert, fifty-three, who missed the bottom step of a friend's deck at 14:30 and rolled his left ankle. The X-ray shows a nondisplaced fracture of the distal fibula at the level of the joint, with the joint still aligned.
+Russell Eckert's X-ray shows a nondisplaced fracture of the distal fibula at the level of the joint, with the joint still aligned. He is fifty-three, and at 14:30 on a Saturday he missed the bottom step of a friend's deck and rolled his left ankle. Audrey Kincaid, who saw him at 16:20 in an urgent care clinic, spent nine years as a hospice nurse giving opioids that others had ordered; she has been an NP for a year. The drugs, doses and quantities below belong to a constructed patient. They show how to record a decision, not what to prescribe; check current labeling, your formulary and your state's rules.
 
-He takes sertraline for depression and sleeps with CPAP for obstructive sleep apnea. He drinks two or three beers on weekend evenings and lives with his wife, who drove him in, and their sixteen-year-old son. Ibuprofen at 16:30 brings his pain from 8 out of 10 to 6, and at 17:00 he asks: "Ibuprofen won't get me through the night. Can I get a Percocet?" At 17:05 Audrey searches the **prescription drug monitoring program**, or PDMP, the state's database of dispensed prescriptions for controlled drugs such as oxycodone. Then she prescribes ten tablets of oxycodone 5 mg beside scheduled ibuprofen and acetaminophen, not the Percocet he named.
+Mr. Eckert takes sertraline for depression and sleeps with CPAP for obstructive sleep apnea. He drinks two or three beers on weekend evenings and lives with his wife, who drove him in, and their sixteen-year-old son. Ibuprofen at 16:30 brings his pain from 8 out of 10 to 6, and at 17:00 he asks: "Ibuprofen won't get me through the night. Can I get a Percocet?" At 17:05 Audrey searches the **prescription drug monitoring program**, or PDMP, the state's database of dispensed prescriptions for controlled drugs such as oxycodone. Then she prescribes ten tablets of oxycodone 5 mg beside scheduled ibuprofen and acetaminophen, not the Percocet he named.
 
 ## What the record will be asked
 
@@ -792,13 +798,13 @@ At 17:30 Audrey writes:
 
 > 53M rolled L ankle, nondisplaced distal fibula fx on XR. Posterior splint, crutches, NWB. Pain 8/10. Rx oxycodone 5 mg q6h prn pain #10, ibuprofen, APAP. PDMP reviewed. NKDA. Risks/benefits discussed. F/u ortho.
 
-Every line but one is true, and none shows a decision. "NKDA" came from a prefilled field, the trap described in the chapter on templates, while the allergy list shows penicillin. "Rx oxycodone" gives no reason for an opioid at all, or for this one over the combination he asked for. "Prn pain" sets no threshold: any ache would qualify. "PDMP reviewed" has no time and no result.
+No line shows a decision, and one is wrong: "NKDA" came from a prefilled field, the trap described in the chapter on templates, while the allergy list shows penicillin. "Rx oxycodone" gives no reason for an opioid at all, or for this one over the combination he asked for. "Prn pain" sets no threshold: any ache would qualify. "PDMP reviewed" has no time and no result.
 
 "Risks/benefits discussed" is the inserted phrase from the same chapter. It names no risk, and none of the ones that mattered for this man appears: not his sleep apnea, his beer, his son or his sertraline. "F/u ortho" names no one and no day, so ten tablets have no end but the bottle. Nor does anything tie the drug to the danger it could hide.
 
 ## The rewrite
 
-Here is the same visit, rewritten:
+The rewrite puts each decision beside its reason:
 
 > 53M, rolled L ankle 14:30 missing bottom step of a deck. Seen 16:20. Lateral malleolus swollen, tender; foot warm, cap refill under 2 s, sensation and toe movement intact. XR: nondisplaced distal fibula fracture at level of joint, mortise intact. Posterior splint, crutches, non-weight-bearing. Pain 8/10; ibuprofen 600 mg 16:30, pain 6/10 at 17:00. Asked: "Ibuprofen won't get me through the night. Can I get a Percocet?"
 >
@@ -806,13 +812,13 @@ Here is the same visit, rewritten:
 >
 > Assessment: acute pain from nondisplaced distal fibula fracture, likely severe for 2–3 days.
 >
-> Plan: ibuprofen 600 mg every 6 h with food, up to 5 days, and acetaminophen 1,000 mg every 8 h, max 3,000 mg/day given alcohol use, both scheduled. Oxycodone 5 mg, 1 tab up to every 6 h, only for severe pain these do not relieve; #10, no refills, enough until ortho visit. Oxycodone alone, not the combination he asked for, so acetaminophen is counted in one place. Tramadol not used: serotonin risk with sertraline. Ibuprofen kept to 5 days: SSRI plus NSAID raises GI bleeding risk; no ulcer or GI bleed history.
+> Plan: ibuprofen 600 mg every 6 h with food, up to 5 days, and acetaminophen 1,000 mg every 8 h, max 3,000 mg/day given alcohol use, both scheduled. Oxycodone 5 mg, 1 tab up to every 6 h, only for severe pain these do not relieve; #10, no refills, enough until ortho visit. Oxycodone alone, not the combination he asked for, so acetaminophen is counted in one place. Tramadol not used: serotonin syndrome and seizure risk with sertraline. Ibuprofen kept to 5 days: SSRI plus NSAID raises GI bleeding risk; no ulcer or GI bleed history.
 >
 > Discussed with patient and wife, present at his request: oxycodone can cause drowsiness and slowed breathing, more so with sleep apnea or alcohol. No alcohol or driving while taking it; CPAP for any sleep, naps included; may constipate. Store tablets out of son's reach; leftovers to a drug take-back site. Naloxone nasal spray prescribed given OSA; use explained to both. He said: "Ibuprofen and Tylenol on the clock, the oxy only if the pain won't let me sleep, and no beer." To ED for pain the medicines no longer control, numbness, or pale, blue or cold toes: the splint can tighten as swelling rises. Ortho: Dr. Lena Jaffe, Tue 09:40, booked; she will decide on further pain treatment.
 
 ## Dose, days and the next look
 
-In the rewrite, a diagnosis with an expected course justifies a drug for severe pain; the scheduled drugs carry the base, and the as-needed dose has a threshold Mr. Eckert can recognize at two in the morning. The quantity is arithmetic anyone can check: ten tablets at up to four a day reach Tuesday's visit, where Dr. Jaffe makes the next decision. His request is quoted with no label, as the chapter on facts and quotes asks, and the change to it has its reason beside it. The last instruction ties the drug to what it could hide: in a splinted fracture, pain the medicine no longer controls can mean a splint too tight or pressure building in the leg, a reason to come back rather than take another tablet.
+In the rewrite, a diagnosis with an expected course justifies a drug for severe pain; the scheduled drugs carry the base, and the as-needed dose has a threshold Mr. Eckert can recognize at two in the morning. The quantity is arithmetic anyone can check: ten tablets at up to four a day reach Tuesday's visit, where Dr. Jaffe makes the next decision. His request is quoted with no label, as the chapter on facts and quotes asks, and the change to it has its reason beside it. The last instruction ties the drug to what it could hide: in this scenario, pain the medicine no longer controls could mean a splint too tight or pressure building in the leg, a reason for Mr. Eckert to come back rather than take another tablet.
 
 ## The checks a controlled substance adds
 
@@ -820,7 +826,7 @@ Federal law sorts controlled substances into schedules, and oxycodone is in Sche
 
 The history that matters is the history that could change the prescription: earlier opioids and how the patient did on them, substance use disorder or overdose, alcohol, other sedating drugs, breathing during sleep and who else lives in the home. Each line either changed the plan or cleared the way for it. Mr. Eckert's beer capped the acetaminophen and added a warning, his son put storage into the conversation, and the absence of sedatives and earlier opioids let a small dose stand.
 
-A **controlled-substance agreement** sets out in writing the terms of ongoing prescribing, such as a single prescriber and pharmacy, how refills are requested and what monitoring to expect. Whether one is required, and for which prescriptions, depends on your state and your organization; Audrey's clinic requires none for a few days' supply after an injury. Where one applies, the note says it was discussed and signed. Like the refusal form in the chapter on informed refusal, it does not replace the conversation.
+A **controlled-substance agreement** sets out in writing the terms of ongoing prescribing, such as a single prescriber and pharmacy, how refills are requested and what monitoring to expect. Whether one is required, and for which prescriptions, depends on your state and your organization; Audrey's clinic requires none for a few days' supply after an injury. Where one applies, the note says it was discussed and signed. It records terms, not the conversation.
 
 The rules behind these checks vary by state, so ask before your first controlled-substance prescription in a new job or a new state. Your state board can tell you which schedules your license lets you prescribe and on what terms, when a PDMP search is required, whether a first opioid prescription for acute pain is limited in days or quantity, and whether an agreement, a signed consent or an offer of naloxone is ever required. Your organization's policy may ask for more than the law, and your risk manager can tell you what it adds.
 
@@ -842,13 +848,13 @@ A patient at higher risk is written the same way: the condition, then what it ch
 
 # When You Say No to an Antibiotic or a Scan
 
-## A Z-Pak before a long drive
+## An antibiotic request before a long drive
 
-The scenario that follows is constructed. Holly Bianchi spent seven years as an infusion nurse and has now worked two months as an NP in a family practice. At 15:10 on a Thursday in February she sees Scott Garrity, forty-two, whose nose has been blocked since Saturday. His sore throat and cough have faded; the yellow discharge and pressure over both cheeks have not changed since Tuesday. He has had no fever. Last winter, after two colds like this one, another clinic gave him azithromycin each time.
+Last winter Scott Garrity had two colds like the one he has now, and another clinic gave him azithromycin for each. At 15:10 on a Thursday in February, with his nose blocked since Saturday, the forty-two-year-old sees Holly Bianchi, a former infusion nurse two months into her work as an NP in a family practice; both of them are fictional. His sore throat and cough have faded; the yellow discharge and pressure over both cheeks have not changed since Tuesday. He has had no fever.
 
 His temperature is 99.0°F. His cheeks are mildly tender and his nasal lining swollen, with purulent discharge; his eyelids look normal, his eyes move without pain, and his neck is supple. At 15:25 he asks: "Every time I get this, it turns into a sinus infection. Can you just call in a Z-Pak? I'm driving to my mother's in Ohio on Saturday, and I'll be there a week."
 
-Holly does not call in the Z-Pak. He leaves at 15:45 with a different plan, not entirely happy with it.
+Holly does not call in the antibiotic. He leaves at 15:45 with a different plan, not entirely happy with it.
 
 ## What the record will be asked
 
@@ -860,13 +866,13 @@ The same questions can come with no complication at all. A patient who leaves fe
 
 At 15:50 Holly writes:
 
-> 42M sinus congestion x 6 days. Requesting Z-Pak. Viral URI, abx not indicated. Educated on antibiotic stewardship. Supportive care. RTC PRN.
+> 42M sinus congestion x 6 days. Requesting azithromycin. Viral URI, abx not indicated. Educated on antibiotic stewardship. Supportive care. RTC PRN.
 
 The request survives, but not the two things inside it that the rest of the visit answered: a belief that his colds always turn bacterial, and a week away from the clinic. "Abx not indicated" is a verdict with nothing underneath, like "No indication for CT head" in the chapter on the test you order and the test you don't. "Educated on antibiotic stewardship" says the conversation was about resistance in the community, not about him; read beside an Ohio emergency record, it says nothing about the risks of his own illness. "Supportive care" names no treatment, and "RTC PRN" gives no threshold. Nothing records his answer, so a reader cannot tell a patient who agreed from one who left unconvinced.
 
 ## The rewrite
 
-Here is the same visit, rewritten:
+Holly could have written this instead:
 
 > 42M, nasal congestion since Sat (day 6). Sore throat, cough days 1–2, resolved. Since Tue, thick yellow discharge and pressure over both cheeks, unchanged, not worse. No fever at home. Two similar illnesses last winter, azithromycin elsewhere both times. No drug allergies. Seen 15:10: T 99.0°F. Mild bilateral maxillary tenderness; nasal mucosa swollen, purulent discharge. No eyelid swelling or redness; eye movements full and painless. No severe headache; neck supple.
 >
@@ -878,7 +884,7 @@ Here is the same visit, rewritten:
 
 ## The request, the reason and the answer
 
-His words come first, quoted by the rules in the chapter on facts and quotes, because they hold what the plan answers. The line on discolored discharge answers his belief, and the delayed prescription answers his trip. Shrink the quotation to "requesting Z-Pak" and both lines lose their reason.
+His words come first, quoted by the rules in the chapter on facts and quotes, because they hold what the plan answers. The line on discolored discharge answers his belief, and the delayed prescription answers his trip. Shrink the quotation to "requesting azithromycin" and both lines lose their reason.
 
 The decision is written as Holly's, with a date on it: "no antibiotic started today." "Antibiotics deferred" would hide that anything was asked for, and "patient declined antibiotics" would put the choice in the wrong hands. "Today" keeps it a judgment about day 6 that a later day may revise.
 
@@ -890,13 +896,13 @@ A no that ends the visit reads as a dismissal; a no followed by a plan reads as 
 
 A *delayed prescription*, written today to be used only if something changes, is still a prescription, and the chapter on prescribing applies to it in full, down to why his drug differs from the one he named. It adds one element: what that something is. Holly's conditions are the bacterial criteria from her assessment, turned into a date and symptoms he can recognize: the sentence about what would change your mind, from the chapter on what you don't know yet, handed to the patient. A delayed prescription suits a patient who cannot easily come back; for one who can, a recheck on a set day may serve better. The portal message lets the record show whether and when he started.
 
-The second list means be seen today, not start the pills: an infection spreading toward the eye or brain is not managed with tablets at home. The note keeps the two lists apart, as the conversation did.
+The second list means be seen today, not start the pills: in this scenario, signs of an infection spreading toward the eye or brain call for an exam that day, not tablets at home. The note keeps the two lists apart, as the conversation did.
 
 "I'd still rather have it now" stays in the note. A note showing a patient who disagreed, understood and left with a plan holds up better than one saying he agreed, because a complaint letter would confirm the first and contradict the second. If after the discussion you do prescribe, write the clinical reason: "per patient request" is a drug without an indication.
 
 ## The scan he wanted now
 
-The second scenario is also constructed. Wendy Cho, a former endoscopy nurse, is in her third year as a primary care NP. At 09:30 on a Monday she sees Dale Henning, thirty-nine, whose lower back has hurt since he lifted a box at work on Thursday; the pain reaches his right buttock, not his leg. He wants an MRI and, if it shows a disc, a spine surgeon. Part of her note reads:
+Wendy Cho's visit, invented like Holly's, is about a scan. A former endoscopy nurse, she is in her third year as a primary care NP. At 09:30 on a Monday she sees Dale Henning, thirty-nine, whose lower back has hurt since he lifted a box at work on Thursday; the pain reaches his right buttock, not his leg. He wants an MRI and, if it shows a disc, a spine surgeon. Part of her note reads:
 
 > 09:40, asked: "My brother waited on his back and ended up needing surgery. I want to know now." No fever, weight loss, cancer history, injection drug or steroid use; no numbness between the legs, bladder or bowel change, or leg weakness. Strength, reflexes and sensation normal both legs; straight-leg raise negative. Assessment: acute low back strain; nerve root compression, cauda equina syndrome, infection and cancer considered, not supported by findings above. MRI and surgical referral not ordered today: neither would change the plan; disc changes are common on MRI in people without back pain. Accepted: physical therapy referral, light-duty note for 2 weeks, heat, keep walking. Recheck booked in 4 weeks; MRI reconsidered then if not improving, sooner for pain or numbness spreading down a leg or leg weakness. ED at once for numbness between the legs, trouble passing urine, or loss of bladder or bowel control. He said: "If my leg goes weak or I can't pee right, I go in. Otherwise we talk MRI in a month."
 
@@ -916,9 +922,9 @@ A request for a scan often carries a fear, and Mr. Henning's has a name: his bro
 
 ## A son who wants a hundred percent
 
-The scenario that follows is constructed. Rebecca Dorsey spent seven years as a nurse on a pulmonary step-down unit and has now worked four months as a hospital medicine NP. Eugene Lowell, seventy-four, was admitted on Friday night with an exacerbation of COPD. His blood gas showed carbon dioxide building up, so his orders set an oxygen saturation target of 88 to 92 percent.
+"He can't breathe. I want him on a hundred percent." Craig Lowell flew in on Saturday afternoon to see his father, Eugene, seventy-four, admitted on Friday night with an exacerbation of COPD, and he wants the oxygen turned up. His father's blood gas showed carbon dioxide building up, so the orders set an oxygen saturation target of 88 to 92 percent. At 18:30 the nurse, Hector Avila, calls Rebecca Dorsey, a hospital medicine NP for four months, to the room. The scene, like everyone in it, is imagined.
 
-At 18:30 on Saturday Mr. Lowell's nurse, Hector Avila, calls Rebecca to the room. His son, Craig, who flew in that afternoon, wants the oxygen turned up: "He can't breathe. I want him on a hundred percent." Rebecca examines his father, who says he feels about the same as that morning, and explains the target. Craig swears, asks for "a real doctor, not a nurse," and at 18:50 slaps the overbed table and says he will be waiting for her in the parking lot. Hector calls security, and Craig leaves the unit with an officer at 19:00.
+Rebecca examines Mr. Lowell, who says he feels about the same as that morning, and explains the target. Craig swears, asks for "a real doctor, not a nurse," and at 18:50 slaps the overbed table and says he will be waiting for her in the parking lot. Hector calls security, and Craig leaves the unit with an officer at 19:00.
 
 ## What the record will be asked
 
@@ -934,7 +940,7 @@ The note is about the son. The patient appears twice, as "a CO2 retainer" and as
 
 ## The rewrite
 
-Here is the same evening, written from what Rebecca saw, heard and did:
+The same evening, written from what Rebecca saw, heard and did:
 
 > 18:35. Seen at request of RN Hector Avila. Sitting up, full sentences. SpO2 90% on 2 L NC, RR 22, HR 94. Scattered expiratory wheeze, no accessory muscle use; unchanged from my 08:15 exam. Alert, oriented, answers promptly. Patient: "I'm breathing about like this morning." Admission ABG Fri 21:40: pH 7.33, PaCO2 58; SpO2 target 88–92% ordered.
 >
@@ -960,7 +966,7 @@ Then let the episode end. If "son hostile, security involved" is copied into eac
 
 ## The request that keeps coming back
 
-The second scenario is also constructed. Gemma Lockhart, a first-year urgent care NP, sees Neil Carver, fifty-one, on day three of a cold. He has type 2 diabetes and wants a steroid shot. She declines, with reasons written as the chapter on the antibiotic or scan you decline describes. He asks again ten minutes later, then a third time, louder, standing by the door. Her first draft argues back:
+The next encounter never happened either. Gemma Lockhart, a first-year urgent care NP, sees Neil Carver, fifty-one, on day three of a cold. He has type 2 diabetes and wants a steroid shot. She declines, with reasons written as the chapter on the antibiotic or scan you decline describes. He asks again ten minutes later, then a third time, louder, standing by the door. Her first draft argues back:
 
 > Pt repeatedly demanding steroid injection despite multiple explanations. Became argumentative. I spent 20 minutes patiently explaining why it is not indicated. Pt would not accept plan.
 
@@ -972,7 +978,7 @@ The timestamps count the requests, and one observed behavior and one quotation c
 
 ## When the disagreement is with a colleague
 
-The third scenario is constructed as well. Natalie Corbin, an emergency NP in her second year, sees Lorraine Abernathy, sixty-three, who fainted at her kitchen sink. Natalie would admit her for cardiac monitoring; Dr. Gordon Hale, the attending supervising her shift, thinks the faint was orthostatic. The tempting line, "Dr. Hale overruled my recommendation to admit," charts the conflict and leaves out every clinical reason on both sides. Part of her note, written as clinical content, reads:
+The last case, just as hypothetical, puts the disagreement inside the team. Natalie Corbin, an emergency NP in her second year, sees Lorraine Abernathy, sixty-three, who fainted at her kitchen sink. Natalie would admit her for cardiac monitoring; Dr. Gordon Hale, the attending supervising her shift, thinks the faint was orthostatic. The tempting line, "Dr. Hale overruled my recommendation to admit," charts the conflict and leaves out every clinical reason on both sides. Part of her note, written as clinical content, reads:
 
 > 15:40. Syncope, discussed with Dr. Gordon Hale, ED attending, 15:20. Admission for telemetry considered: no warning before the faint; ECG first-degree AV block, not present on 2022 ECG. Dr. Hale examined patient 15:30. His assessment: orthostatic syncope; BP 134/80 lying, 108/70 standing, with lightheadedness; hydrochlorothiazide started 12 days ago. His plan: discharge, stop hydrochlorothiazide, ambulatory heart monitor, cardiology clinic within 1 week.
 
@@ -993,7 +999,7 @@ If, having heard the reasons, you still believe a plan leaves the patient at ris
 
 ## A no at 16:40
 
-The scenario that follows is constructed. Tessa Novak spent eleven years as a nurse on a geriatric medical unit and has now worked nine months as a hospital medicine NP. Albert Yates, eighty-four, was admitted on Monday night after three days of black stools. On rounds at 07:50 Tuesday he was oriented and conversant, and gastroenterology recommended an upper endoscopy, or EGD, for Wednesday at 09:00.
+Albert Yates, eighty-four, was admitted on Tuesday at 10:30 after three days of black stools. On admission he was oriented and conversant, and gastroenterology recommended an upper endoscopy, or EGD, for Wednesday at 09:00. His NP is Tessa Novak, a former geriatric nurse nine months into hospital medicine. He, his family and everyone caring for him exist only on these pages.
 
 At 16:40 a GI fellow brings the consent form. Mr. Yates pushes it away: "Nobody's doing anything to me." Since 15:30 his nurse, Imani Shaw, has charted that he is pulling at his IV line and calling her by his late wife's name. The fellow pages Tessa with one question: can he refuse?
 
@@ -1005,13 +1011,13 @@ If Mr. Yates bleeds again on Thursday, the chart will be asked four things. Capa
 
 ## Capacity, not competence
 
-**Decision-making capacity** is a clinical judgment that a patient can make one particular decision at one particular time. The treating clinician makes it at the bedside, and it can change by the afternoon. **Competence** is a legal status decided by a court, which may appoint a **guardian** to make some or all decisions for a person it finds incompetent. The words are often used loosely, but on the record the difference matters: "lacks capacity" with no decision attached reads as a verdict on the whole person.
+**Decision-making capacity** is a clinical judgment that a patient can make one particular decision at one particular time. The treating clinician makes it at the bedside, and it can change by the afternoon. **Competence** is a legal status decided by a court, which may appoint a **guardian** (called a conservator in some states) to make some or all decisions for a person it finds incompetent. The words are often used loosely, but on the record the difference matters: "lacks capacity" with no decision attached reads as a verdict on the whole person.
 
 Adults are presumed to have capacity, so the finding of incapacity is the one that needs support. Neither a diagnosis nor an orientation check supplies it: a man with delirium can know the date and still not grasp that the bleeding is his. A choice you think unwise is not evidence either, though a serious refusal is a reason to look closely.
 
 The assessment rests on four abilities, each judged against the decision at hand. *Understanding* is taking in what is proposed, why, its main risks and the alternatives, and giving it back in one's own words. *Appreciation* is accepting that this applies to oneself: this illness, these risks. *Reasoning* is weighing the options against each other and against what matters to the patient, and reaching a choice that follows. *Expressing a choice* is stating one that holds steady long enough to act on.
 
-## The weak note
+## The note as written
 
 Tessa's two entries, written between pages, read like this:
 
@@ -1019,15 +1025,15 @@ Tessa's two entries, written between pages, read like this:
 >
 > 08:05. Pt A&O x3 today, has capacity. Continues to refuse EGD. Risks explained. GI aware.
 
-Nothing in them is false, but orientation carries both findings, and orientation is not one of the four abilities. Neither entry says what Mr. Yates was told or records a word he said. Read together, they show a clinician who found him incapable on Tuesday and capable on Wednesday, with nothing but the clock to explain the change. If he bleeds on Thursday, a plaintiff's attorney will supply the explanation: a confused man said no twice, and the second time nobody looked closely.
+Orientation carries both findings, and orientation is not one of the four abilities. Neither entry says what Mr. Yates was told or records a word he said. Read together, they show a clinician who found him incapable on Tuesday and capable on Wednesday, with nothing but the clock to explain the change. If he bleeds on Thursday, a plaintiff's attorney will supply the explanation: a confused man said no twice, and the second time nobody looked closely.
 
-## The defensible rewrite
+## The rewrite
 
-Here are the same two entries, rewritten. Nothing in them goes beyond what Tessa asked, heard or did:
+Rewritten, the two entries hold nothing beyond what Tessa asked, heard or did:
 
-> 17:05. Capacity assessment for one decision: EGD recommended by GI for 09:00 tomorrow, declined when consent sought at 16:40. Oriented and conversant on rounds at 07:50; per RN I. Shaw, since 15:30 pulling at IV and calling her by his late wife's name. Now drowsy, says he is "at the bus station." Explained purpose and main risks of EGD in plain words. Understanding: could not say why he is in the hospital; 2 min later asked, "What test?" Appreciation: "I'm not sick. I need to get home." Reasoning: gave no reason related to the procedure. Choice: says no each time asked. Assessment: lacks capacity at this time for this decision, due to fluctuating delirium. Decision can wait: HR 84, BP 128/72, no melena since 12:00, Hb 8.4 at 16:00. Reassess 07:30, before procedure. Son Paul Yates, his health care agent per document in chart, updated by phone 17:30; agrees to wait for morning reassessment.
+> 17:05. Capacity assessment for one decision: EGD recommended by GI for 09:00 tomorrow, declined when consent sought at 16:40. Oriented and conversant on admission at 10:30; per RN I. Shaw, since 15:30 pulling at IV and calling her by his late wife's name. Now drowsy, says he is "at the bus station." Explained purpose and main risks of EGD in plain words. Understanding: could not say why he is in the hospital; 2 min later asked, "What test?" Appreciation: "I'm not sick. I need to get home." Reasoning: gave no reason related to the procedure. Choice: says no each time asked. Assessment: lacks capacity at this time for this decision, due to fluctuating delirium. Decision can wait: HR 84, BP 128/72, no melena since 12:00, Hb 8.4 at 16:00. Reassess 07:30, before procedure. Son Paul Yates, his health care agent per document in chart, updated by phone 17:30; agrees to wait for morning reassessment.
 >
-> 07:35. Capacity reassessment, same decision. Oriented to place, date and reason for admission; recalls "the young doctor with the papers." Explained again. Understanding: "You put a camera down my throat to find the bleeding and maybe stop it. They put me under, and it can tear something." Appreciation: "I've had black stools since Saturday and my blood's low. It could stop by itself, or it could get worse." Reasoning: "My wife choked on one of those tubes and was never right after. If I bleed more, you can give me blood, and I can always change my mind." Choice: declines EGD; unchanged at end of discussion. Assessment: has capacity at this time to decline EGD; deficits found at 17:05 not present. Son, by phone 07:50 with patient's permission: father has refused "any tube down his throat" since his wife's death. Will reassess if mental status changes.
+> 07:35. Capacity reassessment, same decision. Oriented to place, date and reason for admission; recalls "the young doctor with the papers." Explained again. Understanding: "You put a camera down my throat to find the bleeding and maybe stop it. They put me under, and it can tear something." Appreciation: "I've had black stools since Sunday and my blood's low. It could stop by itself, or it could get worse." Reasoning: "My wife choked on one of those tubes and was never right after. If I bleed more, you can give me blood, and I can always change my mind." Choice: declines EGD; unchanged at end of discussion. Assessment: has capacity at this time to decline EGD; deficits found at 17:05 not present. Son, by phone 07:50 with patient's permission: father has refused "any tube down his throat" since his wife's death. Will reassess if mental status changes.
 
 Each entry opens with the decision and gives each ability its own line, in his words wherever he had any, quoted by the rules in the chapter on facts and quotes. The evening deficits are specific enough that their absence in the morning means something: the reader sees a patient who changed, not a clinician who changed her mind. Tessa may not share the morning reasoning, and she does not need to: the choice follows from facts he understood and a value he has long held. The son's call supports that history without standing in for his answers.
 
@@ -1041,33 +1047,33 @@ Fluctuation changes the timing, not the method. When a decision can wait, assess
 
 Suppose that at 07:35 he had still asked "What test?" while his hemoglobin kept falling. The decision could not wait for a better hour, and it would pass to a **surrogate decision-maker**: the person who decides for a patient who lacks capacity. The note has to show three things about that person.
 
-The first is who they are and where their authority comes from. A **health care power of attorney**, called a health care proxy in some states, is a document in which a patient names a **health care agent** to decide if they cannot; Mr. Yates named his son in one. A court-appointed guardian is another source. If no one was named, state law, where it addresses the question, and your organization's policy set who may decide. Some documents and some laws also say who must certify incapacity before an agent's authority begins, so ask your risk manager whether your finding is enough or a physician must make it.
+The first is who they are and where their authority comes from. A **health care power of attorney**, called a health care proxy in some states, is a document in which a patient names a **health care agent** to decide if they cannot; Mr. Yates named his son in one. A court-appointed guardian, or conservator in some states, is another source. If no one was named, state law, where it addresses the question, and your organization's policy set who may decide. Some documents and some laws also say who must certify incapacity before an agent's authority begins, so ask your risk manager whether your finding is enough or a physician must make it.
 
 The second is what they were told: the same information the patient would have received. The third is what they chose and on what basis. A surrogate is generally expected to decide as the patient would have, from the patient's known wishes and values, a standard called **substituted judgment**; when those wishes cannot be known, the surrogate decides by the patient's **best interests**. The exact rule depends on state law. Either way, record the basis in the surrogate's words, including how they know what the patient wanted: "He told me after Mom died he'd never let them put a tube down his throat."
 
 ## Psychiatry and the ethics committee
 
-Most capacity assessments are made by the treating clinician. Ask psychiatry when the question is hard: when a psychiatric illness such as severe depression or a psychotic disorder may be distorting appreciation, when your findings are borderline and the stakes high, or when someone disputes your conclusion. Put the decision in the consult request, "Does Mr. Yates have capacity to refuse EGD?" rather than "capacity eval." Record the question, the consultant's findings and what you did with them; the consult informs your decision without taking it off your hands.
+Most capacity assessments are made by the treating clinician. Many clinicians ask psychiatry when the question is hard: when a psychiatric illness such as severe depression or a psychotic disorder may be distorting appreciation, when your findings are borderline and the stakes high, or when someone disputes your conclusion. Put the decision in the consult request, "Does Mr. Yates have capacity to refuse EGD?" rather than "capacity eval." Record the question, the consultant's findings and what you did with them; the consult informs your decision without taking it off your hands.
 
 The ethics committee answers a different question: not whether the patient can decide, but what to do when the people deciding disagree, or when nobody can. Common reasons are a surrogate whose choice seems to contradict the patient's known wishes, relatives who disagree, and a patient without capacity and without a surrogate. In most hospitals the committee advises rather than decides. Record when you asked, who took part, what was recommended and what followed.
 
 ## What the note must contain
 
-- The decision assessed, named specifically, and the time of the assessment.
-- What the patient was told, and any interpreter or sensory aid used.
-- Each of the four abilities, with the patient's own answers, right or wrong.
-- A finding limited to this decision at this time, with its likely cause.
-- Whether the decision could wait; each reassessment, timed, with what changed.
-- Who assessed, and any psychiatry or ethics consultation: question, answer, action.
-- For a surrogate: name, relationship, source of authority, what they were told, what they chose and why.
+- **The question.** The decision assessed, named specifically, and the time of the assessment.
+- **The information.** What the patient was told, and any interpreter or sensory aid used.
+- **The assessment.** Each of the four abilities, with the patient's own answers, right or wrong.
+- **The conclusion.** A finding limited to this decision at this time, with its likely cause.
+- **The timing.** Whether the decision could wait; each reassessment, timed, with what changed.
+- **The clinicians.** Who assessed, and any psychiatry or ethics consultation: question, answer, action.
+- **The surrogate.** For a surrogate: name, relationship, source of authority, what they were told, what they chose and why.
 
 # Informed Refusal and the Partial Yes
 
 ## Antibiotics yes, needle no
 
-The scenario that follows is constructed. Carmen Vasquez spent seven years as a neuroscience ICU nurse and has now worked ten months as an NP in the emergency department of a county hospital. At 13:25 on a Thursday she sees Derek Sutton, thirty-eight, who has had fever and a headache since the previous evening. Light hurts his eyes, and his neck is stiff. His temperature is 102.6°F and his heart rate 112. He is alert and oriented, with no rash and no focal deficit.
+Light hurts Derek Sutton's eyes, and his neck is stiff. He is thirty-eight and has had fever and a headache since the previous evening. Carmen Vasquez, ten months into her work as an NP in the emergency department of a county hospital, sees him at 13:25 on a Thursday. His temperature is 102.6°F and his heart rate 112. He is alert and oriented, with no rash and no focal deficit. Like every case in the book, this one never happened.
 
-She thinks first of bacterial meningitis and goes straight to Dr. Joanne Whitaker, the ED attending. Blood cultures are drawn at 13:40, and by 13:50 ceftriaxone and vancomycin are running. Dr. Whitaker will do the lumbar puncture, or LP, and at 14:05 Carmen goes back to explain it. Mr. Sutton hears her out, then shakes his head. "I'll take the antibiotics, and I'll stay as long as you want. But nobody's putting a needle in my back."
+She thinks first of bacterial meningitis and goes straight to Dr. Joanne Whitaker, the ED attending. Blood cultures are drawn at 13:40, and by 13:50 ceftriaxone and vancomycin are running, dexamethasone given with the first dose. Dr. Whitaker will do the lumbar puncture, or LP, and at 14:05 Carmen goes back to explain it. Mr. Sutton hears her out, then shakes his head. "I'll take the antibiotics, and I'll stay as long as you want. But nobody's putting a needle in my back."
 
 She talks it through with him and his wife for fifteen minutes, and Dr. Whitaker joins them at 14:10. He does not change his mind. At 14:30 he signs the hospital's refusal form, and at 14:40 Carmen calls the admitting hospitalist.
 
@@ -1085,17 +1091,17 @@ The form records a signature; the note records the conversation. A form signed i
 
 ## The note as written
 
-At 14:50, with two new patients waiting, Carmen writes:
+Carmen's note, signed at 14:50, runs to five short sentences:
 
 > 14:50. Pt refuses LP. Risks explained, pt verbalized understanding. Refusal form signed. Abx given. Admit to medicine.
 
-Every line is true, and the note answers neither half of the question. "Risks explained" does not say which risks: those of the needle, or those of going without it. "Pt verbalized understanding" is a conclusion with nothing inside it, the written version of the "Do you understand?" that the chapter on the capacity question warned against. There is no capacity finding and no alternative. "Refuses," standing alone, reads as obstinacy, and the reason he gave is gone. Nor does the plan say how the refusal changed it, or whether anyone means to ask him again.
+It answers neither half of the question. "Risks explained" does not say which risks: those of the needle, or those of going without it. "Pt verbalized understanding" is a conclusion with nothing inside it, the written version of the "Do you understand?" that the chapter on the capacity question warned against. There is no capacity finding and no alternative. "Refuses," standing alone, reads as obstinacy, and the reason he gave is gone. Nor does the plan say how the refusal changed it, or whether anyone means to ask him again.
 
 ## The rewrite
 
-Here is the same note, rewritten from what Carmen did and heard:
+The note Carmen could have signed at 14:50 holds only what she did and heard:
 
-> 14:50. Lumbar puncture declined; rest of plan accepted. Suspected bacterial meningitis (history and exam above). Blood cultures 13:40; ceftriaxone and vancomycin started 13:50. LP recommended to confirm the diagnosis, identify the organism and guide the choice and length of treatment; Dr. J. Whitaker, ED attending, to perform.
+> 14:50. Lumbar puncture declined; rest of plan accepted. Suspected bacterial meningitis (history and exam above). Blood cultures 13:40; ceftriaxone and vancomycin started 13:50, dexamethasone with the first dose. LP recommended to confirm the diagnosis, identify the organism and guide the choice and length of treatment; Dr. J. Whitaker, ED attending, to perform.
 >
 > Discussed 14:05–14:20 with patient and his wife, present at his request; Dr. Whitaker from 14:10. Explained in plain words: without the LP we may not learn whether this is bacterial, viral or something else, and could miss an infection that needs a different drug; he may stay on IV antibiotics longer than he needs; the longer antibiotics run, the less likely a later LP is to identify the germ. Risks of LP: headache afterward, sore back, rarely bleeding or infection; the needle goes in below where the spinal cord ends. Options offered: LP now, with medication for anxiety and extra numbing; LP later, knowing it will show less; no LP, with admission and a full course of IV antibiotics as if bacterial.
 >
@@ -1115,11 +1121,11 @@ The capacity line is short because the method lives elsewhere. The chapter on th
 
 ## The partial yes
 
-Mr. Sutton's no was partial, and most refusals are. A patient accepts the admission and declines the procedure, or takes the pills and declines the injection. The note keeps three things apart. The part accepted comes first, so that the no is not read as a refusal of care. The part refused is named exactly and as a refusal: "LP declined," not "LP deferred," which makes a refusal look like a plan. And the plan that remains says what the refusal changed. Without the LP, the antibiotics are no longer a bridge to a result; they are the treatment for a diagnosis that may never be confirmed, and the admitting team needs to know it.
+Mr. Sutton's no was partial, and many refusals are. A patient accepts the admission and declines the procedure, or takes the pills and declines the injection. The note keeps three things apart. The part accepted comes first, so that the no is not read as a refusal of care. The part refused is named exactly and as a refusal: "LP declined," not "LP deferred," which makes a refusal look like a plan. And the plan that remains says what the refusal changed. Without the LP, the antibiotics are no longer a bridge to a result; they are the treatment for a diagnosis that may never be confirmed, and the admitting team needs to know it.
 
 The orders have to agree with the note. An LP order left open after the refusal sits on the timeline as a procedure nobody performed, like the result nobody acted on in the chapter on closing the loop. Carmen cancels it with a reason and hands the refusal, with the plan to ask again, to the next clinician by name.
 
-A refusal also ages. The second scenario is constructed as well. Isabel Torres, a hospital medicine NP, cares for Martin Zielinski, seventy-six, admitted with pneumonia. After his first injection of heparin to prevent blood clots, he declines the rest: "Those shots leave bruises all over me." On the morning of day three, Isabel finds four doses marked refused in the medication record and no provider note that mentions them. Read after a clot, those entries would describe refusals nobody heard.
+A refusal also ages. Take a second case, no more real than the first: Isabel Torres, a hospital medicine NP, cares for Martin Zielinski, seventy-six, admitted with pneumonia. After his first injection of heparin to prevent blood clots, he declines the rest: "Those shots leave bruises all over me." On the morning of day three, Isabel finds four doses marked refused in the medication record and no provider note that mentions them. Read after a clot, those entries would describe refusals nobody heard.
 
 Her note that morning answers them: what he declined and why; that she told him a clot could form in his leg and travel to his lungs while he spends most of the day in bed; what he accepted instead, inflatable compression sleeves and walks in the hall, which she told him protect less; and that she will offer the injections again each morning and record each answer with its time. A refusal written once and never revisited reads as a decision the clinicians stopped thinking about.
 
@@ -1138,9 +1144,9 @@ Her note that morning answers them: what he declined and why; that she told him 
 
 ## A bag packed at 14:10
 
-The scenario that follows is constructed. Fiona Strand spent eight years in a hospital float pool and has now worked seven months as a hospital medicine NP. Dennis Quigley, sixty-six, was admitted on Monday at 22:00 with right lower lobe pneumonia, a temperature of 102.8°F and an oxygen saturation of 89%, and started on IV ceftriaxone and azithromycin. He came off oxygen on Tuesday evening, but at 06:00 on Wednesday his temperature was 100.9°F, and the team plans at least one more day of IV treatment.
+At 14:10 on a Wednesday, Dennis Quigley, sixty-six, is dressed, his bag is packed and he wants his IV out. He was admitted on Monday at 22:00 with right lower lobe pneumonia, a temperature of 102.8°F and an oxygen saturation of 89%, and started on IV ceftriaxone and azithromycin. He came off oxygen on Tuesday evening, but at 06:00 this morning his temperature was 100.9°F, and the team plans at least one more day of IV treatment. Nobody in this case is a real person.
 
-At 14:10 his nurse, Theo Nakamura, pages Fiona. Mr. Quigley is dressed, his bag is packed and he wants his IV out. His wife had a stroke last year and cannot be left alone, and the neighbor staying with her goes home tonight. "I'm not lying in this bed," he tells Theo, "while she's on the floor somewhere."
+His nurse, Silas Nakamura, pages Fiona Strand, a hospital medicine NP in her first year. Mr. Quigley's wife had a stroke last year and cannot be left alone, and the neighbor staying with her goes home tonight. "I'm not lying in this bed," he tells Silas, "while she's on the floor somewhere."
 
 Fiona sits with him from 14:20 to 14:45, and Dr. Vikram Mehta, the attending, joins them at 14:35. Mr. Quigley signs the hospital's form at 15:00 and walks out at 15:15.
 
@@ -1160,9 +1166,9 @@ The chapter on informed refusal showed what a form cannot record, and the note b
 
 ## The rewrite
 
-Here is the same departure, rewritten from what Fiona did and heard:
+Fiona's rewrite keeps to what she did and heard:
 
-> 15:30. Left hospital against medical advice at 15:15. His reason: "My wife can't be alone tonight. The neighbor goes home at six." Day 3 of IV ceftriaxone and azithromycin for RLL pneumonia. T 100.9°F at 06:00, 99.8°F at 14:00; HR 96; SpO2 93% RA at rest, 91% walking at 13:30 per RN T. Nakamura. Recommended: stay at least 24 more hours for IV antibiotics and monitoring until fever resolves.
+> 15:30. Left hospital against medical advice at 15:15. His reason: "My wife can't be alone tonight. The neighbor goes home at six." Day 3 of IV ceftriaxone and azithromycin for RLL pneumonia. T 100.9°F at 06:00, 99.8°F at 14:00; HR 96; SpO2 93% RA at rest, 91% walking at 13:30 per RN S. Nakamura. Recommended: stay at least 24 more hours for IV antibiotics and monitoring until fever resolves.
 >
 > Discussed 14:20–14:45; Dr. V. Mehta, attending, from 14:35. Explained in plain words: the infection is better but not controlled. If he leaves now, it is more likely to get worse, spread to his blood or lower his oxygen, and any of these can be life-threatening and can happen at home overnight. Offered: social worker to arrange overnight help for his wife so he could stay (declined: "She won't let a stranger in the house"). His account of the risk: "It's not finished, and it could get bad fast. If I can't breathe or I get mixed up, I come right back." Capacity for this decision: restated the risks in his own words, applies them to himself, reason consistent with his values, choice unchanged over 25 minutes. Has capacity at this time to decline further admission.
 >
@@ -1178,9 +1184,9 @@ Each part of the plan he leaves with also needs an owner, as the chapter on clos
 
 ## The patient who is simply gone
 
-If Mr. Quigley had refused to sign, the rewrite would change in one line: "Declined to sign form; witnessed by RN T. Nakamura." Some patients leave before any conversation can happen. The second scenario is also constructed. Omar Rahimi, a former interventional radiology nurse, is in his second year as an NP in a community emergency department. At 01:00 on a Sunday he sees Troy Underwood, forty-seven, whose chest pressure began at 23:00 and has faded. The ECG and the first troponin are normal, and a second troponin is due at 03:10. At 01:40 Omar tells him why: "A heart attack doesn't always show on the first test." At 02:40 his nurse, Nora Vance, finds the room empty.
+If Mr. Quigley had refused to sign, the rewrite would change in one line: "Declined to sign form; witnessed by RN S. Nakamura." Some patients leave before any conversation can happen, as in a second case, imaginary like the first. Tariq Rahimi, a former interventional radiology nurse, is in his second year as an NP in a community emergency department. At 01:00 on a Sunday he sees Troy Underwood, forty-seven, whose chest pressure began at 23:00 and has faded. The ECG and the first high-sensitivity troponin are normal, and a second troponin is due at 03:10. At 01:40 Tariq tells him why: "A heart attack doesn't always show on the first test." At 02:40 his nurse, Nora Vance, finds the room empty.
 
-Nobody discussed leaving with him, so there is no refusal to record, and the note must not invent one. "Left AMA" implies that the risks were explained and a choice was made. Your organization may use another label for a departure nobody witnessed, such as *eloped* or *left before treatment complete*. At 02:55 Omar writes:
+Nobody discussed leaving with him, so there is no refusal to record, and the note must not invent one. "Left AMA" implies that the risks were explained and a choice was made. Your organization may use another label for a departure nobody witnessed, such as *eloped* or *left before treatment complete*. At 02:55 Tariq writes:
 
 > 02:55. Not in room at 02:40, when RN N. Vance came to draw repeat troponin; last seen by her 02:05, vitals normal, no pain. Gown on bed; saline lock on bedside table, catheter intact. ED, restrooms and waiting room checked; security checked main exit, did not see him. Workup incomplete: ECG 01:05 and troponin 01:10 normal; repeat troponin due 03:10 not drawn. At 01:40, alert and oriented, told the plan and why the second test is needed. No discussion of leaving took place. 02:50 called cell on file: voicemail asked him to call or come back, no results stated. Dr. Alan Wexler, ED attending, informed 02:55; per department policy, no police welfare check requested: no concern about capacity. Will call again 03:30.
 >
@@ -1203,11 +1209,11 @@ The line about the discussion that never took place keeps the first entry honest
 
 ## A third episode in a month
 
-The scenario that follows is constructed. Lena Marchetti spent nine years as a hospice nurse and has now worked six months as an NP at an urgent care clinic with X-ray and an ECG machine, but no ultrasound and no same-night blood tests. At 19:50 on a Wednesday she sees Lydia Prentiss, forty-four, whose pain began at 18:15, half an hour after dinner. It is steady, under her breastbone and right ribs, and reaches around to her right shoulder blade. She has had two episodes like it this month, each gone within an hour or two.
+The pain began at 18:15 on a Wednesday, half an hour after dinner. At 19:50 Bettina Prentiss, forty-four, describes it to Paloma Marchetti, a cardiac rehabilitation nurse for eleven years and an NP for eight months, at an urgent care clinic with X-ray and an ECG machine, but no ultrasound and no same-night blood tests. The pain is steady, under her breastbone and right ribs, and reaches around to her right shoulder blade. She has had two episodes like it this month, each gone within an hour or two. The clinic and both women are inventions.
 
-Her temperature is 98.4°F and her heart rate 92. Her right upper abdomen is tender. When Lena presses under the ribs and asks for a deep breath, the breath does not catch, so Murphy sign, a pointer to an inflamed gallbladder, is absent. Her eyes are not yellow and her ECG is normal. After ketorolac and ondansetron at 20:05, her pain is down to 1 out of 10 by 20:50.
+Her temperature is 98.4°F and her heart rate 92. Her right upper abdomen is tender. When Paloma presses under the ribs and asks for a deep breath, the breath does not catch, so Murphy sign, a pointer to an inflamed gallbladder, is absent. Her eyes are not yellow and her ECG is normal. After ketorolac and ondansetron at 20:05, her pain is down to 1 out of 10 by 20:50.
 
-Lena thinks a gallstone is the likeliest cause, but tonight she can neither see the gallbladder nor check the blood. She offers the emergency department, which can do both. Ms. Prentiss chooses home and leaves with her husband at 21:05.
+Paloma thinks a gallstone is the likeliest cause, but tonight she can neither see the gallbladder nor check the blood. She offers the emergency department, which can do both. Ms. Prentiss chooses home and leaves with her husband at 21:05.
 
 ## What the record will be asked
 
@@ -1215,39 +1221,39 @@ A discharge is a disposition, in the sense of the chapter on the provider note, 
 
 ## The note as written
 
-At 21:15, with four patients waiting, Lena writes:
+Her note goes into the chart at 21:15:
 
 > 44F epigastric/RUQ pain after dinner, vomiting x1, similar episodes x2. RUQ tender. ECG nl. Toradol, Zofran, pain resolved. Dx: biliary colic. Outpt US. F/u PCP. Return to ED for worsening pain, fever or other concerns. Abdominal pain handout given.
 
-Every line is true, but the diagnosis reads as settled. That is the false certainty the chapter on what you don't know yet found in Erin Kowalski's first note, and here the discharge pays for it. A settled diagnosis seems to need no precautions of its own, so these could follow any visit. "Worsening pain" leaves a woman whose pain comes and goes to judge alone whether a recurrence counts, and "fever" has no number. "Outpt US" has nobody booking it, and "F/u PCP" has no name or date. The note also drops the emergency department she was offered, so home reads as the only option anyone considered.
+The diagnosis reads as settled. That is the false certainty the chapter on what you don't know yet found in Erin Kowalski's first note, and here the discharge pays for it. A settled diagnosis seems to need no precautions of its own, so these could follow any visit. "Worsening pain" leaves a woman whose pain comes and goes to judge alone whether a recurrence counts, and "fever" has no number. "Outpt US" has nobody booking it, and "F/u PCP" has no name or date. The note also drops the emergency department she was offered, so home reads as the only option anyone considered.
 
 ## The rewrite
 
-Here is the same visit, rewritten:
+With the open questions left in, the same visit reads:
 
 > 44F, steady epigastric and RUQ pain from 18:15, ~30 min after dinner, radiating to R scapula; vomited x1. Two similar episodes this month, each resolved within 1–2 h. Seen 19:50: T 98.4°F, HR 92, BP 136/82. RUQ tender, Murphy sign negative, no jaundice. ECG 19:58 normal. Urine hCG negative. Ketorolac IM, ondansetron 20:05. At 20:50: pain 1/10, HR 80, RUQ mildly tender, Murphy negative, tolerating water.
 >
-> Assessment: biliary colic most likely: post-meal RUQ pain radiating to R scapula, third episode, resolved in clinic. Not excluded tonight without labs or US: early acute cholecystitis, common bile duct stone, pancreatitis. Against them now: afebrile, Murphy negative, no jaundice, pain resolved. Would reconsider for pain that returns and persists, fever, jaundice or dark urine, or pain into the back with vomiting.
+> Assessment: biliary colic most likely: post-meal RUQ pain radiating to R scapula, third episode, resolved in clinic. Not excluded tonight without labs or US: early acute cholecystitis, common bile duct stone, pancreatitis. Against them now, though none excludes them: afebrile, Murphy negative, no jaundice, pain resolved. Would reconsider for pain that returns and persists, fever, jaundice or dark urine, or pain into the back with vomiting.
 >
-> Disposition: offered ED tonight for labs and US, likely several hours. Prefers home: "These always go away, and my husband's with me." Husband driving, with her overnight. Told a gallstone is the likeliest cause but cannot be confirmed tonight. Told to go to Riverside Hospital ED, not this clinic, for pain that returns and lasts more than 3 h, temperature 100.4°F or higher or shaking chills, yellow eyes or skin or dark urine, or pain through to the back with vomiting. Written copy given. Asked what would send her back: "If it lasts three hours, or I get a fever, or I turn yellow or my pee goes dark." Back pain with vomiting reviewed again; she repeated it.
+> Disposition: offered ED tonight for labs and US, likely several hours. Prefers home: "These always go away, and my husband's with me." Husband driving, with her overnight. Told a gallstone is the likeliest cause but cannot be confirmed tonight. Told to go to the hospital ED, not this clinic, for pain that returns and lasts more than 3 h, temperature 100.4°F or higher or shaking chills, yellow eyes or skin or dark urine, or pain through to the back with vomiting. Written copy given. Asked what would send her back: "If it lasts three hours, or I get a fever, or I turn yellow or my pee goes dark." Back pain with vomiting reviewed again; she repeated it.
 >
-> Follow-up: RUQ US ordered; patient to call imaging center (number on instructions) Thu after 07:00. Front desk to call her Thu 12:00 to confirm a date. PCP Dr. Anjali Varma, Hillcrest Family Medicine: EHR message sent 21:10 with findings and plan; patient to book visit after US. If no US or PCP visit by Fri, return here Fri for recheck; we will help arrange both.
+> Follow-up: RUQ US ordered; patient to call imaging center (number on instructions) Thu after 07:00. Front desk to call her Thu 12:00 to confirm a date. PCP Dr. Anjali Varma, family practice: EHR message sent 21:10 with findings and plan; patient to book visit after US. If no US or PCP visit by Fri, return here Fri for recheck; we will help arrange both.
 
 ## Precautions the assessment wrote
 
 Each instruction in the rewrite takes a diagnosis from the assessment and turns it into something Ms. Prentiss could notice at home. An inflamed gallbladder shows as pain that does not go away, or as fever. A stone in the bile duct shows as yellow eyes or dark urine, and pancreatitis as pain through to the back with vomiting. This is the sentence about what would change your mind, from the chapter on what you don't know yet, carried to the door. Without that sentence the precautions have nothing to be written from, which is how the first note ended up with a generic list.
 
-The printed handout can still go home with her, but it speaks to any patient with abdominal pain, while the note says what this one was told. "Return precautions given," inserted at a keystroke as the chapter on templates and the late addendum warned, names none of them. What she understood goes in her own words, together with the question that drew them out, quoted by the rules in the chapter on facts and quotes. Her first answer left out the back pain, and the rewrite records Lena going over it again. The record now shows an instruction that was checked, not assumed.
+The printed handout can still go home with her, but it speaks to any patient with abdominal pain, while the note says what this one was told. "Return precautions given," inserted at a keystroke as the chapter on templates and the late addendum warned, names none of them. What she understood goes in her own words, together with the question that drew them out, quoted by the rules in the chapter on facts and quotes. Her first answer left out the back pain, and the rewrite records Paloma going over it again. The record now shows an instruction that was checked, not assumed.
 
 ## A follow-up she can reach
 
-"F/u PCP" names a category, not a plan. A follow-up the record can defend has a who, a when and a way in. The who is a clinician or service by name, ideally one who knows the patient is coming, as Dr. Varma did from Lena's message that evening. The when is a date, or a deadline tied to an event. The way in is a phone number, the hours it answers and a means of getting there.
+"F/u PCP" names a category, not a plan. A follow-up the record can defend has a who, a when and a way in. The who is a clinician or service by name, ideally one who knows the patient is coming, as Dr. Varma did from Paloma's message that evening. The when is a date, or a deadline tied to an event. The way in is a phone number, the hours it answers and a means of getting there.
 
-The line most notes leave out covers the appointment that cannot be made. Imaging slots fill, and primary care offices can book weeks ahead. For a patient with no primary care clinician, "follow up with PCP" points nowhere, so the note names the clinic or service that will see them instead. Lena's last line gives the plan a floor: if neither the scan nor the visit happens by Friday, Ms. Prentiss comes back to the clinic that saw her. The front desk's Thursday call makes the clinic, not only the patient, responsible for noticing if no date comes.
+The line many notes leave out covers the appointment that cannot be made. Imaging slots fill, and primary care offices can book weeks ahead. For a patient with no primary care clinician, "follow up with PCP" points nowhere, so the note names the clinic or service that will see them instead. Paloma's last line gives the plan a floor: if neither the scan nor the visit happens by Friday, Ms. Prentiss comes back to the clinic that saw her. The front desk's Thursday call makes the clinic, not only the patient, responsible for noticing if no date comes.
 
 ## The patient who comes back
 
-The scenario continues, still constructed. The earliest ultrasound was Tuesday, and Dr. Varma's office had nothing before the following week. At 08:20 on Friday Ms. Prentiss returns for the recheck she was offered. Ingrid Tolliver, a former operating room nurse in her second year as an NP at the clinic, sees her at 08:40.
+The rest of the case is just as invented. The earliest ultrasound was Tuesday, and Dr. Varma's office had nothing before the following week. At 08:20 on Friday Ms. Prentiss returns for the recheck she was offered. Ingrid Tolliver, a former operating room nurse in her second year as an NP at the clinic, sees her at 08:40.
 
 With the board filling, a second note comes easily:
 
@@ -1255,13 +1261,13 @@ With the board filling, a second note comes easily:
 
 "Known" turns Wednesday's working diagnosis, which no test has confirmed, into a fact. "RUQ tender" was in Wednesday's note too, and "afebrile" hides a number. Side by side, the two notes show the same findings and opposite decisions. A reader who knows the ending will decide that Wednesday's was the mistake. Here is the note from what Ingrid did:
 
-> Return visit. Seen here Wed 19:50 by L. Marchetti, NP; that note read before seeing patient. Working diagnosis then biliary colic, unconfirmed: US not done, earliest slot Tue; no PCP visit yet. Since Wed: Thu 22:00 episode like the others, gone by 23:30. Today dull, constant RUQ ache since 06:30, unchanged after ibuprofen 400 mg at 07:00. Nausea, no vomiting, no back pain, urine normal color. Seen 08:40: T 100.1°F (98.4 Wed), HR 98 (80 Wed at discharge). RUQ tender, Murphy sign positive (negative Wed). No jaundice.
+> Return visit. Seen here Wed 19:50 by P. Marchetti, NP; that note read before seeing patient. Working diagnosis then biliary colic, unconfirmed: US not done, earliest slot Tue; no PCP visit yet. Since Wed: Thu 22:00 episode like the others, gone by 23:30. Today dull, constant RUQ ache since 06:30, unchanged after ibuprofen 400 mg at 07:00. Nausea, no vomiting, no back pain, urine normal color. Seen 08:40: T 100.1°F (98.4 Wed), HR 98 (80 Wed at discharge). RUQ tender, Murphy sign positive (negative Wed). No jaundice.
 >
-> Assessment: acute cholecystitis now likely, given changes since Wed: pain constant over 2 h and not easing, new Murphy sign, temperature up. Plan: Riverside ED now for labs and US. 08:55 history and findings given by phone to Dr. Felix Romano, ED attending. Husband driving; left 09:05. Told her the gallbladder may now be inflamed and needs testing today. She said: "So this one isn't like the others."
+> Assessment: acute cholecystitis now possible and not excluded, given changes since Wed: constant pain not easing after ibuprofen, new Murphy sign, temperature up. Plan: ED now for labs and US. 08:55 history and findings given by phone to Dr. Felix Romano, ED attending. Husband driving; left 09:05. Told her the gallbladder may now be inflamed and needs testing today. She said: "So this one isn't like the others."
 
-Reading Wednesday's note first gives Ingrid a baseline and the triggers Lena set. Taking the history again keeps Wednesday's diagnosis from becoming hers by default. The triggers are a place to start, not a checklist. A temperature of 100.1°F is below the threshold Ms. Prentiss was given, and Ingrid records it as a change anyway, because she is comparing Friday's patient with Wednesday's, not with a printed cutoff.
+Reading Wednesday's note first gives Ingrid a baseline and the triggers Paloma set. Taking the history again keeps Wednesday's diagnosis from becoming hers by default. The triggers are a place to start, not a checklist. A temperature of 100.1°F is below the threshold Ms. Prentiss was given, and Ingrid records it as a change anyway, because she is comparing Friday's patient with Wednesday's, not with a printed cutoff.
 
-The values in parentheses carry the second note. They show a patient who changed between visits, and that lets each decision be judged on its own terms: home for the woman described on Wednesday, the emergency department for the one described on Friday. Had nothing changed, the note would have to say so, and say why the same answer still fits a patient who came back. "Missed at prior visit" or "should have gone to the ED Wednesday" is a verdict on a colleague, which the chapter on facts and quotes keeps out of the chart. Wednesday's note stays as Lena wrote it, and Friday's note records Friday.
+The values in parentheses carry the second note. They show a patient who changed between visits, and that lets each decision be judged on its own terms: home for the woman described on Wednesday, the emergency department for the one described on Friday. Had nothing changed, the note would have to say so, and say why the same answer still fits a patient who came back. "Missed at prior visit" or "should have gone to the ED Wednesday" is a verdict on a colleague, which the chapter on facts and quotes keeps out of the chart. Wednesday's note stays as Paloma wrote it, and Friday's note records Friday.
 
 ## What the note must contain
 
@@ -1276,7 +1282,7 @@ The values in parentheses carry the second note. They show a patient who changed
 
 ## A pressure of 84 at 02:10
 
-The scenario that follows is constructed. Claire Yamada spent eight years as a burn unit nurse and has now worked five months as a hospital medicine NP on nights. At 19:00 on a Tuesday she takes over thirty-eight patients she has never met. One is Leonard Vogel, seventy-two, admitted at 14:30 by the day NP, Deepa Natarajan, with right pyelonephritis.
+Thirty-eight patients become Claire Yamada's at 19:00 on a Tuesday, five months into her work as a night hospital medicine NP, and she has never met any of them. One is Leonard Vogel, seventy-two, admitted at 14:30 by the day NP, Deepa Natarajan, with right pyelonephritis. The night is invented, and so is everyone in it.
 
 His sign-out takes ninety seconds. Ceftriaxone has run since 13:10, and blood cultures from the emergency department are pending. His blood pressure, Deepa says, is "a little soft, 104 over 62 at five, after a liter in the ED. Probably dry. I'm holding his lisinopril." A repeat lactate is due at 21:00; the first, at 12:50, was 2.4. "If his systolic drops under 90, give him 500 of LR and recheck." Claire writes it on her list.
 
@@ -1290,11 +1296,11 @@ The second part asks whether the decisions after the page were hers: did she see
 
 ## The note as written
 
-At 02:55, with two more pages waiting, Claire writes:
+Her 02:55 note, typed between pages, reads:
 
 > 02:55. Cross-cover. Called for hypotension. 72M w/ R pyelo on ceftriaxone, BCx pending. BP soft since admission, lisinopril held. Pt seen, mentating. Hypotension likely sepsis vs meds. 1 L LR bolus, labs. Dr. Mensah aware. Will monitor. Day team to f/u in AM.
 
-Nothing in it is false, and almost nothing in it is Claire's. "BP soft since admission, lisinopril held" is the sign-out in her voice, with no values and no source. It fits the day team's plan and the order Claire stopped at 02:30, but not the 21:00 dose, and beside a medication record that shows the dose, it reads like a clinician who never looked.
+Almost nothing in it is Claire's. "BP soft since admission, lisinopril held" is the sign-out in her voice, with no values and no source. It fits the day team's plan and the order Claire stopped at 02:30, but not the 21:00 dose, and beside a medication record that shows the dose, it reads like a clinician who never looked.
 
 "Pt seen, mentating" has no time and no findings, so the nurse's "sleepier" goes unanswered. "Sepsis vs meds" names two causes without saying which she favored, or why the bolus was twice the size the sign-out planned. "Dr. Mensah aware" does not say when, of what, or whether he saw the patient. "Will monitor" sets no limit, and "day team to f/u" hands nothing to anyone.
 
@@ -1351,7 +1357,7 @@ The entry tells Deepa what changed, what is still waiting and which decisions ar
 
 ## A peak flow held up to the camera
 
-The scenario that follows is constructed. Maya Thibodeaux spent seven years as an outpatient infusion nurse and has now worked ten months as an NP at Northgate Primary Care, where Thursday afternoons are video visits. At 14:40 she connects with Colleen Pacheco, forty-six, who has had asthma since childhood. A cold began on Saturday; since Monday she has been wheezing and short of breath, and since Tuesday she has needed her albuterol inhaler every four hours.
+Thursday afternoons are video visits at the primary care practice where Maya Thibodeaux, a postpartum nurse for six years, now works as an NP. At 14:40 she connects with Colleen Pacheco, forty-six, who has had asthma since childhood. A cold began on Saturday; since Monday she has been wheezing and short of breath, and since Tuesday she has needed her albuterol inhaler every four hours. This visit never happened, and neither did the night call later in the chapter.
 
 Maya cannot listen to her lungs, so she asks for what a camera can show. Ms. Pacheco talks in full sentences while she walks to the kitchen and back, lowers her collar, holds her pulse oximeter up to the lens, blows three times into her peak flow meter and turns the laptop toward her calves. At 14:58 Maya decides on home treatment and sets the point at which Ms. Pacheco must be seen in person.
 
@@ -1363,11 +1369,11 @@ The chapter on what a chart becomes after a bad outcome showed that the setting 
 
 ## The note as written
 
-At 15:10, with the next video visit waiting, Maya writes:
+Maya closes her note at 15:10, as the next patient connects:
 
 > Telehealth visit. 46F hx asthma, SOB and wheeze x 3 days after URI, albuterol q4h. Gen: NAD. Resp: no respiratory distress, lungs clear to auscultation bilaterally. SpO2 95%. A: asthma exacerbation. P: prednisone 40 mg daily x 5 days, continue albuterol. ED if worse.
 
-Every line but one is true, and Maya never typed that one. "Lungs clear to auscultation" came from the clinic's default exam. It is the finding nobody could have made, from the chapter on templates and the late addendum, and it costs the rest of the exam its weight, "NAD" included. "Telehealth" does not say whether there was a picture or only a voice, and "SpO2 95%" has no device and no source. "ED if worse" gives a woman with a peak flow meter on her counter no number to watch. Nor does anything say an in-person exam was weighed, so the lungs nobody heard read as an oversight rather than a limit.
+Maya never typed one of these lines. "Lungs clear to auscultation" came from the clinic's default exam. It is the finding nobody could have made, from the chapter on templates and the late addendum, and it costs the rest of the exam its weight, "NAD" included. "Telehealth" does not say whether there was a picture or only a voice, and "SpO2 95%" has no device and no source. "ED if worse" gives a woman with a peak flow meter on her counter no number to watch. Nor does anything say an in-person exam was weighed, so the lungs nobody heard read as an oversight rather than a limit.
 
 ## The rewrite
 
@@ -1399,7 +1405,7 @@ Who asked is not always the patient: a daughter writing through her father's pro
 
 ## The call after hours
 
-The second scenario is also constructed. Jonah Soto, a former wound care nurse in his second year as an NP, covers Northgate's after-hours line from home. At 23:02 on a Wednesday, paged by the answering service, he reaches Gail Rinaldi, thirty-nine, on day three of amoxicillin for strep throat, with an itchy rash since 21:00. The answering service keeps a log of its own, but the day team will open the chart, so at 23:20 Jonah writes a short note there:
+The night call belongs to Jonah Soto, a former wound care nurse in his second year as an NP, who covers the practice's after-hours line from home. At 23:02 on a Wednesday, paged by the answering service, he reaches Gail Rinaldi, thirty-nine, on day three of amoxicillin for strep throat, with an itchy rash since 21:00. The answering service keeps a log of its own, but the day team will open the chart, so at 23:20 Jonah writes a short note there:
 
 > After-hours call 23:02–23:12. Caller: patient, identity confirmed by name and date of birth. Chart reviewed remotely: amoxicillin started Mon by Dr. Miriam Voss for strep pharyngitis; no allergies listed. Itchy raised rash since 21:00. No swelling of lips, tongue or throat; no trouble breathing or swallowing; no faintness. By phone: full sentences, voice not hoarse. Assessment: hives, likely reaction to amoxicillin; no features of anaphylaxis. Advised: stop amoxicillin; cetirizine 10 mg tonight. 911 for swelling of lips, tongue or throat, trouble breathing or swallowing, or feeling faint. She repeated: "Stop the pills, take the Zyrtec, 911 if my mouth swells or I can't breathe." Amoxicillin (hives) added to allergy list. For Dr. Voss, inbox 23:20: choose replacement antibiotic, call patient Thu by 10:00. Patient told to expect the call.
 
@@ -1425,7 +1431,7 @@ Ask your organization whether a remote visit needs its own consent, whether a ve
 
 ## A positive test and two empty slots
 
-The scenario that follows is constructed. Nina Sandoval spent eight years as a public health nurse and has now worked eleven months as an NP at Maplewood Family Practice. At her annual visit on March 4, Marlene Ostrowski, fifty-eight, takes home a fecal immunochemical test, or FIT: a stool test for blood too slight to see, used to screen for colorectal cancer. On Tuesday, March 18, the result posts: positive.
+At her annual visit on March 4, Marlene Ostrowski, fifty-eight, takes home a fecal immunochemical test, or FIT: a stool test for blood too slight to see, used to screen for colorectal cancer. Nina Sandoval, who ordered it, is a former public health nurse in her first year as an NP at a family practice. On Tuesday, March 18, the result posts: positive. The practice and everyone in this case exist only on these pages.
 
 At 16:10 Nina reaches her at home. A positive test does not mean cancer, she explains, but the blood has a source, and a colonoscopy is how it is found. Ms. Ostrowski wants to talk it through in person before agreeing to anything, so a visit is booked for March 25 at 10:00. She does not come. The clinic rebooks her for April 8 at 09:20, and she misses that visit too.
 
@@ -1447,7 +1453,7 @@ Between patients, Nina writes two entries:
 
 ## The rewrite
 
-Here are the same weeks, written from what Nina did and heard:
+The same weeks, written from what Nina did and heard:
 
 > Tue 3/18, 16:25. Telephone encounter. FIT from 3/4 visit, resulted 09:40 today: positive. Called home 16:10, reached patient, identity confirmed by date of birth. Told in plain words: the test found hidden blood in her stool; it does not mean cancer, but the source must be found, and colonoscopy is how; polyps and early cancers found this way are easier to treat. She asked to discuss in person before any referral: "I'm not agreeing to a scope over the phone." Visit booked Tue 3/25 10:00 for that discussion. She said: "So it may be nothing, but only the scope can tell." Added to problem list: positive FIT, colonoscopy not yet done.
 >
@@ -1457,7 +1463,7 @@ Here are the same weeks, written from what Nina did and heard:
 >
 > Fri 4/11, 15:40. No call; portal shows message unread. Letter sent by certified mail per clinic policy, copy in chart: a test result needs follow-up; waiting could let a treatable problem become harder to treat; my direct line and clinic hours. Chart alert: positive FIT, colonoscopy not done; route any contact to me.
 >
-> Wed 4/16, 12:50. Telephone encounter. Patient called 12:30. Why she missed both visits: "I kept putting it off. I was scared of what they'd find." Explained again why colonoscopy is needed and what it involves; questions answered. Agrees to referral: "Okay. Better to know." Referral sent 12:45 to Dr. Samuel Tran, Lakeside Gastroenterology, marked positive FIT. Will check scheduling by 5/14.
+> Wed 4/16, 12:50. Telephone encounter. Patient called 12:30. Why she missed both visits: "I kept putting it off. I was scared of what they'd find." Explained again why colonoscopy is needed and what it involves; questions answered. Agrees to referral: "Okay. Better to know." Referral sent 12:45 to Dr. Samuel Tran, gastroenterology, marked positive FIT. Will check scheduling by 5/14.
 
 ## Outreach the record can count
 
@@ -1471,17 +1477,17 @@ Had she never called, the April 11 entry could stand as the last step policy req
 
 ## The referral that never comes back
 
-The scenario continues, still constructed. On May 14, the date Nina set, the referral still reads "sent" in the clinic's system, with no appointment beside it. She calls Lakeside, then the patient, and writes:
+The invented case goes on. On May 14, the date Nina set, the referral still reads "sent" in the clinic's system, with no appointment beside it. She calls the gastroenterology practice, then the patient, and writes:
 
-> Wed 5/14, 11:40. Referral check, positive FIT (referral sent 4/16). No appointment in system. 11:05 called Lakeside Gastroenterology: referral received 4/17; voicemails left for patient 4/18 and 4/25, no reply. 11:20 called patient: "I thought they'd call me again." Lakeside's scheduling number given; she will call today.
+> Wed 5/14, 11:40. Referral check, positive FIT (referral sent 4/16). No appointment in system. 11:05 called GI practice: referral received 4/17; voicemails left for patient 4/18 and 4/25, no reply. 11:20 called patient: "I thought they'd call me again." GI practice's scheduling number given; she will call today.
 >
-> Addendum, 16:40. Lakeside confirms colonoscopy booked Tue 6/10. Will check for report by 6/24.
+> Addendum, 16:40. GI practice confirms colonoscopy booked Tue 6/10. Will check for report by 6/24.
 >
-> Tue 6/24, 09:40. Colonoscopy report not in chart. 09:10 called Lakeside: done 6/10; report sent, received 09:30 and reviewed. Two polyps removed; pathology pending. Per Lakeside, Dr. Tran's office will give patient the pathology result and set her next colonoscopy; copy to be sent here. Problem list updated: colonoscopy 6/10, pathology pending at Lakeside.
+> Tue 6/24, 09:40. Colonoscopy report not in chart. 09:10 called GI practice: done 6/10; report sent, received 09:30 and reviewed. Two polyps removed; pathology pending. Per GI practice, Dr. Tran's office will give patient the pathology result and set her next colonoscopy; copy to be sent here. Problem list updated: colonoscopy 6/10, pathology pending at GI practice.
 
 A referral marked "sent" records an order, not an appointment, and an appointment is not a result. Nina's two checks sit where referrals stall: the scheduling that never happens and the report that never comes back. Each was dated at the step before it, so neither depended on her memory. Who tracks referrals is your organization's decision: a referral coordinator in some, the ordering clinician in others. Ask who it is where you work, and what happens when one stalls.
 
-Ownership follows the rule from the chapter on closing the loop on the abnormal result: it passes only when the next clinician knows and accepts. Until the colonoscopy was done and its report read, the question raised by the test Nina ordered was hers. On June 24 Dr. Tran's office took on the next step, and the entry names it. Nothing in her entries faults Lakeside or the patient; the unanswered voicemails and the missing report appear as facts with times.
+Ownership follows the rule from the chapter on closing the loop on the abnormal result: it passes only when the next clinician knows and accepts. Until the colonoscopy was done and its report read, the question raised by the test Nina ordered was hers. On June 24 Dr. Tran's office took on the next step, and the entry names it. Nothing in her entries faults the GI practice or the patient; the unanswered voicemails and the missing report appear as facts with times.
 
 ## The patient who says no
 
@@ -1504,9 +1510,9 @@ The opposite mistake is writing "declined colonoscopy" for a patient who never a
 
 ## A glucose of 48 at 05:50
 
-The scenario that follows is constructed. Hazel Ventura spent ten years as a medical ICU nurse and has now worked eight months as a hospital medicine NP. Edith Nyberg, seventy-eight, was admitted on a Monday in February with a flare of COPD, and the prednisone for it has pushed her glucose above 300. At 16:30 on Tuesday Hazel orders insulin glargine, a long-acting insulin, 14 units at 21:00.
+Edith Nyberg's fingerstick glucose is 48 when the night nurse, Joel Ramsey, checks it at 05:50 on a Wednesday in February; she is sweaty and slow to answer, and he treats her under the hospital's hypoglycemia protocol. Seventy-eight, she was admitted on Monday with a flare of COPD, and the prednisone for it has pushed her glucose above 300. At 16:30 on Tuesday, Hazel Ventura, a hospital medicine NP, ordered insulin glargine, a long-acting insulin, 14 units at 21:00. Every part of this case is imagined.
 
-At 05:50 on Wednesday the night nurse, Joel Ramsey, finds her sweaty and slow to answer, with a fingerstick glucose of 48, and treats her under the hospital's hypoglycemia protocol. At 07:05, before rounds, Hazel finds glargine 40 units in the medication record, documented at 21:10. She sees Mrs. Nyberg at 07:15, and at 10:45 she and the attending, Dr. Irene Sato, sit down with Mrs. Nyberg and her daughter, Linda.
+At 07:05, before rounds, Hazel finds glargine 40 units in the medication record, documented at 21:10. She sees Mrs. Nyberg at 07:15, and at 10:45 she and the attending, Dr. Irene Sato, sit down with Mrs. Nyberg and her daughter, Linda.
 
 ## What the record will be asked
 
@@ -1514,21 +1520,21 @@ Most notes in this book were written before anyone knew the ending. This one is 
 
 ## The note as written
 
-At 11:30, between admissions, Hazel writes one entry:
+Hazel's one entry, written at 11:30 between admissions:
 
-> 11:30. Pt received wrong dose of Lantus last night (40u instead of 14u) due to RN error. Hypoglycemic overnight, treated by RN. Now stable. D10 started, will monitor BG. Dr. Sato aware. Incident report filed, risk mgmt notified. Pt and daughter informed; daughter very upset. Apologized.
+> 11:30. Pt received wrong dose of glargine last night (40u instead of 14u) due to RN error. Hypoglycemic overnight, treated by RN. Now stable. D10 started, will monitor BG. Dr. Sato aware. Incident report filed, risk mgmt notified. Pt and daughter informed; daughter very upset. Apologized.
 
 The numbers are right, and little else is. "Due to RN error" names a cause Hazel did not witness. Finding out how 40 units came to be given is the review's job, and the chapter on facts and quotes keeps blame of colleagues out of the chart. The report and the call to risk management appear in the one document that should never mention them. "Now stable" has no values, and "will monitor BG" sets no frequency, limit or end for an insulin that keeps working through the day. "Daughter very upset" is a label, and both "informed" and "apologized" record that a conversation took place, but not a word of it.
 
 ## The rewrite
 
-Here are the same morning's entries, written from what Hazel found, did and said:
+What Hazel found, did and said that morning, entry by entry:
 
 > 07:55. Hypoglycemia overnight. Per medication record, insulin glargine 40 units given 21:10 Tue; ordered dose 14 units. Per RN Joel Ramsey: at 05:50 diaphoretic, slow to answer, glucose 48; IV dextrose 05:55 per protocol; glucose 132 at 06:10, 96 at 07:00. Seen 07:15: awake, oriented x3, answers promptly, skin dry, no focal deficit. HR 88, BP 138/76. Glucose 84 at 07:30.
 >
-> Assessment: hypoglycemia after glargine 40 units, nearly three times the ordered dose. Glargine acts for about a day, so the risk of further lows lasts until tonight; glucose already falling after dextrose. No neurologic deficit.
+> Assessment: hypoglycemia after glargine 40 units, nearly three times the ordered dose. Glargine acts for about a day, and can act longer after an overdose or with reduced kidney function, so the risk of further lows lasts at least until tonight; glucose already falling after dextrose. No neurologic deficit.
 >
-> Plan: dextrose 10% IV at 07:45. Glucose hourly until 22:00; RN to call me, or night coverage after 19:00, for glucose below 70 or any change in alertness. Tonight's glargine on hold; decision by 18:00 from today's readings. 07:35 Dr. Irene Sato, attending, by phone: told findings and plan, agrees; will see patient by 09:00. Pharmacy asked 07:50 to review insulin orders.
+> Plan: dextrose 10% IV at 07:45. Glucose hourly until 22:00, then as the readings dictate; BMP with potassium this morning. RN to call me, or night coverage after 19:00, for glucose below 70 or any change in alertness. Tonight's glargine on hold; decision by 18:00 from today's readings. 07:35 Dr. Irene Sato, attending, by phone: told findings and plan, agrees; will see patient by 09:00. Pharmacy asked 07:50 to review insulin orders.
 >
 > 11:10. Discussion 10:45–11:05 with patient and daughter Linda Nyberg, present at patient's request; Dr. Sato and this NP. Dr. Sato explained: last night she received more of her long-acting insulin than was ordered, 40 units instead of 14; this caused the low sugar at 05:50, which was treated. Because this insulin lasts about a day, she will have a sugar drip and hourly checks until tonight, and tonight's dose is on hold. The hospital is reviewing how it happened. Patient asked: "Could it have hurt my brain?" I answered: no sign of that on exam; alertness checked with each sugar. Dr. Sato to update patient and daughter by 16:00; daughter's cell confirmed. Patient said: "So it's the extra insulin, and you're watching my sugar till tonight."
 
@@ -1536,27 +1542,27 @@ Here are the same morning's entries, written from what Hazel found, did and said
 
 The rewrite never uses the word *error*, and it hides nothing. The dose ordered and the dose given, each with its source, say exactly what happened. The clinical cause of the hypoglycemia belongs in the note; how the overdose came about belongs to the review. If the wrong dose had been in Hazel's own order, the rule would hold: the order as written, the dose given, no verdict. The rest is the method of every earlier scenario: values instead of "stable," and an assessment that says how long the danger lasts, which sets the checks.
 
-**Disclosure** is telling the patient, or the person who decides for them, that something unexpected happened in their care, what it means for them and what is being done. The 11:10 entry records the conversation the weak note only named, with the patient's questions in her own words. It states only what was known at 11:05; a guess at the cause, later proven wrong, would stay in the chart. Many organizations have a disclosure policy that sets who leads the conversation and how soon it happens, so read yours before your first event. Laws on apologies differ by state, and so does what they protect; ask your risk manager whether and how an expression of regret is recorded.
+**Disclosure of an adverse event** is telling the patient, or the person who decides for them, that something unexpected happened in their care, what it means for them and what is being done. It is not the same as releasing health information under privacy law. The 11:10 entry records the conversation the weak note only named, with the patient's questions in her own words. It states only what was known at 11:05; a guess at the cause, later proven wrong, would stay in the chart. Many organizations have a disclosure policy that sets who leads the conversation and how soon it happens, so read yours before your first event. Laws on apologies differ by state, and so does what they protect; ask your risk manager whether and how an expression of regret is recorded.
 
 ## What the incident report carries
 
 The chapter on facts and quotes explained why the chart never names the incident report, and the call to risk management stays out for the same reason. The report is written for the organization's safety review, and it carries what the chart leaves out. That means how the event came to light, and anything Hazel saw or was told that may have contributed, such as a look-alike pen or an interruption the night nurse described. It sticks to facts too: depending on how it is handled and on the law where you work, it may travel beyond the safety team.
 
-Three habits keep the two documents apart and consistent. The clinical facts go in the chart even when the report repeats them, because the chart is the record of the patient's care and the report is not. The times and values match, so no reader has to ask which one is true. And the report stays in its own channel, with no copy in the chart or among your own papers; your policy says who files it and how soon.
+Three habits keep the two documents apart and consistent. The clinical facts go in the chart even when the report repeats them, because the chart is the record of the patient's care and the report is not. The times and values match, so no reader has to ask which one is true. And the report stays in its own channel, with no copy in the chart; your policy says who files it and how soon. Ask your risk manager what to do with your own copies.
 
 ## When the request arrives
 
-The scenario continues, still constructed. In June, Hazel's risk manager calls: an attorney for Mrs. Nyberg has asked for her complete record, and a copy is on its way to Hazel. A **records request** is a request for copies of the chart, made by the patient or someone acting for them, often an attorney; health information management usually answers it. Reading her copy, Hazel sees that the bedside recheck she did at 15:30, with Linda in the room, appears nowhere. She remembers it clearly and wants to add one line.
+In June, Hazel's risk manager calls: an attorney for Mrs. Nyberg has asked for her complete record, and a copy is on its way to Hazel. A **records request** is a request for copies of the chart, made by the patient or someone acting for them, often an attorney; health information management usually answers it. Reading her copy, Hazel sees that the bedside recheck she did at 15:30, with Linda in the room, appears nowhere. She remembers it clearly and wants to add one line.
 
-She should not, and neither should you. Once a request, a complaint or a claim has arrived, add nothing to the chart about the care in question and change nothing in it. The chapter on templates, copy-forward and the late addendum gives the reasons. The audit trail dates every entry, a line written in June about February reads as a record built for an argument, and an altered record can be treated as spoliation. On the afternoon of the recheck, a late entry would have been ordinary.
+Most organizations would say no. Once a complaint, a claim or an attorney's request has arrived, add nothing to the chart about the care in question and change nothing in it. The duty to leave the record alone can begin earlier, when a claim is reasonably expected, so ask risk management before you add anything about an event like this one. The chapter on templates, copy-forward and the late addendum gives the reasons. The audit trail dates every entry, a line written in June about February reads as a record built for an argument, and an altered record can be treated as spoliation. On the afternoon of the recheck, a late entry, labeled and written the same day, would have been ordinary.
 
-What Hazel remembers goes to risk management or to the attorney handling the matter, in whatever form they ask for. The record is also larger than her notes: the hourly glucose values are already in it. If the patient is still in your care, chart today's care as you always would; the rule covers the past, not the present. And when you need to reread the chart, ask risk management how rather than opening it on your own: the audit trail logs every look.
+What Hazel remembers goes to risk management or to the attorney handling the matter, in whatever form they ask for. The record is also larger than her notes: the hourly glucose values are already in it. If the patient is still in your care, chart today's care as you always would; the rule covers the past, not the present. And when you need to reread the chart, ask risk management how rather than opening it on your own: in most systems the audit trail records who opened the chart and when.
 
-A complaint to your licensing board arrives as a letter, often with a deadline. A **subpoena** is a legal demand, also with a deadline, to produce records or to appear and testify. Don't ignore either one, and don't answer either one alone. Do not hand over records yourself, and do not discuss the matter with the patient, the family or their attorney. Whatever arrives, call your organization's risk manager the same day, and your own professional liability insurer if you carry a policy. Many policies require prompt notice of a claim, and some of an event that may become one; read the notice section of yours now.
+A complaint to your licensing board arrives as a letter, often with a deadline. A **subpoena** is a legal demand, also with a deadline, to produce records or to appear and testify. Most organizations ask four things of you: ignore neither, answer neither alone, do not hand over records yourself, and do not discuss the complaint or the claim with the patient, the family or their attorney. If you are still caring for the patient, keep answering questions about their care, and ask risk management what to say about the event. Whatever arrives, call your organization's risk manager the same day, and your own professional liability insurer if you carry a policy. Many policies require prompt notice of a claim, and some of an event that may become one; read the notice section of yours now.
 
 ## What to ask, and whom
 
-None of these calls decides anything, and nobody can promise you how the matter will end. Ask risk management what has arrived and from whom, what to say if the patient, the family or a colleague raises the event, and whether the organization's coverage extends to you. Ask your insurer what your policy covers, from a subpoena to a board matter, as the chapter on where claims begin advised. Ask how soon notice is due, whether an attorney will be assigned and whether a settlement would need your consent.
+None of these calls decides anything, and nobody can promise you how the matter will end. Ask risk management what has arrived and from whom, whether the organization's coverage extends to you, what you may say, to whom, and whether you need your own attorney. Ask your insurer what your policy covers, from a subpoena to a board matter, as the chapter on where claims begin advised. Ask how soon notice is due, whether an attorney will be assigned and whether a settlement would need your consent.
 
 Ask the attorney, first, whom they represent: you, your employer or both. If those interests could diverge, ask whether you need counsel of your own. Then ask about deadlines, what happens next and your part in it, whom you may talk to about the event, and whether and how to write down what you remember.
 
@@ -1574,23 +1580,67 @@ Ask the attorney, first, whom they represent: you, your employer or both. If tho
 
 ## Models, not text to paste
 
-The pairs follow the order of the scenario chapters, and each heading is the title of the chapter that shows the full note and its reasoning. The weak line is what a busy, competent NP might write. The defensible line is shortened from the rewrite of the same encounter, and the reason says in a line why it holds up better.
+The pairs follow the order of the chapters, and each heading is the title of the chapter that shows the full note and its reasoning. The weak line is what a busy, competent NP might write. The defensible line is shortened from the rewrite of the same encounter, and the reason says in a line why it holds up better. "Defensible" here means the note shows the reasoning; it is not a legal result.
 
-The phrases are models to rewrite, never text to paste. Their times, values, names and quotations belong to constructed patients. A line pasted without the care behind it becomes what the chapter on templates and the late addendum warned against: a sentence you sign without having written it. Keep the shape and write it in your own words, about your own patient.
+The phrases are models to rewrite, never text to paste. Their times, values, doses, thresholds, names and quotations belong to constructed patients. A line pasted without the care behind it becomes what the chapter on templates and the late addendum warned against: a sentence you sign without having written it. Keep the shape and write it in your own words, about your own patient.
+
+## Writing the Differential You Actually Ran
+
+**Weak:** PE unlikely.
+
+**Defensible:** PE considered: judged low risk on clinical grounds, then PERC applied, none of 8 criteria present (age 33, HR 84, SpO2 98% RA; no hemoptysis, hormone use, prior VTE, unilateral leg swelling, or recent surgery or trauma). No further testing for PE.
+
+**Why:** The danger has reasons of its own, and the rule shows its inputs after the clinical judgment it requires.
+
+## What You Don't Know Yet, Written Plainly
+
+**Weak:** r/o appendicitis. Clinical correlation recommended.
+
+**Defensible:** Early appendicitis not excluded: at 6 hrs the exam may not yet show it. Would reconsider if pain localizes to the RLQ, becomes constant or hurts with walking, or if fever develops.
+
+**Why:** "R/o" can mean open or excluded, and in a provider note the correlating clinician is you; say what would change your mind.
+
+**Weak:** Risks, benefits and alternatives discussed.
+
+**Defensible:** Options discussed: (1) ED now for blood work and imaging, likely several hours, may show nothing; (2) home, recheck here 09:00 tomorrow, accepting that appendicitis, if present, would be found later. Patient prefers 2, to avoid a night in the ED; roommate home overnight, has a car.
+
+**Why:** The options as offered, what each costs and the patient's reason; the phrase would fit any patient.
+
+## Facts, Quotes, and What Never Goes in the Chart
+
+**Weak:** Hx noncompliance, off metformin for months. Drug-seeking, demanding IV Dilaudid.
+
+**Defensible:** Has not taken metformin for ~4 months; states it caused stomach upset. Reports L leg pain 8/10, "the pills don't touch it"; asked for IV hydromorphone by name. Last oxycodone 5 mg at 04:10.
+
+**Why:** A behavior with its reason, and the exact request, replace a label that ends the asking and a motive nobody can observe.
+
+## Templates, Copy-Forward, and the Late Addendum
+
+**Weak** (copied forward): Feels better, breathing easier, slept well. Exam: alert and oriented x3, NAD.
+
+**Defensible:** Seen 08:45. RN charted new confusion at 05:30. Drowsy, rouses to voice, oriented to self only; oriented x3 on my exam yesterday.
+
+**Why:** Today's findings, written fresh, with the comparison to yesterday that copy-forward erases.
+
+**Weak** (signed 09:24): Plan: continue IV furosemide 40 mg BID.
+
+**Defensible:** Correction, 10:15, to progress note signed 09:24 today. Subjective, exam, assessment and plan were carried forward in error from yesterday's note. IV furosemide held 08:55, not continued.
+
+**Why:** The error stays readable, and a correction, never a silent edit, says who changed it, when and why.
+
+**Weak** (written at 15:50): 11:30. Awake, oriented to person and place, not date. Plan unchanged.
+
+**Defensible:** Late entry, written 15:50, for bedside reassessment at 11:30. Delayed by two admissions. At 11:30: awake, oriented to person and place, not date.
+
+**Why:** Labeled, with both times and a reason, a late entry is ordinary; disguised as contemporaneous, it is not.
 
 ## The Test You Order and the Test You Don't
 
 **Weak:** No indication for CT head.
 
-**Defensible:** Intracranial injury considered. Canadian CT Head Rule applies (minor head injury with witnessed LOC, age 16 or over, no anticoagulant); none of its 7 criteria present. CT not required by the rule.
+**Defensible:** Intracranial injury considered. Canadian CT Head Rule applies (minor head injury with witnessed LOC, age 16 or over, no anticoagulant); none of its 7 criteria present: GCS 15 at 10:20, 2.5 h after injury; no sign of open, depressed or basal skull fracture; no vomiting; age 38; no amnesia before the fall; mechanism a ground-level slip. CT not required by the rule.
 
-**Why:** The test weighed is named, with the rule, why the patient fell inside it and an output stated no larger than it is.
-
-**Weak:** R wrist pain, XR neg. F/u 10 days.
-
-**Defensible:** R wrist: possible scaphoid fracture, which can be occult on the first X-ray. Recheck booked Fri 09:00; repeat scaphoid views ordered today for that visit.
-
-**Why:** The test left for later has a reason, an owner and a date.
+**Why:** The test weighed is named, with the rule, why the patient fell inside it, each criterion with its value and time, and an output stated no larger than it is.
 
 ## Closing the Loop on the Abnormal Result
 
@@ -1599,12 +1649,6 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 **Defensible:** 17:20 called home, reached patient, identity confirmed with date of birth. Told him his potassium is high enough to disturb his heart rhythm and he needs the ED now.
 
 **Why:** The note shows which call reached him, and "advised ED" becomes go now, with the reason he heard.
-
-**Weak:** Incidental RLL nodule, f/u PCP.
-
-**Defensible:** EHR message to Dr. Ruth Lindqvist, PCP, naming the nodule and the recommended scan; her reply 11:05: "Got it, will order at his follow-up visit."
-
-**Why:** Ownership passes only when the next clinician knows and accepts; her reply records that moment.
 
 ## The Delayed Scan and the Bed That Never Opens
 
@@ -1622,12 +1666,6 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 ## The Consultant Who Never Comes
 
-**Weak** (the page): Please call 4 East.
-
-**Defensible:** "Urgent. 76F, 4 East bed 12, cold pulseless L foot since 13:15, prior SFA stent, heparin ordered. Need evaluation for revascularization. Call NP Holloway x4417."
-
-**Why:** The finding, its onset and the question travel with the request, and the note keeps the words.
-
 **Weak:** Vascular paged multiple times without response.
 
 **Defensible:** 14:20. No callback. Operator confirmed Dr. Kirby on call, same pager; second page, same text.
@@ -1638,7 +1676,7 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Weak:** Rx oxycodone 5 mg q6h prn pain #10.
 
-**Defensible:** Oxycodone 5 mg, 1 tab up to every 6 h, only for severe pain the scheduled drugs do not relieve; #10, no refills, enough until ortho visit. Tramadol not used: serotonin risk with sertraline.
+**Defensible:** Oxycodone 5 mg, 1 tab up to every 6 h, only for severe pain the scheduled drugs do not relieve; #10, no refills, enough until ortho visit. Tramadol not used: serotonin syndrome and seizure risk with sertraline.
 
 **Why:** The as-needed dose has a threshold, the quantity an end, and the drug set aside a reason.
 
@@ -1670,12 +1708,6 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Why:** Observed behavior, and the threat once in its exact words, let a reader judge the response.
 
-**Weak:** Dr. Hale overruled my recommendation to admit.
-
-**Defensible:** Admission for telemetry considered: no warning before the faint; ECG first-degree AV block, not present on 2022 ECG. Dr. Hale examined patient 15:30. His assessment: orthostatic syncope.
-
-**Why:** The option you favored keeps its findings, the decision its owner, and the conflict stays out.
-
 ## The Capacity Question, Decision by Decision
 
 **Weak:** Confused, A&O x1. Lacks capacity.
@@ -1686,9 +1718,9 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Weak:** Pt A&O x3 today, has capacity.
 
-**Defensible:** Has capacity at this time to decline EGD; deficits found at 17:05 not present.
+**Defensible:** 07:35. Understanding: "You put a camera down my throat to find the bleeding and maybe stop it." Reasoning: "My wife choked on one of those tubes and was never right after." Has capacity at this time to decline EGD; deficits found at 17:05 not present.
 
-**Why:** His answers on each ability, set against the evening's deficits, show a patient who changed, not a clinician who changed her mind.
+**Why:** His own answers, set against the evening's deficits, show a patient who changed, not a clinician who changed her mind.
 
 ## Informed Refusal and the Partial Yes
 
@@ -1722,15 +1754,9 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Weak:** Return to ED for worsening pain, fever or other concerns.
 
-**Defensible:** Told to go to Riverside Hospital ED, not this clinic, for pain that returns and lasts more than 3 h, temperature 100.4°F or higher or shaking chills, yellow eyes or skin or dark urine, or pain through to the back with vomiting.
+**Defensible:** Told to go to the hospital ED, not this clinic, for pain that returns and lasts more than 3 h, temperature 100.4°F or higher or shaking chills, yellow eyes or skin or dark urine, or pain through to the back with vomiting.
 
 **Why:** Each danger the assessment left open becomes a sign with a threshold, and the place named will be open.
-
-**Weak:** F/u PCP.
-
-**Defensible:** PCP Dr. Anjali Varma: EHR message sent 21:10 with findings and plan. If no US or PCP visit by Fri, return here Fri for recheck.
-
-**Why:** A named clinician who knows she is coming, and a floor for the appointment that cannot be made.
 
 ## Handoffs, Cross-Cover, and the Night Call
 
@@ -1740,12 +1766,6 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Why:** What you were told keeps its source and time, apart from what you checked.
 
-**Weak:** Hypotension likely sepsis vs meds.
-
-**Defensible:** Worsening sepsis from R kidney most likely; lisinopril at 21:00 likely contributing. Fever and drowsiness new since sign-out, so bolus larger than the 500 mL planned.
-
-**Why:** The assessment says which cause leads, and the change to the inherited plan reads as a decision, not a deviation.
-
 ## The Telehealth Visit and the Portal Message
 
 **Weak:** Telehealth visit. Lungs clear to auscultation bilaterally.
@@ -1754,29 +1774,17 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 **Why:** The exam is sorted by source, and the camera's limit replaces a finding nobody could have made.
 
-**Weak:** ED if worse.
-
-**Defensible:** ED or 911 for: cannot finish a sentence, blue lips, oximeter below 92%, peak flow below 215, or albuterol relief under 2 h.
-
-**Why:** The thresholds are numbers she can read on her own devices.
-
 ## Missed Visits and Referrals That Go Nowhere
-
-**Weak:** Pt no-show x2. Noncompliant with f/u.
-
-**Defensible:** No-show, 10:00 visit for positive FIT (see 3/18). 10:45 called cell: no answer; voicemail asked her to call clinic, result not stated.
-
-**Why:** The missed visit is noticed, tied to its result and pursued; "noncompliant" is a verdict on a reason nobody recorded.
 
 **Weak:** Referral sent.
 
-**Defensible:** Referral sent 12:45 to Dr. Samuel Tran, Lakeside Gastroenterology, marked positive FIT. Will check scheduling by 5/14.
+**Defensible:** Referral sent 12:45 to Dr. Samuel Tran, gastroenterology, marked positive FIT. Will check scheduling by 5/14.
 
 **Why:** "Sent" records an order, not an appointment; a dated check keeps it from depending on memory.
 
 ## The Adverse Event and the Records Request
 
-**Weak:** Pt received wrong dose of Lantus last night due to RN error.
+**Weak:** Pt received wrong dose of glargine last night due to RN error.
 
 **Defensible:** Per medication record, insulin glargine 40 units given 21:10 Tue; ordered dose 14 units.
 
@@ -1792,6 +1800,10 @@ The phrases are models to rewrite, never text to paste. Their times, values, nam
 
 ## What is happening now
 
+- A dangerous diagnosis to name and set aside, or a score or decision rule you relied on: *Writing the Differential You Actually Ran*
+- A working diagnosis you are not sure of, a choice the evidence leaves to the patient, a symptom with no cause yet: *What You Don't Know Yet, Written Plainly*
+- A behavior to describe, the patient's words to quote, a label or a complaint about staff you are tempted to chart: *Facts, Quotes, and What Never Goes in the Chart*
+- A copied or templated note, a signed note to correct or add to, care written up hours later: *Templates, Copy-Forward, and the Late Addendum*
 - A test to order, to skip or to leave for later: *The Test You Order and the Test You Don't*
 - A critical value, an incidental finding, a result after the patient has left: *Closing the Loop on the Abnormal Result*
 - A delayed scan, a bed or transfer that does not open: *The Delayed Scan and the Bed That Never Opens*
@@ -1887,13 +1899,13 @@ The abnormal result, the prescription, the antibiotic or scan you decline, the t
 
 ### The Capacity Question, Decision by Decision
 
-- The decision assessed, named specifically, and the time of the assessment.
-- What the patient was told, and any interpreter or sensory aid used.
-- Each of the four abilities, with the patient's own answers, right or wrong.
-- A finding limited to this decision at this time, with its likely cause.
-- Whether the decision could wait; each reassessment, timed, with what changed.
-- Who assessed, and any psychiatry or ethics consultation: question, answer, action.
-- For a surrogate: name, relationship, source of authority, what they were told, what they chose and why.
+- **The question.** The decision assessed, named specifically, and the time of the assessment.
+- **The information.** What the patient was told, and any interpreter or sensory aid used.
+- **The assessment.** Each of the four abilities, with the patient's own answers, right or wrong.
+- **The conclusion.** A finding limited to this decision at this time, with its likely cause.
+- **The timing.** Whether the decision could wait; each reassessment, timed, with what changed.
+- **The clinicians.** Who assessed, and any psychiatry or ethics consultation: question, answer, action.
+- **The surrogate.** For a surrogate: name, relationship, source of authority, what they were told, what they chose and why.
 
 ### Informed Refusal and the Partial Yes
 
@@ -1970,21 +1982,21 @@ The abnormal result, the prescription, the antibiotic or scan you decline, the t
 
 ## Before you sign
 
-Read the list for your scenario once the note is drafted, and look for each element in what you wrote; one you cannot find is a sentence to add before you sign, while a change is still just an edit. The lists are not a form to fill in: an element is there when your own sentences show it, not when a heading names it.
+Read the list for your scenario once the note is drafted, and look for each element in what you wrote; one you cannot find is a sentence to add before you sign. The lists are not a form to fill in: an element is there when your own sentences show it, not when a heading names it.
 
 # Glossary of Legal Terms in Plain English
 
-These definitions are general information, not legal advice, and the precise meaning of a term can change from state to state; for your own state, ask your risk manager, your insurer or your state board. The title in italics at the end of each entry is the chapter where the term is first explained.
+These definitions are general information, not legal advice, and the precise meaning of a term can change from state to state; for your own state, ask your risk manager, your insurer or your state board. The italics at the end of each entry name the chapter where the term is first explained.
 
 **Addendum.** Information added to a note that is already signed, such as a result that came back, a call returned or a detail left out. Organizations define addenda and late entries differently, so follow your policy on the label. *Templates, Copy-Forward, and the Late Addendum*.
 
-**Adverse event.** Any unexpected harm to a patient in the course of care. *What a Chart Becomes After a Bad Outcome*.
+**Adverse event.** Harm to a patient that results from care rather than from the underlying illness. Whether a given event must be reported, and to whom, depends on state law and your organization's policy. *What a Chart Becomes After a Bad Outcome*.
 
-**Against medical advice (AMA).** A patient leaves against medical advice when they end care before the treating clinicians judge it safe, after being told so. A patient who leaves before anyone has discussed leaving with them has not left AMA, and your organization may use another label, such as *eloped*. *The Patient Leaving Against Medical Advice*.
+**Against medical advice (AMA).** A patient leaves against medical advice when they end care before the treating clinicians judge it safe, after being told so. A patient who leaves before anyone has discussed leaving with them has not left AMA. *The Patient Leaving Against Medical Advice*.
 
 **Attestation.** A statement a second clinician adds to someone else's note about their own role: that they saw the patient, reviewed the note or agreed with the plan. *The Provider Note Records a Decision*.
 
-**Audit trail.** The system's own record of activity in the chart: which account opened which record and when, and what was viewed, created, edited, signed or deleted, often with each earlier version of a changed note. It does not depend on what anyone chose to write. *Templates, Copy-Forward, and the Late Addendum*.
+**Audit trail.** The system's own record of activity in the chart: which account opened which record and when, and what was viewed, created, edited, signed or deleted, often with each earlier version of a changed note. *Templates, Copy-Forward, and the Late Addendum*.
 
 **Behavior agreement.** A written statement, made with a patient or visitor whose conduct has disrupted care, of what is expected from now on and what follows if it is not met. *Hostile Encounters in Neutral Words*.
 
@@ -1994,43 +2006,43 @@ These definitions are general information, not legal advice, and the precise mea
 
 **Capacity.** See decision-making capacity.
 
-**Causation.** The link between a failure to meet the standard of care and the patient's harm. A claim has to show that doing what should have been done would have changed what happened. *What a Chart Becomes After a Bad Outcome*.
+**Causation.** The link between a failure to meet the standard of care and the patient's harm. In most states, a claim has to show that doing what should have been done would have changed what happened. *What a Chart Becomes After a Bad Outcome*.
 
-**Chain of command.** The route your organization sets for taking a clinical concern past the people who have not resolved it. The route differs between organizations, so read your policy before you need it. *The Consultant Who Never Comes*.
+**Chain of command.** The route your organization sets for taking a clinical concern past the people who have not resolved it. *The Consultant Who Never Comes*.
 
-**Closed claim.** A malpractice claim that has reached its end: withdrawn, dismissed, settled or decided at trial. Some insurers publish what their closed claims show. *Where Claims Against NPs Actually Begin*.
+**Closed claim.** A malpractice claim that has reached its end: withdrawn, dismissed, settled or decided at trial. *The chapter on where claims begin*.
 
-**Collaborative agreement.** A written arrangement that sets out how an NP and a physician work together. Whether one applies to you depends on your state and setting. *The Provider Note Records a Decision*.
+**Collaborative agreement.** An arrangement, usually in writing, that sets out how an NP and a physician work together. Whether one applies to you depends on your state and setting. *The Provider Note Records a Decision*.
 
-**Competence.** A legal status decided by a court, unlike decision-making capacity, which the treating clinician judges at the bedside. A court that finds a person incompetent may appoint a guardian. *The Capacity Question, Decision by Decision*.
+**Competence.** A legal status decided by a court, unlike decision-making capacity. *The Capacity Question, Decision by Decision*.
 
-**Contemporaneous.** Written at the time of the care or soon after, before memory starts filling gaps. *Where Claims Against NPs Actually Begin*.
+**Contemporaneous.** Written at the time of the care or soon after, before memory starts filling gaps. *The chapter on where claims begin*.
 
-**Controlled substance.** A drug that federal and state law regulate more tightly because it can lead to dependence or misuse. Federal law sorts these drugs into schedules, and Schedule II, which includes oxycodone, is the most restricted group that can be prescribed at all. *Why This Drug, This Dose, This Patient*.
+**Controlled substance.** A drug that federal and state law regulate more tightly because it can lead to dependence or misuse. *Why This Drug, This Dose, This Patient*.
 
-**Controlled-substance agreement.** A written statement of the terms of ongoing prescribing, such as a single prescriber and pharmacy, how refills are requested and what monitoring to expect. Whether one is required depends on your state and your organization. *Why This Drug, This Dose, This Patient*.
+**Controlled-substance agreement.** A written statement of the terms of ongoing prescribing. Whether one is required depends on your state and your organization. *Why This Drug, This Dose, This Patient*.
 
 **Cosignature.** A second clinician's signature on a note someone else wrote. By itself it does not say whether that clinician examined the patient, read the note line by line or only signed it. *The Provider Note Records a Decision*.
 
-**Damages.** The money a malpractice claim seeks for the harm it alleges. *Where Claims Against NPs Actually Begin*.
+**Damages.** The money a malpractice claim seeks for the harm it alleges. *The chapter on where claims begin*.
 
-**Decision-making capacity.** A clinical judgment, made by the treating clinician, that a patient can make one particular decision at one particular time. It rests on four abilities: understanding, appreciating that the situation applies to oneself, reasoning and expressing a choice. *The Capacity Question, Decision by Decision*.
+**Decision-making capacity.** A clinical judgment, usually made by the treating clinician, that a patient can make one particular decision at one particular time. Clinically it rests on four abilities: understanding, appreciating that the situation applies to oneself, reasoning and expressing a choice. State law may use its own wording, and when the finding activates a health care agent or a surrogate it may say who must make it, so ask whether an NP's finding is enough where you work. *The Capacity Question, Decision by Decision*.
 
 **Defense attorney.** The lawyer who defends against a claim. The defense attorney may represent you, your employer or both, so ask first whom they represent. *What a Chart Becomes After a Bad Outcome*.
 
-**Disclosure.** Telling the patient, or the person who decides for them, that something unexpected happened in their care, what it means for them and what is being done. *The Adverse Event and the Records Request*.
+**Disclosure of an adverse event.** Telling the patient, or the person who decides for them, that something unexpected happened in their care, what it means for them and what is being done. Not the same as releasing health information under privacy law. *The Adverse Event and the Records Request*.
 
-**Employer review.** The internal review your organization starts when it learns of a bad outcome. It often begins before any claim or complaint and often includes a peer review, and it can end in a conversation, limits on practice or the loss of the job. *Where Claims Against NPs Actually Begin*.
+**Employer review.** The internal review your organization starts when it learns of a bad outcome, often before any claim or complaint. It can end in a conversation, limits on practice or the loss of the job. *The chapter on where claims begin*.
 
 **Expert witness.** A clinician hired by one side to explain what the standard of care required and whether your care met it. State rules decide who may serve as an expert in a case against an NP, and it is not always another NP. *What a Chart Becomes After a Bad Outcome*.
 
-**Guardian.** A person a court appoints to make some or all decisions for someone it has found incompetent. *The Capacity Question, Decision by Decision*.
+**Guardian.** A person a court appoints, called a conservator in some states, to make some or all decisions for someone it has found incompetent. *The Capacity Question, Decision by Decision*.
 
 **Health care agent.** The person a patient names in a health care power of attorney to decide for them if they cannot. *The Capacity Question, Decision by Decision*.
 
-**Health care power of attorney.** A document in which a patient names a health care agent to make decisions if the patient cannot. Some states call it a health care proxy. *The Capacity Question, Decision by Decision*.
+**Health care power of attorney.** A document in which a patient names a health care agent to make decisions if the patient cannot. *The Capacity Question, Decision by Decision*.
 
-**Health care proxy.** See health care power of attorney.
+**Health care proxy.** In some states, the name of the health care power of attorney document; in everyday speech, also the person it names. See health care power of attorney and health care agent.
 
 **Hindsight bias.** The tendency, once you know how something ended, to see the ending as more predictable than it was and the early signs as louder than they sounded at the time. *What a Chart Becomes After a Bad Outcome*.
 
@@ -2040,34 +2052,48 @@ These definitions are general information, not legal advice, and the precise mea
 
 **Informed refusal.** The informed-consent process ending in no, with the risks of refusing at its center. A signed refusal form records a signature; the note records the conversation. *Informed Refusal and the Partial Yes*.
 
+**Judgment.** A court's decision that ends a case, including any money one side must pay. *The chapter on where claims begin*.
+
 **Late entry.** An entry documenting care given earlier but not written at the time. It is labeled as late and gives both the time of the care and the reason for the delay. *Templates, Copy-Forward, and the Late Addendum*.
 
-**Licensing board complaint.** A complaint to the state board that licenses you. Anyone can file one, it needs no injury, and what is at stake is the license rather than money. *Where Claims Against NPs Actually Begin*.
+**Licensing board complaint.** A complaint to the state board that licenses you. Anyone can file one, it needs no injury, and what is at stake is chiefly the license, though a board can also fine you and its actions can be reported to the National Practitioner Data Bank. *The chapter on where claims begin*.
 
-**Malpractice claim.** A claim of negligence against a clinician, seeking money damages for harm to a patient. An insurer, yours or your employer's, usually defends it. *What a Chart Becomes After a Bad Outcome*.
+**Malpractice claim.** A claim of negligence against a clinician, seeking money damages for harm to a patient. *The chapter on where claims begin*.
 
-**National Practitioner Data Bank.** A federal repository that hospitals and licensing boards can query. Any payment made on a clinician's behalf in a malpractice claim, by settlement or judgment, is reported to it. *Where Claims Against NPs Actually Begin*.
+**National Practitioner Data Bank.** A federal repository that hospitals, licensing boards and some other health care organizations can query. Malpractice payments made on a clinician's behalf, by settlement or judgment and whatever the amount, are reported to it, and so are licensing board actions and some actions on hospital privileges. *The chapter on where claims begin*.
 
 **Negligence.** In a malpractice claim, the allegation that a clinician who owed the patient care failed to meet the standard of care, and that this failure harmed the patient. *What a Chart Becomes After a Bad Outcome*.
 
-**Peer review.** An internal examination of a clinician's care by colleagues. Whether it can later be used outside the organization depends on state law. *Where Claims Against NPs Actually Begin*.
+**Peer review.** An internal examination of a clinician's care by colleagues. Whether it can later be used outside the organization depends on state law. *The chapter on where claims begin*.
 
-**Plaintiff.** The patient or family bringing a claim. Their attorney reads the chart for gaps, contradictions and decisions with no visible reason. *What a Chart Becomes After a Bad Outcome*.
+**Plaintiff.** The patient or family bringing a claim. *What a Chart Becomes After a Bad Outcome*.
 
 **Prescription drug monitoring program (PDMP).** A state database of dispensed prescriptions for controlled drugs. When a search is required depends on your state, and the note records the time and result of each search, even an empty one. *Why This Drug, This Dose, This Patient*.
 
-**Records request.** A request for copies of the chart, made by the patient or someone acting for them, often an attorney. Once one arrives, add nothing to the chart about the care in question and change nothing in it. *The Adverse Event and the Records Request*.
+**Records request.** A request for copies of the chart, from the patient, from someone acting for them such as an attorney, or from another party with a right to it. Most are routine. One that comes from an attorney, or with a complaint or a claim, means: add nothing to the chart about the care in question and change nothing in it. *The Adverse Event and the Records Request*.
 
-**Risk manager.** The person in your organization whose job is to find out what happened after an adverse event and how exposed the organization is. Call yours the same day a board complaint or a subpoena arrives. *What a Chart Becomes After a Bad Outcome*.
+**Risk manager.** The person in your organization whose job includes finding out what happened after an adverse event and how exposed the organization is. *What a Chart Becomes After a Bad Outcome*.
 
-**Spoliation.** The destruction or alteration of evidence. Altering a record once a claim is pending or reasonably expected can be treated as spoliation. *Templates, Copy-Forward, and the Late Addendum*.
+**Scope of practice.** The care your license allows you to provide, as set by state law and your state board. *Introduction*.
 
-**Standard of care.** What a reasonably prudent NP, with similar training and in similar circumstances, would have done with the same information at that moment. It is not perfection, and often several choices would have met it. *What a Chart Becomes After a Bad Outcome*.
+**Settlement.** An agreement that ends a claim without a court's decision, usually with a payment. *The chapter on where claims begin*.
 
-**Subpoena.** A legal demand, with a deadline, to produce records or to appear and testify. Do not ignore one or answer it alone: call your risk manager the same day, and your own professional liability insurer if you carry a policy. *The Adverse Event and the Records Request*.
+**Spoliation.** The destruction, alteration or failure to preserve evidence. Altering a record once a claim is pending or reasonably expected can be treated as spoliation. *Templates, Copy-Forward, and the Late Addendum*.
+
+**Standard of care.** In most states, what a reasonably prudent NP, with similar training and in similar circumstances, would have done with the same information at that moment. It is not perfection, and often several choices would have met it. Some courts hold an NP who does what a physician would do to the physician's standard; ask your risk manager which applies where you work. *What a Chart Becomes After a Bad Outcome*.
+
+**Subpoena.** A legal demand, with a deadline, to produce records or to appear and testify. Call your risk manager the same day, and your own professional liability insurer if you carry a policy. *The Adverse Event and the Records Request*.
 
 **Substituted judgment.** The standard a surrogate is generally expected to use: deciding as the patient would have, from the patient's known wishes and values. Compare best interests. *The Capacity Question, Decision by Decision*.
 
-**Supervision.** An arrangement in which a physician holds a defined oversight role in an NP's practice. Whether it applies to you depends on your state and setting. *The Provider Note Records a Decision*.
+**Supervision.** An arrangement, depending on your state and setting, in which a physician holds a defined oversight role in an NP's practice. *The Provider Note Records a Decision*.
 
-**Surrogate decision-maker.** The person who decides for a patient who lacks capacity. Their authority may come from a health care power of attorney or a court-appointed guardianship; if no one was named, state law and your organization's policy set who may decide. *The Capacity Question, Decision by Decision*.
+**Surrogate decision-maker.** The person who decides for a patient who lacks capacity. Their authority may come from a health care power of attorney or a court-appointed guardian or conservator; if no one was named, state law and your organization's policy set who may decide. *The Capacity Question, Decision by Decision*.
+
+## Sources for the tools in this book
+
+- Canadian CT Head Rule: Stiell IG et al., Lancet 2001;357:1391–1396.
+- IDSA rhinosinusitis guideline: Chow AW et al., Clin Infect Dis 2012;54(8):e72–e112.
+- PERC: Kline JA et al., J Thromb Haemost 2004;2:1247–1255.
+- The four abilities of decision-making capacity: Appelbaum PS, N Engl J Med 2007;357:1834–1840.
+- CNA/NSO claim report on nurse practitioners: read the most recent edition on the publisher's website.

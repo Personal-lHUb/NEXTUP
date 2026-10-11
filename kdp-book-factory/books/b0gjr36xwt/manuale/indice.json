@@ -10,7 +10,7 @@
     },
     {
       "number": 3,
-      "title": "Where Claims Against NPs Actually Begin"
+      "title": "Where a Claim, a Complaint, and a Review Begin"
     },
     {
       "number": 4,
@@ -108,16 +108,16 @@
     },
     {
       "first_chapter": 8,
-      "title": "The Workup Under Pressure"
+      "title": "Orders, Waits, and Pushback"
     },
     {
       "first_chapter": 15,
-      "title": "Refusals, Exits, and Aftermath"
+      "title": "Choices, Continuity, and Aftermath"
     },
     {
       "first_chapter": 23,
       "title": "The Mid-Shift Reference"
     }
   ],
-  "notes": "Indice con tutti i titoli sotto i 55 caratteri, senza due punti né numeri, nessuna promessa di tutela da cause o sanzioni, parti di due-cinque parole che non ripetono alcun titolo di capitolo, e i capitoli 23-25 riscritti come sostantivi paralleli (Phrasebook, Scenario Finder, Glossary) perché chi apre la parte di consultazione a metà turno capisca subito che cosa trova."
+  "notes": "Cambiati tre titoli, tutti sotto i 55 caratteri, senza due punti né numeri. Cap. 3: «Where Claims Against NPs Actually Begin» diventa «Where a Claim, a Complaint, and a Review Begin» (46 caratteri, virgola seriale come negli altri titoli). Via «Actually» e via «Claims Against NPs», che facevano aspettare dati, graduatorie o una mappa dei reclami: il capitolo non cita cifre, raggruppa le accuse in quattro voci scelte dal libro e rimanda al rapporto dell'assicuratore. Il nuovo titolo dice quello che il capitolo fa davvero: parte da una visita e da una nota e mostra i tre procedimenti che la leggono (causa per danni, reclamo al board, revisione del datore di lavoro) e il punto della nota in cui cade ogni accusa. Il rimando del glossario «the chapter on where claims begin» regge ancora; l'intestazione di manuscript/04.md va allineata al titolo nuovo. Parte II (cap. 8-14): «The Workup Under Pressure» diventa «Orders, Waits, and Pushback»: ordini (test, prescrizione), attese (risultato anomalo, esame in ritardo, letto, consulente), resistenze (richiesta rifiutata, incontro ostile, disaccordo con un collega). «Workup» escludeva prescrizione e incontro ostile. Parte III (cap. 15-22): «Refusals, Exits, and Aftermath» diventa «Choices, Continuity, and Aftermath»: scelte del paziente (capacità, rifiuto, uscita contro parere), continuità della cura (dimissione e ritorno, passaggi di consegne, televisita e portale, visite saltate e invii), conseguenze (evento avverso e richiesta di cartella). Ho evitato «Handoffs» nel titolo di parte per non ripetere una parola del cap. 19. Invariati le parti I e IV e gli altri 22 titoli. «Actually» resta nel cap. 4, dove distingue il differenziale pensato da quello scritto. «The Bed That Never Opens» (cap. 10) resta, perché il capitolo corretto ora ha il paragrafo sul letto che non si libera entro il turno."
 }

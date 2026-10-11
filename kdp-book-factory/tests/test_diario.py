@@ -192,6 +192,8 @@ class TestIndice(Base):
             "# Where Claims Actually Begin\n\ntesto\n", encoding="utf-8")
         (self.libro / "manuale" / "capitolo-03.md").write_text(
             "# Phrasebook\n\n## Where Claims Actually Begin\n\ncoppie\n", encoding="utf-8")
+        (self.libro / "manuale" / "capitolo-02-brief.md").write_text(
+            "Scaletta: Where Claims Actually Begin\n", encoding="utf-8")
         backup.configure(directory=Path(self._tmp.name) / "backup")
         self.addCleanup(backup.configure)
         self.file = self.libro / "consegne" / "indice.json"

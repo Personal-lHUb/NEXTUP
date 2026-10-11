@@ -16,3 +16,12 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-10 17:20 UTC · finito `indice` (id `a2c6e9bb2f62570e1`): fermato dal limite di sessione (azzeramento 13:00 UTC) prima di consegnare; nessun promemoria programmato. Da rifare quando l'autore lo fa partire: l'agente indice (prompt in prompt/20261010-085921-…), poi consegna --indice, build, impaginazione, editor di sviluppo
 - 2026-10-10 17:20 UTC · regola nuova dell'autore: ogni passo lo fa partire lui; niente si programma; al limite d'uso ci si ferma e si aspetta il suo «continua»
 - 2026-10-10 17:21 UTC · correzione: l'agente indice aveva scritto la consegna prima del limite (consegne/indice-fase5.json, completa: 25 capitoli, 4 parti, note). Non applicata: aspetta il via dell'autore (consegna b0gjr36xwt indice-fase5.json --indice)
+- 2026-10-11 11:36 UTC · consegna `indice-fase5.json` importata come indice: capitolo 3 (sezione 4): «Where Claims Against NPs Actually Begin» → «Where a Claim, a Complaint, and a Review Begin»; parte «The Workup Under Pressure» → «Orders, Waits, and Pushback»; parte «Refusals, Exits, and Aftermath» → «Choices, Continuity, and Aftermath»
+- 2026-10-11 11:36 UTC · lanciato `impaginazione` «Impaginazione dopo le correzioni» → `prompt/20261011-113658-impaginazione-impaginazione-dopo-le-correzioni.md`
+- 2026-10-11 11:36 UTC · `impaginazione` «Impaginazione dopo le correzioni» in background, id `af5608596a9ff8925`
+- 2026-10-11 11:37 UTC · lanciato `editor-sviluppo` «Editor di sviluppo: verifica correzioni» → `prompt/20261011-113705-editor-sviluppo-editor-di-sviluppo-verifica-correzioni.md`
+- 2026-10-11 11:37 UTC · `editor-sviluppo` «Editor di sviluppo: verifica correzioni» in background, id `a7ce363ba7903f212`
+- 2026-10-11 11:37 UTC · finito `impaginazione` (id `af5608596a9ff8925`): uscita lunga salvata in `consegne/20261011-113720-impaginazione-af560859.md`
+- 2026-10-11 11:37 UTC · titoli dell'indice applicati (cap. 3 «Where a Claim, a Complaint, and a Review Begin»; parti II «Orders, Waits, and Pushback», III «Choices, Continuity, and Aftermath»); build: 178 pagine (167-185); qa: 0 errori, 3 avvisi (cap. 25 lungo e frasi ripetute: voluti; titolo del cap. 6 generico); manoscritto-completo.md rigenerato
+- 2026-10-11 11:37 UTC · consegna `20261011-113720-impaginazione-af560859.md` letta
+- 2026-10-11 11:37 UTC · impaginazione dopo le correzioni: 0 bloccanti, 0 importanti, 3 minori (righe finali corte pp. 16, 21, 26, 72, 173; code di capitolo pp. 18, 30; 17 pagine corte)
