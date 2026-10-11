@@ -67,6 +67,19 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   del capitolo 4 senza «Actually», forse anche il 5), build, impaginazione,
   verifica dell'editor di sviluppo sui capitoli corretti, `manoscritto-completo.md`
   da rigenerare.
+- **Aggiornamento 11 ottobre.** Fatti: sezioni 24-26, titoli dell'agente
+  `indice` (cap. 3 «Where a Claim, a Complaint, and a Review Begin», parti II
+  «Orders, Waits, and Pushback» e III «Choices, Continuity, and Aftermath»),
+  note in riquadro, build a 178 pagine, `qa` 0 errori (3 avvisi), impaginazione
+  0 bloccanti (3 minori), `manoscritto-completo.md` rigenerato. **Verifica
+  dell'editor di sviluppo** (`revisioni/editor-sviluppo-verifica.md`): 1
+  bloccante (A1: l'introduzione numera i capitoli dalla scaletta, non dall'indice
+  stampato), 4 importanti (A2 frase che introduce la riscrittura in otto
+  capitoli, N1 etichetta «caso costruito» sempre in chiusa di primo paragrafo,
+  N2 «N months into» in otto capitoli, N3 dieci rimandi del glossario al cap. 3
+  con un titolo che non esiste), 8 minori. **La fase 5 non è chiusa**: il
+  prossimo passo, quando lo fa partire l'autore, è un secondo giro dell'editor
+  su questi rilievi, poi build e verifica.
 - **Richieste dell'autore per dopo il collegio**: se il lettore cieco dà l'OK,
   le immagini dell'interno prendendo a riferimento i libri analoghi (i box per
   le note deboli e riscritte, più quello che il confronto suggerisce, con un
