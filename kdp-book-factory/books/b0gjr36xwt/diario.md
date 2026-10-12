@@ -42,3 +42,6 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-12 16:33 UTC · `editor` «Secondo giro: sezioni 17-20» in background, id `afe3322c583eab2b5`
 - 2026-10-12 16:33 UTC · lanciato `editor` «Secondo giro: sezioni 21-23» → `prompt/20261012-163311-editor-secondo-giro-sezioni-21-23.md`
 - 2026-10-12 16:33 UTC · `editor` «Secondo giro: sezioni 21-23» in background, id `ae5fdb80699716ad5`
+- 2026-10-12 16:35 UTC · finito `indice` (id `a5f83dc189284f832`): «`/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/indice-cap5.json`: cap. 5 diventa «The Working Diagnosis and What Would Change It» (46 caratteri), tutto il resto identico. Le sette cita…»
+- 2026-10-12 16:35 UTC · lanciato `editor` «Secondo giro: sezioni 24-26» → `prompt/20261012-163518-editor-secondo-giro-sezioni-24-26.md`
+- 2026-10-12 16:35 UTC · `editor` «Secondo giro: sezioni 24-26» in background, id `ad24c7d1e03bce41c`
