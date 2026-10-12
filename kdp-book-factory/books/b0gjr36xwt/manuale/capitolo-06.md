@@ -1,8 +1,8 @@
-# What You Don't Know Yet, Written Plainly
+# The Working Diagnosis and What Would Change It
 
 ## Six hours into a stomachache
 
-The urgent care clinic where Erin Kowalski has worked as an NP for seven months closes at 21:00 and has no imaging on site. At 18:20 on a Wednesday she sees Ben Sorensen, nineteen, whose stomach began to ache around noon. The pain sits around his navel and comes in cramps. He vomited once at 15:00 and has eaten almost nothing since breakfast. His roommate was sick with vomiting last week. The clinic, Erin and Ben are all made up for this chapter.
+The urgent care clinic where Erin Kowalski works as an NP closes at 21:00 and has no imaging on site. At 18:20 on a Wednesday she sees Ben Sorensen, nineteen, whose stomach began to ache around noon. The pain sits around his navel and comes in cramps. He vomited once at 15:00 and has eaten almost nothing since breakfast. His roommate was sick with vomiting last week.
 
 His temperature is 99.5°F. His abdomen is soft and mildly tender around the navel, with no guarding and no rebound tenderness. Pressing on the lower right side hurts no more than pressing anywhere else. He climbs on and off the table easily, hops on one foot without wincing and keeps down the water he sips in the room.
 
@@ -10,7 +10,7 @@ Erin thinks a stomach virus is the likeliest explanation. She also knows that ap
 
 ## Two ways to write it wrong
 
-Here is one note she could write:
+Erin, Ben and the clinic come from no real chart. Here is one note she could write:
 
 > 19M abd pain x 6 hrs, vomiting x1, roommate w/ similar illness. Abd soft, mild periumbilical tenderness. Dx: viral gastroenteritis. Ondansetron, clear fluids. RTC PRN.
 
@@ -54,7 +54,7 @@ There is one limit. A choice is shared only when you would stand behind every op
 
 ## The symptom that has no name yet
 
-Some visits end without a working diagnosis worth the name. Take a constructed one from a primary care practice. Rachel Dunmore, in her second year as an NP there, sees Joan Petrakis, fifty-four, at 10:40 on a Monday; Mrs. Petrakis has felt tired for three months. The clinic scale recorded 162 pounds four months ago and 151 today, and Mrs. Petrakis has not been trying to lose weight. Nothing in the history or exam points anywhere in particular, so Rachel orders a first set of blood tests.
+Some visits end without a working diagnosis worth the name. Take a constructed one from a primary care practice. Rachel Dunmore, one of its NPs, sees Joan Petrakis, fifty-four, at 10:40 on a Monday; Mrs. Petrakis has felt tired for three months. The clinic scale recorded 162 pounds four months ago and 151 today, and Mrs. Petrakis has not been trying to lose weight. Nothing in the history or exam points anywhere in particular, so Rachel orders a first set of blood tests.
 
 Two weak entries are tempting. "Fatigue, likely stress" gives the symptom a convenient explanation with nothing underneath it. Once such a label reaches the problem list, later notes tend to repeat it until nobody looks further. "Weight loss, r/o malignancy" has the ambiguity described earlier, and it names the most frightening possibility without saying what will settle it. The honest version makes the symptom itself the problem and says where the search stands:
 

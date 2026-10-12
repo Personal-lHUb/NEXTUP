@@ -49,3 +49,6 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-12 16:36 UTC · consegna `editor2-01-02.md` importata: sezioni 01, 02 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261012-163656)
 - 2026-10-12 16:38 UTC · finito `editor` (id `af65fb2c75df95a63`): «Ho scritto i tre capitoli corretti (14, 15, 16) in `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor2-14-16.md`: 14 ha 1808 parole (prima 1827), 15 ha 1855 (prima 1861), 16 ha 1829…»
 - 2026-10-12 16:38 UTC · consegna `editor2-14-16.md` importata: sezioni 14, 15, 16 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261012-163829)
+- 2026-10-12 16:39 UTC · finito `editor` (id `a15936c4e44f969e5`): «I scritti sono in `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor2-05-08.md`, quattro capitoli col conteggio del motore: 05 ha 1.798 parole (−5), 06 ne ha 1.813 (−10), 07 ne ha 1…»
+- 2026-10-12 16:40 UTC · consegna `editor2-05-08.md` importata: sezioni 05, 06, 07, 08 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261012-164003)
+- 2026-10-12 16:40 UTC · consegna `indice-cap5.json` importata come indice: capitolo 5 (sezione 6): «What You Don't Know Yet, Written Plainly» → «The Working Diagnosis and What Would Change It»

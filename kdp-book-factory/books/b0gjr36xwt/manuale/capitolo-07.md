@@ -2,13 +2,13 @@
 
 ## A hard morning, written two ways
 
-Raymond Teague, sixty-two, was admitted on Friday with cellulitis of the left lower leg. He has type 2 diabetes. Overnight he pulled out his IV, saying it burned. A new line went in at 05:15, and the cefazolin dose due at 02:00 was given at 05:30. The night nurse filed an incident report about the late dose. At 07:40 on Sunday he is first on the rounding list of Kendra Walsh, ten months into her first job as a hospital medicine NP. Neither of them is real; the case was built for this chapter.
+A new IV line went into Raymond Teague's arm at 05:15 on Sunday. Overnight he had pulled out the old one, saying it burned, and the cefazolin dose due at 02:00 was given at 05:30. The night nurse filed an incident report about the late dose. Mr. Teague, sixty-two, was admitted on Friday with cellulitis of the left lower leg, and he has type 2 diabetes. At 07:40 he is first on Kendra Walsh's weekend rounding list.
 
-When Kendra walks in, Mr. Teague is sitting up and speaking loudly. He swears several times while describing the night. He says his leg pain is 8 out of 10, that "the pills don't touch it," and asks for IV hydromorphone by name. His fasting glucose is 287; asked about it, he says he stopped metformin about four months ago. Before she leaves he says he is going to get a lawyer. At 08:30, still irritated, she writes:
+No real patient or nurse practitioner stands behind Kendra or Mr. Teague. When she walks in, he is sitting up and speaking loudly. He swears several times while describing the night. He says his leg pain is 8 out of 10, that "the pills don't touch it," and asks for IV hydromorphone by name. His fasting glucose is 287; asked about it, he says he stopped metformin about four months ago. Before she leaves he says he is going to get a lawyer. At 08:30, still irritated, she writes:
 
 > Pt belligerent and uncooperative on rounds, cursing at staff. Pulled out IV overnight; IV team didn't come for 3+ hrs (unit short-staffed again), so cefazolin given 3.5 hrs late. Hx noncompliance, off metformin for months. Drug-seeking, demanding IV Dilaudid. Apparently he knows more about his treatment than we do. Incident report filed re: late dose. Pt states he will "get a lawyer." Continue current plan.
 
-Very little of that is false. Mr. Teague was loud, the dose was late, and he did ask for hydromorphone. But almost every line gives a verdict instead of evidence, and several lines are not about the patient at all. Here is the same encounter rewritten, with nothing added that Kendra did not see or hear:
+Very little of that is false. Mr. Teague was loud, the dose was late, and he did ask for hydromorphone. But almost every line gives a verdict instead of evidence, and several lines are not about the patient at all. The version below is built from observations, quotations with their speakers, and times:
 
 > 07:40, seen at bedside. Sitting up, speaking loudly; swore several times while describing the night. States: "That IV was burning and nobody came, so I pulled it." Per RN Kwame Osei, PIV removed by patient ~01:40, new PIV R forearm 05:15; cefazolin due 02:00 given 05:30. Reports L leg pain 8/10, "the pills don't touch it"; asked for IV hydromorphone by name. Last oxycodone 5 mg at 04:10. States he stopped metformin ~4 months ago: "It tore up my stomach." Fasting glucose 287.
 >

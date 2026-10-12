@@ -4,7 +4,7 @@
 
 > 33F L chest pain x 2 days. Chest wall tender. ECG NSR, CXR neg. Assessment: MSK chest pain. Ibuprofen, RTC PRN.
 
-Talia Brennan signs that note on a Saturday afternoon, eleven months into her work as an NP in the fast-track area of a suburban emergency department. She and her patient are invented; the visit behind the note begins at 13:40, when she sees Alicia Moreno, thirty-three, who has had sharp pain on the left side of her chest for two days. It began the morning after she helped her sister move furniture, and it gets worse when she breathes deeply or twists.
+Talia Brennan signs that note on a Saturday afternoon as the NP covering the fast-track area of a suburban emergency department. She and her patient are invented; the visit behind the note begins at 13:40, when she sees Alicia Moreno, thirty-three, who has had sharp pain on the left side of her chest for two days. It began the morning after she helped her sister move furniture, and it gets worse when she breathes deeply or twists.
 
 Talia thinks of a pulmonary embolism before anything else, and her questions show it: coughing blood, leg swelling, earlier clots, hormonal contraception, recent surgery or long travel. She asks whether the pain changes with exertion or with position. She listens to both lungs, presses along the ribs, looks at both calves, and gets an ECG and a chest X-ray. Everything points to a strained chest wall, and she sends Ms. Moreno home with ibuprofen.
 

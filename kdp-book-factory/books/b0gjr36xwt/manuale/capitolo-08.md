@@ -2,7 +2,7 @@
 
 ## Yesterday's exam, signed today
 
-At 05:30 on a Wednesday, a nurse charts new confusion in Evelyn Kraus, eighty-one, admitted on Monday with worsening heart failure and on IV furosemide since. Mateo Ruiz, a former cardiac step-down nurse six months into hospital medicine as an NP, sees her at 08:45: drowsy, oriented only to herself, moving all four limbs. Her sodium, 134 on Tuesday, is 129 this morning, and at 08:55 he holds the furosemide. Patient, NP and timeline are all constructed.
+At 05:30 on a Wednesday, a nurse charts new confusion in Evelyn Kraus, eighty-one, admitted on Monday with worsening heart failure and on IV furosemide since. The hospital medicine NP on her case, Mateo Ruiz, sees her at 08:45: drowsy, oriented only to herself, moving all four limbs. Her sodium, 134 on Tuesday, is 129 this morning, and at 08:55 he holds the furosemide. Patient, NP and timeline are all constructed.
 
 At 09:10 he opens Tuesday's progress note, copies it forward into a new one, updates the hospital day, the weight and the sodium, and signs at 09:24. Part of it reads:
 
@@ -54,6 +54,6 @@ A delay costs weight. Written four hours later, before anything has gone wrong, 
 
 Behind the chart you read, the system keeps a second record you usually cannot see. The **audit trail**, or audit log, records activity in the chart: which account opened which patient's record, when, and often from which device; what was viewed, created, edited, signed, printed or deleted; and in many systems each earlier version of a changed note. It does not depend on what anyone chose to write. What your system captures, and for how long, is a question for your health information management or privacy office.
 
-After a bad outcome, the organization's reviewers can pull the audit trail, and in many courts the other side can ask for it in a lawsuit. Whoever has it lays it beside the notes, minute by minute. For Mrs. Kraus it would show a note opened at 09:10 and signed at 09:24, a correction at 10:15 and a late entry at 15:50, each saying what it is. The two records agree, and that agreement is what a reviewer looks for. A signed note changed in silence, or an entry describing 08:45 that was created at 16:00 and never says so, shows up just as plainly. So does every look, including a look at the chart of a patient who is not yours.
+After a bad outcome, the organization's reviewers can pull the audit trail, and in many courts the other side can ask for it in a lawsuit. Whoever has it lays it beside the notes, minute by minute. For Mrs. Kraus it would show a note opened at 09:10 and signed at 09:24, a correction at 10:15 and a late entry at 15:50, each saying what it is. The two records agree, and that agreement is what a reviewer looks for. A signed note changed in silence, or an entry describing 08:45 that was created at 16:00 and never says so, shows up just as plainly. In most systems, so does every look, including a look at the chart of a patient who is not yours.
 
 Before you sign, a change is just an edit. After, it is an entry of its own, with your name and the minute attached. The only kind that helps you is the one that says what it is.
