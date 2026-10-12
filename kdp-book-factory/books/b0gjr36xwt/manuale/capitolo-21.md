@@ -2,7 +2,7 @@
 
 ## A peak flow held up to the camera
 
-Thursday afternoons are video visits at the primary care practice where Maya Thibodeaux, a postpartum nurse for six years, now works as an NP. At 14:40 she connects with Colleen Pacheco, forty-six, who has had asthma since childhood. A cold began on Saturday; since Monday she has been wheezing and short of breath, and since Tuesday she has needed her albuterol inhaler every four hours. This visit never happened, and neither did the night call later in the chapter.
+Thursday afternoons are video visits at the primary care practice where Maya Thibodeaux works as an NP. At 14:40 she connects with Colleen Pacheco, forty-six, who has had asthma since childhood. A cold began on Saturday; since Monday she has been wheezing and short of breath, and since Tuesday she has needed her albuterol inhaler every four hours. This visit never happened, and neither did the night call later in the chapter.
 
 Maya cannot listen to her lungs, so she asks for what a camera can show. Ms. Pacheco talks in full sentences while she walks to the kitchen and back, lowers her collar, holds her pulse oximeter up to the lens, blows three times into her peak flow meter and turns the laptop toward her calves. At 14:58 Maya decides on home treatment and sets the point at which Ms. Pacheco must be seen in person.
 
@@ -22,7 +22,7 @@ Maya never typed one of these lines. "Lungs clear to auscultation" came from the
 
 ## The rewrite
 
-Here is the same visit, written from what Maya saw, heard and decided:
+This time the note opens with how the visit was held and ends with the numbers that would bring her in:
 
 > Video visit, audio and video throughout, 14:40–14:58. Patient at home; address on file confirmed for emergency use. Identity confirmed by name, date of birth and chart photo. Alone. Telehealth consent per clinic process, confirmed at start.
 >
@@ -50,7 +50,7 @@ Who asked is not always the patient: a daughter writing through her father's pro
 
 ## The call after hours
 
-The night call belongs to Jonah Soto, a former wound care nurse in his second year as an NP, who covers the practice's after-hours line from home. At 23:02 on a Wednesday, paged by the answering service, he reaches Gail Rinaldi, thirty-nine, on day three of amoxicillin for strep throat, with an itchy rash since 21:00. The answering service keeps a log of its own, but the day team will open the chart, so at 23:20 Jonah writes a short note there:
+The night call belongs to Jonah Soto, an NP who covers the practice's after-hours line from home. At 23:02 on a Wednesday, paged by the answering service, he reaches Gail Rinaldi, thirty-nine, on day three of amoxicillin for strep throat, with an itchy rash since 21:00. The answering service keeps a log of its own, but the day team will open the chart, so at 23:20 Jonah writes a short note there:
 
 > After-hours call 23:02–23:12. Caller: patient, identity confirmed by name and date of birth. Chart reviewed remotely: amoxicillin started Mon by Dr. Miriam Voss for strep pharyngitis; no allergies listed. Itchy raised rash since 21:00. No swelling of lips, tongue or throat; no trouble breathing or swallowing; no faintness. By phone: full sentences, voice not hoarse. Assessment: hives, likely reaction to amoxicillin; no features of anaphylaxis. Advised: stop amoxicillin; cetirizine 10 mg tonight. 911 for swelling of lips, tongue or throat, trouble breathing or swallowing, or feeling faint. She repeated: "Stop the pills, take the Zyrtec, 911 if my mouth swells or I can't breathe." Amoxicillin (hives) added to allergy list. For Dr. Voss, inbox 23:20: choose replacement antibiotic, call patient Thu by 10:00. Patient told to expect the call.
 

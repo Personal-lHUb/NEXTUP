@@ -71,6 +71,7 @@ Ask your organization whether a remote visit needs its own consent, whether a ve
 - **The threshold for in-person care.** The signs or readings that bring the patient in, and those that send them to the emergency department.
 - **Phone and portal advice.** Who asked, in their words; what was advised and by whom; how the answer was delivered and whether it was received.
 - **The after-hours call.** The time, your chart access, the advice, the escalation threshold with the patient's read-back, and who owns the next step by when.
+
 # Missed Visits and Referrals That Go Nowhere
 
 ## A positive test and two empty slots
@@ -149,6 +150,7 @@ The opposite mistake is writing "declined colonoscopy" for a patient who never a
 - **The referral, tracked.** Whether it was received and scheduled, whether the report came back, who checked and when, and who owns the next step until the report has been read.
 - **The patient's answer.** Their reason in their own words; a refusal written as an informed refusal, and silence never written as one.
 - **Where the effort ended.** What was done, that the item is still open, and how the chart will catch the next contact.
+
 # The Adverse Event and the Records Request
 
 ## A glucose of 48 at 05:50

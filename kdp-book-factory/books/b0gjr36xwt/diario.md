@@ -56,3 +56,5 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-12 16:40 UTC · consegna `editor2-09-11.md` importata: sezioni 09, 10, 11 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261012-164030)
 - 2026-10-12 16:41 UTC · finito `editor` (id `afe3322c583eab2b5`): «/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor2-17-20.md: quattro capitoli corretti; parole 17 = 1821 (prima 1822), 18 = 1841 (1840), 19 = 1811 (1835), 20 = 1798 (1798).»
 - 2026-10-12 16:41 UTC · consegna `editor2-17-20.md` importata: sezioni 17, 18, 19, 20 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261012-164142)
+- 2026-10-12 16:42 UTC · finito `editor` (id `ae5fdb80699716ad5`): «`/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor2-21-23.md`: contiene i tre capitoli corretti (21, 22, 23), con circa 1.803, 1.801 e 1.891 parole. Le ho contate a mano, senza cont…»
+- 2026-10-12 16:42 UTC · consegna `editor2-21-23.md` importata: sezioni 21, 22, 23 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261012-164235)

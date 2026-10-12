@@ -20,7 +20,7 @@ The numbers are right, and little else is. "Due to RN error" names a cause Hazel
 
 ## The rewrite
 
-What Hazel found, did and said that morning, entry by entry:
+Two entries replace the 11:30 note: the findings and plan at 07:55, and the conversation with Mrs. Nyberg and Linda at 11:10.
 
 > 07:55. Hypoglycemia overnight. Per medication record, insulin glargine 40 units given 21:10 Tue; ordered dose 14 units. Per RN Joel Ramsey: at 05:50 diaphoretic, slow to answer, glucose 48; IV dextrose 05:55 per protocol; glucose 132 at 06:10, 96 at 07:00. Seen 07:15: awake, oriented x3, answers promptly, skin dry, no focal deficit. HR 88, BP 138/76. Glucose 84 at 07:30.
 >
@@ -66,4 +66,4 @@ Ask the attorney, first, whom they represent: you, your employer or both. If tho
 - **How long the danger lasts.** Monitoring, call limits and an end point to match.
 - **Who was told.** Clinicians involved in the care, with times; never the report or the call to risk management.
 - **The disclosure.** When, who was present and who spoke, what was said, the patient's questions in their words with the answers, and who speaks to them next.
-- **After a request, complaint or subpoena.** No new entries about the past care and no changes; today's care charted as usual.
+- **After an attorney's request, a complaint, a claim or a subpoena.** No new entries about the past care and no changes; today's care charted as usual.
