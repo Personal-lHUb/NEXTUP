@@ -2,9 +2,9 @@
 
 ## Antibiotics yes, needle no
 
-Light hurts Derek Sutton's eyes, and his neck is stiff. He is thirty-eight and has had fever and a headache since the previous evening. Carmen Vasquez, ten months into her work as an NP in the emergency department of a county hospital, sees him at 13:25 on a Thursday. His temperature is 102.6°F and his heart rate 112. He is alert and oriented, with no rash and no focal deficit. Like every case in the book, this one never happened.
+Light hurts Derek Sutton's eyes, and his neck is stiff. He is thirty-eight and has had fever and a headache since the previous evening. Carmen Vasquez, one of the NPs in the emergency department of a county hospital, sees him at 13:25 on a Thursday. His temperature is 102.6°F and his heart rate 112. He is alert and oriented, with no rash and no focal deficit.
 
-She thinks first of bacterial meningitis and goes straight to Dr. Joanne Whitaker, the ED attending. Blood cultures are drawn at 13:40, and by 13:50 ceftriaxone and vancomycin are running, dexamethasone given with the first dose. Dr. Whitaker will do the lumbar puncture, or LP, and at 14:05 Carmen goes back to explain it. Mr. Sutton hears her out, then shakes his head. "I'll take the antibiotics, and I'll stay as long as you want. But nobody's putting a needle in my back."
+No real patient, NP or hospital lies behind this afternoon. Carmen thinks first of bacterial meningitis and goes straight to Dr. Joanne Whitaker, the ED attending. Blood cultures are drawn at 13:40, and by 13:50 ceftriaxone and vancomycin are running, dexamethasone given with the first dose. Dr. Whitaker will do the lumbar puncture, or LP, and at 14:05 Carmen goes back to explain it. Mr. Sutton hears her out, then shakes his head. "I'll take the antibiotics, and I'll stay as long as you want. But nobody's putting a needle in my back."
 
 She talks it through with him and his wife for fifteen minutes, and Dr. Whitaker joins them at 14:10. He does not change his mind. At 14:30 he signs the hospital's refusal form, and at 14:40 Carmen calls the admitting hospitalist.
 
@@ -30,7 +30,7 @@ It answers neither half of the question. "Risks explained" does not say which ri
 
 ## The rewrite
 
-The note Carmen could have signed at 14:50 holds only what she did and heard:
+Signed at 14:50, the note can carry the whole conversation, from the first offer to the next one:
 
 > 14:50. Lumbar puncture declined; rest of plan accepted. Suspected bacterial meningitis (history and exam above). Blood cultures 13:40; ceftriaxone and vancomycin started 13:50, dexamethasone with the first dose. LP recommended to confirm the diagnosis, identify the organism and guide the choice and length of treatment; Dr. J. Whitaker, ED attending, to perform.
 >

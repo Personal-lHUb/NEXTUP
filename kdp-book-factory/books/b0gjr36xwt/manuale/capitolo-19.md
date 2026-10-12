@@ -2,7 +2,7 @@
 
 ## A third episode in a month
 
-The pain began at 18:15 on a Wednesday, half an hour after dinner. At 19:50 Bettina Prentiss, forty-four, describes it to Paloma Marchetti, a cardiac rehabilitation nurse for eleven years and an NP for eight months, at an urgent care clinic with X-ray and an ECG machine, but no ultrasound and no same-night blood tests. The pain is steady, under her breastbone and right ribs, and reaches around to her right shoulder blade. She has had two episodes like it this month, each gone within an hour or two. The clinic and both women are inventions.
+The pain began at 18:15 on a Wednesday, half an hour after dinner. At 19:50 Bettina Prentiss, forty-four, describes it to Paloma Marchetti, an NP at an urgent care clinic with X-ray and an ECG machine, but no ultrasound and no same-night blood tests. The pain is steady, under her breastbone and right ribs, and reaches around to her right shoulder blade. She has had two episodes like it this month, each gone within an hour or two. The clinic and both women are inventions.
 
 Her temperature is 98.4°F and her heart rate 92. Her right upper abdomen is tender. When Paloma presses under the ribs and asks for a deep breath, the breath does not catch, so Murphy sign, a pointer to an inflamed gallbladder, is absent. Her eyes are not yellow and her ECG is normal. After ketorolac and ondansetron at 20:05, her pain is down to 1 out of 10 by 20:50.
 
@@ -42,11 +42,11 @@ The printed handout can still go home with her, but it speaks to any patient wit
 
 "F/u PCP" names a category, not a plan. A follow-up the record can defend has a who, a when and a way in. The who is a clinician or service by name, ideally one who knows the patient is coming, as Dr. Varma did from Paloma's message that evening. The when is a date, or a deadline tied to an event. The way in is a phone number, the hours it answers and a means of getting there.
 
-The line many notes leave out covers the appointment that cannot be made. Imaging slots fill, and primary care offices can book weeks ahead. For a patient with no primary care clinician, "follow up with PCP" points nowhere, so the note names the clinic or service that will see them instead. Paloma's last line gives the plan a floor: if neither the scan nor the visit happens by Friday, Ms. Prentiss comes back to the clinic that saw her. The front desk's Thursday call makes the clinic, not only the patient, responsible for noticing if no date comes.
+One more line covers the appointment that cannot be made. Imaging slots fill, and primary care offices can book weeks ahead. For a patient with no primary care clinician, "follow up with PCP" points nowhere, so the note names the clinic or service that will see them instead. Paloma's last line gives the plan a floor: if neither the scan nor the visit happens by Friday, Ms. Prentiss comes back to the clinic that saw her. The front desk's Thursday call makes the clinic, not only the patient, responsible for noticing if no date comes.
 
 ## The patient who comes back
 
-The rest of the case is just as invented. The earliest ultrasound was Tuesday, and Dr. Varma's office had nothing before the following week. At 08:20 on Friday Ms. Prentiss returns for the recheck she was offered. Ingrid Tolliver, a former operating room nurse in her second year as an NP at the clinic, sees her at 08:40.
+The rest of the case is just as invented. The earliest ultrasound was Tuesday, and Dr. Varma's office had nothing before the following week. At 08:20 on Friday Ms. Prentiss returns for the recheck she was offered. Ingrid Tolliver, who has the morning shift, sees her at 08:40.
 
 With the board filling, a second note comes easily:
 

@@ -2,9 +2,9 @@
 
 ## A pressure of 84 at 02:10
 
-Thirty-eight patients become Claire Yamada's at 19:00 on a Tuesday, five months into her work as a night hospital medicine NP, and she has never met any of them. One is Leonard Vogel, seventy-two, admitted at 14:30 by the day NP, Deepa Natarajan, with right pyelonephritis. The night is invented, and so is everyone in it.
+Thirty-eight patients become Claire Yamada's at 19:00 on a Tuesday, when her night shift as a hospital medicine NP begins, and she has never met any of them. One is Leonard Vogel, seventy-two, admitted at 14:30 by the day NP, Deepa Natarajan, with right pyelonephritis.
 
-His sign-out takes ninety seconds. Ceftriaxone has run since 13:10, and blood cultures from the emergency department are pending. His blood pressure, Deepa says, is "a little soft, 104 over 62 at five, after a liter in the ED. Probably dry. I'm holding his lisinopril." A repeat lactate is due at 21:00; the first, at 12:50, was 2.4. "If his systolic drops under 90, give him 500 of LR and recheck." Claire writes it on her list.
+Claire, her patients and her colleagues are characters, not people. Mr. Vogel's sign-out takes ninety seconds. Ceftriaxone has run since 13:10, and blood cultures from the emergency department are pending. His blood pressure, Deepa says, is "a little soft, 104 over 62 at five, after a liter in the ED. Probably dry. I'm holding his lisinopril." A repeat lactate is due at 21:00; the first, at 12:50, was 2.4. "If his systolic drops under 90, give him 500 of LR and recheck." Claire writes it on her list.
 
 At 21:40 she sees the repeat lactate: 1.6. At 02:10 his nurse, Ruby Whelan, pages her: blood pressure 84/50, temperature 101.3°F, and "he's sleepier than he was at midnight." Claire is at the bedside at 02:20. Before ordering anything, she opens his medication record and finds lisinopril 20 mg, his usual evening dose, given at 21:00; the order to continue it was still active. At 02:45 she calls Dr. Kofi Mensah, the night hospitalist.
 

@@ -54,3 +54,5 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-12 16:40 UTC · consegna `indice-cap5.json` importata come indice: capitolo 5 (sezione 6): «What You Don't Know Yet, Written Plainly» → «The Working Diagnosis and What Would Change It»
 - 2026-10-12 16:40 UTC · finito `editor` (id `aa933143f0911a693`): «I've written the three corrected chapters (09, 10, 11) to `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor2-09-11.md`. Word counts are about 1,756 for 09 (−6), 1,805 for 10 (−6) a…»
 - 2026-10-12 16:40 UTC · consegna `editor2-09-11.md` importata: sezioni 09, 10, 11 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261012-164030)
+- 2026-10-12 16:41 UTC · finito `editor` (id `afe3322c583eab2b5`): «/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor2-17-20.md: quattro capitoli corretti; parole 17 = 1821 (prima 1822), 18 = 1841 (1840), 19 = 1811 (1835), 20 = 1798 (1798).»
+- 2026-10-12 16:41 UTC · consegna `editor2-17-20.md` importata: sezioni 17, 18, 19, 20 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261012-164142)
