@@ -28,3 +28,17 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-11 11:46 UTC · finito `editor-sviluppo` (id `a7ce363ba7903f212`): «/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor-sviluppo-verifica.md — rapporto di verifica, 3 aperti (1 bloccante: i numeri di capitolo nell'introduzione non corrispondono all'in…»
 - 2026-10-11 11:47 UTC · consegna `editor-sviluppo-verifica.md` importata in `revisioni/editor-sviluppo-verifica.md`
 - 2026-10-11 11:47 UTC · verifica dell'editor di sviluppo importata in revisioni/editor-sviluppo-verifica.md: 1 bloccante (A1 numeri di capitolo nell'introduzione), 4 importanti (A2, N1, N2, N3), 8 minori. Fase 5 non chiusa; prossimo passo, al via dell'autore: secondo giro dell'editor
+- 2026-10-12 16:31 UTC · lanciato `indice` «Indice: titolo del capitolo 5» → `prompt/20261012-163152-indice-indice-titolo-del-capitolo-5.md`
+- 2026-10-12 16:31 UTC · `indice` «Indice: titolo del capitolo 5» in background, id `a5f83dc189284f832`
+- 2026-10-12 16:32 UTC · lanciato `editor` «Secondo giro: sezioni 1-2» → `prompt/20261012-163249-editor-secondo-giro-sezioni-1-2.md`
+- 2026-10-12 16:32 UTC · `editor` «Secondo giro: sezioni 1-2» in background, id `ab106b72c6c7a348c`
+- 2026-10-12 16:32 UTC · lanciato `editor` «Secondo giro: sezioni 5-8» → `prompt/20261012-163253-editor-secondo-giro-sezioni-5-8.md`
+- 2026-10-12 16:32 UTC · `editor` «Secondo giro: sezioni 5-8» in background, id `a15936c4e44f969e5`
+- 2026-10-12 16:32 UTC · lanciato `editor` «Secondo giro: sezioni 9-11» → `prompt/20261012-163258-editor-secondo-giro-sezioni-9-11.md`
+- 2026-10-12 16:32 UTC · `editor` «Secondo giro: sezioni 9-11» in background, id `aa933143f0911a693`
+- 2026-10-12 16:33 UTC · lanciato `editor` «Secondo giro: sezioni 14-16» → `prompt/20261012-163302-editor-secondo-giro-sezioni-14-16.md`
+- 2026-10-12 16:33 UTC · `editor` «Secondo giro: sezioni 14-16» in background, id `af65fb2c75df95a63`
+- 2026-10-12 16:33 UTC · lanciato `editor` «Secondo giro: sezioni 17-20» → `prompt/20261012-163306-editor-secondo-giro-sezioni-17-20.md`
+- 2026-10-12 16:33 UTC · `editor` «Secondo giro: sezioni 17-20» in background, id `afe3322c583eab2b5`
+- 2026-10-12 16:33 UTC · lanciato `editor` «Secondo giro: sezioni 21-23» → `prompt/20261012-163311-editor-secondo-giro-sezioni-21-23.md`
+- 2026-10-12 16:33 UTC · `editor` «Secondo giro: sezioni 21-23» in background, id `ae5fdb80699716ad5`
