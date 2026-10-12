@@ -21,6 +21,7 @@ from pathlib import Path
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
 from reportlab.lib.styles import ParagraphStyle
+from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import (
     ActionFlowable,
     BaseDocTemplate,
@@ -606,21 +607,35 @@ def _maiuscoletto(testo: str, corpo: float) -> str | None:
 #: al massimo tante parole. Un'ultima riga di una parola sola («it.») è il buco
 #: che il compositore di un editore toglie per primo.
 CODA_MIN_CARATTERI = 10
-CODA_MAX_PAROLE = 3
+CODA_MAX_PAROLE = 4
+#: Quando la giustezza è nota, la coda si misura in larghezza: almeno questa
+#: quota della riga. Il controllo d'impaginazione segnala sotto il 12%; dieci
+#: caratteri ne facevano l'11,6% in 6×9 (b0gjr36xwt, sei righe segnalate) e
+#: molto meno in 8,5×11.
+CODA_QUOTA_RIGA = 0.14
 
 
-def _lega_coda(testo: str) -> str:
+def _lega_coda(testo: str, larghezza_min: float = 0.0, font: str = "", corpo: float = 0.0) -> str:
     """Le ultime parole del capoverso unite da spazi unificatori, così l'ultima
     riga non resta mai con una parola corta da sola.
 
     ReportLab tratta lo spazio unificatore come parte della parola: le parole
-    legate vanno a capo insieme. Un capoverso di poche parole resta com'è.
+    legate vanno a capo insieme. Con `larghezza_min` (punti) e il font, la coda
+    si misura in larghezza; senza, in caratteri. Un capoverso di poche parole
+    resta com'è.
     """
     parole = testo.rstrip().split(" ")
     if len(parole) <= CODA_MAX_PAROLE * 2:
         return testo
+
+    def corta(coda: list[str]) -> bool:
+        riga = " ".join(coda)
+        if larghezza_min and font:
+            return pdfmetrics.stringWidth(riga.replace("*", ""), font, corpo) < larghezza_min
+        return len(riga) < CODA_MIN_CARATTERI
+
     coda = [parole.pop()]
-    while len(coda) < CODA_MAX_PAROLE and len(" ".join(coda)) < CODA_MIN_CARATTERI:
+    while len(coda) < CODA_MAX_PAROLE and corta(coda):
         coda.insert(0, parole.pop())
     return " ".join(parole) + " " + "\u00a0".join(coda)
 
@@ -663,6 +678,8 @@ def markdown_to_flowables(
 ) -> list:
     flowables: list = []
     first_para_done = not first_paragraph_flush
+    # la coda dei capoversi si misura sulla giustezza, quando è nota
+    coda_min = measure * CODA_QUOTA_RIGA if measure else 0.0
     pending_heading: Paragraph | None = None
     # Il maiuscoletto d'attacco va sul primo capoverso del capitolo, se il
     # capitolo comincia con un capoverso: dopo un titoletto non serve.
@@ -703,14 +720,15 @@ def markdown_to_flowables(
             first_para_done = False
         elif isinstance(block, mdlite.Paragraph):
             style = styles["body"] if first_para_done else styles["body_first"]
-            testo = _lega_coda(block.text)
+            testo = _lega_coda(block.text, coda_min, style.fontName, style.fontSize)
             markup = _maiuscoletto(testo, style.fontSize) if attacco else None
             emit(Paragraph(markup or mdlite.inline_to_markup(testo), style))
             first_para_done = True
         elif isinstance(block, mdlite.BulletList):
             items = [
                 Paragraph(
-                    mdlite.inline_to_markup(_lega_coda(item)),
+                    mdlite.inline_to_markup(_lega_coda(
+                        item, coda_min, styles["bullet"].fontName, styles["bullet"].fontSize)),
                     styles["bullet"],
                     bulletText=f"{index}." if block.ordered else "\u2022",
                 )

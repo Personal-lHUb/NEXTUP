@@ -195,3 +195,51 @@ def applica_indice(
     diario.annota(project, f"consegna `{file.name}` importata come indice: "
                            f"{'; '.join(cambi) or 'nessun titolo cambiato'}")
     return cambi, citati
+
+
+def applica_sostituzioni(
+    project: BookProject, file: Path, adesso: datetime | None = None,
+) -> list[dict]:
+    """Correzioni puntuali consegnate come sostituzioni, non come capitoli interi.
+
+    La consegna è una lista JSON di `{"sezione": N, "trova": "…", "sostituisci":
+    "…"}`. Per ritocchi piccoli (una frase per l'impaginazione, un rimando) un
+    capitolo intero rimandato costava duemila parole d'uscita per cambiarne
+    dieci. Ogni `trova` deve comparire una volta sola, alla lettera, nel suo
+    capitolo: se una non torna, non si applica niente.
+    """
+    voci = json.loads(file.read_text(encoding="utf-8"))
+    if isinstance(voci, dict):
+        voci = voci.get("sostituzioni", [])
+    outline = Outline.load(project.outline_path)
+    testi: dict[int, str] = {}
+    for voce in voci:
+        numero = int(voce["sezione"])
+        capitolo = project.root / "manuale" / f"capitolo-{numero:02d}.md"
+        if numero not in testi:
+            if not capitolo.exists():
+                raise ValueError(f"sezione {numero}: manca {capitolo.name}")
+            testi[numero] = capitolo.read_text(encoding="utf-8")
+        trova = voce["trova"]
+        volte = testi[numero].count(trova)
+        if volte != 1:
+            raise ValueError(f"sezione {numero}: «{trova[:60]}…» compare {volte} volte, non una")
+        if trova.startswith("# ") or voce["sostituisci"].startswith("# "):
+            raise ValueError(f"sezione {numero}: il titolo del capitolo non si cambia da qui")
+        testi[numero] = testi[numero].replace(trova, voce["sostituisci"])
+
+    copie = _cartella_backup(project, adesso)
+    copie.mkdir(parents=True, exist_ok=True)
+    esiti = []
+    for numero, testo in sorted(testi.items()):
+        capitolo = project.root / "manuale" / f"capitolo-{numero:02d}.md"
+        prima = len(capitolo.read_text(encoding="utf-8").split())
+        shutil.copy2(capitolo, copie / f"{capitolo.name}.prima")
+        capitolo.write_text(testo, encoding="utf-8")
+        esito = manuale.importa_capitolo(project, outline, numero, testo)
+        esito["parole_prima"] = prima
+        esiti.append(esito)
+    elenco = ", ".join(f"{e['numero']:02d}" for e in esiti)
+    diario.annota(project, f"consegna `{file.name}` importata: {len(voci)} sostituzioni "
+                           f"nelle sezioni {elenco} (backup {copie})")
+    return esiti

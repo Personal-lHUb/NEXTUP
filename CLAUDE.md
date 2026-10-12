@@ -31,7 +31,8 @@ Diario, prompt e consegne entrano in git; una nota a mano: `diario <slug> --nota
    dagli i percorsi, non il testo, e il suo file di consegna
    (`books/<slug>/consegne/<nome>.md`): scrive lì l'uscita intera e risponde
    con una riga. Nel libro la porta `consegna <slug> <file> --capitoli N …` (o
-   `--in <percorso>`), col backup; mai ricopiarla dalla chat. Confini: le promesse della vetrina le giudica
+   `--in <percorso>`; per i ritocchi l'editor consegna una lista JSON di
+   sostituzioni, `--sostituzioni`), col backup; mai ricopiarla dalla chat. Confini: le promesse della vetrina le giudica
    solo il `lettore-cieco`; i conti interni sono dell'`editor-sviluppo`, il
    `fact-checker` guarda solo il mondo fuori; la copertina è dell'agente
    `copertina`. Un confine si sposta nella tabella, poi

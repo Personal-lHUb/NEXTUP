@@ -116,6 +116,16 @@ class TestCoda(unittest.TestCase):
         self.assertTrue(typeset._lega_coda("a b c d e f g h of the whole month.")
                         .endswith(" the whole\u00a0month."))
 
+    def test_con_la_giustezza_la_coda_si_misura_in_larghezza(self):
+        # b0gjr36xwt: «like this:» faceva l'11,6% di una riga 6×9, sotto il 12%
+        # che il controllo d'impaginazione segnala
+        from reportlab.pdfbase import pdfmetrics
+
+        testo = "Nadia could have written a short entry at the bedside, something like this:"
+        legata = typeset._lega_coda(testo, 0.14 * 316, "Helvetica", 11)
+        coda = legata.rsplit(" ", 1)[1].replace("\u00a0", " ")
+        self.assertGreaterEqual(pdfmetrics.stringWidth(coda, "Helvetica", 11), 0.14 * 316)
+
     def test_le_parole_legate_vanno_a_capo_insieme(self):
         stili = typeset.build_styles(spec())
         testo = "word " * 13 + "endings it."

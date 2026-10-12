@@ -1763,6 +1763,10 @@ def cmd_consegna(args) -> int:
                 )
         elif args.in_file:
             print(f"{file.name} → {consegne.importa_file(project, file, args.in_file)}")
+        elif args.sostituzioni:
+            for esito in consegne.applica_sostituzioni(project, file):
+                print(f"{esito['numero']:02d}: {esito['parole_prima']} → {esito['parole']} parole "
+                      f"su {esito['parole_chieste']} chieste ({esito['scarto']:+.0%})")
         elif args.indice:
             cambi, citati = consegne.applica_indice(project, file)
             for riga in cambi or ["nessun titolo cambiato"]:
@@ -1770,7 +1774,8 @@ def cmd_consegna(args) -> int:
             for riga in citati:
                 print(f"da sistemare: {riga}")
         else:
-            raise SystemExit("Indica --capitoli N [N …], --in <percorso>, --indice oppure --letta.")
+            raise SystemExit(
+                "Indica --capitoli N [N …], --in <percorso>, --sostituzioni, --indice oppure --letta.")
     except ValueError as errore:
         raise SystemExit(str(errore)) from errore
     return 0
@@ -2218,6 +2223,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="i numeri delle sezioni consegnate, in ordine: vanno in manuale/ e nel manoscritto")
     p.add_argument("--in", dest="in_file", default="",
                    help="il percorso nel libro dove copiarla intera (revisioni/lettore-cieco.md)")
+    p.add_argument("--sostituzioni", action="store_true",
+                   help="correzioni puntuali: lista JSON di {sezione, trova, sostituisci}")
     p.add_argument("--indice", action="store_true",
                    help="i titoli dell'agente indice: scaletta, capitoli e manuale/indice.json")
     p.add_argument("--letta", action="store_true", help="segnala nel diario che è stata letta e usata")

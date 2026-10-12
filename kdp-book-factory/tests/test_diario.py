@@ -170,6 +170,25 @@ class TestConsegne(Base):
         self.assertIn("prima versione",
                       (self.libro / "manuale" / "capitolo-01.md").read_text(encoding="utf-8"))
 
+    def test_le_sostituzioni_puntuali_entrano_tutte_o_nessuna(self):
+        sost = self.libro / "consegne" / "ritocchi.json"
+        sost.write_text(json.dumps([
+            {"sezione": 1, "trova": "prima versione", "sostituisci": "versione ritoccata"},
+        ]), encoding="utf-8")
+        esiti = consegne.applica_sostituzioni(self.project, sost, adesso=ORA)
+        self.assertEqual([e["numero"] for e in esiti], [1])
+        self.assertIn("versione ritoccata",
+                      (self.libro / "manuale" / "capitolo-01.md").read_text(encoding="utf-8"))
+        self.assertIn("versione ritoccata", self.project.chapter_path(1).read_text(encoding="utf-8"))
+        sost.write_text(json.dumps([
+            {"sezione": 1, "trova": "versione ritoccata", "sostituisci": "x"},
+            {"sezione": 1, "trova": "frase che non c'è", "sostituisci": "y"},
+        ]), encoding="utf-8")
+        with self.assertRaises(ValueError):
+            consegne.applica_sostituzioni(self.project, sost)
+        self.assertIn("versione ritoccata",
+                      (self.libro / "manuale" / "capitolo-01.md").read_text(encoding="utf-8"))
+
     def test_un_rapporto_va_dove_serve(self):
         self.file.write_text("# Rapporto\n\n[minore] …\n", encoding="utf-8")
         arrivo = consegne.importa_file(self.project, self.file, "revisioni/lettore-cieco.md")
