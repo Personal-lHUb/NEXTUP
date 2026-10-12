@@ -2,7 +2,7 @@
 
 ## A no at 16:40
 
-Albert Yates, eighty-four, was admitted on Tuesday at 10:30 after three days of black stools. On admission he was oriented and conversant, and gastroenterology recommended an upper endoscopy, or EGD, for Wednesday at 09:00. His NP is Tessa Novak, a former geriatric nurse nine months into hospital medicine. He, his family and everyone caring for him exist only on these pages.
+Albert Yates, eighty-four, was admitted on Tuesday at 10:30 after three days of black stools. On admission he was oriented and conversant, and gastroenterology recommended an upper endoscopy, or EGD, for Wednesday at 09:00. His NP is Tessa Novak, a former geriatric nurse. He, his family and everyone caring for him exist only on these pages.
 
 At 16:40 a GI fellow brings the consent form. Mr. Yates pushes it away: "Nobody's doing anything to me." Since 15:30 his nurse, Imani Shaw, has charted that he is pulling at his IV line and calling her by his late wife's name. The fellow pages Tessa with one question: can he refuse?
 
