@@ -581,6 +581,7 @@ def _check_chapter_tails(
     if not opening_pages:
         return []
     tails: list[int] = []
+    dettagli: list[str] = []
     for opening in sorted(opening_pages):
         previous = opening - 1
         page_lines = by_page.get(previous, [])
@@ -589,6 +590,9 @@ def _check_chapter_tails(
         used = page_lines[-1].y1 - page_lines[0].y0
         if used < geo.text_height * CHAPTER_TAIL_RATIO:
             tails.append(previous)
+            # quante righe togliere: quelle sulla pagina di coda, testatina esclusa
+            righe = sum(1 for riga in page_lines if riga.y0 >= geo.top_margin)
+            dettagli.append(f"p. {previous}: {righe} righe, finisce con «…{page_lines[-1].text[-45:]}»")
     if not tails:
         return []
     return [
@@ -597,7 +601,9 @@ def _check_chapter_tails(
             severity="minore",
             category="coda di capitolo",
             issue=f"Capitoli che finiscono con poche righe su una pagina quasi vuota: "
-            f"pagine {_pages_label(tails)}.",
+            f"pagine {_pages_label(tails, limit=len(tails))}.",
+            # tutte, con quanto accorciare: chi ritocca il testo non deve rimisurare
+            quote=" · ".join(dettagli),
             suggestion="Accorcia il capitolo di qualche riga per farlo chiudere sulla pagina "
             "precedente, oppure allungalo fino a riempire almeno mezza pagina.",
         )
@@ -623,6 +629,7 @@ def _check_short_pages(
     fondo = geo.page_height - geo.bottom_margin
     soglia = ctx.spec.leading * SHORT_PAGE_LINES
     corte: list[int] = []
+    dettagli: list[str] = []
     for page, page_lines in sorted(by_page.items()):
         if page < body_start or not page_lines:
             continue
@@ -631,8 +638,12 @@ def _check_short_pages(
         # capitolo o di una pagina di parte (che non ha righe di testo corrente)
         if (page + 1) in openings or not any(round(riga.size, 1) == body_size for riga in dopo):
             continue
-        if fondo - max(line.y1 for line in page_lines) > soglia:
+        vuoto = fondo - max(line.y1 for line in page_lines)
+        if vuoto > soglia:
             corte.append(page)
+            ultima = max(page_lines, key=lambda riga: riga.y1)
+            righe_vuote = vuoto / ctx.spec.leading
+            dettagli.append(f"p. {page}: {righe_vuote:.1f} righe vuote dopo «…{ultima.text[-45:]}»")
     if not corte:
         return []
     return [
@@ -641,7 +652,9 @@ def _check_short_pages(
             severity="minore",
             category="pagina corta",
             issue=f"{len(corte)} pagine finiscono più di {SHORT_PAGE_LINES:g} righe sopra il "
-            f"fondo della gabbia a capitolo aperto: pagine del PDF {_pages_label(corte)}.",
+            f"fondo della gabbia a capitolo aperto: pagine del PDF {_pages_label(corte, limit=len(corte))}.",
+            # tutte, con le righe vuote e la fine del testo: chi ritocca non rimisura
+            quote=" · ".join(dettagli),
             suggestion="Di solito è un titoletto o una figura passati alla pagina dopo: "
             "allunga o accorcia di due righe il capoverso che precede.",
         )
