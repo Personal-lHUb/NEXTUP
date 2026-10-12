@@ -3,7 +3,7 @@
 ## What is happening now
 
 - A dangerous diagnosis to name and set aside, or a score or decision rule you relied on: *Writing the Differential You Actually Ran*
-- A working diagnosis you are not sure of, a choice the evidence leaves to the patient, a symptom with no cause yet: *What You Don't Know Yet, Written Plainly*
+- A working diagnosis you are not sure of, a choice the evidence leaves to the patient, a symptom with no cause yet: *The Working Diagnosis and What Would Change It*
 - A behavior to describe, the patient's words to quote, a label or a complaint about staff you are tempted to chart: *Facts, Quotes, and What Never Goes in the Chart*
 - A copied or templated note, a signed note to correct or add to, care written up hours later: *Templates, Copy-Forward, and the Late Addendum*
 - A test to order, to skip or to leave for later: *The Test You Order and the Test You Don't*
@@ -61,7 +61,7 @@ The abnormal result, the prescription, the antibiotic or scan you decline, the t
 - **The interim plan and its owner.** What you did for the condition you suspected, and who was responsible for the patient while they waited.
 - **The limits that end the wait.** The findings that would make you stop waiting, who watches for them and what you will do.
 - **Each reassessment.** Its time, the findings that bear on the danger and the decision, including the decision to keep waiting.
-- **For a transfer.** The accepting facility and clinician, when they accepted and what it is pending, transport and its estimate, the alternatives considered, what the patient and family were told, and when you will act if the bed does not open.
+- **For a transfer.** The accepting facility and clinician, when they accepted and what it is pending, transport and its estimate, the alternatives considered, what the patient and family were told, and when you will act if the bed does not open; and, if your shift ends first, the handoff: time, the clinician by name, what you told them.
 
 ### The Consultant Who Never Comes
 
@@ -180,7 +180,7 @@ The abnormal result, the prescription, the antibiotic or scan you decline, the t
 - **How long the danger lasts.** Monitoring, call limits and an end point to match.
 - **Who was told.** Clinicians involved in the care, with times; never the report or the call to risk management.
 - **The disclosure.** When, who was present and who spoke, what was said, the patient's questions in their words with the answers, and who speaks to them next.
-- **After a request, complaint or subpoena.** No new entries about the past care and no changes; today's care charted as usual.
+- **After an attorney's request, a complaint, a claim or a subpoena.** No new entries about the past care and no changes; today's care charted as usual.
 
 ## Before you sign
 

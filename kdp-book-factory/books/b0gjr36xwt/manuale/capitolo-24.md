@@ -14,7 +14,7 @@ The phrases are models to rewrite, never text to paste. Their times, values, dos
 
 **Why:** The danger has reasons of its own, and the rule shows its inputs after the clinical judgment it requires.
 
-## What You Don't Know Yet, Written Plainly
+## The Working Diagnosis and What Would Change It
 
 **Weak:** r/o appendicitis. Clinical correlation recommended.
 
@@ -22,7 +22,7 @@ The phrases are models to rewrite, never text to paste. Their times, values, dos
 
 **Why:** "R/o" can mean open or excluded, and in a provider note the correlating clinician is you; say what would change your mind.
 
-**Weak:** Risks, benefits and alternatives discussed.
+**Weak:** Risks and benefits discussed, patient agrees with plan.
 
 **Defensible:** Options discussed: (1) ED now for blood work and imaging, likely several hours, may show nothing; (2) home, recheck here 09:00 tomorrow, accepting that appendicitis, if present, would be found later. Patient prefers 2, to avoid a night in the ED; roommate home overnight, has a car.
 
