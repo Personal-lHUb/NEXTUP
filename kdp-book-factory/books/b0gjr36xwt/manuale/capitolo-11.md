@@ -2,9 +2,9 @@
 
 ## A scanner out of service
 
-One CT scanner serves the whole community hospital. At 09:25 on a Friday Bianca Ellison, an NP in its emergency department for seven months, sees Victor Langley, sixty-seven, who has had cramping abdominal pain since 06:00. He has vomited four times and has passed no stool or gas since the night before. In his thirties he had open surgery for a ruptured appendix. His abdomen is distended and tender all over, without guarding or rebound. Mr. Langley, Bianca and the hospital are constructed.
+One CT scanner serves the whole community hospital. At 09:25 on a Friday Bianca Ellison, an NP in its emergency department, sees Victor Langley, sixty-seven, who has had cramping abdominal pain since 06:00. He has vomited four times and has passed no stool or gas since the night before. In his thirties he had open surgery for a ruptured appendix. His abdomen is distended and tender all over, without guarding or rebound.
 
-Bianca suspects a small bowel obstruction. At 09:40 she orders blood work and a CT of the abdomen and pelvis with IV contrast, and starts IV fluids, an antiemetic and morphine. At 09:55 the CT technologist calls: the scanner is out of service, and the repair should be done by noon. It is back at 12:40.
+The hospital, Bianca and Mr. Langley are drawn for this book, from no real record. She suspects a small bowel obstruction. At 09:40 she orders blood work and a CT of the abdomen and pelvis with IV contrast, and starts IV fluids, an antiemetic and morphine. At 09:55 the CT technologist calls: the scanner is out of service, and the repair should be done by noon. It is back at 12:40.
 
 The scan, read at 14:05, shows an obstruction without signs that the bowel is losing its blood supply, and the general surgeon recommends managing it without an operation. The hospitalist accepts Mr. Langley at 15:20, but there is no medical bed. In this hospital, by policy, the emergency clinician keeps writing orders for an admitted patient until a bed is assigned. His is assigned at 20:35.
 
@@ -24,7 +24,7 @@ More than eleven hours fit into one clause and two reassurances. "CT delayed, sc
 
 ## The rewrite
 
-Here is the same day as it could have been written, one timed entry at a time:
+In the rewrite, every step of the wait has its time, from the first exam to the bed:
 
 > 67M, cramping abdominal pain since 06:00, vomiting x4, no stool or flatus since last night. Open surgery for ruptured appendix, age 34. Seen 09:25: T 98.9°F, HR 98, BP 138/84. Abdomen distended, diffusely tender, no guarding or rebound. Assessment: suspected small bowel obstruction, likely adhesive; compromised bowel not excluded. Plan: NPO, IV fluids, ondansetron, morphine; labs and CT abdomen/pelvis with IV contrast ordered 09:40.
 >
@@ -54,7 +54,7 @@ How often to look again is your clinical judgment, set by how fast the danger yo
 
 ## The transfer that stalls
 
-Another constructed case moves the wait to a forty-bed rural hospital, where Corinne Abbott, a former flight nurse, is in her second year as a hospital medicine NP. Elaine Burke, fifty-eight, was admitted on Sunday with right upper abdominal pain and jaundice. Her ultrasound shows a dilated bile duct, her bilirubin is rising, and the plan is an ERCP, an endoscopic procedure to clear the duct, which this hospital does not offer. By Monday evening the chart could say "Accepted at Regional, awaiting bed. Pt and family aware." Some of Corinne's entries show what that line would hide:
+Another constructed case moves the wait to a forty-bed rural hospital, where Corinne Abbott, a former flight nurse, works as a hospital medicine NP. Elaine Burke, fifty-eight, was admitted on Sunday with right upper abdominal pain and jaundice. Her ultrasound shows a dilated bile duct, her bilirubin is rising, and the plan is an ERCP, an endoscopic procedure to clear the duct, which this hospital does not offer. By Monday evening the chart could say "Accepted at Regional, awaiting bed. Pt and family aware." Some of Corinne's entries show what that line would hide:
 
 > 10:15. Transfer requested for ERCP, not available here. 10:50 accepted by Dr. Isaac Farrow, gastroenterology, Regional Medical Center, pending bed; no estimate. 13:40 Regional: no bed yet. University Hospital called as an alternative: no bed.
 >
@@ -76,4 +76,4 @@ Sometimes the bed does not open before your shift ends. The last entry is then t
 - **The interim plan and its owner.** What you did for the condition you suspected, and who was responsible for the patient while they waited.
 - **The limits that end the wait.** The findings that would make you stop waiting, who watches for them and what you will do.
 - **Each reassessment.** Its time, the findings that bear on the danger and the decision, including the decision to keep waiting.
-- **For a transfer.** The accepting facility and clinician, when they accepted and what it is pending, transport and its estimate, the alternatives considered, what the patient and family were told, and when you will act if the bed does not open.
+- **For a transfer.** The accepting facility and clinician, when they accepted and what it is pending, transport and its estimate, the alternatives considered, what the patient and family were told, and when you will act if the bed does not open; and, if your shift ends first, the handoff: time, the clinician by name, what you told them.

@@ -2,9 +2,9 @@
 
 ## Ice in the parking lot
 
-At 07:50 on a Tuesday in January, Curtis Faber, thirty-eight, slipped on ice in the parking lot at work, pitched forward onto his outstretched right hand and struck his forehead on the pavement. The coworker who drove him in saw the fall and says he was "out for maybe five seconds." At 10:20 Celeste Hartley, a former school nurse five months into her first NP job, sees him at an urgent care clinic that has X-ray on site but no CT scanner; the nearest one is in an emergency department twenty minutes away. The case is fiction, built for teaching like all the others.
+The coworker who drove Curtis Faber to urgent care saw him fall. At 07:50 on a Tuesday in January, Mr. Faber, thirty-eight, slipped on ice in the parking lot at work, pitched forward onto his outstretched right hand and struck his forehead on the pavement; he was "out for maybe five seconds," the coworker says. The clinic has X-ray on site but no CT scanner; the nearest one is in an emergency department twenty minutes away. The NP on shift, Celeste Hartley, sees him at 10:20.
 
-Mr. Faber remembers slipping and everything after he came to. He has a mild headache, has not vomited, takes no medications and has had no alcohol. His vital signs and neurological exam are normal, and apart from a swelling on his forehead he shows no sign of a skull fracture. His right wrist is tender in the hollow at the base of the thumb, the anatomic snuffbox.
+Mr. Faber, Celeste and the clinic are fiction, written for teaching. He remembers slipping and everything after he came to. He has a mild headache, has not vomited, takes no medications and has had no alcohol. His vital signs and neurological exam are normal, and apart from a swelling on his forehead he shows no sign of a skull fracture. His right wrist is tender in the hollow at the base of the thumb, the anatomic snuffbox.
 
 Celeste orders an X-ray of the wrist with scaphoid views, and it shows no fracture. She does not order a CT of his head. The first decision leaves an order, a timestamp and a result in the chart. The second leaves nothing unless she writes it down.
 
