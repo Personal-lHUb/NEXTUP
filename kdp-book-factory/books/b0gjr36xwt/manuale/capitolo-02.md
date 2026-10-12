@@ -4,7 +4,7 @@
 
 When you write a note, it feels like a single document about a single moment. After a bad outcome it stops being that. Someone exports the entire record for the episode of care, including every note, order, vital sign, medication given, result and message, and sorts it by time. Your note becomes one entry on a line that runs from the patient's arrival to the event that brought the reviewer to the chart. The reviewer studies what each entry says, and also the spaces between the entries.
 
-Here is a constructed example. Nadia Brooks is a hospital medicine NP eight months into her first provider job. On a weekday afternoon she admits Harold Jensen, seventy-four, with community-acquired pneumonia. Cut down to its key entries, the record later put together for review reads like this:
+Here is a constructed example. Nadia Brooks is a hospital medicine NP on a general medical floor. On a weekday afternoon she admits Harold Jensen, seventy-four, with community-acquired pneumonia. Cut down to its key entries, the record later put together for review reads like this:
 
 - 14:20. Admission H&P signed by N. Brooks, NP: pneumonia, oxygen at 2 L by nasal cannula, antibiotics started.
 - 19:05. Nursing note: respiratory rate 26, oxygen saturation 89% on 2 L. NP paged.

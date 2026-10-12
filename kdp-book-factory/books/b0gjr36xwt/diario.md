@@ -45,3 +45,5 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-12 16:35 UTC · finito `indice` (id `a5f83dc189284f832`): «`/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/indice-cap5.json`: cap. 5 diventa «The Working Diagnosis and What Would Change It» (46 caratteri), tutto il resto identico. Le sette cita…»
 - 2026-10-12 16:35 UTC · lanciato `editor` «Secondo giro: sezioni 24-26» → `prompt/20261012-163518-editor-secondo-giro-sezioni-24-26.md`
 - 2026-10-12 16:35 UTC · `editor` «Secondo giro: sezioni 24-26» in background, id `ad24c7d1e03bce41c`
+- 2026-10-12 16:36 UTC · finito `editor` (id `ab106b72c6c7a348c`): «Ho scritto `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor2-01-02.md`, con due capitoli. Il 01 conta circa 1.154 parole (+1,7%), il 02 circa 1.846 (−0,1%); le parole le ho contat…»
+- 2026-10-12 16:36 UTC · consegna `editor2-01-02.md` importata: sezioni 01, 02 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261012-163656)
