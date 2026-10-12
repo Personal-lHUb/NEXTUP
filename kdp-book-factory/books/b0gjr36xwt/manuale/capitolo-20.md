@@ -48,7 +48,7 @@ Pending items need the same care, because a handoff moves ownership along with i
 
 ## Your assessment, not the sign-out's
 
-The sign-out carries the day team's working diagnosis, and as the chapter on what you don't know yet put it, a working diagnosis has a date on it. "Probably dry" described a man at 17:00. The man Claire saw at 02:20 had a fever, slow answers and a dose of lisinopril nobody had planned. Recorded as what you were told, the day team's view is a fact. Carried into your assessment, "per day team" or not, it is a judgment you did not make about a man who has since changed, with your signature under it.
+The sign-out carries the day team's working diagnosis, and as the chapter on the working diagnosis put it, a working diagnosis has a date on it. "Probably dry" described a man at 17:00. The man Claire saw at 02:20 had a fever, slow answers and a dose of lisinopril nobody had planned. Recorded as what you were told, the day team's view is a fact. Carried into your assessment, "per day team" or not, it is a judgment you did not make about a man who has since changed, with your signature under it.
 
 The if-then plan in the sign-out deserves the same look. "Give him 500 of LR" was advice written before the event, by someone picturing it. When the event comes, decide whether the advice still fits, and write which it was: followed, changed or set aside, with the reason in a few words. The last line of Claire's assessment does that, and it turns a bolus twice the planned size from a deviation into a decision.
 

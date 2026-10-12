@@ -44,7 +44,7 @@ The population comes first. The Canadian CT Head Rule applies to patients aged s
 
 The times come next. One criterion is the Glasgow Coma Scale score two hours after the injury, so the note needs both the time of the fall and the time of the exam. "GCS 15" with no time beside it does not let a reader apply the rule.
 
-Then the output, stated no larger than it is. "CT not required by the rule" is not "no brain injury," and the working diagnosis stays concussion. A rule that says a scan is unnecessary has not said that nothing is wrong. That is the honest uncertainty of the chapter on what you don't know yet, applied to a decision tool, and it is why the plan still tells Mr. Faber what would bring him back.
+Then the output, stated no larger than it is. "CT not required by the rule" is not "no brain injury," and the working diagnosis stays concussion. A rule that says a scan is unnecessary has not said that nothing is wrong. That is the honest uncertainty of the chapter on the working diagnosis, applied to a decision tool, and it is why the plan still tells Mr. Faber what would bring him back.
 
 The plan records a choice that was shared. Mr. Faber was neither asking for a scan nor refusing one; he was weighing hours in an emergency department against an evening at home with someone watching, and his own words show which mattered to him. The three parts of a shared decision from that same chapter are all there, his choice recorded with his reason and the person who makes it safe. If Celeste had not offered the scan and he had asked for one, the encounter would belong to the chapter on the antibiotic or scan you decline.
 

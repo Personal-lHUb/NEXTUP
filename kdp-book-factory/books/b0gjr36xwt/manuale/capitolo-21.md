@@ -38,7 +38,7 @@ This time the note opens with how the visit was held and ends with the numbers t
 
 The rewrite sorts the remote exam by source. What Maya saw or heard through the connection is *observed*, and it counts as her exam. A number from the patient's own device, read on camera at Maya's request, is *measured*: data with a source, so the note names the device and how the reading was seen. A number the patient only reports is history. And the line on what was not assessable names what the modality ruled out.
 
-That line keeps the assessment honest. Pneumonia stays "not excluded" because nobody heard the lungs, and the plan answers it, as the chapter on what you don't know yet requires: a fever is one of the triggers for the morning visit. The reasons for remote care point to findings already in the note, so a reviewer can test the decision against them. The thresholds open two doors, the clinic for slow progress and the emergency department for danger, each with numbers Ms. Pacheco can read on her own devices. If the video fails partway, the note says when, and what was seen before it.
+That line keeps the assessment honest. Pneumonia stays "not excluded" because nobody heard the lungs, and the plan answers it, as the chapter on the working diagnosis requires: a fever is one of the triggers for the morning visit. The reasons for remote care point to findings already in the note, so a reviewer can test the decision against them. The thresholds open two doors, the clinic for slow progress and the emergency department for danger, each with numbers Ms. Pacheco can read on her own devices. If the video fails partway, the note says when, and what was seen before it.
 
 ## Advice by phone and portal
 

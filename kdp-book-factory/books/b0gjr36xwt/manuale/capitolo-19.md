@@ -18,7 +18,7 @@ Her note goes into the chart at 21:15:
 
 > 44F epigastric/RUQ pain after dinner, vomiting x1, similar episodes x2. RUQ tender. ECG nl. Toradol, Zofran, pain resolved. Dx: biliary colic. Outpt US. F/u PCP. Return to ED for worsening pain, fever or other concerns. Abdominal pain handout given.
 
-The diagnosis reads as settled. That is the false certainty the chapter on what you don't know yet found in Erin Kowalski's first note, and here the discharge pays for it. A settled diagnosis seems to need no precautions of its own, so these could follow any visit. "Worsening pain" leaves a woman whose pain comes and goes to judge alone whether a recurrence counts, and "fever" has no number. "Outpt US" has nobody booking it, and "F/u PCP" has no name or date. The note also drops the emergency department she was offered, so home reads as the only option anyone considered.
+The diagnosis reads as settled. That is the false certainty the chapter on the working diagnosis found in Erin Kowalski's first note, and here the discharge pays for it. A settled diagnosis seems to need no precautions of its own, so these could follow any visit. "Worsening pain" leaves a woman whose pain comes and goes to judge alone whether a recurrence counts, and "fever" has no number. "Outpt US" has nobody booking it, and "F/u PCP" has no name or date. The note also drops the emergency department she was offered, so home reads as the only option anyone considered.
 
 ## The rewrite
 
@@ -34,7 +34,7 @@ With the open questions left in, the same visit reads:
 
 ## Precautions the assessment wrote
 
-Each instruction in the rewrite takes a diagnosis from the assessment and turns it into something Ms. Prentiss could notice at home. An inflamed gallbladder shows as pain that does not go away, or as fever. A stone in the bile duct shows as yellow eyes or dark urine, and pancreatitis as pain through to the back with vomiting. This is the sentence about what would change your mind, from the chapter on what you don't know yet, carried to the door. Without that sentence the precautions have nothing to be written from, which is how the first note ended up with a generic list.
+Each instruction in the rewrite takes a diagnosis from the assessment and turns it into something Ms. Prentiss could notice at home. An inflamed gallbladder shows as pain that does not go away, or as fever. A stone in the bile duct shows as yellow eyes or dark urine, and pancreatitis as pain through to the back with vomiting. This is the sentence about what would change your mind, from the chapter on the working diagnosis, carried to the door. Without that sentence the precautions have nothing to be written from, which is how the first note ended up with a generic list.
 
 The printed handout can still go home with her, but it speaks to any patient with abdominal pain, while the note says what this one was told. "Return precautions given," inserted at a keystroke as the chapter on templates and the late addendum warned, names none of them. What she understood goes in her own words, together with the question that drew them out, quoted by the rules in the chapter on facts and quotes. Her first answer left out the back pain, and the rewrite records Paloma going over it again. The record now shows an instruction that was checked, not assumed.
 
