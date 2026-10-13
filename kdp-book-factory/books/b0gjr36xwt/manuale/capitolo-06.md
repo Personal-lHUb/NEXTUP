@@ -10,7 +10,7 @@ Erin thinks a stomach virus is the likeliest explanation. She also knows that ap
 
 ## Two ways to write it wrong
 
-Here is one note she could write about her imaginary patient:
+Here is one note she could write about this invented patient:
 
 > 19M abd pain x 6 hrs, vomiting x1, roommate w/ similar illness. Abd soft, mild periumbilical tenderness. Dx: viral gastroenteritis. Ondansetron, clear fluids. RTC PRN.
 

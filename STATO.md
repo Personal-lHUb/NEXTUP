@@ -1,6 +1,6 @@
 # Stato della fabbrica
 
-Aggiornato il 10 ottobre 2026. Si aggiorna alla fine di ogni sessione: chi apre la
+Aggiornato il 13 ottobre 2026. Si aggiorna alla fine di ogni sessione: chi apre la
 sessione dopo parte da qui.
 
 ## Il libro in corso
@@ -89,8 +89,12 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   (`revisioni/ritocchi-impaginazione.md`): **178 pagine, impaginazione 0
   rilievi, `qa` 0 errori** (2 avvisi voluti). Motore: coda dei capoversi
   misurata sulla giustezza, rapporto d'impaginazione con tutte le pagine e le
-  righe da ritoccare. In corso la verifica finale dell'editor di sviluppo
-  (`consegne/editor-sviluppo-verifica-3.md`).
+  righe da ritoccare. Verifica finale dell'editor di sviluppo
+  (`revisioni/editor-sviluppo-verifica-3.md`): tutti i rilievi risolti, i 6
+  minori nati dai ritocchi corretti a lunghezza invariata. **Fase 5 chiusa**
+  (13 ottobre): 0 bloccanti, impaginazione 0 rilievi, `qa` 0 errori.
+  Prossimo passo, al via dell'autore: fase 6, la scheda prodotto. La fase 7
+  (copertina) aspetta la sua decisione sul formato.
 - **Richieste dell'autore per dopo il collegio**: se il lettore cieco dà l'OK,
   le immagini dell'interno prendendo a riferimento i libri analoghi (i box per
   le note deboli e riscritte, più quello che il confronto suggerisce, con un

@@ -298,7 +298,7 @@ Erin thinks a stomach virus is the likeliest explanation. She also knows that ap
 
 ## Two ways to write it wrong
 
-Here is one note she could write about her imaginary patient:
+Here is one note she could write about this invented patient:
 
 > 19M abd pain x 6 hrs, vomiting x1, roommate w/ similar illness. Abd soft, mild periumbilical tenderness. Dx: viral gastroenteritis. Ondansetron, clear fluids. RTC PRN.
 
@@ -480,9 +480,9 @@ Before you sign, a change is just an edit. After, it is an entry of its own, wit
 
 The coworker who drove Curtis Faber to urgent care saw him fall. At 07:50 on a Tuesday in January, Mr. Faber, thirty-eight, slipped on ice in the parking lot at work, pitched forward onto his outstretched right hand and struck his forehead on the pavement; he was "out for maybe five seconds," the coworker says. The clinic has X-ray on site but no CT scanner; the nearest one is in an emergency department twenty minutes away. His turn comes at 10:20, with Celeste Hartley, the NP on shift.
 
-The head-injury rule Celeste will apply is real; the case around it is not. He remembers slipping and everything after he came to. He has a mild headache, has not vomited, takes no medications and has had no alcohol. His vital signs and neurological exam are normal, and apart from a swelling on his forehead he shows no sign of a skull fracture. His right wrist is tender in the hollow at the base of the thumb, the anatomic snuffbox.
+The Canadian CT Head Rule, which Celeste applies, is real; the case around it is not. He remembers slipping and everything after he came to. He has a mild headache, has not vomited, takes no medications and has had no alcohol. His vital signs and neurological exam are normal, and apart from a swelling on his forehead he shows no sign of a skull fracture. His right wrist is tender in the hollow at the base of the thumb, the anatomic snuffbox.
 
-Celeste orders an X-ray of the wrist with scaphoid views, and it shows no fracture. She does not order a CT of his head. He has none of the rule's seven criteria, and, told that a scan means hours at an emergency department twenty minutes away, he chooses to go home, where his wife can watch him tonight. The first decision leaves an order, a timestamp and a result in the chart. The second leaves nothing unless she writes it down.
+Celeste orders an X-ray of the wrist with scaphoid views, and it shows no fracture. She does not order a CT of his head. He has none of the rule's seven criteria, and, told that a scan means hours away from home and a small radiation dose, he chooses to go home, where his wife can watch him tonight. The first decision leaves an order, a timestamp and a result in the chart. The second leaves nothing unless she writes it down.
 
 ## What the record will be asked
 
@@ -569,7 +569,7 @@ Suppose Mr. Delgado never reaches the emergency department. His wife may say he 
 
 ## The rewrite
 
-Written with the whole chain in it, the same call reads:
+The same call, link by link, from the lab to the hospital:
 
 > Telephone encounter. Lab called critical K 6.6 at 17:05 to Gina Calloway, MA, who read it back; given to me 17:10. Drawn 09:40 today. Same panel: creatinine 1.9 (1.3 in March). Lab reports no hemolysis. On lisinopril 20 mg; spironolactone 25 mg added 7 days ago.
 >
@@ -707,7 +707,7 @@ Gloria Ainsworth, seventy-three, was admitted on Tuesday with a urinary tract in
 
 At 14:00 the foot is pale and cool to the ankle, with no pulse Jasmine can feel and only a faint signal on Doppler; sensation and movement are intact. She suspects the stent has closed, orders heparin and at 14:05 pages the vascular surgeon on call, Dr. Michael Kirby. No call comes back. At 14:20 she pages him again, and at 14:25 she calls Dr. Omar Bashir, the attending hospitalist on her service.
 
-By 14:40 the toes are numb. Dr. Bashir learns from the operating room desk that Dr. Kirby is scrubbed in a case expected to finish around 16:30, and through the house supervisor he reaches the chief of surgery, Dr. Helen Eastman, who is at the bedside at 15:25. Dr. Kirby never comes; his only answer is a call from the operating room at 16:35, when Mrs. Ainsworth is in the angiography suite and the decision has been made without him. Nobody need have failed for that to happen, and that is what makes the note hard to write.
+By 14:40 the toes are numb. Dr. Bashir learns from the operating room desk that Dr. Kirby is scrubbed in a case expected to finish around 16:30, and through the house supervisor he reaches the chief of surgery, Dr. Helen Eastman, who is at the bedside at 15:25. Dr. Kirby never comes; his only answer is a call from the operating room at 16:35, after the decision has been made without him, and he is told of Dr. Eastman's plan. Nobody need have failed for that to happen, and that is what makes the note hard to write.
 
 ## What the record will be asked
 
@@ -966,7 +966,7 @@ Then let the episode end. If "son hostile, security involved" is copied into eac
 
 ## The request that keeps coming back
 
-On day three of a cold, Neil Carver, fifty-one, sees Gemma Lockhart, the NP staffing a made-up urgent care clinic. He has type 2 diabetes and wants a steroid shot. She declines, with reasons written as the chapter on the antibiotic or scan you decline describes. He asks again ten minutes later, then a third time, louder, standing by the door. Her first draft argues back:
+Neil Carver, fifty-one, has type 2 diabetes, a cold now in its third day and one request: a steroid shot. Gemma Lockhart, an NP at a made-up urgent care clinic, declines, with reasons written as the chapter on the antibiotic or scan you decline describes. He asks again ten minutes later, then a third time, louder, standing by the door. Her first draft argues back:
 
 > Pt repeatedly demanding steroid injection despite multiple explanations. Became argumentative. I spent 20 minutes patiently explaining why it is not indicated. Pt would not accept plan.
 
@@ -1107,7 +1107,7 @@ Signed at 14:50, the note can carry the whole conversation and the next offer:
 >
 > Patient, 14:05: "I'll take the antibiotics, and I'll stay as long as you want. But nobody's putting a needle in my back." His reason: "My brother-in-law had one, and his back's never been right." Asked what could happen without it: "You can't be sure what bug it is, so I'm on the strong stuff longer, and you might miss something else." Capacity for this decision: alert, oriented; restated purpose and consequences in his own words, applies them to himself, reason consistent, choice unchanged throughout. Has capacity at this time to decline LP.
 >
-> Plan: admit to medicine; IV antibiotics as above, now planned as a full course. LP order cancelled, reason "declined by patient." Told he may change his mind at any time; RN Luis Navarro to page if he does. Refusal form signed 14:30. 14:40, Dr. Anita Rhodes, admitting hospitalist, told of the refusal and his reason; she will offer the LP again on admission.
+> Plan: admit to medicine; IV antibiotics as above, now a full course. LP order cancelled, reason "declined by patient." Told he may change his mind at any time; RN Luis Navarro to page if he does. Capacity reassessed if confused. Refusal form signed 14:30. 14:40, Dr. Anita Rhodes, admitting hospitalist, told of the refusal and his reason; she will offer the LP again on admission.
 
 ## What the conversation has to show
 
@@ -1564,7 +1564,7 @@ A complaint to your licensing board arrives as a letter, often with a deadline. 
 
 None of these calls decides anything, and nobody can promise you how the matter will end. Ask risk management what has arrived and from whom, whether the organization's coverage extends to you, what you may say, to whom, and whether you need your own attorney. Ask your insurer what your policy covers, from a subpoena to a board matter, as the chapter on where claims begin advised. Ask how soon notice is due, whether an attorney will be assigned and whether a settlement would need your consent.
 
-Ask the attorney, first, whom they represent: you, your employer or both. If those interests could diverge, ask whether you need counsel of your own. Then ask about deadlines, what happens next and your part in it, whom you may talk to about the event, and whether and how to write down what you remember. For Hazel, that means asking whether she may talk about the event with Joel Ramsey or Dr. Sato, and whether, and how, to set down her memory of the 15:30 recheck, with Linda in the room.
+Ask the attorney, first, whom they represent: you, your employer or both. If those interests could diverge, ask whether you need counsel of your own. Then ask about deadlines, what happens next and your part in it, whom you may talk to about the event, and whether and how to write down what you remember. For Hazel, that means asking whether she may talk about the event with Joel Ramsey or Dr. Sato, who both cared for Mrs. Nyberg, and how to set down what she remembers of the 15:30 recheck.
 
 ## What the note must contain
 

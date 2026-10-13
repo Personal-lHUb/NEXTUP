@@ -46,7 +46,7 @@ Then let the episode end. If "son hostile, security involved" is copied into eac
 
 ## The request that keeps coming back
 
-On day three of a cold, Neil Carver, fifty-one, sees Gemma Lockhart, the NP staffing a made-up urgent care clinic. He has type 2 diabetes and wants a steroid shot. She declines, with reasons written as the chapter on the antibiotic or scan you decline describes. He asks again ten minutes later, then a third time, louder, standing by the door. Her first draft argues back:
+Neil Carver, fifty-one, has type 2 diabetes, a cold now in its third day and one request: a steroid shot. Gemma Lockhart, an NP at a made-up urgent care clinic, declines, with reasons written as the chapter on the antibiotic or scan you decline describes. He asks again ten minutes later, then a third time, louder, standing by the door. Her first draft argues back:
 
 > Pt repeatedly demanding steroid injection despite multiple explanations. Became argumentative. I spent 20 minutes patiently explaining why it is not indicated. Pt would not accept plan.
 

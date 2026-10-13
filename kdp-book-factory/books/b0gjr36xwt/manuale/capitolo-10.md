@@ -28,7 +28,7 @@ Suppose Mr. Delgado never reaches the emergency department. His wife may say he 
 
 ## The rewrite
 
-Written with the whole chain in it, the same call reads:
+The same call, link by link, from the lab to the hospital:
 
 > Telephone encounter. Lab called critical K 6.6 at 17:05 to Gina Calloway, MA, who read it back; given to me 17:10. Drawn 09:40 today. Same panel: creatinine 1.9 (1.3 in March). Lab reports no hemolysis. On lisinopril 20 mg; spironolactone 25 mg added 7 days ago.
 >

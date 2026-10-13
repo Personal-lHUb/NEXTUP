@@ -6,7 +6,7 @@ Gloria Ainsworth, seventy-three, was admitted on Tuesday with a urinary tract in
 
 At 14:00 the foot is pale and cool to the ankle, with no pulse Jasmine can feel and only a faint signal on Doppler; sensation and movement are intact. She suspects the stent has closed, orders heparin and at 14:05 pages the vascular surgeon on call, Dr. Michael Kirby. No call comes back. At 14:20 she pages him again, and at 14:25 she calls Dr. Omar Bashir, the attending hospitalist on her service.
 
-By 14:40 the toes are numb. Dr. Bashir learns from the operating room desk that Dr. Kirby is scrubbed in a case expected to finish around 16:30, and through the house supervisor he reaches the chief of surgery, Dr. Helen Eastman, who is at the bedside at 15:25. Dr. Kirby never comes; his only answer is a call from the operating room at 16:35, when Mrs. Ainsworth is in the angiography suite and the decision has been made without him. Nobody need have failed for that to happen, and that is what makes the note hard to write.
+By 14:40 the toes are numb. Dr. Bashir learns from the operating room desk that Dr. Kirby is scrubbed in a case expected to finish around 16:30, and through the house supervisor he reaches the chief of surgery, Dr. Helen Eastman, who is at the bedside at 15:25. Dr. Kirby never comes; his only answer is a call from the operating room at 16:35, after the decision has been made without him, and he is told of Dr. Eastman's plan. Nobody need have failed for that to happen, and that is what makes the note hard to write.
 
 ## What the record will be asked
 

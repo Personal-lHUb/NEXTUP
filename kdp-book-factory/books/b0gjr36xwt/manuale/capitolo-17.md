@@ -38,7 +38,7 @@ Signed at 14:50, the note can carry the whole conversation and the next offer:
 >
 > Patient, 14:05: "I'll take the antibiotics, and I'll stay as long as you want. But nobody's putting a needle in my back." His reason: "My brother-in-law had one, and his back's never been right." Asked what could happen without it: "You can't be sure what bug it is, so I'm on the strong stuff longer, and you might miss something else." Capacity for this decision: alert, oriented; restated purpose and consequences in his own words, applies them to himself, reason consistent, choice unchanged throughout. Has capacity at this time to decline LP.
 >
-> Plan: admit to medicine; IV antibiotics as above, now planned as a full course. LP order cancelled, reason "declined by patient." Told he may change his mind at any time; RN Luis Navarro to page if he does. Refusal form signed 14:30. 14:40, Dr. Anita Rhodes, admitting hospitalist, told of the refusal and his reason; she will offer the LP again on admission.
+> Plan: admit to medicine; IV antibiotics as above, now a full course. LP order cancelled, reason "declined by patient." Told he may change his mind at any time; RN Luis Navarro to page if he does. Capacity reassessed if confused. Refusal form signed 14:30. 14:40, Dr. Anita Rhodes, admitting hospitalist, told of the refusal and his reason; she will offer the LP again on admission.
 
 ## What the conversation has to show
 
