@@ -17,8 +17,7 @@ scrivilo invece di stimare: l'accesso non lo fai tu.
 
 La copertina di un libro nuovo si progetta come farebbe un editore: prima si
 guarda che cosa vende nella sua categoria. Su amazon.com, reparto Books, apri la
-pagina Best Sellers della prima categoria nella riga «Best Sellers Rank» di
-https://www.amazon.com/dp/B0GJR36XWT e riporta il percorso della categoria e l'URL.
+pagina Best Sellers della categoria «Books > Medical Books > Nursing > Assessment & Diagnosis» e riporta il percorso della categoria e l'URL.
 
 Prima di cominciare: dal pulsante «Deliver to» di amazon.com imposta un
 indirizzo degli Stati Uniti (per esempio 10001), così prezzi e

@@ -93,10 +93,10 @@
       "perche": "Libro da leggere (full-content, casi in prosa). Nella nicchia il 6x9 è il formato dei libri da leggere (Chart Like a BOSS 313 pp, No-Guesswork 175 pp), l'8,5x11 delle raccolte di modelli da tavolo (Bulletproof 124 pp, Protocols Bible 198 pp). Misurato sul manoscritto: 6x9 = 176 pagine, 73 caratteri per riga; 8,5x11 = 124 pagine, 115 caratteri per riga, troppo lunghe per la prosa.",
       "chiesta_il": "2026-10-10T00:15:31Z",
       "scade_il": "",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "scelta dall'autore",
+      "valore": "6x9 (il formato del concorrente B0GJR36XWT: 6 x 0.3 x 9 in secondo Amazon e Bookshop.org)",
+      "deciso_il": "2026-10-13T11:25:59Z",
+      "applicata": true
     }
   ]
 }

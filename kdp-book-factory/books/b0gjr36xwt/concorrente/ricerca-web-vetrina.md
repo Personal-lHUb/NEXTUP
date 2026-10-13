@@ -17,7 +17,7 @@ libro né nel brief di copertina.
 | The Bulletproof Charting Bible for Nurses & NPs | 8,5 × 11 in | 124 | amazon.com (esiste anche una versione a spirale) |
 | The Charting Protocols Bible for Nurses & NPs | 8,5 × 11 in | 198 | amazon.com |
 | Chart Like a Boss: A Documentation Guide for Nurses (Goodman) | 5 × 8 in | — | amazon.com, amazon.ca |
-| Chart Like a Lawyer (il concorrente) | non trovato | 138 | — |
+| Chart Like a Lawyer (il concorrente) | 6 × 9 in | 138 | Amazon, Bookshop.org, Books-A-Million (ricerca web, 13 ottobre) |
 
 Lettura: due famiglie. Il **6 × 9** per i libri da leggere, il **8,5 × 11**
 per le raccolte di modelli e protocolli da consultare sul tavolo. Nessun dato

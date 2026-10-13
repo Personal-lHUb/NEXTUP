@@ -23,7 +23,7 @@ Formats and identifiers
 - Paperback: ASIN B0GJR36XWT, ISBN-13 979-8218860660, 138 pages (Amazon, Bookshop.org, ThriftBooks)
 - Kindle edition: ASIN B0GF4H2LVS, 132 pages (Amazon Kindle listing, Goodreads)
 - Ebook (Apple Books, RedShelf): ISBN 979-8218860677, 104 pages (Apple Books)
-- Dimensions: not found
+- Dimensions: 6 x 0.3 x 9 in (trim 6 x 9) — Amazon and Bookshop.org via web search, 13 October 2026; Books-A-Million gives the same size
 
 Price
 - Paperback list price: $36.98 (Barnes & Noble, ThriftBooks); $36.97 list, $35.49 sale (World of Books)
@@ -109,3 +109,4 @@ SOURCES
 - https://books.apple.com/us/book/chart-like-a-lawyer/id6757411468
 - https://www.tiktok.com/@the.legal.np/video/7571200137490337055 (publisher's description)
 - https://thelegalnp.com/
+- https://booksamillion.com/p/Chart-Like-Lawyer-Legal-Proof/Jaime-Weiland/9798218860660 (via search results only)

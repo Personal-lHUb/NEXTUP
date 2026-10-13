@@ -96,3 +96,9 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-13 06:54 UTC · finito `editor` (id `a35ef5d4cbfd4bb56`): «/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor4-sostituzioni.json: 8 sostituzioni con questa differenza di parole: 17 nota di Carmen +2 (commento invariato), 09 etichetta +2, 09 …»
 - 2026-10-13 06:54 UTC · consegna `editor4-sostituzioni.json` importata: 8 sostituzioni nelle sezioni 06, 09, 10, 12, 15, 17, 23 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261013-065421)
 - 2026-10-13 06:54 UTC · fase 5 chiusa: ultimi 8 ritocchi applicati a lunghezza invariata; build 178 pagine, impaginazione 0 rilievi, qa 0 errori (2 avvisi voluti), elenchi del 25 identici ai capitoli; manoscritto-completo.md rigenerato. Prossimo, al via dell'autore: fase 6 (scheda prodotto)
+- 2026-10-13 11:25 UTC · scelta dell'autore, formato: «6x9 (il formato del concorrente B0GJR36XWT: 6 x 0.3 x 9 in secondo Amazon e Bookshop.org)»
+- 2026-10-13 11:26 UTC · lanciato `copertina` «Copertina: tre direzioni d'arte» → `prompt/20261013-112655-copertina-copertina-tre-direzioni-d-arte.md`
+- 2026-10-13 11:26 UTC · `copertina` «Copertina: tre direzioni d'arte» in background, id `a147e0ef80649af3b`
+- 2026-10-13 11:27 UTC · lanciato `conformita` «Conformità: scheda prodotto» → `prompt/20261013-112754-conformita-conformit-scheda-prodotto.md`
+- 2026-10-13 11:27 UTC · `conformita` «Conformità: scheda prodotto» in background, id `a72ac820da9071f6d`
+- 2026-10-13 11:28 UTC · formato: scelta dell'autore 6x9, il formato del concorrente (6 x 0.3 x 9 in, Amazon e Bookshop.org via ricerca web). Fase 6: scheda scritta e importata (build/kdp-listing.md), parola chiave che prometteva protezione sostituita; conformità in corso. Fase 7: agente copertina sulle tre direzioni (studio della categoria parziale, senza Cowork)

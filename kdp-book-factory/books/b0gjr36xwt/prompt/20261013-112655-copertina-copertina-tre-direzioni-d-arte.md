@@ -1,0 +1,11 @@
+<!-- agente: copertina · Copertina: tre direzioni d'arte · 2026-10-13 11:26:55 UTC -->
+
+Libro `b0gjr36xwt`, cartella `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/`: *Hard Calls, Clear Notes: The NP Casebook of Defensible Documentation*, Dana Ellery, full-content, 6×9, 178 pagine, per nurse practitioner. Tocca a te la fase 7, passo 2: le tre direzioni d'arte.
+
+Il modello da compilare è `copertina-direzioni.json`, preparato da `copertina b0gjr36xwt --direzioni`; le regole sono in `../../docs/copertine.md` e nella sezione «7 · Copertina» di `../../docs/linee-guida.md`. Leggi i dati del libro: `build/vetrina.md`, `book.json` (titolo, sottotitolo, categorie, `notes`) e `outline.json` (tesi, quarta). Leggi le scelte dell'autore sui libri precedenti in `../../config/copertine-direzione.json`, se c'è. La copertina del concorrente è descritta a parole in `concorrente/copertina.md`; non va imitata.
+
+Lo studio della categoria fatto da Cowork **non c'è**: l'autore ha scelto la ricerca web della sessione, e Cowork non si lancia senza il suo consenso. Usa quello che c'è, cioè la sezione «Le copertine (dati scarsi)» di `concorrente/ricerca-web-vetrina.md`. Nel campo che il modello prevede per lo studio, o nelle note, scrivi che lo studio è parziale e su quali dati poggia. Il genere è documentazione clinica e tutela legale per NP. Il concorrente è rosso, con una linea del battito e una bilancia. La nicchia usa stetoscopio, clipboard, linea dell'ECG e fondi blu. Le tre direzioni devono stare nel genere e distinguersi dal concorrente.
+
+Il tuo campo, e solo quello: le tre direzioni (idea, soggetto, al massimo tre elementi, resa, luce, palette del motore, composizione, voce tipografica, perché venderebbe, come si distingue), senza testo nell'immagine e senza imitazioni. I prompt li scrive il sistema, non tu.
+
+Consegna: scrivi il JSON compilato, con la stessa forma del modello, in `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/copertina-direzioni.json`. È l'unico file che puoi scrivere; il resto lo porta un comando. Poi, da `/home/user/NEXTUP/kdp-book-factory`, esegui `python3 -c "import json;json.load(open('books/b0gjr36xwt/consegne/copertina-direzioni.json'))"` per controllare che sia JSON valido, e rispondi con una riga: il percorso e il nome delle tre direzioni.
