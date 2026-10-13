@@ -241,7 +241,8 @@ def build_package(
 
     epub_path = project.build_dir / f"{spec.slug}.epub"
     epub_module.build_epub(
-        spec, outline, chapters, epub_path, author_bio=meta.get("author_bio", "")
+        spec, outline, chapters, epub_path,
+        author_bio=meta.get("author_bio", ""), keywords=meta.get("keywords"),
     )
     result.epub_path = epub_path
 

@@ -97,6 +97,21 @@
       "valore": "6x9 (il formato del concorrente B0GJR36XWT: 6 x 0.3 x 9 in secondo Amazon e Bookshop.org)",
       "deciso_il": "2026-10-13T11:25:59Z",
       "applicata": true
+    },
+    {
+      "chiave": "copertina",
+      "proposta": "Direzione 1 «Il cerchio che la nota chiude» (stetoscopio a cerchio chiuso da una penna, titolo al centro, blu notte e verde acqua)",
+      "alternative": [
+        "Direzione 2 «L'ultima luce del turno» (postazione di notte, lampada calda, titolo in alto)",
+        "Direzione 3 «La lente del giorno dopo» (cartella sotto una lente, verde, titolo in alto)"
+      ],
+      "perche": "Agente copertina: la 1 dice la tesi del libro («close the loop», cap. 10) e col titolo incorniciato al centro regge meglio in miniatura; bozzetti a bassa risoluzione generati su Higgsfield il 13 ottobre",
+      "chiesta_il": "2026-10-13T11:41:36Z",
+      "scade_il": "",
+      "stato": "in attesa",
+      "valore": "",
+      "deciso_il": "",
+      "applicata": false
     }
   ]
 }

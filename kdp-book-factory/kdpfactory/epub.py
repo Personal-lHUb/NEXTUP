@@ -102,6 +102,7 @@ def build_epub(
     output: Path,
     *,
     author_bio: str = "",
+    keywords: list[str] | None = None,
     year: int | None = None,
 ) -> dict:
     year = year or spec.year or date.today().year
@@ -191,8 +192,10 @@ def build_epub(
     )
     spine = "\n".join(f'    <itemref idref="{Path(name).stem}"/>' for name, _, _ in documents)
     description = escape((outline.back_cover or spec.promise or spec.topic)[:900])
+    # Le parole chiave della scheda prodotto, se c'è: quelle di `book.json` sono
+    # della prima stesura e la scheda può averle cambiate.
     subjects = "\n".join(
-        f"    <dc:subject>{escape(keyword)}</dc:subject>" for keyword in spec.keywords
+        f"    <dc:subject>{escape(keyword)}</dc:subject>" for keyword in keywords or spec.keywords
     )
 
     opf = f"""<?xml version="1.0" encoding="utf-8"?>
