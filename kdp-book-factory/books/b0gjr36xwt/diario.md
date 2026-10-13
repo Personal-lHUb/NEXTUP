@@ -86,3 +86,5 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-13 06:28 UTC · ritocchi d'impaginazione, primo giro: 19 sostituzioni applicate; code di capitolo sparite, pagine corte da 13 a 3 (41, 110, 168); secondo giro lanciato su quelle tre
 - 2026-10-13 06:37 UTC · finito `editor` (id `a9391384c844389ad`): «/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/ritocchi-impaginazione-2.json: sei sostituzioni. Voce 1 (06, nota di Rachel Dunmore allungata) +12 parole: «If not reached, portal message…»
 - 2026-10-13 06:37 UTC · consegna `ritocchi-impaginazione-2.json` importata: 6 sostituzioni nelle sezioni 06, 17, 22, 23, 25 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261013-063708)
+- 2026-10-13 06:37 UTC · lanciato `editor-sviluppo` «Editor di sviluppo: verifica finale» → `prompt/20261013-063734-editor-sviluppo-editor-di-sviluppo-verifica-finale.md`
+- 2026-10-13 06:37 UTC · `editor-sviluppo` «Editor di sviluppo: verifica finale» in background, id `af84aacd8269e6d78`

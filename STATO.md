@@ -80,6 +80,17 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   con un titolo che non esiste), 8 minori. **La fase 5 non è chiusa**: il
   prossimo passo, quando lo fa partire l'autore, è un secondo giro dell'editor
   su questi rilievi, poi build e verifica.
+- **Aggiornamento 13 ottobre.** Tutti i rilievi risolti in tre giri
+  (`revisioni/piano-correzioni-2.md`, poi sostituzioni puntuali con `consegna
+  --sostituzioni`): l'introduzione nomina le parti senza numeri, il capitolo 6
+  si intitola «The Working Diagnosis and What Would Change It» (rimandi
+  allineati), etichette del caso inventato e presentazioni degli NP diverse fra
+  loro, glossario allineato. Ritocchi d'impaginazione
+  (`revisioni/ritocchi-impaginazione.md`): **178 pagine, impaginazione 0
+  rilievi, `qa` 0 errori** (2 avvisi voluti). Motore: coda dei capoversi
+  misurata sulla giustezza, rapporto d'impaginazione con tutte le pagine e le
+  righe da ritoccare. In corso la verifica finale dell'editor di sviluppo
+  (`consegne/editor-sviluppo-verifica-3.md`).
 - **Richieste dell'autore per dopo il collegio**: se il lettore cieco dà l'OK,
   le immagini dell'interno prendendo a riferimento i libri analoghi (i box per
   le note deboli e riscritte, più quello che il confronto suggerisce, con un
