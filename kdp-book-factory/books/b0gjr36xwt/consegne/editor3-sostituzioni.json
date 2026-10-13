@@ -1,0 +1,22 @@
+[
+  {"sezione": 6, "trova": "Erin, Ben and the clinic come from no real chart. Here is one note she could write:", "sostituisci": "Here is one note she could write about this imaginary visit:"},
+  {"sezione": 7, "trova": "No real patient or nurse practitioner stands behind Kendra or Mr. Teague.", "sostituisci": "Theirs is a story written to teach."},
+  {"sezione": 8, "trova": "Patient, NP and timeline are all constructed.", "sostituisci": "This book made up the morning, down to the minute."},
+  {"sezione": 9, "trova": "Mr. Faber, Celeste and the clinic are fiction, written for teaching.", "sostituisci": "The case is fictitious; the head-injury rule behind Celeste's decision is not."},
+  {"sezione": 11, "trova": "The hospital, Bianca and Mr. Langley are drawn for this book, from no real record. She suspects a small bowel obstruction.", "sostituisci": "Bianca, drawn for this book along with her patient, suspects a small bowel obstruction."},
+  {"sezione": 15, "trova": "Gemma Lockhart, an urgent care NP, sees Neil Carver, fifty-one, on day three of a cold. Mr. Carver's visit is invented too.", "sostituisci": "On day three of a cold, Neil Carver, fifty-one, sees Gemma Lockhart, an NP at a made-up urgent care clinic."},
+  {"sezione": 17, "trova": "No real patient, NP or hospital lies behind this afternoon.", "sostituisci": "This afternoon is fiction."},
+  {"sezione": 20, "trova": "Claire, her patients and her colleagues are characters, not people. Mr. Vogel's sign-out takes ninety seconds.", "sostituisci": "On this fictional Tuesday, Mr. Vogel's sign-out takes ninety seconds."},
+  {"sezione": 22, "trova": "Marlene Ostrowski, Nina and the practice are fictitious.", "sostituisci": "Ms. Ostrowski and Nina are creations of this book."},
+  {"sezione": 19, "trova": "Here is the note from what Ingrid did:", "sostituisci": "Ingrid's note sets Friday's findings next to Wednesday's:"},
+  {"sezione": 6, "trova": "Then add the sentence most notes leave out: what would change your mind.", "sostituisci": "Then add one more sentence: what would change your mind."},
+  {"sezione": 26, "trova": "The italics at the end of each entry name the chapter where the term first appears.", "sostituisci": "The italics at the end of each entry name the chapter to turn to for that term."},
+  {"sezione": 15, "trova": "In the rewrite, Mr. Lowell comes first and his son second:", "sostituisci": "A better version starts with Mr. Lowell and turns to his son afterward:"},
+  {"sezione": 21, "trova": "This time the note opens with how the visit was held and ends with the numbers that would bring her in:", "sostituisci": "How the visit was held goes first, and the numbers that would bring her in go last:"},
+  {"sezione": 22, "trova": "Every step gets a date and a time, from the call about the result to the day she calls back:", "sostituisci": "The fuller record begins with the call on March 18:"},
+  {"sezione": 7, "trova": "At 07:40 he is first on Kendra Walsh's weekend rounding list.", "sostituisci": "At 07:40, when Kendra Walsh begins her weekend rounds as the hospital medicine NP, he is first on her list."},
+  {"sezione": 9, "trova": "The NP on shift, Celeste Hartley, sees him at 10:20.", "sostituisci": "His turn comes at 10:20, with Celeste Hartley, the NP on shift."},
+  {"sezione": 15, "trova": "At 18:30 the nurse, Hector Avila, calls the hospital medicine NP, Rebecca Dorsey, to the room.", "sostituisci": "At 18:30 Rebecca Dorsey, the hospital medicine NP, is called to the room by the nurse, Hector Avila."},
+  {"sezione": 21, "trova": "Thursday afternoons are video visits at the primary care practice where Maya Thibodeaux works as an NP.", "sostituisci": "Thursday afternoons are video visits for Maya Thibodeaux, an NP in a primary care practice."},
+  {"sezione": 1, "trova": "the encounters away from the bedside, and what happens after an adverse event.", "sostituisci": "the encounters away from the bedside, the patient who drops out of care, and what happens after an adverse event."}
+]
