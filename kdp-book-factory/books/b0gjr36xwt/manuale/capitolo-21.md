@@ -2,7 +2,7 @@
 
 ## A peak flow held up to the camera
 
-Thursday afternoons are video visits at the primary care practice where Maya Thibodeaux works as an NP. At 14:40 she connects with Colleen Pacheco, forty-six, who has had asthma since childhood. A cold began on Saturday; since Monday she has been wheezing and short of breath, and since Tuesday she has needed her albuterol inhaler every four hours. This visit never happened, and neither did the night call later in the chapter.
+Thursday afternoons are video visits for Maya Thibodeaux, a primary care NP. At 14:40 she connects with Colleen Pacheco, forty-six, who has had asthma since childhood. A cold began on Saturday; since Monday she has been wheezing and short of breath, and since Tuesday she has needed her albuterol inhaler every four hours. This visit never happened, and neither did the night call later in the chapter.
 
 Maya cannot listen to her lungs, so she asks for what a camera can show. Ms. Pacheco talks in full sentences while she walks to the kitchen and back, lowers her collar, holds her pulse oximeter up to the lens, blows three times into her peak flow meter and turns the laptop toward her calves. At 14:58 Maya decides on home treatment and sets the point at which Ms. Pacheco must be seen in person.
 
@@ -22,7 +22,7 @@ Maya never typed one of these lines. "Lungs clear to auscultation" came from the
 
 ## The rewrite
 
-This time the note opens with how the visit was held and ends with the numbers that would bring her in:
+How the visit was held goes first, and the numbers that would bring her in go last:
 
 > Video visit, audio and video throughout, 14:40–14:58. Patient at home; address on file confirmed for emergency use. Identity confirmed by name, date of birth and chart photo. Alone. Telehealth consent per clinic process, confirmed at start.
 >

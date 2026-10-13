@@ -46,13 +46,13 @@ One more line covers the appointment that cannot be made. Imaging slots fill, an
 
 ## The patient who comes back
 
-The rest of the case is just as invented. The earliest ultrasound was Tuesday, and Dr. Varma's office had nothing before the following week. At 08:20 on Friday Ms. Prentiss returns for the recheck she was offered. Ingrid Tolliver, who has the morning shift, sees her at 08:40.
+The earliest ultrasound was Tuesday, and Dr. Varma's office had nothing before the following week. At 08:20 on Friday Ms. Prentiss returns for the recheck she was offered. Ingrid Tolliver, who has the morning shift, sees her at 08:40.
 
 With the board filling, a second note comes easily:
 
 > 44F known biliary colic, seen here Wed. Pain again today. Afebrile. RUQ tender. To ED for US and labs.
 
-"Known" turns Wednesday's working diagnosis, which no test has confirmed, into a fact. "RUQ tender" was in Wednesday's note too, and "afebrile" hides a number. Side by side, the two notes show the same findings and opposite decisions. A reader who knows the ending will decide that Wednesday's was the mistake. Here is the note from what Ingrid did:
+"Known" turns Wednesday's working diagnosis, which no test has confirmed, into a fact. "RUQ tender" was in Wednesday's note too, and "afebrile" hides a number. Side by side, the two notes show the same findings and opposite decisions. A reader who knows the ending will decide that Wednesday's was the mistake. Ingrid's note measures Friday against Wednesday:
 
 > Return visit. Seen here Wed 19:50 by P. Marchetti, NP; that note read before seeing patient. Working diagnosis then biliary colic, unconfirmed: US not done, earliest slot Tue; no PCP visit yet. Since Wed: Thu 22:00 episode like the others, gone by 23:30. Today dull, constant RUQ ache since 06:30, unchanged after ibuprofen 400 mg at 07:00. Nausea, no vomiting, no back pain, urine normal color. Seen 08:40: T 100.1°F (98.4 Wed), HR 98 (80 Wed at discharge). RUQ tender, Murphy sign positive (negative Wed). No jaundice.
 >

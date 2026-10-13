@@ -2,9 +2,9 @@
 
 ## A hard morning, written two ways
 
-A new IV line went into Raymond Teague's arm at 05:15 on Sunday. Overnight he had pulled out the old one, saying it burned, and the cefazolin dose due at 02:00 was given at 05:30. The night nurse filed an incident report about the late dose. Mr. Teague, sixty-two, was admitted on Friday with cellulitis of the left lower leg, and he has type 2 diabetes. At 07:40 he is first on Kendra Walsh's weekend rounding list.
+A new IV line went into Raymond Teague's arm at 05:15 on Sunday. Overnight he had pulled out the old one, saying it burned, and the cefazolin dose due at 02:00 was given at 05:30. The night nurse filed an incident report about the late dose. Mr. Teague, sixty-two, was admitted on Friday with cellulitis of the left lower leg, and he has type 2 diabetes. At 07:40, when Kendra Walsh begins her weekend rounds as the hospital medicine NP, he is first on her list.
 
-No real patient or nurse practitioner stands behind Kendra or Mr. Teague. When she walks in, he is sitting up and speaking loudly. He swears several times while describing the night. He says his leg pain is 8 out of 10, that "the pills don't touch it," and asks for IV hydromorphone by name. His fasting glucose is 287; asked about it, he says he stopped metformin about four months ago. Before she leaves he says he is going to get a lawyer. At 08:30, still irritated, she writes:
+Theirs is a story written to teach. When she walks in, he is sitting up and speaking loudly. He swears several times while describing the night. He says his leg pain is 8 out of 10, that "the pills don't touch it," and asks for IV hydromorphone by name. His fasting glucose is 287; asked about it, he says he stopped metformin about four months ago. Before she leaves he says he is going to get a lawyer. At 08:30, still irritated, she writes:
 
 > Pt belligerent and uncooperative on rounds, cursing at staff. Pulled out IV overnight; IV team didn't come for 3+ hrs (unit short-staffed again), so cefazolin given 3.5 hrs late. Hx noncompliance, off metformin for months. Drug-seeking, demanding IV Dilaudid. Apparently he knows more about his treatment than we do. Incident report filed re: late dose. Pt states he will "get a lawyer." Continue current plan.
 

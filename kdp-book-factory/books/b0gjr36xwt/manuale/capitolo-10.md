@@ -46,7 +46,7 @@ The plan's last line does the most work. Telling a patient where to go does not 
 
 ## The finding nobody asked about
 
-A second case, made up like the first, moves to the hospital. Simone Bergstrom is an NP on the hospital medicine service. On a Monday she admits Frank Iverson, fifty-two, whose CT of the abdomen and pelvis shows sigmoid diverticulitis without abscess. The report's last line answers a question nobody asked: a 7 mm solid nodule in the right lower lobe, for which the radiologist recommends a chest CT in 6 to 12 months.
+Simone Bergstrom is an NP on the hospital medicine service, and a fictional one. On a Monday she admits Frank Iverson, fifty-two, whose CT of the abdomen and pelvis shows sigmoid diverticulitis without abscess. The report's last line answers a question nobody asked: a 7 mm solid nodule in the right lower lobe, for which the radiologist recommends a chest CT in 6 to 12 months.
 
 By Wednesday he is ready for home. Simone has told him about the nodule and messaged his primary care physician, but her draft discharge summary says only "Incidental RLL nodule, f/u PCP," a line that would read the same if neither had happened. As the chapter on the test you order and the test you don't showed, "per PCP" hands a task to someone who may never hear of it, and a finding nobody was waiting for is easier still to lose.
 
@@ -58,7 +58,7 @@ The rewrite shows Mr. Iverson hearing about the nodule in plain words, with a re
 
 ## When the patient has already left
 
-The third case is fictional too. At 11:00 on a Saturday, Joy Kessler, an urgent care NP, sees Ana Gutierrez, thirty-four, with burning on urination. She sends a urine culture, prescribes trimethoprim-sulfamethoxazole and writes the pending test into the plan: "Urine culture pending; clinic will call if treatment needs to change. Cell number confirmed." That is the deferred-test plan from the previous chapter, applied to a result.
+The third case brings its own cast of characters. At 11:00 on a Saturday, Joy Kessler, an urgent care NP, sees Ana Gutierrez, thirty-four, with burning on urination. She sends a urine culture, prescribes trimethoprim-sulfamethoxazole and writes the pending test into the plan: "Urine culture pending; clinic will call if treatment needs to change. Cell number confirmed." That is the deferred-test plan from the previous chapter, applied to a result.
 
 On Monday at 14:20 the culture posts: *E. coli*, resistant to the drug she went home with. Joy is on shift, and she records each step as an addendum to the Saturday visit when she takes it:
 

@@ -4,7 +4,7 @@
 
 At her annual visit on March 4, Marlene Ostrowski, fifty-eight, takes home a fecal immunochemical test, or FIT: a stool test for blood too slight to see, used to screen for colorectal cancer. Nina Sandoval, who ordered it, is an NP at a family practice. On Tuesday, March 18, the result posts: positive.
 
-Marlene Ostrowski, Nina and the practice are fictitious. At 16:10 Nina reaches her at home. A positive test does not mean cancer, she explains, but the blood has a source, and a colonoscopy is how it is found. Ms. Ostrowski wants to talk it through in person before agreeing to anything, so a visit is booked for March 25 at 10:00. She does not come. The clinic rebooks her for April 8 at 09:20, and she misses that visit too.
+Ms. Ostrowski is fictitious. At 16:10 Nina reaches her at home. A positive test does not mean cancer, she explains, but the blood has a source, and a colonoscopy is how it is found. Ms. Ostrowski wants to talk it through in person before agreeing to anything, so a visit is booked for March 25 at 10:00. She does not come. The clinic rebooks her for April 8 at 09:20, and she misses that visit too.
 
 ## What the record will be asked
 
@@ -24,7 +24,7 @@ Between patients, Nina writes two entries:
 
 ## The rewrite
 
-Every step gets a date and a time, from the call about the result to the day she calls back:
+Nina's record of those weeks could look like this:
 
 > Tue 3/18, 16:25. Telephone encounter. FIT from 3/4 visit, resulted 09:40 today: positive. Called home 16:10, reached patient, identity confirmed by date of birth. Told in plain words: the test found hidden blood in her stool; it does not mean cancer, but the source must be found, and colonoscopy is how; polyps and early cancers found this way are easier to treat. She asked to discuss in person before any referral: "I'm not agreeing to a scope over the phone." Visit booked Tue 3/25 10:00 for that discussion. She said: "So it may be nothing, but only the scope can tell." Added to problem list: positive FIT, colonoscopy not yet done.
 >

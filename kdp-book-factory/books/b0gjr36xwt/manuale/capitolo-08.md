@@ -2,7 +2,7 @@
 
 ## Yesterday's exam, signed today
 
-At 05:30 on a Wednesday, a nurse charts new confusion in Evelyn Kraus, eighty-one, admitted on Monday with worsening heart failure and on IV furosemide since. The hospital medicine NP on her case, Mateo Ruiz, sees her at 08:45: drowsy, oriented only to herself, moving all four limbs. Her sodium, 134 on Tuesday, is 129 this morning, and at 08:55 he holds the furosemide. Patient, NP and timeline are all constructed.
+At 05:30 on a Wednesday, a nurse charts new confusion in Evelyn Kraus, eighty-one, admitted on Monday with worsening heart failure and on IV furosemide since. The hospital medicine NP on her case, Mateo Ruiz, sees her at 08:45: drowsy, oriented only to herself, moving all four limbs. Her sodium, 134 on Tuesday, is 129 this morning, and at 08:55 he holds the furosemide. Mateo's morning is fiction, down to the minute.
 
 At 09:10 he opens Tuesday's progress note, copies it forward into a new one, updates the hospital day, the weight and the sodium, and signs at 09:24. Part of it reads:
 

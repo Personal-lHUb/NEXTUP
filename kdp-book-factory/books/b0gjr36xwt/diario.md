@@ -75,3 +75,5 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-13 05:41 UTC · lanciato `editor` «Terzo giro: completa le sostituzioni» → `prompt/20261013-054156-editor-terzo-giro-completa-le-sostituzioni.md`
 - 2026-10-13 05:41 UTC · `editor` «Terzo giro: completa le sostituzioni» in background, id `aad3e12932e541d12`
 - 2026-10-13 05:42 UTC · finito `editor` (id `a608d18c792d58ce2`): fermato dal limite di sessione dopo aver scritto una lista parziale (20 sostituzioni in consegne/editor3-sostituzioni.json); rilanciato al «Try again» dell'autore per verificarla e completarla
+- 2026-10-13 06:07 UTC · finito `editor` (id `aad3e12932e541d12`): «/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor3-sostituzioni.json: 27 sostituzioni in tutto, 7 aggiunte (le etichette dei casi successivi nei capitoli 10, 14, 15, 17 e 19, più «f…»
+- 2026-10-13 06:08 UTC · consegna `editor3-sostituzioni.json` importata: 27 sostituzioni nelle sezioni 01, 06, 07, 08, 09, 10, 11, 14, 15, 17, 19, 20, 21, 22, 26 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261013-060802)

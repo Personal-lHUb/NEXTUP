@@ -4,7 +4,7 @@
 
 Light hurts Derek Sutton's eyes, and his neck is stiff. He is thirty-eight and has had fever and a headache since the previous evening. Carmen Vasquez, one of the NPs in the emergency department of a county hospital, sees him at 13:25 on a Thursday. His temperature is 102.6°F and his heart rate 112. He is alert and oriented, with no rash and no focal deficit.
 
-No real patient, NP or hospital lies behind this afternoon. Carmen thinks first of bacterial meningitis and goes straight to Dr. Joanne Whitaker, the ED attending. Blood cultures are drawn at 13:40, and by 13:50 ceftriaxone and vancomycin are running, dexamethasone given with the first dose. Dr. Whitaker will do the lumbar puncture, or LP, and at 14:05 Carmen goes back to explain it. Mr. Sutton hears her out, then shakes his head. "I'll take the antibiotics, and I'll stay as long as you want. But nobody's putting a needle in my back."
+Mr. Sutton is an illustration, not a case report. Carmen thinks first of bacterial meningitis and goes straight to Dr. Joanne Whitaker, the ED attending. Blood cultures are drawn at 13:40, and by 13:50 ceftriaxone and vancomycin are running, dexamethasone given with the first dose. Dr. Whitaker will do the lumbar puncture, or LP, and at 14:05 Carmen goes back to explain it. Mr. Sutton hears her out, then shakes his head. "I'll take the antibiotics, and I'll stay as long as you want. But nobody's putting a needle in my back."
 
 She talks it through with him and his wife for fifteen minutes, and Dr. Whitaker joins them at 14:10. He does not change his mind. At 14:30 he signs the hospital's refusal form, and at 14:40 Carmen calls the admitting hospitalist.
 
@@ -30,7 +30,7 @@ It answers neither half of the question. "Risks explained" does not say which ri
 
 ## The rewrite
 
-Signed at 14:50, the note can carry the whole conversation, from the first offer to the next one:
+Signed at 14:50, the note can carry the whole conversation and the next offer:
 
 > 14:50. Lumbar puncture declined; rest of plan accepted. Suspected bacterial meningitis (history and exam above). Blood cultures 13:40; ceftriaxone and vancomycin started 13:50, dexamethasone with the first dose. LP recommended to confirm the diagnosis, identify the organism and guide the choice and length of treatment; Dr. J. Whitaker, ED attending, to perform.
 >
@@ -56,7 +56,7 @@ Mr. Sutton's no was partial, and many refusals are. A patient accepts the admiss
 
 The orders have to agree with the note. An LP order left open after the refusal sits on the timeline as a procedure nobody performed, like the result nobody acted on in the chapter on closing the loop. Carmen cancels it with a reason and hands the refusal, with the plan to ask again, to the next clinician by name.
 
-A refusal also ages. Take a second case, no more real than the first: Isabel Torres, a hospital medicine NP, cares for Martin Zielinski, seventy-six, admitted with pneumonia. After his first injection of heparin to prevent blood clots, he declines the rest: "Those shots leave bruises all over me." On the morning of day three, Isabel finds four doses marked refused in the medication record and no provider note that mentions them. Read after a clot, those entries would describe refusals nobody heard.
+A refusal also ages. The chapter's other illustration shows how: Isabel Torres, a hospital medicine NP, cares for Martin Zielinski, seventy-six, admitted with pneumonia. After his first injection of heparin to prevent blood clots, he declines the rest: "Those shots leave bruises all over me." On the morning of day three, Isabel finds four doses marked refused in the medication record and no provider note that mentions them. Read after a clot, those entries would describe refusals nobody heard.
 
 Her note that morning answers them: what he declined and why; that she told him a clot could form in his leg and travel to his lungs while he spends most of the day in bed; what he accepted instead, inflatable compression sleeves and walks in the hall, which she told him protect less; and that she will offer the injections again each morning and record each answer with its time. A refusal written once and never revisited reads as a decision the clinicians stopped thinking about.
 

@@ -10,7 +10,7 @@ Erin thinks a stomach virus is the likeliest explanation. She also knows that ap
 
 ## Two ways to write it wrong
 
-Erin, Ben and the clinic come from no real chart. Here is one note she could write:
+Here is one note she could write about her imaginary patient:
 
 > 19M abd pain x 6 hrs, vomiting x1, roommate w/ similar illness. Abd soft, mild periumbilical tenderness. Dx: viral gastroenteritis. Ondansetron, clear fluids. RTC PRN.
 
@@ -30,7 +30,7 @@ A *working diagnosis* is your best explanation for now, held firmly enough to ac
 
 The wording carries the difference. "Most consistent with" and "favor X over Y because" state a leaning and its basis. "Not excluded" leaves a possibility honestly open, provided the next words say what is being done about it. Avoid "r/o" as a diagnostic label: some readers take "r/o appendicitis" to mean still under consideration and others to mean already excluded, and months later nobody can tell which you meant. Match the strength of each word to the evidence. If one explanation is clearly ahead, "most likely" is accurate. If you cannot yet tell two apart, say so, and say what will.
 
-Then add the sentence most notes leave out: what would change your mind. Here is Erin's assessment, rewritten:
+Then add one more sentence: what would change your mind. Here is Erin's assessment, rewritten:
 
 > Assessment: abdominal pain x 6 hrs. Working diagnosis: viral gastroenteritis, favored given crampy, intermittent pain, one episode of vomiting, roommate ill with vomiting last week, tolerating fluids in clinic. Early appendicitis not excluded: periumbilical pain can precede localization, and at 6 hrs the exam may not yet show it. At 18:35: T 99.5°F, no RLQ tenderness, no guarding or rebound, hops without pain. Would reconsider appendicitis if pain localizes to the RLQ, becomes constant or steadily worse, or hurts with walking, or if fever develops or he cannot keep fluids down.
 

@@ -4,7 +4,7 @@
 
 One CT scanner serves the whole community hospital. At 09:25 on a Friday Bianca Ellison, an NP in its emergency department, sees Victor Langley, sixty-seven, who has had cramping abdominal pain since 06:00. He has vomited four times and has passed no stool or gas since the night before. In his thirties he had open surgery for a ruptured appendix. His abdomen is distended and tender all over, without guarding or rebound.
 
-The hospital, Bianca and Mr. Langley are drawn for this book, from no real record. She suspects a small bowel obstruction. At 09:40 she orders blood work and a CT of the abdomen and pelvis with IV contrast, and starts IV fluids, an antiemetic and morphine. At 09:55 the CT technologist calls: the scanner is out of service, and the repair should be done by noon. It is back at 12:40.
+Bianca, drawn for this book along with her patient, suspects a small bowel obstruction. At 09:40 she orders blood work and a CT of the abdomen and pelvis with IV contrast, and starts IV fluids, an antiemetic and morphine. At 09:55 the CT technologist calls: the scanner is out of service, and the repair should be done by noon. It is back at 12:40.
 
 The scan, read at 14:05, shows an obstruction without signs that the bowel is losing its blood supply, and the general surgeon recommends managing it without an operation. The hospitalist accepts Mr. Langley at 15:20, but there is no medical bed. In this hospital, by policy, the emergency clinician keeps writing orders for an admitted patient until a bed is assigned. His is assigned at 20:35.
 

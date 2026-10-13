@@ -1,6 +1,6 @@
 # Glossary of Legal Terms in Plain English
 
-These definitions are general information, not legal advice, and the precise meaning of a term can change from state to state; for your own state, ask your risk manager, your insurer or your state board. The italics at the end of each entry name the chapter where the term first appears.
+These definitions are general information, not legal advice, and the precise meaning of a term can change from state to state; for your own state, ask your risk manager, your insurer or your state board. The italics at the end of each entry name the chapter to turn to for that term.
 
 **Addendum.** Information added to a note that is already signed, such as a result that came back, a call returned or a detail left out. Organizations define addenda and late entries differently, so follow your policy on the label. *Templates, Copy-Forward, and the Late Addendum*.
 
