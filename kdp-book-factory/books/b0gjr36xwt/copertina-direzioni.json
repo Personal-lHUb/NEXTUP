@@ -65,5 +65,9 @@
       "tipografia": "deciso"
     }
   ],
-  "scelta": null
+  "scelta": {
+    "direzione": 1,
+    "perche": "Scelta dell'autore il 13 ottobre: la copertina deve essere «coerente con il tema del libro e allo stesso tempo accattivante»; ha confermato la direzione 1 proposta su questo criterio",
+    "quando": "2026-10-13"
+  }
 }

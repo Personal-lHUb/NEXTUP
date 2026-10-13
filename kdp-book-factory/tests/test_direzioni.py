@@ -308,6 +308,26 @@ class TestTreDirezioni(unittest.TestCase):
         self.assertEqual(storia[0]["scelta"]["composizione"], "centro")
         self.assertEqual(storia[0]["scartate"], ["La busta in luce", "Le chiavi di casa"])
 
+    def test_senza_riga_di_comando_i_prompt_delle_varianti_restano_in_un_file(self):
+        # b0gjr36xwt: nel container la riga di comando di Higgsfield non ha
+        # l'accesso, il connettore sì; i prompt li scrive comunque il sistema.
+        from types import SimpleNamespace
+
+        from kdpfactory import cli
+
+        d = tre_direzioni()["direzioni"][1]
+        with mock.patch.object(cli.higgsfield, "pronto", return_value="manca l'accesso"):
+            esito = cli._genera_copertina(
+                self.project, SimpleNamespace(varianti=3), libro(), 192, {}, None, "",
+                (1838, 2775), Path(self.tmp.name), direzione=d)
+        self.assertEqual(esito, 0)
+        voci = json.loads((self.project.build_dir / cli.VARIANTI_PROMPT).read_text(encoding="utf-8"))
+        self.assertEqual([v["file"] for v in voci],
+                         [f"assets/copertina-{n}.png" for n in (1, 2, 3)])
+        self.assertTrue(all(d["soggetto"] in v["prompt"] for v in voci))
+        self.assertEqual(len({v["prompt"] for v in voci}), 3, "una composizione per variante")
+        self.assertFalse(any(self.project.assets_dir.glob("copertina-*.png")))
+
     def test_produzione_aspetta_l_autore_e_non_il_silenzio(self):
         self.scrivi(tre_direzioni())
         direzioni.registra_bozzetti(self.project, [

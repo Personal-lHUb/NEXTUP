@@ -50,6 +50,8 @@ from .models import BookProject, BookSpec, slugify
 DEFAULT_BOOKS_DIR = Path(os.environ.get("KDPFACTORY_BOOKS_DIR", "")) if os.environ.get(
     "KDPFACTORY_BOOKS_DIR"
 ) else Path(__file__).resolve().parent.parent / "books"
+#: i prompt delle varianti finali di copertina, per il connettore di Higgsfield
+VARIANTI_PROMPT = "copertina-varianti-prompt.json"
 
 
 def books_dir(args) -> Path:
@@ -867,20 +869,40 @@ def _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, ra
     generatore) con un'indicazione di composizione diversa; tornano in
     `assets/copertina-N.png`, e la loro traccia in `build/immagini-generate.json`.
     Con una direzione scelta i prompt nascono da lei.
+
+    I prompt finiscono prima in `build/copertina-varianti-prompt.json`: se la
+    riga di comando di Higgsfield non è pronta (nel container non ha l'accesso)
+    la sessione li passa al connettore, e il comando si ferma lì.
     """
+    primo = _prima_variante_libera(project)
+    voci = [
+        {
+            "variante": primo + indice - 1,
+            "file": f"assets/copertina-{primo + indice - 1}.png",
+            "proporzione": "2:3",
+            "prompt": coverbrief.prompt_da_incollare(
+                spec, pages=pages, metadata=meta, copy=copy, concorrente=rivale,
+                varianti=args.varianti, variante=indice, per_chat=False, direzione=direzione,
+            ),
+        }
+        for indice in range(1, args.varianti + 1)
+    ]
+    elenco = project.build_dir / VARIANTI_PROMPT
+    elenco.parent.mkdir(parents=True, exist_ok=True)
+    elenco.write_text(json.dumps(voci, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    save_backup(project, args, "prompt delle varianti di copertina")
     motivo = higgsfield.pronto()
     if motivo:
-        raise SystemExit(f"Higgsfield non è pronto: {motivo}.")
+        print(f"Higgsfield non è pronto da riga di comando: {motivo}.")
+        print(f"I prompt delle {len(voci)} varianti sono in {elenco}: si generano col")
+        print("connettore, alla risoluzione e qualità più alte, poi tornano nei file indicati.")
+        return 0
     modello = higgsfield.configurazione(radice).get("modello") or higgsfield.MODELLO_IMMAGINI
     schema = higgsfield.schema(modello)
     generate = []
-    primo = _prima_variante_libera(project)
-    for indice in range(1, args.varianti + 1):
-        numero = primo + indice - 1
-        prompt = coverbrief.prompt_da_incollare(
-            spec, pages=pages, metadata=meta, copy=copy, concorrente=rivale,
-            varianti=args.varianti, variante=indice, per_chat=False, direzione=direzione,
-        )
+    for indice, voce in enumerate(voci, start=1):
+        numero = voce["variante"]
+        prompt = voce["prompt"]
         destinazione = project.assets_dir / f"copertina-{numero}.png"
         if destinazione.exists():
             save_backup(project, args, f"variante {numero} di copertina precedente", force=True)

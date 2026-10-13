@@ -50,10 +50,10 @@
       "perche": "Fascia di royalty del 60%, circa 10 USD a copia; il concorrente costa circa 37 USD fuori da Amazon; si scende a 19.99 se i comparabili su Amazon stanno sotto i 20.",
       "chiesta_il": "2026-10-08T05:54:55Z",
       "scade_il": "",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
-      "applicata": false
+      "stato": "scelta dall'autore",
+      "valore": "21.99 USD (cartaceo)",
+      "deciso_il": "2026-10-13T11:55:11Z",
+      "applicata": true
     },
     {
       "chiave": "pseudonimo",
@@ -108,9 +108,9 @@
       "perche": "Agente copertina: la 1 dice la tesi del libro («close the loop», cap. 10) e col titolo incorniciato al centro regge meglio in miniatura; bozzetti a bassa risoluzione generati su Higgsfield il 13 ottobre",
       "chiesta_il": "2026-10-13T11:41:36Z",
       "scade_il": "",
-      "stato": "in attesa",
-      "valore": "",
-      "deciso_il": "",
+      "stato": "scelta dall'autore",
+      "valore": "Direzione 1 «Il cerchio che la nota chiude» (variante finale ancora da scegliere)",
+      "deciso_il": "2026-10-13T12:01:09Z",
       "applicata": false
     }
   ]

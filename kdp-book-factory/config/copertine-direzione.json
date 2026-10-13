@@ -1,0 +1,21 @@
+{
+  "direzioni_scelte": [
+    {
+      "libro": "b0gjr36xwt",
+      "quando": "2026-10-13",
+      "scelta": {
+        "nome": "Il cerchio che la nota chiude",
+        "idea": "Uno stetoscopio visto dall'alto, col tubo steso in un grande cerchio aperto in basso; a chiudere il cerchio è una penna, l'unico punto in accento. Il titolo sta dentro il cerchio. È la tesi del libro detta con due oggetti: l'esame non è finito finché la nota non lo rende visibile. Per un NP americano «close the loop» è gergo di documentazione (il capitolo 10 si chiama così).",
+        "tecnica": "layered cut-paper illustration seen from above: a few flat paper shapes with crisp cut edges, subtle matte paper grain and soft drop shadows, very few pieces, no fine detail",
+        "composizione": "centro",
+        "palette": "inchiostro",
+        "tipografia": "deciso"
+      },
+      "scartate": [
+        "L'ultima luce del turno",
+        "La lente del giorno dopo"
+      ],
+      "perche": "Scelta dell'autore il 13 ottobre: la copertina deve essere «coerente con il tema del libro e allo stesso tempo accattivante»; ha confermato la direzione 1 proposta su questo criterio"
+    }
+  ]
+}
