@@ -112,6 +112,18 @@
       "valore": "Direzione 1 «Il cerchio che la nota chiude» (variante finale ancora da scegliere)",
       "deciso_il": "2026-10-13T12:01:09Z",
       "applicata": false
+    },
+    {
+      "chiave": "copertina",
+      "proposta": "",
+      "alternative": [],
+      "perche": "",
+      "chiesta_il": "",
+      "scade_il": "",
+      "applicata": false,
+      "stato": "scelta dall'autore",
+      "valore": "Direzione 1 «Il cerchio che la nota chiude», variante finale 3 (job 98010d17-3c64-4d56-87ce-7b8f227e33e3, 2336 x 3504 px)",
+      "deciso_il": "2026-10-13T12:26:17Z"
     }
   ]
 }

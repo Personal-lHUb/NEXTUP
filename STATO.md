@@ -6,8 +6,8 @@ sessione dopo parte da qui.
 ## Il libro in corso
 
 **`b0gjr36xwt`**: *Hard Calls, Clear Notes: The NP Casebook of Defensible
-Documentation*, di Dana Ellery. Full-content, inglese, amazon.com, 176 pagine,
-21,99 USD. Libro per nurse practitioner sulla documentazione difendibile,
+Documentation*, di Dana Ellery. Full-content, inglese, amazon.com, 6×9, 180
+pagine, 21,99 USD. Libro per nurse practitioner sulla documentazione difendibile,
 scenario per scenario (differenziale, risultati anomali, consulente che non
 arriva, capacità decisionale, dimissioni contro parere, televisita,
 prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
@@ -26,10 +26,10 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   verificati. Le categorie KDP sono ricostruite. Si verificano alla scheda
   prodotto (fase 6), o prima, se Cowork torna.
 - **Decisioni dell'autore** (`decisioni.json`): categoria full-content, titolo,
-  promessa e pseudonimo **scelti dall'autore** l'8 ottobre. **In attesa della
-  sua risposta**, senza scadenza: il prezzo (21,99 USD, alternativa 19,99) e il
-  formato di stampa (proposto 6×9: 176 pagine e 73 caratteri per riga, contro
-  124 pagine e 115 caratteri in 8,5×11). Il formato ferma la fase 7.
+  promessa e pseudonimo **scelti dall'autore** l'8 ottobre; il 13 ottobre il
+  formato (6×9, quello del concorrente), il prezzo (21,99 USD) e la copertina
+  (direzione 1, variante finale 3). Nella biografia resta «The author is not a
+  clinician», per sua scelta.
 - **Fase 1 chiusa** (8 ottobre). Scaletta dell'architetto: 25 capitoli in
   quattro parti (principi; workup; rifiuti, uscite e dopo; consultazione con
   frasario, elenchi per scenario e glossario), più l'introduzione. Nessuna
@@ -95,6 +95,25 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   (13 ottobre): 0 bloccanti, impaginazione 0 rilievi, `qa` 0 errori.
   Prossimo passo, al via dell'autore: fase 6, la scheda prodotto. La fase 7
   (copertina) aspetta la sua decisione sul formato.
+- **Aggiornamento 13 ottobre, fasi 6 e 7.** Formato 6×9 come il concorrente
+  (6 x 0.3 x 9 in, da Amazon e Bookshop.org). **Fase 6**: scheda in
+  `manuale/scheda.json`, importata; conformità (`revisioni/conformita-scheda.md`)
+  0 bloccanti, 4 importanti e 4 minori, tutti applicati coi testi del rapporto;
+  `book.json` allineato alla scheda (parole chiave e categorie), e il motore ora
+  scrive nell'EPUB le parole chiave della scheda. Build a **180 pagine** (+2: la
+  pagina «About the Author»), impaginazione 0 rilievi, `qa` 0 errori. Interno,
+  EPUB e scheda consegnati all'autore. **Fase 7**: tre direzioni dell'agente
+  `copertina`, tre bozzetti su Higgsfield; l'autore ha scelto la 1 («coerente con
+  il tema e accattivante»). Tre varianti finali dal connettore (qualità max, 4k,
+  2336 × 3504 px, 45 crediti): **l'autore ha scelto la 3**. Gli indirizzi sono nel
+  diario e in `build/copertina-higgsfield.json`; il motore scrive i prompt delle
+  varianti in `build/copertina-varianti-prompt.json` per il connettore.
+  **Ferma**: la rete del container blocca la CDN `d8j0ntlcm91z4.cloudfront.net`
+  (403). Quando l'autore la abilita (Network access → Allowed domains) e dice
+  «continua»: `copertina b0gjr36xwt --scarica-generate`, `--scegli 3`, `build`,
+  `review --agents copertina,impaginazione`, `qa`, `diagnostica`, consegna di
+  copertina PDF e pacchetto completo. In alternativa carica lui la variante 3 sul
+  ramo `cowork-immagini` come `kdp-book-factory/books/b0gjr36xwt/assets/copertina-3.png`.
 - **Richieste dell'autore per dopo il collegio**: se il lettore cieco dà l'OK,
   le immagini dell'interno prendendo a riferimento i libri analoghi (i box per
   le note deboli e riscritte, più quello che il confronto suggerisce, con un
