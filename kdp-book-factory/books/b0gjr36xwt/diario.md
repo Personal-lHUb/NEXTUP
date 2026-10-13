@@ -88,3 +88,8 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-13 06:37 UTC · consegna `ritocchi-impaginazione-2.json` importata: 6 sostituzioni nelle sezioni 06, 17, 22, 23, 25 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261013-063708)
 - 2026-10-13 06:37 UTC · lanciato `editor-sviluppo` «Editor di sviluppo: verifica finale» → `prompt/20261013-063734-editor-sviluppo-editor-di-sviluppo-verifica-finale.md`
 - 2026-10-13 06:37 UTC · `editor-sviluppo` «Editor di sviluppo: verifica finale» in background, id `af84aacd8269e6d78`
+- 2026-10-13 06:45 UTC · finito `editor-sviluppo` (id `af84aacd8269e6d78`): «`/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/editor-sviluppo-verifica-3.md`: i sei rilievi della seconda verifica (A2, A3, D1–D4) sono risolti, quindi nessuno resta aperto; i ritocch…»
+- 2026-10-13 06:45 UTC · consegna `editor-sviluppo-verifica-3.md` importata in `revisioni/editor-sviluppo-verifica-3.md`
+- 2026-10-13 06:45 UTC · lanciato `editor` «Ultimi ritocchi a lunghezza invariata» → `prompt/20261013-064558-editor-ultimi-ritocchi-a-lunghezza-invariata.md`
+- 2026-10-13 06:45 UTC · `editor` «Ultimi ritocchi a lunghezza invariata» in background, id `a35ef5d4cbfd4bb56`
+- 2026-10-13 06:46 UTC · verifica finale (revisioni/editor-sviluppo-verifica-3.md): A2, A3, D1-D4 risolti; 6 minori nuovi dai ritocchi (E1-E6) più una nota sul 10; lanciati come sostituzioni a lunghezza invariata (±2 parole) per non toccare l'impaginazione
