@@ -48,7 +48,7 @@ The alternatives show that the no answered a real offer. Medication for anxiety,
 
 The patient's own words carry two things: his reason and his account of the consequences. The reason explains a decision that would otherwise look arbitrary. The account is what "verbalized understanding" leaves out, and it answers the second half of the reviewer's question in his voice rather than yours. Quote both by the rules in the chapter on facts and quotes.
 
-The capacity line is short because the method lives elsewhere. The chapter on the capacity question shows how to assess the four abilities for one decision; the refusal note names the decision, states the finding and points to the patient's answers that support it. In Carmen's note they are his account of what could happen without the LP and a choice that held for the whole fifteen minutes. A bare "has capacity" would not carry a refusal this consequential. When capacity is in doubt, settle it first: a refusal is the patient's only if they could make it.
+The capacity line is short because the method lives elsewhere. The chapter on the capacity question shows how to assess the four abilities for one decision; the refusal note names the decision, states the finding and points to the patient's answers that support it. In Carmen's note they are his account of what could happen without the LP and a choice that held for the whole fifteen minutes. Her "at this time" is literal: if he becomes confused, capacity is reassessed. A bare "has capacity" would not carry a refusal this consequential. When capacity is in doubt, settle it first: a refusal is the patient's only if they could make it.
 
 ## The partial yes
 

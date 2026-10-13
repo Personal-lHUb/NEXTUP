@@ -70,7 +70,7 @@ The opposite mistake is writing "declined colonoscopy" for a patient who never a
 
 - **Why the follow-up matters.** At the call or visit that sets it up, the reason in plain words and what the patient said back.
 - **The open item.** Where the chart will show it until it closes, such as the problem list or an alert.
-- **Each missed visit, noticed.** Who reviewed it, when, and what was decided.
+- **Each missed visit, noticed.** Who reviewed it, when, and the decision.
 - **Each attempt.** Time, method, what was said or left, and the reply or its absence; a copy of any letter.
 - **The next step and its date.** At the end of every entry, within the steps your policy sets.
 - **The referral, tracked.** Whether it was received and scheduled, whether the report came back, who checked and when, and who owns the next step until the report has been read.

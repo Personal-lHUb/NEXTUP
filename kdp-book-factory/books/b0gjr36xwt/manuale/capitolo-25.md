@@ -165,7 +165,7 @@ The abnormal result, the prescription, the antibiotic or scan you decline, the t
 
 - **Why the follow-up matters.** At the call or visit that sets it up, the reason in plain words and what the patient said back.
 - **The open item.** Where the chart will show it until it closes, such as the problem list or an alert.
-- **Each missed visit, noticed.** Who reviewed it, when, and what was decided.
+- **Each missed visit, noticed.** Who reviewed it, when, and the decision.
 - **Each attempt.** Time, method, what was said or left, and the reply or its absence; a copy of any letter.
 - **The next step and its date.** At the end of every entry, within the steps your policy sets.
 - **The referral, tracked.** Whether it was received and scheduled, whether the report came back, who checked and when, and who owns the next step until the report has been read.
@@ -177,7 +177,7 @@ The abnormal result, the prescription, the antibiotic or scan you decline, the t
 - **The event as facts.** What happened and when, with the source of anything you did not witness; no guess at how it came about, no blame.
 - **The patient's condition.** Findings with times and values, not "stable."
 - **What was done.** Treatment and orders, with times.
-- **How long the danger lasts.** Monitoring, call limits and an end point to match.
+- **How long the danger lasts.** Monitoring, call limits and an end point.
 - **Who was told.** Clinicians involved in the care, with times; never the report or the call to risk management.
 - **The disclosure.** When, who was present and who spoke, what was said, the patient's questions in their words with the answers, and who speaks to them next.
 - **After an attorney's request, a complaint, a claim or a subpoena.** No new entries about the past care and no changes; today's care charted as usual.

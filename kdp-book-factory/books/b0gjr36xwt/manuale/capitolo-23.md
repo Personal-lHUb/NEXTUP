@@ -63,7 +63,7 @@ Ask the attorney, first, whom they represent: you, your employer or both. If tho
 - **The event as facts.** What happened and when, with the source of anything you did not witness; no guess at how it came about, no blame.
 - **The patient's condition.** Findings with times and values, not "stable."
 - **What was done.** Treatment and orders, with times.
-- **How long the danger lasts.** Monitoring, call limits and an end point to match.
+- **How long the danger lasts.** Monitoring, call limits and an end point.
 - **Who was told.** Clinicians involved in the care, with times; never the report or the call to risk management.
 - **The disclosure.** When, who was present and who spoke, what was said, the patient's questions in their words with the answers, and who speaks to them next.
 - **After an attorney's request, a complaint, a claim or a subpoena.** No new entries about the past care and no changes; today's care charted as usual.

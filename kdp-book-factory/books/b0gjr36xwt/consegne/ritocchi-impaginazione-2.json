@@ -1,0 +1,32 @@
+[
+  {
+    "sezione": 6,
+    "trova": "Plan: will call patient with results Thursday. Weight on the same clinic scale at every visit.",
+    "sostituisci": "Plan: will call patient with results Thursday. If not reached, portal message that day and a second call Friday. Weight on the same clinic scale at every visit."
+  },
+  {
+    "sezione": 17,
+    "trova": "a choice that held for the whole fifteen minutes.",
+    "sostituisci": "a choice that held for the whole fifteen minutes. Her \"at this time\" is literal: if he becomes confused, capacity is reassessed."
+  },
+  {
+    "sezione": 22,
+    "trova": "- **Each missed visit, noticed.** Who reviewed it, when, and what was decided.",
+    "sostituisci": "- **Each missed visit, noticed.** Who reviewed it, when, and the decision."
+  },
+  {
+    "sezione": 25,
+    "trova": "- **Each missed visit, noticed.** Who reviewed it, when, and what was decided.",
+    "sostituisci": "- **Each missed visit, noticed.** Who reviewed it, when, and the decision."
+  },
+  {
+    "sezione": 23,
+    "trova": "- **How long the danger lasts.** Monitoring, call limits and an end point to match.",
+    "sostituisci": "- **How long the danger lasts.** Monitoring, call limits and an end point."
+  },
+  {
+    "sezione": 25,
+    "trova": "- **How long the danger lasts.** Monitoring, call limits and an end point to match.",
+    "sostituisci": "- **How long the danger lasts.** Monitoring, call limits and an end point."
+  }
+]
