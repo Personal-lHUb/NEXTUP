@@ -6,7 +6,7 @@ The coworker who drove Curtis Faber to urgent care saw him fall. At 07:50 on a T
 
 The head-injury rule Celeste will apply is real; the case around it is not. He remembers slipping and everything after he came to. He has a mild headache, has not vomited, takes no medications and has had no alcohol. His vital signs and neurological exam are normal, and apart from a swelling on his forehead he shows no sign of a skull fracture. His right wrist is tender in the hollow at the base of the thumb, the anatomic snuffbox.
 
-Celeste orders an X-ray of the wrist with scaphoid views, and it shows no fracture. She does not order a CT of his head. The first decision leaves an order, a timestamp and a result in the chart. The second leaves nothing unless she writes it down.
+Celeste orders an X-ray of the wrist with scaphoid views, and it shows no fracture. She does not order a CT of his head. He has none of the rule's seven criteria, and, told that a scan means hours at an emergency department twenty minutes away, he chooses to go home, where his wife can watch him tonight. The first decision leaves an order, a timestamp and a result in the chart. The second leaves nothing unless she writes it down.
 
 ## What the record will be asked
 

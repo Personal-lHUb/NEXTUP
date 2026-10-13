@@ -6,7 +6,7 @@ The pain began at 18:15 on a Wednesday, half an hour after dinner. At 19:50 Bett
 
 Her temperature is 98.4°F and her heart rate 92. Her right upper abdomen is tender. When Paloma presses under the ribs and asks for a deep breath, the breath does not catch, so Murphy sign, a pointer to an inflamed gallbladder, is absent. Her eyes are not yellow and her ECG is normal. After ketorolac and ondansetron at 20:05, her pain is down to 1 out of 10 by 20:50.
 
-Paloma thinks a gallstone is the likeliest cause, but tonight she can neither see the gallbladder nor check the blood. She offers the emergency department, which can do both. Ms. Prentiss chooses home and leaves with her husband at 21:05.
+Paloma thinks a gallstone is the likeliest cause, but tonight she can neither see the gallbladder nor check the blood. She offers the emergency department, which can do both. Ms. Prentiss chooses home: "These always go away, and my husband's with me." She leaves with him at 21:05, carrying a written copy of the signs that should send her to the hospital.
 
 ## What the record will be asked
 

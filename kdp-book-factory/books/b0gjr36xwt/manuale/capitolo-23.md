@@ -56,7 +56,7 @@ A complaint to your licensing board arrives as a letter, often with a deadline. 
 
 None of these calls decides anything, and nobody can promise you how the matter will end. Ask risk management what has arrived and from whom, whether the organization's coverage extends to you, what you may say, to whom, and whether you need your own attorney. Ask your insurer what your policy covers, from a subpoena to a board matter, as the chapter on where claims begin advised. Ask how soon notice is due, whether an attorney will be assigned and whether a settlement would need your consent.
 
-Ask the attorney, first, whom they represent: you, your employer or both. If those interests could diverge, ask whether you need counsel of your own. Then ask about deadlines, what happens next and your part in it, whom you may talk to about the event, and whether and how to write down what you remember.
+Ask the attorney, first, whom they represent: you, your employer or both. If those interests could diverge, ask whether you need counsel of your own. Then ask about deadlines, what happens next and your part in it, whom you may talk to about the event, and whether and how to write down what you remember. For Hazel, that means asking whether she may talk about the event with Joel Ramsey or Dr. Sato, and whether, and how, to set down her memory of the 15:30 recheck, with Linda in the room.
 
 ## What the note must contain
 

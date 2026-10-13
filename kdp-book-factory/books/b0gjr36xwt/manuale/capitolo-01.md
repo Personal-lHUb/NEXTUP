@@ -10,7 +10,7 @@ She types her note before calling the next patient:
 
 > HA x 2 days. Neuro intact. Likely tension HA. Ibuprofen. Return PRN.
 
-The questions she asked about onset are not there, the dangerous diagnoses she thought of and set aside are not there, and the warnings she gave Marcus have shrunk to "Return PRN." If his headache turns out to be something else, the person who reads that note months later will see a clinician who wrote down a conclusion. They will have no way of seeing the clinician who reached it.
+The questions she asked about onset are not there, the dangerous diagnoses she thought of and set aside are not there, and the warnings she gave Marcus have shrunk to "Return PRN." Nothing in the note shows that his neck was supple and his temperature normal, the two findings that argued against infection. If his headache turns out to be something else, the person who reads that note months later will see a clinician who wrote down a conclusion. They will have no way of seeing the clinician who reached it.
 
 ## The problem nobody taught you
 

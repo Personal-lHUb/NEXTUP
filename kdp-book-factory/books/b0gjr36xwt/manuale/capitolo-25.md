@@ -86,7 +86,7 @@ The abnormal result, the prescription, the antibiotic or scan you decline, the t
 - **The decision.** What you did not prescribe or order, written as your clinical choice, with its date.
 - **The clinical reason.** The diagnosis the request aimed at, with the findings that set it aside, and the dangerous alternative with its own.
 - **The explanation and the reply.** What the patient heard about their own illness, and their answer, disagreement included.
-- **What was offered instead.** Symptomatic treatment, a delayed prescription with its conditions, a referral or recheck, and what was accepted.
+- **What was offered instead.** Symptom relief, a delayed prescription, a referral or recheck, and what was accepted.
 - **The signs that change the answer.** Those that mean start the delayed plan, and those that mean be seen today.
 - **The way back.** Who reassesses and when, and how the record will learn the delayed plan was used.
 

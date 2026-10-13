@@ -52,6 +52,6 @@ It is also not a shield. Written exactly this way, it would not have stopped the
 
 ## How the scenario chapters are built
 
-Every scenario chapter follows the same order. It opens with a constructed scenario: a named clinician, a setting, a patient and the clock. Next comes what the record will be asked: the short set of questions that a claim, a complaint or a review would bring to that kind of encounter. Then comes the weak note, written the way a competent, busy NP might write it: accurate as far as it goes, but thin.
+Every scenario chapter opens with a constructed scenario: a named clinician, a setting, a patient and the clock. Next comes what the record will be asked: the questions a claim, a complaint or a review would bring to it. Then comes the weak note, as a competent, busy NP might write it: accurate as far as it goes, but thin.
 
-Beside it is the defensible rewrite of the same encounter. Nothing is added that the clinician did not do, so the difference lies in the writing and not in the care. After that comes the short list of elements the note must contain. They are elements, not sentences, because the note should be in your words. Where a scenario rests on a principle explained earlier in the book, it names the chapter that explains it and moves on. When a patient is walking out or a page is waiting, the list is the part to reach for.
+Beside it is the defensible rewrite of the same encounter. It adds nothing the clinician did not do, so the difference lies in the writing, not the care. Last comes the short list of what the note must contain: elements, not sentences, because the note should be in your words. When a patient is walking out or a page is waiting, the list is the part to reach for.

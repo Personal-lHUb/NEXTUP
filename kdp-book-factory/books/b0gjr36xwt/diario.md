@@ -79,3 +79,8 @@ Una riga per passo, in ordine, scritta dai comandi e dagli hook di Claude Code
 - 2026-10-13 06:08 UTC · consegna `editor3-sostituzioni.json` importata: 27 sostituzioni nelle sezioni 01, 06, 07, 08, 09, 10, 11, 14, 15, 17, 19, 20, 21, 22, 26 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261013-060802)
 - 2026-10-13 06:09 UTC · lanciato `editor` «Ritocchi d'impaginazione» → `prompt/20261013-060926-editor-ritocchi-d-impaginazione.md`
 - 2026-10-13 06:09 UTC · `editor` «Ritocchi d'impaginazione» in background, id `ad0360343be37bb5c`
+- 2026-10-13 06:27 UTC · finito `editor` (id `ad0360343be37bb5c`): «/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/ritocchi-impaginazione.json contiene 19 sostituzioni, in parole aggiunte o tolte: 01 +21; 02 −14, −14 e −5 (−33 in tutto); 04 −14 e −28 (−…»
+- 2026-10-13 06:27 UTC · consegna `ritocchi-impaginazione.json` importata: 19 sostituzioni nelle sezioni 01, 02, 04, 06, 07, 09, 10, 11, 12, 13, 14, 17, 19, 23, 25 (backup /home/user/NEXTUP/kdp-book-factory/backup/b0gjr36xwt/consegne/20261013-062721)
+- 2026-10-13 06:28 UTC · lanciato `editor` «Ritocchi d'impaginazione, secondo giro» → `prompt/20261013-062819-editor-ritocchi-d-impaginazione-secondo-giro.md`
+- 2026-10-13 06:28 UTC · `editor` «Ritocchi d'impaginazione, secondo giro» in background, id `a9391384c844389ad`
+- 2026-10-13 06:28 UTC · ritocchi d'impaginazione, primo giro: 19 sostituzioni applicate; code di capitolo sparite, pagine corte da 13 a 3 (41, 110, 168); secondo giro lanciato su quelle tre

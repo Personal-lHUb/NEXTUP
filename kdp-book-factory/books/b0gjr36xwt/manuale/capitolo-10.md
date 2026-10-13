@@ -54,7 +54,7 @@ Whoever owns a scan owns its whole report, not only the answer to its question; 
 
 > Incidental finding requiring follow-up: 7 mm solid nodule, right lower lobe, on CT abdomen/pelvis 6/9. Radiology recommends chest CT in 6–12 months. 6/11 09:30, EHR message to Dr. Ruth Lindqvist, PCP, naming the nodule and the recommended scan; her reply 11:05: "Got it, will order at his follow-up visit." Discussed with patient at bedside 11:40: told it is probably harmless but needs a repeat scan to be sure, and that Dr. Lindqvist will order it. He said: "So another scan in six months to a year, and she sets it up." Report copy given; finding listed in his discharge instructions.
 
-The rewrite shows Mr. Iverson hearing about the nodule in plain words, with a reason not to panic and a reason not to forget, and his instructions carry it home. Dr. Lindqvist's reply is the moment ownership changes hands. Without one, the note would say whom Simone called next. For a patient with no primary care clinician, it would name who will order the scan, and that may be the team that found it.
+The rewrite shows Mr. Iverson hearing about the nodule in plain words, with a reason not to panic and a reason not to forget, and his instructions carry it home. The bedside talk at 11:40 comes after the reply at 11:05, so the plan Simone describes to him is already agreed. Dr. Lindqvist's reply is the moment ownership changes hands. Without one, the note would say whom Simone called next. For a patient with no primary care clinician, it would name who will order the scan, and that may be the team that found it.
 
 ## When the patient has already left
 

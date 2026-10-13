@@ -6,7 +6,7 @@ One CT scanner serves the whole community hospital. At 09:25 on a Friday Bianca 
 
 Bianca, drawn for this book along with her patient, suspects a small bowel obstruction. At 09:40 she orders blood work and a CT of the abdomen and pelvis with IV contrast, and starts IV fluids, an antiemetic and morphine. At 09:55 the CT technologist calls: the scanner is out of service, and the repair should be done by noon. It is back at 12:40.
 
-The scan, read at 14:05, shows an obstruction without signs that the bowel is losing its blood supply, and the general surgeon recommends managing it without an operation. The hospitalist accepts Mr. Langley at 15:20, but there is no medical bed. In this hospital, by policy, the emergency clinician keeps writing orders for an admitted patient until a bed is assigned. His is assigned at 20:35.
+The scan, read at 14:05, shows an obstruction without signs that the bowel is losing its blood supply, and the general surgeon recommends managing it without an operation. The hospitalist accepts Mr. Langley at 15:20, but there is no medical bed. In this hospital, by policy, the emergency clinician keeps writing orders for an admitted patient until a bed is assigned. His is assigned at 20:35. Until then he waits in her department with a tube draining his stomach, and Bianca returns to examine him through the evening.
 
 ## What the record will be asked
 

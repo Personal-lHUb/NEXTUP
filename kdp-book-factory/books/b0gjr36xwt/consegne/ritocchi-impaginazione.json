@@ -1,0 +1,97 @@
+[
+  {
+    "sezione": 1,
+    "trova": "The questions she asked about onset are not there, the dangerous diagnoses she thought of and set aside are not there, and the warnings she gave Marcus have shrunk to \"Return PRN.\" If his headache turns out to be something else, the person who reads that note months later will see a clinician who wrote down a conclusion. They will have no way of seeing the clinician who reached it.",
+    "sostituisci": "The questions she asked about onset are not there, the dangerous diagnoses she thought of and set aside are not there, and the warnings she gave Marcus have shrunk to \"Return PRN.\" Nothing in the note shows that his neck was supple and his temperature normal, the two findings that argued against infection. If his headache turns out to be something else, the person who reads that note months later will see a clinician who wrote down a conclusion. They will have no way of seeing the clinician who reached it."
+  },
+  {
+    "sezione": 2,
+    "trova": "The note also records what was not yet known. At 19:25 Nadia could not know whether Mr. Jensen would keep improving or start to tire. Her record would show that she based her decision on the patient in front of her and had arranged to find out what happened next. That puts the reader back at 19:25, before anyone knew the ending.",
+    "sostituisci": "The note also records what was not yet known. At 19:25 Nadia could not know whether Mr. Jensen would keep improving or start to tire. Her record would show a decision based on the patient in front of her, and a plan to find out what happened next."
+  },
+  {
+    "sezione": 2,
+    "trova": "This book rests on a particular order of priorities, and the patient comes first. The night covering provider and the rapid response team would have read Nadia's 19:25 entry long before any attorney saw it. It would have told them how Mr. Jensen looked earlier in the evening, what had already been tried and what limits had been set. A note written for the next clinician serves the patient best. It is usually also the note that holds up best with every other reader.",
+    "sostituisci": "In this book's order of priorities, the patient comes first. The night covering provider and the rapid response team would have read Nadia's 19:25 entry long before any attorney saw it. It would have told them how Mr. Jensen had looked, what had been tried and what limits were set. A note written for the next clinician serves the patient best, and usually holds up best with every other reader."
+  },
+  {
+    "sezione": 2,
+    "trova": "Only after that does the note serve your license and your career, and it does so in one way: by making your reasoning visible. It cannot make a wrong decision right. It cannot stop a family from filing a claim, or anyone from filing a complaint. A note written mainly to protect its author tends to read that way, crowded with boilerplate and self-justification, and the readers in this chapter spot it quickly. What a careful note offers is narrower, and more reliable. It lets people who arrive already knowing the ending see the moment you were in: what you knew, what you did not know yet, and why you chose what you chose.",
+    "sostituisci": "Only after that does the note serve your license and your career, and it does so in one way: by making your reasoning visible. It cannot make a wrong decision right, or keep anyone from filing a claim or a complaint. A note written mainly to protect its author tends to read that way, crowded with boilerplate and self-justification, and the readers in this chapter spot it quickly. What a careful note offers is narrower, and more reliable. It lets people who arrive already knowing the ending see the moment you were in: what you knew, what you did not know yet, and why you chose what you chose."
+  },
+  {
+    "sezione": 4,
+    "trova": "Every scenario chapter follows the same order. It opens with a constructed scenario: a named clinician, a setting, a patient and the clock. Next comes what the record will be asked: the short set of questions that a claim, a complaint or a review would bring to that kind of encounter. Then comes the weak note, written the way a competent, busy NP might write it: accurate as far as it goes, but thin.",
+    "sostituisci": "Every scenario chapter opens with a constructed scenario: a named clinician, a setting, a patient and the clock. Next comes what the record will be asked: the questions a claim, a complaint or a review would bring to it. Then comes the weak note, as a competent, busy NP might write it: accurate as far as it goes, but thin."
+  },
+  {
+    "sezione": 4,
+    "trova": "Beside it is the defensible rewrite of the same encounter. Nothing is added that the clinician did not do, so the difference lies in the writing and not in the care. After that comes the short list of elements the note must contain. They are elements, not sentences, because the note should be in your words. Where a scenario rests on a principle explained earlier in the book, it names the chapter that explains it and moves on. When a patient is walking out or a page is waiting, the list is the part to reach for.",
+    "sostituisci": "Beside it is the defensible rewrite of the same encounter. It adds nothing the clinician did not do, so the difference lies in the writing, not the care. Last comes the short list of what the note must contain: elements, not sentences, because the note should be in your words. When a patient is walking out or a page is waiting, the list is the part to reach for."
+  },
+  {
+    "sezione": 6,
+    "trova": "> Assessment: unintentional weight loss, 11 lb over 4 months (clinic weights), with fatigue x 3 months. Cause not yet identified. No fever, night sweats, cough, change in bowel habits or blood in stool; appetite reduced; depression screen negative today. Initial labs ordered. Plan: will call patient with results Thursday. Return visit in 2 weeks whatever they show, sooner for fever, night sweats, blood in stool or further weight loss. Patient told the cause may take more than one visit to find; if labs do not explain it, next steps chosen together at the 2-week visit.",
+    "sostituisci": "> Assessment: unintentional weight loss, 11 lb over 4 months (162 to 151 lb, clinic scale), with fatigue x 3 months. Cause not yet identified. No fever, night sweats, cough, change in bowel habits or blood in stool; appetite reduced; depression screen negative today. Initial labs ordered. Plan: will call patient with results Thursday. Weight on the same clinic scale at every visit. Return visit in 2 weeks whatever they show, sooner for fever, night sweats, blood in stool or further weight loss. Patient told the cause may take more than one visit to find; if labs do not explain it, next steps chosen together at the 2-week visit."
+  },
+  {
+    "sezione": 7,
+    "trova": "Patients have a legal right to their records, and under the federal information-blocking rules in force since 2021, most US providers may not withhold signed notes without a recognized exception, so many notes reach the patient portal as soon as they are signed. A patient who reads \"drug-seeking\" about himself may stop reporting his pain, or may answer with a complaint to your board. As the chapter on where claims begin noted, a complaint needs no injury behind it.",
+    "sostituisci": "Patients have a legal right to their records, and under the federal information-blocking rules in force since 2021, most US providers may not withhold signed notes without a recognized exception, so many notes reach the patient portal as soon as they are signed. If Kendra signs her 08:30 version, Mr. Teague can read \"belligerent\" and \"noncompliance\" on his phone before she finishes rounds. A patient who reads \"drug-seeking\" about himself may stop reporting his pain, or may answer with a complaint to your board. As the chapter on where claims begin noted, a complaint needs no injury behind it."
+  },
+  {
+    "sezione": 9,
+    "trova": "Celeste orders an X-ray of the wrist with scaphoid views, and it shows no fracture. She does not order a CT of his head. The first decision leaves an order, a timestamp and a result in the chart. The second leaves nothing unless she writes it down.",
+    "sostituisci": "Celeste orders an X-ray of the wrist with scaphoid views, and it shows no fracture. She does not order a CT of his head. He has none of the rule's seven criteria, and, told that a scan means hours at an emergency department twenty minutes away, he chooses to go home, where his wife can watch him tonight. The first decision leaves an order, a timestamp and a result in the chart. The second leaves nothing unless she writes it down."
+  },
+  {
+    "sezione": 10,
+    "trova": "The rewrite shows Mr. Iverson hearing about the nodule in plain words, with a reason not to panic and a reason not to forget, and his instructions carry it home. Dr. Lindqvist's reply is the moment ownership changes hands. Without one, the note would say whom Simone called next. For a patient with no primary care clinician, it would name who will order the scan, and that may be the team that found it.",
+    "sostituisci": "The rewrite shows Mr. Iverson hearing about the nodule in plain words, with a reason not to panic and a reason not to forget, and his instructions carry it home. The bedside talk at 11:40 comes after the reply at 11:05, so the plan Simone describes to him is already agreed. Dr. Lindqvist's reply is the moment ownership changes hands. Without one, the note would say whom Simone called next. For a patient with no primary care clinician, it would name who will order the scan, and that may be the team that found it."
+  },
+  {
+    "sezione": 11,
+    "trova": "The scan, read at 14:05, shows an obstruction without signs that the bowel is losing its blood supply, and the general surgeon recommends managing it without an operation. The hospitalist accepts Mr. Langley at 15:20, but there is no medical bed. In this hospital, by policy, the emergency clinician keeps writing orders for an admitted patient until a bed is assigned. His is assigned at 20:35.",
+    "sostituisci": "The scan, read at 14:05, shows an obstruction without signs that the bowel is losing its blood supply, and the general surgeon recommends managing it without an operation. The hospitalist accepts Mr. Langley at 15:20, but there is no medical bed. In this hospital, by policy, the emergency clinician keeps writing orders for an admitted patient until a bed is assigned. His is assigned at 20:35. Until then he waits in her department with a tube draining his stomach, and Bianca returns to examine him through the evening."
+  },
+  {
+    "sezione": 12,
+    "trova": "By 14:40 the toes are numb. Dr. Bashir learns from the operating room desk that Dr. Kirby is scrubbed in a case, and through the house supervisor he reaches the chief of surgery, Dr. Helen Eastman, who is at the bedside at 15:25. Dr. Kirby never comes. Nobody need have failed for that to happen, and that is what makes the note hard to write.",
+    "sostituisci": "By 14:40 the toes are numb. Dr. Bashir learns from the operating room desk that Dr. Kirby is scrubbed in a case expected to finish around 16:30, and through the house supervisor he reaches the chief of surgery, Dr. Helen Eastman, who is at the bedside at 15:25. Dr. Kirby never comes; his only answer is a call from the operating room at 16:35, when Mrs. Ainsworth is in the angiography suite and the decision has been made without him. Nobody need have failed for that to happen, and that is what makes the note hard to write."
+  },
+  {
+    "sezione": 12,
+    "trova": "\"Without response\" and \"eventually\" are not findings but complaints. They set Jasmine's note against Dr. Kirby, who may answer that he was in an emergency operation and returned the page as soon as he could: the argument between clinicians that the chapter on facts and quotes warned against.",
+    "sostituisci": "\"Without response\" and \"eventually\" are not findings but complaints. They set Jasmine's note against Dr. Kirby, who may answer that he was in an emergency operation and returned the page as soon as he could: the argument between clinicians that the chapter on facts and quotes warned against. \"Eventually\" also stands where 15:25 belongs, and the wait it hides could have lasted eighty minutes or five hours."
+  },
+  {
+    "sezione": 13,
+    "trova": "Mr. Eckert takes sertraline for depression and sleeps with CPAP for obstructive sleep apnea. He drinks two or three beers on weekend evenings and lives with his wife, who drove him in, and their sixteen-year-old son. Ibuprofen at 16:30 brings his pain from 8 out of 10 to 6, and at 17:00 he asks: \"Ibuprofen won't get me through the night. Can I get a Percocet?\" At 17:05 Audrey searches the **prescription drug monitoring program**, or PDMP, the state's database of dispensed prescriptions for controlled drugs such as oxycodone. Then she prescribes ten tablets of oxycodone 5 mg beside scheduled ibuprofen and acetaminophen, not the Percocet he named.",
+    "sostituisci": "Mr. Eckert takes sertraline for depression and sleeps with CPAP for obstructive sleep apnea. He drinks two or three beers on weekend evenings and lives with his wife, who drove him in, and their sixteen-year-old son. Ibuprofen at 16:30 brings his pain from 8 out of 10 to 6, and at 17:00 he asks: \"Ibuprofen won't get me through the night. Can I get a Percocet?\" At 17:05 Audrey searches the **prescription drug monitoring program**, or PDMP, the state's database of dispensed prescriptions for controlled drugs such as oxycodone. The search shows no controlled drug filled in the past year. Then she prescribes ten tablets of oxycodone 5 mg beside scheduled ibuprofen and acetaminophen, not the Percocet he named. She adds a naloxone nasal spray because of his sleep apnea, and books him with an orthopedist for Tuesday morning."
+  },
+  {
+    "sezione": 14,
+    "trova": "- **What was offered instead.** Symptomatic treatment, a delayed prescription with its conditions, a referral or recheck, and what was accepted.",
+    "sostituisci": "- **What was offered instead.** Symptom relief, a delayed prescription, a referral or recheck, and what was accepted."
+  },
+  {
+    "sezione": 17,
+    "trova": "The capacity line is short because the method lives elsewhere. The chapter on the capacity question shows how to assess the four abilities for one decision; the refusal note names the decision, states the finding and points to the patient's answers that support it. A bare \"has capacity\" would not carry a refusal this consequential. When capacity is in doubt, settle it first: a refusal is the patient's only if they could make it.",
+    "sostituisci": "The capacity line is short because the method lives elsewhere. The chapter on the capacity question shows how to assess the four abilities for one decision; the refusal note names the decision, states the finding and points to the patient's answers that support it. In Carmen's note they are his account of what could happen without the LP and a choice that held for the whole fifteen minutes. A bare \"has capacity\" would not carry a refusal this consequential. When capacity is in doubt, settle it first: a refusal is the patient's only if they could make it."
+  },
+  {
+    "sezione": 19,
+    "trova": "Paloma thinks a gallstone is the likeliest cause, but tonight she can neither see the gallbladder nor check the blood. She offers the emergency department, which can do both. Ms. Prentiss chooses home and leaves with her husband at 21:05.",
+    "sostituisci": "Paloma thinks a gallstone is the likeliest cause, but tonight she can neither see the gallbladder nor check the blood. She offers the emergency department, which can do both. Ms. Prentiss chooses home: \"These always go away, and my husband's with me.\" She leaves with him at 21:05, carrying a written copy of the signs that should send her to the hospital."
+  },
+  {
+    "sezione": 23,
+    "trova": "Ask the attorney, first, whom they represent: you, your employer or both. If those interests could diverge, ask whether you need counsel of your own. Then ask about deadlines, what happens next and your part in it, whom you may talk to about the event, and whether and how to write down what you remember.",
+    "sostituisci": "Ask the attorney, first, whom they represent: you, your employer or both. If those interests could diverge, ask whether you need counsel of your own. Then ask about deadlines, what happens next and your part in it, whom you may talk to about the event, and whether and how to write down what you remember. For Hazel, that means asking whether she may talk about the event with Joel Ramsey or Dr. Sato, and whether, and how, to set down her memory of the 15:30 recheck, with Linda in the room."
+  },
+  {
+    "sezione": 25,
+    "trova": "- **What was offered instead.** Symptomatic treatment, a delayed prescription with its conditions, a referral or recheck, and what was accepted.",
+    "sostituisci": "- **What was offered instead.** Symptom relief, a delayed prescription, a referral or recheck, and what was accepted."
+  }
+]
