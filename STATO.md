@@ -137,6 +137,15 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   li allega l'autore, ci si ferma sul passo che non va. Al «continua»:
   `--scarica-generate`, `--scegli 3`, `build`, controlli, `pubblicazione`,
   push; poi il prompt a Cowork.
+- **Aggiornamento 14 ottobre, pacchetto pronto.** Variante 3 dal ramo
+  `cowork-immagini`, copertina rifatta col titolo dentro il cerchio
+  (`CENTRO_MISURA`), prezzi della scheda ricalcolati a 180 pagine (stampa 3,16
+  USD, royalty 10,03). `qa` 0 errori, impaginazione 0 rilievi, copertina 1
+  minore accettato. **Pacchetto in `books/b0gjr36xwt/pubblicazione/`** su
+  GitHub. Prossimo passo, dell'autore: incollare `prompt-cowork.md` in Cowork
+  (Chrome con KDP aperto, Claude in Chrome collegato, i file li trascina lui),
+  poi portare qui la risposta (`cowork corriere --ricevi`). Se Cowork si blocca
+  ancora: pagina con un pulsante «copia» per ogni campo, e carica l'autore.
 - **Richieste dell'autore per dopo il collegio**: se il lettore cieco dà l'OK,
   le immagini dell'interno prendendo a riferimento i libri analoghi (i box per
   le note deboli e riscritte, più quello che il confronto suggerisce, con un

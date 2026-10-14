@@ -345,7 +345,9 @@ def _copertina(state: dict, report: BookReport) -> None:
     verdict = cover.get("verifica") or {}
     report.copertina = {
         "palette": cover.get("theme", ""),
-        "illustrazione": cover.get("illustrazione", ""),
+        # con l'illustrazione dell'autore il motivo vettoriale non si disegna:
+        # «solo testo» lì era falso (b0gjr36xwt, variante 3 di Higgsfield)
+        "illustrazione": "immagine" if cover.get("immagine") else cover.get("illustrazione", ""),
         **{k: v for k, v in verdict.items() if k != "problemi"},
         "problemi": verdict.get("problemi", []),
     }

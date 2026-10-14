@@ -1,0 +1,49 @@
+{
+  "libro": "b0gjr36xwt",
+  "titolo": "Hard Calls, Clear Notes",
+  "pronto": true,
+  "scritto_il": "2026-10-14T07:22:10Z",
+  "pagine": 180,
+  "formato": "6x9",
+  "carta": "cream",
+  "dorso_in": 0.45,
+  "prezzo_cartaceo": 21.99,
+  "prezzo_kindle": 7.99,
+  "decisioni": {
+    "prezzo": "Cartaceo 21.99 USD; Kindle 7.99 USD, royalty 70% (14 ottobre)",
+    "copertina": "Direzione 1 «Il cerchio che la nota chiude», variante finale 3 (job 98010d17-3c64-4d56-87ce-7b8f227e33e3, 2336 x 3504 px)",
+    "formato": "6x9 (il formato del concorrente B0GJR36XWT: 6 x 0.3 x 9 in secondo Amazon e Bookshop.org)"
+  },
+  "file": {
+    "b0gjr36xwt-interno.pdf": {
+      "byte": 411427,
+      "sha256": "7a9f426cc417fefe2e34e479d4aeaf990dc2308869af728a8b7307049a54e4c0",
+      "url": "https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/books/b0gjr36xwt/pubblicazione/b0gjr36xwt-interno.pdf"
+    },
+    "b0gjr36xwt-copertina.pdf": {
+      "byte": 1555563,
+      "sha256": "b123acaba044fc01f021f1f89f5f3755a7cd64fe1b6c1c67b0b84b5083308aaa",
+      "url": "https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/books/b0gjr36xwt/pubblicazione/b0gjr36xwt-copertina.pdf"
+    },
+    "b0gjr36xwt-copertina-kindle.jpg": {
+      "byte": 583210,
+      "sha256": "f8347cffd0ff1a5a164638b96e0f8c5adcaa521cb6a24316ead5e399a2ad2599",
+      "url": "https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/books/b0gjr36xwt/pubblicazione/b0gjr36xwt-copertina-kindle.jpg"
+    },
+    "b0gjr36xwt.epub": {
+      "byte": 135768,
+      "sha256": "6d3fc01a213aa8604c90a6d3ffebbf9beaeb410f1a98c98c7b6706c48112a505",
+      "url": "https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/books/b0gjr36xwt/pubblicazione/b0gjr36xwt.epub"
+    },
+    "kdp-listing.md": {
+      "byte": 4829,
+      "sha256": "0576cb078aeed420e0c338a079ba36991ab8ec3669dab016808f40234628a5eb",
+      "url": "https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/books/b0gjr36xwt/pubblicazione/kdp-listing.md"
+    },
+    "metadata.json": {
+      "byte": 7920,
+      "sha256": "6dc11809097fdd0f624f8f52bf4d1b1482b1786601eb21dd7d1cc2eaaa0259fa",
+      "url": "https://raw.githubusercontent.com/Personal-lHUb/NEXTUP/claude/dreamy-archimedes-hf8w45/kdp-book-factory/books/b0gjr36xwt/pubblicazione/metadata.json"
+    }
+  }
+}

@@ -205,6 +205,17 @@ def build_package(
     state = project.load_state()
     meta = state.get("metadata", {})
     chapters = writer.load_chapters(project, outline)
+    # Costi di stampa e royalty dipendono dalle pagine: se il libro è cambiato
+    # dopo la scheda, la scheda si riscrive con le pagine vere (b0gjr36xwt: 180
+    # pagine nel libro, 178 e 3,14 USD di stampa nella scheda).
+    scheda = project.build_dir / "metadata.json"
+    if meta and scheda.exists() and result.pages:
+        try:
+            pagine_scheda = json.loads(scheda.read_text(encoding="utf-8")).get("pagine")
+        except ValueError:
+            pagine_scheda = None
+        if pagine_scheda != result.pages:
+            write_metadata_files(project, spec, outline, meta, result.pages)
 
     cover_path = project.build_dir / f"{spec.slug}-copertina.pdf"
     image_path = None

@@ -159,6 +159,18 @@ class TestRegoleDeiVideoNelMotore(unittest.TestCase):
         self.assertIn("calm, plain area in the middle", prompt)
         self.assertIn("turned towards the centre", prompt)
 
+    def test_al_centro_di_un_illustrazione_il_titolo_sta_nella_zona_calma(self):
+        # b0gjr36xwt: a tutta larghezza il titolo usciva dal cerchio dello
+        # stetoscopio che l'illustrazione gli lasciava libero.
+        spec = libro(title="Hard Calls, Clear Notes", cover_layout="centro")
+        sull_immagine = self.costruisci(spec, self.immagine(), nome="img")
+        tipografica = self.costruisci(spec, nome="tipo")
+        # il corpo scende con la misura, che è una frazione di quella piena
+        self.assertLess(sull_immagine["titolo_corpo"], tipografica["titolo_corpo"])
+        self.assertGreaterEqual(sull_immagine["titolo_corpo"],
+                                tipografica["titolo_corpo"] * coverdesign.CENTRO_MISURA - 1)
+        self.assertEqual(sull_immagine["verifica"]["problemi"], [])
+
     def test_su_un_immagine_chiara_la_velatura_cresce_fino_al_contrasto(self):
         info = self.costruisci(libro(), self.immagine(chiara=True))
         rapporto = info["immagine"]

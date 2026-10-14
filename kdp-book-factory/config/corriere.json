@@ -2,7 +2,9 @@
   "_nota": "Il registro del corriere: le consegne di Cowork salvate nel repository (ricevute), le richieste lanciate nel cloud (avviate) e i file presi dal ramo cowork-immagini (dal_ramo). drive_dismesso è la storia del tragitto su Google Drive, chiuso il 7 ottobre 2026: non si usa più.",
   "ricevute": {},
   "avviate": {},
-  "dal_ramo": {},
+  "dal_ramo": {
+    "books/b0gjr36xwt/assets/copertina-3.png": "eb05b5ec537016022d22691f34d9e1f6162d4637"
+  },
   "drive_dismesso": {
     "cartella_id": "1yprHuxzFDGj12k8clTp0othzTXjiyn5N",
     "caricati": {

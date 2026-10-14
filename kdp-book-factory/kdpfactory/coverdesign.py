@@ -49,7 +49,7 @@ import hashlib
 import itertools
 import re
 from collections.abc import Iterable
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from dataclasses import fields as dataclass_fields
 from pathlib import Path
 
@@ -68,6 +68,12 @@ MIN_CONTRAST = 7.0              # titolo contro fondo
 THUMBNAIL_WIDTH_PX = 160        # com'è vista davvero nei risultati di ricerca
 MAX_TOP_ELEMENTS = 4            # blocchi di testo nella metà alta della prima
 MAX_TITLE_LINES = 3             # oltre, il titolo non è un'insegna ma un paragrafo
+#: con il titolo al centro sopra un'illustrazione, la frazione della misura che
+#: il blocco può occupare: il prompt chiede all'immagine una zona calma al
+#: centro, con i soggetti intorno, e il titolo sta lì dentro, non a tutta
+#: larghezza (b0gjr36xwt: il titolo usciva dal cerchio dello stetoscopio e ne
+#: copriva la testina)
+CENTRO_MISURA = 0.74
 SAFE_MARGIN_IN = 0.25           # margine di sicurezza KDP dal taglio
 #: Il testo sta ad almeno 1 cm dal taglio (video A, 19:43: «almeno 1 cm di
 #: margine tra il testo e i bordi esterni»). È più largo dell'area di sicurezza
@@ -784,9 +790,14 @@ def draw_front(
     center = box.center
     top = box.y0 + box.height - box.bleed
     layout = layout if layout in LAYOUTS else "alto"
+    # La misura del blocco occhiello-titolo-gancio: tutta la larghezza, salvo
+    # il titolo al centro di un'illustrazione, che sta nella sua zona calma.
+    testo = box
+    if layout == "centro" and over_image:
+        testo = replace(box, safe=box.safe + box.measure * (1 - CENTRO_MISURA) / 2)
 
     title_font, title_size, lines = title_font_and_size(
-        copy, title_display or display, condensed, box,
+        copy, title_display or display, condensed, testo,
         fallback=(title_face("deciso"), display),
     )
     hook_font = text_font
@@ -795,15 +806,15 @@ def draw_front(
         hook_font = display
 
     kicker_size = (
-        fit_size(copy.kicker.upper(), display, box.measure,
+        fit_size(copy.kicker.upper(), display, testo.measure,
                  max(box.trim_height * 0.016, 7.5), 6.5, KICKER_TRACKING)
         if copy.kicker else 0.0
     )
     hook_size = (
-        fit_size(copy.hook, hook_font, box.measure, box.trim_height * 0.028, 9)
+        fit_size(copy.hook, hook_font, testo.measure, box.trim_height * 0.028, 9)
         if copy.hook else 0.0
     )
-    hook_lines = wrap(copy.hook, hook_font, hook_size, box.measure) if copy.hook else []
+    hook_lines = wrap(copy.hook, hook_font, hook_size, testo.measure) if copy.hook else []
 
     # Quanto è alto il blocco occhiello-titolo-gancio: serve per metterlo al
     # centro, dove il video B lo vuole «dentro un ipotetico cerchio» (16:02).
@@ -945,7 +956,7 @@ def draw_front(
             center + widest / 2,
             first_baseline + title_size * 0.72,
         ),
-        block_box=(center - box.measure / 2, block_bottom, center + box.measure / 2, block_top),
+        block_box=(center - testo.measure / 2, block_bottom, center + testo.measure / 2, block_top),
         families=tuple(sorted(families)),
         layout=layout,
     )
