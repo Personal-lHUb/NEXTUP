@@ -1,9 +1,8 @@
-"""Il pacchetto di pubblicazione: i file finali in git, la scheda di caricamento, la bozza di Cowork.
+"""Il pacchetto di pubblicazione: i file finali in git e la scheda di caricamento.
 
-Da b0gjr36xwt: `build/` non entra in git, e il caricamento su KDP lo fa Cowork
-dal portatile, leggendo il repository. L'autore ha deciso (14 ottobre 2026) che
-i file finali stiano nella cartella del libro e che Cowork prepari le bozze di
-cartaceo e Kindle senza mai pubblicare.
+Da b0gjr36xwt: `build/` non entra in git, e i file finali devono restare. Dal
+14 ottobre 2026 su KDP carica l'autore (Cowork non apre i siti di Amazon), e
+un libro su un tema escluso non ha pacchetto.
 """
 
 import json
@@ -11,7 +10,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from kdpfactory import cowork, decisioni, kdpspecs, pubblicazione
+from kdpfactory import decisioni, kdpspecs, pubblicazione
 from kdpfactory.models import BookProject, BookSpec
 
 PAGINE = 180
@@ -20,7 +19,7 @@ PAGINE = 180
 def _spec(**extra) -> BookSpec:
     base = dict(slug="libro", title="Hard Calls", subtitle="A Casebook", author="A. Author",
                 language="en", trim="6x9", paper="cream", price_eur=21.99,
-                keywords=["one", "two"], categories=["MEDICAL / Nursing / Issues"])
+                keywords=["one", "two"], categories=["GAMES & ACTIVITIES / Puzzles"])
     base.update(extra)
     return BookSpec(**base)
 
@@ -51,7 +50,7 @@ class TestPubblicazione(unittest.TestCase):
         (build / "kdp-listing.md").write_text("# scheda\n", encoding="utf-8")
         (build / "metadata.json").write_text(json.dumps({
             "description_html": "<p><b>Hook.</b></p>", "keywords": ["k1", "k2"],
-            "categories": ["MEDICAL / Nursing / Issues"],
+            "categories": ["GAMES & ACTIVITIES / Puzzles"],
             "prezzi": [{"marketplace": "amazon.com", "costo_stampa": 3.14, "royalty_per_copia": 10.06}],
         }), encoding="utf-8")
         (build / "qa-report.json").write_text(json.dumps({"ok": True}), encoding="utf-8")
@@ -65,8 +64,7 @@ class TestPubblicazione(unittest.TestCase):
 
     def _prepara(self, **extra):
         spec = _spec(**extra)
-        return spec, pubblicazione.prepara(self.project, spec, "Owner/Repo", "ramo",
-                                           "https://example/leggimi.md")
+        return spec, pubblicazione.prepara(self.project, spec, "Owner/Repo", "ramo")
 
     def test_pronto_quando_il_cancello_e_chiuso(self):
         self.assertEqual(pubblicazione.problemi(self.project, self.spec), [])
@@ -122,22 +120,18 @@ class TestPubblicazione(unittest.TestCase):
         scheda = (pubblicazione.cartella(self.project) / pubblicazione.SCHEDA).read_text(encoding="utf-8")
         self.assertNotIn("Kindle eBook Pricing", scheda)
 
-    def test_la_richiesta_e_del_ruolo_kdp_e_non_pubblica(self):
+    def test_un_tema_escluso_non_ha_pacchetto(self):
+        spec = _spec(categories=["MEDICAL / Nursing / Issues"])
+        problemi = pubblicazione.problemi(self.project, spec)
+        self.assertTrue(any("tema escluso" in p for p in problemi), problemi)
+        with self.assertRaises(ValueError):
+            pubblicazione.prepara(self.project, spec, "Owner/Repo", "ramo")
+        self.assertFalse(pubblicazione.cartella(self.project).exists())
+
+    def test_niente_richiesta_a_cowork(self):
         self._prepara(price_ebook=7.99)
-        radice_fabbrica = self.radice / "kdp-book-factory"
-        trovate = [r for r in cowork.richieste(radice_fabbrica) if r.argomento.startswith("kdp-bozza")]
-        self.assertEqual(len(trovate), 1)
-        richiesta = trovate[0]
-        self.assertEqual(richiesta.ruolo, "regole-kdp")
-        self.assertTrue(richiesta.serve)
-        testo = (radice_fabbrica / richiesta.percorso).read_text(encoding="utf-8")
-        self.assertIn("Cowork · risposta · kdp-book-factory/books/libro/pubblicazione/"
-                      "cowork-kdp-bozza-risposta.md", testo)
-        self.assertIn("Non premi mai «Publish Your Paperback Book»", testo)
-        self.assertIn("Non lanciare\n`fire_trigger`", testo)
-        prompt = (pubblicazione.cartella(self.project) / pubblicazione.PROMPT).read_text(encoding="utf-8")
-        self.assertIn("non pubblicare", prompt)
-        self.assertIn("cowork-kdp-bozza.md", prompt)
+        nomi = {f.name for f in pubblicazione.cartella(self.project).iterdir()}
+        self.assertFalse(any(n.startswith("cowork-") for n in nomi), nomi)
 
     def test_book_json_accetta_i_campi_nuovi(self):
         spec = BookSpec.from_dict({"slug": "x", "title": "X", "price_ebook": 7.99, "cover_finish": "glossy"})

@@ -75,6 +75,16 @@ Diario, prompt e consegne entrano in git; una nota a mano: `diario <slug> --nota
    (`docs/standard-editoriale.md`); l'indice corrisponde al libro nei due sensi,
    e lo misura `qa`. Se un libro ne ha bisogno, si cambia il motore per tutti.
 11. **I file si salvano solo su GitHub.** Google Drive non si usa più.
+12. **Niente che possa creare problemi legali** (scelta dell'autore, 14
+   ottobre 2026; `docs/rischi-legali.md`). Temi esclusi: salute e medicina,
+   diritto, finanza personale e investimenti, psicologia e salute mentale; li
+   ferma `temi` (fase 0, prima di ogni agente), `concorrente importa`, `qa`
+   (errore `TEMA`) e il pacchetto: con un tema escluso si chiede all'autore un
+   altro ASIN. Mai nel libro, in copertina o nella scheda il titolo, l'autore,
+   l'editore o l'ASIN del concorrente (`qa`, errore `CONCORRENTE`), né testi
+   altrui, persone reali, promesse, credenziali inventate. La frase sull'IA
+   nel colophon dice il vero: il libro è scritto con l'IA, nessuna «revisione
+   umana» che non c'è. Fisco e GPSR: dal commercialista, non dalla fabbrica.
 
 ## Le due categorie
 
@@ -89,7 +99,10 @@ di copertina. In `books/` c'è anche `collaudo`, che non è un libro
 ## Cowork (app Claude Desktop)
 
 Il container non raggiunge amazon.com, KDP, ChatGPT né il portatile
-dell'autore: quello lo fa Cowork. Le richieste sono file `cowork-<argomento>.md`
+dell'autore. Cowork **non apre nessun sito di Amazon** (amazon.com,
+kdp.amazon.com) e non guida Helium 10, Publisher Rocket o Google Trends
+(LEGGIMI versione 16): lavora sulla ricerca web e su quello che l'autore gli
+porta, e su KDP carica l'autore. Le richieste sono file `cowork-<argomento>.md`
 sul ramo di lavoro, elencate in `config/cowork-aperte.md`; Cowork le legge dagli
 indirizzi pubblici e su GitHub non scrive. Consegna la risposta come testo
 lanciando la routine della fabbrica, e la sessione la salva con
@@ -105,8 +118,9 @@ dell'autore. Dettagli: `docs/cowork.md`.
 - Da `kdp-book-factory/`: test `python3 -m unittest discover -s tests` (nessuna
   rete), lint `ruff check kdpfactory tests`, a che punto è il libro
   `python3 -m kdpfactory produzione`, stato di Cowork
-  `python3 -m kdpfactory cowork stato`, i file finali in git con la richiesta
-  di bozza KDP per Cowork `python3 -m kdpfactory pubblicazione <slug>`.
+  `python3 -m kdpfactory cowork stato`, i file finali in git con la scheda
+  di caricamento `python3 -m kdpfactory pubblicazione <slug>`, i temi esclusi
+  `python3 -m kdpfactory temi [<slug>] [--testo …] [--categoria …]`.
 - Senza chiave API si lavora con `manuale <slug> <passo>`
   (`docs/linea-manuale.md`); impaginazione, copertina, controlli, prezzi ed EPUB
   non chiamano mai il modello.

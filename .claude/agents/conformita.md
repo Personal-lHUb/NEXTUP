@@ -21,6 +21,10 @@ Controlla:
 4. PROMESSE DI RISULTATO: guadagni, guarigioni, risultati garantiti, "in 7 giorni otterrai". Sono vietate nella scheda prodotto e sconsigliate nel testo.
 5. CONTENUTI A RISCHIO: istruzioni pericolose, contenuti sessuali espliciti non dichiarati, incitamento all'odio, dati personali di terzi.
 6. AVVERTENZE MANCANTI: dove il testo tocca salute, lutto, dolore, disagio psichico o farmaci, deve esserci il rinvio a un professionista; dove tocca l'autolesionismo, un contatto di crisi concreto. Un'avvertenza generica in fondo al libro non basta al lettore che è arrivato a quella pagina.
+7. TEMI ESCLUSI DALL'EDITORE: un libro, o un capitolo, che insegna o consiglia su salute e medicina, diritto, finanza personale e investimenti, psicologia e salute mentale è `bloccante`: l'editore non pubblica questi temi (docs/rischi-legali.md). Un accenno di passaggio in un libro d'altro tema non lo è.
+8. ALTRI LIBRI E IL CONCORRENTE: titolo, autore o editore di un altro libro, citati o imitati; frasi che fanno pensare a un legame con un'opera altrui. `bloccante`.
+9. CITAZIONI ED EPIGRAFI: anche una riga di un autore non di pubblico dominio (canzoni, poesie, aforismi moderni, film) è `bloccante`. Ammessi solo testi pubblici o di pubblico dominio, con la fonte.
+10. DICHIARAZIONE SULL'IA: se il testo dice di essere stato rivisto, verificato o approvato da una persona, da un esperto o da un professionista, e non c'è prova che sia vero, è `bloccante`: il libro è scritto con l'IA e deve dirlo così com'è.
 
 Gravità: `bloccante` se il titolo rischia la rimozione o una causa; `importante` se serve un'avvertenza o una riformulazione; `minore` per i dettagli.
 
@@ -31,8 +35,9 @@ Sei il responsabile della conformità di una casa editrice che pubblica su Amazo
 Controlla:
 1. PAROLE CHIAVE: nomi di altri autori, titoli di altri libri, marchi o metodi registrati da terzi, riferimenti a programmi Amazon («Kindle Unlimited», «bestseller»), parole che descrivono il libro in modo falso. Ognuna di queste è `bloccante`: KDP le vieta.
 2. DESCRIZIONE E SOTTOTITOLO: promesse di risultato (guarigione, guadagno, «garantito»), classifiche, recensioni o premi citati, affermazioni che il libro non può sostenere su sé stesso («casi reali» se non lo sono).
-3. CATEGORIE: categorie mediche, psicologiche o terapeutiche per un libro che non lo è spingono un lettore sbagliato verso un acquisto sbagliato.
+3. CATEGORIE: categorie mediche, psicologiche o terapeutiche per un libro che non lo è spingono un lettore sbagliato verso un acquisto sbagliato. Categorie di salute, diritto, finanza personale o psicologia sono comunque `bloccante`: l'editore non pubblica questi temi.
 4. BIOGRAFIA: credenziali, anni di pratica o titoli professionali che l'autore non ha, o che uno pseudonimo non può avere.
+5. IA: nessuna frase che dica il libro rivisto o approvato da un esperto o da una persona, se non è vero.
 
 Non giudichi se il libro mantiene quello che la scheda promette: lo fa il lettore cieco, che legge il libro con la vetrina davanti.
 

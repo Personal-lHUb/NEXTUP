@@ -261,7 +261,8 @@ fase 8.
 | **Esce** | `book.json` e `brief.md` del libro nuovo |
 | **Comando** | con la chiave API `python3 -m kdpfactory concorrente build <slug>` ([`acquisizione.md`](acquisizione.md)) |
 | **Linea manuale** | i quattro subagent in fila, ognuno legge i file del precedente; la sessione salva le risposte in `concorrente/scheda.json`, `lacune.json`, `piano.json`, `originalita.json`, poi `concorrente importa <slug>` |
-| **Cancello** | nessun bloccante di `originalita`: un libro troppo vicino all'altro non si scrive |
+| **Prima** | `python3 -m kdpfactory temi --testo "<titolo e sottotitolo del concorrente>" --categoria "<sue categorie>"`: se tocca salute, diritto, finanza o psicologia il libro non si fa e si chiede all'autore un altro ASIN, prima di spendere un agente ([`rischi-legali.md`](rischi-legali.md)) |
+| **Cancello** | nessun bloccante di `originalita`: un libro troppo vicino all'altro non si scrive; nessun tema escluso (`concorrente importa` lo rifiuta) |
 
 ### 1 · Progetto — scaletta e indice
 
@@ -531,14 +532,13 @@ A cancello chiuso, `python3 -m kdpfactory pubblicazione <slug>` copia i file
 finali in `books/<slug>/pubblicazione/`, che entra in git (`build/` no):
 interno, copertina, copertina dell'ebook (il fronte in JPG, 2560 pixel
 d'altezza, se `price_ebook` in `book.json` è più di zero), EPUB, scheda
-prodotto, `manifest.json` con byte, SHA-256 e indirizzo pubblico di ogni file,
-`caricamento-kdp.md` campo per campo, la richiesta a Cowork
-(`cowork-kdp-bozza.md`) e il prompt da incollare nella sua chat
-(`prompt-cowork.md`). Con `--controlla` dice solo che cosa manca: `qa` con
-errori, la copertina ancora tipografica quando c'è una direzione scelta, una
-decisione dell'autore su prezzo, copertina o formato. Cowork prepara le bozze
-su KDP e non pubblica: «Publish» lo preme l'autore (scelta del 14 ottobre
-2026, LEGGIMI versione 14).
+prodotto, `manifest.json` con byte, SHA-256 e indirizzo di ogni file,
+`caricamento-kdp.md` campo per campo. Con `--controlla` dice solo che cosa
+manca: `qa` con errori (fra cui `TEMA` e `CONCORRENTE`), un tema escluso,
+la copertina ancora tipografica quando c'è una direzione scelta, una decisione
+dell'autore su prezzo, copertina o formato. Su KDP carica l'autore con la
+scheda di caricamento: Cowork non apre i siti di Amazon (14 ottobre 2026,
+`docs/rischi-legali.md`).
 
 ---
 

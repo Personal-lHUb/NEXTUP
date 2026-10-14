@@ -255,8 +255,8 @@ def _front_matter(spec: BookSpec, book: PuzzleBook, styles: dict, year: int) -> 
         "The puzzles in this book were composed by a computer program written by the "
         "author. Every case was checked by that program before printing: each has exactly "
         "one solution, and no clue in it can be removed without making the case unsolvable. "
-        "The story text around the puzzles was produced with the assistance of artificial "
-        "intelligence, under human supervision and editorial responsibility.",
+        "The story text around the puzzles was written with artificial intelligence tools; "
+        "the publisher chose the subject and directed the work.",
         "",
         "All persons, trains, places and events in this book are invented. Any resemblance "
         "to real persons, living or dead, is coincidental.",

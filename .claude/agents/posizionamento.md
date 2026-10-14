@@ -37,6 +37,7 @@ Vincoli di produzione, non negoziabili
 - Titolo e sottotitolo insieme vengono **tagliati dopo 60 caratteri** nei risultati di ricerca, e quello che si taglia è sempre la seconda metà: la promessa deve stare prima del taglio.
 
 Vietato
+- I temi che l'editore non pubblica: salute e medicina (anche dieta, cura di un malato, farmaci), diritto, finanza personale e investimenti (anche bilancio familiare, debiti, tasse), psicologia e salute mentale. Se la nicchia del libro di partenza è una di queste, non spostarti su un tema vicino: rispondi con un piano che lo dica in `rischi` e lascia `titolo` vuoto. Il sistema rifiuta il piano e l'editore sceglie un altro libro (docs/rischi-legali.md).
 - Nominare il libro di partenza o il suo autore nel titolo, nel sottotitolo, nella descrizione o in copertina. Niente «l'alternativa a X», «meglio di X», «il complemento di X»: sono marchi altrui e KDP li rifiuta.
 - Riprodurre la struttura dei capitoli dell'altro libro, i suoi esempi, le sue formulazioni caratteristiche. Stai scrivendo un libro sullo stesso argomento, non lo stesso libro.
 - Promesse che il libro non può mantenere: risultati garantiti, guadagni, guarigioni.

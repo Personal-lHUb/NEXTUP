@@ -1,3 +1,0 @@
-<!-- agente: impaginazione · Impaginazione, secondo giro · 2026-10-12 16:44:21 UTC -->
-
-Libro `b0gjr36xwt`, interno appena impaginato (`/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/build/b0gjr36xwt-interno.pdf`, 178 pagine, 6×9). Da `/home/user/NEXTUP/kdp-book-factory` esegui `python3 -m kdpfactory review b0gjr36xwt --agents impaginazione` e riporta quello che esce: quante segnalazioni bloccanti, importanti e minori; per le righe finali corte e le code di capitolo la pagina e le ultime parole del capoverso o il capitolo, così come il rapporto le dà; per le pagine corte quante sono. Rispondi in non più di 15 righe. Non modificare nessun file.

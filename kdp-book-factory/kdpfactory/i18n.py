@@ -28,9 +28,12 @@ LABELS: dict[str, dict[str, str]] = {
             "sostituiscono una consulenza professionale personalizzata. L'autore e l'editore "
             "non rispondono di eventuali danni derivanti dall'uso dei contenuti."
         ),
+        # Vera, non rassicurante: il testo lo scrivono gli strumenti di IA e lo
+        # controllano agenti, non una persona (AI Act, art. 50(4); KDP lo chiama
+        # «AI-generated»). Decisione dell'autore del 14 ottobre 2026.
         "ai_disclosure": (
-            "Questo libro è stato realizzato con l'ausilio di strumenti di intelligenza "
-            "artificiale, sotto supervisione, revisione e responsabilità editoriale umana."
+            "Questo libro è stato scritto con strumenti di intelligenza artificiale. "
+            "L'editore ne ha scelto il tema e ha diretto il lavoro."
         ),
         "first_edition": "Prima edizione",
         "printed_by": "Stampato da Amazon KDP",
@@ -72,8 +75,8 @@ LABELS: dict[str, dict[str, str]] = {
             "for any damages arising from the use of this content."
         ),
         "ai_disclosure": (
-            "This book was produced with the assistance of artificial intelligence tools, under "
-            "human supervision, review and editorial responsibility."
+            "This book was written with artificial intelligence tools. The publisher chose the "
+            "subject and directed the work."
         ),
         "first_edition": "First edition",
         "printed_by": "Printed by Amazon KDP",

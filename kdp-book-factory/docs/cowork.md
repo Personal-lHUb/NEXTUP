@@ -308,20 +308,17 @@ Cowork non le può consegnare: la sua CDN è bloccata nel cloud e su GitHub non
 scrive. Finché mancano, `produzione` dà la copertina in attesa dell'autore: le
 varianti già pagate non si rigenerano.
 
-## La bozza su KDP
+## Niente siti di Amazon (LEGGIMI versione 16)
 
-Su KDP Cowork legge e basta, con un'eccezione decisa dall'autore il 14 ottobre
-2026: la richiesta che `pubblicazione <slug>` scrive in
-`books/<slug>/pubblicazione/cowork-kdp-bozza.md`, del ruolo `regole-kdp`, con
-la riga `Bozza KDP: autorizzata dall'autore …`. Cowork controlla prima che
-il Bookshelf si veda nel Chrome dell'autore (se no si ferma e dice che cosa
-vede), crea il titolo, compila le pagine da `caricamento-kdp.md` e salva le
-bozze del cartaceo e del Kindle; i file li trascina l'autore quando Cowork
-glieli chiede (LEGGIMI versione 15: al primo giro il browser si era bloccato
-su KDP); non pubblica, non ordina copie, non iscrive a
-KDP Select. Con le routine spente risponde nell'ultimo messaggio della chat, e
-l'autore porta la risposta qui (`cowork corriere --ricevi`). Il prompt da
-incollare è `prompt-cowork.md`, nella stessa cartella.
+Dal 14 ottobre 2026, per decisione dell'autore (`docs/rischi-legali.md`),
+Cowork non apre nessun sito di Amazon: né amazon.com, né il servizio di
+autocompletamento, né kdp.amazon.com, nemmeno per leggere. Le Condizioni d'uso
+di Amazon vietano robot e raccolta di schede, descrizioni e prezzi, e il
+rischio è l'account dell'autore, lo stesso di KDP. Non guida nemmeno Helium 10,
+Publisher Rocket e Google Trends: quei dati li esporta l'autore. I ruoli
+`concorrente`, `parole-chiave` e `regole-kdp` lavorano dalla ricerca web su
+siti terzi; le bozze su KDP (versioni 14 e 15) non si fanno più, e su KDP
+carica l'autore con `pubblicazione/caricamento-kdp.md`.
 
 ## Il progetto ChatGPT delle immagini
 

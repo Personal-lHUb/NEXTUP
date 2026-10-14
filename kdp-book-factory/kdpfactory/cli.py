@@ -41,6 +41,7 @@ from . import (
     pubblicazione,
     pubbliche,
     richiesteimmagini,
+    temi,
     trascrizione,
     writer,
 )
@@ -1144,13 +1145,11 @@ def cmd_pubblicazione(args) -> int:
         return 1 if ostacoli else 0
     canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
     if not canale:
-        raise SystemExit(f"Manca {cowork.CONFIG}: non so da che ramo Cowork legge i file.")
-    leggimi = cowork.link_lettura(
-        canale, canale["leggimi"].removeprefix(cowork.CARTELLA_FABBRICA + "/"))
+        raise SystemExit(f"Manca {cowork.CONFIG}: non so in che repository e ramo stanno i file.")
     cartella = pubblicazione.cartella(project)
     if cartella.exists():
         save_backup(project, args, "pacchetto di pubblicazione precedente", force=True)
-    manifest = pubblicazione.prepara(project, spec, canale["repository"], canale["ramo"], leggimi)
+    manifest = pubblicazione.prepara(project, spec, canale["repository"], canale["ramo"])
     save_backup(project, args, "pacchetto di pubblicazione")
     diario.annota(project, f"pacchetto di pubblicazione in `{pubblicazione.CARTELLA}/`: "
                            + ", ".join(manifest["file"]))
@@ -1158,9 +1157,21 @@ def cmd_pubblicazione(args) -> int:
     for nome, dati in manifest["file"].items():
         print(f"  {nome}: {dati['byte']} byte")
     print(f"Scheda di caricamento: {cartella / pubblicazione.SCHEDA}")
-    print(f"Richiesta a Cowork: {cartella / pubblicazione.RICHIESTA}")
-    print(f"Prompt da incollare in Cowork: {cartella / pubblicazione.PROMPT}")
-    print("Poi: commit e push, perché Cowork legge i file dal ramo.")
+    print("Poi: commit e push. Su KDP carica l'autore, con la scheda di caricamento.")
+    return 0
+
+
+def cmd_temi(args) -> int:
+    """Se un libro, o il titolo e le categorie di un concorrente, toccano un tema escluso."""
+    if args.slug:
+        project, spec = open_project(args)
+        trovati = temi.per_libro(spec)
+    else:
+        trovati = temi.motivi(args.testo or [], args.categoria or [])
+    if trovati:
+        print(temi.messaggio(trovati))
+        return 1
+    print("Nessun tema escluso.")
     return 0
 
 
@@ -1588,6 +1599,16 @@ def cmd_concorrente(args) -> int:
         # La linea manuale: i quattro agenti li ha chiamati la sessione.
         risultato = acquisizione.importa(project, asin=args.asin)
         print(acquisizione.render(risultato))
+        # I temi esclusi dall'autore (salute, diritto, finanza, psicologia) non
+        # diventano mai un libro: né dal concorrente né dal piano.
+        esclusi = temi.per_concorrente(risultato.scheda) + temi.motivi(
+            [str(risultato.piano.get(k) or "") for k in ("titolo", "sottotitolo", "argomento",
+                                                          "promessa", "lettore")]
+            + [str(p) for p in risultato.piano.get("parole_chiave") or []],
+            [str(c) for c in risultato.piano.get("categorie") or []],
+        )
+        if esclusi:
+            raise SystemExit(temi.messaggio(esclusi))
         if project.spec_path.exists():
             save_backup(project, args, "scheda prima dell'importazione del reparto", force=True)
         spec = acquisizione.scrivi(project, risultato, args.author)
@@ -2165,8 +2186,15 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("slug")
     p.set_defaults(func=cmd_qa)
 
+    p = sub.add_parser("temi", help="i temi esclusi (salute, diritto, finanza, psicologia): "
+                                    "un libro, o titolo e categorie di un concorrente")
+    p.add_argument("slug", nargs="?", default="")
+    p.add_argument("--testo", action="append", help="titolo, sottotitolo, argomento (ripetibile)")
+    p.add_argument("--categoria", action="append", help="una categoria (ripetibile)")
+    p.set_defaults(func=cmd_temi)
+
     p = sub.add_parser("pubblicazione",
-                       help="i file finali, la scheda di caricamento e la richiesta a Cowork "
+                       help="i file finali e la scheda di caricamento "
                             "in books/<slug>/pubblicazione/")
     p.add_argument("slug")
     p.add_argument("--controlla", action="store_true", help="dice solo che cosa manca, senza scrivere")

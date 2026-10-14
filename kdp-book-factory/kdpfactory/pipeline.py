@@ -19,6 +19,7 @@ from . import (
     coverdesign,
     coverimage,
     kdpspecs,
+    legale,
     planner,
     qa,
     typeset,
@@ -369,6 +370,8 @@ def run_qa(
         qa.check_print_pdf(spec, result.interior_pdf, result.pages, report)
     state = project.load_state()
     controlla_indice(project, spec, outline, chapters, result, state, report)
+    # Le linee rosse legali che si misurano (docs/rischi-legali.md).
+    legale.controlla(project, spec, chapters, state, report)
     if state.get("metadata"):
         qa.check_metadata(state["metadata"], spec, report)
     if state.get("cover"):

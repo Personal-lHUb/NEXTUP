@@ -199,6 +199,17 @@ Se l'autore ammette i temi di salute, diritto, finanza o psicologia:
   per l'autolesionismo, un contatto di crisi concreto;
 - nessuna promessa né in copertina né nella scheda.
 
+## Decisioni dell'autore del 14 ottobre 2026, e che cosa fa il motore
+
+| tema | decisione | nel motore |
+|---|---|---|
+| salute, diritto, finanza, psicologia | **esclusi**, anche il libro in corso | `kdpfactory/temi.py`: il comando `temi`, il blocco a `concorrente importa`, l'errore `TEMA` di `qa`, il blocco del pacchetto; agenti `posizionamento` e `conformita` |
+| libro `b0gjr36xwt` (documentazione clinica) | **eliminato** | tolto da `books/` e dai libri attivi; resta nella storia di git e in una copia di backup |
+| dichiarazione sull'IA | **veritiera** | colophon: «This book was written with artificial intelligence tools. The publisher chose the subject and directed the work.» (anche in italiano e nei libri di enigmi) |
+| Cowork sui siti di Amazon | **fermo** | LEGGIMI versione 16: niente amazon.com, completion.amazon.com, kdp.amazon.com; niente Helium 10, Publisher Rocket, Google Trends guidati da Cowork; il pacchetto non scrive più la richiesta di bozza KDP: su KDP carica l'autore |
+| testi e PDF pubblici | **libri in un repository privato** | da fare: serve il repository privato (vedi sotto) |
+| concorrente nel libro | linea rossa | `kdpfactory/legale.py`: errore `CONCORRENTE` di `qa` se titolo, autore, editore o ASIN del concorrente compaiono nel testo, in copertina o nella scheda |
+
 ## Che cosa resta all'autore
 
 1. Repository: testi e PDF fuori dal pubblico, o no.

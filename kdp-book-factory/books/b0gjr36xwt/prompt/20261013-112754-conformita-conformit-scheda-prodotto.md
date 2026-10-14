@@ -1,7 +1,0 @@
-<!-- agente: conformita · Conformità: scheda prodotto · 2026-10-13 11:27:54 UTC -->
-
-Libro `b0gjr36xwt`, cartella `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/`. Fase 6: controlla la scheda prodotto in `build/kdp-listing.md` (la sorgente è `manuale/scheda.json`): descrizione, punti, chiusura, parole chiave, categorie, biografia dell'autore, quarta di copertina, occhiello e gancio di copertina. Per sapere che cosa il libro dice e promette davvero leggi `book.json` (`notes`, `disclaimer`) e il tuo rapporto della fase 4 `revisioni/conformita.md`, dove avevi lasciato una nota per questa fase; se ti serve un riscontro sul testo, i capitoli sono in `manuscript/`. Non leggere niente in `concorrente/`.
-
-Il tuo campo, e solo quello: i rischi legali e le regole di contenuto KDP nella scheda. Promesse di risultato, consulenza professionale presentata come prescrizione, credenziali non dichiarate o implicite nella biografia, marchi, nomi di autori o titoli altrui nelle parole chiave, parole chiave fuorvianti o che ripetono il titolo, categorie che descrivono il libro in modo falso, tag non ammessi nella descrizione. Le gravità sono `bloccante`, `importante`, `minore`. Per ogni rilievo dai il testo sostitutivo esatto.
-
-Consegna: scrivi il rapporto intero, che comincia con `# Rapporto`, in `/home/user/NEXTUP/kdp-book-factory/books/b0gjr36xwt/consegne/conformita-scheda.md`. Poi rispondi con una riga: il percorso e quanti rilievi ci sono per gravità.

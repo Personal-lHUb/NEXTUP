@@ -1,22 +1,21 @@
 """Il pacchetto di pubblicazione: i file che vanno su KDP, in git, con la scheda per caricarli.
 
 `build/` non entra in git: si rigenera. Quando il libro è finito, però, i file
-che vanno su KDP devono stare in un posto che resta e che Cowork può leggere,
-perché il caricamento lo fa lui dal portatile dell'autore. `pubblicazione`
-copia in `books/<slug>/pubblicazione/` l'interno, la copertina del cartaceo, la
+che vanno su KDP devono stare in un posto che resta. `pubblicazione` copia in
+`books/<slug>/pubblicazione/` l'interno, la copertina del cartaceo, la
 copertina dell'ebook (il fronte, in JPG: KDP la vuole a parte), l'EPUB e la
 scheda prodotto, e ci scrive:
 
 - `caricamento-kdp.md`, campo per campo, con i valori esatti da mettere nelle
   pagine di KDP, per il cartaceo e per il Kindle;
-- `manifest.json`, con i byte, l'impronta SHA-256 e l'indirizzo pubblico di
-  ogni file, così chi li scarica vede se sono arrivati interi;
-- la richiesta a Cowork (`cowork-kdp-bozza.md`) e il prompt da incollare nella
-  sua chat (`prompt-cowork.md`).
+- `manifest.json`, con i byte, l'impronta SHA-256 e l'indirizzo di ogni file,
+  così chi li scarica vede se sono arrivati interi.
 
-Il pacchetto si fa solo a cancello chiuso: `qa` senza errori, la copertina con
-l'illustrazione della direzione scelta, le decisioni dell'autore prese. Cowork
-salva le bozze e non pubblica mai: il pulsante lo preme l'autore.
+Il pacchetto si fa solo a cancello chiuso: `qa` senza errori, nessun tema
+escluso dall'autore, la copertina con l'illustrazione della direzione scelta,
+le decisioni dell'autore prese. Su KDP carica l'autore: Cowork non apre i siti
+di Amazon (decisione del 14 ottobre 2026, `docs/rischi-legali.md`), e
+«Publish» lo preme comunque lui.
 """
 
 from __future__ import annotations
@@ -27,14 +26,12 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import decisioni, direzioni, kdpspecs
+from . import decisioni, direzioni, kdpspecs, temi
 from .models import BookProject, BookSpec
 
 CARTELLA = "pubblicazione"
 MANIFEST = "manifest.json"
 SCHEDA = "caricamento-kdp.md"
-RICHIESTA = "cowork-kdp-bozza.md"
-PROMPT = "prompt-cowork.md"
 #: l'altezza della copertina dell'ebook che KDP consiglia; la larghezza segue il formato
 KINDLE_ALTEZZA = 2560
 #: le decisioni dell'autore senza cui il libro non si carica
@@ -86,6 +83,8 @@ def problemi(project: BookProject, spec: BookSpec, stato: dict | None = None) ->
     if direzioni.scelta(direzioni.leggi(project)) and not copertina.get("immagine"):
         trovati.append("la copertina è ancora solo tipografica: manca l'illustrazione della "
                        "direzione scelta (`copertina --scegli N`, poi `build`)")
+    for motivo in temi.per_libro(spec):
+        trovati.append(f"tema escluso dall'autore — {motivo}")
     for chiave in DECISIONI:
         if not decisioni.valore(project, chiave):
             trovati.append(f"manca la decisione dell'autore sul {chiave}")
@@ -162,7 +161,7 @@ def scheda_caricamento(spec: BookSpec, meta: dict, pagine: int, file: dict[str, 
         "",
         "Scritto da `python3 -m kdpfactory pubblicazione`. I valori si copiano così",
         "come sono; quelli in inglese sono le etichette e le scelte delle pagine di KDP.",
-        "**Si salva come bozza e non si pubblica**: «Publish» lo preme l'autore.",
+        "Li compila l'autore; «Publish» solo dopo aver riletto l'anteprima di KDP.",
         "",
         "## I file",
         "",
@@ -274,102 +273,9 @@ def scheda_caricamento(spec: BookSpec, meta: dict, pagine: int, file: dict[str, 
     return "\n".join(riga)
 
 
-def richiesta_cowork(spec: BookSpec, base: str, risposta: str, kindle: bool) -> str:
-    """La richiesta per il ruolo `regole-kdp`: la bozza su KDP, senza pubblicare."""
-    edizioni = "il cartaceo e il Kindle" if kindle else "il cartaceo"
-    quando = f"{datetime.now(timezone.utc):%Y-%m-%d}"
-    kindle_passo = (
-        "4. Dalla scheda del cartaceo crea il Kindle, compila le tre pagine come dice la\n"
-        "   scheda, con EPUB e copertina JPG allegati dall'autore, apri l'anteprima,\n"
-        "   «Save as Draft»." if kindle else "4. Il Kindle non c'è: niente da fare."
-    )
-    return f"""# Bozza su KDP — {spec.title}
-
-Ruolo: regole-kdp
-Serve: l'accesso a KDP (kdp.amazon.com) aperto nel browser del portatile
-Bozza KDP: autorizzata dall'autore il {quando} per questo libro solo, senza pubblicare
-
-La risposta comincia con questa riga:
-
-    Cowork · risposta · {risposta}
-
-L'autore ti chiede di preparare su KDP {edizioni} di questo libro e di
-**fermarti alle bozze**. È l'unica eccezione alla regola «su KDP si legge e
-basta» (LEGGIMI, «Bozze su KDP autorizzate»): vale per questa richiesta e per
-nessun'altra.
-
-## Che cosa fai
-
-0. **Prima di tutto, il browser.** Apri https://kdp.amazon.com/bookshelf nel
-   Chrome dell'autore. Se non vedi il Bookshelf (pagina di accesso, codice di
-   verifica, browser che non risponde, estensione non collegata), fermati
-   subito e scrivi all'autore che cosa vedi, alla lettera: l'accesso lo apre
-   lui. Non cercare un'altra strada.
-1. Leggi la scheda di caricamento, con WebFetch:
-   {base}/{SCHEDA}
-   e il manifest: {base}/{MANIFEST}
-   Se un indirizzo risponde 404, il pacchetto non è ancora pronto: fermati e
-   dillo all'autore.
-2. I file **li allega l'autore**: quando arrivi a un campo di caricamento,
-   gli scrivi quale file trascinare (nome del manifest; li trova ai link della
-   scheda) e aspetti che ti dica che è caricato. Tu non scegli file dal disco.
-3. Nel Bookshelf crea il titolo del cartaceo e compila le tre pagine come dice
-   la scheda, campo per campo, con i file allegati dall'autore. Apri
-   l'anteprima di KDP e leggi ogni avviso. A ogni pagina premi «Save as Draft».
-   Dopo ogni pagina salvata scrivi all'autore una riga: che cosa è fatto.
-{kindle_passo}
-5. Se un passo non va (un campo che non si trova, un clic che non risponde,
-   un errore di KDP), salva la bozza com'è, fermati e scrivi il passo, il campo
-   e il messaggio esatto: si riprende da lì, non dall'inizio.
-
-## Che cosa non fai
-
-- Non premi mai «Publish Your Paperback Book», «Publish Your Kindle eBook» né
-  un altro pulsante che pubblica o mette in vendita.
-- Non ordini copie di prova o copie autore, non iscrivi a KDP Select, non
-  attivi Expanded Distribution, non tocchi account, pagamenti, tasse.
-- Non cambi i testi: se un campo non accetta un valore della scheda (troppo
-  lungo, carattere rifiutato, categoria che non c'è), lasci il campo com'è e lo
-  scrivi nella risposta.
-
-## Che cosa rispondi
-
-Per ogni pagina compilata: i valori messi, quelli che KDP ha rifiutato o
-cambiato, con il messaggio esatto. In più:
-
-- l'ISBN che KDP ha assegnato al cartaceo;
-- le tre categorie scelte nel selettore, col percorso completo;
-- il costo di stampa e la royalty che KDP mostra per amazon.com;
-- gli avvisi dell'anteprima, pagina per pagina, copiati alla lettera;
-- lo stato finale di ogni edizione nel Bookshelf («Draft», «In review», …).
-
-Consegna: le routine sono spente per scelta dell'autore. Non lanciare
-`fire_trigger`: scrivi la risposta intera nell'ultimo messaggio, con la riga
-«Cowork · risposta · …» qui sopra come prima riga, e l'autore la porta alla
-fabbrica.
-"""
-
-
-def prompt_cowork(spec: BookSpec, base: str, leggimi: str) -> str:
-    """Il messaggio da incollare in una chat di Cowork sul portatile."""
-    return f"""Ruolo: regole-kdp. Prima di tutto leggi le regole del canale, con WebFetch:
-{leggimi}
-
-Poi leggi questa richiesta, con WebFetch, ed eseguila punto per punto:
-{base}/{RICHIESTA}
-
-È la bozza su KDP di «{spec.title}» che l'autore ha autorizzato: compila,
-salva come bozza, **non pubblicare**. Prima apri il Bookshelf di KDP nel mio
-Chrome: se non lo vedi, fermati e dimmi che cosa vedi. I file li allego io:
-quando arrivi a un campo di caricamento, dimmi quale file e aspetta. Dopo ogni
-pagina salvata scrivimi una riga. Alla fine scrivi qui la risposta intera,
-senza lanciare routine.
-"""
-
-
 def prepara(project: BookProject, spec: BookSpec, repository: str, ramo: str,
-            leggimi: str, stato: dict | None = None) -> dict:
-    """Copia i file finali nel pacchetto e scrive scheda, manifest, richiesta e prompt."""
+            stato: dict | None = None) -> dict:
+    """Copia i file finali nel pacchetto e scrive la scheda di caricamento e il manifest."""
     stato = project.load_state() if stato is None else stato
     ostacoli = problemi(project, spec, stato)
     if ostacoli:
@@ -411,9 +317,4 @@ def prepara(project: BookProject, spec: BookSpec, repository: str, ramo: str,
     (uscita / MANIFEST).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
                                    encoding="utf-8")
     (uscita / SCHEDA).write_text(scheda_caricamento(spec, meta, pagine, file), encoding="utf-8")
-    radice_repo = _radice_git(project.root)
-    risposta = (uscita / RICHIESTA.replace(".md", "-risposta.md")).resolve().relative_to(radice_repo)
-    (uscita / RICHIESTA).write_text(
-        richiesta_cowork(spec, base, risposta.as_posix(), kindle), encoding="utf-8")
-    (uscita / PROMPT).write_text(prompt_cowork(spec, base, leggimi), encoding="utf-8")
     return manifest

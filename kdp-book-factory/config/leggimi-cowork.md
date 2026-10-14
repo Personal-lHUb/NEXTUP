@@ -1,25 +1,41 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 15 · 14 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 16 · 14 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
 
+**Novità della versione 16: niente siti di Amazon, niente strumenti a pagamento
+guidati da te.** Decisione dell'autore del 14 ottobre 2026, per i rischi
+legali (`kdp-book-factory/docs/rischi-legali.md`). Le Condizioni d'uso di
+Amazon vietano robot e strumenti di raccolta dati, e la raccolta di schede,
+descrizioni e prezzi: il rischio è l'account dell'autore, lo stesso di KDP.
+Quindi:
+
+- **non apri nessun sito di Amazon**: né amazon.com, né il servizio di
+  autocompletamento (completion.amazon.com), né kdp.amazon.com, nemmeno per
+  leggere; le bozze su KDP non si fanno più (la sezione è tolta);
+- **non guidi Helium 10, Publisher Rocket, Google Trends**: i loro dati li
+  esporta l'autore e li consegna alla fabbrica;
+- le pagine di aiuto di KDP e le notizie su Amazon si leggono solo come
+  **risultati di ricerca web** o da siti terzi, mai aprendo amazon.com.
+
+Una richiesta scritta prima di questa versione che ti chiede una di queste
+cose: rispondi `Esito: parziale — <punti>: vietato dal LEGGIMI 16` e non la
+fai.
+
 **Novità della versione 15: nelle bozze su KDP i file li allega l'autore.**
+(Superata dalla versione 16: le bozze su KDP non si fanno più.)
 Al primo giro il browser si è bloccato su KDP. Ora: prima si controlla che il
 Bookshelf si veda, e se no ci si ferma e si scrive che cosa si vede; ai campi
 di caricamento si chiede all'autore di trascinare il file e si aspetta; se un
 passo non va, si salva la bozza e ci si ferma su quel passo.
 
-**Novità della versione 14: le bozze su KDP autorizzate.** Su KDP resta la
-regola «si legge e basta», con una sola eccezione: una richiesta del ruolo
-`regole-kdp` con la riga `Bozza KDP: autorizzata dall'autore …` sotto il ruolo.
-Quella richiesta ti chiede di creare il titolo, compilarlo, caricare i file e
-salvarlo come bozza, **senza mai pubblicare** (sezione «Bozze su KDP
-autorizzate»). Le routine della fabbrica sono spente per scelta dell'autore:
-se una richiesta dice di non lanciare `fire_trigger`, la risposta intera va
-nell'ultimo messaggio del giro, e la porta l'autore.
+**Versione 14** (le bozze su KDP) è superata dalla 16. Resta: le routine della
+fabbrica sono spente per scelta dell'autore; se una richiesta dice di non
+lanciare `fire_trigger`, la risposta intera va nell'ultimo messaggio del giro,
+e la porta l'autore.
 
 **Novità della versione 13: Google Drive non si usa più.** L'autore ha deciso
 che i file si salvano in un posto solo, GitHub. Su GitHub Cowork continua a non
@@ -157,9 +173,10 @@ senza richieste da fare, o in cui tutto è andato, non consegna nessun esito.
   corriere resta com'è: non si modifica e non si cancella niente.
 - Una risposta consegnata non si cambia. Se alla fabbrica serve altro, apre
   una richiesta nuova.
-- Su KDP (kdp.amazon.com) si legge e basta: niente titoli nuovi, bozze,
-  pubblicazioni o impostazioni cambiate. L'unica eccezione sono le bozze
-  autorizzate (sezione «Bozze su KDP autorizzate»): mai una pubblicazione.
+- Sui siti di Amazon (amazon.com, completion.amazon.com, kdp.amazon.com) non
+  si apre niente: né per leggere, né per scrivere (versione 16).
+- Helium 10, Publisher Rocket e Google Trends non li guidi tu: i dati li
+  esporta l'autore (versione 16).
 - Negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) si usa
   solo l'accesso che l'autore ha già aperto nel browser: non si inseriscono
   credenziali, non si compra, non si cambiano abbonamenti né impostazioni.
@@ -187,30 +204,25 @@ Il testo per crearle è in `kdp-book-factory/config/progetto-cowork.md`.
 
 ### Ruolo concorrente
 
-Le pagine Amazon dei libri concorrenti: scheda, classifica, descrizione,
-indice, recensioni, copertina in miniatura, vicini di scaffale, prezzi. Lavora
-col browser del portatile.
+Il libro concorrente, **fuori da Amazon**: siti di librerie e di editori,
+Goodreads, Google Books, ricerca web. Su amazon.com non si apre niente
+(versione 16).
 
-- Le **recensioni si copiano alla lettera**, con stelle, titolo e data. Non si
-  riassumono: la fabbrica cita le parole esatte, e un riassunto non si cita.
-- Se l'ASIN apre un'edizione Audible o Kindle, si passa al **cartaceo** dal
-  selettore dei formati: pagine e classifica in Books stanno lì.
-- Prezzi nella valuta del mercato: si imposta l'indirizzo di consegna che la
-  richiesta indica e alla fine si rimette com'era.
+- Le **recensioni si copiano alla lettera**, con stelle, titolo, data e sito
+  da cui vengono. Non si riassumono: la fabbrica cita le parole esatte.
+- Quello che si trova solo su Amazon (classifica, vicini di scaffale) non si
+  cerca: la risposta lo segna come non disponibile. Se l'autore incolla lui
+  la pagina Amazon nella richiesta, si usa quella.
 
 ### Ruolo parole-chiave
 
-Le parole chiave e le categorie: che cosa digitano i lettori e quanto sono
-affollati gli scaffali. Lavora col browser del portatile.
+Le parole chiave e le categorie, **senza Amazon e senza guidare strumenti a
+pagamento** (versione 16).
 
-- **Amazon**: l'autocompletamento si legge nella barra di ricerca, reparto
-  Books, e si riporta alla lettera; il numero di risultati è quello della
-  ricerca con `i=stripbooks`.
-- **Helium 10** (Cerebro, Magnet) e **Publisher Rocket**: solo con l'accesso
-  già aperto dall'autore. Se uno strumento non è accessibile, i suoi punti
-  restano vuoti e la risposta è parziale, con il motivo. Le cifre sono stime
-  dello strumento: si riportano come le mostra, con il suo nome.
-- **Google Trends**: nel paese del mercato, sugli ultimi cinque anni.
+- Le esportazioni di **Helium 10**, **Publisher Rocket** e **Google Trends**
+  le fa l'autore e le allega alla richiesta: tu le leggi e ne ricavi la
+  tabella. Se mancano, quelle colonne restano vuote e la risposta è parziale.
+- Ricerca web su siti terzi per capire come i lettori chiamano il tema.
 - Si chiude sempre con la tabella che la richiesta chiede: una frase per riga,
   una cella vuota dove manca il dato. Mai un numero stimato da te.
 
@@ -228,43 +240,10 @@ cloud.
 ### Ruolo regole-kdp
 
 Le regole di KDP che valgono per ogni libro: costi di stampa, limiti, pagine,
-selettore delle categorie. Le pagine di aiuto si leggono anche nel cloud; il
-flusso di un titolo nuovo solo col browser del portatile.
-
-- Su KDP **si legge e basta**. Nel flusso di un titolo nuovo si guarda e si
-  esce senza salvare: niente bozze.
-- Se serve l'accesso a KDP e nel browser non è aperto: con la riga `Serve:`
-  non rispondi e aspetti il giro dopo; senza, la risposta è parziale con quel
-  motivo. L'accesso lo apre l'autore, non tu.
-- La fonte preferita è la guida ufficiale di KDP (kdp.amazon.com/help); il
-  calcolatore dei costi va citato con le cifre che mostra.
-
-#### Bozze su KDP autorizzate
-
-Una richiesta con la riga `Bozza KDP: autorizzata dall'autore il <data> per
-questo libro solo, senza pubblicare` è l'unico caso in cui su KDP si scrive.
-
-- Si crea il titolo, si compilano le pagine con i valori della scheda di
-  caricamento che la richiesta indica, si caricano i file del pacchetto e si
-  preme **«Save as Draft»** a ogni pagina.
-- Prima di tutto si apre il Bookshelf (kdp.amazon.com/bookshelf) nel Chrome
-  dell'autore. Se non si vede — pagina di accesso, codice di verifica,
-  estensione non collegata, browser che non risponde — ci si ferma e si scrive
-  all'autore che cosa si vede, alla lettera. L'accesso lo apre lui.
-- I file li allega l'autore: al campo di caricamento gli si scrive quale file
-  trascinare e si aspetta la sua conferma. Non si scelgono file dal disco e non
-  si scarica niente. Su GitHub non si scrive niente.
-- Se un passo non va, si salva la bozza com'è e ci si ferma su quel passo, con
-  il campo e il messaggio esatto: si riprende da lì.
-- **Mai** «Publish Your Paperback Book», «Publish Your Kindle eBook» o un altro
-  pulsante che pubblica, mette in vendita o manda in revisione. Mai copie di
-  prova o copie autore, KDP Select, Expanded Distribution, account, pagamenti,
-  tasse.
-- I testi della scheda non si cambiano: un valore che KDP rifiuta si lascia
-  com'è e si scrive nella risposta, col messaggio esatto.
-- La risposta dice, pagina per pagina, che cosa è stato messo e che cosa KDP ha
-  rifiutato, più ISBN assegnato, categorie scelte, costo di stampa, avvisi
-  dell'anteprima e stato finale nel Bookshelf.
+categorie, contenuti. **Solo dalla ricerca web** (i risultati che citano le
+pagine di aiuto di KDP, e siti terzi): kdp.amazon.com non si apre, nemmeno
+per leggere (versione 16). Ogni regola con la fonte e la data in cui è stata
+vista; se la fonte non è ufficiale, lo si scrive.
 
 ### Ruolo immagini
 
