@@ -186,6 +186,27 @@ class TestRamoImmagini(Base):
         )
         scrivi(self.radice, "books/libro/manuale/cowork-immagini-scarica.md", testo)
 
+    def test_le_varianti_pagate_si_prendono_dal_ramo_senza_richiesta(self):
+        # b0gjr36xwt: la CDN bloccata nel container; l'autore carica sul ramo la
+        # variante scelta, al percorso che il registro delle generate prevede.
+        finto = FintoGit({
+            "kdp-book-factory/books/libro/assets/copertina-3.png": PNG,
+            "kdp-book-factory/books/libro/assets/copertina-4.jpg": b"<html>no</html>",
+            "kdp-book-factory/books/altro/assets/copertina-1.png": PNG,  # libro che non c'è
+        })
+        trovate, avvisi = corriere.immagini_attese_sul_ramo(
+            self.radice,
+            ["books/libro/assets/copertina-3", "books/libro/assets/copertina-4",
+             "books/libro/assets/copertina-5", "books/altro/assets/copertina-1"],
+            esegui=finto,
+        )
+        self.assertEqual(list(trovate), ["books/libro/assets/copertina-3"])
+        self.assertEqual(trovate["books/libro/assets/copertina-3"][1], PNG)
+        self.assertEqual(len(avvisi), 1)
+        _, avvisi = corriere.immagini_attese_sul_ramo(self.radice, ["books/libro/assets/x"],
+                                                      esegui=FintoGit(None))
+        self.assertIn("non c'è", avvisi[0])
+
     def test_dal_ramo_arrivano_solo_le_immagini_chieste(self):
         finto = FintoGit({
             "kdp-book-factory/books/libro/assets/copertina-1.png": PNG,

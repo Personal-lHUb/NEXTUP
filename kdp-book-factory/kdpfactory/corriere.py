@@ -452,6 +452,46 @@ def preleva_dal_ramo(
     return presi, avvisi
 
 
+def immagini_attese_sul_ramo(
+    radice: Path, relativi: list[str], esegui=subprocess.run
+) -> tuple[dict[str, tuple[str, bytes]], list[str]]:
+    """Le immagini che il sistema aspetta sul ramo `cowork-immagini`, senza richiesta che le nomini.
+
+    Sono le varianti già generate e pagate che la rete del container non lascia
+    scaricare dalla CDN: le carica l'autore sul ramo, allo stesso percorso che
+    avrebbero in `assets/`, con qualunque estensione da immagine. Per ognuno dei
+    `relativi` (relativi a kdp-book-factory/, senza estensione) restituisce il
+    blob e il contenuto, se c'è ed è davvero un'immagine; più gli avvisi.
+    """
+    def git(*argomenti: str) -> subprocess.CompletedProcess:
+        return esegui(["git", "-C", str(radice), *argomenti], capture_output=True)
+
+    rif = f"refs/remotes/origin/{RAMO_IMMAGINI}"
+    if git("fetch", "-q", "origin", f"+refs/heads/{RAMO_IMMAGINI}:{rif}").returncode != 0:
+        return {}, [f"il ramo {RAMO_IMMAGINI} non c'è"]
+    voci: dict[str, str] = {}
+    for riga in git("ls-tree", "-r", "--full-tree", rif).stdout.decode("utf-8", "replace").splitlines():
+        testa, _, percorso = riga.partition("\t")
+        campi = testa.split()
+        if len(campi) == 3 and campi[1] == "blob":
+            voci[percorso] = campi[2]
+    trovate: dict[str, tuple[str, bytes]] = {}
+    avvisi: list[str] = []
+    for relativo in relativi:
+        for estensione in sorted(IMMAGINI):
+            candidato = f"{relativo}{estensione}"
+            blob = voci.get(percorso_sul_ramo(candidato))
+            if not blob or not immagine_ammessa(radice, candidato):
+                continue
+            contenuto = git("cat-file", "blob", blob).stdout
+            if not e_un_immagine(contenuto):
+                avvisi.append(f"{candidato}: sul ramo non è un'immagine, resta lì")
+                continue
+            trovate[relativo] = (blob, contenuto)
+            break
+    return trovate, avvisi
+
+
 def registra_dal_ramo(radice: Path, relativo: str, blob: str) -> None:
     registro = leggi_registro(radice)
     registro.setdefault("dal_ramo", {})[relativo] = blob

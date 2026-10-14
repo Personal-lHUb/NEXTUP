@@ -1,10 +1,16 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 14 · 14 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 15 · 14 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
+
+**Novità della versione 15: nelle bozze su KDP i file li allega l'autore.**
+Al primo giro il browser si è bloccato su KDP. Ora: prima si controlla che il
+Bookshelf si veda, e se no ci si ferma e si scrive che cosa si vede; ai campi
+di caricamento si chiede all'autore di trascinare il file e si aspetta; se un
+passo non va, si salva la bozza e ci si ferma su quel passo.
 
 **Novità della versione 14: le bozze su KDP autorizzate.** Su KDP resta la
 regola «si legge e basta», con una sola eccezione: una richiesta del ruolo
@@ -111,8 +117,7 @@ dalla shell: la modalità automatica li nega, e dopo un rifiuto non si riprova
 con un altro strumento. Non servono credenziali: il repository è pubblico. Se
 un indirizzo non si apre, scrivi l'esito (sezione «Se qualcosa non va»). Il
 browser del portatile serve per il lavoro del tuo ruolo (Amazon, KDP, YouTube,
-ChatGPT), non per GitHub; l'unica eccezione è scaricare i file di un pacchetto
-per una bozza su KDP autorizzata, dai loro indirizzi pubblici.
+ChatGPT), non per GitHub.
 
 ## Giri nel cloud
 
@@ -242,9 +247,15 @@ questo libro solo, senza pubblicare` è l'unico caso in cui su KDP si scrive.
 - Si crea il titolo, si compilano le pagine con i valori della scheda di
   caricamento che la richiesta indica, si caricano i file del pacchetto e si
   preme **«Save as Draft»** a ogni pagina.
-- I file del pacchetto si scaricano col browser dai loro indirizzi
-  `raw.githubusercontent.com` (sola lettura) nella cartella Download, e i byte
-  si confrontano col manifest. Su GitHub non si scrive niente.
+- Prima di tutto si apre il Bookshelf (kdp.amazon.com/bookshelf) nel Chrome
+  dell'autore. Se non si vede — pagina di accesso, codice di verifica,
+  estensione non collegata, browser che non risponde — ci si ferma e si scrive
+  all'autore che cosa si vede, alla lettera. L'accesso lo apre lui.
+- I file li allega l'autore: al campo di caricamento gli si scrive quale file
+  trascinare e si aspetta la sua conferma. Non si scelgono file dal disco e non
+  si scarica niente. Su GitHub non si scrive niente.
+- Se un passo non va, si salva la bozza com'è e ci si ferma su quel passo, con
+  il campo e il messaggio esatto: si riprende da lì.
 - **Mai** «Publish Your Paperback Book», «Publish Your Kindle eBook» o un altro
   pulsante che pubblica, mette in vendita o manda in revisione. Mai copie di
   prova o copie autore, KDP Select, Expanded Distribution, account, pagamenti,

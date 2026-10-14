@@ -278,6 +278,11 @@ def richiesta_cowork(spec: BookSpec, base: str, risposta: str, kindle: bool) -> 
     """La richiesta per il ruolo `regole-kdp`: la bozza su KDP, senza pubblicare."""
     edizioni = "il cartaceo e il Kindle" if kindle else "il cartaceo"
     quando = f"{datetime.now(timezone.utc):%Y-%m-%d}"
+    kindle_passo = (
+        "4. Dalla scheda del cartaceo crea il Kindle, compila le tre pagine come dice la\n"
+        "   scheda, con EPUB e copertina JPG allegati dall'autore, apri l'anteprima,\n"
+        "   «Save as Draft»." if kindle else "4. Il Kindle non c'è: niente da fare."
+    )
     return f"""# Bozza su KDP — {spec.title}
 
 Ruolo: regole-kdp
@@ -295,18 +300,27 @@ nessun'altra.
 
 ## Che cosa fai
 
+0. **Prima di tutto, il browser.** Apri https://kdp.amazon.com/bookshelf nel
+   Chrome dell'autore. Se non vedi il Bookshelf (pagina di accesso, codice di
+   verifica, browser che non risponde, estensione non collegata), fermati
+   subito e scrivi all'autore che cosa vedi, alla lettera: l'accesso lo apre
+   lui. Non cercare un'altra strada.
 1. Leggi la scheda di caricamento, con WebFetch:
    {base}/{SCHEDA}
    e il manifest: {base}/{MANIFEST}
-2. Scarica col browser i file elencati nel manifest dai loro indirizzi
-   (raw.githubusercontent.com, in sola lettura) nella cartella Download del
-   portatile, e controlla che i byte siano quelli del manifest. Se un file non
-   si scarica o i byte non tornano, fermati: risposta parziale col motivo.
-3. Nel Bookshelf di KDP crea il titolo del cartaceo e compila le tre pagine
-   come dice la scheda, campo per campo, caricando interno e copertina. Apri
+   Se un indirizzo risponde 404, il pacchetto non è ancora pronto: fermati e
+   dillo all'autore.
+2. I file **li allega l'autore**: quando arrivi a un campo di caricamento,
+   gli scrivi quale file trascinare (nome del manifest; li trova ai link della
+   scheda) e aspetti che ti dica che è caricato. Tu non scegli file dal disco.
+3. Nel Bookshelf crea il titolo del cartaceo e compila le tre pagine come dice
+   la scheda, campo per campo, con i file allegati dall'autore. Apri
    l'anteprima di KDP e leggi ogni avviso. A ogni pagina premi «Save as Draft».
-{"4. Dalla scheda del cartaceo crea il Kindle, compila le tre pagine come dice la" if kindle else ""}
-{"   scheda, carica EPUB e copertina JPG, apri l'anteprima, «Save as Draft»." if kindle else ""}
+   Dopo ogni pagina salvata scrivi all'autore una riga: che cosa è fatto.
+{kindle_passo}
+5. Se un passo non va (un campo che non si trova, un clic che non risponde,
+   un errore di KDP), salva la bozza com'è, fermati e scrivi il passo, il campo
+   e il messaggio esatto: si riprende da lì, non dall'inizio.
 
 ## Che cosa non fai
 
@@ -344,9 +358,11 @@ def prompt_cowork(spec: BookSpec, base: str, leggimi: str) -> str:
 Poi leggi questa richiesta, con WebFetch, ed eseguila punto per punto:
 {base}/{RICHIESTA}
 
-È la bozza su KDP di «{spec.title}» che l'autore ha autorizzato: compila e
-carica, salva come bozza, **non pubblicare**. L'accesso a KDP è già aperto nel
-browser: se non lo è, fermati e dimmelo. Alla fine scrivi qui la risposta intera,
+È la bozza su KDP di «{spec.title}» che l'autore ha autorizzato: compila,
+salva come bozza, **non pubblicare**. Prima apri il Bookshelf di KDP nel mio
+Chrome: se non lo vedi, fermati e dimmi che cosa vedi. I file li allego io:
+quando arrivi a un campo di caricamento, dimmi quale file e aspetta. Dopo ogni
+pagina salvata scrivimi una riga. Alla fine scrivi qui la risposta intera,
 senza lanciare routine.
 """
 

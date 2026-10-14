@@ -921,12 +921,55 @@ def _genera_copertina(project, args, spec, pages, meta, copy, rivale, minimo, ra
     return 0
 
 
-def _scarica_generate(project: BookProject, args, apri=urllib.request.urlopen) -> int:
+def _generate_dal_ramo(project: BookProject, falliti: list[tuple[str, str]],
+                       esegui=None) -> list[tuple[str, str]]:
+    """Le varianti che la CDN non ha dato, prese dal ramo `cowork-immagini` se l'autore le ha caricate.
+
+    Restituisce quelle che mancano ancora. L'autore le carica allo stesso
+    percorso che avranno in `assets/` (b0gjr36xwt: la rete del container
+    bloccava la CDN, e il dominio non si apriva nella sessione in corso).
+    """
+    radice = Path(__file__).resolve().parent.parent
+    try:
+        cartella = project.assets_dir.resolve().relative_to(radice).as_posix()
+    except ValueError:
+        return falliti
+    attese = {f"{cartella}/{Path(nome).stem}": (nome, motivo) for nome, motivo in falliti}
+    opzioni = {"esegui": esegui} if esegui else {}
+    trovate, avvisi = corriere.immagini_attese_sul_ramo(radice, list(attese), **opzioni)
+    for avviso in avvisi:
+        print(f"! {avviso}", file=sys.stderr)
+    restano = []
+    for relativo, (nome, motivo) in attese.items():
+        if relativo not in trovate:
+            restano.append((nome, motivo))
+            continue
+        blob, contenuto = trovate[relativo]
+        destinazione = project.assets_dir / (Path(nome).stem + _estensione(contenuto))
+        destinazione.write_bytes(contenuto)
+        corriere.registra_dal_ramo(radice, f"{relativo}{destinazione.suffix}", blob)
+        from PIL import Image
+        with Image.open(destinazione) as immagine:
+            larghezza, altezza = immagine.size
+        print(f"  {destinazione.name}: {larghezza} x {altezza} px, dal ramo {corriere.RAMO_IMMAGINI}")
+    return restano
+
+
+def _estensione(contenuto: bytes) -> str:
+    if contenuto.startswith(b"\x89PNG"):
+        return ".png"
+    if contenuto.startswith(b"\xff\xd8\xff"):
+        return ".jpg"
+    return ".webp"
+
+
+def _scarica_generate(project: BookProject, args, apri=urllib.request.urlopen, esegui=None) -> int:
     """Le varianti già generate e pagate, dalla CDN di Higgsfield in assets/copertina-N.png.
 
     Non si rigenera niente: si scaricano gli indirizzi che il generatore ha
     restituito (`build/copertina-higgsfield.json`). La CDN la rete del container
-    può bloccarla: allora lo dice, con l'host da aprire.
+    può bloccarla: allora le cerca sul ramo `cowork-immagini`, dove l'autore può
+    caricarle, e se non ci sono lo dice, con l'host da aprire.
     """
     from PIL import Image
 
@@ -957,6 +1000,8 @@ def _scarica_generate(project: BookProject, args, apri=urllib.request.urlopen) -
         with Image.open(destinazione) as immagine:
             larghezza, altezza = immagine.size
         print(f"  {destinazione.name}: {larghezza} x {altezza} px, {len(contenuto)} byte")
+    if falliti:
+        falliti = _generate_dal_ramo(project, falliti, esegui)
     if len(falliti) < len(mancanti):
         save_backup(project, args, "varianti di copertina scaricate da Higgsfield")
     for nome, motivo in falliti:

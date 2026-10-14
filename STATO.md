@@ -128,6 +128,15 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   --agents copertina,impaginazione`, `qa`, `diagnostica`, `pubblicazione
   b0gjr36xwt`, commit e push; poi l'autore incolla `prompt-cowork.md` in Cowork
   e porta qui la risposta (`cowork corriere --ricevi`).
+- **Aggiornamento 14 ottobre, Cowork.** Il primo tentativo è fallito: la
+  richiesta dava 404 (il pacchetto aspetta la copertina) e il browser si è
+  bloccato su KDP. L'autore carica la variante 3 sul ramo `cowork-immagini`
+  (`kdp-book-factory/books/b0gjr36xwt/assets/copertina-3.png`):
+  `copertina --scarica-generate` ora la prende da lì quando la CDN è bloccata.
+  Richiesta a Cowork rifatta (LEGGIMI versione 15): prima il Bookshelf, i file
+  li allega l'autore, ci si ferma sul passo che non va. Al «continua»:
+  `--scarica-generate`, `--scegli 3`, `build`, controlli, `pubblicazione`,
+  push; poi il prompt a Cowork.
 - **Richieste dell'autore per dopo il collegio**: se il lettore cieco dà l'OK,
   le immagini dell'interno prendendo a riferimento i libri analoghi (i box per
   le note deboli e riscritte, più quello che il confronto suggerisce, con un

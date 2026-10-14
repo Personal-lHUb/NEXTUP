@@ -313,10 +313,12 @@ varianti già pagate non si rigenerano.
 Su KDP Cowork legge e basta, con un'eccezione decisa dall'autore il 14 ottobre
 2026: la richiesta che `pubblicazione <slug>` scrive in
 `books/<slug>/pubblicazione/cowork-kdp-bozza.md`, del ruolo `regole-kdp`, con
-la riga `Bozza KDP: autorizzata dall'autore …`. Cowork scarica i file del
-pacchetto dagli indirizzi pubblici, controlla i byte col manifest, crea il
-titolo, compila le pagine da `caricamento-kdp.md`, carica i file e salva le
-bozze del cartaceo e del Kindle; non pubblica, non ordina copie, non iscrive a
+la riga `Bozza KDP: autorizzata dall'autore …`. Cowork controlla prima che
+il Bookshelf si veda nel Chrome dell'autore (se no si ferma e dice che cosa
+vede), crea il titolo, compila le pagine da `caricamento-kdp.md` e salva le
+bozze del cartaceo e del Kindle; i file li trascina l'autore quando Cowork
+glieli chiede (LEGGIMI versione 15: al primo giro il browser si era bloccato
+su KDP); non pubblica, non ordina copie, non iscrive a
 KDP Select. Con le routine spente risponde nell'ultimo messaggio della chat, e
 l'autore porta la risposta qui (`cowork corriere --ricevi`). Il prompt da
 incollare è `prompt-cowork.md`, nella stessa cartella.
