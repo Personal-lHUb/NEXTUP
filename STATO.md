@@ -1,6 +1,6 @@
 # Stato della fabbrica
 
-Aggiornato il 13 ottobre 2026. Si aggiorna alla fine di ogni sessione: chi apre la
+Aggiornato il 14 ottobre 2026. Si aggiorna alla fine di ogni sessione: chi apre la
 sessione dopo parte da qui.
 
 ## Il libro in corso
@@ -114,6 +114,20 @@ prescrizione). Concorrente: B0GJR36XWT, *Chart Like a Lawyer* (Jaime Weiland,
   `review --agents copertina,impaginazione`, `qa`, `diagnostica`, consegna di
   copertina PDF e pacchetto completo. In alternativa carica lui la variante 3 sul
   ramo `cowork-immagini` come `kdp-book-factory/books/b0gjr36xwt/assets/copertina-3.png`.
+- **Aggiornamento 14 ottobre, verso KDP.** Scelte dell'autore: Cowork prepara
+  su KDP le **bozze** del cartaceo (21,99 USD, ISBN gratuito di KDP, opaca) e
+  del Kindle (7,99 USD, royalty 70%) e **non pubblica**; i file finali vanno in
+  `books/b0gjr36xwt/pubblicazione/` (repository pubblico, accettato); la
+  copertina arriva abilitando la CDN. Motore: `pubblicazione <slug>` (con
+  `--controlla`) fa il pacchetto: interno, copertina, copertina Kindle JPG,
+  EPUB, scheda, `manifest.json`, `caricamento-kdp.md`, la richiesta
+  `cowork-kdp-bozza.md` (ruolo `regole-kdp`) e `prompt-cowork.md`; LEGGIMI
+  versione 14 con l'eccezione «Bozze su KDP autorizzate». **Ferma sulla
+  copertina** (CDN ancora 403). Al «continua» con la CDN aperta:
+  `copertina b0gjr36xwt --scarica-generate`, `--scegli 3`, `build`, `review
+  --agents copertina,impaginazione`, `qa`, `diagnostica`, `pubblicazione
+  b0gjr36xwt`, commit e push; poi l'autore incolla `prompt-cowork.md` in Cowork
+  e porta qui la risposta (`cowork corriere --ricevi`).
 - **Richieste dell'autore per dopo il collegio**: se il lettore cieco dà l'OK,
   le immagini dell'interno prendendo a riferimento i libri analoghi (i box per
   le note deboli e riscritte, più quello che il confronto suggerisce, con un

@@ -105,7 +105,8 @@ dell'autore. Dettagli: `docs/cowork.md`.
 - Da `kdp-book-factory/`: test `python3 -m unittest discover -s tests` (nessuna
   rete), lint `ruff check kdpfactory tests`, a che punto è il libro
   `python3 -m kdpfactory produzione`, stato di Cowork
-  `python3 -m kdpfactory cowork stato`.
+  `python3 -m kdpfactory cowork stato`, i file finali in git con la richiesta
+  di bozza KDP per Cowork `python3 -m kdpfactory pubblicazione <slug>`.
 - Senza chiave API si lavora con `manuale <slug> <passo>`
   (`docs/linea-manuale.md`); impaginazione, copertina, controlli, prezzi ed EPUB
   non chiamano mai il modello.

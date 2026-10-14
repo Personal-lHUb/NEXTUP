@@ -38,6 +38,7 @@ from . import (
     pipeline,
     planner,
     produzione,
+    pubblicazione,
     pubbliche,
     richiesteimmagini,
     trascrizione,
@@ -1086,6 +1087,38 @@ def cmd_qa(args) -> int:
     return 0 if report.ok else 1
 
 
+def cmd_pubblicazione(args) -> int:
+    """I file finali in `books/<slug>/pubblicazione/`, con scheda di caricamento e richiesta a Cowork."""
+    project, spec = open_project(args)
+    ostacoli = pubblicazione.problemi(project, spec)
+    if args.controlla or ostacoli:
+        for ostacolo in ostacoli:
+            print(f"! {ostacolo}")
+        if not ostacoli:
+            print("Pronto: il pacchetto si può fare.")
+        return 1 if ostacoli else 0
+    canale = cowork.configurazione(Path(__file__).resolve().parent.parent)
+    if not canale:
+        raise SystemExit(f"Manca {cowork.CONFIG}: non so da che ramo Cowork legge i file.")
+    leggimi = cowork.link_lettura(
+        canale, canale["leggimi"].removeprefix(cowork.CARTELLA_FABBRICA + "/"))
+    cartella = pubblicazione.cartella(project)
+    if cartella.exists():
+        save_backup(project, args, "pacchetto di pubblicazione precedente", force=True)
+    manifest = pubblicazione.prepara(project, spec, canale["repository"], canale["ramo"], leggimi)
+    save_backup(project, args, "pacchetto di pubblicazione")
+    diario.annota(project, f"pacchetto di pubblicazione in `{pubblicazione.CARTELLA}/`: "
+                           + ", ".join(manifest["file"]))
+    print(f"Pacchetto in {cartella}:")
+    for nome, dati in manifest["file"].items():
+        print(f"  {nome}: {dati['byte']} byte")
+    print(f"Scheda di caricamento: {cartella / pubblicazione.SCHEDA}")
+    print(f"Richiesta a Cowork: {cartella / pubblicazione.RICHIESTA}")
+    print(f"Prompt da incollare in Cowork: {cartella / pubblicazione.PROMPT}")
+    print("Poi: commit e push, perché Cowork legge i file dal ramo.")
+    return 0
+
+
 def cmd_all(args) -> int:
     project, spec = open_project(args, riscrive=True)
     client = make_client(args)
@@ -2086,6 +2119,13 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("qa", help="controlli di qualità e conformità")
     p.add_argument("slug")
     p.set_defaults(func=cmd_qa)
+
+    p = sub.add_parser("pubblicazione",
+                       help="i file finali, la scheda di caricamento e la richiesta a Cowork "
+                            "in books/<slug>/pubblicazione/")
+    p.add_argument("slug")
+    p.add_argument("--controlla", action="store_true", help="dice solo che cosa manca, senza scrivere")
+    p.set_defaults(func=cmd_pubblicazione)
 
     p = sub.add_parser("all", help="pipeline completa")
     p.add_argument("slug")

@@ -308,6 +308,19 @@ Cowork non le può consegnare: la sua CDN è bloccata nel cloud e su GitHub non
 scrive. Finché mancano, `produzione` dà la copertina in attesa dell'autore: le
 varianti già pagate non si rigenerano.
 
+## La bozza su KDP
+
+Su KDP Cowork legge e basta, con un'eccezione decisa dall'autore il 14 ottobre
+2026: la richiesta che `pubblicazione <slug>` scrive in
+`books/<slug>/pubblicazione/cowork-kdp-bozza.md`, del ruolo `regole-kdp`, con
+la riga `Bozza KDP: autorizzata dall'autore …`. Cowork scarica i file del
+pacchetto dagli indirizzi pubblici, controlla i byte col manifest, crea il
+titolo, compila le pagine da `caricamento-kdp.md`, carica i file e salva le
+bozze del cartaceo e del Kindle; non pubblica, non ordina copie, non iscrive a
+KDP Select. Con le routine spente risponde nell'ultimo messaggio della chat, e
+l'autore porta la risposta qui (`cowork corriere --ricevi`). Il prompt da
+incollare è `prompt-cowork.md`, nella stessa cartella.
+
 ## Il progetto ChatGPT delle immagini
 
 Le immagini nascono in un progetto di ChatGPT, «NEXTUP — Immagini»: le regole

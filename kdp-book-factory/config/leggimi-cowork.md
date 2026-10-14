@@ -1,10 +1,19 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 13 · 7 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 14 · 14 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
+
+**Novità della versione 14: le bozze su KDP autorizzate.** Su KDP resta la
+regola «si legge e basta», con una sola eccezione: una richiesta del ruolo
+`regole-kdp` con la riga `Bozza KDP: autorizzata dall'autore …` sotto il ruolo.
+Quella richiesta ti chiede di creare il titolo, compilarlo, caricare i file e
+salvarlo come bozza, **senza mai pubblicare** (sezione «Bozze su KDP
+autorizzate»). Le routine della fabbrica sono spente per scelta dell'autore:
+se una richiesta dice di non lanciare `fire_trigger`, la risposta intera va
+nell'ultimo messaggio del giro, e la porta l'autore.
 
 **Novità della versione 13: Google Drive non si usa più.** L'autore ha deciso
 che i file si salvano in un posto solo, GitHub. Su GitHub Cowork continua a non
@@ -102,7 +111,8 @@ dalla shell: la modalità automatica li nega, e dopo un rifiuto non si riprova
 con un altro strumento. Non servono credenziali: il repository è pubblico. Se
 un indirizzo non si apre, scrivi l'esito (sezione «Se qualcosa non va»). Il
 browser del portatile serve per il lavoro del tuo ruolo (Amazon, KDP, YouTube,
-ChatGPT), non per GitHub.
+ChatGPT), non per GitHub; l'unica eccezione è scaricare i file di un pacchetto
+per una bozza su KDP autorizzata, dai loro indirizzi pubblici.
 
 ## Giri nel cloud
 
@@ -143,7 +153,8 @@ senza richieste da fare, o in cui tutto è andato, non consegna nessun esito.
 - Una risposta consegnata non si cambia. Se alla fabbrica serve altro, apre
   una richiesta nuova.
 - Su KDP (kdp.amazon.com) si legge e basta: niente titoli nuovi, bozze,
-  pubblicazioni o impostazioni cambiate.
+  pubblicazioni o impostazioni cambiate. L'unica eccezione sono le bozze
+  autorizzate (sezione «Bozze su KDP autorizzate»): mai una pubblicazione.
 - Negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) si usa
   solo l'accesso che l'autore ha già aperto nel browser: non si inseriscono
   credenziali, non si compra, non si cambiano abbonamenti né impostazioni.
@@ -222,6 +233,27 @@ flusso di un titolo nuovo solo col browser del portatile.
   motivo. L'accesso lo apre l'autore, non tu.
 - La fonte preferita è la guida ufficiale di KDP (kdp.amazon.com/help); il
   calcolatore dei costi va citato con le cifre che mostra.
+
+#### Bozze su KDP autorizzate
+
+Una richiesta con la riga `Bozza KDP: autorizzata dall'autore il <data> per
+questo libro solo, senza pubblicare` è l'unico caso in cui su KDP si scrive.
+
+- Si crea il titolo, si compilano le pagine con i valori della scheda di
+  caricamento che la richiesta indica, si caricano i file del pacchetto e si
+  preme **«Save as Draft»** a ogni pagina.
+- I file del pacchetto si scaricano col browser dai loro indirizzi
+  `raw.githubusercontent.com` (sola lettura) nella cartella Download, e i byte
+  si confrontano col manifest. Su GitHub non si scrive niente.
+- **Mai** «Publish Your Paperback Book», «Publish Your Kindle eBook» o un altro
+  pulsante che pubblica, mette in vendita o manda in revisione. Mai copie di
+  prova o copie autore, KDP Select, Expanded Distribution, account, pagamenti,
+  tasse.
+- I testi della scheda non si cambiano: un valore che KDP rifiuta si lascia
+  com'è e si scrive nella risposta, col messaggio esatto.
+- La risposta dice, pagina per pagina, che cosa è stato messo e che cosa KDP ha
+  rifiutato, più ISBN assegnato, categorie scelte, costo di stampa, avvisi
+  dell'anteprima e stato finale nel Bookshelf.
 
 ### Ruolo immagini
 

@@ -77,6 +77,11 @@ class BookSpec:
     publisher: str = ""
     year: int = 0
     price_eur: float = 0.0
+    #: il prezzo dell'edizione Kindle, nella valuta del mercato principale;
+    #: 0 = niente Kindle (l'EPUB si fa lo stesso, ma non va su KDP)
+    price_ebook: float = 0.0
+    #: la finitura della copertina del cartaceo su KDP: «matte» o «glossy»
+    cover_finish: str = "matte"
     notes: str = ""                      # istruzioni libere per il modello
     #: l'avvertenza della pagina di copyright, se questo libro ne vuole una sua.
     #: Vuota, vale quella generica di `i18n`, che non dice di che consulenza non
@@ -152,6 +157,10 @@ class BookSpec:
             problems.append(
                 f"`paper` {self.paper!r} non valido: {', '.join(kdpspecs.PAPER_SPINE_FACTOR)}"
             )
+        if self.cover_finish not in ("matte", "glossy"):
+            problems.append("`cover_finish` supportati: 'matte', 'glossy'.")
+        if self.price_ebook < 0:
+            problems.append("`price_ebook` non può essere negativo (0 = niente Kindle).")
         if not (kdpspecs.PROJECT_MIN_PAGES <= self.target_pages <= kdpspecs.PROJECT_MAX_PAGES):
             problems.append(
                 f"`target_pages` ({self.target_pages}) fuori dall'intervallo di progetto "

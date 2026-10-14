@@ -527,6 +527,19 @@ generata **dopo** l'impaginazione finale, compilare la scheda da
 ordinare una copia di prova: i colori della copertina si giudicano anche stampati,
 non solo a schermo (video A, 13:53).
 
+A cancello chiuso, `python3 -m kdpfactory pubblicazione <slug>` copia i file
+finali in `books/<slug>/pubblicazione/`, che entra in git (`build/` no):
+interno, copertina, copertina dell'ebook (il fronte in JPG, 2560 pixel
+d'altezza, se `price_ebook` in `book.json` è più di zero), EPUB, scheda
+prodotto, `manifest.json` con byte, SHA-256 e indirizzo pubblico di ogni file,
+`caricamento-kdp.md` campo per campo, la richiesta a Cowork
+(`cowork-kdp-bozza.md`) e il prompt da incollare nella sua chat
+(`prompt-cowork.md`). Con `--controlla` dice solo che cosa manca: `qa` con
+errori, la copertina ancora tipografica quando c'è una direzione scelta, una
+decisione dell'autore su prezzo, copertina o formato. Cowork prepara le bozze
+su KDP e non pubblica: «Publish» lo preme l'autore (scelta del 14 ottobre
+2026, LEGGIMI versione 14).
+
 ---
 
 ## Il lettore cieco, per intero
