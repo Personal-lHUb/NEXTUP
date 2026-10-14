@@ -22,8 +22,7 @@ sessione dopo parte da qui.
 - **Da fare per il prossimo libro**: prima di qualunque agente,
   `python3 -m kdpfactory temi --testo "<titolo del concorrente>" --categoria
   "<sue categorie>"`. Se tocca un tema escluso, si chiede un altro ASIN.
-- **Repository**: l'autore ha scelto i libri in un repository privato. Va
-  deciso come (vedi «In sospeso»).
+- **Repository**: l'autore rende privato `NEXTUP` (vedi «In sospeso»).
 
 ## Contesto (10 ottobre, scelta dell'autore)
 
@@ -70,10 +69,11 @@ sessione dopo parte da qui.
 
 ## In sospeso, non bloccante
 
-- **Repository privato per i libri** (scelta dell'autore, 14 ottobre): spostare
-  `books/` in un repository privato nuovo non toglie i testi dalla storia
-  pubblica di `NEXTUP` (commit vecchi e altri rami): la strada che li toglie
-  davvero è rendere privato `NEXTUP`. Si aspetta la conferma dell'autore.
+- **`NEXTUP` diventa privato** (scelta dell'autore, 14 ottobre): lo fa lui da
+  GitHub (Settings → General → Danger Zone → Change visibility → Private), così
+  nessun testo resta pubblico, storia e altri rami compresi. Dopo, Cowork non
+  legge più i link `raw.githubusercontent.com`: i file glieli porta l'autore.
+  Da verificare alla sessione dopo che il repository risulti privato.
 - **CDN di Higgsfield bloccata** dalla rete del container (403): le immagini
   generate le carica l'autore sul ramo `cowork-immagini` e
   `copertina --scarica-generate` le prende da lì.
