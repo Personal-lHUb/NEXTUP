@@ -3,6 +3,7 @@ name: analista-recensioni
 description: Legge le recensioni del libro concorrente e ne ricava il buco di mercato: che cosa i lettori che hanno già pagato dicono di non aver trovato.
 tools: Read, Grep, Glob, Write
 model: sonnet
+effort: medium
 ---
 
 # Analista delle recensioni

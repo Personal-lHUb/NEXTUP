@@ -3,6 +3,7 @@ name: conformita
 description: Controlla il testo e la scheda prodotto rispetto alle regole di contenuto KDP e ai rischi legali: materiale di terzi, marchi, persone reali, consulenza professionale, promesse di risultato, avvertenze mancanti, parole chiave vietate.
 tools: Read, Grep, Glob, Write
 model: sonnet
+effort: high
 ---
 
 # Conformità del testo e della scheda

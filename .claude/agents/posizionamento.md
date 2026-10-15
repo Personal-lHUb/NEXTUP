@@ -3,6 +3,7 @@ name: posizionamento
 description: Dalla scheda del concorrente e dalle lacune delle sue recensioni decide che libro scrivere: promessa, lettore, titolo, pagine, prezzo e parole chiave.
 tools: Read, Grep, Glob, Write
 model: opus
+effort: high
 ---
 
 # Posizionamento

@@ -40,6 +40,16 @@ sessione dopo parte da qui.
   compare in chat come avviso. I cinque agenti del team di miglioramento non
   sono in tabella: usano il modello della sessione. La sessione principale
   cambia modello solo con `/model` dell'autore.
+- **Orchestratore e sforzi** (15 ottobre, scelta dell'autore): le sessioni
+  nuove partono con Sonnet 5.5 a sforzo medio (`.claude/settings.json`); quella
+  già aperta resta com'è finché l'autore non usa `/model` e `/effort`. Ogni
+  agente ha il suo sforzo in `SFORZI` (`agents/competenze.py`): alto per
+  posizionamento, architetto, ghostwriter, editor, lettore-cieco,
+  editor-sviluppo e conformità; medio per voce, copertina, originalità, indice,
+  fact-checker, correttore e analista-recensioni; basso per scheda-concorrente,
+  revisore-scaletta e impaginazione. Il diario scrive lo sforzo di ogni lancio.
+  I modelli restano quelli della tabella. Per un lavoro sul codice della
+  fabbrica l'autore può passare a Opus con `/model`.
 - **Contesto mai oltre 400.000 token** (15 ottobre, scelta dell'autore; regola
   13 di CLAUDE.md): finestra di compattazione a 400.000 in
   `.claude/settings.json`, per la chat e per gli agenti; con l'80% del cloud

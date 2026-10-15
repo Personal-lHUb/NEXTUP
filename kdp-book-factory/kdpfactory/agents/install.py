@@ -11,14 +11,14 @@ from pathlib import Path
 
 from ..models import BookSpec
 from .base import REGISTRY, AgentContext
-from .competenze import competenze_di, fuori_campo, modello_di
+from .competenze import competenze_di, fuori_campo, modello_di, sforzo_di
 
 HEADER = """---
 name: {name}
 description: {description}
 tools: {tools}
 model: {model}
----
+{effort}---
 
 """
 
@@ -123,6 +123,7 @@ def render_agent_markdown(agent) -> str:
         # e scrivono solo la loro consegna.
         tools="Read, Grep, Glob, Bash" if not blocks else "Read, Grep, Glob, Write",
         model=modello_di(agent.name),
+        effort=f"effort: {sforzo_di(agent.name)}\n" if sforzo_di(agent.name) else "",
     )
     body += f"# {agent.title}\n\n{agent.description}\n\n"
 

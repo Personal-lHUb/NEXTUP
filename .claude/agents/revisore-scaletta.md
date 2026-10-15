@@ -3,6 +3,7 @@ name: revisore-scaletta
 description: Esamina la scaletta prima che diventi un libro: argomenti del brief rimasti scoperti, capitoli che si sovrappongono, titoli generici, promesse di risultato, date dichiarate come fatti, quantità da contare. Non usa il modello: conta.
 tools: Read, Grep, Glob, Bash
 model: haiku
+effort: low
 ---
 
 # Revisore di scaletta

@@ -265,6 +265,24 @@ class TestModelli(unittest.TestCase):
         for agente in ("ghostwriter", "editor", "architetto", "lettore-cieco"):
             self.assertEqual(MODELLI[agente], "opus", agente)
 
+    def test_ogni_agente_ha_uno_sforzo(self):
+        from kdpfactory.agents.competenze import MODELLI, SFORZI
+
+        self.assertEqual(set(SFORZI), set(MODELLI))
+        self.assertTrue(set(SFORZI.values()) <= {"low", "medium", "high"})
+        # chi esegue un comando non ragiona a fondo; chi scrive o giudica sì
+        for agente in ("revisore-scaletta", "impaginazione"):
+            self.assertEqual(SFORZI[agente], "low", agente)
+        for agente in ("ghostwriter", "editor", "architetto", "lettore-cieco", "conformita"):
+            self.assertEqual(SFORZI[agente], "high", agente)
+
+    def test_il_file_esportato_porta_lo_sforzo(self):
+        from kdpfactory.agents.base import REGISTRY
+        from kdpfactory.agents.install import render_agent_markdown
+
+        intestazione = render_agent_markdown(REGISTRY["ghostwriter"]).split("---", 2)[1]
+        self.assertIn("\nmodel: opus\neffort: high\n", intestazione)
+
     def test_il_file_esportato_porta_il_modello(self):
         from kdpfactory.agents.base import REGISTRY
         from kdpfactory.agents.install import render_agent_markdown

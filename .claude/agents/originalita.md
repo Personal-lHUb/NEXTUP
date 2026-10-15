@@ -3,6 +3,7 @@ name: originalita
 description: Verifica che il libro progettato a partire da una scheda Amazon sia un libro indipendente: titolo distinguibile, nessun marchio altrui, struttura propria.
 tools: Read, Grep, Glob, Write
 model: sonnet
+effort: medium
 ---
 
 # Controllo di originalità

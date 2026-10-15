@@ -122,6 +122,42 @@ def modello_di(agente: str) -> str:
     return MODELLI.get(agente, "inherit")
 
 
+#: Lo sforzo di ragionamento di ogni agente, scritto come `effort:` nel suo file
+#: (scelta dell'autore, 15 ottobre 2026: qualità dove si vede). Alto per chi
+#: scrive o giudica il testo che si stampa; medio per chi controlla contro
+#: regole scritte, la conformità legale compresa (un errore lì costa più di
+#: un errore di virgola); basso per chi estrae dati o esegue un comando.
+#: Si cambia qui e si rigenerano i file (`agents --install ../.claude/agents`).
+SFORZI: dict[str, str] = {
+    # scrivono o giudicano quello che il lettore legge e vede
+    "posizionamento": "high",
+    "architetto": "high",
+    "ghostwriter": "high",
+    "editor": "high",
+    "lettore-cieco": "high",
+    "editor-sviluppo": "high",
+    # lavorano dentro paletti stretti: ritmo della frase, prompt già scritti dal sistema
+    "voce": "medium",
+    "copertina": "medium",
+    # controllano contro regole scritte
+    "conformita": "high",
+    "originalita": "medium",
+    "indice": "medium",
+    "fact-checker": "medium",
+    "correttore": "medium",
+    "analista-recensioni": "medium",
+    # estraggono dati o eseguono un comando che misura
+    "scheda-concorrente": "low",
+    "revisore-scaletta": "low",
+    "impaginazione": "low",
+}
+
+
+def sforzo_di(agente: str) -> str:
+    """Lo sforzo dell'agente; chi non è in tabella prende quello della sessione."""
+    return SFORZI.get(agente, "")
+
+
 def competenze_di(agente: str) -> list[Competenza]:
     return [c for c in COMPETENZE if c.agente == agente]
 

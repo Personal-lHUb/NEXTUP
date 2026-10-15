@@ -3,6 +3,7 @@ name: ghostwriter
 description: Scrive il capitolo assegnato rispettando scaletta, voce e budget di parole, senza ripetere ciò che è già stato detto nei capitoli precedenti.
 tools: Read, Grep, Glob, Write
 model: opus
+effort: high
 ---
 
 # Ghostwriter

@@ -107,8 +107,15 @@ con `agents --install`. È fissa (scelta dell'autore, 15 ottobre 2026): Fable
 non si usa, e nessun lancio passa un modello diverso se l'autore non lo chiede;
 chi la cambia la cambia lì. Il diario scrive il modello di ogni lancio
 («con `opus` (tabella)»), e un lancio fuori tabella compare in chat come avviso.
-La sessione principale non cambia modello da sola: lo sceglie l'autore con
-`/model`. Le altre regole: tutto quello che si misura lo fa un
+Accanto al modello, ogni agente ha il suo sforzo di ragionamento (`SFORZI`,
+`effort:` nel file): **alto** per posizionamento, architetto, ghostwriter,
+editor, lettore-cieco, editor-sviluppo e conformità; **medio** per voce,
+copertina, originalità, indice, fact-checker, correttore e analista-recensioni;
+**basso** per scheda-concorrente, revisore-scaletta e impaginazione. Il diario
+scrive modello e sforzo di ogni lancio. L'orchestratore è Sonnet 5.5 a sforzo
+medio (`model` ed `effortLevel` in `.claude/settings.json`, per le sessioni
+nuove); la sessione già aperta cambia solo con `/model` e `/effort`
+dell'autore. Le altre regole: tutto quello che si misura lo fa un
 comando, non un agente; l'agente riceve i percorsi e legge da sé; la sua uscita
 la scrive lui nel file di consegna (`books/<slug>/consegne/<nome>.md`), risponde
 con una riga, e `consegna <slug> <file>` la porta nel libro dopo il backup (se

@@ -3,6 +3,7 @@ name: fact-checker
 description: Individua dati, statistiche, citazioni e affermazioni presentate come fatti che non sono verificabili: in un libro stampato non si correggono più.
 tools: Read, Grep, Glob, Write
 model: sonnet
+effort: medium
 ---
 
 # Fact-checker

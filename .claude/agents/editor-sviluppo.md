@@ -3,6 +3,7 @@ name: editor-sviluppo
 description: Guarda il libro nel suo insieme: progressione, ripetizioni fra capitoli, contraddizioni e conti che non tornano, ordine dei concetti, aperture tutte uguali.
 tools: Read, Grep, Glob, Write
 model: opus
+effort: high
 ---
 
 # Editor di sviluppo

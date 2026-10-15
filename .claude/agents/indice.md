@@ -3,6 +3,7 @@ name: indice
 description: Scrive l'indice del libro: il titolo definitivo di ogni capitolo e di ogni parte, nell'ordine già deciso. È la pagina che un cliente guarda nell'anteprima prima di comprare.
 tools: Read, Grep, Glob, Write
 model: sonnet
+effort: medium
 ---
 
 # Indice dei capitoli

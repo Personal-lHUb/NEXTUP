@@ -28,9 +28,13 @@ Diario, prompt e consegne entrano in git; una nota a mano: `diario <slug> --nota
    senza chiedere il permesso. Ognuno ha **un campo solo** (`kdpfactory/agents/competenze.py`) e
    **il suo modello** (`MODELLI`: opus scrive o giudica, sonnet estrae e
    controlla, haiku esegue un comando). La tabella è fissa (scelta
-   dell'autore, 15 ottobre 2026): Fable non si usa, e mai un `model` diverso
-   nella chiamata se l'autore non lo chiede; il diario scrive il modello di
-   ogni lancio, e uno fuori tabella compare in chat come avviso. Chiedi all'agente solo il suo campo;
+   dell'autore, 15 ottobre 2026): Fable non si usa, e mai un `model` o un
+   `effort` diversi nella chiamata se l'autore non lo chiede. Ogni agente ha
+   anche il suo sforzo di ragionamento (`SFORZI`, `effort:` nel file: alto
+   per chi scrive o giudica, medio per chi controlla, basso per chi misura);
+   il diario scrive modello e sforzo di ogni lancio, e uno fuori tabella
+   compare in chat come avviso. L'orchestratore è Sonnet 5.5 a sforzo medio:
+   `model` ed `effortLevel` di `.claude/settings.json`, per le sessioni nuove. Chiedi all'agente solo il suo campo;
    dagli i percorsi, non il testo, e il suo file di consegna
    (`books/<slug>/consegne/<nome>.md`): scrive lì l'uscita intera e risponde
    con una riga. Nel libro la porta `consegna <slug> <file> --capitoli N …` (o

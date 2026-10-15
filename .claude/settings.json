@@ -1,4 +1,6 @@
 {
+  "model": "claude-sonnet-5-5",
+  "effortLevel": "medium",
   "autoCompactWindow": 400000,
   "env": {
     "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "400000"

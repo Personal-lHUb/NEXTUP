@@ -127,7 +127,8 @@ class TestModello(Base):
         agenti = self.radice.parent / diario.AGENTI
         agenti.mkdir(parents=True)
         (agenti / "editor.md").write_text(
-            "---\nname: editor\ntools: Read, Write\nmodel: opus\n---\n\n# Editor\n", encoding="utf-8")
+            "---\nname: editor\ntools: Read, Write\nmodel: opus\neffort: high\n---\n\n# Editor\n",
+            encoding="utf-8")
         (agenti / "analista-mercato.md").write_text(
             "---\nname: analista-mercato\ntools: Read\n---\n\n# Analista\n", encoding="utf-8")
 
@@ -138,13 +139,19 @@ class TestModello(Base):
     def test_il_diario_scrive_il_modello_della_tabella(self):
         codice, uscita, _ = self.lancia("editor")
         self.assertEqual((codice, uscita), (0, ""))
-        self.assertIn("lanciato `editor` «Correzioni» con `opus` (tabella) →",
+        self.assertIn("lanciato `editor` «Correzioni» con `opus` (tabella), sforzo `high` (tabella) →",
                       diario.righe(self.project)[0])
 
     def test_lo_stesso_modello_della_tabella_non_e_un_cambio(self):
         _, uscita, _ = self.lancia("editor", model="opus")
         self.assertEqual(uscita, "")
         self.assertIn("con `opus` (tabella)", diario.righe(self.project)[0])
+
+    def test_uno_sforzo_fuori_tabella_si_dice_in_chat(self):
+        _, uscita, _ = self.lancia("editor", effort="low")
+        self.assertIn("sforzo `low`, fuori tabella (la tabella dice `high`)",
+                      diario.righe(self.project)[0])
+        self.assertIn("sforzo low invece di high", json.loads(uscita)["systemMessage"])
 
     def test_un_modello_fuori_tabella_si_dice_in_chat(self):
         _, uscita, _ = self.lancia("editor", model="sonnet")
@@ -175,11 +182,12 @@ class TestModello(Base):
 
     def test_i_file_installati_dicono_la_tabella(self):
         # i file veri di .claude/agents/, quelli che Claude Code legge
-        from kdpfactory.agents.competenze import MODELLI
+        from kdpfactory.agents.competenze import MODELLI, SFORZI
 
         for agente, modello in MODELLI.items():
             with self.subTest(agente=agente):
                 self.assertEqual(diario.modello_in_tabella(agente), modello)
+                self.assertEqual(diario.sforzo_in_tabella(agente), SFORZI[agente])
 
 
 class TestFinestraDiContesto(unittest.TestCase):
@@ -190,6 +198,18 @@ class TestFinestraDiContesto(unittest.TestCase):
                                   .read_text(encoding="utf-8"))
         self.assertEqual(impostazioni["autoCompactWindow"], 400000)
         self.assertEqual(impostazioni["env"]["CLAUDE_CODE_AUTO_COMPACT_WINDOW"], "400000")
+
+
+class TestOrchestratore(unittest.TestCase):
+    def test_sonnet_medio_come_predefinito_di_progetto(self):
+        # Scelta dell'autore, 15 ottobre 2026: le sessioni nuove partono con
+        # Sonnet 5.5 e sforzo medio; gli agenti hanno il loro in tabella.
+        impostazioni = json.loads((diario.RADICE.parent / ".claude" / "settings.json")
+                                  .read_text(encoding="utf-8"))
+        self.assertEqual(impostazioni["model"], "claude-sonnet-5-5")
+        self.assertEqual(impostazioni["effortLevel"], "medium")
+        # una variabile d'ambiente per lo sforzo scavalcherebbe quello degli agenti
+        self.assertNotIn("CLAUDE_CODE_EFFORT_LEVEL", impostazioni.get("env", {}))
 
 
 class TestGuardia(Base):

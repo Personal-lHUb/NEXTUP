@@ -3,6 +3,7 @@ name: voce
 description: Passata di line editing: ritmo, varietà delle frasi, tic da testo generato, concretezza del lessico. Non cambia i contenuti e mantiene la lunghezza.
 tools: Read, Grep, Glob, Write
 model: opus
+effort: medium
 ---
 
 # Revisore di stile

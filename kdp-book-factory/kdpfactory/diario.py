@@ -160,11 +160,11 @@ def _relativo(project, file: Path) -> str:
 # --------------------------------------------------------------------------
 # Il modello di ogni lancio
 # --------------------------------------------------------------------------
-def modello_in_tabella(agente: str, radice: Path = RADICE) -> str | None:
-    """Il modello che il file dell'agente fissa (`model:`).
+def _campo_in_tabella(agente: str, campo: str, radice: Path) -> str | None:
+    """Un campo dell'intestazione del file dell'agente (`model:`, `effort:`).
 
-    "" se il file c'è ma lascia il modello della sessione (`inherit`, o nessun
-    `model:`); None se l'agente non ha un file, come quelli di Claude Code.
+    "" se il file c'è ma il campo manca o vale `inherit`; None se l'agente non
+    ha un file, come quelli di Claude Code.
     """
     cartella = radice.parent / AGENTI
     file = cartella / f"{agente}.md"
@@ -174,30 +174,53 @@ def modello_in_tabella(agente: str, radice: Path = RADICE) -> str | None:
         parti = file.read_text(encoding="utf-8").split("---", 2)
     except OSError:
         return None
-    trovato = re.search(r"^model:\s*(\S+)", parti[1], re.M) if len(parti) == 3 else None
+    trovato = re.search(rf"^{campo}:\s*(\S+)", parti[1], re.M) if len(parti) == 3 else None
     return trovato[1] if trovato and trovato[1] != "inherit" else ""
 
 
-def modello_del_lancio(agente: str, entrata: dict, radice: Path = RADICE) -> tuple[str, str]:
-    """Con che modello parte l'agente, detto per il diario, e l'avviso per la chat.
+def modello_in_tabella(agente: str, radice: Path = RADICE) -> str | None:
+    """Il modello che il file dell'agente fissa (`model:`)."""
+    return _campo_in_tabella(agente, "model", radice)
 
-    La tabella è fissa (scelta dell'autore, 15 ottobre 2026): un modello passato
-    nella chiamata che non è quello del file dell'agente è un cambio, e l'autore
-    lo vede in chat. L'avviso è vuoto quando non c'è niente da dire.
+
+def sforzo_in_tabella(agente: str, radice: Path = RADICE) -> str | None:
+    """Lo sforzo di ragionamento che il file dell'agente fissa (`effort:`)."""
+    return _campo_in_tabella(agente, "effort", radice)
+
+
+def modello_del_lancio(agente: str, entrata: dict, radice: Path = RADICE) -> tuple[str, str]:
+    """Con che modello e sforzo parte l'agente, detto per il diario, e l'avviso per la chat.
+
+    La tabella è fissa (scelta dell'autore, 15 ottobre 2026): un modello o uno
+    sforzo passati nella chiamata che non sono quelli del file dell'agente sono
+    un cambio, e l'autore lo vede in chat. L'avviso è vuoto quando non c'è
+    niente da dire.
     """
     tabella = modello_in_tabella(agente, radice)
     scelto = str(entrata.get("model") or "").strip()
+    sforzo_tabella = sforzo_in_tabella(agente, radice)
+    sforzo_scelto = str(entrata.get("effort") or "").strip()
+    avvisi = []
     if scelto and tabella and scelto != tabella:
-        return (f"con `{scelto}`, fuori tabella (la tabella dice `{tabella}`)",
-                f"Modello fuori tabella: l'agente {agente} parte con {scelto} "
-                f"invece di {tabella}.")
-    if scelto and scelto != tabella:
-        return f"con `{scelto}`, scelto nella chiamata", ""
-    if tabella:
-        return f"con `{tabella}` (tabella)", ""
-    if tabella == "":
-        return "con il modello della sessione", ""
-    return "con il modello predefinito di Claude Code", ""
+        detto = f"con `{scelto}`, fuori tabella (la tabella dice `{tabella}`)"
+        avvisi.append(f"l'agente {agente} parte con {scelto} invece di {tabella}")
+    elif scelto and scelto != tabella:
+        detto = f"con `{scelto}`, scelto nella chiamata"
+    elif tabella:
+        detto = f"con `{tabella}` (tabella)"
+    elif tabella == "":
+        detto = "con il modello della sessione"
+    else:
+        detto = "con il modello predefinito di Claude Code"
+    if sforzo_scelto and sforzo_tabella and sforzo_scelto != sforzo_tabella:
+        detto += f", sforzo `{sforzo_scelto}`, fuori tabella (la tabella dice `{sforzo_tabella}`)"
+        avvisi.append(f"sforzo {sforzo_scelto} invece di {sforzo_tabella}")
+    elif sforzo_scelto and sforzo_scelto != sforzo_tabella:
+        detto += f", sforzo `{sforzo_scelto}`, scelto nella chiamata"
+    elif sforzo_tabella:
+        detto += f", sforzo `{sforzo_tabella}` (tabella)"
+    avviso = ("Fuori tabella: " + "; ".join(avvisi) + ".") if avvisi else ""
+    return detto, avviso
 
 
 # --------------------------------------------------------------------------
