@@ -118,6 +118,70 @@ class TestDiario(Base):
         self.assertIn("editor-24-26.md", testo)
 
 
+class TestModello(Base):
+    """La tabella dei modelli è fissa (scelta dell'autore, 15 ottobre 2026):
+    il diario scrive il modello di ogni lancio, e un cambio si vede in chat."""
+
+    def setUp(self):
+        super().setUp()
+        agenti = self.radice.parent / diario.AGENTI
+        agenti.mkdir(parents=True)
+        (agenti / "editor.md").write_text(
+            "---\nname: editor\ntools: Read, Write\nmodel: opus\n---\n\n# Editor\n", encoding="utf-8")
+        (agenti / "analista-mercato.md").write_text(
+            "---\nname: analista-mercato\ntools: Read\n---\n\n# Analista\n", encoding="utf-8")
+
+    def lancia(self, agente, **extra):
+        return self.hook("pre-agent", tool_input={
+            "subagent_type": agente, "description": "Correzioni", "prompt": "x", **extra})
+
+    def test_il_diario_scrive_il_modello_della_tabella(self):
+        codice, uscita, _ = self.lancia("editor")
+        self.assertEqual((codice, uscita), (0, ""))
+        self.assertIn("lanciato `editor` «Correzioni» con `opus` (tabella) →",
+                      diario.righe(self.project)[0])
+
+    def test_lo_stesso_modello_della_tabella_non_e_un_cambio(self):
+        _, uscita, _ = self.lancia("editor", model="opus")
+        self.assertEqual(uscita, "")
+        self.assertIn("con `opus` (tabella)", diario.righe(self.project)[0])
+
+    def test_un_modello_fuori_tabella_si_dice_in_chat(self):
+        _, uscita, _ = self.lancia("editor", model="sonnet")
+        self.assertIn("con `sonnet`, fuori tabella (la tabella dice `opus`)",
+                      diario.righe(self.project)[0])
+        avviso = json.loads(uscita)["systemMessage"]
+        self.assertIn("editor", avviso)
+        self.assertIn("sonnet invece di opus", avviso)
+
+    def test_l_avviso_resta_anche_senza_libro_in_corso(self):
+        (self.radice / "config" / "produzione.json").write_text('{"attivi": []}', encoding="utf-8")
+        _, uscita, _ = self.lancia("editor", model="fable")
+        self.assertIn("fable invece di opus", json.loads(uscita)["systemMessage"])
+        self.assertFalse(diario.percorso(self.project).exists())
+
+    def test_agenti_fuori_dalla_tabella(self):
+        self.lancia("analista-mercato")
+        self.lancia("Explore")
+        _, uscita, _ = self.lancia("general-purpose", model="haiku")
+        self.assertEqual(uscita, "")
+        prima, seconda, terza = diario.righe(self.project)
+        self.assertIn("con il modello della sessione", prima)
+        self.assertIn("con il modello predefinito di Claude Code", seconda)
+        self.assertIn("con `haiku`, scelto nella chiamata", terza)
+
+    def test_niente_percorsi_fuori_dalla_cartella_degli_agenti(self):
+        self.assertIsNone(diario.modello_in_tabella("../editor", self.radice))
+
+    def test_i_file_installati_dicono_la_tabella(self):
+        # i file veri di .claude/agents/, quelli che Claude Code legge
+        from kdpfactory.agents.competenze import MODELLI
+
+        for agente, modello in MODELLI.items():
+            with self.subTest(agente=agente):
+                self.assertEqual(diario.modello_in_tabella(agente), modello)
+
+
 class TestGuardia(Base):
     def test_un_agente_scrive_solo_la_sua_consegna(self):
         dentro = "/x/kdp-book-factory/books/libro/consegne/editor.md"

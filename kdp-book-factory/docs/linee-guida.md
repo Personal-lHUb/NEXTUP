@@ -103,7 +103,12 @@ Un libro alla volta, e ogni chiamata al modello dove la qualità si vede:
 | `haiku` | revisore-scaletta, impaginazione | eseguono un comando che misura e riportano l'esito |
 
 La tabella sta in `competenze.py` (`MODELLI`) e finisce nei file degli agenti
-con `agents --install`. Le altre regole: tutto quello che si misura lo fa un
+con `agents --install`. È fissa (scelta dell'autore, 15 ottobre 2026): Fable
+non si usa, e nessun lancio passa un modello diverso se l'autore non lo chiede;
+chi la cambia la cambia lì. Il diario scrive il modello di ogni lancio
+(«con `opus` (tabella)»), e un lancio fuori tabella compare in chat come avviso.
+La sessione principale non cambia modello da sola: lo sceglie l'autore con
+`/model`. Le altre regole: tutto quello che si misura lo fa un
 comando, non un agente; l'agente riceve i percorsi e legge da sé; la sua uscita
 la scrive lui nel file di consegna (`books/<slug>/consegne/<nome>.md`), risponde
 con una riga, e `consegna <slug> <file>` la porta nel libro dopo il backup (se

@@ -1,6 +1,6 @@
 # Stato della fabbrica
 
-Aggiornato il 14 ottobre 2026 (sera). Si aggiorna alla fine di ogni sessione: chi apre la
+Aggiornato il 15 ottobre 2026. Si aggiorna alla fine di ogni sessione: chi apre la
 sessione dopo parte da qui.
 
 ## Il libro in corso
@@ -34,6 +34,12 @@ sessione dopo parte da qui.
   volo, consegne da importare e la coda del diario.
 - Gli agenti che usano il modello hanno `Write` (solo per la consegna) e
   rispondono con una riga: la chat non si riempie di capitoli.
+- **Modelli degli agenti** (15 ottobre, scelta dell'autore): tabella fissa
+  `MODELLI` com'era (opus scrive e giudica, sonnet controlla, haiku misura;
+  Fable no). Il diario scrive il modello di ogni lancio; uno fuori tabella
+  compare in chat come avviso. I cinque agenti del team di miglioramento non
+  sono in tabella: usano il modello della sessione. La sessione principale
+  cambia modello solo con `/model` dell'autore.
 
 ## Automazioni e consenso (10 ottobre, decisioni dell'autore)
 
@@ -44,8 +50,7 @@ sessione dopo parte da qui.
   di Cowork. Le routine restano spente, non si cancellano. Un limite d'uso
   si annota nel diario, e si aspetta il suo «continua».
 - **Silenzio-assenso spento**: ogni decisione d'autore aspetta la sua risposta,
-  senza scadenza. In attesa ora: **prezzo** (21,99 USD, alternativa 19,99) e
-  **formato** (6×9 proposto).
+  senza scadenza. Nessuna in attesa ora (nessun libro in corso).
 - Gli hook del contesto restano: registrano e rimettono in contesto, non
   avviano lavoro. Quando qualcosa aspetta l'autore: riga in chat e notifica push.
 - Stamattina (10 ottobre) le cinque routine di Cowork risultano partite fra le

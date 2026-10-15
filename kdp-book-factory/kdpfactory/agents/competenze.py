@@ -88,6 +88,11 @@ COMPETENZE: tuple[Competenza, ...] = (
 #: o controlla contro regole scritte → `sonnet`. Esegue un comando che misura e
 #: riporta quello che esce → `haiku`. Chi cambia un modello lo cambia qui e
 #: rigenera i file (`agents --install ../.claude/agents`).
+#:
+#: La tabella è fissa (scelta dell'autore, 15 ottobre 2026): Fable non si usa,
+#: e nessun lancio passa un modello diverso se l'autore non lo chiede. Il diario
+#: scrive il modello di ogni lancio, e uno fuori tabella compare in chat come
+#: avviso (`diario.modello_del_lancio`).
 MODELLI: dict[str, str] = {
     # scrivono o giudicano quello che il lettore legge e vede
     "posizionamento": "opus",

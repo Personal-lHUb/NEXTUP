@@ -8,8 +8,9 @@ grezza. Da allora quello che serve per ripartire sta nei file, e ci arriva
 senza che nessuno debba ricordarsene:
 
 - **il diario** (`books/<slug>/diario.md`): una riga datata per ogni passo,
-  scritta dagli hook di Claude Code (agente lanciato, identificativo, agente
-  finito) e dai comandi (consegna importata, decisione proposta);
+  scritta dagli hook di Claude Code (agente lanciato e con che modello,
+  identificativo, agente finito) e dai comandi (consegna importata, decisione
+  proposta);
 - **i prompt** (`books/<slug>/prompt/`): il messaggio esatto di ogni agente
   lanciato, per rilanciarlo identico;
 - **le consegne** (`books/<slug>/consegne/`): l'uscita intera di ogni agente.
@@ -43,6 +44,9 @@ RADICE = Path(__file__).resolve().parent.parent
 CONFIG = Path("config") / "produzione.json"
 CONSEGNE = "consegne"
 PROMPT = "prompt"
+#: i file degli agenti, rispetto alla radice del repository: `agents --install`
+#: ci scrive il modello della tabella `MODELLI` (`agents/competenze.py`)
+AGENTI = Path(".claude") / "agents"
 #: oltre questa lunghezza la risposta finale di un agente è un'uscita, non un avviso
 SOGLIA_USCITA = 1500
 RIGHE_IN_CONTESTO = 30
@@ -154,6 +158,49 @@ def _relativo(project, file: Path) -> str:
 
 
 # --------------------------------------------------------------------------
+# Il modello di ogni lancio
+# --------------------------------------------------------------------------
+def modello_in_tabella(agente: str, radice: Path = RADICE) -> str | None:
+    """Il modello che il file dell'agente fissa (`model:`).
+
+    "" se il file c'è ma lascia il modello della sessione (`inherit`, o nessun
+    `model:`); None se l'agente non ha un file, come quelli di Claude Code.
+    """
+    cartella = radice.parent / AGENTI
+    file = cartella / f"{agente}.md"
+    if file.parent != cartella:
+        return None
+    try:
+        parti = file.read_text(encoding="utf-8").split("---", 2)
+    except OSError:
+        return None
+    trovato = re.search(r"^model:\s*(\S+)", parti[1], re.M) if len(parti) == 3 else None
+    return trovato[1] if trovato and trovato[1] != "inherit" else ""
+
+
+def modello_del_lancio(agente: str, entrata: dict, radice: Path = RADICE) -> tuple[str, str]:
+    """Con che modello parte l'agente, detto per il diario, e l'avviso per la chat.
+
+    La tabella è fissa (scelta dell'autore, 15 ottobre 2026): un modello passato
+    nella chiamata che non è quello del file dell'agente è un cambio, e l'autore
+    lo vede in chat. L'avviso è vuoto quando non c'è niente da dire.
+    """
+    tabella = modello_in_tabella(agente, radice)
+    scelto = str(entrata.get("model") or "").strip()
+    if scelto and tabella and scelto != tabella:
+        return (f"con `{scelto}`, fuori tabella (la tabella dice `{tabella}`)",
+                f"Modello fuori tabella: l'agente {agente} parte con {scelto} "
+                f"invece di {tabella}.")
+    if scelto and scelto != tabella:
+        return f"con `{scelto}`, scelto nella chiamata", ""
+    if tabella:
+        return f"con `{tabella}` (tabella)", ""
+    if tabella == "":
+        return "con il modello della sessione", ""
+    return "con il modello predefinito di Claude Code", ""
+
+
+# --------------------------------------------------------------------------
 # Lettura del diario: agenti in volo, consegne da importare
 # --------------------------------------------------------------------------
 _LANCIATO = re.compile(r"`(?P<agente>[^`]+)` «(?P<descr>[^»]*)» in background, id `(?P<id>[^`]+)`")
@@ -232,10 +279,12 @@ def contesto(radice: Path = RADICE, sorgente: str = "") -> str:
 # --------------------------------------------------------------------------
 def hook(evento: str, dati: dict, radice: Path = RADICE,
          adesso: datetime | None = None) -> tuple[int, str, str]:
-    """Esegue un hook: (codice d'uscita, testo per il contesto, messaggio d'errore).
+    """Esegue un hook: (codice d'uscita, uscita, messaggio d'errore).
 
-    Il codice è 2 solo quando la guardia blocca una scrittura; ogni altro
-    hook esce con 0 qualunque cosa succeda.
+    L'uscita è il contesto per `session-start`; per `pre-agent` è il JSON con
+    l'avviso per la chat (`systemMessage`) quando il modello esce dalla
+    tabella. Il codice è 2 solo quando la guardia blocca una scrittura; ogni
+    altro hook esce con 0 qualunque cosa succeda.
     """
     if evento == "guardia":
         if not dati.get("agent_id"):
@@ -253,17 +302,24 @@ def hook(evento: str, dati: dict, radice: Path = RADICE,
     if evento == "session-start":
         return 0, contesto(radice, dati.get("source", "")), ""
 
-    libro = libro_attivo(radice)
-    if libro is None:
-        return 0, "", ""
     entrata = dati.get("tool_input") or {}
     agente = entrata.get("subagent_type") or "general-purpose"
     descrizione = entrata.get("description") or ""
+    uscita = ""
+    if evento == "pre-agent":
+        modello, avviso = modello_del_lancio(agente, entrata, radice)
+        if avviso:  # anche senza un libro in corso: la tabella vale sempre
+            uscita = json.dumps({"systemMessage": avviso}, ensure_ascii=False)
+
+    libro = libro_attivo(radice)
+    if libro is None:
+        return 0, uscita, ""
 
     if evento == "pre-agent":
         prompt = entrata.get("prompt") or ""
         file = salva_prompt(libro, agente, descrizione, prompt, adesso)
-        annota(libro, f"lanciato `{agente}` «{descrizione}» → `{_relativo(libro, file)}`", adesso)
+        annota(libro, f"lanciato `{agente}` «{descrizione}» {modello} → `{_relativo(libro, file)}`",
+               adesso)
     elif evento == "post-agent":
         risposta = json.dumps(dati.get("tool_response"), ensure_ascii=False)
         trovato = re.search(r"agentId:\s*([A-Za-z0-9_-]+)", risposta) or re.search(
@@ -301,7 +357,7 @@ def hook(evento: str, dati: dict, radice: Path = RADICE,
         volo = in_volo(libro)
         annota(libro, f"— la chat viene riassunta ({dati.get('trigger') or 'auto'}); "
                       f"agenti in volo: {len(volo)} —", adesso)
-    return 0, "", ""
+    return 0, uscita, ""
 
 
 def main(argv: list[str] | None = None) -> int:
