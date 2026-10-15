@@ -40,6 +40,11 @@ sessione dopo parte da qui.
   compare in chat come avviso. I cinque agenti del team di miglioramento non
   sono in tabella: usano il modello della sessione. La sessione principale
   cambia modello solo con `/model` dell'autore.
+- **Contesto mai oltre 400.000 token** (15 ottobre, scelta dell'autore; regola
+  13 di CLAUDE.md): finestra di compattazione a 400.000 in
+  `.claude/settings.json`, per la chat e per gli agenti; con l'80% del cloud
+  il riassunto parte verso i 320.000. Comprimere con Haiku non si può
+  impostare: il riassunto lo fa il modello della sessione.
 
 ## Automazioni e consenso (10 ottobre, decisioni dell'autore)
 

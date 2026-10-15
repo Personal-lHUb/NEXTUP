@@ -88,6 +88,12 @@ Diario, prompt e consegne entrano in git; una nota a mano: `diario <slug> --nota
    altrui, persone reali, promesse, credenziali inventate. La frase sull'IA
    nel colophon dice il vero: il libro è scritto con l'IA, nessuna «revisione
    umana» che non c'è. Fisco e GPSR: dal commercialista, non dalla fabbrica.
+13. **Il contesto non supera i 400.000 token** (scelta dell'autore, 15 ottobre
+   2026). `.claude/settings.json` fissa la finestra di compattazione a
+   400.000 (`autoCompactWindow`, e `CLAUDE_CODE_AUTO_COMPACT_WINDOW`, che vale
+   anche per gli agenti); nel cloud l'ambiente fa partire il riassunto all'80%,
+   verso i 320.000. Il riassunto lo scrive il modello della sessione: Claude
+   Code non lascia sceglierne un altro.
 
 ## Le due categorie
 

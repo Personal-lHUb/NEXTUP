@@ -1,4 +1,8 @@
 {
+  "autoCompactWindow": 400000,
+  "env": {
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "400000"
+  },
   "hooks": {
     "SessionStart": [
       {

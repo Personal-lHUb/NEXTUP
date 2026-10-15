@@ -182,6 +182,16 @@ class TestModello(Base):
                 self.assertEqual(diario.modello_in_tabella(agente), modello)
 
 
+class TestFinestraDiContesto(unittest.TestCase):
+    def test_mai_oltre_400k_token(self):
+        # Scelta dell'autore, 15 ottobre 2026: la chat si riassume prima dei
+        # 400.000 token. La variabile d'ambiente vale anche per gli agenti.
+        impostazioni = json.loads((diario.RADICE.parent / ".claude" / "settings.json")
+                                  .read_text(encoding="utf-8"))
+        self.assertEqual(impostazioni["autoCompactWindow"], 400000)
+        self.assertEqual(impostazioni["env"]["CLAUDE_CODE_AUTO_COMPACT_WINDOW"], "400000")
+
+
 class TestGuardia(Base):
     def test_un_agente_scrive_solo_la_sua_consegna(self):
         dentro = "/x/kdp-book-factory/books/libro/consegne/editor.md"
