@@ -112,10 +112,11 @@ di copertina. In `books/` c'è anche `collaudo`, che non è un libro
 ## Cowork (app Claude Desktop)
 
 Il container non raggiunge amazon.com, KDP, ChatGPT né il portatile
-dell'autore. Cowork **non apre nessun sito di Amazon** (amazon.com,
-kdp.amazon.com) e non guida Helium 10, Publisher Rocket o Google Trends
-(LEGGIMI versione 16): lavora sulla ricerca web e su quello che l'autore gli
-porta, e su KDP carica l'autore. Le richieste sono file `cowork-<argomento>.md`
+dell'autore. Cowork **può aprire amazon.com, solo per leggere** le pagine
+che l'autore gli allega (scelta dell'autore, 24 ottobre 2026, LEGGIMI versione
+17; il rischio sulle Condizioni d'uso di Amazon lo ha accettato lui); non apre
+kdp.amazon.com né il completamento automatico, e non guida Helium 10,
+Publisher Rocket o Google Trends: su KDP carica l'autore. Le richieste sono file `cowork-<argomento>.md`
 sul ramo di lavoro, elencate in `config/cowork-aperte.md`; Cowork le legge dagli
 indirizzi pubblici e su GitHub non scrive. Consegna la risposta come testo
 lanciando la routine della fabbrica, e la sessione la salva con

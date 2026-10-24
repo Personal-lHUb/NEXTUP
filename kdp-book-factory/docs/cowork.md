@@ -308,13 +308,14 @@ Cowork non le può consegnare: la sua CDN è bloccata nel cloud e su GitHub non
 scrive. Finché mancano, `produzione` dà la copertina in attesa dell'autore: le
 varianti già pagate non si rigenerano.
 
-## Niente siti di Amazon (LEGGIMI versione 16)
+## Siti di Amazon (LEGGIMI versioni 16 e 17)
 
-Dal 14 ottobre 2026, per decisione dell'autore (`docs/rischi-legali.md`),
-Cowork non apre nessun sito di Amazon: né amazon.com, né il servizio di
-autocompletamento, né kdp.amazon.com, nemmeno per leggere. Le Condizioni d'uso
-di Amazon vietano robot e raccolta di schede, descrizioni e prezzi, e il
-rischio è l'account dell'autore, lo stesso di KDP. Non guida nemmeno Helium 10,
+Dal 14 ottobre 2026 Cowork non apriva nessun sito di Amazon. Dal 24 ottobre
+(versione 17), per decisione dell'autore, **può aprire amazon.com, solo per
+leggere** i link e gli ASIN che l'autore gli allega; restano chiusi
+kdp.amazon.com e il servizio di autocompletamento. Le Condizioni d'uso di
+Amazon vietano robot e raccolta di schede, descrizioni e prezzi, e il rischio
+è l'account dell'autore, lo stesso di KDP: l'autore lo ha accettato. Non guida nemmeno Helium 10,
 Publisher Rocket e Google Trends: quei dati li esporta l'autore. I ruoli
 `concorrente`, `parole-chiave` e `regole-kdp` lavorano dalla ricerca web su
 siti terzi; le bozze su KDP (versioni 14 e 15) non si fanno più, e su KDP

@@ -17,7 +17,7 @@ sessione dopo parte da qui.
 - **Rischi legali** (`kdp-book-factory/docs/rischi-legali.md`, 14 ottobre):
   temi esclusi salute, diritto, finanza, psicologia (regola 12 di CLAUDE.md);
   frase sull'IA veritiera nel colophon; mai il concorrente nel libro; Cowork
-  fuori dai siti di Amazon; su KDP carica l'autore. Fisco (royalty di libri
+  su amazon.com solo in lettura (dal 24 ottobre); su KDP carica l'autore. Fisco (royalty di libri
   scritti con l'IA, partita IVA, W-8BEN) e GPSR: dal commercialista.
 - **Da fare per il prossimo libro**: prima di qualunque agente,
   `python3 -m kdpfactory temi --testo "<titolo del concorrente>" --categoria
@@ -79,10 +79,11 @@ sessione dopo parte da qui.
 - **Tutte le routine sono spente** (8 ottobre, su richiesta dell'autore): la
   fabbrica «Produzione NEXTUP» e le cinque attività di Cowork. Si riaccendono
   solo col consenso dell'autore.
-- **Cowork non apre i siti di Amazon** (LEGGIMI versione 16, 14 ottobre) e non
-  guida Helium 10, Publisher Rocket, Google Trends: i ruoli `concorrente`,
-  `parole-chiave`, `regole-kdp` lavorano sulla ricerca web e sulle
-  esportazioni dell'autore. Le bozze su KDP non si fanno più. `config/cowork-kdp-3.md`
+- **Cowork può aprire amazon.com, solo per leggere** (LEGGIMI versione 17,
+  24 ottobre, scelta dell'autore, che accetta il rischio sulle Condizioni
+  d'uso di Amazon). Resta chiuso kdp.amazon.com, il completamento automatico,
+  e non guida Helium 10, Publisher Rocket, Google Trends: quei dati li
+  esporta l'autore. Le bozze su KDP non si fanno più. `config/cowork-kdp-3.md`
   ritirata. Nessuna richiesta aperta.
 - Le attività di Cowork sul portatile hanno ancora il prompt vecchio: prima di
   riaccenderle, l'autore approva i prompt di `kdp-book-factory/config/attivita-cowork.json`.

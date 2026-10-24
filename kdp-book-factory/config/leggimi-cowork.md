@@ -1,10 +1,26 @@
 # LEGGIMI — regole del canale con Cowork
 
-Versione 16 · 14 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
+Versione 17 · 24 ottobre 2026 · scritto dalla fabbrica di libri NEXTUP.
 
 Queste regole valgono per ogni giro di Cowork. Se dicono una cosa diversa dal
 prompt dell'attività pianificata, vale questo file: lo tiene aggiornato la
 fabbrica, e ogni modifica porta un numero di versione nuovo.
+
+**Novità della versione 17: amazon.com si può aprire, solo per leggere.**
+Decisione dell'autore del 24 ottobre 2026: il rischio sulle Condizioni d'uso di
+Amazon lo accetta lui. Quindi, della versione 16 cambia solo questo:
+
+- **puoi aprire amazon.com** (pagine prodotto e liste) **solo per leggere**,
+  e solo i link o gli ASIN che l'autore ti allega: non cercare libri per conto
+  tuo, non scorrere pagine in serie, non scaricare in massa; niente accesso con
+  credenziali, niente acquisti, niente scrittura;
+- **resta chiuso kdp.amazon.com** e il completamento automatico
+  (completion.amazon.com): su KDP carica l'autore;
+- **restano fuori** Helium 10, Publisher Rocket, Google Trends: i dati li
+  esporta l'autore.
+
+Il resto della versione 16 (qui sotto) vale ancora, tranne dove dice di non
+aprire amazon.com.
 
 **Novità della versione 16: niente siti di Amazon, niente strumenti a pagamento
 guidati da te.** Decisione dell'autore del 14 ottobre 2026, per i rischi
@@ -173,8 +189,9 @@ senza richieste da fare, o in cui tutto è andato, non consegna nessun esito.
   corriere resta com'è: non si modifica e non si cancella niente.
 - Una risposta consegnata non si cambia. Se alla fabbrica serve altro, apre
   una richiesta nuova.
-- Sui siti di Amazon (amazon.com, completion.amazon.com, kdp.amazon.com) non
-  si apre niente: né per leggere, né per scrivere (versione 16).
+- Su kdp.amazon.com e completion.amazon.com non si apre niente; su amazon.com
+  solo per leggere i link o gli ASIN che l'autore allega, mai per scrivere
+  (versione 17).
 - Helium 10, Publisher Rocket e Google Trends non li guidi tu: i dati li
   esporta l'autore (versione 16).
 - Negli strumenti a pagamento (Helium 10, Publisher Rocket, ChatGPT) si usa
@@ -204,15 +221,15 @@ Il testo per crearle è in `kdp-book-factory/config/progetto-cowork.md`.
 
 ### Ruolo concorrente
 
-Il libro concorrente, **fuori da Amazon**: siti di librerie e di editori,
-Goodreads, Google Books, ricerca web. Su amazon.com non si apre niente
-(versione 16).
+Il libro concorrente: le pagine di amazon.com che l'autore allega (solo per
+leggere, versione 17), siti di librerie e di editori, Goodreads, Google Books,
+ricerca web.
 
 - Le **recensioni si copiano alla lettera**, con stelle, titolo, data e sito
   da cui vengono. Non si riassumono: la fabbrica cita le parole esatte.
-- Quello che si trova solo su Amazon (classifica, vicini di scaffale) non si
-  cerca: la risposta lo segna come non disponibile. Se l'autore incolla lui
-  la pagina Amazon nella richiesta, si usa quella.
+- Classifica, categorie e prezzo si leggono dalla pagina Amazon allegata; i
+  vicini di scaffale e quello che la pagina non mostra si segnano come non
+  disponibili. Se l'autore incolla lui la pagina nella richiesta, si usa quella.
 
 ### Ruolo parole-chiave
 

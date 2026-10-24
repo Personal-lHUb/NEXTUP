@@ -4,7 +4,7 @@
   "repository": "Personal-lHUb/NEXTUP",
   "ramo": "claude/dreamy-archimedes-hf8w45",
   "leggimi": "kdp-book-factory/config/leggimi-cowork.md",
-  "leggimi_versione": 16,
+  "leggimi_versione": 17,
   "progetto": {
     "_nota": "Il progetto di Cowork in Claude Desktop: una chat e un'attività pianificata per ruolo. Il testo da incollare lo scrive `python3 -m kdpfactory cowork progetto` in config/progetto-cowork.md.",
     "nome": "NEXTUP — Cowork",
@@ -15,11 +15,11 @@
     "concorrente": {
       "chat": "Concorrente",
       "attivita": "NEXTUP — Concorrente",
-      "compito": "il libro concorrente fuori da Amazon: siti di librerie e di editori, Goodreads, Google Books, ricerca web; recensioni alla lettera col sito di provenienza",
+      "compito": "il libro concorrente: pagine Amazon che allega l'autore (solo lettura), siti di librerie e di editori, Goodreads, Google Books, ricerca web; recensioni alla lettera col sito di provenienza",
       "ogni": "ora",
       "minuto": 5,
       "note": [
-        "su amazon.com non si apre niente (LEGGIMI 16): quello che si trova solo lì si segna come non disponibile;",
+        "amazon.com si apre solo per leggere, e solo i link o gli ASIN che l'autore allega (LEGGIMI 17); kdp.amazon.com mai;",
         "se l'autore incolla la pagina Amazon nella richiesta, si usa quella."
       ],
       "trigger": "trig_014b3hSG6mk3HhUAdvoGzvru",

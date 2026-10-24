@@ -206,7 +206,7 @@ Se l'autore ammette i temi di salute, diritto, finanza o psicologia:
 | salute, diritto, finanza, psicologia | **esclusi**, anche il libro in corso | `kdpfactory/temi.py`: il comando `temi`, il blocco a `concorrente importa`, l'errore `TEMA` di `qa`, il blocco del pacchetto; agenti `posizionamento` e `conformita` |
 | libro `b0gjr36xwt` (documentazione clinica) | **eliminato** | tolto da `books/` e dai libri attivi; resta nella storia di git e in una copia di backup |
 | dichiarazione sull'IA | **veritiera** | colophon: «This book was written with artificial intelligence tools. The publisher chose the subject and directed the work.» (anche in italiano e nei libri di enigmi) |
-| Cowork sui siti di Amazon | **fermo** | LEGGIMI versione 16: niente amazon.com, completion.amazon.com, kdp.amazon.com; niente Helium 10, Publisher Rocket, Google Trends guidati da Cowork; il pacchetto non scrive più la richiesta di bozza KDP: su KDP carica l'autore |
+| Cowork sui siti di Amazon | **amazon.com aperto in sola lettura dal 24 ottobre** (versione 17, rischio accettato dall'autore); il resto fermo | LEGGIMI versione 16: niente completion.amazon.com, kdp.amazon.com; niente Helium 10, Publisher Rocket, Google Trends guidati da Cowork; il pacchetto non scrive più la richiesta di bozza KDP: su KDP carica l'autore |
 | testi e PDF pubblici | **`NEXTUP` privato**, storia compresa | lo fa l'autore da GitHub; dopo, Cowork non legge più i link pubblici e i file glieli porta l'autore |
 | concorrente nel libro | linea rossa | `kdpfactory/legale.py`: errore `CONCORRENTE` di `qa` se titolo, autore, editore o ASIN del concorrente compaiono nel testo, in copertina o nella scheda |
 
@@ -214,7 +214,8 @@ Se l'autore ammette i temi di salute, diritto, finanza o psicologia:
 
 1. Repository: testi e PDF fuori dal pubblico, o no.
 2. Dichiarazione sull'IA: frase veritiera, o revisione umana vera.
-3. Cowork su amazon.com: fermo, o no.
+3. Cowork su amazon.com: deciso il 24 ottobre, aperto in sola lettura (resta
+   a suo carico il rischio sulle Condizioni d'uso).
 4. Temi di salute, diritto, finanza, psicologia: esclusi o con condizioni; e
    il libro in corso.
 5. Fisco e GPSR: con un commercialista, prima di pubblicare più titoli.
