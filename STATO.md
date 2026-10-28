@@ -85,6 +85,10 @@ sessione dopo parte da qui.
   e non guida Helium 10, Publisher Rocket, Google Trends: quei dati li
   esporta l'autore. Le bozze su KDP non si fanno più. `config/cowork-kdp-3.md`
   ritirata. Nessuna richiesta aperta.
+- **Prompt per analizzare gli ASIN** (28 ottobre):
+  `kdp-book-factory/config/prompt-cowork-asin.md`. Cowork apre amazon.com in
+  lettura, controlla copyright (contenuto, marchio, logo) senza cambiare il
+  consiglio, e tiene solo gli ASIN che iniziano per B. Lo lancia l'autore.
 - Le attività di Cowork sul portatile hanno ancora il prompt vecchio: prima di
   riaccenderle, l'autore approva i prompt di `kdp-book-factory/config/attivita-cowork.json`.
 
